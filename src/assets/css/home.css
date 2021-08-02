@@ -1,0 +1,16 @@
+.swiper__img{
+    border-radius: 10px;
+    width: 120px;
+}
+.swiper__title{
+    color: #000 !important;
+}
+.booking__container{
+    position: relative;
+    height: 400px;
+}
+.booking__img{
+    position: absolute;
+    bottom: -25%;
+    left: 0;
+}

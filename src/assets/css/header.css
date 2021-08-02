@@ -1,0 +1,38 @@
+.sidebar{
+    background-color: var(--primary-color);
+    width: 300px;
+    color: #fff;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 1rem;
+}
+.sidebar__toggler{
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    height: 40px;
+    width: 40px;
+}
+.header .logo{
+    width: 110px;
+}
+ .btn-close{
+    color: #fff;
+}
+.sidebar__nav{
+
+}
+.sidebar__navlink{
+    width: 100%;
+    color: #fff;
+    padding: 1rem;
+}
+.sidebar__navlink:hover{
+    color: #fff;
+    font-weight: bold;
+}
