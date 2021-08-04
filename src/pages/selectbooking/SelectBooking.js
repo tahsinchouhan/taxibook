@@ -1,93 +1,173 @@
-// import React, { useState } from 'react'
-// import { Button, Row, Col, Form, Container } from 'react-bootstrap'
-// import logo from '../../assets/img/logo.png'
-// import { FaBus, FaCarAlt, FaTicketAlt } from "react-icons/fa";
-// import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
-// import Pass from './Pass';
-// import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react'
+import { Button, Row, Col, Form, Container } from 'react-bootstrap'
+import logo from '../../assets/img/logo.png'
+import { FaBus, FaCarAlt, FaTicketAlt } from "react-icons/fa";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import Pass from './Pass';
+import BusPass from '../BusPass'
+import { useHistory } from 'react-router-dom';
+import Cab from '../Cab';
 
 
 
-// // import home1 from '../assets/img/home1.svg'
+
+// import home1 from '../assets/img/home1.svg'
 
 
-
-// function SelectBooking() {
-//     const [startDate, setStartDate] = useState(new Date());
-//     const history = useHistory();
-
-//     const onButtonclick = () => {
-//         console.log("object");
-//         history.push('/pass')
-//     }
-
-//     return (
-//         <div>
-//             <Container>
-//                 <div className="select_div">
-//                     <div className="row p-5" style={{ textAlign: "center" }}>
-//                         <div className="col-xs-12  col-sm-14 col-md-12">
-//                             <img src={logo} alt="bastar" h />
-//                             <div className="booking-div p-5">
-//                                 <h1>Select youe booking</h1>
-//                             </div>
-//                         </div>
-//                     </div>
-//                     <Container >
-//                         <Row xs={12} md={4} className="user-icon" >
-//                             <Col style={{ color: "red" }}><FaBus /><br />Bus</Col>
-//                             <Col style={{ color: "purple" }}><FaCarAlt /><br />Cab</Col>
-//                             <Col style={{ color: "green" }}><FaTicketAlt onClick={onButtonclick} /><br />Pass</Col>
-//                         </Row>
-
-//                     </Container>
-
-//                     <div className="userDate row">
-//                         <label for="colFormLabel" className="col-xs-12 col-md-6 col-form-label">From</label>
-//                         <div className="col-sm-10 usre-sourc">
-//                             <input type="email" className="user_input" id="colFormLabel" placeholder="Enter Source" />
-//                         </div>
-//                         <label for="colFormLabel" className="col-xs-12 col-md-6 col-form-label">To</label>
-//                         <div className="col-sm-10 user_input">
-//                             <input type="email" className="user_input" id="colFormLabel" placeholder="Enter Source" />
-//                         </div>
-//                     </div>
-//                     <div className="" style={{ height: "50px" }}></div>
-
-//                     <div className="userdata row" >
-//                         <label for="colFormLabel" className="col-xs-12 col-md-6 col-form-label">Journey Date</label>
-//                         <div className="col-sm-10 user_input pt-0">
-//                             < DatePicker className="col-sm-10 user_input"
-//                                 selected={startDate}
-//                                 onChange={(date) => setStartDate(date)} />
-
-//                         </div>
-//                     </div>
-//                 </div><br />
-//                 <div className="text-center">
-//                     <button type="submit" class="btn btn-success">Submit</button>
-//                 </div>
-
-
-//             </Container>
-
-
-//         </div>
-//     )
-// }
-
-// export default SelectBooking;
-
-
-import React from 'react'
 
 function SelectBooking() {
+    const [passTab, setPassTab] = useState(false)
+    const [Journey, setJourney] = useState(true)
+
+    const [busjourney, setBusJourney] = useState(false)
+
+    const [cabjourney, setCabJourney] = useState(false)
+
+
+    const [startDate, setStartDate] = useState(new Date());
+    const history = useHistory();
+
+    const onPassClick = () => {
+        setPassTab(true)
+        setJourney(false)
+        setBusJourney(false)
+        setCabJourney(false)
+        console.log("object");
+        // history.push('/pass')
+    }
+    const onBusClick = () => {
+        setPassTab(false)
+        setJourney(false)
+        setBusJourney(true)
+        console.log("hiii");
+        // history.push('/buspass')
+    }
+
+    const onCabClick = () => {
+        setBusJourney(false)
+        setPassTab(false)
+        setJourney(false)
+        setCabJourney(true)
+        console.log("hiii");
+        // history.push('/buspass')
+    }
+
+
     return (
-        <div>
-            <h1>helloo</h1>
-        </div>
+        <>
+            <Container>
+                <div className="select_div">
+                    <div className="row p-3" style={{ textAlign: "center" }}>
+                        <div className="col-xs-12  col-sm-12 col-md-4"  >
+                            <img src={logo} alt="bastar" style={{ width: "20%" }} />
+                            <div className="booking-div">
+                                <h1>Select your booking</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <Container >
+                        <Row className="user-icon" >
+                            <Col xs={4} md={4} className="icon-item"  >
+                                <FaTicketAlt className={passTab ? 'pass-color' : 'default-color'}
+                                    onClick={onPassClick} />
+                                <br />
+                                <span onClick={onPassClick} className={passTab ? 'pass-color' : 'default-color'}>Pass</span></Col>
+                            <Col xs={4} md={4} className="icon-item" >
+                                <FaBus
+                                    className={busjourney ? 'bus-color' : 'default-color'}
+                                    onClick={onBusClick} />
+                                <br />
+                                <span onClick={onBusClick} className={busjourney ? 'bus-color' : 'default-color'}> Bus</span></Col>
+                            <Col xs={4} md={4} className="icon-item" >
+                                <FaCarAlt className={cabjourney ? 'cab-color' : 'default-color'}
+                                    onClick={onCabClick} />
+                                <br />
+                                <span onClick={onCabClick} className={cabjourney ? 'cab-color' : 'default-color'}>Cab</span>
+                            </Col>
+                        </Row>
+                    </Container>
+                    {Journey ? (
+                        <>
+                            {/* <div className="userDate row">
+                                <label for="colFormLabel" className="col-xs-12 col-md-4 col-form-label">From</label>
+                                <div className="col-sm-10 usre-sourc">
+                                    <input type="email" className="user_input" id="col-FormLabel" placeholder="Enter Source" />
+                                </div>
+                                <label for="colFormLabel" className="col-xs-12 col-md-4 col-form-label">To</label>
+                                <div className="col-sm-10 user_input">
+                                    <input type="email" className="user_input" id="colFormLabel" placeholder="Enter Source" />
+                                </div>
+                            </div>
+                            <div className="" style={{ height: "20px" }}></div>
+
+                            <div className="userdata row" >
+                                <label for="colFormLabel" className="col-xs-12 col-md-4 col-form-label">Journey Date</label>
+                                <div className="col-sm-10 user_input pt-0">
+                                    < DatePicker className="col-sm-10 user_input"
+                                        selected={startDate}
+                                        onChange={(date) => setStartDate(date)} />
+                                </div>
+                            </div>
+                            <br />
+                            <div className="text-center">
+                                <button type="submit" class="btn btn-success">Proceed</button>
+                            </div> */}
+
+                            <Container>
+                                <Row>
+                                    <Col xs={12} md={4}>
+                                        <Form.Group className="mb-3 userDate pl-3" controlId="exampleForm.ControlInput1">
+                                            <Form.Label className="">From</Form.Label>
+                                            <Form.Control type="text"
+                                                className="user_input"
+                                                placeholder="Enter Source"
+                                               />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col xs={12} md={4}>
+                                        <Form.Group className="mb-3 userDate" controlId="exampleForm.ControlInput1">
+                                            <Form.Label>From</Form.Label>
+                                            <Form.Control type="text"
+                                                className="user_input"
+                                                placeholder="Enter Source"
+                                               />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col xs={12} md={4}>
+                                        <Form.Group className="mb-3 userdata" controlId="exampleForm.ControlInput1">
+                                            <Form.Label>From</Form.Label>    <br />
+                                            < DatePicker className="col-sm-10 user_input"
+                                                selected={startDate}
+                                                onChange={(date) => setStartDate(date)} />
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                                <div className="text-center">
+                                <Button type="submit" class="btn btn-success"style={{width:"20%", textAlign:"center"}}>Proceed</Button>
+                            </div> 
+                              
+
+                            </Container>
+
+
+
+
+
+
+                        </>
+                    ) : ("")}
+                    {passTab ? <Pass /> : null}
+                    {busjourney ? <BusPass /> : null}
+                    {cabjourney ? <Cab /> : null}
+                </div>
+            </Container>
+
+
+        </>
     )
 }
 
-export default SelectBooking
+export default SelectBooking;
+
+

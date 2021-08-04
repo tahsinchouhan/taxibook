@@ -27,8 +27,11 @@ const onButtonclick=()=>{
     return (
         <>
             <Header />
-            <Container>
-                <img src={home1} className="w-100" />
+            {/* <Container>
+                <div className="header_image">
+                <img src={home1} alt="bastar"  />
+                </div>
+                
                 <div className="text-center">
                     <h1>Explore</h1>
                     <h6 className="px-5">Check out the best tourism destinations around Bastar</h6>
@@ -67,7 +70,7 @@ const onButtonclick=()=>{
                 </div>
                 <img src={home1} className="booking__img w-100" />
 
-            </Container>
+            </Container> */}
 
             {/* <SelectBooking/> */}
         </>

@@ -25,7 +25,7 @@
     color: #fff;
 }
 .sidebar__nav{
-
+   
 }
 .sidebar__navlink{
     width: 100%;
@@ -36,3 +36,45 @@
     color: #fff;
     font-weight: bold;
 }
+/* {header_div mon} */
+
+.header_div{
+    padding: 0px;
+    margin: 0px;
+  }
+  .header_image{
+    width: 100%;
+  }
+  @media screen and (max-width: 320px){
+    .header_image{
+      width: 40%!important;
+  }
+  }
+  .toggle-icon{
+    margin-right: 20px;
+  }
+  .sidebar_item{
+  padding: 10px;
+  margin: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  }
+  @media screen and (max-width: 320px){
+    .sidebar_item{
+      width: 40%!important;
+  }
+  }
+  /* .search_icon{
+font-size:21px;
+font-weight: 600;
+font-style: bold;
+color: grey;
+  } */
+  
+  .header_item{
+    padding:10px;
+  }
+  .header_item:hover{
+    background-color: blue;
+    color:white;
+  }
