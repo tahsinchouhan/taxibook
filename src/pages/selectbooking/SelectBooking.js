@@ -5,9 +5,9 @@ import { FaBus, FaCarAlt, FaTicketAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Pass from './Pass';
-import BusPass from '../BusPass'
+import BusPass from './BusPass'
 import { useHistory } from 'react-router-dom';
-import Cab from '../Cab';
+import Cab from './Cab';
 
 
 
@@ -58,8 +58,11 @@ function SelectBooking() {
         <>
             <Container>
                 <div className="select_div">
+                    {/* <Row>
+                        <Col></Col>
+                    </Row> */}
                     <div className="row p-3" style={{ textAlign: "center" }}>
-                        <div className="col-xs-12  col-sm-12 col-md-4"  >
+                        <div className="col-xs-12  col-sm-12 col-md-12"  >
                             <img src={logo} alt="bastar" style={{ width: "20%" }} />
                             <div className="booking-div">
                                 <h1>Select your booking</h1>
@@ -88,37 +91,13 @@ function SelectBooking() {
                         </Row>
                     </Container>
                     {Journey ? (
-                        <>
-                            {/* <div className="userDate row">
-                                <label for="colFormLabel" className="col-xs-12 col-md-4 col-form-label">From</label>
-                                <div className="col-sm-10 usre-sourc">
-                                    <input type="email" className="user_input" id="col-FormLabel" placeholder="Enter Source" />
-                                </div>
-                                <label for="colFormLabel" className="col-xs-12 col-md-4 col-form-label">To</label>
-                                <div className="col-sm-10 user_input">
-                                    <input type="email" className="user_input" id="colFormLabel" placeholder="Enter Source" />
-                                </div>
-                            </div>
-                            <div className="" style={{ height: "20px" }}></div>
-
-                            <div className="userdata row" >
-                                <label for="colFormLabel" className="col-xs-12 col-md-4 col-form-label">Journey Date</label>
-                                <div className="col-sm-10 user_input pt-0">
-                                    < DatePicker className="col-sm-10 user_input"
-                                        selected={startDate}
-                                        onChange={(date) => setStartDate(date)} />
-                                </div>
-                            </div>
-                            <br />
-                            <div className="text-center">
-                                <button type="submit" class="btn btn-success">Proceed</button>
-                            </div> */}
+                        <>                         
 
                             <Container>
                                 <Row>
                                     <Col xs={12} md={4}>
                                         <Form.Group className="mb-3 userDate pl-3" controlId="exampleForm.ControlInput1">
-                                            <Form.Label className="">From</Form.Label>
+                                            <Form.Label className="formselect">From</Form.Label>
                                             <Form.Control type="text"
                                                 className="user_input"
                                                 placeholder="Enter Source"
@@ -127,7 +106,7 @@ function SelectBooking() {
                                     </Col>
                                     <Col xs={12} md={4}>
                                         <Form.Group className="mb-3 userDate" controlId="exampleForm.ControlInput1">
-                                            <Form.Label>From</Form.Label>
+                                            <Form.Label className="formselect">From</Form.Label>
                                             <Form.Control type="text"
                                                 className="user_input"
                                                 placeholder="Enter Source"
@@ -136,8 +115,8 @@ function SelectBooking() {
                                     </Col>
                                     <Col xs={12} md={4}>
                                         <Form.Group className="mb-3 userdata" controlId="exampleForm.ControlInput1">
-                                            <Form.Label>From</Form.Label>    <br />
-                                            < DatePicker className="col-sm-10 user_input"
+                                            <Form.Label className="formselect">Journey Date</Form.Label>   
+                                            < DatePicker className="col-sm-10 user_input" style={{marginLeft:"50px"}}
                                                 selected={startDate}
                                                 onChange={(date) => setStartDate(date)} />
                                         </Form.Group>

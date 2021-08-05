@@ -1,80 +1,87 @@
-.sidebar{
-    background-color: var(--primary-color);
-    width: 300px;
-    color: #fff;
+.sidebar {
+  background-color: var(--primary-color);
+  width: 300px;
+  color: #fff;
 }
 
-.header{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding-top: 1rem;
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-top: 1rem;
 }
-.sidebar__toggler{
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-    height: 40px;
-    width: 40px;
+.sidebar__toggler {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  height: 40px;
+  width: 40px;
 }
-.header .logo{
-    width: 110px;
+.header .logo {
+  width: 110px;
 }
- .btn-close{
-    color: #fff;
+.btn-close {
+  color: #fff;
 }
-.sidebar__nav{
-   
+.sidebar__nav {
 }
-.sidebar__navlink{
-    width: 100%;
-    color: #fff;
-    padding: 1rem;
+.sidebar__navlink {
+  width: 100%;
+  color: #fff;
+  padding: 1rem;
 }
-.sidebar__navlink:hover{
-    color: #fff;
-    font-weight: bold;
+.sidebar__navlink:hover {
+  color: #fff;
+  font-weight: bold;
 }
 /* {header_div mon} */
 
-.header_div{
-    padding: 0px;
-    margin: 0px;
-  }
-  .header_image{
-    width: 100%;
-  }
-  @media screen and (max-width: 320px){
-    .header_image{
-      width: 40%!important;
-  }
-  }
-  .toggle-icon{
-    margin-right: 20px;
-  }
-  .sidebar_item{
+.header_div {
+  padding: 0px;
+  margin: 0px;
+}
+.header_image {
+  width: 100%;
+}
+.toggle-icon {
+  margin-right: 20px;
+}
+.sidebar_item {
   padding: 10px;
   margin: 10px;
   font-size: 15px;
   font-weight: 600;
+}
+@media screen and (max-width: 700px) {
+  .sidebar_item {
+    width: 40% !important;
   }
-  @media screen and (max-width: 320px){
-    .sidebar_item{
-      width: 40%!important;
+  .header_image {
+    width: 40% !important;
   }
+
+  .searchIcon {
+    position: absolute;
+    right: 1rem;
+    top: 1.5rem;
+    height: 30px;
+    width: 30px;
   }
-  /* .search_icon{
+}
+/* .search_icon{
 font-size:21px;
 font-weight: 600;
 font-style: bold;
 color: grey;
   } */
-  
-  .header_item{
-    padding:10px;
-  }
-  .header_item:hover{
-    background-color: blue;
-    color:white;
-  }
+
+.header_item {
+  padding: 10px;
+}
+.header_item:hover {
+  background-color: blue;
+  color: white;
+}
+
+/* Mobile View */

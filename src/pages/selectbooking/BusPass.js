@@ -1,42 +1,35 @@
-import React,{useState} from 'react'
-import { Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Container, Row,Col} from "react-bootstrap";
+import { Link } from "react-router-dom";
 
-import ButtonComponent from '../containers/Button';
-
-
-
+import ButtonComponent from "../../containers/Button";
 
 const button_Data = [
-    {
-      name: "Male",
-      value: "Male"
-    },
-  
-    {
-      name: "Female",
-      value: "Female"
-    },
-    
-  
-  ];
+  {
+    name: "Male",
+    value: "Male",
+  },
+
+  {
+    name: "Female",
+    value: "Female",
+  },
+];
 
 function BusPass() {
-    const [activeButton, setActiveButton] = useState(button_Data[0  ].name);
-    const onSideBtnClick = e =>
-    {
-      const name = e.target.name;
-      setActiveButton(name);
-      // alert("test");
-    };
+  const [activeButton, setActiveButton] = useState(button_Data[0].name);
+  const onSideBtnClick = (e) => {
+    const name = e.target.name;
+    setActiveButton(name);
+    // alert("test");
+  };
 
-
-    return (
-        <div>
-            <Container>
-                {/* <h1>bus</h1> */}
+  return (
+    <div>
+      <Container>
+        {/* <h1>bus</h1> */}
         <Row className="dmpassData">
-          <form>
+          {/* <form>
             <div className="form-row">
             </div>
             <div className="form-group">
@@ -87,10 +80,7 @@ function BusPass() {
                   data={button_Data}
                   activeButton={activeButton}
                   trigerOnClickEmpSideBtn={onSideBtnClick}
-                />
-
-                          {/* <button type="text" className="btn-danger genderbtn">Male</button>
-                          <button type="text" className="btn-info genderbtn">Female</button> */}
+                />                       
                         </div>
                       </div>
                       <div className="col m-2 w-50">
@@ -112,16 +102,42 @@ function BusPass() {
             <div className="form-group passengerbtn">
               <button type="submit" className="btn btn-primary">Add passenger</button>
             </div>
-          </form>
+          </form> */}
         </Row>
+        <h3 className="text-center">Available Promo Codes</h3>
+        <Container>
+        <Row>
+          <Col className="bg-secondary m-3">
+            <h3>MONSOON15</h3>
+            <span>15% off in July 2021</span>
+          </Col>
+          <Col className="bg-secondary  m-3">
+            <h3>TRYNEW</h3>
+            <span>10% off your first booking</span>
+          </Col>
+          <Col className="bg-secondary  m-3">
+          <h3>MONSOON15</h3>
+            <span>15% off in July 2021</span>
+          </Col>
+          <Col className="bg-secondary  m-3">
+          <h3>TRYNEW</h3>
+            <span>10% off your first booking</span>
+          </Col>
+        </Row>
+        </Container>
+        <Container>
+        <Row>          
+          <Col>hlll</Col>
+          <Col>hlll</Col>
+        </Row>
+        </Container>
+
       </Container>
       <div className="payment-div text-center pt-2 bg-danger">
-        <h1 >MAKE PAYMENT</h1>
-
+        <h1>MAKE PAYMENT</h1>
       </div>
-            
-        </div>
-    )
+    </div>
+  );
 }
 
-export default BusPass
+export default BusPass;
