@@ -53,10 +53,10 @@ export default function Header() {
 
   return (
     <>
-      <Container className="d-md-none">
+      <Container className="d-md-none header_div">
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
-          <div style={{ textAlign: "center", marginTop: 10 }}>
+          <div style={{ textAlign: "center",}}>
             <img className="logo" style={{ width: 80 }} src={logo} />
             <FaSistrix onClick={onSearchClick} className="searchIcon" />
           </div>
