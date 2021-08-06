@@ -6,7 +6,7 @@ import Layer12 from "../../assets/img/adivash.svg";
 import men1 from "../../assets/img/men.svg";
 import doodle1 from "../../assets/img/doodle.png";
 import "../../assets/css/saly.css";
-import Inform from "./Inform";
+import Inform from "./Footer";
 import { NavLink, useHistory } from "react-router-dom";
 
 function Saly() {
@@ -199,8 +199,6 @@ function Saly() {
           </div>
         </Container>
       </Container>
-
-      <Inform />
     </>
   );
 }

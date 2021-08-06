@@ -17,11 +17,13 @@ import { FaUser, FaSistrix } from "react-icons/fa";
 import Saly from "../pages/travesaly/Saly";
 import Search from "../pages/travesaly/Search";
 import { useHistory } from "react-router-dom";
+import SelectBooking from "../pages/selectbooking/SelectBooking";
 
 export default function Header() {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState(false);
   const [explore,setExpolre] =useState(false);
+  const[booking,setBooking] =useState(false);
 
   const [searching, setSearching] = useState();
 
@@ -47,6 +49,10 @@ export default function Header() {
   const onExploreClick = () => {
     setExpolre(true)
     history.push('/explore')
+  }
+  const onBookingClick = () => {
+    SelectBooking(true)
+    history.push('/buspass')
   }
 
 
@@ -80,22 +86,22 @@ export default function Header() {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="me-auto sidebar__nav">
-              <Nav.Link className="sidebar__navlink" href="#explore">
+              <Nav.Link className="sidebar__navlink" href="/">
                 HOME
               </Nav.Link>
-              <Nav.Link className="sidebar__navlink" to="/explore">
+              <Nav.Link className="sidebar__navlink" href="/explore">
                 EXPLORE
               </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="#booking">
+              <Nav.Link className="sidebar__navlink" href="/booking">
                 BOOKING
               </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="#pricing">
+              <Nav.Link className="sidebar__navlink" href="/pricing">
                 TICKETS
               </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="#pricing">
+              <Nav.Link className="sidebar__navlink" href="/pricing">
                 CONTACT
               </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="#pricing">
+              <Nav.Link className="sidebar__navlink" href="/pricing">
                 ABOUT
               </Nav.Link>
             </Nav>
@@ -107,7 +113,7 @@ export default function Header() {
         <Navbar expand="lg" style={{ height: "60px", marginTop: "20px" }}>
           <Navbar.Brand href="#">
             <div style={{ marginLeft: "30px" }}>
-              <img className="logo" src={logo} style={{ height: "60px" }} />
+              <img className="logo" src={logo} />
             </div>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" className="toggle-icon" />
@@ -122,7 +128,7 @@ export default function Header() {
               }}
               navbarScroll
             >
-              <Nav.Link className="sidebar_item" href="/home">
+              <Nav.Link className="sidebar_item" href="/">
                 HOME
               </Nav.Link>
               <Nav.Link className="sidebar_item" href="/explore">
@@ -188,9 +194,7 @@ export default function Header() {
             </Form>
           </Navbar.Collapse>
         </Navbar>
-        <header classNameName="header"></header>
       </Container>
-      <Saly />
     </>
   );
 }

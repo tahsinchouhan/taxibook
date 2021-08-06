@@ -527,7 +527,6 @@ body {
 
 .navbar {
   padding: 0 !important;
-  background: #fff !important;
 }
 
 
@@ -660,7 +659,6 @@ body {
   background: #BEBEBE;
   color: #fff;
   font-size: 16px;
-
   font-weight: bold;
   padding: 10px 15px;
   border-radius: 16px;
@@ -691,14 +689,7 @@ body {
   display: flex;
   justify-content: space-between;
   text-transform: capitalize;
-}    
-
-
-
-
-
-
-
+}
 /* Chat Box */
 
 .app {

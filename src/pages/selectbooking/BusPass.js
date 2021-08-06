@@ -3,6 +3,7 @@ import { Container, Row,Col} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../../assets/css/buspass.css";
 import { FaBus, FaCarAlt, FaTicketAlt } from "react-icons/fa";
+import bus from '../../assets/img/bus.png'
 
 
 import ButtonComponent from "../../containers/Button";
@@ -58,12 +59,16 @@ function BusPass() {
         <Container>
         <Row>          
           <Col>
+          <div>
           <span>2 Stops</span>
           <span>21:45 - 9:50</span>
-          <span>12h 05m</span><br/>
-         
-           <FaBus style={{backgroundColor:"red"}}/>
-           <span>Raj Ratan Tours and Travels</span>
+          <span>12h 05m</span><br/>       
+           
+          <div>
+            <img src={bus} alt="bus" style={{height:"10px"}}/>
+          <span>Raj Ratan Tours and Travels</span>
+          </div>
+          </div>
           
           </Col>
           <Col>
