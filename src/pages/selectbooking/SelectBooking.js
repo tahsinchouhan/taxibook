@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Row, Col, Form, Container } from 'react-bootstrap'
 import logo from '../../assets/img/logo.png'
-import { FaBus, FaCarAlt, FaTicketAlt } from "react-icons/fa";
+import { FaBus, FaCarAlt, FaTicketAlt,FaCity} from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Pass from './Pass';
@@ -98,10 +98,13 @@ function SelectBooking() {
                                     <Col xs={12} md={4}>
                                         <Form.Group className="mb-3 userDate pl-3" controlId="exampleForm.ControlInput1">
                                             <Form.Label className="formselect">From</Form.Label>
+                                            <div>
+                                                {/* <FaCity  style={{color:"black"}} /> */}                                                
                                             <Form.Control type="text"
                                                 className="user_input"
                                                 placeholder="Enter Source"
                                                />
+                                            </div>
                                         </Form.Group>
                                     </Col>
                                     <Col xs={12} md={4}>
@@ -123,7 +126,12 @@ function SelectBooking() {
                                     </Col>
                                 </Row>
                                 <div className="text-center">
-                                <Button type="submit" class="btn btn-success"style={{width:"20%", textAlign:"center"}}>Proceed</Button>
+                                <Button type="submit" class="btn btn-success"
+                                style={{width:"19%", 
+                                textAlign:"center",
+                                height:"48px",
+                                borderRadius:"9px",
+                                backgroundColor:"#0fa453"}}>Proceed</Button>
                             </div> 
                               
 

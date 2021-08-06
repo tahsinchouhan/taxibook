@@ -21,6 +21,7 @@ import { useHistory } from "react-router-dom";
 export default function Header() {
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState(false);
+  const [explore,setExpolre] =useState(false);
 
   const [searching, setSearching] = useState();
 
@@ -42,6 +43,13 @@ export default function Header() {
   const onSearchingHolder = () => {
     console.log("hellllooo");
   };
+
+  const onExploreClick = () => {
+    setExpolre(true)
+    history.push('/explore')
+  }
+
+
   return (
     <>
       <Container className="d-md-none">
@@ -54,7 +62,7 @@ export default function Header() {
         </header>
 
         {search === true ? (
-          <div className="mt-4">
+          <div className="">
             <InputGroup>
               <FormControl
                 id="inlineFormInputGroup"
@@ -75,7 +83,7 @@ export default function Header() {
               <Nav.Link className="sidebar__navlink" href="#explore">
                 HOME
               </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="#explore">
+              <Nav.Link className="sidebar__navlink" to="/explore">
                 EXPLORE
               </Nav.Link>
               <Nav.Link className="sidebar__navlink" href="#booking">
@@ -114,22 +122,22 @@ export default function Header() {
               }}
               navbarScroll
             >
-              <Nav.Link className="sidebar_item" href="#home">
+              <Nav.Link className="sidebar_item" href="/home">
                 HOME
               </Nav.Link>
-              <Nav.Link className="sidebar_item" href="#explore">
+              <Nav.Link className="sidebar_item" href="/explore">
                 EXPLORE
               </Nav.Link>
-              <Nav.Link className="sidebar_item" href="#booking">
+              <Nav.Link className="sidebar_item" href="/booking">
                 BOOKING
               </Nav.Link>
-              <Nav.Link className="sidebar_item" href="#pricing">
+              <Nav.Link className="sidebar_item" href="/pricing">
                 TICKETS
               </Nav.Link>
-              <Nav.Link className="sidebar_item" href="#pricing">
+              <Nav.Link className="sidebar_item" href="/pricing">
                 CONTACT
               </Nav.Link>
-              <Nav.Link className="sidebar_item" href="#pricing">
+              <Nav.Link className="sidebar_item" href="/pricing">
                 ABOUT
               </Nav.Link>
             </Nav>
