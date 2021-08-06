@@ -33,11 +33,6 @@ export default function Header() {
   const history = useHistory();
 
   const onSearchClick = () => {
-    // if (search === false) {
-    //   setSearch(true);
-    // } else {
-    //   setSearch(false);
-    // }
     console.log("hiii");
     history.push('/search')
   };
@@ -110,9 +105,9 @@ export default function Header() {
       </Container>
 
       <Container fluid className="header_div d-none d-md-block">
-        <Navbar expand="lg" style={{ height: "60px", marginTop: "20px" }}>
+        <Navbar expand="lg" style={{ height: "80px"}}>
           <Navbar.Brand href="#">
-            <div style={{ marginLeft: "30px" }}>
+            <div style={{ marginLeft: "100%"}}>
               <img className="logo" src={logo} />
             </div>
           </Navbar.Brand>

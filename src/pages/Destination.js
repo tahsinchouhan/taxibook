@@ -7,7 +7,7 @@ import hill2 from "../assets/img/hill2.jpg";
 import tree from '../assets/img/tree.jpg';
 import Header from '../components/Header'
 
-function Packages() {
+function Destination() {
     
     return (
         <React.Fragment>
@@ -29,37 +29,26 @@ function Packages() {
           </div>
         </div>
           <>
-          <div className="package-block">
-            <h2 class="package__title package__title_ "><span>Packages</span></h2>
-            <div className="sort__element">
-              <label>Sort By Price : &nbsp; </label>
-              <select> 
-                <option>Relevance</option>
-                <option value="heigh">High to Low</option>
-                <option value="low">Low to High</option>
-              </select>
-            </div>
-          </div>
-            <Row>          
-              {/* _package && _package.map(item => ( */}
+          <h2 class="package__title mb-5"><span>Destinations</span> </h2>
+            <Row>
+            {/* {
+              _destination && _destination.map(item => ( */}
                 <Col md={2} sm={6} xs={6} className="mb-3">
-                 {/* <Link className="code mb-3" to={`/package_details/${item.id}`}>  */}
-                 <Link className="code mb-3" >
-                  <Link className="code mb-3">
+                  {/* <Link className="code" to={`/destination_details/${item.id}`}> */}
+                  <Link className="code">                
                   <div id="package__sort">
                     <Image
                       draggable={false}
                       style={{ width: "100%", height: "100%" }}
                       src={hill2}
                     />
-                    <h6 className="packages__block-title_ mt-3 mb-0">Kanger Valley National Park Day Tour</h6>
-                    <small className="packages__block-subtitle ">₹ 90000</small>
+                    <h6 className="packages__block-title_ mt-3 mb-0">Teerathgarh Falls</h6>
+                    <small className="packages__block-subtitle_ ">Kanger Valley National Park </small>
                   </div>
                   </Link>
-                  </Link>
                 </Col>
-              {/* )) */}
-           
+              {/* ))
+            } */}
             </Row>
           </>   
         </Container>
@@ -68,4 +57,4 @@ function Packages() {
     )
 }
 
-export default Packages
+export default Destination
