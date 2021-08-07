@@ -212,49 +212,52 @@ function SelectBooking() {
           </div>
           <Container>
             <Row className="user-icon">
-              <Col xs={4} md={3} className="icon-item">
-                <img
-                  src={ticket}
-                  alt="ticket"
-                  className={passTab ? "pass-color" : "default-color"}
-                  onClick={onPassClick}
-                />
-                <br />
-                <span
-                  onClick={onPassClick}
-                  className={passTab ? "pass-color" : "default-color"}
-                >
-                  Pass
+            <div
+                className="icon-item"
+              >
+                <span className="tab-icons">
+                  <img
+                    src={ticket}
+                    alt="ticket"
+                    className={passTab ? "pass-color" : "default-color"}
+                    onClick={onPassClick}
+                  />
+                  <div
+                    onClick={onPassClick}
+                    className={passTab ? "pass-color" : "default-color"}
+                  >
+                    Pass
+                  </div>
                 </span>
-              </Col>
-              <Col xs={4} md={3} className="icon-item">
-                <img
-                  src={cab}
-                  className={busjourney ? "bus-color" : "default-color"}
-                  onClick={onBusClick}
-                />
-                <br />
-                <span
-                  onClick={onBusClick}
-                  className={busjourney ? "bus-color" : "default-color"}
-                >
-                  Bus
+
+                <span className="tab-icons">
+                  <img
+                    src={bus}
+                    className={busjourney ? "bus-color" : "default-color"}
+                    onClick={onBusClick}
+                  />
+                  <div
+                    onClick={onBusClick}
+                    className={busjourney ? "bus-color" : "default-color"}
+                  >
+                    Bus
+                  </div>
                 </span>
-              </Col>
-              <Col xs={4} md={3} className="icon-item">
-                <img
-                  src={bus}
-                  className={cabjourney ? "cab-color" : "default-color"}
-                  onClick={onCabClick}
-                />
-                <br />
-                <span
-                  onClick={onCabClick}
-                  className={cabjourney ? "cab-color" : "default-color"}
-                >
-                  Cab
+
+                <span className="tab-icons">
+                  <img
+                    src={cab}
+                    className={cabjourney ? "cab-color" : "default-color"}
+                    onClick={onCabClick}
+                  />
+                  <div
+                    onClick={onCabClick}
+                    className={cabjourney ? "cab-color" : "default-color"}
+                  >
+                    Cab
+                  </div>
                 </span>
-              </Col>
+              </div>
             </Row>
           </Container>
           {Journey ? (
