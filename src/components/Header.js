@@ -87,7 +87,7 @@ export default function Header() {
               <Nav.Link className="sidebar__navlink" href="/explore">
                 EXPLORE
               </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="/booking">
+              <Nav.Link className="sidebar__navlink" href="/select-booking">
                 BOOKING
               </Nav.Link>
               <Nav.Link className="sidebar__navlink" href="/pricing">
@@ -129,7 +129,7 @@ export default function Header() {
               <Nav.Link className="sidebar_item" href="/explore">
                 EXPLORE
               </Nav.Link>
-              <Nav.Link className="sidebar_item" href="/booking">
+              <Nav.Link className="sidebar_item" href="/select-booking">
                 BOOKING
               </Nav.Link>
               <Nav.Link className="sidebar_item" href="/pricing">
