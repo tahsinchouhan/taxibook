@@ -24,8 +24,6 @@
 .btn-close {
   color: #fff;
 }
-.sidebar__nav {
-}
 .sidebar__navlink {
   width: 100%;
   color: #fff;
@@ -40,7 +38,7 @@
 .header_div {
   padding: 0px;
   margin: 0px;
-  background-color:#FAFAFA;
+  background-color: white !important;
 }
 .header_image {
   width: 100%;
