@@ -189,7 +189,7 @@ function Pass() {
                       />
                     </div>
                   </p>
-                  <Link className="btn btn-success">Button</Link>
+                  <Link className="btn" style={{backgroundColor:"#0FA453"}}>Button</Link>
                 </div>
               </div>
             </div>

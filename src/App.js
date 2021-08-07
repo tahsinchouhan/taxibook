@@ -11,6 +11,7 @@ import './assets/css/app.css'
 import Search from './pages/travesaly/Search';
 import Explore from './pages/explore/Explore';
 import booking from './pages/booking/Booking';
+import DmPass from './pages/dmpass/DmPass';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             <Route exact path='/populardestinations' component={Destination} />
             <Route exact path='/curatedexperiences' component={Packages} />
             <Route exact path='/select-booking' component={SelectBooking} />
+            <Route exact path='/dmpass' component={DmPass} />
             <Route exact path='/pass' component={Pass} />
             <Route exact path='/buspass' component={BusPass} />
             <Route exact path='/search' component={Search}/>

@@ -1,0 +1,32 @@
+*{
+
+}
+.dmpass-div{
+    background-color:#FF814A;
+}
+.dm-kangervilla{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.kanger-valley{
+   color: #FFFFFF;
+   font-size: 20px;
+    
+}
+.kanger-arrow{
+    color: #FFFFFF;;   
+    font-weight: 700;  
+    position: absolute;
+left: 6.67%;
+right: 87.5%;
+top: 5.63%;
+bottom: 97.04%;
+font-size: 20px;
+
+}
+.kangervilla{
+    text-align: center;
+    margin: 10px;
+    font-weight: 700;
+}
