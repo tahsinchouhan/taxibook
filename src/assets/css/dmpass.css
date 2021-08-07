@@ -3,6 +3,7 @@
 }
 .dmpass-div{
     background-color:#FF814A;
+    width: 100%;
 }
 .dm-kangervilla{
     display: flex;
@@ -20,7 +21,7 @@
     position: absolute;
 left: 6.67%;
 right: 87.5%;
-top: 5.63%;
+top: 4.63%;
 bottom: 97.04%;
 font-size: 20px;
 

@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 41px;
+  width: 100%;
 }
 .genderbtn {
   width: 50%;
@@ -36,11 +37,84 @@
   width: 60%;
 }
 .passengerbtn{
-  
+  width: 375px;
+height: 86px;
+left: 0px;
+top: 645px;
+
+background: #0FA453;
 }
 
 @media screen and (max-width: 700px) {
   .dmpass-form {
     width: 87%;
   }
+  .dmpass-div{
+    background-color:#FF814A;
+    width: 100%;
 }
+}
+
+.rangebar{
+  
+}
+
+.dmPass-rangebar{
+  position: absolute;
+width: 24px;
+height: 24px;
+left: 55px;
+top: 94px;
+
+background: #FF814A;
+border-radius: 50px;
+
+
+
+}
+.locations-rangebar{
+  width: 24px;
+  height: 24px;
+  left: 133px;
+  top: 94px;
+  
+  border: 1px solid #FF814A;
+  box-sizing: border-box;
+
+
+  margin-left: 110px;
+    margin-top: 14px;
+  border-radius: 50px;
+}
+.confirm-rangebar{
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 212px;
+  top: 94px;
+  
+  border: 1px solid #FF814A;
+  box-sizing: border-box;
+  border-radius: 50px;
+  
+}
+.checkout-rangebar{
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 292px;
+  top: 94px;
+  
+  border: 1px solid #FF814A;
+  box-sizing: border-box;
+  border-radius: 50px;
+}
+/* .{
+  position: absolute;
+width: 43px;
+height: 0px;
+left: 84px;
+top: 106px;
+
+border: 1px solid #FF814A;
+} */

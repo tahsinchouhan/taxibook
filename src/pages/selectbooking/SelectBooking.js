@@ -234,12 +234,12 @@ function SelectBooking() {
                   onClick={onBusClick}
                 />
                 <br />
-                <span
+                <div
                   onClick={onBusClick}
                   className={busjourney ? "bus-color" : "default-color"}
                 >
                   Bus
-                </span>
+                </div>
               </Col>
               <Col xs={4} md={3} className="icon-item">
                 <img
@@ -248,12 +248,12 @@ function SelectBooking() {
                   onClick={onCabClick}
                 />
                 <br />
-                <span
+                <div
                   onClick={onCabClick}
                   className={cabjourney ? "cab-color" : "default-color"}
                 >
                   Cab
-                </span>
+                </div>
               </Col>
             </Row>
           </Container>
