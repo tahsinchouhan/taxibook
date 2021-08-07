@@ -14,7 +14,7 @@ body{
   font-size: 30px;
   font-weight: 400;
   align-items: center;
-  margin-left: 20px;
+  margin-left: 0px;
   cursor: pointer;
   padding-bottom:10px;   
 }
@@ -29,8 +29,8 @@ body{
 .userDate{
   background-color: #9b98981c;
   color:grey;
-  margin:10px;
-  height:85px;
+  /* margin:10px; */
+  height:79px;
   border-radius: 6px;
   font-size: 19px;
     font-weight: 400;
@@ -38,7 +38,7 @@ body{
 .userform{
   align-items: center;
   padding: 10px;
-  margin: 10px;
+  /* margin: 10px; */
   background-color: #9b98981c;
   border-radius: 999px;
 }
@@ -64,8 +64,8 @@ body{
 .userdata{
   background-color: #9b98981c;
   color:grey;
-  margin:10px;
-  height: 85px;
+  /* margin:10px; */
+  height: 75px;
   border-radius: 6px;
   font-size: 19px;
     font-weight: 400;

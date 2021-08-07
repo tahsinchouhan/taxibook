@@ -4,17 +4,17 @@ import logo from "../../assets/img/logo.png";
 import { FaBus, FaCarAlt, FaTicketAlt, FaCity } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Pass from "./Pass";
-import BusPass from "./BusPass";
+import Pass from "../selectbooking/Pass";
+import BusPass from "../selectbooking/BusPass";
 import { useHistory } from "react-router-dom";
-import Cab from "./Cab";
-import bus from '../../assets/img/bus.png'
-import cab from '../../assets/img/cab.png'
-import ticket from '../../assets/img/ticket.png'
+import Cab from "../selectbooking/Cab";
+import bus from "../../assets/img/bus.png";
+import cab from "../../assets/img/cab.png";
+import ticket from "../../assets/img/ticket.png";
 
 // import home1 from '../assets/img/home1.svg'
 
-function SelectBooking() {
+function Booking() {
   const [passTab, setPassTab] = useState(false);
   const [Journey, setJourney] = useState(true);
 
@@ -52,7 +52,7 @@ function SelectBooking() {
 
   return (
     <>
-       {/* <Container>
+      {/* <Container>
         <div className="select_div">
           <div className="row p-3" style={{ textAlign: "center" }}>
             <div className="col-xs-12  col-sm-12 col-md-12">
@@ -182,8 +182,7 @@ function SelectBooking() {
         </div>
       </Container> */}
 
-
-{/*mobile*/}
+      {/*mobile*/}
 
       <Container>
         <div className="select_div">
@@ -198,7 +197,9 @@ function SelectBooking() {
           <Container>
             <Row className="user-icon">
               <Col xs={4} md={3} className="icon-item">
-               <img src={ticket} alt="ticket"
+                <img
+                  src={ticket}
+                  alt="ticket"
                   className={passTab ? "pass-color" : "default-color"}
                   onClick={onPassClick}
                 />
@@ -211,7 +212,8 @@ function SelectBooking() {
                 </span>
               </Col>
               <Col xs={4} md={3} className="icon-item">
-              <img src={cab} 
+                <img
+                  src={cab}
                   className={busjourney ? "bus-color" : "default-color"}
                   onClick={onBusClick}
                 />
@@ -220,12 +222,12 @@ function SelectBooking() {
                   onClick={onBusClick}
                   className={busjourney ? "bus-color" : "default-color"}
                 >
-                  
                   Bus
                 </span>
               </Col>
               <Col xs={4} md={3} className="icon-item">
-              <img src={bus} 
+                <img
+                  src={bus}
                   className={cabjourney ? "cab-color" : "default-color"}
                   onClick={onCabClick}
                 />
@@ -243,36 +245,40 @@ function SelectBooking() {
             <>
               <Container>
                 <Row>
-                  <Col  xs={2} md={2}></Col>
-                  <div className="d-flex"style={{borderBlockColor:"#9b98981c"}} >
-                  <Col xs={12} md={3} className="" >
-                    <Form.Group style={{borderBottom:"1px solid grey"}}
-                      className="  userDate "
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label className="formselect">From</Form.Label>
-                      <div>
+                  <Col xs={2} md={2}></Col>
+                  <div
+                    className="d-flex"
+                    style={{ borderBlockColor: "#9b98981c" }}
+                  >
+                    <Col xs={12} md={3} className="">
+                      <Form.Group
+                        style={{ borderBottom: "1px solid grey" }}
+                        className="  userDate "
+                        controlId="exampleForm.ControlInput1"
+                      >
+                        <Form.Label className="formselect">From</Form.Label>
+                        <div>
+                          <Form.Control
+                            type="text"
+                            className="user_input"
+                            placeholder="Enter Source"
+                          />
+                        </div>
+                      </Form.Group>
+                      {/* </Col>
+                  <Col xs={12} md={3} className=""> */}
+                      <Form.Group
+                        className=" userDate"
+                        controlId="exampleForm.ControlInput1"
+                      >
+                        <Form.Label className="formselect">To</Form.Label>
                         <Form.Control
                           type="text"
                           className="user_input"
                           placeholder="Enter Source"
                         />
-                      </div>
-                    </Form.Group>
-                  {/* </Col>
-                  <Col xs={12} md={3} className=""> */}
-                    <Form.Group
-                      className=" userDate"
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label className="formselect">To</Form.Label>
-                      <Form.Control
-                        type="text"
-                        className="user_input"
-                        placeholder="Enter Source"
-                      />
-                    </Form.Group>
-                  </Col>
+                      </Form.Group>
+                    </Col>
                   </div>
                   <Col xs={12} md={2} className="mt-2">
                     <Form.Group
@@ -290,14 +296,15 @@ function SelectBooking() {
                       />
                     </Form.Group>
                   </Col>
-                  <Col  xs={2} md={2}></Col>
-                  <Col  xs={2} md={2}></Col>
+                  <Col xs={2} md={2}></Col>
+                  <Col xs={2} md={2}></Col>
                 </Row>
-                <div className="text-center">
+                <div className="text-center" style={{marginTop:"50px"}}>
                   <Button
                     type="submit"
                     class="btn btn-success"
                     style={{
+                      marginTop:"30px",
                       width: "60%",
                       textAlign: "center",
                       height: "48px",
@@ -308,18 +315,16 @@ function SelectBooking() {
                     Proceed
                   </Button>
                 </div>
-              </Container> 
+              </Container>
             </>
           ) : null}
           {passTab ? <Pass /> : null}
           {busjourney ? <BusPass /> : null}
           {cabjourney ? <Cab /> : null}
         </div>
-      </Container> 
-
-      
+      </Container>
     </>
   );
 }
 
-export default SelectBooking;
+export default Booking;
