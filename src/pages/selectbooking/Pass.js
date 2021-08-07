@@ -73,7 +73,7 @@ function Pass() {
       order_id: data.id,
       name: "Aamcho Bastar",
       description: "Tankyou for nothink.",
-      image: "http://localhost:1337/logo.svg",
+      image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
       handler: function (response) {
         alert(response.razorpay_payment_id);
         alert(response.razorpay_order_id);
