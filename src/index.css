@@ -1,109 +1,87 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
-*{
-  font-family: 'Inter', sans-serif;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap");
+* {
+  font-family: "Inter", sans-serif;
 }
-body{
+body {
   margin: 0;
   padding: 0;
+  background-color: white !important;
 }
 
-.user-icon{  
+.user-icon {
   width: 100%;
   display: flex;
-    justify-content: center;
+  justify-content: center;
   font-size: 30px;
   font-weight: 400;
   align-items: center;
   margin-left: 0px;
   cursor: pointer;
-  padding-bottom:10px;   
+  padding-bottom: 10px;
 }
-@media screen and (max-width: 320px){
-  .user-icon{
+@media screen and (max-width: 320px) {
+  .user-icon {
     font-size: 20px !important;
+  }
 }
-}
-.icon-item{
+.icon-item {
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
-.userDate{
-  background-color: #9b98981c;
-  color:grey;
-  /* margin:10px; */
-  height:79px;
-  border-radius: 6px;
+.tab-icons{
+  padding: 0 20px;
+}
+.userDate {
+  color: grey;
   font-size: 19px;
-    font-weight: 400;
 }
-.userform{
+
+.fromtocontainer {
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 0 20px;
+  background-color: #9b98981c;
+}
+.userform {
   align-items: center;
   padding: 10px;
-  /* margin: 10px; */
   background-color: #9b98981c;
   border-radius: 999px;
 }
-.usre-sourc{
+.usre-sourc {
   border-bottom: 1px solid #9b98996c;
 }
-.user_input{
+.user_input {
   width: 97%;
-  border: none!important;
-    background-color: #cccbcb05;
-    outline-width: 0;   
-    border-radius: 6px;
-    margin-left: 4px;
-    padding-top: 0;
-}
-.formselect{
-  margin: 10px;
-  margin-top: 0;
-}
-/* .icon-item{
-  text-align: center;
-} */
-.userdata{
-  background-color: #9b98981c;
-  color:grey;
-  /* margin:10px; */
-  height: 75px;
+  border: none !important;
+  background-color: #cccbcb05;
+  outline-width: 0;
   border-radius: 6px;
+  margin-left: 4px;
+  padding-top: 0;
+}
+.formselect {
+  margin: 0px;
+  font-size: 12px;
+}
+.userdatas{
+  color: grey;
   font-size: 19px;
-    font-weight: 400;
+  background-color: #9b98981c;
+  margin: 0 0 20px 0;
+  padding:10px 20px;
+  border-radius: 10px;
 }
-
-/*{pass.css}*/
-
-
-/* {header_div} */
-
-/* .header_div{
-  padding: 0;
-  margin: 0;
+.userdata {
+  color: grey;
+  font-size: 19px;
+  background-color: #9b98981c;
+  margin: 20px 0;
+  padding:10px 20px;
+  border-radius: 10px;
 }
-.header_image{
-  width: 100%;
-}
-@media screen and (max-width: 320px){
-  .header_image{
-    width: 40%!important;
-}
-}
-.header_middle{
-  display: flex;
-  flex: 1;
-  justify-content: center;
-}
-.header_right{
-
-}
-.header_item{
-  padding:10px;
-}
-.header_item:hover{
-  background-color: blue;
-  color:white;
-} */
-
-.airoIcon{
+.airoIcon {
   margin-right: 20px;
 }
