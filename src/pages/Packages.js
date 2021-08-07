@@ -1,14 +1,15 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Container, Col, Form, Row,Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import Footer from '../pages/travesaly/Footer';
 import hill2 from "../assets/img/hill2.jpg";
-import tree from '../assets/img/tree.jpg';
 import Header from '../components/Header'
 
 function Packages() {
-    
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
     return (
         <React.Fragment>
           <Header />
