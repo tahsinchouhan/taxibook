@@ -90,6 +90,9 @@ export default function Header() {
               <Nav.Link className="sidebar__navlink" href="/select-booking">
                 BOOKING
               </Nav.Link>
+              <Nav.Link className="sidebar__navlink" href="/dmpass">
+                DM PASS
+              </Nav.Link>
               <Nav.Link className="sidebar__navlink" href="/pricing">
                 TICKETS
               </Nav.Link>
@@ -131,6 +134,9 @@ export default function Header() {
               </Nav.Link>
               <Nav.Link className="sidebar_item" href="/select-booking">
                 BOOKING
+              </Nav.Link>
+              <Nav.Link className="sidebar_item" href="/dmpass">
+                DM PASS
               </Nav.Link>
               <Nav.Link className="sidebar_item" href="/pricing">
                 TICKETS

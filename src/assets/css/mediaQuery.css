@@ -12,6 +12,7 @@
   .package__title_ {
     margin-bottom: 40px;
   }
+  
 }
 
 /* 
@@ -137,6 +138,7 @@
     border-radius: 16px;
   }
   
+  
   .search__bt::before {
     /* background-image: url('../assets/search_new.png'); */
   }
@@ -243,6 +245,7 @@
   #trip__package {
     flex-direction: column;
   }
+  
 
   .logo {
     height: 91px;

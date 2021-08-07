@@ -1,34 +1,46 @@
-* .dmpassData{
-    margin: 10px;
-  }
-  .passform{
-    margin: 40px;
-  }
-  .passengerbtn{
-    display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 41px;
-  }
-  .genderbtn{
-    width: 50%;
-    height: 30px;
-    font-size: 12px;
-  }
-  .pass_input{
-    border: none;
-    background-color:#9b98981c;
-    height: 50px;
-  }
-  .pass-color{
-    color: green;
-  }
-  .bus-color{
+* .dmpassData {
+  margin: 10px;
+}
+.passform {
+  margin: 40px;
+}
+.passengerbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 41px;
+}
+.genderbtn {
+  width: 50%;
+  height: 30px;
+  font-size: 12px;
+}
+.pass_input {
+  border: none;
+  background-color: #9b98981c;
+  height: 50px;
+}
+.pass-color {
+  color: #0fa453;
+}
+.bus-color {
   color: red;
-  }
-  .cab-color{
+}
+.cab-color {
   color: purple;
+}
+.default-color {
+  color: grey;
+}
+.dmpass-form {
+  width: 60%;
+}
+.passengerbtn{
+  
+}
+
+@media screen and (max-width: 700px) {
+  .dmpass-form {
+    width: 87%;
   }
-  .default-color{
-    color: grey;
-  } 
+}
