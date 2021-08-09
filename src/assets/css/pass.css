@@ -16,13 +16,22 @@
   height: 30px;
   font-size: 12px;
 }
-.pass_input {
+.pass_input input {
   /* border: none; */
   /* background-color: #9b98981c; */
   height: 50px;
   border: none;
   background-color: transparent;
+  outline-width:0;
 }
+.pass_input{
+  display: flex;
+  align-items: center;
+  /* padding: 10px; */
+  margin-left: 10px;
+  background-color:  #9b98981c;
+  /* border-radius: 0px; */
+} 
 .pass-color {
   color: #0fa453;
 }
@@ -55,10 +64,7 @@ background: #0FA453;
     background-color:#FF814A;
     width: 100%;
 }
-}
 
-.rangebar{
-  
 }
 
 .dmPass-rangebar{

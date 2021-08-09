@@ -78,19 +78,27 @@ function Locations() {
             <h3 style={{ fontWeight: "bolder", textAlign: "center" }}>
         Select Locations
             </h3>
-            <form>
-              <div className="form-row"></div>
-              <div className="pass_input mt-4 d-flex bg-light">
-              <Form.Check type="radio" aria-label="radio 1" className="pt-2"/>
+            <form>   
+            <div className="location_pass">
+            <Form.Check
+          type="radio"
+          label="second radio"
+          name="formHorizontalRadios"
+          id="formHorizontalRadios2"
+        />
+                        <input  className=""placeholder="Search Facebook" type="text" />
+                    </div>
+
+              {/* <div className="location-pass mt-4 d-flex bg-light">             
+              
                 <input
                   type="text"
                   className="form-control pass_input"
                   // id="inputAddress"
                   placeholder="Enter mobile number"
-                />
-              
+                />             
 
-              </div>
+              </div> */}
               <div className="form-row">
                 <div className="form-group mt-4 ">
                 

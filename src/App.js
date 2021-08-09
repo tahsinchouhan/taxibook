@@ -14,6 +14,8 @@ import booking from './pages/booking/Booking';
 // import DmPass from './pages/dmpass/DmPass';
 import DmPass from './pages/dm pass/DmPass';
 import Locations from './pages/dm pass/Locations';
+import BusDetail from './pages/selectbooking/BusDetail';
+import BusMonsoon from './pages/selectbooking/BusMonsoon';
 
 function App() {
 
@@ -33,6 +35,9 @@ function App() {
             <Route exact path='/buspass' component={BusPass} />
             <Route exact path='/search' component={Search}/>
             <Route exact path='/locations' component={Locations}/>
+            <Route exact path='/busdetail' component={BusDetail}/>
+            <Route exact path='/busmonsoon' component={BusMonsoon}/>
+
           </Switch>
         </div>
       </Router>

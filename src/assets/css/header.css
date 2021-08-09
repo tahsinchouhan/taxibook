@@ -83,4 +83,15 @@
     width: 100%;
     margin: auto;
   }
+  .locationpass-btn{
+    color: white;
+    background-color: #0FA453;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 0;
+    position:absolute;
+    bottom: 0;
+    height: 80px;
+    border: 1px solid #0FA453;
+}
 }

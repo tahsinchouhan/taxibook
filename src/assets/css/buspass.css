@@ -4,3 +4,67 @@ border: 1px dashed #0FA453;
 box-sizing: border-box;
 border-radius: 10px;
 }
+.location-userdatas{
+    color: grey;
+    font-size: 19px;
+    background-color: #F8F8F8;
+    margin: 0 0 20px 0;
+    padding:10px 20px;
+    border-radius: 10px;
+    /* width: 270px; */
+height:50.67px;
+  }
+
+
+.user_input1{
+/* width: 270px;
+height: 46.67px; */
+  outline: none !important;
+  background-color: #F8F8F8;;
+  outline-width: 0;
+  border-radius: 6px;
+  /* margin-left: 4px; */
+  padding-top: 0;
+  border: none;
+
+}
+.location-btn{
+    text-align: center;
+    /* margin: 30px; */
+}
+.locationpass-btn{
+    color: white;
+    background-color: #0FA453;
+    font-weight: bold;
+    width: 18%;
+    height: 49px;
+    border-radius: 11px;
+    margin: 20px 0 100px;
+}
+/* .locationpass-btn:hover{
+    color: white;
+    background-color: #0FA453;
+} */
+
+.formbus{
+    color: grey;
+  font-size: 19px;
+  /* background-color: #9b98981c; */
+  /* margin: 0 0 20px 0; */
+  padding:10px 20px;
+  /* border-radius: 10px; */
+}
+.bus_input{
+  height: 50px;
+    outline: none !important;
+    background-color: #F8F8F8;
+    outline-width: 0;
+    /* border-radius: 6px; */
+    /* margin-left: 4px; */
+    padding-top: 0;
+    border: none;
+}
+
+
+
+
