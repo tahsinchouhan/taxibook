@@ -11,7 +11,9 @@ import './assets/css/app.css'
 import Search from './pages/travesaly/Search';
 import Explore from './pages/explore/Explore';
 import booking from './pages/booking/Booking';
-import DmPass from './pages/dmpass/DmPass';
+// import DmPass from './pages/dmpass/DmPass';
+import DmPass from './pages/dm pass/DmPass';
+import Locations from './pages/dm pass/Locations';
 
 function App() {
 
@@ -30,6 +32,7 @@ function App() {
             <Route exact path='/pass' component={Pass} />
             <Route exact path='/buspass' component={BusPass} />
             <Route exact path='/search' component={Search}/>
+            <Route exact path='/locations' component={Locations}/>
           </Switch>
         </div>
       </Router>
