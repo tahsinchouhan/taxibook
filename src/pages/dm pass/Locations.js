@@ -17,19 +17,16 @@ const button_Data = [
   },
 ];
 
-function DmPass() {
+function Locations() {
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
   const [data, setData] = useState();
-  const history = useHistory();
+
   const onSideBtnClick = (e) => {
     const name = e.target.name;
     setActiveButton(name);
   };
 
-  const onLocationsClick = () => {
-    console.log("object");
-    history.push("/locations");
-  };
+  
   return (
     <>
       <div>
@@ -51,34 +48,24 @@ function DmPass() {
             <div>
               <Button className=" btn-danger dmPass-rangebar">
                 <br />
-                <span>DM Pass</span>
+                <span>DM Pass</span>              
               </Button>
             </div>
             <div>
-              <Button
-                className=" locations-rangebar"
-                style={{
-                  backgroundColor: "none",
-                  border: "1px solid #FF814A",
-                  color: "black",
-                }}
-                onClick={onLocationsClick}
-              >
-                <br />
+              <Button className=" locations-rangebar" style={{backgroundColor:"none",border:"1px solid #FF814A",color:"black"}}
+              ><br/>
                 <span>Locations</span>
               </Button>
             </div>
             <div>
-              <Button className=" btn-danger confirm-rangebar">
-                <br />
-                <span>Confirm</span>
-              </Button>
-            </div>
+            <Button className=" btn-danger confirm-rangebar"><br/>
+                <span>
+                Confirm</span> 
+            </Button></div>
             <div>
-              <Button className=" btn-danger checkout-rangebar">
-                <span>Checkout</span>
-              </Button>
-            </div>
+            <Button className=" btn-danger checkout-rangebar"><span>
+            Checkout</span></Button>
+            </div>           
           </div>
 
           {/* <Form.Label>Range</Form.Label>
@@ -89,21 +76,25 @@ function DmPass() {
         <Container className="dmpass-form mt-5">
           <Row className="dmpassData">
             <h3 style={{ fontWeight: "bolder", textAlign: "center" }}>
-              Book your DM Pass
+        Select Locations
             </h3>
             <form>
               <div className="form-row"></div>
-              <div className="form-group mt-4">
-                <label for="inputAddress">Mobile Number</label>
+              <div className="pass_input mt-4 d-flex bg-light">
+              <Form.Check type="radio" aria-label="radio 1" className="pt-2"/>
                 <input
                   type="text"
                   className="form-control pass_input"
-                  id="inputAddress"
+                  // id="inputAddress"
                   placeholder="Enter mobile number"
                 />
+              
+
               </div>
               <div className="form-row">
                 <div className="form-group mt-4 ">
+                
+    
                   <label for="inputState">Number of Travellers</label>
                   <select id="inputState" className="form-control pass_input">
                     <option selected>1</option>
@@ -305,44 +296,15 @@ function DmPass() {
               </button> */}
         </div>
 
-        {/* <!-- Horizontal Steppers --> */}
-        <div class="row">
-          <div class="col-md-12">
-            {/* <!-- Stepers Wrapper --> */}
-            <ul class="stepper stepper-horizontal">
-              {/* <!-- First Step --> */}
-              <li class="completed">
-                <a href="#!">
-                  <span class="circle">1</span>
-                  <span class="label">First step</span>
-                </a>
-              </li>
 
-              {/* <!-- Second Step --> */}
-              <li class="active">
-                <a href="#!">
-                  <span class="circle">2</span>
-                  <span class="label">Second step</span>
-                </a>
-              </li>
 
-              {/* <-- Third Step --> */}
-              <li class="warning">
-                <a href="#!">
-                  <span class="circle">
-                    <i class="fas fa-exclamation"></i>
-                  </span>
-                  <span class="label">Third step</span>
-                </a>
-              </li>
-            </ul>
-            {/* <!-- /.Stepers Wrapper --> */}
-          </div>
-        </div>
-        {/* <!-- /.Horizontal Steppers --> */}
+
+
+
+       
       </div>
     </>
   );
 }
 
-export default DmPass;
+export default Locations;

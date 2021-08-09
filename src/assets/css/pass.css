@@ -17,9 +17,11 @@
   font-size: 12px;
 }
 .pass_input {
-  border: none;
-  background-color: #9b98981c;
+  /* border: none; */
+  /* background-color: #9b98981c; */
   height: 50px;
+  border: none;
+  background-color: transparent;
 }
 .pass-color {
   color: #0fa453;
