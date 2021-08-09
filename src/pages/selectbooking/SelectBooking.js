@@ -17,38 +17,37 @@ import Footer from "../travesaly/Footer";
 
 function SelectBooking() {
   const [passTab, setPassTab] = useState(false);
-  const [Journey, setJourney] = useState(true);
+  // const [Journey, setJourney] = useState(true);
+  const [startDate, setStartDate] = useState(new Date());
 
   const [busjourney, setBusJourney] = useState(false);
 
   const [cabjourney, setCabJourney] = useState(false);
-
-  const [startDate, setStartDate] = useState(new Date());
   const history = useHistory();
 
   const onPassClick = () => {
     setPassTab(true);
-    setJourney(false);
-    setBusJourney(false);
-    setCabJourney(false);
+    // setJourney(true);
+    // setBusJourney(false);
+    // setCabJourney(false);
     console.log("object");
-    // history.push('/pass')
+    history.push("/pass");
   };
   const onBusClick = () => {
-    setPassTab(false);
-    setJourney(false);
+    // setPassTab(false);
+    // setJourney(false);
     setBusJourney(true);
     console.log("hiii");
-    // history.push('/buspass')
+    history.push("/buspass");
   };
 
   const onCabClick = () => {
-    setBusJourney(false);
-    setPassTab(false);
-    setJourney(false);
+    // setBusJourney(false);
+    // setPassTab(false);
+    // setJourney(false);
     setCabJourney(true);
     console.log("hiii");
-    // history.push('/buspass')
+    history.push("/buspass");
   };
 
   return (
@@ -67,9 +66,7 @@ function SelectBooking() {
           </div>
           <Container>
             <Row className="user-icon">
-              <div
-                className="icon-item"
-              >
+              <div className="icon-item">
                 <span className="tab-icons">
                   <img
                     src={ticket}
@@ -115,83 +112,93 @@ function SelectBooking() {
               </div>
             </Row>
           </Container>
-          {Journey ? (
-            <>
-              <Container>
-                <Row>
-                  <Col xs={2} md={2}></Col>
-                  <Col xs={12} md={3} className="mt-2">
-                    <Form.Group
-                      className="userdatas"
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label className="formselect">From</Form.Label>
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <img src={city} style={{ width: 20, height: 20 }} />
-                        <Form.Control
-                          type="text"
-                          className="user_input"
-                          placeholder="Enter Source"
-                        />
-                      </div>
-                    </Form.Group>
-                  </Col>
-                  <Col xs={12} md={3} className="mt-2">
-                    <Form.Group
-                      className="userdatas"
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label className="formselect">To</Form.Label>
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <img src={city} style={{ width: 20, height: 20 }} />
-                        <Form.Control
-                          type="text"
-                          className="user_input"
-                          placeholder="Enter Source"
-                        />
-                      </div>
-                    </Form.Group>
-                  </Col>
-                  <Col xs={12} md={2} className="mt-2">
-                    <Form.Group
-                      className="userdatas"
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label className="formselect">
-                        Journey Date
-                      </Form.Label>
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <img src={calendar} style={{ width: 20, height: 20 }} />
-                        <DatePicker
-                          className="col-sm-10 user_input"
-                          style={{ marginLeft: "50px" }}
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
-                        />
-                      </div>
-                    </Form.Group>
-                  </Col>
-                  <Col xs={2} md={2}></Col>
-                  <Col xs={2} md={2}></Col>
-                </Row>
-                <div className="text-center">
-                  <Button
-                    type="submit"
-                    class="btn btn-success"
-                    style={{
-                      width: "19%",
-                      textAlign: "center",
-                      height: "48px",
-                      borderRadius: "9px",
-                      backgroundColor: "#0fa453",
-                    }}
+          {/* {Journey ? ( */}
+          <>
+            <Container>
+              <Row>
+                <Col xs={2} md={2}></Col>
+                <Col xs={12} md={3} className="mt-2">
+                  <Form.Group
+                    className="userdatas"
+                    controlId="exampleForm.ControlInput1"
                   >
-                    Proceed
-                  </Button>
-                </div>
-              </Container>
-            </>
-          ) : null}
+                    <Form.Label className="formselect">From</Form.Label>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <img src={city} style={{ width: 20, height: 20 }} />
+                      <Form.Control
+                        type="text"
+                        className="user_input"
+                        placeholder="Enter Source"
+                      />
+                    </div>
+                  </Form.Group>
+                </Col>
+                <Col xs={12} md={3} className="mt-2">
+                  <Form.Group
+                    className="userdatas"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label className="formselect">To</Form.Label>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <img src={city} style={{ width: 20, height: 20 }} />
+                      <Form.Control
+                        type="text"
+                        className="user_input"
+                        placeholder="Enter Source"
+                      />
+                    </div>
+                  </Form.Group>
+                </Col>
+                <Col xs={12} md={2} className="mt-2">
+                  <Form.Group
+                    className="userdatas"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label className="formselect">Journey Date</Form.Label>
+                    <div style={{ display: "flex", flexDirection: "row",overflow: 'hidden',border:"none"}}>
+                      <img src={calendar} style={{ width: 20, height: 20 }} />
+                      {/* <DateTimePicker
+                        format={{
+                          year: "numeric",
+                          month: "short",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          second: "2-digit",
+                        }}
+                        defaultValue={defaultValue}
+                      /> */}
+                      
+                      <DatePicker
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                        showTimeSelect
+                        dateFormat="dd,MMM"
+                       
+                      />
+                    </div>
+                  </Form.Group>
+                </Col>
+                <Col xs={2} md={2}></Col>
+                <Col xs={2} md={2}></Col>
+              </Row>
+              <div className="text-center">
+                <Button
+                  type="submit"
+                  class="btn btn-success"
+                  style={{
+                    width: "19%",
+                    textAlign: "center",
+                    height: "48px",
+                    borderRadius: "9px",
+                    backgroundColor: "#0fa453",
+                  }}
+                >
+                  Proceed
+                </Button>
+              </div>
+            </Container>
+          </>
+          {/* ) : null} */}
           {passTab ? <Pass /> : null}
           {busjourney ? <BusPass /> : null}
           {cabjourney ? <Cab /> : null}
@@ -212,9 +219,7 @@ function SelectBooking() {
           </div>
           <Container>
             <Row className="user-icon">
-            <div
-                className="icon-item"
-              >
+              <div className="icon-item">
                 <span className="tab-icons">
                   <img
                     src={ticket}
@@ -260,94 +265,88 @@ function SelectBooking() {
               </div>
             </Row>
           </Container>
-          {Journey ? (
-            <>
-              <Container>
-                <Row>
-                  <Col xs={2} md={2}></Col>
-                  <div
-                    className="d-flex"
-                    style={{ borderBlockColor: "#9b98981c" }}
-                  >
-                    <Col xs={12} md={3}>
-                      <div className="fromtocontainer">
-                        <Form.Group
-                          className="userDate"
-                          controlId="exampleForm.ControlInput1"
-                          style={{ borderBottom: "2px solid #8888" }}
-                        >
-                          <span className="formselect">From</span>
-                          <div
-                            style={{ display: "flex", flexDirection: "row" }}
-                          >
-                            <img src={city} style={{ width: 20, height: 20 }} />
-                            <Form.Control
-                              type="text"
-                              className="user_input"
-                              placeholder="Enter Source"
-                            />
-                          </div>
-                        </Form.Group>
-                        <Form.Group
-                          className="userDate"
-                          controlId="exampleForm.ControlInput1"
-                        >
-                          <span className="formselect">To</span>
-                          <div
-                            style={{ display: "flex", flexDirection: "row" }}
-                          >
-                            <img src={city} style={{ width: 20, height: 20 }} />
-                            <Form.Control
-                              type="text"
-                              className="user_input"
-                              placeholder="Enter Source"
-                            />
-                          </div>
-                        </Form.Group>
-                      </div>
-                    </Col>
-                  </div>
-                  <Col xs={12} md={2} className="mt-2">
-                    <Form.Group
-                      className="userdata"
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label className="formselect">
-                        Journey Date
-                      </Form.Label>
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <img src={calendar} style={{ width: 20, height: 20 }} />
-                        <DatePicker
-                          className="col-sm-10 user_input"
-                          style={{ marginLeft: "50px" }}
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
-                        />
-                      </div>
-                    </Form.Group>
+          {/* {Journey ? ( */}
+          <>
+            <Container>
+              <Row>
+                <Col xs={2} md={2}></Col>
+                <div
+                  className="d-flex"
+                  style={{ borderBlockColor: "#9b98981c" }}
+                >
+                  <Col xs={12} md={3}>
+                    <div className="fromtocontainer">
+                      <Form.Group
+                        className="userDate"
+                        controlId="exampleForm.ControlInput1"
+                        style={{ borderBottom: "2px solid #8888" }}
+                      >
+                        <span className="formselect">From</span>
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                          <img src={city} style={{ width: 20, height: 20 }} />
+                          <Form.Control
+                            type="text"
+                            className="user_input"
+                            placeholder="Enter Source"
+                          />
+                        </div>
+                      </Form.Group>
+                      <Form.Group
+                        className="userDate"
+                        controlId="exampleForm.ControlInput1"
+                      >
+                        <span className="formselect">To</span>
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                          <img src={city} style={{ width: 20, height: 20 }} />
+                          <Form.Control
+                            type="text"
+                            className="user_input"
+                            placeholder="Enter Source"
+                          />
+                        </div>
+                      </Form.Group>
+                    </div>
                   </Col>
-                  <Col xs={2} md={2}></Col>
-                  <Col xs={2} md={2}></Col>
-                </Row>
-                <div className="text-center">
-                  <Button
-                    type="submit"
-                    class="btn btn-success"
-                    style={{
-                      width: "60%",
-                      textAlign: "center",
-                      height: "48px",
-                      borderRadius: "9px",
-                      backgroundColor: "#0fa453",
-                      marginBottom: "40px",
-                    }}
-                  >
-                    Proceed
-                  </Button>
                 </div>
-              </Container>
-            </>
-          ) : null}
+                <Col xs={12} md={2} className="mt-2">
+                  <Form.Group
+                    className="userdata"
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label className="formselect">Journey Date</Form.Label>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <img src={calendar} style={{ width: 20, height: 20 }} />
+                      <DatePicker
+                        className="col-sm-10 user_input"
+                        style={{ marginLeft: "50px" }}
+                        selected={startDate}
+                        onChange={(date) => setStartDate(date)}
+                      />
+                    </div>
+                  </Form.Group>
+                </Col>
+                <Col xs={2} md={2}></Col>
+                <Col xs={2} md={2}></Col>
+              </Row>
+              <div className="text-center">
+                <Button
+                  type="submit"
+                  class="btn btn-success"
+                  style={{
+                    width: "60%",
+                    textAlign: "center",
+                    height: "48px",
+                    borderRadius: "9px",
+                    backgroundColor: "#0fa453",
+                    marginBottom: "40px",
+                  }}
+                >
+                  Proceed
+                </Button>
+              </div>
+            </Container>
+          </>
+          {/* ) : null} */}
           {passTab ? <Pass /> : null}
           {busjourney ? <BusPass /> : null}
           {cabjourney ? <Cab /> : null}

@@ -53,14 +53,16 @@ body {
 .usre-sourc {
   border-bottom: 1px solid #9b98996c;
 }
+
 .user_input {
   width: 97%;
-  border: none !important;
+  outline: none !important;
   background-color: #cccbcb05;
   outline-width: 0;
   border-radius: 6px;
   margin-left: 4px;
   padding-top: 0;
+  border: none;
 }
 .formselect {
   margin: 0px;

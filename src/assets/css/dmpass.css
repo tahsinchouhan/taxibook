@@ -31,3 +31,20 @@ font-size: 20px;
     margin: 10px;
     font-weight: 700;
 }
+.radio_input{
+    /* position: absolute;
+left: 12.74%;
+right: 82.54%;
+top: 24.46%;
+bottom: 73.7%; */
+
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+height: 17px;
+width: 17.724590301513672px;
+left: 47.7672119140625px;
+top: 225px;
+border-radius: 0px;
+
+}
