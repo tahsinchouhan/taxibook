@@ -37,17 +37,7 @@ export default function Header() {
   const onSearchingHolder = () => {
     console.log("hellllooo");
   };
-
-  const onExploreClick = () => {
-    setExpolre(true)
-    history.push('/explore')
-  }
-  const onBookingClick = () => {
-    SelectBooking(true)
-    history.push('/buspass')
-  }
-
-
+  
   return (
     <>
       <Container className="d-md-none header_div">
@@ -81,7 +71,7 @@ export default function Header() {
               <NavLink to="/" className="sidebar__navlink" >
                 HOME
               </NavLink>
-              <NavLink className="sidebar__navlink" to="/explore">
+              <NavLink className="sidebar__navlink" to="/explores">
                 EXPLORE
               </NavLink>
               <NavLink className="sidebar__navlink" to="/select-booking">
@@ -126,7 +116,7 @@ export default function Header() {
               <NavLink className="sidebar_item" to="/">
                 HOME
               </NavLink>
-              <NavLink className="sidebar_item" to="/explore">
+              <NavLink className="sidebar_item" to="/explores">
                 EXPLORE
               </NavLink>
               <NavLink className="sidebar_item" to="/select-booking">

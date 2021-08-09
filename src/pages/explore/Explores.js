@@ -1,7 +1,7 @@
 import { Container, Image } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import Header from "../../components/Header";
-import Footer from "../../pages/travesaly/Footer";
+import Footer from "../travesaly/Footer";
 import bg from "../../assets/img/bg_12.jpg";
 import { useHistory } from 'react-router-dom';
 import Heritage from "../../assets/img/Heritage.jpg";
@@ -10,7 +10,7 @@ import Adventure from "../../assets/img/Adventure.jpg";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-const Explore = () => {
+const Explores = () => {
   const history = useHistory();
   const curated = [
    {
@@ -332,4 +332,4 @@ const Explore = () => {
   );
 };
 
-export default Explore;
+export default Explores;
