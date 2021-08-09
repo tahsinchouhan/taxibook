@@ -4,19 +4,16 @@ import {
   Offcanvas,
   Nav,
   Navbar,
-  Button,
-  NavDropdown,
   Form,
   InputGroup,
   FormControl,
 } from "react-bootstrap";
 import { HiMenu } from "react-icons/hi";
 import logo from "../assets/img/logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { FaUser, FaSistrix } from "react-icons/fa";
 import Saly from "../pages/travesaly/Saly";
 import Search from "../pages/travesaly/Search";
-import { useHistory } from "react-router-dom";
 import SelectBooking from "../pages/selectbooking/SelectBooking";
 
 export default function Header() {
@@ -81,27 +78,27 @@ export default function Header() {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="me-auto sidebar__nav">
-              <Nav.Link className="sidebar__navlink" href="/">
+              <NavLink to="/" className="sidebar__navlink" >
                 HOME
-              </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="/explore">
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/explore">
                 EXPLORE
-              </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="/select-booking">
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/select-booking">
                 BOOKING
-              </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="/dmpass">
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/dmpass">
                 DM PASS
-              </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="/pricing">
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/pricing">
                 TICKETS
-              </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="/pricing">
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/pricing">
                 CONTACT
-              </Nav.Link>
-              <Nav.Link className="sidebar__navlink" href="/pricing">
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/pricing">
                 ABOUT
-              </Nav.Link>
+              </NavLink>
             </Nav>
           </Offcanvas.Body>
         </Offcanvas>
@@ -126,27 +123,27 @@ export default function Header() {
               }}
               navbarScroll
             >
-              <Nav.Link className="sidebar_item" href="/">
+              <NavLink className="sidebar_item" to="/">
                 HOME
-              </Nav.Link>
-              <Nav.Link className="sidebar_item" href="/explore">
+              </NavLink>
+              <NavLink className="sidebar_item" to="/explore">
                 EXPLORE
-              </Nav.Link>
-              <Nav.Link className="sidebar_item" href="/select-booking">
+              </NavLink>
+              <NavLink className="sidebar_item" to="/select-booking">
                 BOOKING
-              </Nav.Link>
-              <Nav.Link className="sidebar_item" href="/dmpass">
+              </NavLink>
+              <NavLink className="sidebar_item" to="/dmpass">
                 DM PASS
-              </Nav.Link>
-              <Nav.Link className="sidebar_item" href="/pricing">
+              </NavLink>
+              <NavLink className="sidebar_item" to="#">
                 TICKETS
-              </Nav.Link>
-              <Nav.Link className="sidebar_item" href="/pricing">
+              </NavLink>
+              <NavLink className="sidebar_item" to="#">
                 CONTACT
-              </Nav.Link>
-              <Nav.Link className="sidebar_item" href="/pricing">
+              </NavLink>
+              <NavLink className="sidebar_item" to="#">
                 ABOUT
-              </Nav.Link>
+              </NavLink>
             </Nav>
             <Form className="" style={{ marginRight: "70px" }}>
               <div className="header_right d-flex">
