@@ -307,7 +307,7 @@ const Explores = () => {
           >
             {packages.map((item) => {
               return (
-                <div>
+                <div onClick={() => history.push(`/destination_details/${item.title}`)}>
                   <Image
                     draggable={false}
                     style={{ width: "100%", height: "100%" }}

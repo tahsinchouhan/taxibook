@@ -10,7 +10,7 @@ import BusPass from './pages/selectbooking/BusPass';
 import './assets/css/app.css'
 import Search from './pages/travesaly/Search';
 import Explores from './pages/explore/Explores'
-import booking from './pages/booking/Booking';
+import DestinationDetails from './pages/explore/DestinationDetails'
 // import DmPass from './pages/dmpass/DmPass';
 import DmPass from './pages/dm pass/DmPass';
 import Locations from './pages/dm pass/Locations';
@@ -26,6 +26,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/explores' component={Explores} />
+            <Route path="/destination_details/:name" component={DestinationDetails}/>
             <Route exact path='/booking' component={BusPass} />
             <Route exact path='/populardestinations' component={Destination} />
             <Route exact path='/curatedexperiences' component={Packages} />
