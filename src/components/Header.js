@@ -12,11 +12,10 @@ import { HiMenu } from "react-icons/hi";
 import logo from "../assets/img/logo.png";
 import { NavLink, useHistory } from "react-router-dom";
 import { FaUser, FaSistrix } from "react-icons/fa";
-import Saly from "../pages/travesaly/Saly";
-import Search from "../pages/travesaly/Search";
-import SelectBooking from "../pages/selectbooking/SelectBooking";
+import {useDispatch, connect} from 'react-redux';
 
-export default function Header() {
+function Header() {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState(false);
   const [explore,setExpolre] =useState(false);
@@ -167,17 +166,6 @@ export default function Header() {
                     onClick={onSearchClick}
                   />
                 </div>
-                {/* {search === true ? (
-                  <div className="mt-4">
-                    <InputGroup>
-                      <FormControl className="mb-2"
-                        id="inlineFormInputGroup"
-                        onChange={onSearchingHolder}
-                        placeholder="Search..."
-                      />
-                    </InputGroup>
-                  </div>
-                ) : null} */}
               </div>
             </Form>
           </Navbar.Collapse>
@@ -186,3 +174,5 @@ export default function Header() {
     </>
   );
 }
+
+export default Header;
