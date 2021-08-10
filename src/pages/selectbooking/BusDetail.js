@@ -201,6 +201,7 @@ const onClickMonsoon=()=>{
         </Container>
         <Button className="locationpass-btn" onClick={onClickMonsoon}>Continue</Button>
       </div>
+      
     </>
   );
 }
