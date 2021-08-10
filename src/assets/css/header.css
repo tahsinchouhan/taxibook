@@ -94,4 +94,14 @@
     height: 80px;
     border: 1px solid #0FA453;
 }
+.train-seats{
+  /* border: 1px solid red; */
+  background-color: #0FA453;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 1px 0px 1px 1px grey;
+  height: 80px;
+  width: 80%;
+}
 }

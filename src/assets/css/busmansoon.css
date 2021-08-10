@@ -1,11 +1,50 @@
 
 .mansoon-div{
-    width: 65%;
+    width: 60%;
 }
 .mansoon-row{
     background-color:#F8F8F8;
     color: grey;
     margin: 10px;
     border-radius: 8px;
-    border: 2px dashed rgb(15,164,83);
+    border: 2px dashed #0FA453;
+    height: 74px;
+}
+.mansoon-per{
+    font-size: 12px;
+    font-weight: bolder;
+    color: black;
+   
+}
+.mansoon-item{
+    font-weight: bolder;
+    color: black;
+}
+.train-sleeper{
+    font-family: sans-serif;
+    font-weight: 500;
+    color: grey;
+    padding: 5px;
+}
+.train-seats{
+    /* border: 1px solid red; */
+    background-color: #0FA453;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 1px 0px 1px 1px grey;
+    height: 68px;
+    width: 38%;
+}
+.train-seatsmobile {
+    background-color: #0FA453;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 1px 0px 1px 1px grey;
+    height: 80px;
+    width: 75%;
+}
+.select-train{
+
 }
