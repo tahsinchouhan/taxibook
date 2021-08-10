@@ -1,0 +1,11 @@
+
+.mansoon-div{
+    width: 65%;
+}
+.mansoon-row{
+    background-color:#F8F8F8;
+    color: grey;
+    margin: 10px;
+    border-radius: 8px;
+    border: 2px dashed rgb(15,164,83);
+}

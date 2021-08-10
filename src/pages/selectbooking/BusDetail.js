@@ -117,7 +117,7 @@ const onClickMonsoon=()=>{
           </Row>
         </Container>
         <div className="location-btn">
-          <Button className="locationpass-btn">Continue</Button>
+          <Button className="locationpass-btn" onClick={onClickMonsoon}>Continue</Button>
         </div>
         <Footer />
       </div>
