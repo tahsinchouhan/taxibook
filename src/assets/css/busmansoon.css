@@ -46,5 +46,7 @@
     width: 75%;
 }
 .select-train{
-
+    background-color:#F8F8F8;
+    color: grey;
+    height: 65px;
 }

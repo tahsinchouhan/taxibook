@@ -13,11 +13,16 @@ function BusMonsoon() {
   const onClickTrain = () => {
     console.log("object");
     history.push("/raipur");
-  };
+      };
+
+      const onClickRaipur = () => {
+        console.log("object");
+        history.push("/booking");
+      };
 
   return (
     <>
-      {/* <div className="d-none d-md-block>
+      <div className="d-none d-md-block">
         <Header />
         <div style={{ backgroundColor: "white", marginTop: "40px" }}>
           <Container className="mansoon-div">
@@ -100,7 +105,7 @@ function BusMonsoon() {
               </Row>
             </Container>
             <hr />
-            <Container>
+            <Container onClick={onClickTrain}>
               <Row>
                 <Col>
                   <div className="rajratan-train" style={{float:"left" }}>
@@ -134,30 +139,16 @@ function BusMonsoon() {
           </Container>
         </div>
          <Footer />
-      </div> */}
+      </div>
 
+{/*mobile View*/}
       <div >
-        <div className="">
+        <div fluid className="d-md-none">
           <Row >
             <Col xs={12}>
-            <div className="tatibandh d-flex"
-                style={{
-                  height: "85px",
-                  backgroundColor: "#0FA453",
-                  color: "white",
-                 
-
-                }}
-              >
-               <div style={{
-                   marginRight: "76px",
-                   paddingTop:" 20px",
-                   fontSize:" 24px",
-                   marginLeft:"35px",
-               }}>
-               <FaArrowLeft
-                />
-               </div>
+            <div className=""
+               
+              >              
                <div >
                <h5
                   style={{
