@@ -16,6 +16,9 @@ import DmPass from './pages/dm pass/DmPass';
 import Locations from './pages/dm pass/Locations';
 import BusDetail from './pages/selectbooking/BusDetail';
 import BusMonsoon from './pages/selectbooking/BusMonsoon';
+import Raipur from './pages/selectbooking/Raipur';
+import BusDropoff from './pages/selectbooking/BusDropoff';
+import BusConfirmation from './pages/selectbooking/BusConfirmation';
 
 function App() {
 
@@ -39,6 +42,9 @@ function App() {
             <Route exact path='/locations' component={Locations}/>
             <Route exact path='/busdetail' component={BusDetail}/>
             <Route exact path='/busmonsoon' component={BusMonsoon}/>
+            <Route exact path='/raipur' component={Raipur}/>
+            <Route exact path='/busdropoff' component={BusDropoff}/>
+            <Route exact path='/busconfirmation' component={BusConfirmation}/>
 
           </Switch>
         </div>
