@@ -1,2 +1,4 @@
-export const GETDESTINATIONS = "SUBMIT";
+export const GET_DESTINATIONS = "GET_DESTINATIONS";
+export const GET_DESTINATIONS_SUCCESS = "GET_DESTINATIONS_SUCCESS";
+export const GET_DESTINATIONS_ERROR = "GET_DESTINATIONS_ERROR";
 export * from "./auth/actions";

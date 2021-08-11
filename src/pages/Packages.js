@@ -69,7 +69,10 @@ function Packages() {
               return (
                 <div
                   onClick={() =>
-                    history.push(`/packages_details/${item.title}`)
+                    history.push({
+                      pathname: `/packages_details/${item.title}`,
+                      item: item._id,
+                    })
                   }
                   style={{
                     width: 300,

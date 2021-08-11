@@ -1,6 +1,9 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { GETDESTINATIONS } from "../actions";
+import { GET_DESTINATIONS } from "../actions";
 import { API_PATH } from "../../Path/Path";
+import {
+  getDestinationsSuccess
+} from "./actions";
 
 const DestinationsAsync = (payload) =>
 fetch(API_PATH + "/api/v1/destinations/list")
@@ -10,19 +13,14 @@ fetch(API_PATH + "/api/v1/destinations/list")
 function* Destinations({ payload }) {
   try {
     const apiDestinations = yield call(DestinationsAsync, payload);
-    console.log("LOGIN:::::::", apiDestinations);
-    // if (apiLogin.success === true) {
-    //   yield put(getLoginSuccess(apiLogin));
-    // } else {
-    //   yield put(getLoginError(apiLogin));
-    // }
+      yield put(getDestinationsSuccess(apiDestinations.data));
   } catch (error) {
     console.log(error);
   }
 }
 
 function* watchGetPlaceholder() {
-  yield takeEvery(GETDESTINATIONS, Destinations);
+  yield takeEvery(GET_DESTINATIONS, Destinations);
 }
 export default function* rootSaga() {
   yield all([fork(watchGetPlaceholder)]);

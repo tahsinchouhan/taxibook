@@ -39,7 +39,7 @@ const Explores = () => {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 1.5,
+      items: 3.5,
       slidesToSlide: 2, // optional, default to 1.
     },
     mobile: {
@@ -52,6 +52,7 @@ const Explores = () => {
   useEffect(() => {
     getDestinations();
     getPackages();
+    window.scrollTo(0, 0);
   }, []);
 
   const getDestinations = () => {
@@ -72,6 +73,13 @@ const Explores = () => {
         console.log(json.data);
       })
       .catch((e) => console.log(e));
+  };
+
+  const onDestinations = (value) => {
+    history.push({
+      pathname: `/destination_details/${value.title}`,
+      id: value._id,
+    });
   };
 
   return (
@@ -159,7 +167,7 @@ const Explores = () => {
                 onClick={() =>
                   history.push({
                     pathname: `/packages_details/${item.title}`,
-                    item: item,
+                    item: item._id,
                   })
                 }
               >
@@ -241,11 +249,7 @@ const Explores = () => {
           >
             {destinations.map((item) => {
               return (
-                <div
-                  onClick={() =>
-                    history.push(`/destination_details/${item.title}`)
-                  }
-                >
+                <div onClick={() => onDestinations(item)}>
                   <Image
                     draggable={false}
                     style={{ width: "100%", height: "100%" }}
