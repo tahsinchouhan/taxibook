@@ -12,7 +12,8 @@ function CongratulationPage() {
   return (
     <>
       <div>
-        <Container>
+      <Header />
+        <Container  style={{ width: "70%", paddingTop: "50px" }}>
           <Row>
             <Col>
             <div>
@@ -20,33 +21,72 @@ function CongratulationPage() {
             </div>
             </Col>
             <Col>
-              <div>
-                <div>
-                  <h3>CONGRATULATIONS!</h3>
-                  <span>Your booking has been confirmed</span>
+              <div style={{paddingTop:"60px"}}>
+                <div style={{marginBottom:"20px"}}>
+                  <h3 style={{fontWeight:"bolder"}}>CONGRATULATIONS!</h3>
+                  <span style={{color:"black"}}>Your booking has been confirmed</span>
 
-                  <h3>Order ID</h3>
-                  <span>BAS05493</span>
+                  <h3 style={{fontWeight:"bolder"}}>Order ID</h3>
+                  <span style={{color:"black", marginBottom:"50px"}}>BAS05493</span>
                 </div>
                 <div>
-                     <div>
-                     <Button><FaWhatsapp/>
-                       Whatsapp Link</Button>
+                     <div >
+                     <Button  
+                  className="btn btn-success"
+                  style={{
+                    width: "200px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    backgroundColor: "#0fa453",
+                    fontWeight:"bold",
+                    marginBottom:"20px"
+                  }} 
+                     ><FaWhatsapp style={{fontWeight:"bold",marginLeft:"-23px",fontSize:"30px"}}/>
+                      <span> Whatsapp Link</span></Button>
                      </div>
                  <div>
-                 <Button>Download E-ticket</Button>
+                 <Button style={{
+                    width: "208px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    backgroundColor: " #FF4A68",
+                    fontWeight:"bold",
+                    marginBottom:"20px"
+                  }} 
+                 >Download E-ticket</Button>
                  </div>
                    <div>
-                   <Button>Sent by Email</Button>
+                   <Button style={{
+                    width: "186px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    backgroundColor: "",
+                    fontWeight:"bold",
+                    marginBottom:"20px"
+                  }} 
+                   >Sent by Email</Button>
                    </div>
                    <div>
-                   <Button>Back to Home</Button>
+                   <Button style={{
+                    width: "186px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    backgroundColor: "#864BD8",
+                    fontWeight:"bold",
+                    marginBottom:"20px"
+                  }} 
+                   >Back to Home</Button>
                    </div>
                 </div>
               </div>
             </Col>
           </Row>
         </Container>
+        <Footer/>
       </div>
     </>
   );

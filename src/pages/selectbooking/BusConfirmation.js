@@ -358,6 +358,7 @@ function BusConfirmation() {
                   textAlign: "center",
                   height: "86px",
                 }}
+                onClick={onCheckout}
               >
                <div style={{paddingTop:"30px"}}>
                <span
