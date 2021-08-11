@@ -407,7 +407,7 @@ function BusDropoff() {
         <Container>
           <Row>
             <Col xs={12} md={6}>
-              <div className=" select-train mt-2 d-flex">
+              <div className=" select-train mt-2 d-flex" onClick={onBusConfirmation}>
                 <Form className="d-flex">
                   {["radio"].map((type) => (
                     <div
@@ -455,7 +455,7 @@ function BusDropoff() {
               </div>
             </Col>
             <Col xs={12} md={6}>
-              <div className=" select-train mt-2 d-flex">
+              <div className=" select-train mt-2 d-flex" onClick={onBusConfirmation}>
                 <Form className="d-flex">
                   {["radio"].map((type) => (
                     <div
