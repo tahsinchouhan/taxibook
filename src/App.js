@@ -19,6 +19,7 @@ import BusMonsoon from './pages/selectbooking/BusMonsoon';
 import Raipur from './pages/selectbooking/Raipur';
 import BusDropoff from './pages/selectbooking/BusDropoff';
 import BusConfirmation from './pages/selectbooking/BusConfirmation';
+import BusCard from './pages/selectbooking/BusCard';
 
 function App() {
 
@@ -44,6 +45,8 @@ function App() {
             <Route exact path='/raipur' component={Raipur}/>
             <Route exact path='/busdropoff' component={BusDropoff}/>
             <Route exact path='/busconfirmation' component={BusConfirmation}/>
+            <Route exact path='/ buscard' component={ BusCard}/>
+
 
           </Switch>
         </div>
