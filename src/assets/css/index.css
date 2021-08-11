@@ -82,6 +82,9 @@
 
 .get__direction{
   color: #17a2b8 !important;
+  font-size: 20px;
+  font-weight: bolder !important;
+  text-decoration: none !important
 }
 
 .link {
