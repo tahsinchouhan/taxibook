@@ -12,14 +12,26 @@ import { HiMenu } from "react-icons/hi";
 import logo from "../assets/img/logo.png";
 import { NavLink, useHistory } from "react-router-dom";
 import { FaUser, FaSistrix } from "react-icons/fa";
-import {useDispatch, connect} from 'react-redux';
+import { useDispatch, connect } from "react-redux";
+import LoginModal from "../components/modal/LoginModal";
+import Modal from 'react-bootstrap'
 
 function Header() {
+  const [modalShow, setModalShow] = useState(false);
+
+const modalHadler=()=>{
+  setModalShow(true)
+  console.log("helllo")
+}
+const  handleLoginClose=()=>{
+  setModalShow(false)
+}
+
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState(false);
-  const [explore,setExpolre] =useState(false);
-  const[booking,setBooking] =useState(false);
+  const [explore, setExpolre] = useState(false);
+  const [booking, setBooking] = useState(false);
 
   const [searching, setSearching] = useState();
 
@@ -30,19 +42,19 @@ function Header() {
 
   const onSearchClick = () => {
     console.log("hiii");
-    history.push('/search')
+    history.push("/search");
   };
 
   const onSearchingHolder = () => {
     console.log("hellllooo");
   };
-  
+
   return (
     <>
       <Container className="d-md-none header_div">
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
-          <div style={{ textAlign: "center",}}>
+          <div style={{ textAlign: "center" }}>
             <img className="logo" style={{ width: 80 }} src={logo} />
             <FaSistrix onClick={onSearchClick} className="searchIcon" />
           </div>
@@ -67,7 +79,7 @@ function Header() {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="me-auto sidebar__nav">
-              <NavLink to="/" className="sidebar__navlink" >
+              <NavLink to="/" className="sidebar__navlink">
                 HOME
               </NavLink>
               <NavLink className="sidebar__navlink" to="/explores">
@@ -94,9 +106,9 @@ function Header() {
       </Container>
 
       <Container fluid className="header_div d-none d-md-block">
-        <Navbar expand="lg" style={{ height: "80px"}}>
+        <Navbar expand="lg" style={{ height: "80px" }}>
           <Navbar.Brand href="#">
-            <div style={{ marginLeft: "100%"}}>
+            <div style={{ marginLeft: "100%" }}>
               <img className="logo" src={logo} />
             </div>
           </Navbar.Brand>
@@ -150,7 +162,8 @@ function Header() {
                       color: "purple",
                       marginRight: "10px",
                     }}
-                  >
+                    onClick={() =>  modalHadler()}
+                  >                                   
                     login
                   </h4>
                 </div>
@@ -171,6 +184,7 @@ function Header() {
           </Navbar.Collapse>
         </Navbar>
       </Container>
+      <LoginModal show={modalShow} handleClose={handleLoginClose}/>    
     </>
   );
 }
