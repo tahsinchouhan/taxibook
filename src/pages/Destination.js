@@ -70,7 +70,10 @@ function Destination() {
               return (
                 <div
                   onClick={() =>
-                    history.push(`/destination_details/${item.title}`)
+                    history.push({
+                      pathname: `/destination_details/${item.title}`,
+                      id: item._id,
+                    })
                   }
                   style={{
                     width: 300,

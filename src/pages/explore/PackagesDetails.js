@@ -5,17 +5,49 @@ import { Container, Row, Col } from "react-bootstrap";
 import loc from "../../assets/img/location.svg";
 import bg from "../../assets/img/bg_12.jpg";
 import GoogleMapReact from "google-map-react";
-import ReactPlayer from "react-player";
+import { API_PATH } from "../../Path/Path";
 
-const Marker = (props) => {
+const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
 };
-const PackagesDetails = () => {
+const PackagesDetails = (props) => {
+  const [packages, setPackages] = useState("");
+  const [inclusions, setInclusions] = useState([]);
+  const [exclusions, setExclusions] = useState([]);
+  const [zoom, setZoom] = useState(11);
+
+  var id;
+  useEffect(() => {
+    if (props.location.item) {
+      localStorage.setItem("id", props.location.item);
+      id = localStorage.getItem("id");
+    } else {
+      id = localStorage.getItem("id");
+    }
+  }, []);
+
+  useEffect(() => {
+    getPackages();
+    window.scrollTo(0, 0);
+  }, []);
+
+  const getPackages = () => {
+    fetch(API_PATH + `/api/v1/packages/${id}`)
+      .then((response) => response.json())
+      .then((res) => {
+        console.log(res.data);
+        setPackages(res.data);
+        setInclusions(res.data.inclusions);
+        setExclusions(res.data.exclusions);
+      })
+      .catch((e) => console.log(e));
+  };
+
   return (
     <>
       <div
         style={{
-          backgroundImage: `url(${bg})`,
+          backgroundImage: `url(${packages.upload_images})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: 500,
@@ -23,7 +55,9 @@ const PackagesDetails = () => {
       >
         <Header />
         <h1 className="header__title">
-          <span>Jagdalpur Palace</span>
+          <Container>
+            <span>{packages.address}</span>
+          </Container>
         </h1>
       </div>
 
@@ -32,26 +66,15 @@ const PackagesDetails = () => {
           <h4 className="block__title">
             <span>About</span> the Destination
           </h4>
-          <p className="pt-3">
-            The Teerathgarh Falls is all season tourism's site and a good
-            photography place waterfall near Jagdalpur at Kanger Ghati in Bastar
-            district in the Indian state of Chhattisgarh. The Teerathgarh Falls
-            is a block type waterfall on the Kanger River. The water plunges 91
-            metres (299 ft) in a single drop. It is located at a distance of 35
-            kilometres (22 mi) south-west of Jagdalpur. One can approach the
-            falls from Darbha, near state highway that connects Jagdalpur to
-            Sukma. One has to take a jeep at Darbha junction to visit
-            Teerathgarh and Kutumsar. Kutumsar Caves and Kailash Gufa are nearby
-            attractions. It is in Kanger Ghati National Park.
-          </p>
+          <p className="pt-3">{packages.description}</p>
         </div>
       </Container>
       <Container className="mb-5 pb-5">
         <h4 className="block__title mt-5">
           <span>Price</span>
         </h4>
-        <h5 className="price__title pt-3 mb-1">₹5000</h5>
-        <p>3d 2N Paclage</p>
+        <h5 className="price__title pt-3 mb-1">₹{packages.price}</h5>
+        <p>{packages.duration}</p>
         <div className="block pt-5">
           <h4 className="block__title">
             <span>Location</span>
@@ -67,13 +90,13 @@ const PackagesDetails = () => {
                   justifyContent: "center",
                 }}
               >
-                <p className="pt-3">Jagdalpur,Chhattisgarh</p>
+                <p className="pt-3">{packages.address}</p>
                 <span className="text-info">
                   <img src={loc} height="40" width="45" />
                   <b>
                     <a
                       className="get__direction"
-                      href={`https://maps.google.com/?q=28.4838° N,77.0210° E`}
+                      href={`https://maps.google.com/?q=${packages.latitude},${packages.longitude}`}
                       target="_blank"
                     >
                       Get Directions
@@ -83,21 +106,23 @@ const PackagesDetails = () => {
               </div>
             </Col>
             <Col sm={6} className="google__map">
-              <GoogleMapReact
-                bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API }}
-                defaultCenter={{
-                  lat: parseFloat("28.4838° N"),
-                  lng: parseFloat("77.0210° E"),
-                }}
-                defaultZoom={11}
-              >
-                <Marker
-                  lat={parseFloat("28.4838° N")}
-                  lng={parseFloat("77.0210° E")}
-                  name="My Marker"
-                  color="blue"
-                />
-              </GoogleMapReact>
+              {packages ? (
+                <GoogleMapReact
+                  bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API }}
+                  defaultCenter={{
+                    lat: parseFloat(packages.latitude),
+                    lng: parseFloat(packages.longitude),
+                  }}
+                  defaultZoom={zoom}
+                >
+                  <Marker
+                    lat={parseFloat(packages.latitude)}
+                    lng={parseFloat(packages.longitude)}
+                    name="My Marker"
+                    color="blue"
+                  />
+                </GoogleMapReact>
+              ) : null}
             </Col>
           </Row>
         </div>
@@ -109,15 +134,16 @@ const PackagesDetails = () => {
           <Row>
             <Col sm={6}>
               <ul className="inclusionn__iteml pt-3">
-                <li className="inclusionn__item-list">Gypsy</li>
-                <li className="inclusionn__item-list">Refreshements</li>
+                {inclusions.map((inclusion) => (
+                  <li className="inclusionn__item-list">{inclusion}</li>
+                ))}
               </ul>
             </Col>
             <Col sm={6}>
               <ul className="inclusionn__itemr">
-                <li className="inclusionn__item-list">
-                  Water bottles, tips, souvenirs etc
-                </li>
+                {exclusions.map((exclusion) => (
+                  <li className="inclusionn__item-list">{exclusion}</li>
+                ))}
               </ul>
             </Col>
           </Row>

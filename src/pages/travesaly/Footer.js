@@ -16,18 +16,18 @@ function Footer() {
             <Col sm={4} md={4}>
               <div className="footer__block">
                 <div className="footer__item">
-                  <Link to="/for-visitors" className="link">
+                  <Link to="/covidresponse" className="link">
                     <h6 className="footer__item-subtitle">For Visitors</h6>
                   </Link>
                 </div>
                 <div className="footer__item">
-                  <Link to="/for-visitors" className="link">
+                  <Link to="/covidresponse" className="link">
                     <h5 className="footer__item-title"> Covid-19 Response</h5>
                   </Link>
                   <small>Health and Safety Update</small>
                 </div>
                 <div className="footer__item">
-                  <Link to="/for-visitors" className="link">
+                  <Link to="/covidresponse" className="link">
                     <h5 className="footer__item-title">Booking Details</h5>
                   </Link>
                   <small>Know how to book or cancel</small>
@@ -37,7 +37,7 @@ function Footer() {
             <Col sm={4} md={4}>
               <div className="footer__block">
                 <div className="footer__item">
-                  <Link to="/for-operators" className="link">
+                  <Link to="/registrationguide" className="link">
                     <h6 className="footer__item-subtitle">For Operators</h6>
                   </Link>
                 </div>
@@ -56,13 +56,14 @@ function Footer() {
                   <small>How to assosiate with Know Bastar</small>
                 </div>
                 <div className="footer__item">
-                  <Link to="/for-operators" className="link">
+                  <Link to="/registrationguide" className="link">
                     <h5 className="footer__item-title">Booking Details</h5>
                   </Link>
                   <small>Map, Guides and Packages </small>
                 </div>
               </div>
             </Col>
+            
             <Col sm={4} md={4}>
               <div className="footer__logo">
                 <div className={`header__logo`}>

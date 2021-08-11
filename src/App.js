@@ -11,7 +11,9 @@ import './assets/css/app.css'
 import Search from './pages/travesaly/Search';
 import Explores from './pages/explore/Explores';
 import DestinationDetails from './pages/explore/DestinationDetails';
-import PackagesDetails from './pages/explore/PackagesDetails'
+import PackagesDetails from './pages/explore/PackagesDetails';
+import CovidResponse from './Footer/CovidResponse'
+import RegistrationGuide from './Footer/RegistrationGuide'
 import DmPass from './pages/dm pass/DmPass';
 import Locations from './pages/dm pass/Locations';
 import BusDetail from './pages/selectbooking/BusDetail';
@@ -34,6 +36,8 @@ function App() {
             <Route exact path='/explores' component={Explores} />
             <Route path="/destination_details/:name" component={DestinationDetails}/>
             <Route path="/packages_details/:name" component={PackagesDetails}/>
+            <Route path="/covidresponse" component={CovidResponse}/>
+            <Route path="/registrationguide" component={RegistrationGuide}/>
             <Route exact path='/booking' component={BusPass} />
             <Route exact path='/populardestinations' component={Destination} />
             <Route exact path='/curatedexperiences' component={Packages} />

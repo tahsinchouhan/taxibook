@@ -6,62 +6,84 @@ import loc from "../../assets/img/location.svg";
 import bg from "../../assets/img/bg_12.jpg";
 import GoogleMapReact from "google-map-react";
 import ReactPlayer from "react-player";
-const Marker = (props) => {
+import { API_PATH } from "../../Path/Path";
+
+const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
 };
-const DestinationDetails = () => {
+
+const DestinationDetails = (props) => {
+  const [destinations, setDestinations] = useState("");
+  const [zoom, setZoom] = useState(11);
+
+  var id;
+
+  useEffect(() => {
+    if (props.location.id) {
+      localStorage.setItem("id", props.location.id);
+      id = localStorage.getItem("id");
+    } else {
+      id = localStorage.getItem("id");
+    }
+  }, []);
+
+  useEffect(() => {
+    getPackages();
+    window.scrollTo(0, 0);
+  }, []);
+
+  const getPackages = () => {
+    fetch(API_PATH + `/api/v1/destinations/${id}`)
+      .then((response) => response.json())
+      .then((res) => {
+        setDestinations(res.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
   return (
     <>
       <div
         style={{
-          backgroundImage: `url(${bg})`,
+          backgroundImage: `url(${destinations.upload_images})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: 500,
         }}
       >
         <Header />
-        <h1 className="header__title">
-          <span>Jagdalpur Palace</span>
-        </h1>
+        <Container>
+          <h1 className="header__title">
+            <span>{destinations.address}</span>
+          </h1>
+        </Container>
       </div>
-
       <Container>
         <div className="block pt-5">
           <h4 className="block__title">
             <span>About</span> the Destination
           </h4>
-          <p className="pt-3">
-            The Teerathgarh Falls is all season tourism's site and a good
-            photography place waterfall near Jagdalpur at Kanger Ghati in Bastar
-            district in the Indian state of Chhattisgarh. The Teerathgarh Falls
-            is a block type waterfall on the Kanger River. The water plunges 91
-            metres (299 ft) in a single drop. It is located at a distance of 35
-            kilometres (22 mi) south-west of Jagdalpur. One can approach the
-            falls from Darbha, near state highway that connects Jagdalpur to
-            Sukma. One has to take a jeep at Darbha junction to visit
-            Teerathgarh and Kutumsar. Kutumsar Caves and Kailash Gufa are nearby
-            attractions. It is in Kanger Ghati National Park.
-          </p>
+          <p className="pt-3">{destinations.description}</p>
         </div>
       </Container>
-      <Container>
-        <h4 className="block__title know__more mb-4 pt-4">
-          <span>Know More</span>
-        </h4>
-        <ReactPlayer
-          url={"https://www.youtube.com/watch?v=gBB5Vjn8xbA"}
-          controls
-          playbackRate={2}
-          width="100%"
-          height="500px"
-        />
-      </Container>
+      {destinations.youtube_url ? (
+        <Container>
+          <h4 className="block__title know__more mb-4 pt-4">
+            <span>Know More</span>
+          </h4>
+
+          <ReactPlayer
+            url={destinations.youtube_url}
+            controls
+            playbackRate={2}
+            width="100%"
+            height="500px"
+          />
+        </Container>
+      ) : null}
+
       <Container className="mb-5 pb-5">
         <div className="block pt-5">
-          <h4 className="block__title">
-            <span>About</span> the Destination
-          </h4>
           <Row>
             <Col sm={6}>
               <div
@@ -73,13 +95,16 @@ const DestinationDetails = () => {
                   justifyContent: "center",
                 }}
               >
-                <p className="pt-3"></p>
+                <h4 className="block__title">
+                  <span>Location</span>
+                </h4>
+                <p className="pt-3">{destinations.address}</p>
                 <span className="text-info">
                   <img src={loc} height="40" width="45" />
                   <b>
                     <a
                       className="get__direction"
-                      href={`https://maps.google.com/?q=28.4838° N,77.0210° E`}
+                      href={`https://maps.google.com/?q=${destinations.latitude},${destinations.longitude}`}
                       target="_blank"
                     >
                       Get Directions
@@ -89,21 +114,23 @@ const DestinationDetails = () => {
               </div>
             </Col>
             <Col sm={6} className="google__map">
-              <GoogleMapReact
-                bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API }}
-                defaultCenter={{
-                  lat: parseFloat("28.4838° N"),
-                  lng: parseFloat("77.0210° E"),
-                }}
-                defaultZoom={11}
-              >
-                <Marker
-                  lat={parseFloat("28.4838° N")}
-                  lng={parseFloat("77.0210° E")}
-                  name="My Marker"
-                  color="blue"
-                />
-              </GoogleMapReact>
+              {destinations ? (
+                <GoogleMapReact
+                  bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API }}
+                  defaultCenter={{
+                    lat: parseFloat(destinations.latitude),
+                    lng: parseFloat(destinations.longitude),
+                  }}
+                  defaultZoom={zoom}
+                >
+                  <Marker
+                    lat={parseFloat(destinations.latitude)}
+                    lng={parseFloat(destinations.longitude)}
+                    name="My Marker"
+                    color="blue"
+                  />
+                </GoogleMapReact>
+              ) : null}
             </Col>
           </Row>
         </div>
