@@ -43,7 +43,8 @@ function BusPass() {
 
   const onSubmit = () => {
     console.log(selected)
-      toast("Wow so easy!");
+      // toast("Wow so easy!");
+      history.push('/busdetail')
   };
 
   return (
