@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../../assets/css/buspass.css";
@@ -7,43 +7,48 @@ import bus from "../../assets/img/bus.png";
 import calendar from "../../assets/img/calendar.png";
 import { useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
-
-import ButtonComponent from "../../containers/Button";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
-
-const button_Data = [
-  {
-    name: "Male",
-    value: "Male",
-  },
-
-  {
-    name: "Female",
-    value: "Female",
-  },
-];
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { API_PATH } from "../../Path/Path";
 
 function BusPass() {
-  const [activeButton, setActiveButton] = useState(button_Data[0].name);
-  const [startDate, setStartDate] = useState(new Date());
-  const [detail, setDetail] = useState(false);
   const history = useHistory();
+  const [routes, setRoutes] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [selected, setSelected] = useState("");
 
-  const onSideBtnClick = (e) => {
-    const name = e.target.name;
-    setActiveButton(name);
-    // alert("test");
-    history.push("/busdetail");
+  const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
+    <button
+      style={{ border: "none", background: "transparent" }}
+      onClick={onClick}
+      ref={ref}
+    >
+      {value}
+    </button>
+  ));
+  useEffect(() => {
+    getRoutes();
+  }, []);
 
-    const onClickContinue = () => {
-      console.log("object");
-      // history.push('/busdetail')
-    };
+  const getRoutes = () => {
+    fetch(API_PATH + `/api/v1/routes/list`)
+      .then((response) => response.json())
+      .then((res) => {
+        setRoutes(res.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const onSubmit = () => {
+    console.log(selected)
+      toast("Wow so easy!");
   };
 
   return (
     <div>
+      <ToastContainer />
       <Header />
       <Container className="d-none d-md-block">
         <div style={{ textAlign: "center", margin: "50px" }}>
@@ -75,9 +80,15 @@ function BusPass() {
                   className="location-userdatas"
                   style={{ border: "none", fontSize: "12px" }}
                   defaultValue="Choose..."
+                  value={selected}
+                  onChange={(e) => setSelected(e.target.value)}
                 >
                   <option>Choose your preferred route</option>
-                  <option>...</option>
+                  {routes.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.routename}
+                    </option>
+                  ))}
                 </Form.Select>
               </Form.Group>
             </Col>
@@ -110,29 +121,25 @@ function BusPass() {
                     src={calendar}
                     style={{ width: 25, height: 30 }}
                   />
-                  {/* <DatePicker
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                        showTimeSelect
-                        dateFormat="dd,MMM"
-                       
-                      /> */}
-                  {/* <Form.Control
-                    type="text"
-                    className="user_input1"
-                    placeholder="Enter Source"
-                  /> */}
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    customInput={<ExampleCustomInput />}
+                    dateFormat="dd,MMM"
+                  />
                 </div>
               </Form.Group>
             </Col>
           </Row>
         </Container>
         <div className="location-btn">
-          <Button className="locationpass-btn" onClick={onSideBtnClick}>
+          <Button className="locationpass-btn" onClick={onSubmit}>
             Continue
           </Button>
         </div>
       </Container>
+
+      {/* Mobile View */}
 
       <div className="d-md-none">
         <div style={{ textAlign: "center", margin: "50px" }}>
@@ -164,17 +171,20 @@ function BusPass() {
                   className="location-userdatas"
                   style={{ border: "none", fontSize: "12px" }}
                   defaultValue="Choose..."
+                  value={selected}
+                  onChange={(e) => setSelected(e.target.value)}
                 >
                   <option>Choose your preferred route</option>
-                  <option>...</option>
+                  {routes.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.routename}
+                    </option>
+                  ))}
                 </Form.Select>
               </Form.Group>
             </Col>
             <Col xs={12} md={4} className="">
-              <Form.Group
-                // className="location-userdatas"
-                controlId="exampleForm.ControlInput1"
-              >
+              <Form.Group controlId="exampleForm.ControlInput1">
                 <Form.Label
                   className="formselect"
                   style={{
@@ -199,31 +209,22 @@ function BusPass() {
                     src={calendar}
                     style={{ width: 25, height: 30 }}
                   />
-                  {/* <DatePicker
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                        showTimeSelect
-                        dateFormat="dd,MMM"
-                       
-                      /> */}
-
-                  {/* <Form.Control
-                    type="text"
-                    className="user_input1"
-                    placeholder="Enter Source"
-                  /> */}
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    customInput={<ExampleCustomInput />}
+                    dateFormat="dd,MMM"
+                  />
                 </div>
               </Form.Group>
             </Col>
           </Row>
         </Container>
-        <Button className="locationpass-btn" onClick={onSideBtnClick}>
-        Continue
-      </Button>
+        <Button className="locationpass-btn" onClick={onSubmit}>
+          Continue
+        </Button>
       </div>
-     
     </div>
   );
 }
-
 export default BusPass;
