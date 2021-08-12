@@ -59,10 +59,10 @@ function BusConfirmation() {
   };
   //   const history = useHistory();
 
-  // const handleClick=()=>{
-  //   console.log('heeee')
-  //   history.push("/ buscard");
-  // }
+  const onBackpage=()=>{
+    console.log('heeee')
+    history.push("/busdropoff");
+  }
 
   return (
     <>
@@ -309,7 +309,7 @@ function BusConfirmation() {
               )}
             </Popper>
 
-            <div style={{ textAlign: "center", margin: "55px" }}>
+            <div style={{ textAlign: "center", margin: "55px", marginBottom:"100px" }}>
               <Button
                 style={{
                   backgroundColor: "#0FA453",
@@ -318,6 +318,7 @@ function BusConfirmation() {
                   height: "51px",
                   border: "none",
                   borderRadius: "15px",
+                 
                 }}
                 onClick={handleClick("top-start")}
               >
@@ -379,6 +380,8 @@ function BusConfirmation() {
         <Footer />
       </div>
 
+      {/*mobile-view*/}  {/*mobile-view*/} {/*mobile-view*/} {/*mobile-view*/} {/*mobile-view*/} {/*mobile-view*/}
+      {/*mobile-view*/}
       {/*mobile-view*/}
 
       <div className="d-md-none">
@@ -398,7 +401,7 @@ function BusConfirmation() {
               marginLeft: "20px",
             }}
           >
-            <FaArrowLeft />
+            <FaArrowLeft  onClick={onBackpage}/>
           </div>
           <div>
             <h5
@@ -485,7 +488,8 @@ function BusConfirmation() {
                 <div className="d-flex">
                   <span
                     style={{
-                      margin: "10px",
+                      // margin: "10px",
+                      paddingTop:"10px",
                       whiteSpace: "nowrap",
                       fontSize: "12px",
                       fontWeight: "bolder",
@@ -569,7 +573,166 @@ function BusConfirmation() {
               </div>
             </Col>
           </Row>
-          {/* <Row>
+         
+        </Container>
+
+
+
+
+        <Popper
+              open={open}
+              anchorEl={anchorEl}
+              placement={placement}
+              transition
+            >
+              {({ TransitionProps }) => (
+                <Fade {...TransitionProps} timeout={350}>
+                  <Paper>
+                    <Typography className={classes.typography}>
+                      <div className="card-body">
+                        <h5 className="card-title">Passengers 1</h5>
+                        <p className="card-text">
+                          <div className="form-group mt-4">
+                            <label for="inputAddress">Name</label>
+                            <input
+                              type="text"
+                              className="form-control pass_input"
+                              id="inputAddress"
+                              placeholder="Enter passenger name"
+                              style={{ fontSize: "11px", marginLeft: "-5px" }}
+                            />
+                          </div>
+
+                          <div className="form-row genderform pt-3 d-flex ">
+                            <div className="col m-2 w-50">
+                              <label for="inputAddress">Gender</label>
+                              <div className="d-flex pt-2">
+                                <ButtonComponent
+                                  style={{
+                                    width: "50%",
+                                    fontSize: "11px",
+                                    whiteSpace: "nowrap",
+                                  }}
+                                  data={button_Data}
+                                  activeButton={activeButton}
+                                  trigerOnClickEmpSideBtn={onSideBtnClick}
+                                />
+                              </div>
+                            </div>
+                            <div className="col m-2 w-50">
+                              <label for="inputAddress">Age</label>
+                              <br />
+                              <input
+                                type="text"
+                                className="form-control pass_input w-70 pt-2"
+                                placeholder="Enter Age"
+                                style={{
+                                  width: "110px",
+                                  marginLeft: "-5px",
+                                  fontSize: "12px",
+                                  whiteSpace: "nowrap",
+                                  height: "33px",
+                                }}
+                              />
+                            </div>
+                          </div>
+
+                          <div className="form-group mt-4 pt-2">
+                            <label for="inputAddress">
+                              Aadhar Card Number{" "}
+                            </label>
+                            <input
+                              type="text"
+                              className="form-control pass_input"
+                              id="inputAddress"
+                              placeholder=" Enter 12 digit Aadhar Card Number"
+                              style={{ fontSize: "11px", marginLeft: "-5px" }}
+                            />
+                          </div>
+                        </p>
+                      </div>
+                    </Typography>
+                  </Paper>
+                </Fade>
+              )}
+            </Popper>
+        <div style={{ textAlign: "center" }}>
+          <Button
+            style={{
+              backgroundColor: "#0FA453",
+              color: "white",
+              width: "54%",
+              height: "53px",
+              border: "none",
+              borderRadius: "15px",
+            }}
+            onClick={handleClick("top-start")}
+          >
+            Add Passengers
+          </Button>
+        </div>
+
+        <div style={{display: 'flex',flexDirection: 'row', position:'fixed', bottom: 0, width:'100%'}}>
+            <Col style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px", }}>
+              <div style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px" }}>
+               
+               <div style={{padding:"10px"}}>
+               <span style={{ fontSize: "14px", lineHeight: "21px",color:"grey" }}>
+                  Total Amount 
+                </span>
+                <br />
+               <span
+                  style={{
+                    // fontSize: "33px",
+                    fontWeight: "bolder",
+                    lineHeight: "20px",
+                    fontSize:" 16px",
+                    color:"black"
+                  }}
+                >                 
+                  ₹ 1500
+                </span><br/>
+                <span style={{ fontSize: "14px", lineHeight: "21px",color:"grey" }}>
+                   (*Exclusive of Taxes)
+                </span>
+               </div>
+              </div>
+            </Col>
+            <Col>
+              <div
+                style={{
+                  backgroundColor: "#0FA453",
+                  color: "white",
+                  textAlign: "center",
+                  height: "86px",
+                }}
+                onClick={onCheckout}
+              >
+               <div style={{paddingTop:"30px"}}>
+               <span
+                  style={{
+                    fontSize: "21px",
+                    fontWeight: "bolder",
+                    lineHeight: "25px",
+                  }}
+                  onClick={onCheckout}
+                >
+                  CHECKOUT
+                </span>
+               </div>
+              </div>
+            </Col>
+          </div>
+      </div>
+    </>
+  );
+}
+
+export default BusConfirmation;
+
+
+
+ {/* <Row>
             <Col xs={12}>
               <div className=" select-train mt-2 d-flex">
                 <Form className="d-flex">
@@ -667,24 +830,3 @@ function BusConfirmation() {
               </div>
             </Col>
           </Row> */}
-        </Container>
-        <div style={{ textAlign: "center" }}>
-          <Button
-            style={{
-              backgroundColor: "#0FA453",
-              color: "white",
-              width: "100%",
-              height: "51px",
-              border: "none",
-              borderRadius: "15px",
-            }}
-          >
-            Add Passengers
-          </Button>
-        </div>
-      </div>
-    </>
-  );
-}
-
-export default BusConfirmation;
