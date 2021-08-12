@@ -8,7 +8,14 @@ import { useHistory } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import runmen from "../../assets/img/runmen.png";
 
+import { useDispatch, useSelector } from "react-redux";
+
 function CongratulationPage() {
+  const history = useHistory();
+  const { data: apiData, tripData,booking_id } = useSelector(state => state.busReducer)
+  const goHome = () => {
+    history.push("/");
+  };
   return (
     <>
       <div>
@@ -27,7 +34,7 @@ function CongratulationPage() {
                   <span style={{color:"black"}}>Your booking has been confirmed</span>
 
                   <h3 style={{fontWeight:"bolder"}}>Order ID</h3>
-                  <span style={{color:"black", marginBottom:"50px"}}>BAS05493</span>
+                  <span style={{color:"black", marginBottom:"50px"}}>{booking_id}</span>
                 </div>
                 <div>
                      <div >
@@ -79,6 +86,7 @@ function CongratulationPage() {
                     fontWeight:"bold",
                     marginBottom:"20px"
                   }} 
+                  onClick={goHome}
                    >Back to Home</Button>
                    </div>
                 </div>

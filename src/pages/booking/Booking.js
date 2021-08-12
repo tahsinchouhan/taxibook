@@ -17,11 +17,8 @@ import ticket from "../../assets/img/ticket.png";
 function Booking() {
   const [passTab, setPassTab] = useState(false);
   const [Journey, setJourney] = useState(true);
-
   const [busjourney, setBusJourney] = useState(false);
-
   const [cabjourney, setCabJourney] = useState(false);
-
   const [startDate, setStartDate] = useState(new Date());
   const history = useHistory();
 
@@ -299,12 +296,12 @@ function Booking() {
                   <Col xs={2} md={2}></Col>
                   <Col xs={2} md={2}></Col>
                 </Row>
-                <div className="text-center" style={{marginTop:"50px"}}>
+                <div className="text-center" style={{ marginTop: "50px" }}>
                   <Button
                     type="submit"
                     class="btn btn-success"
                     style={{
-                      marginTop:"30px",
+                      marginTop: "30px",
                       width: "60%",
                       textAlign: "center",
                       height: "48px",
