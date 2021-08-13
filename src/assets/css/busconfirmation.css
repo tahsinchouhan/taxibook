@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+.traveller_div{
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.traveller__card{
+    width: 318px;
+    padding: 2rem;
+    font-size: 12px;
+    flex-basis: calc(50% - 0.5rem);
+}
+
+.traveller__card_title{
+    font-weight: 700;
+}
+
+.pass_input{
+    background-color: #F8F8F8;
+    border-color: #F8F8F8;
+}

@@ -29,6 +29,7 @@ export const UPDATE_BUS_BOOKING='UPDATE_BUS_BOOKING';
 export const RESET_BUS_BOOKING='RESET_BUS_BOOKING';
 export const SET_BOOKING_ID='SET_BOOKING_ID';
 export const SET_MOBILE='SET_MOBILE';
+export const SET_ROUTE_DATA='SET_ROUTE_DATA';
 
 export const GET_OTP = "GET_OTP";
 export const GET_OTP_SUCCESS = "GET_OTP_SUCCESS";

@@ -11,6 +11,7 @@ import {
     SET_BOOKING_ID,
     CREATE_BUS_BOOKING,
     SET_MOBILE,
+    SET_START_DATE,
     SET_ROUTE_DATA,
 } from "../actions";
 
@@ -61,6 +62,11 @@ export const setBookingId = (value) => ({
 });
 export const setMobile = (value) => ({
     type: SET_MOBILE,
+    payload: value,
+});
+
+export const setBookinStartDate = (value) => ({
+    type: SET_START_DATE,
     payload: value,
 });
 

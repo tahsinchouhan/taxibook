@@ -27,6 +27,7 @@ import CongratulationPage from './pages/selectbooking/CongratulationPage';
 import RatanCard from './pages/selectbooking/RatanCard';
 import DmTicket2 from './pages/dm pass/dmtickets/DmTicket2';
 import TravelTicket from './pages/dm pass/dmtickets/TravelTicket';
+import DmDetail from './pages/dm pass/dmtickets/DmDetail';
 // import DmTicket from './pages/dm pass/dmtickets/DmTicket';
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
             <Route exact path='/ratancard'component={RatanCard}/>
             <Route exact path='/dmticket2'component={ DmTicket2}/>
             <Route exact path='/travelticket'component={TravelTicket}/>
+            <Route exact path='/dm-detail'component={DmDetail}/>
 
 
 

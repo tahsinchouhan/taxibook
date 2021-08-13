@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+.dm__barcode{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.dm__card{
+    background-color: #f8f8f8;
+    padding: 2rem;
+    padding-inline-end: 3.5rem;
+}
+.dm__card_title{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+    font-size: 13px;
+    line-height: 16px;
+}
+.dm__card_title .left{
+    color: #000;
+}
+.dm__card_title .right{
+    color: #FF4A68;
+}
+
+.dm__card_body{
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    line-height: 16px;
+}
+.dm__card_body .left{
+    font-weight: 400;
+    padding: 5px 0;
+}
+.dm__card_body .right{
+    color: #000;
+    font-weight: 700;
+}
+
+.dm__title{
+    text-align: center;
+    font-weight: 700;
+}
+.dm__traveller_div{
+    padding: 1rem;
+    display: flex;
+    padding-inline:14vw;
+    gap:1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.dm__trav_card{
+    background-color: #f8f8f8;
+    padding: 2rem 1rem;
+    text-align: center;
+    color: #000;
+    font-size: 13px;
+    line-height: 16px;
+    width: 210px;
+    border-radius: 5px;
+}
+.dm__trav_card_title{
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    text-transform: capitalize;
+}
+
+.dm__entry_div{
+    padding: 1rem;
+    display: flex;
+    padding-inline:19vw;
+    gap:1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.dm__entry_card{
+    background-color: #f8f8f8;
+    padding: 1rem;
+    padding-inline-end: 2rem;
+    width: 320px;
+}
+.dm__entry_card_title{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+    font-size: 13px;
+    line-height: 16px;
+}
+.dm__entry_card_title .left{
+    color: #000;
+}
+.dm__entry_card_title .right{
+    color: #FF4A68;
+}
+
+.dm__entry_card_body{
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    line-height: 16px;
+}
+.dm__entry_card_body .left{
+    font-weight: 400;
+    padding: 5px 0;
+}
+.dm__entry_card_body .right{
+    color: #000;
+    font-weight: 700;
+}
+
+.dm__footer_div{
+    padding: 1rem;
+    display: flex;
+    padding-inline:33vw;
+    gap:1rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.dm__footer_card{
+    background-color: #f8f8f8;
+    padding: 1.5rem;
+    padding-inline-end: 1.5rem;
+    text-align: center;
+    color: #000;
+    font-size: 13px;
+    line-height: 16px;
+    width: 150px;
+    border-radius: 5px;
+}
+.dm__footer_card_title{
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    margin-bottom: 1.5rem;
+}
+.dm__footer_card_body{
+    background-color: #0FA453;
+    border-color: #0FA453;
+    font-size: 12px;
+    padding: 0.25em 2.5em;
+
+}
+
+/* mobile */
+.dmpass__mob_header{
+    height: 75px;
+    background-color: #FF814A;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+.dmpass__mob_header_title{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+    margin-inline: auto;
+}
+
+.dm__card.mobile{
+    padding: 1rem;
+    width: 318px;
+}
+
+.dm__title.mobile{
+    text-align: left;
+    padding-left: 1.5rem;
+    padding-top: 0;
+    margin-block: 1rem;
+}
+.dm__traveller_div.mobile,.dm__entry_div.mobile,.dm__footer_div.mobile{
+    padding-inline: 1.5rem;
+    padding-top: 0;
+    justify-content: initial;
+}
+.dm__trav_card.mobile{
+    width: 148px;
+}

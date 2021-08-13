@@ -13,7 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_PATH } from "../../Path/Path";
 import { useDispatch } from "react-redux";
-import { getTripByRouteId, setRouteId } from "../../redux/actions";
+import { getTripByRouteId, setBookinStartDate, setRouteData, setRouteId } from "../../redux/actions";
 
 function BusPass() {
   const history = useHistory();
@@ -25,7 +25,7 @@ function BusPass() {
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
-      style={{ border: "none", background: "transparent" }}
+      style={{ border: "none", background: "transparent", fontSize:"25px", color:"#a5a5a5" }}
       onClick={onClick}
       ref={ref}
     >
@@ -50,9 +50,10 @@ function BusPass() {
     // dispatch(setRouteId(selected))
     // dispatch(getTripByRouteId(selected))
     dispatch(setRouteId(selected))
+    dispatch(setRouteData({...routes[routes.findIndex(x => x._id == selected)], startDate }))
     history.push('/busmonsoon')
-    console.log(selected)
-    toast("Wow so easy!");
+    // console.log(startDate,"erty",selected,startDate)
+    // toast("Wow so easy!");
   };
 
   return (
@@ -134,7 +135,7 @@ function BusPass() {
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
                     customInput={<ExampleCustomInput />}
-                    dateFormat="dd,MMM"
+                    dateFormat="dd MMM"
                   />
                 </div>
               </Form.Group>
@@ -222,7 +223,7 @@ function BusPass() {
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
                     customInput={<ExampleCustomInput />}
-                    dateFormat="dd,MMM"
+                    dateFormat="dd MMM"
                   />
                 </div>
               </Form.Group>
