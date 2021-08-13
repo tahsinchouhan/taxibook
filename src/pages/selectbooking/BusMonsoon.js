@@ -86,7 +86,7 @@ function BusMonsoon() {
                 </Form.Label>
               </Col>
             </Row>
-            <Container>
+            {/* <Container>
               <div style={{ textAlign: "center" }}>
                 <span
                   style={{
@@ -133,7 +133,7 @@ function BusMonsoon() {
                 </Col>
               </Row>
             </Container>
-            <hr />
+            <hr /> */}
             {/* <Container onClick={onClickTrain}>
               <Row>
                 <Col>
@@ -255,7 +255,7 @@ function BusMonsoon() {
             </Col>
           </Row>
           <div style={{ marginLeft: "15px" }}>
-            <Container sty={{ marginLeft: "10px" }}>
+            {/* <Container sty={{ marginLeft: "10px" }}>
               <div>
                 <span
                   style={{
@@ -304,7 +304,7 @@ function BusMonsoon() {
                 </Row>
               </div>
             </Container>
-            <hr />
+            <hr /> */}
             {/* <Container>
               <Row>
                 <Col>

@@ -97,7 +97,7 @@ function BusConfirmation() {
   const { name, age, gender, aadhar, basic_details, price, surcharge } = values;
 
   const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value })
+    setValues({ ...values, [e.target.name]: e.target.value , gender: activeButton })
     console.log(e.target, 'val', values);
   }
 
@@ -399,7 +399,7 @@ function BusConfirmation() {
                             color: "black",
                           }}
                           > {item.name}</span> <br />
-                          <span>{item.gender}Male, {item.age}</span> <br />
+                          <span>{item.gender}, {item.age}</span> <br />
                           <span> Adhaar: {item.aadhar}</span>
                           <div className="p-3">
                             <Button className="checout-btn">EDIT</Button>
@@ -798,7 +798,7 @@ function BusConfirmation() {
                         color: "black",
                       }}
                       > {item.name}</span> <br />
-                      <span>{item.gender}Male, {item.age}</span> <br />
+                      <span>{item.gender}, {item.age}</span> <br />
                       <span> Adhaar: {item.aadhar}</span>
                       <div className="p-3">
                         <Button className="checout-btn">EDIT</Button>

@@ -11,37 +11,23 @@ import ButtonComponent from "../../containers/Button";
 import Footer from "../travesaly/Footer";
 import Header from "../../components/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { setMobile } from "../../redux/actions";
-
-const button_Data = [
-  {
-    name: "Male",
-    value: "Male",
-  },
-  {
-    name: "Female",
-    value: "Female",
-  },
-];
+import { getOtp, setMobile } from "../../redux/actions";
 
 function BusDetail() {
-  const [activeButton, setActiveButton] = useState(button_Data[0].name);
   const history = useHistory();
   //   const[detail,setDetail]=useState(false);
-  const {mobile} = useSelector(state => state.busReducer)
-  
+  const { mobile } = useSelector(state => state.busReducer)
+
   const dispatch = useDispatch()
 
-  const onSideBtnClick = (e) => {
-    const name = e.target.name;
-    setActiveButton(name);
-    // alert("test");
-
-    // const onClickContinue=()=>{
-    //     console.log("object");
-    //     history.push('/busdetail')
-    // }
-  };
+  const handleMobile = (e) => {
+    console.log("object", e.target.value);
+    let mob = e.target.value;
+    if (mob.length > 9) {
+      dispatch(getOtp(`91${e.target.value}`))
+    }
+    dispatch(setMobile(e.target.value))
+  }
   const onClickMonsoon = () => {
     console.log("object");
     history.push('/busdetail')
@@ -82,7 +68,7 @@ function BusDetail() {
                   placeholder="Enter Mobile No"
                   style={{ height: "50px", fontSize: "12px" }}
                   value={mobile}
-                  onChange={(e)=>dispatch(setMobile(e.target.value))}
+                  onChange={handleMobile}
                 />
               </Form.Group>
               <Button
@@ -163,7 +149,7 @@ function BusDetail() {
                   placeholder="Enter Mobile No"
                   style={{ fontSize: "12px" }}
                   value={mobile}
-                  onChange={(e)=>dispatch(setMobile(e.target.value))}
+                  onChange={(e) => dispatch(setMobile(e.target.value))}
                 />
                 <Button
                   style={{

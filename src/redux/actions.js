@@ -1,3 +1,10 @@
+// COMMON
+export const FETCH_START = "FETCH_START";
+export const FETCH_SUCCESS = "FETCH_SUCCESS";
+export const FETCH_ERROR = "FETCH_ERROR";
+export const SHOW_MESSAGE = "SHOW_MESSAGE";
+export const HIDE_MESSAGE = "HIDE_MESSAGE";
+
 export const GET_DESTINATIONS = "GET_DESTINATIONS";
 export const GET_DESTINATIONS_SUCCESS = "GET_DESTINATIONS_SUCCESS";
 export const GET_DESTINATIONS_ERROR = "GET_DESTINATIONS_ERROR";
@@ -27,6 +34,7 @@ export const GET_OTP = "GET_OTP";
 export const GET_OTP_SUCCESS = "GET_OTP_SUCCESS";
 export const GET_OTP_ERROR = "GET_OTP_ERROR";
 
+export * from "./common/actions";
 export * from "./auth/actions";
 export * from "./bus/actions";
 export * from "./login/actions";

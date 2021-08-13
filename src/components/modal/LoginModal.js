@@ -70,7 +70,7 @@ function LoginModal({ show, handleClose }) {
                       <div className="modal__block" style={{display: `${showDiv ? "block" : "none" }` }} >
                         <h5 className="modal__title mt-2 mb-4" style={{ fontWeight: "bolder"}}>Enter Verification Code</h5>
                         <OtpInput
-                          containerStyle="container__style"
+                          // containerStyle="container__style"
                           inputStyle="input__style"
                           value={OTP}
                           onChange={handleChange}
