@@ -1,34 +1,38 @@
-import React, { useState}  from "react";
-import { Button, Row, Col, Form, Container } from "react-bootstrap";
-import logo from "../../assets/img/logo.png";
-import city from "../../assets/img/city.png";
-// import calendar from "../../assets/img/calendar.png";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-// import Pass from "./Pass";
-// import BusPass from "./BusPass";
-import { useHistory } from "react-router-dom";
-// import Cab from "./Cab";
-import bus from "../../assets/img/bus.png";
-import cab from "../../assets/img/cab.png";
-import ticket from "../../assets/img/ticket.png";
-import Header from "../../components/Header";
-import Footer from "../travesaly/Footer";
-import calendar from "../../assets/img/calendar.png";
+import React, { useState } from "react";
+import { Container, Row, Button, Form } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import ButtonComponent from "../../containers/Button";
+import { NavLink, useHistory } from "react-router-dom";
 
+import { FaArrowLeft } from "react-icons/fa";
+
+const button_Data = [
+  {
+    name: "Male",
+    value: "Male",
+  },
+  {
+    name: "Female",
+    value: "Female",
+  },
+];
 
 function DmPass() {
+  const [activeButton, setActiveButton] = useState(button_Data[0].name);
+  const [data, setData] = useState();
   const history = useHistory();
+  const onSideBtnClick = (e) => {
+    const name = e.target.name;
+    setActiveButton(name);
+  };
 
-  const onDmTicketShow = () => {
-    console.log('hii')
-      // toast("Wow so easy!");
-      history.push('/dmticket2')
+  const onLocationsClick = () => {
+    console.log("object");
+    history.push("/locations");
   };
   return (
     <>
       <div>
-<<<<<<< HEAD
         <div className="dmpass-div">
           <Container className="dm-kangervilla">
             <FaArrowLeft className="kanger-arrow" />
@@ -90,7 +94,7 @@ function DmPass() {
             <form>
               <div className="form-row"></div>
               <div className="form-group mt-4">
-                <label htmlFor ="inputAddress">Mobile Number</label>
+                <label for="inputAddress">Mobile Number</label>
                 <input
                   type="text"
                   className="form-control pass_input"
@@ -100,7 +104,7 @@ function DmPass() {
               </div>
               <div className="form-row">
                 <div className="form-group mt-4 ">
-                  <label htmlFor ="inputState">Number of Travellers</label>
+                  <label for="inputState">Number of Travellers</label>
                   <select id="inputState" className="form-control pass_input">
                     <option selected>1</option>
                     <option value="2">2</option>
@@ -111,7 +115,7 @@ function DmPass() {
                   </select>
                 </div>
                 <div className="form-group mt-4 ">
-                  <label htmlFor ="inputState">Days of Travel</label>
+                  <label for="inputState">Days of Travel</label>
                   <select id="inputState" className="form-control pass_input">
                     <option selected>1</option>
                     <option value="2">2</option>
@@ -122,7 +126,7 @@ function DmPass() {
                   </select>
                 </div>
                 <div className="form-group mt-4 ">
-                  <label htmlFor ="inputState">Number of Vehicles</label>
+                  <label for="inputState">Number of Vehicles</label>
                   <select id="inputState" className="form-control pass_input">
                     <option selected>1</option>
                     <option value="2">2</option>
@@ -134,7 +138,7 @@ function DmPass() {
                 </div>
               </div>
               <div className="traveller-detail">
-                <label htmlFor ="inputAddress" style={{ paddingTop: "30px" }}>
+                <label for="inputAddress" style={{ paddingTop: "30px" }}>
                   Vehicle Details
                 </label>
                 <div className="card w-100">
@@ -142,7 +146,7 @@ function DmPass() {
                     <h5 className="card-title">Vehicle 1</h5>
                     <p className="card-text">
                       <div className="form-group mt-4">
-                        <label htmlFor ="inputAddress">Name</label>
+                        <label for="inputAddress">Name</label>
                         <input
                           type="text"
                           className="form-control pass_input"
@@ -154,7 +158,7 @@ function DmPass() {
 
                       <div className="form-row genderform pt-3 d-flex ">
                         <div className="col m-2 w-50">
-                          <label htmlFor ="inputAddress">Gender</label>
+                          <label for="inputAddress">Gender</label>
                           <div className="d-flex pt-2">
                             <ButtonComponent
                               style={{
@@ -169,7 +173,7 @@ function DmPass() {
                           </div>
                         </div>
                         <div className="col m-2 w-50">
-                          <label htmlFor ="inputAddress">Age</label>
+                          <label for="inputAddress">Age</label>
                           <br />
                           <input
                             type="text"
@@ -185,7 +189,7 @@ function DmPass() {
                       </div>
 
                       <div className="form-group mt-4 pt-2">
-                        <label htmlFor ="inputAddress">Aadhar Card Number </label>
+                        <label for="inputAddress">Aadhar Card Number </label>
                         <input
                           type="text"
                           className="form-control pass_input"
@@ -201,27 +205,12 @@ function DmPass() {
                     >
                       Add Vehicle
                     </Link>
-=======
-        <Header />
-        <Container className="d-none d-md-block my-5" style={{width:"70%"}}>
-          <div className="select_div">
-            <div className="row p-3" style={{ textAlign: "center" }}>
-              <div className="col-xs-12  col-sm-12 col-md-12">
-                <div className="booking-div">
-                  <div style={{marginBottom:"15px"}}>
-                    <img src={ticket} alt=""/>
->>>>>>> f8b67f0492162b56e30f7f68b3a5085a9bfe1c03
                   </div>
-                  <span style={{ fontWeight: "bolder", fontSize: "15px",color:"#0fa453",paddingTop:"50px" }}>DM Pass</span><br/>
-                  <span style={{ fontWeight: "bolder", fontSize: "12px",padding:"10px" }}>
-                  Get a pass for travellers, vehicles<br/> and duration of your travel
-                  </span>
                 </div>
               </div>
-<<<<<<< HEAD
               {/*traveller Detail*/}
               <div className="traveller-detail">
-                <label htmlFor ="inputAddress" style={{ paddingTop: "30px" }}>
+                <label for="inputAddress" style={{ paddingTop: "30px" }}>
                   Traveller Details
                 </label>
                 <div className="card w-100">
@@ -229,7 +218,7 @@ function DmPass() {
                     <h5 className="card-title">Traveller 1</h5>
                     <p className="card-text">
                       <div className="form-group mt-4">
-                        <label htmlFor ="inputAddress">Name</label>
+                        <label for="inputAddress">Name</label>
                         <input
                           type="text"
                           className="form-control pass_input"
@@ -241,7 +230,7 @@ function DmPass() {
 
                       <div className="form-row genderform pt-3 d-flex ">
                         <div className="col m-2 w-50">
-                          <label htmlFor ="inputAddress">Gender</label>
+                          <label for="inputAddress">Gender</label>
                           <div className="d-flex pt-2">
                             <ButtonComponent
                               style={{
@@ -256,7 +245,7 @@ function DmPass() {
                           </div>
                         </div>
                         <div className="col m-2 w-50">
-                          <label htmlFor ="inputAddress">Age</label>
+                          <label for="inputAddress">Age</label>
                           <br />
                           <input
                             type="text"
@@ -272,7 +261,7 @@ function DmPass() {
                       </div>
 
                       <div className="form-group mt-4 pt-2">
-                        <label htmlFor ="inputAddress">Aadhar Card Number </label>
+                        <label for="inputAddress">Aadhar Card Number </label>
                         <input
                           type="text"
                           className="form-control pass_input"
@@ -317,114 +306,45 @@ function DmPass() {
         </div>
 
         {/* <!-- Horizontal Steppers --> */}
-        <div className = "row">
-          <div className = "col-md-12">
+        <div class="row">
+          <div class="col-md-12">
             {/* <!-- Stepers Wrapper --> */}
-            <ul className = "stepper stepper-horizontal">
+            <ul class="stepper stepper-horizontal">
               {/* <!-- First Step --> */}
-              <li className = "completed">
+              <li class="completed">
                 <a href="#!">
-                  <span className = "circle">1</span>
-                  <span className = "label">First step</span>
+                  <span class="circle">1</span>
+                  <span class="label">First step</span>
                 </a>
               </li>
 
               {/* <!-- Second Step --> */}
-              <li className = "active">
+              <li class="active">
                 <a href="#!">
-                  <span className = "circle">2</span>
-                  <span className = "label">Second step</span>
+                  <span class="circle">2</span>
+                  <span class="label">Second step</span>
                 </a>
               </li>
 
               {/* <-- Third Step --> */}
-              <li className = "warning">
+              <li class="warning">
                 <a href="#!">
-                  <span className = "circle">
-                    <i className = "fas fa-exclamation"></i>
+                  <span class="circle">
+                    <i class="fas fa-exclamation"></i>
                   </span>
-                  <span className = "label">Third step</span>
+                  <span class="label">Third step</span>
                 </a>
               </li>
             </ul>
             {/* <!-- /.Stepers Wrapper --> */}
-=======
-            </div>
-
-            <Container style={{width:"100%",paddingTop:"28px"}}>
-              <Row>
-               
-                <Col xs={12} md={4} className="mt-2">
-                  <Form.Group
-                    className=""
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label className="dm-ticket" >Number of Vehicles</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <Form.Control
-                        type="text"
-                        className="dm-inputticket"
-                        placeholder=" Vehicles..."
-                      />
-                    </div>
-                  </Form.Group>
-                </Col>
-                <Col xs={12} md={4} className="mt-2">
-                  <Form.Group
-                    className=""
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label className="dm-ticket">Number of Travellers</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <Form.Control
-                        type="text"
-                        className="dm-inputticket"
-                        placeholder="Travellers..."
-                      />
-                    </div>
-                  </Form.Group>
-                </Col>
-                <Col xs={12} md={4} className="mt-2">
-                  <Form.Group
-                    className=""
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label className="dm-ticket">Days of Travel</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <Form.Control
-                        type="text"
-                        className="dm-inputticket"
-                        placeholder="Days of Travel.."
-                      />
-                    </div>
-                  </Form.Group>
-                </Col>
-               
-              </Row>
-              <div className="dmticket-btn" style={{textAlign:"center",marginTop:"70px"}}>
-                <Button
-                  type="submit"
-                  class="btn btn-success"
-                  style={{
-                    width: "20%",
-                    textAlign: "center",
-                    height: "52px",
-                    borderRadius: "9px",
-                    backgroundColor: "#0fa453",
-                    border:"none"
-                  }}
-                  onClick={onDmTicketShow}
-                >
-                 Continue
-                </Button>
-              </div>
-            </Container>
->>>>>>> f8b67f0492162b56e30f7f68b3a5085a9bfe1c03
           </div>
-        </Container>
+        </div>
+        {/* <!-- /.Horizontal Steppers --> */}
       </div>
     </>
   );
 }
 
 export default DmPass;
+
+
