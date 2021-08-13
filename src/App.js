@@ -24,14 +24,11 @@ import BusConfirmation from './pages/selectbooking/BusConfirmation';
 import BusCard from './pages/selectbooking/BusCard';
 import CheckoutPage from './pages/selectbooking/CheckoutPage';
 import CongratulationPage from './pages/selectbooking/CongratulationPage';
-<<<<<<< HEAD
 import AddForm from './pages/VenderOrgAdd/AddForm';
-=======
 import RatanCard from './pages/selectbooking/RatanCard';
 import DmTicket2 from './pages/dm pass/dmtickets/DmTicket2';
 import TravelTicket from './pages/dm pass/dmtickets/TravelTicket';
 // import DmTicket from './pages/dm pass/dmtickets/DmTicket';
->>>>>>> f8b67f0492162b56e30f7f68b3a5085a9bfe1c03
 
 function App() {
 
@@ -63,10 +60,8 @@ function App() {
             <Route exact path='/busconfirmation' component={BusConfirmation}/>
             <Route exact path='/ buscard' component={BusCard}/>
             <Route exact path='/checkoutpage' component={CheckoutPage}/>
-<<<<<<< HEAD
             <Route exact path='/CongratulationPage' component={CongratulationPage}/>
             <Route exact path='/add-form' component={AddForm}/>
-=======
             <Route exact path='/CongratulationPage'component={CongratulationPage}/>
             <Route exact path='/ratancard'component={RatanCard}/>
             <Route exact path='/dmticket2'component={ DmTicket2}/>
@@ -74,7 +69,6 @@ function App() {
 
 
 
->>>>>>> f8b67f0492162b56e30f7f68b3a5085a9bfe1c03
           </Switch>
         </div>
       </Router>

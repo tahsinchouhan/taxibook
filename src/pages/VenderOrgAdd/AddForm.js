@@ -9,19 +9,17 @@ import { useHistory } from "react-router-dom";
 
 function AddForm() {
   const history = useHistory();
-
   const [show, setShow] = useState(0);
   const [sNo, setSno] = useState("");
   const [vName, setVName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [idProof, setIdProof] = useState("");
-
   const [categoryName, setCategoryName] = useState("");
   const [serialNo, setSerialNo] = useState("");
   const [orgName, setOrgName] = useState("");
   const [address, setAddress] = useState("");
-  const [name, setName] = useState("");
+  const [name, setName] = useState(""); 
   const [oEmail, setOEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [accName, setAccName] = useState("");
