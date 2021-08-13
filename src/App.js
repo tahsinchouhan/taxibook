@@ -24,6 +24,10 @@ import BusConfirmation from './pages/selectbooking/BusConfirmation';
 import BusCard from './pages/selectbooking/BusCard';
 import CheckoutPage from './pages/selectbooking/CheckoutPage';
 import CongratulationPage from './pages/selectbooking/CongratulationPage';
+import RatanCard from './pages/selectbooking/RatanCard';
+import DmTicket2 from './pages/dm pass/dmtickets/DmTicket2';
+import TravelTicket from './pages/dm pass/dmtickets/TravelTicket';
+// import DmTicket from './pages/dm pass/dmtickets/DmTicket';
 
 function App() {
 
@@ -56,6 +60,12 @@ function App() {
             <Route exact path='/ buscard' component={BusCard}/>
             <Route exact path='/checkoutpage' component={CheckoutPage}/>
             <Route exact path='/CongratulationPage'component={CongratulationPage}/>
+            <Route exact path='/ratancard'component={RatanCard}/>
+            <Route exact path='/dmticket2'component={ DmTicket2}/>
+            <Route exact path='/travelticket'component={TravelTicket}/>
+
+
+
           </Switch>
         </div>
       </Router>
