@@ -5,17 +5,11 @@ import city1 from "../../assets/img/city.png";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { useHistory } from "react-router-dom";
-<<<<<<< HEAD
 import { FaArrowLeft } from "react-icons/fa";
-=======
-import { useDispatch, useSelector } from "react-redux";
-import { createBusBooking } from "../../redux/actions";
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
 
 function CheckoutPage() {
   const history = useHistory();
 
-<<<<<<< HEAD
   const onCongratsClick = () => {
     console.log("object");
     history.push("/CongratulationPage");
@@ -23,25 +17,6 @@ function CheckoutPage() {
   return (
     <>
       <div fluid className="d-none d-md-block">
-=======
-  const dispatch = useDispatch()
-  const { data: apiData, tripData,mobile } = useSelector(state => state.busReducer)
-  const { name, age, gender, aadhar, basic_details, price, surcharge } = apiData;
-  const onCongratsClick = () => {
-    console.log("object",tripData);
-    dispatch(createBusBooking({...apiData,trips_id:tripData?._id,route:tripData?.route?._id,from:tripData?.route?.start?._id,to:tripData?.route?.end?._id,bus:tripData?.vehical,mobile}))
-    history.push("/CongratulationPage");
-  };
-  useEffect(() => {
-    // setValues({ ...values, price: (BASE_PRICE * basic_details.length)  })
-    // setValues({ ...values, price: (basePrice * basic_details.length) })
-    console.log("enosdkl", apiData);
-  }, [basic_details])
-
-  return (
-    <>
-      <div>
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
         <Header />
         <div>
           <Container className="" style={{ width: "42%", paddingTop: "50px" }}>
@@ -57,11 +32,7 @@ function CheckoutPage() {
             </h5>
             <Row>
               <Col>
-<<<<<<< HEAD
                 <div style={{ marginLeft: "25px" }}>
-=======
-                <div style={{ marginLeft: "25px", }}>
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
                   <div className="p-2">
                     <span
                       style={{
@@ -78,7 +49,6 @@ function CheckoutPage() {
                         fontSize: "19px",
                         fontWeight: "bolder",
                         color: "black",
-<<<<<<< HEAD
                       }}
                     >
                       Chitrakote, Bastar
@@ -103,17 +73,10 @@ function CheckoutPage() {
                       }}
                     >
                       Total Amount
-=======
-                      }}
-                    >
-                      {/* Chitrakote, Bastar */}
-                      {tripData?.route?.end?.name}
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
                     </span>
                     <br />
                     <span
                       style={{
-<<<<<<< HEAD
                         fontSize: "19px",
                         fontWeight: "bolder",
                         color: "#FF4A68",
@@ -124,14 +87,11 @@ function CheckoutPage() {
                     <br />
                     <span
                       style={{
-=======
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
                         color: "black",
                         fontSize: "12px",
                         fontWeight: "bold",
                       }}
                     >
-<<<<<<< HEAD
                       *Excluding taxes
                     </span>
                   </div>
@@ -288,27 +248,6 @@ function CheckoutPage() {
                         border: "none",
                         outlineColor:"none"
                        
-=======
-                      31 July, 2021
-                    </span>
-                  </div>
-                  <div className="p-2">
-                    <span
-                      style={{
-                        color: "black",
-                        fontSize: "12px",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Total Amount
-                    </span>
-                    <br />
-                    <span
-                      style={{
-                        fontSize: "19px",
-                        fontWeight: "bolder",
-                        color: "#FF4A68",
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
                       }}
                       >EDIT</Button>
                     </div>
@@ -390,7 +329,6 @@ function CheckoutPage() {
                         }
                       }
                     >
-<<<<<<< HEAD
                       Destination
                     </span>
                     <br />
@@ -434,9 +372,6 @@ function CheckoutPage() {
                       }}
                     >
                       ₹ 3000
-=======
-                      ₹ {price}
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
                     </span>
                     <br />
                     <span
@@ -486,7 +421,6 @@ function CheckoutPage() {
                             fontSize: "13px",
                           }}
                         >
-<<<<<<< HEAD
                           21:45 - 9:50
                         </span>
                         <br />
@@ -494,25 +428,12 @@ function CheckoutPage() {
                           <span
                             style={{
                               // marginRight: "20px",
-=======
-                          {tripData?.departure_time} - {tripData?.estimated_time_of_arrival}
-                        </span>
-                        <br />
-                        <div style={{ marginLeft: "-8px" }}>
-                          <span
-                            style={{
-                              marginRight: "20px",
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
                               color: "grey",
                               padding: "12px",
                               fontFamily: "sans-serif",
                             }}
                           >
-<<<<<<< HEAD
                             12h 05m
-=======
-                            {tripData?.duration_of_travel}
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
                           </span>
                         </div>
                       </div>
@@ -530,12 +451,7 @@ function CheckoutPage() {
                             fontFamily: "sans-serif",
                           }}
                         >
-<<<<<<< HEAD
                           Raj Ratan Tours and Travels
-=======
-                          {tripData?.trip_name}
-
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
                         </span>
                       </div>
                       <span
@@ -553,7 +469,6 @@ function CheckoutPage() {
               </Col>
             </Row>
           </Container>
-<<<<<<< HEAD
           <Container className="" style={{ paddingTop: "20px" }}>
             <Row>
               <span
@@ -671,95 +586,6 @@ function CheckoutPage() {
         >
           <div
             className="checkout-payment"
-=======
-          <Container className="" style={{ width: "42%", paddingTop: "20px" }}>
-            <Row>
-              <span style={{
-                fontWeight: "bolder",
-                fontFamily: "sans-serif",
-                fontSize: "16px",
-                color: "black",
-                marginLeft: "25px",
-              }}
-              >Passenger Details</span>
-              {
-                (basic_details?.length > 0) ?
-
-                  <Row>
-                    {/* <h3
-                    style={{
-                      fontSize: "19px",
-                      color: "#0FA453",
-                      fontWeight: "bolder",
-                    }}>Passengers ({`${basic_details?.length}`})</h3> */}
-                    {basic_details?.map((item, i) =>
-
-                      <Col md={6}>
-                        <div className="check-passenger" style={{ marginLeft: "25px", }}>
-                          <div style={{ textAlign: "center", padding: "10px" }}>
-                            <span style={{
-                              fontWeight: "bolder",
-                              fontFamily: "sans-serif",
-                              fontSize: "13px",
-                              color: "black",
-                            }}
-                            > {item.name}</span> <br />
-                            <span>{item.gender}Male, {item.age}</span> <br />
-                            <span> Adhaar: {item.aadhar}</span>
-                            <div className="p-3">
-                              <Button className="checout-btn">EDIT</Button>
-                            </div>
-                          </div>
-                        </div>
-                      </Col>
-                    )}
-                  </Row>
-                  : null
-              }
-              {/* <Col>
-                <div className="check-passenger" style={{ marginLeft: "25px", }}>
-                  <div style={{ textAlign: "center", padding: "10px" }}>
-                    <span style={{
-                      fontWeight: "bolder",
-                      fontFamily: "sans-serif",
-                      fontSize: "13px",
-                      color: "black",
-                    }}
-                    >Rajesh Sharma</span> <br />
-                    <span>Male, 25</span> <br />
-                    <span> Adhaar: 1298 2954 1926</span>
-                    <div className="p-3">
-                      <Button className="checout-btn">EDIT</Button>
-                    </div>
-                  </div>
-                </div>
-              </Col> */}
-              {/* <Col>
-                <div className="check-passenger" style={{ marginLeft: "15px", }}>
-                  <div style={{ textAlign: "center", padding: "10px" }}>
-                    <span style={{
-                      fontWeight: "bolder",
-                      fontFamily: "sans-serif",
-                      fontSize: "13px",
-                      color: "black",
-                    }}
-                    >Sunita Sharma</span>  <br />
-                    <span>Female, 22</span> <br />
-                    <span> Adhaar: 1298 2954 1926</span>
-                    <div className="p-3">
-                      <Button className="checout-btn">EDIT</Button>
-                    </div>
-                  </div>
-                </div>
-              </Col> */}
-            </Row>
-          </Container>
-        </div>
-        <div style={{ height: "250px" }}>
-        </div>
-        <div className="check-payment" style={{ background: "#0FA453" }} onClick={onCongratsClick}>
-          <div className="checkout-payment"
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
             style={{
               position: "absolute",
               lineHeight: "25px",
@@ -768,21 +594,12 @@ function CheckoutPage() {
               paddingTop: " 32px",
               fontWeight: "bolder",
               color: " #FFFFFF",
-<<<<<<< HEAD
               // marginLeft: "577px",
-=======
-              marginLeft: "577px"
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
             }}
           >
             MAKE PAYMENT
           </div>
-<<<<<<< HEAD
         </div> */}
-=======
-        </div>
-        <Footer />
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
       </div>
     </>
   );

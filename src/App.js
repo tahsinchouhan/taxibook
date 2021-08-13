@@ -60,15 +60,12 @@ function App() {
             <Route exact path='/ buscard' component={BusCard}/>
             <Route exact path='/checkoutpage' component={CheckoutPage}/>
             <Route exact path='/CongratulationPage'component={CongratulationPage}/>
-<<<<<<< HEAD
             <Route exact path='/ratancard'component={RatanCard}/>
             <Route exact path='/dmticket2'component={ DmTicket2}/>
             <Route exact path='/travelticket'component={TravelTicket}/>
 
 
 
-=======
->>>>>>> d1bcbd6f99b757f3e0ff701aa573c9809fb628a5
           </Switch>
         </div>
       </Router>
