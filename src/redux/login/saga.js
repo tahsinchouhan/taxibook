@@ -4,15 +4,13 @@ import { API_PATH } from "../../Path/Path";
 import {
   getOtpSuccess
 } from "./actions";
+import axios from 'axios'
 
 const OtpAsync = (mobile) =>
-  fetch(API_PATH + "/api/v1/customer/otp", {
-    method: "POST",
-    body: JSON.stringify({
+axios.post(API_PATH + "/api/v1/customer/otp", {
       mobile
-    }),
   })
-    .then((response) => response.json())
+    .then((response) => response)
     .then((json) => json);
 
 function* Otp({ payload }) {

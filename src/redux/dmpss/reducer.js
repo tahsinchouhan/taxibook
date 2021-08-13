@@ -8,11 +8,13 @@ import {
     GET_TRIP_BY_ROUTE_ID_SUCCESS,
     SET_BOOKING_ID,
     SET_MOBILE,
+    SET_START_DATE,
     SET_ROUTE_DATA
 } from "../actions";
 
 const INIT_STATE = {
     data:[],
+    startDate:'',
     route_id: '',
     tripList: [],
     tripData: '',
@@ -28,6 +30,9 @@ const busReducer = (state = INIT_STATE, action) => {
             return { ...state, route_id: action.payload }
         case SET_ROUTE_DATA:
             return { ...state, routeData: action.payload }
+
+        case SET_START_DATE:
+            return { ...state, route_id: action.payload }
 
         case SET_TRIP:
             return { ...state, tripData: action.payload }

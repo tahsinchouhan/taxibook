@@ -24,13 +24,18 @@ import BusConfirmation from './pages/selectbooking/BusConfirmation';
 import BusCard from './pages/selectbooking/BusCard';
 import CheckoutPage from './pages/selectbooking/CheckoutPage';
 import CongratulationPage from './pages/selectbooking/CongratulationPage';
+import AddForm from './pages/VenderOrgAdd/AddForm';
 import RatanCard from './pages/selectbooking/RatanCard';
 import DmTicket2 from './pages/dm pass/dmtickets/DmTicket2';
 import TravelTicket from './pages/dm pass/dmtickets/TravelTicket';
+<<<<<<< HEAD
 import DmCongratulate from './pages/dm pass/dmtickets/DmCongratulate';
 import TicketsSraech from './pages/booking/tickets/TicketsSreach';
 import Tickets1 from './pages/booking/tickets/Tickets1';
 import SteperDmpass from './pages/booking/tickets/SteperDmpass';
+=======
+import DmDetail from './pages/dm pass/dmtickets/DmDetail';
+>>>>>>> a3dacdf6fa7e92df5a2ece00595c535f6dec6aed
 // import DmTicket from './pages/dm pass/dmtickets/DmTicket';
 
 function App() {
@@ -63,15 +68,21 @@ function App() {
             <Route exact path='/busconfirmation' component={BusConfirmation}/>
             <Route exact path='/ buscard' component={BusCard}/>
             <Route exact path='/checkoutpage' component={CheckoutPage}/>
+            <Route exact path='/CongratulationPage' component={CongratulationPage}/>
+            <Route exact path='/add-form' component={AddForm}/>
             <Route exact path='/CongratulationPage'component={CongratulationPage}/>
             <Route exact path='/ratancard'component={RatanCard}/>
             <Route exact path='/dmticket2'component={ DmTicket2}/>
             <Route exact path='/travelticket'component={TravelTicket}/>
+<<<<<<< HEAD
             <Route exact path='/dm_congratulate'component={DmCongratulate}/>
             <Route exact path='/tickets_sraech'component={TicketsSraech}/>
             <Route exact path='/tickets1'component={Tickets1}/>
             <Route exact path='/steper_dmpass'component={SteperDmpass}/>
 
+=======
+            <Route exact path='/dm-detail'component={DmDetail}/>
+>>>>>>> a3dacdf6fa7e92df5a2ece00595c535f6dec6aed
 
 
 

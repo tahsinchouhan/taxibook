@@ -13,8 +13,8 @@ import { getTripByRouteId, setRouteId, setTripData } from "../../redux/actions";
 function BusMonsoon() {
   const history = useHistory();
   // const [trips, setTrips] = useState([]);
-  const {tripList:trips,route_id} = useSelector(state => state.busReducer)
-  
+  const { tripList: trips, route_id ,routeData} = useSelector(state => state.busReducer)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -23,9 +23,8 @@ function BusMonsoon() {
   }, [route_id]);
 
   useEffect(() => {
-    console.log("rd", trips);
-  }, [trips]);
-
+    console.log("ddd", routeData);
+  }, [routeData]);
   // const getTrips = () => {
   //   fetch(API_PATH + `/api/v1/trips/list`)
   //     .then((response) => response.json())
@@ -56,7 +55,7 @@ function BusMonsoon() {
         <div style={{ backgroundColor: "white", marginTop: "40px" }}>
           <Container className="mansoon-div">
             <Row>
-              <Col>
+              <Col md={8}>
                 <h5
                   style={{
                     fontSize: "19px",
@@ -64,7 +63,7 @@ function BusMonsoon() {
                     fontWeight: "bolder",
                   }}
                 >
-                  Tatibandh, Boarding to Chitrakote{" "}
+                  {`${routeData?.start?.name} to ${routeData?.end?.name} `}
                 </h5>
                 <span style={{ color: "black", fontWeight: "bolder" }}>
                   Change
@@ -77,12 +76,13 @@ function BusMonsoon() {
                     fontSize: "20px",
                     fontWeight: "bolder",
                     marginLeft: "4px",
-                    color: "grey",
+                    color: "#a5a5a5",
                     float: "right",
                     paddingRight: "20px",
                   }}
                 >
-                  30 July
+                  30 July 
+                  {/* {`${routeData?.startDate}`} */}
                 </Form.Label>
               </Col>
             </Row>
@@ -178,7 +178,7 @@ function BusMonsoon() {
                               <img src={bus1} alt="bus" style={{ height: "20px", paddingRight: "10px" }} />
                               <span style={{ fontWeight: "bolder", fontFamily: "sans-serif" }}>{item.trip_name}</span>
                             </div>
-                            <span className="train-sleeper">Volvo Multi-Axle Sleeper A/C (2+1)</span>
+                            <span className="train-sleeper">Bus 30 Seater</span>
                             <div>
                               <img src={city1} />
                               <span style={{ color: "grey", padding: "10px", fontFamily: "sans-serif" }}>2 Stops</span>
@@ -193,9 +193,9 @@ function BusMonsoon() {
                               <span style={{ color: "grey", fontFamily: "sans-serif", padding: "5px" }}>*per person</span><br />
                               <span style={{ fontWeight: "bolder", fontFamily: "sans-serif", padding: "5px" }}>₹ {item?.ticket_price}</span>
                             </div>
-                            <div className=" train-seats ">
-                              <span style={{ fontSize: "12px", fontWeight: "bolder" }}>14</span><br />
-                              <span style={{ fontSize: "12px", fontWeight: "bolder" }}>seats available</span>
+                            <div className="train-seats d-flex justify-content-center flex-column" style={{ lineHeight:"12px",}}>
+                              <span style={{ fontSize: "22px", lineHeight:"27px", fontWeight: "bolder",display:"block" }}>14</span>
+                              <span style={{ fontSize: "12px" }}>seats available</span>
                             </div>
                           </div>
                         </Col>
@@ -429,7 +429,7 @@ function BusMonsoon() {
                     <Container>
                       <Row>
                         <Col>
-                          <div className="rajratan-train" style={{ float: "" }} onClick={()=>onClickTrain(item._id)}>
+                          <div className="rajratan-train" style={{ float: "" }} onClick={() => onClickTrain(item._id)}>
                             <div style={{}}>
                               <img src={city1} />
                               <span
@@ -487,7 +487,7 @@ function BusMonsoon() {
                                 whiteSpace: "nowrap",
                               }}
                             >
-                              Volvo Multi-Axle Sleeper A/C (2+1)
+                              Bus 30 Seater
                             </span>
                           </div>
                         </Col>
@@ -523,15 +523,14 @@ function BusMonsoon() {
                                 </div>
                               </Col>
                               <Col xs={12} >
-                                <div className=" train-seatsmobile ">
+                                <div className="train-seatsmobile  d-flex justify-content-center flex-column">
                                   <span
-                                    style={{ fontSize: "12px", fontWeight: "bolder" }}
+                                    style={{ fontSize: "22px", fontWeight: "bolder" }}
                                   >
                                     14
                                   </span>
-                                  <br />
                                   <span
-                                    style={{ fontSize: "12px", fontWeight: "bolder" }}
+                                    style={{ fontSize: "12px" }}
                                   >
                                     seats available
                                   </span>
@@ -550,7 +549,7 @@ function BusMonsoon() {
           </div>
         </div>
       </div>
-      
+
     </>
   );
 }

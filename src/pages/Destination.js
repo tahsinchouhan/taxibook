@@ -54,7 +54,7 @@ function Destination() {
           </div>
         </div>
         <>
-          <h2 class="package__title mb-5">
+          <h2 className="package__title mb-5">
             <span>Destinations</span>{" "}
           </h2>
           <div

@@ -66,10 +66,14 @@
 }
 .check-payment{
     position: absolute;
-width: 1440px;
+/* width: 1440px; */
+width: 100%;
+display: flex;
+justify-content: center;
 height: 86px;
 left: 0px;
 top: 713px;
+bottom: 0;
 
 background: #0FA453;
 }
