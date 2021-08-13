@@ -37,6 +37,12 @@ function TravelTicket() {
     setActiveButton(name);
   };
 
+  const onDmByeClick = () => {
+    console.log("object");
+    // dispatch(setApiData(values))
+    history.push("/dm_congratulate");
+  };
+
   return (
     <>
       <div>
@@ -75,13 +81,17 @@ function TravelTicket() {
             </div>
           </div>
         </Container>
-        <Container style={{width:"50%",marginBottom:"40px"}}>
+        <Container
+          style={{ width: "", marginBottom: "40px"}}>
+            <div style={{display:"flex",justifyContent:"center",alignItems:"centers"}}>
+            <div style={{width:""}}>
+
             <Row>
-                <Col>
-                <div style={{background: "#F8F8F8" ,width:"50%"}}>
-                <div  style={{background: "#F8F8F8",width:"50%"}}>
-                    <h2 style={{textAlign:"center"}}>1</h2>
-                    <span>Vehicles</span><br/>
+                <Col style={{background: "#F8F8F8" ,width:"px", margin:"10px"}}>
+                <div style={{}}>
+                <div  style={{padding:"10px"}}>
+                    <h2 style={{textAlign:"center" ,fontSize:"17px",fontWeight:"700"}}>1</h2>
+                    <span style={{fontSize:"12px" ,fontWeight:"700",color:"gray"}}>Vehicles</span><br/>
                    <div style={{background: "#F8F8F8"}}>
                    <Button
                     style={{
@@ -89,48 +99,55 @@ function TravelTicket() {
                         border: "none",
                         color: "#FF4A68",
                         float: "right",
-                        fontSize: "12px",
-                        float:"left"
+                        fontSize: "11px",
+                        float:"left",
+                        fontWeight:"700"
                       }}
                     >Edit</Button>
                    </div>
                 </div>
                 </div>
-
                 </Col>
-                <Col>
-                <div style={{background: "#F8F8F8"  ,width:"50%"}}>
-                    <h2  style={{textAlign:"center"}}>4</h2>
-                    <span>Vehicles</span><br/>
+                <Col style={{background: "#F8F8F8",margin:"10px"}}>
+                <div style={{background: "#F8F8F8",padding:"10px"}}>
+                    <h2  style={{textAlign:"center" ,fontSize:"17px",fontWeight:"700"}}>4</h2>
+                    <span style={{fontSize:"12px" ,fontWeight:"700",color:"gray"}}>Vehicles</span><br/>
                     <Button
                     style={{
                         backgroundColor: "transparent",
                         border: "none",
                         color: "#FF4A68",
                         float: "right",
-                        fontSize: "12px",
-                        float:"left"
+                        fontSize: "11px",
+                        float:"left",
+                        fontWeight:"700"
                       }}
                     >Edit</Button>
                 </div>
                 </Col>
-                <Col>
-                <div  style={{background: "#F8F8F8" ,width:"50%"}}>
-                    <h2  style={{textAlign:"center"}}>3</h2>
-                    <span>Vehicles</span><br/>
+                <Col style={{background: "#F8F8F8" , margin:"10px"}}>
+                <div  style={{background: "#F8F8F8",padding:"10px"}}>
+                    <h2  style={{textAlign:"center" ,fontSize:"17px",fontWeight:"700"}}>3</h2>
+                    <span style={{fontSize:"12px" ,fontWeight:"700",color:"gray"}}>Vehicles</span><br/>
                     <Button
                     style={{
                         backgroundColor: "transparent",
                         border: "none",
                         color: "#FF4A68",
                         float: "right",
-                        fontSize: "12px",
-                        float:"left"
+                        fontSize: "11px",
+                        float:"left",
+                        fontWeight:"700"
                       }}
                     >Edit</Button>
                 </div>
                 </Col>
             </Row>
+            </div>
+            </div>
+           
+          
+
         </Container>
 
         <Container style={{ width: "" }}>
@@ -253,20 +270,22 @@ function TravelTicket() {
                     </p>
                   </div>
                 </div>
-                <div style={{marginTop:"23px",textAlign:"center"}}>
+                <div style={{ marginTop: "23px", textAlign: "center" }}>
                   <Button
-                  type="submit"
-                  class="btn btn-success"
-                  style={{
-                    width: "55%",
-                    textAlign: "center",
-                    height: "50px",
-                    borderRadius: "9px",
-                    backgroundColor: "#0fa453",
-                    border: "none",
-                    fontWeight:"600"
-                  }}
-                  >Add Vehicle</Button>
+                    type="submit"
+                    class="btn btn-success"
+                    style={{
+                      width: "55%",
+                      textAlign: "center",
+                      height: "50px",
+                      borderRadius: "9px",
+                      backgroundColor: "#0fa453",
+                      border: "none",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Add Vehicle
+                  </Button>
                 </div>
               </div>
             </Col>
@@ -388,44 +407,49 @@ function TravelTicket() {
                     </p>
                   </div>
                 </div>
-                <div style={{marginTop:"23px",textAlign:"center"}}>
+                <div style={{ marginTop: "23px", textAlign: "center" }}>
                   <Button
-                   type="submit"
-                   class="btn btn-success"
-                   style={{
-                     width: "55%",
-                     textAlign: "center",
-                     height: "50px",
-                     borderRadius: "9px",
-                     backgroundColor: "#0fa453",
-                     border: "none",
-                     fontWeight:"600"
-                   }}
-                  >Add Passenger</Button>
+                    type="submit"
+                    class="btn btn-success"
+                    style={{
+                      width: "55%",
+                      textAlign: "center",
+                      height: "50px",
+                      borderRadius: "9px",
+                      backgroundColor: "#0fa453",
+                      border: "none",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Add Passenger
+                  </Button>
                 </div>
               </div>
             </Col>
           </Row>
         </Container>
-        <div style={{height:"100px"}}></div>
-        <div style={{marginTop:"23px",textAlign:"center"}}>
-                  <Button
-                   type="submit"
-                   class="btn btn-success"
-                   style={{
-                     width: "25%",
-                     textAlign: "center",
-                     height: "100px",
-                     borderRadius: "",
-                     backgroundColor: "#0fa453",
-                     border: "none",
-                     fontWeight:"600"
-                   }}
-                  >Back your Pass</Button>
-                </div>
-        
-        <div style={{height:"100px"}}></div>
-        <Footer/>
+        <div style={{ height: "100px" }}></div>
+        <div style={{ marginTop: "23px", textAlign: "center" }}>
+          <Button
+            type="submit"
+            class="btn btn-success"
+            style={{
+              width: "25%",
+              textAlign: "center",
+              height: "100px",
+              borderRadius: "",
+              backgroundColor: "#0fa453",
+              border: "none",
+              fontWeight: "600",
+            }}
+            onClick={onDmByeClick}
+          >
+            Back your Pass
+          </Button>
+        </div>
+
+        <div style={{ height: "100px" }}></div>
+        <Footer />
       </div>
     </>
   );

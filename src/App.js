@@ -27,6 +27,10 @@ import CongratulationPage from './pages/selectbooking/CongratulationPage';
 import RatanCard from './pages/selectbooking/RatanCard';
 import DmTicket2 from './pages/dm pass/dmtickets/DmTicket2';
 import TravelTicket from './pages/dm pass/dmtickets/TravelTicket';
+import DmCongratulate from './pages/dm pass/dmtickets/DmCongratulate';
+import TicketsSraech from './pages/booking/tickets/TicketsSreach';
+import Tickets1 from './pages/booking/tickets/Tickets1';
+import SteperDmpass from './pages/booking/tickets/SteperDmpass';
 // import DmTicket from './pages/dm pass/dmtickets/DmTicket';
 
 function App() {
@@ -63,6 +67,11 @@ function App() {
             <Route exact path='/ratancard'component={RatanCard}/>
             <Route exact path='/dmticket2'component={ DmTicket2}/>
             <Route exact path='/travelticket'component={TravelTicket}/>
+            <Route exact path='/dm_congratulate'component={DmCongratulate}/>
+            <Route exact path='/tickets_sraech'component={TicketsSraech}/>
+            <Route exact path='/tickets1'component={Tickets1}/>
+            <Route exact path='/steper_dmpass'component={SteperDmpass}/>
+
 
 
 

@@ -196,10 +196,7 @@ function BusConfirmation() {
                       fontWeight: "bolder",
                       fontFamily: "sans-serif",
                     }}
-                  >
-                    {/* Raj Ratan Travels, Borivali East,
-                    <br />
-                    Devipada Subway */}
+                  >                   
                     {tripData?.route?.start?.name}
                   </span>
                 </div>

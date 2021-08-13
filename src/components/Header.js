@@ -92,7 +92,7 @@ const  handleLoginClose=()=>{
               <NavLink className="sidebar__navlink" to="/dmpass">
                 DM PASS
               </NavLink>
-              <NavLink className="sidebar__navlink" to="/pricing">
+              <NavLink className="sidebar__navlink" to="/tickets_sraech">
                 TICKETS
               </NavLink>
               <NavLink className="sidebar__navlink" to="/pricing">
@@ -138,7 +138,7 @@ const  handleLoginClose=()=>{
               <NavLink className="sidebar_item" to="/dmpass">
                 DM PASS
               </NavLink>
-              <NavLink className="sidebar_item" to="#">
+              <NavLink className="sidebar_item" to="/tickets_sraech">
                 TICKETS
               </NavLink>
               <NavLink className="sidebar_item" to="#">

@@ -495,7 +495,7 @@ body {
   right: 0;
 }
 
-.mobile {}
+
 
 
 .mobile__input {
@@ -589,7 +589,6 @@ body {
 
 /* Search Field */
 
-.search {}
 
 .search__title {
   color: #fff;
