@@ -1,4 +1,32 @@
 export const GET_DESTINATIONS = "GET_DESTINATIONS";
 export const GET_DESTINATIONS_SUCCESS = "GET_DESTINATIONS_SUCCESS";
 export const GET_DESTINATIONS_ERROR = "GET_DESTINATIONS_ERROR";
+
+export const SET_ROUTE = "SET_ROUTE";
+export const GET_ROUTE = "GET_ROUTE";
+export const GET_ROUTE_SUCCESS = "GET_ROUTE_SUCCESS";
+export const GET_ROUTE_ERROR = "GET_ROUTE_ERROR";
+
+export const GET_TRIP_BY_ROUTE_ID = "GET_TRIP_BY_ROUTE_ID";
+export const GET_TRIP_BY_ROUTE_ID_SUCCESS = "GET_TRIP_BY_ROUTE_ID_SUCCESS";
+export const GET_TRIP_BY_ROUTE_ID_ERROR = "GET_TRIP_BY_ROUTE_ID_ERROR";
+export const SET_DATA = "SET_DATA";
+export const SET_TRIP = "SET_TRIP";
+export const CREATE_BUS_BOOKING='CREATE_BUS_BOOKING';
+export const GET_BUS_BOOKING='GET_BUS_BOOKING';
+export const GET_BUS_BOOKING_SUCCESS='GET_BUS_BOOKING_SUCCESS';
+export const DELETE_BUS_BOOKING='DELETE_BUS_BOOKING';
+export const GET_BUS_BOOKING_BY_ID='GET_BUS_BOOKING_BY_ID';
+export const GET_BUS_BOOKING_BY_ID_SUCCESS='GET_BUS_BOOKING_BY_ID_SUCCESS';
+export const UPDATE_BUS_BOOKING='UPDATE_BUS_BOOKING';
+export const RESET_BUS_BOOKING='RESET_BUS_BOOKING';
+export const SET_BOOKING_ID='SET_BOOKING_ID';
+export const SET_MOBILE='SET_MOBILE';
+
+export const GET_OTP = "GET_OTP";
+export const GET_OTP_SUCCESS = "GET_OTP_SUCCESS";
+export const GET_OTP_ERROR = "GET_OTP_ERROR";
+
 export * from "./auth/actions";
+export * from "./bus/actions";
+export * from "./login/actions";

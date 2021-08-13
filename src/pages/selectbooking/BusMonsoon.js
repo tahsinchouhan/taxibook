@@ -10,8 +10,31 @@ import RatanCard from "./RatanCard";
 
 function BusMonsoon() {
   const history = useHistory();
+  // const [trips, setTrips] = useState([]);
+  const {tripList:trips,route_id} = useSelector(state => state.busReducer)
+  
+  const dispatch = useDispatch()
 
-  const onClickTrain = () => {
+  useEffect(() => {
+    dispatch(setRouteId(route_id))
+    dispatch(getTripByRouteId(route_id))
+  }, [route_id]);
+
+  useEffect(() => {
+    console.log("rd", trips);
+  }, [trips]);
+
+  // const getTrips = () => {
+  //   fetch(API_PATH + `/api/v1/trips/list`)
+  //     .then((response) => response.json())
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setTrips(res.data);
+  //     })
+  //     .catch((e) => console.log(e));
+  // };
+
+  const onClickTrain = (id) => {
     console.log("object");
     history.push("/raipur");
   };
@@ -36,7 +59,7 @@ function BusMonsoon() {
                     fontWeight: "bolder",
                   }}
                 >
-                  Tatibandh, Raipur to Chitrakote{" "}
+                  Tatibandh, Boarding to Chitrakote{" "}
                 </h5>
                 <span style={{ color: "black", fontWeight: "bolder" }}>
                   Change
@@ -111,7 +134,7 @@ function BusMonsoon() {
               </Row>
             </Container>
             <hr />
-            <Container onClick={onClickTrain}>
+            {/* <Container onClick={onClickTrain}>
               <Row>
                 <Col>
                   <div className="rajratan-train" style={{ float: "left" }}>
@@ -228,7 +251,7 @@ function BusMonsoon() {
                   >
                     Tatibandh, Raipur
                     <br />
-                    to Chitrakote{" "}
+                    to Chitrakote
                   </h5>
                 </div>
               </div>
@@ -421,7 +444,7 @@ function BusMonsoon() {
                         </div>
                       </Col>
                     </div>
-                  </Row>                 
+                  </Row>
                 </Col>
               </Row>
             </Container>

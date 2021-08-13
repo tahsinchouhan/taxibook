@@ -1,53 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "../../assets/css/buspass.css";
-import { FaBus, FaCarAlt, FaTicketAlt } from "react-icons/fa";
+// import { FaBus, FaCarAlt, FaTicketAlt } from "react-icons/fa";
 import bus from "../../assets/img/bus.png";
 import calendar from "../../assets/img/calendar.png";
 import { useHistory } from "react-router-dom";
-
-import ButtonComponent from "../../containers/Button";
-import Footer from "../travesaly/Footer";
+import DatePicker from "react-datepicker";
 import Header from "../../components/Header";
+// import Footer from "../travesaly/Footer";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { API_PATH } from "../../Path/Path";
+import { useDispatch } from "react-redux";
+import { getTripByRouteId, setRouteId } from "../../redux/actions";
 
-const button_Data = [
-  {
-    name: "Male",
-    value: "Male",
-  },
-
-  {
-    name: "Female",
-    value: "Female",
-  },
-];
-
-function BusDetail() {
-  const [activeButton, setActiveButton] = useState(button_Data[0].name);
+function BusPass() {
   const history = useHistory();
-  //   const[detail,setDetail]=useState(false);
+  const [routes, setRoutes] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
+  const [selected, setSelected] = useState("");
 
-  const onSideBtnClick = (e) => {
-    const name = e.target.name;
-    setActiveButton(name);
-    // alert("test");
+  const dispatch = useDispatch()
 
-    // const onClickContinue=()=>{
-    //     console.log("object");
-    //     history.push('/busdetail')
-    // }
+  const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
+    <button
+      style={{ border: "none", background: "transparent" }}
+      onClick={onClick}
+      ref={ref}
+    >
+      {value}
+    </button>
+  ));
+
+  useEffect(() => {
+    getRoutes();
+  }, []);
+
+  const getRoutes = () => {
+    fetch(API_PATH + `/api/v1/routes/list`)
+      .then((response) => response.json())
+      .then((res) => {
+        setRoutes(res.data);
+      })
+      .catch((e) => console.log(e));
   };
-const onClickMonsoon=()=>{
-  console.log("object");
-        history.push('/busmonsoon')
-}
 
+  const onSubmit = () => {
+    // dispatch(setRouteId(selected))
+    // dispatch(getTripByRouteId(selected))
+    dispatch(setRouteId(selected))
+    history.push('/busmonsoon')
+    console.log(selected)
+    toast("Wow so easy!");
+  };
 
   return (
-    <>
+    <div>
+      <ToastContainer />
       <Header />
-      <div className="d-none d-md-block">
+      <Container className="d-none d-md-block">
         <div style={{ textAlign: "center", margin: "50px" }}>
           <div style={{ margin: "10px" }}>
             <img src={bus} alt="bus" />
@@ -63,39 +75,39 @@ const onClickMonsoon=()=>{
             <Col xs={12} md={4} className="">
               <Form.Group as={Col} controlId="formGridState">
                 <Form.Label
-                  className="formbus"
+                  className="formselect"
                   style={{
-                    fontSize: "12px",
                     fontWeight: "bolder",
                     marginLeft: "4px",
+                    fontSize: "12px",
                     color: "black",
                   }}
                 >
-                  Enter Mobile no.
+                  Select Route
                 </Form.Label>
-                <Form.Control
-                  type="text"
-                  className="bus_input"
-                  placeholder="Enter the 6 digit OTP"
-                  style={{ height: "50px", fontSize: "12px" }}
-                />
+                <Form.Select
+                  className="location-userdatas"
+                  style={{ border: "none", fontSize: "12px" }}
+                  defaultValue="Choose..."
+                  value={selected}
+                  onChange={(e) => setSelected(e.target.value)}
+                >
+                  <option>Choose your preferred route</option>
+                  {routes.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.routename}
+                    </option>
+                  ))}
+                </Form.Select>
               </Form.Group>
-              <Button
-                style={{
-                  backgroundColor: "transparent",
-                  border: "none",
-                  color: "#FF4A68",
-                  float: "right",
-                  fontSize: "12px",
-                }}
-              >
-                Sent OTP
-              </Button>
             </Col>
             <Col xs={12} md={4} className="">
-              <Form.Group as={Col} controlId="formGridState">
+              <Form.Group
+                // className="location-userdatas"
+                controlId="exampleForm.ControlInput1"
+              >
                 <Form.Label
-                  className="formbus"
+                  className="formselect"
                   style={{
                     fontSize: "12px",
                     fontWeight: "bolder",
@@ -103,107 +115,125 @@ const onClickMonsoon=()=>{
                     color: "black",
                   }}
                 >
-                  Enter OTP
+                  Journey Date
                 </Form.Label>
-
-                <Form.Control
-                  type="text"
-                  className="bus_input"
-                  placeholder="Enter the 6 digit OTP"
-                  style={{ height: "50px", fontSize: "12px" }}
-                />
+                <div
+                  className="location-userdatas"
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    overflow: "hidden",
+                  }}
+                >
+                  <img
+                    className="location-userdatas-calendar"
+                    src={calendar}
+                    style={{ width: 25, height: 30 }}
+                  />
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    customInput={<ExampleCustomInput />}
+                    dateFormat="dd,MMM"
+                  />
+                </div>
               </Form.Group>
             </Col>
           </Row>
         </Container>
         <div className="location-btn">
-          <Button className="locationpass-btn" onClick={onClickMonsoon}>Continue</Button>
+          <Button className="locationpass-btn" onClick={onSubmit}>
+            Continue
+          </Button>
         </div>
-        <Footer />
-      </div>
+      </Container>
 
-      <div fluid className="d-md-none">
+      {/* Mobile View */}
+
+      <div className="d-md-none">
         <div style={{ textAlign: "center", margin: "50px" }}>
           <div style={{ margin: "10px" }}>
             <img src={bus} alt="bus" />
             <h5 style={{ margin: "10px", color: "#FF4A68" }}>Bus</h5>
           </div>
           <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-            Find buses that will take you to <br />
-            your favourite destinations
+            Find buses that will take you to
+            <br /> your favourite destinations
           </span>
         </div>
-        <Container>
+        <Container style={{ width: "100%" }}>
           <Row className="row justify-content-center">
-            <Col xs={12} md={4} className="" style={{ width: "100%" }}>
-              <Form.Group
-                className="formbus"
-                style={{ fontWeight: "bolder" }}
-                controlId="exampleForm.ControlInput1"
-              >
+            <Col xs={12} md={4} className="">
+              <Form.Group as={Col} controlId="formGridState">
                 <Form.Label
                   className="formselect"
                   style={{
-                    fontSize: "12px",
                     fontWeight: "bolder",
                     marginLeft: "4px",
+                    fontSize: "12px",
                     color: "black",
                   }}
                 >
-                  Enter Mobile no.
+                  Select Route
                 </Form.Label>
-                <Form.Control
-                  type="text"
-                  className="bus_input"
-                  placeholder="Enter the 6 digit OTP"
-                  style={{ fontSize: "12px" }}
-                />
-                <Button
-                  style={{
-                    marginTop: "0px",
-                    color: "#FF4A68",
-                    backgroundColor: "transparent",
-                    border: "none",
-                    float: "right",
-                    fontSize: "12px",
-                  }}
+                <Form.Select
+                  className="location-userdatas"
+                  style={{ border: "none", fontSize: "12px" }}
+                  defaultValue="Choose..."
+                  value={selected}
+                  onChange={(e) => setSelected(e.target.value)}
                 >
-                  Sent OTP
-                </Button>
+                  <option>Choose your preferred route</option>
+                  {routes.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.routename}
+                    </option>
+                  ))}
+                </Form.Select>
               </Form.Group>
             </Col>
-            <Col xs={12} md={4} className="" style={{ width: "100%" }}>
-              <Form.Group
-                className="formbus"
-                style={{ fontWeight: "bolder" }}
-                controlId="exampleForm.ControlInput1"
-              >
+            <Col xs={12} md={4} className="">
+              <Form.Group controlId="exampleForm.ControlInput1">
                 <Form.Label
                   className="formselect"
                   style={{
-                    fontSize: "12px",
                     fontWeight: "bolder",
                     marginLeft: "4px",
+                    fontSize: "12px",
                     color: "black",
                   }}
                 >
-                  Enter OTP
+                  Journey Date
                 </Form.Label>
-                <Form.Control
-                  type="text"
-                  className="bus_input"
-                  placeholder="Enter OTP"
-                  style={{ fontSize: "12px" }}
-                />
+                <div
+                  className="location-userdatas"
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    overflow: "hidden",
+                  }}
+                >
+                  <img
+                    className="location-userdatas-calendar"
+                    src={calendar}
+                    style={{ width: 25, height: 30 }}
+                  />
+                  <DatePicker
+                    selected={startDate}
+                    onChange={(date) => setStartDate(date)}
+                    customInput={<ExampleCustomInput />}
+                    dateFormat="dd,MMM"
+                  />
+                </div>
               </Form.Group>
             </Col>
           </Row>
         </Container>
-        <Button className="locationpass-btn" onClick={onClickMonsoon}>Continue</Button>
+        <Button className="locationpass-btn" onClick={onSubmit}>
+          Continue
+        </Button>
       </div>
-      
-    </>
+    </div>
   );
 }
-
-export default BusDetail;
+export default BusPass;

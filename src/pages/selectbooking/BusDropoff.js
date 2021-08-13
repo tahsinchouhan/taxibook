@@ -8,7 +8,7 @@ import Footer from "../travesaly/Footer";
 function BusDropoff() {
   const history = useHistory();
 
-  const onClickRaipur = () => {
+  const onClickBoarding = () => {
     console.log("object");
     history.push("/busmonsoon");
   };
@@ -378,7 +378,7 @@ function BusDropoff() {
               marginLeft: "35px",
             }}
           >
-            <FaArrowLeft onClick={onClickRaipur}/>
+            <FaArrowLeft onClick={onClickBoarding}/>
           </div>
           <div>
             <h5
