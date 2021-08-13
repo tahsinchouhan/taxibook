@@ -94,7 +94,7 @@ function DmPass() {
             <form>
               <div className="form-row"></div>
               <div className="form-group mt-4">
-                <label for="inputAddress">Mobile Number</label>
+                <label htmlFor ="inputAddress">Mobile Number</label>
                 <input
                   type="text"
                   className="form-control pass_input"
@@ -104,7 +104,7 @@ function DmPass() {
               </div>
               <div className="form-row">
                 <div className="form-group mt-4 ">
-                  <label for="inputState">Number of Travellers</label>
+                  <label htmlFor ="inputState">Number of Travellers</label>
                   <select id="inputState" className="form-control pass_input">
                     <option selected>1</option>
                     <option value="2">2</option>
@@ -115,7 +115,7 @@ function DmPass() {
                   </select>
                 </div>
                 <div className="form-group mt-4 ">
-                  <label for="inputState">Days of Travel</label>
+                  <label htmlFor ="inputState">Days of Travel</label>
                   <select id="inputState" className="form-control pass_input">
                     <option selected>1</option>
                     <option value="2">2</option>
@@ -126,7 +126,7 @@ function DmPass() {
                   </select>
                 </div>
                 <div className="form-group mt-4 ">
-                  <label for="inputState">Number of Vehicles</label>
+                  <label htmlFor ="inputState">Number of Vehicles</label>
                   <select id="inputState" className="form-control pass_input">
                     <option selected>1</option>
                     <option value="2">2</option>
@@ -138,7 +138,7 @@ function DmPass() {
                 </div>
               </div>
               <div className="traveller-detail">
-                <label for="inputAddress" style={{ paddingTop: "30px" }}>
+                <label htmlFor ="inputAddress" style={{ paddingTop: "30px" }}>
                   Vehicle Details
                 </label>
                 <div className="card w-100">
@@ -146,7 +146,7 @@ function DmPass() {
                     <h5 className="card-title">Vehicle 1</h5>
                     <p className="card-text">
                       <div className="form-group mt-4">
-                        <label for="inputAddress">Name</label>
+                        <label htmlFor ="inputAddress">Name</label>
                         <input
                           type="text"
                           className="form-control pass_input"
@@ -158,7 +158,7 @@ function DmPass() {
 
                       <div className="form-row genderform pt-3 d-flex ">
                         <div className="col m-2 w-50">
-                          <label for="inputAddress">Gender</label>
+                          <label htmlFor ="inputAddress">Gender</label>
                           <div className="d-flex pt-2">
                             <ButtonComponent
                               style={{
@@ -173,7 +173,7 @@ function DmPass() {
                           </div>
                         </div>
                         <div className="col m-2 w-50">
-                          <label for="inputAddress">Age</label>
+                          <label htmlFor ="inputAddress">Age</label>
                           <br />
                           <input
                             type="text"
@@ -189,7 +189,7 @@ function DmPass() {
                       </div>
 
                       <div className="form-group mt-4 pt-2">
-                        <label for="inputAddress">Aadhar Card Number </label>
+                        <label htmlFor ="inputAddress">Aadhar Card Number </label>
                         <input
                           type="text"
                           className="form-control pass_input"
@@ -210,7 +210,7 @@ function DmPass() {
               </div>
               {/*traveller Detail*/}
               <div className="traveller-detail">
-                <label for="inputAddress" style={{ paddingTop: "30px" }}>
+                <label htmlFor ="inputAddress" style={{ paddingTop: "30px" }}>
                   Traveller Details
                 </label>
                 <div className="card w-100">
@@ -218,7 +218,7 @@ function DmPass() {
                     <h5 className="card-title">Traveller 1</h5>
                     <p className="card-text">
                       <div className="form-group mt-4">
-                        <label for="inputAddress">Name</label>
+                        <label htmlFor ="inputAddress">Name</label>
                         <input
                           type="text"
                           className="form-control pass_input"
@@ -230,7 +230,7 @@ function DmPass() {
 
                       <div className="form-row genderform pt-3 d-flex ">
                         <div className="col m-2 w-50">
-                          <label for="inputAddress">Gender</label>
+                          <label htmlFor ="inputAddress">Gender</label>
                           <div className="d-flex pt-2">
                             <ButtonComponent
                               style={{
@@ -245,7 +245,7 @@ function DmPass() {
                           </div>
                         </div>
                         <div className="col m-2 w-50">
-                          <label for="inputAddress">Age</label>
+                          <label htmlFor ="inputAddress">Age</label>
                           <br />
                           <input
                             type="text"
@@ -261,7 +261,7 @@ function DmPass() {
                       </div>
 
                       <div className="form-group mt-4 pt-2">
-                        <label for="inputAddress">Aadhar Card Number </label>
+                        <label htmlFor ="inputAddress">Aadhar Card Number </label>
                         <input
                           type="text"
                           className="form-control pass_input"
@@ -306,33 +306,33 @@ function DmPass() {
         </div>
 
         {/* <!-- Horizontal Steppers --> */}
-        <div class="row">
-          <div class="col-md-12">
+        <div className = "row">
+          <div className = "col-md-12">
             {/* <!-- Stepers Wrapper --> */}
-            <ul class="stepper stepper-horizontal">
+            <ul className = "stepper stepper-horizontal">
               {/* <!-- First Step --> */}
-              <li class="completed">
+              <li className = "completed">
                 <a href="#!">
-                  <span class="circle">1</span>
-                  <span class="label">First step</span>
+                  <span className = "circle">1</span>
+                  <span className = "label">First step</span>
                 </a>
               </li>
 
               {/* <!-- Second Step --> */}
-              <li class="active">
+              <li className = "active">
                 <a href="#!">
-                  <span class="circle">2</span>
-                  <span class="label">Second step</span>
+                  <span className = "circle">2</span>
+                  <span className = "label">Second step</span>
                 </a>
               </li>
 
               {/* <-- Third Step --> */}
-              <li class="warning">
+              <li className = "warning">
                 <a href="#!">
-                  <span class="circle">
-                    <i class="fas fa-exclamation"></i>
+                  <span className = "circle">
+                    <i className = "fas fa-exclamation"></i>
                   </span>
-                  <span class="label">Third step</span>
+                  <span className = "label">Third step</span>
                 </a>
               </li>
             </ul>

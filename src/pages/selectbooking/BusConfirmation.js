@@ -304,7 +304,7 @@ function BusConfirmation() {
                     {/* <h5 className="card-title">Passengers 1</h5> */}
                     {/* <p className="card-text"> */}
                     <div className="form-group mt-0">
-                      <label for="inputAddress">Name</label>
+                      <label htmlFor ="inputAddress">Name</label>
                       <input
                         type="text"
                         className="form-control pass_input"
@@ -317,7 +317,7 @@ function BusConfirmation() {
 
                     <div className="form-row genderform pt-3 d-flex ">
                       <div className="col m-2 w-50">
-                        <label for="inputAddress">Gender</label>
+                        <label htmlFor ="inputAddress">Gender</label>
                         <div className="d-flex pt-2">
                           <ButtonComponent
                             style={{
@@ -332,7 +332,7 @@ function BusConfirmation() {
                         </div>
                       </div>
                       <div className="col m-2 w-50">
-                        <label for="inputAddress">Age</label>
+                        <label htmlFor ="inputAddress">Age</label>
                         <br />
                         <input
                           type="text"
@@ -352,7 +352,7 @@ function BusConfirmation() {
                     </div>
 
                     <div className="form-group mt-1 pt-2">
-                      <label for="inputAddress">
+                      <label htmlFor ="inputAddress">
                         Aadhar Card Number{" "}
                       </label>
                       <input

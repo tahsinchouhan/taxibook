@@ -52,7 +52,7 @@ function Packages() {
             </form>
           </div>
         </div>
-        <h2 class="package__title mb-5">
+        <h2 className = "package__title mb-5">
           <span>Packages</span>
         </h2>
         <>

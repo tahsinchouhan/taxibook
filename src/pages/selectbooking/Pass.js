@@ -97,7 +97,7 @@ function Pass() {
           <form>
             <div className="form-row"></div>
             <div className="form-group">
-              <label for="inputAddress">Mobile Number</label>
+              <label htmlFor ="inputAddress">Mobile Number</label>
               <input
                 type="text"
                 className="form-control pass_input"
@@ -107,7 +107,7 @@ function Pass() {
             </div>
             <div className="form-row">
               <div className="form-group ">
-                <label for="inputState">Number of Travellers</label>
+                <label htmlFor ="inputState">Number of Travellers</label>
                 <select id="inputState" className="form-control pass_input">
                   <option selected>1</option>
                   <option value="2">2</option>
@@ -118,7 +118,7 @@ function Pass() {
                 </select>
               </div>
               <div className="form-group ">
-                <label for="inputState">Days of Travel</label>
+                <label htmlFor ="inputState">Days of Travel</label>
                 <select id="inputState" className="form-control pass_input">
                   <option selected>1</option>
                   <option value="2">2</option>
@@ -130,13 +130,13 @@ function Pass() {
               </div>
             </div>
             <div className="traveller-detail">
-              <label for="inputAddress">Traveller Details</label>
+              <label htmlFor ="inputAddress">Traveller Details</label>
               <div className="card w-100">
                 <div className="card-body">
                   <h5 className="card-title">Traveller 1</h5>
                   <p className="card-text">
                     <div className="form-group">
-                      <label for="inputAddress">Name</label>
+                      <label htmlFor ="inputAddress">Name</label>
                       <input
                         type="text"
                         className="form-control pass_input"
@@ -148,7 +148,7 @@ function Pass() {
 
                     <div className="form-row genderform pt-3 d-flex ">
                       <div className="col m-2 w-50">
-                        <label for="inputAddress">Gender</label>
+                        <label htmlFor ="inputAddress">Gender</label>
                         <div className="d-flex pt-2">
                           <ButtonComponent
                             style={{
@@ -163,7 +163,7 @@ function Pass() {
                         </div>
                       </div>
                       <div className="col m-2 w-50">
-                        <label for="inputAddress">Age</label>
+                        <label htmlFor ="inputAddress">Age</label>
                         <br />
                         <input
                           type="text"
@@ -179,7 +179,7 @@ function Pass() {
                     </div>
 
                     <div className="form-group pt-2">
-                      <label for="inputAddress">Aadhar Card Number </label>
+                      <label htmlFor ="inputAddress">Aadhar Card Number </label>
                       <input
                         type="text"
                         className="form-control pass_input"

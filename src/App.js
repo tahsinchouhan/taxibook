@@ -24,6 +24,7 @@ import BusConfirmation from './pages/selectbooking/BusConfirmation';
 import BusCard from './pages/selectbooking/BusCard';
 import CheckoutPage from './pages/selectbooking/CheckoutPage';
 import CongratulationPage from './pages/selectbooking/CongratulationPage';
+import AddForm from './pages/VenderOrgAdd/AddForm';
 
 function App() {
 
@@ -55,7 +56,8 @@ function App() {
             <Route exact path='/busconfirmation' component={BusConfirmation}/>
             <Route exact path='/ buscard' component={BusCard}/>
             <Route exact path='/checkoutpage' component={CheckoutPage}/>
-            <Route exact path='/CongratulationPage'component={CongratulationPage}/>
+            <Route exact path='/CongratulationPage' component={CongratulationPage}/>
+            <Route exact path='/add-form' component={AddForm}/>
           </Switch>
         </div>
       </Router>
