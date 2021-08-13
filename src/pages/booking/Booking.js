@@ -158,7 +158,7 @@ function Booking() {
                 <div className="text-center">
                   <Button
                     type="submit"
-                    class="btn btn-success"
+                    className = "btn btn-success"
                     style={{
                       width: "19%",
                       textAlign: "center",
@@ -299,7 +299,7 @@ function Booking() {
                 <div className="text-center" style={{ marginTop: "50px" }}>
                   <Button
                     type="submit"
-                    class="btn btn-success"
+                    className = "btn btn-success"
                     style={{
                       marginTop: "30px",
                       width: "60%",
