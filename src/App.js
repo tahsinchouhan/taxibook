@@ -28,6 +28,7 @@ import AddForm from './pages/VenderOrgAdd/AddForm';
 import RatanCard from './pages/selectbooking/RatanCard';
 import DmTicket2 from './pages/dm pass/dmtickets/DmTicket2';
 import TravelTicket from './pages/dm pass/dmtickets/TravelTicket';
+import DmDetail from './pages/dm pass/dmtickets/DmDetail';
 import DmCongratulate from './pages/dm pass/dmtickets/DmCongratulate';
 import TicketsSraech from './pages/booking/tickets/TicketsSreach';
 import Tickets1 from './pages/booking/tickets/Tickets1';
@@ -51,7 +52,12 @@ function App() {
             <Route exact path='/populardestinations' component={Destination} />
             <Route exact path='/curatedexperiences' component={Packages} />
             <Route exact path='/select-booking' component={SelectBooking} />
-            <Route exact path='/dmpass' component={DmPass} />
+
+            {/* <Route exact path='/dmpass' component={DmPass} />
+            <Route exact path='/dmticket2'component={ DmTicket2}/> */}
+            <Route exact path='/dmpass' component={DmTicket2} />
+            <Route exact path='/dmticket'component={DmPass}/>
+
             <Route exact path='/pass' component={Pass} />
             <Route exact path='/buspass' component={BusPass} />
             <Route exact path='/buspass' component={BusDetail} />
@@ -68,8 +74,8 @@ function App() {
             <Route exact path='/add-form' component={AddForm}/>
             <Route exact path='/CongratulationPage'component={CongratulationPage}/>
             <Route exact path='/ratancard'component={RatanCard}/>
-            <Route exact path='/dmticket2'component={ DmTicket2}/>
             <Route exact path='/travelticket'component={TravelTicket}/>
+            <Route exact path='/dm-detail'component={DmDetail}/>
             <Route exact path='/dm_congratulate'component={DmCongratulate}/>
             <Route exact path='/tickets_sraech'component={TicketsSraech}/>
             <Route exact path='/tickets1'component={Tickets1}/>

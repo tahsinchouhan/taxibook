@@ -67,7 +67,7 @@ function BusConfirmation() {
 
   const onCheckout = () => {
     console.log("object");
-    dispatch(setApiData(values))
+    dispatch(setApiData({ ...values, basic_details: travellers }))
     history.push("/checkoutpage");
   };
 
@@ -93,7 +93,7 @@ function BusConfirmation() {
     gender: '',
     basic_details: [],
   })
-  const [basePrice, setBasePrice] = useState(tripData?.ticket_price)
+  const [basePrice, setBasePrice] = useState(tripData?.ticket_price || 0)
 
   const [travellers, setTravellers] = useState([])
 
@@ -103,12 +103,30 @@ function BusConfirmation() {
     setValues({ ...values, [e.target.name]: e.target.value, gender: activeButton })
     console.log(e.target, 'val', values);
   }
+  const handleTraveller = (val, lbl, i) => {
+    setTravellers([...travellers].map((obj, key) => {
+      if (key === i) {
+        return {
+          ...obj,
+          [lbl]: val
+        }
+      } else {
+        return obj
+      }
+
+    }))
+  }
 
   const handleOk = () => {
     console.log('ok');
     setValues({ ...values, basic_details: [...basic_details, { name, age, gender, aadhar }], name: "", age: '', gender: '', aadhar: '' })
     setShow(false);
   };
+
+  useEffect(() => {
+    setValues({ ...values, price: (basePrice * travellers.length) })
+    // console.log(tripData,price,"enosdkl",travellers);
+  }, [travellers])
 
   useEffect(() => {
     // setValues({ ...values, price: (BASE_PRICE * basic_details.length)  })
@@ -199,7 +217,7 @@ function BusConfirmation() {
                       fontWeight: "bolder",
                       fontFamily: "sans-serif",
                     }}
-                  >                   
+                  >
                     {tripData?.route?.start?.name}
                   </span>
                 </div>
@@ -286,25 +304,25 @@ function BusConfirmation() {
             <div className="traveller_div">
               {
                 travellers?.map((item, i) => (
-                  <Paper className="traveller__card">
+                  <Paper key={i} className="traveller__card">
                     <div className="traveller__card_body" className="py-0">
-                      <h5 className="traveller__card_title">Travellers 1</h5>
+                      <h5 className="traveller__card_title" style={{fontSize:"12px"}}>Travellers {i + 1}</h5>
                       <p className="traveller__card_text">
                         <div className="form-group mt-0">
-                          <label for="inputAddress">Name</label>
+                          <label className="mb-1" for={`name${i}`}>Name</label>
                           <input
                             type="text"
                             className="form-control pass_input"
-                            id="inputAddress"
+                            id={`name${i}`}
                             placeholder="Enter passenger name"
                             style={{ fontSize: "11px", marginLeft: "-5px" }}
-                            name="name" onChange={handleChange} value={name}
+                            name="name" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].name}
                           />
                         </div>
 
                         <div className="form-row genderform pt-3 d-flex ">
                           <div className="col m-2 w-50">
-                            <label for="inputAddress">Gender</label>
+                            <label className="mb-1" for={`gender${i}`}>Gender</label>
                             <div className="d-flex pt-2">
                               <ButtonComponent
                                 style={{
@@ -318,13 +336,13 @@ function BusConfirmation() {
                               />
                             </div>
                           </div>
-                          <div className="col m-2 w-50">
-                            <label for="inputAddress">Age</label>
-                            <br />
+                          <div className="form-group col m-2 w-50">
+                            <label className="mb-1" for={`age${i}`}>Age</label>
                             <input
                               type="text"
                               className="form-control pass_input w-70 pt-2"
                               placeholder="Enter Age"
+                              id={`age${i}`}
                               style={{
                                 width: "110px",
                                 marginLeft: "-5px",
@@ -332,22 +350,24 @@ function BusConfirmation() {
                                 whiteSpace: "nowrap",
                                 height: "33px",
                               }}
-                              name="age" onChange={handleChange} value={age}
+                              // name="age" onChange={handleChange} value={age}
+                              name="age" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].age}
                             />
                           </div>
                         </div>
 
                         <div className="form-group mt-1 pt-2">
-                          <label for="inputAddress">
+                          <label className="mb-1" for={`aadhaar${i}`}>
                             Aadhar Card Number{" "}
                           </label>
                           <input
                             type="text"
                             className="form-control pass_input"
-                            id="inputAddress"
+                            id={`aadhar${i}`}
                             placeholder=" Enter 12 digit Aadhar Card Number"
                             style={{ fontSize: "11px", marginLeft: "-5px" }}
-                            name="aadhar" onChange={handleChange} value={aadhar}
+                            // name="aadhar" onChange={handleChange} value={aadhar}
+                            name="aadhar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].aadhar}
                           />
                         </div>
                       </p>
@@ -507,7 +527,7 @@ function BusConfirmation() {
                 </Row>
                 : null
             }
-            <div style={{ textAlign: "center", margin: "55px" }}>
+            {/* <div style={{ textAlign: "center", margin: "55px" }}>
               <Button
                 style={{
                   backgroundColor: "#0FA453",
@@ -522,7 +542,7 @@ function BusConfirmation() {
               >
                 Add Traveller
               </Button>
-            </div>
+            </div> */}
           </div>
         </Container>
         <div>
@@ -872,7 +892,7 @@ function BusConfirmation() {
           </Row> */}
         </Container>
 
-        {
+        {/* {
           (basic_details?.length > 0) ?
 
             <Row>
@@ -911,7 +931,83 @@ function BusConfirmation() {
               )}
             </Row>
             : null
-        }
+        } */}
+
+        <div className="traveller_div">
+          {
+            travellers?.map((item, i) => (
+              <Paper key={i} className="traveller__card">
+                <div className="traveller__card_body" className="py-0">
+                  <h5 className="traveller__card_title" style={{fontSize:"12px"}}>Travellers {i + 1}</h5>
+                  <p className="traveller__card_text">
+                    <div className="form-group mt-0">
+                      <label className="mb-1" for={`name${i}`}>Name</label>
+                      <input
+                        type="text"
+                        className="form-control pass_input"
+                        id={`name${i}`}
+                        placeholder="Enter passenger name"
+                        style={{ fontSize: "11px", marginLeft: "-5px" }}
+                        name="name" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].name}
+                      />
+                    </div>
+
+                    <div className="form-row genderform pt-3 d-flex ">
+                      <div className="col m-2 w-50">
+                        <label className="mb-1" for={`gender${i}`}>Gender</label>
+                        <div className="d-flex pt-2">
+                          <ButtonComponent
+                            style={{
+                              width: "50%",
+                              fontSize: "11px",
+                              whiteSpace: "nowrap",
+                            }}
+                            data={button_Data}
+                            activeButton={activeButton}
+                            trigerOnClickEmpSideBtn={onSideBtnClick}
+                          />
+                        </div>
+                      </div>
+                      <div className="form-group col m-2 w-50">
+                        <label className="mb-1" for={`age${i}`}>Age</label>
+                        <input
+                          type="text"
+                          className="form-control pass_input w-70 pt-2"
+                          placeholder="Enter Age"
+                          id={`age${i}`}
+                          style={{
+                            width: "110px",
+                            marginLeft: "-5px",
+                            fontSize: "12px",
+                            whiteSpace: "nowrap",
+                            height: "33px",
+                          }}
+                          // name="age" onChange={handleChange} value={age}
+                          name="age" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].age}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="form-group mt-1 pt-2">
+                      <label className="mb-1" for={`aadhaar${i}`}>
+                        Aadhar Card Number{" "}
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control pass_input"
+                        id={`aadhar${i}`}
+                        placeholder=" Enter 12 digit Aadhar Card Number"
+                        style={{ fontSize: "11px", marginLeft: "-5px" }}
+                        // name="aadhar" onChange={handleChange} value={aadhar}
+                        name="aadhar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].aadhar}
+                      />
+                    </div>
+                  </p>
+                </div>
+              </Paper>
+            ))
+          }
+        </div>
         <div style={{ textAlign: "center" }}>
           <Button
             style={{
@@ -922,8 +1018,14 @@ function BusConfirmation() {
               border: "none",
               borderRadius: "15px",
             }}
-            onClick={handleShow}
-          // onClick={handleClick("top-start")}
+            // onClick={handleShow}
+            // onClick={handleClick("top-start")}
+            onClick={() => setTravellers([...travellers, {
+              name: '',
+              gender: '',
+              age: '',
+              aadhar: '',
+            }])}
           >
             Add Traveller
           </Button>

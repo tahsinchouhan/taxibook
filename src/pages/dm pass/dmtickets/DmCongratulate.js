@@ -6,12 +6,16 @@ import Footer from "../../travesaly/Footer";
 import { useHistory } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import mobile from "../../../assets/img/mobile.png";
+import { useDispatch, useSelector } from "react-redux";
 
 function DmCongratulate() {
   // const { data: apiData, tripData,booking_id } = useSelector(state => state.busReducer)
   // const goHome = () => {
   //   history.push("/");
   // };
+  const dispatch = useDispatch()
+  const { dmData } = useSelector(state => state.dmpassReducer)
+  const { dmpass_id} = dmData
   return (
     <>
       <div>
@@ -32,7 +36,7 @@ function DmCongratulate() {
                   </span>
 
                   <h3 style={{ fontWeight: "bolder" }}>Order ID</h3>
-                  <span style={{ color: "black", marginBottom: "50px" }}></span>
+                  <span style={{ color: "black", marginBottom: "50px" }}>{dmpass_id}</span>
                 </div>
                 <div>
                   <div>

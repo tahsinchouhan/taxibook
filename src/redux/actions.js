@@ -35,7 +35,13 @@ export const GET_OTP = "GET_OTP";
 export const GET_OTP_SUCCESS = "GET_OTP_SUCCESS";
 export const GET_OTP_ERROR = "GET_OTP_ERROR";
 
+//dmpass
+export const SET_DM_DATA = "SET_DM_DATA";
+export const CREATE_DM_PASS = "CREATE_DM_PASS";
+export const SET_DM_PASS_ID = "SET_DM_PASS_ID";
+
 export * from "./common/actions";
 export * from "./auth/actions";
 export * from "./bus/actions";
 export * from "./login/actions";
+export * from "./dmpass/actions";

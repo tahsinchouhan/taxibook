@@ -6,12 +6,19 @@ import { useHistory } from "react-router-dom";
 import ticket from "../../../assets/img/ticket.png";
 import Header from "../../../components/Header";
 
+import { useDispatch, useSelector } from "react-redux";
+import { setDmData } from "../../../redux/actions";
+
 function DmTicket2() {
     const history = useHistory();
 
+    const dispatch = useDispatch()
+    const { dmData } = useSelector(state => state.dmpassReducer)
+    const { mobile } = dmData
   const onDmTicketSecondShow = () => {
     console.log("hii");
-    history.push('/travelticket')
+    history.push('/dmticket')
+    // history.push('/travelticket')
   };
   return (
     <>
@@ -65,6 +72,8 @@ function DmTicket2() {
                         type="text"
                         className="dm-inputticket"
                         placeholder=" Vehicles..."
+                        name="mobile"
+                        value={mobile} onChange={(e)=>dispatch(setDmData("mobile",e.target.value))}
                       />
                     </div>
                     <Button

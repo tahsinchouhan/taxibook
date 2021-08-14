@@ -12,10 +12,12 @@ import Footer from "../travesaly/Footer";
 import Header from "../../components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { getOtp, setMobile } from "../../redux/actions";
+import { API_PATH } from "../../Path/Path";
+import axios from "axios";
 
 function BusDetail() {
   const history = useHistory();
-  //   const[detail,setDetail]=useState(false);
+    const[otp,setOtp]=useState('');
   const { mobile } = useSelector(state => state.busReducer)
 
   const dispatch = useDispatch()
@@ -30,7 +32,14 @@ function BusDetail() {
   }
   const onClickMonsoon = () => {
     console.log("object");
-    history.push('/busdetail')
+    axios.post(`${API_PATH}/api/v1/customer/verifyotp`, {
+          mobile,
+          registrationMobileOTP:otp
+      })
+        .then((response) => response)
+        .then((json) => json);
+    
+    // history.push('/busdetail')
     // history.push('/busmonsoon')
   }
   return (
@@ -187,6 +196,7 @@ function BusDetail() {
                   className="bus_input"
                   placeholder="Enter OTP"
                   style={{ fontSize: "12px" }}
+                  value={otp} onChange={(e)=>setOtp(e.target.value)}
                 />
               </Form.Group>
             </Col>
