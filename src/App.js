@@ -33,6 +33,7 @@ import DmCongratulate from './pages/dm pass/dmtickets/DmCongratulate';
 import TicketsSraech from './pages/booking/tickets/TicketsSreach';
 import Tickets1 from './pages/booking/tickets/Tickets1';
 import SteperDmpass from './pages/booking/tickets/SteperDmpass';
+import TicketCheckOut from './pages/booking/tickets/TicketCheckOut';
 // import DmTicket from './pages/dm pass/dmtickets/DmTicket';
 
 function App() {
@@ -80,6 +81,8 @@ function App() {
             <Route exact path='/tickets_sraech'component={TicketsSraech}/>
             <Route exact path='/tickets1'component={Tickets1}/>
             <Route exact path='/steper_dmpass'component={SteperDmpass}/>
+            <Route exact path='/ ticket_checkout'component={ TicketCheckOut}/>
+
 
 
 

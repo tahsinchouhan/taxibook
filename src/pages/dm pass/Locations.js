@@ -15,7 +15,7 @@ const button_Data = [
 ];
 
 function Locations() {
-  const [show, setShow] = useState(0);
+  const [show, setShow] = useState(1);
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
   const [data, setData] = useState();
 
@@ -26,13 +26,13 @@ function Locations() {
 
   const onLocationsClick = () => {
     console.log("object");
-    setShow(1);
+    setShow(2);
     // history.push("/locations");
   };
 
   return (
     <>
-      {show == 0 ? (
+      {show == 1 ? (
         <div>
           <Container className="dmpass-form mt-2">
             <Row className="dmpassData">

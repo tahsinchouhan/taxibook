@@ -1,7 +1,15 @@
 import React from "react";
 import { Container, Row, Button, Form, Col, Card } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 
 function TicketsConfirm() {
+  const history=useHistory();
+
+  const onTicketCheckClick = () => {
+    console.log("object");
+    history.push('./ ticket_checkout')
+    // setShow(1)
+  };
   return (
     <>
       {/* <div>
@@ -143,7 +151,7 @@ function TicketsConfirm() {
           </div>
         </Container>
       </div>
-      <Button className="locationpass-btn" >Save Continue</Button>
+      <Button className="locationpass-btn" onClick={onTicketCheckClick}>Save Continue</Button>
     </>
   );
 }
