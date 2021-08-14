@@ -1,0 +1,18 @@
+.confirm-title{
+    font-size: 15px;
+    font-weight: 700;
+    color: black;
+}
+.confirm_div{
+    width: 70%;
+    margin: auto;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.confirm_part{
+    white-space: nowrap;
+    font-size: 12px;
+}
+.confirm-main{
+    text-align: center;
+}
