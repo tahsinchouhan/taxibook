@@ -1,71 +1,66 @@
-.monsoon-div{
-    background: #F1F1F1;
-border: 1px dashed #0FA453;
-box-sizing: border-box;
-border-radius: 10px;
+.monsoon-div {
+  background: #f1f1f1;
+  border: 1px dashed #0fa453;
+  box-sizing: border-box;
+  border-radius: 10px;
 }
-.location-userdatas{
-    color: grey;
-    font-size: 19px;
-    background-color: #F8F8F8;
-    margin: 0 0 20px 0;
-    padding:10px 20px;
-    border-radius: 10px;
-    /* width: 270px; */
-height:50.67px;
-  }
+.location-userdatas {
+  color: grey;
+  font-size: 19px;
+  background-color: #f8f8f8;
+  margin: 0 0 20px 0;
+  padding: 10px 20px;
+  border-radius: 10px;
+  /* width: 270px; */
+  height: 50.67px;
+}
 
-
-.user_input1{
-/* width: 270px;
+.user_input1 {
+  /* width: 270px;
 height: 46.67px; */
   outline: none !important;
-  background-color: #F8F8F8;;
+  background-color: #f8f8f8;
   outline-width: 0;
   border-radius: 6px;
   /* margin-left: 4px; */
   padding-top: 0;
   border: none;
-
 }
-.location-btn{
-    text-align: center;
-    /* margin: 30px; */
+.location-btn {
+  text-align: center;
+  /* margin: 30px; */
 }
-.locationpass-btn{
-    color: white;
-    background-color: #0FA453;
-    border-color: #0FA453;
-    font-weight: bold;
-    width: 18%;
-    height: 49px;
-    border-radius: 11px;
-    margin: 20px 0 100px;
+.locationpass-btn {
+  margin: auto;
+  color: white;
+  background-color: #0fa453;
+  border-color: #0fa453;
+  font-weight: bold;
+  width: 18%;
+  height: 49px;
+  border-radius: 11px;
+  margin: 10% 40% 5%;
 }
 /* .locationpass-btn:hover{
     color: white;
     background-color: #0FA453;
 } */
 
-.formbus{
-    color: grey;
+.formbus {
+  color: grey;
   font-size: 19px;
   /* background-color: #9b98981c; */
   /* margin: 0 0 20px 0; */
-  padding:10px 20px;
+  padding: 10px 20px;
   /* border-radius: 10px; */
 }
-.bus_input{
+.bus_input {
   height: 50px;
-    outline: none !important;
-    background-color: #F8F8F8;
-    outline-width: 0;
-    /* border-radius: 6px; */
-    /* margin-left: 4px; */
-    padding-top: 0;
-    border: none;
+  outline: none !important;
+  background-color: #f8f8f8;
+  outline-width: 0;
+  /* border-radius: 6px; */
+  /* margin-left: 4px; */
+  padding-top: 0;
+  border: none;
 }
-
-
-
-

@@ -22,8 +22,9 @@ const button_Data = [
 function SteperDmpass() {
   const [show, setShow] = useState(0);
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
-  const [data, setData] = useState();
-  const history = useHistory();
+  // const [data, setData] = useState();
+  // const history = useHistory();
+
   const onSideBtnClick = (e) => {
     const name = e.target.name;
     setActiveButton(name);
@@ -32,7 +33,6 @@ function SteperDmpass() {
   const onLocationsClick = () => {
     console.log("object");
     setShow(1)
-    // history.push("/locations");
   };
 
   return (
@@ -63,8 +63,6 @@ function SteperDmpass() {
     </Container>
     {show == 0 ?
     <div>
-    
-    
     <Container className="dmpass-form mt-5">
       <Row className="dmpassData">
         <h3 style={{ fontWeight: "bolder", textAlign: "center" }}>
@@ -187,7 +185,6 @@ function SteperDmpass() {
               </div>
             </div>
           </div>
-          {/*traveller Detail*/}
           <div className="traveller-detail">
             <label for="inputAddress" style={{ paddingTop: "30px" }}>
               Traveller Details
@@ -262,12 +259,8 @@ function SteperDmpass() {
         </form>
       </Row>
     </Container>
-    <Button className="locationpass-btn" onClick={onLocationsClick}> Save Continue</Button>
+    <Button className="locationpass-btn" onClick={onLocationsClick}>Save Continue</Button>
   </div>:<Locations /> }
-
-      
-
-      
     </>
   );
 }

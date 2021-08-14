@@ -1,7 +1,38 @@
-.location-card{
-    font-size: 10px;
-    margin-bottom: 7px;
-    white-space: nowrap;
-    margin-left: -10px;
-    
+.card-Caintainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-bottom: 100px;
+}
+.location-card {
+  font-size: 12px;
+  margin-bottom: 7px;
+  white-space: nowrap;
+  text-align: center;
+  margin-top: 10px;
+
+}
+.location-card-rate {
+  margin-top: -10px;
+  text-align: center;
+  color: orange;
+}
+.location-card-name {
+  text-align: center;
+  font-size: 8px;
+  margin-top: -15px;
+}
+
+.plus-minus-input {
+  display: flex;
+  flex-direction:row;
+  margin:auto;
+  justify-content: center;
+}
+.button{
+    margin-top: -0.5px;
+}
+.input-group-field {
+    width: 45%;
+    text-align: center;
 }

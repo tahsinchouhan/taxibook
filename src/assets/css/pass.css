@@ -59,6 +59,7 @@ background: #0FA453;
 @media screen and (max-width: 700px) {
   .dmpass-form {
     width: 87%;
+    padding: 0;
   }
   .dmpass-div{
     background-color:#FF814A;
