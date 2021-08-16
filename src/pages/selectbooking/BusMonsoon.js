@@ -73,7 +73,7 @@ function BusMonsoon() {
                 <Form.Label
                   className=""
                   style={{
-                    fontSize: "20px",
+                    fontSize: "33px",
                     fontWeight: "bolder",
                     marginLeft: "4px",
                     color: "#a5a5a5",
@@ -81,8 +81,8 @@ function BusMonsoon() {
                     paddingRight: "20px",
                   }}
                 >
-                  30 July 
-                  {/* {`${routeData?.startDate}`} */}
+                  {/* 30 July  */}
+                  {`${routeData?.startDate?.toLocaleDateString("en-US", {  day: 'numeric', month: 'short'})} `}
                 </Form.Label>
               </Col>
             </Row>

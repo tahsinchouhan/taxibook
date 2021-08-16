@@ -13,7 +13,7 @@ function CheckoutPage() {
 
   const dispatch = useDispatch()
   const { data: apiData, tripData, mobile } = useSelector(state => state.busReducer)
-  const { name, age, gender, aadhar, basic_details, price, surcharge } = apiData;
+  const { name, age, gender, adhaar, basic_details, price, surcharge } = apiData;
   const onCongratsClick = () => {
     console.log("object", tripData);
     dispatch(createBusBooking({ ...apiData, trips_id: tripData?._id, route: tripData?.route?._id, from: tripData?.route?.start?._id, to: tripData?.route?.end?._id, bus: tripData?.vehical, mobile }))
@@ -226,7 +226,7 @@ function CheckoutPage() {
                             }}
                             > {item.name}</span> <br />
                             <span>{item.gender}, {item.age}</span> <br />
-                            <span> Adhaar: {item.aadhar}</span>
+                            <span> Adhaar: {item.adhaar}</span>
                             <div className="p-3">
                               <Button className="checout-btn">EDIT</Button>
                             </div>

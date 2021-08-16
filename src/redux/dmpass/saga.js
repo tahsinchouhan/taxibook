@@ -29,6 +29,17 @@ const createVehiclePassRequest = async (payload) =>
         .then(busticket => busticket.data)
         .catch(error => error);
 
+const createEntryPassRequest = async (payload) =>
+    await axios.post(`${API_PATH}/entrypass/create`, {
+        traveller_id: payload.tp_id,
+        vehical_pass_id: payload.vp_id,
+        locations: payload.locations,
+        total_charges: payload.total_charges,
+        createdby: JSON.parse(localStorage.getItem('user_data'))?.user?._id,
+    })
+        .then(vendor => vendor.data)
+        .catch(error => error);
+
 const createDmPassRequest = async (payload) =>
     await axios.post(`${API_PATH}/api/v1/dmpass/create`, payload)
         .then(busticket => busticket.data)
@@ -39,7 +50,8 @@ function* createDmPass({ payload }) {
     try {
         const dmpass = yield call(createTravelPassRequest, payload);
         const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id });
-        const entry = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id });
+        const entry = yield call(createEntryPassRequest, {  ...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id });
+        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id });
         yield put(setDmPassId(entry.data.dm_pass_id));
         // console.log("bus",busticket);
     } catch (error) {

@@ -179,12 +179,12 @@ function Pass() {
                     </div>
 
                     <div className="form-group pt-2">
-                      <label htmlFor ="inputAddress">Aadhar Card Number </label>
+                      <label htmlFor ="inputAddress">Adhaar Card Number </label>
                       <input
                         type="text"
                         className="form-control pass_input"
                         id="inputAddress"
-                        placeholder=" Enter 12 digit Aadhar Card Number"
+                        placeholder=" Enter 12 digit Adhaar Card Number"
                         style={{ fontSize: "11px" }}
                       />
                     </div>

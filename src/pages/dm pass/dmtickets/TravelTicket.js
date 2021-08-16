@@ -42,27 +42,26 @@ function TravelTicket() {
   const { dmData } = useSelector(state => state.dmpassReducer)
   const { number_of_vehicals, number_of_travellers, duration_of_travel } = dmData
 
-  useEffect(() => {
-    console.log("dmData", dmData);
-  }, [dmData])
-
-  const onSideBtnClick = (e) => {
-    const name = e.target.name;
-    setActiveButton(name);
-  };
-
   const onDmByeClick = () => {
     console.log("object", { ...dmData, basic_details: travellers, vehical_details: vehicles });
     dispatch(createDmPass({ ...dmData, basic_details: travellers, vehical_details: vehicles }))
     history.push("/dm_congratulate");
   };
 
-  const [travellers, setTravellers] = useState([{
-    name: '',
-    gender: '',
-    age: '',
-    aadhar: '',
-  }])
+  const initialTravellers = ()=>{
+    let temp = []
+    for(let v = 0;v<number_of_travellers;v++){
+      temp.push({
+        name: '',
+        gender: 'Male',
+        age: '',
+        adhaar: '',
+      })
+    }
+    return temp
+  }
+  const [travellers, setTravellers] = useState(initialTravellers)
+  
   const handleTraveller = (val, lbl, i) => {
     setTravellers([...travellers].map((obj, key) => {
       if (key === i) {
@@ -77,13 +76,21 @@ function TravelTicket() {
     }))
   }
 
-  const [vehicles, setVehicles] = useState([{
-    vehicle_number: '',
-    name: '',
-    gender: '',
-    age: '',
-    aadhar: '',
-  }])
+  const initialVehicles = ()=>{
+    let temp = []
+    for(let v = 0;v<number_of_vehicals;v++){
+      temp.push({
+        vehicle_number: '',
+        name: '',
+        gender: 'Male',
+        age: '',
+        adhaar: '',
+      })
+    }
+    return temp
+  }
+
+  const [vehicles, setVehicles] = useState(initialVehicles)
   const handleVehicle = (val, lbl, i) => {
     setVehicles([...vehicles].map((obj, key) => {
       if (key === i) {
@@ -97,6 +104,9 @@ function TravelTicket() {
     }))
   }
 
+  useEffect(() => {
+    console.log("vehicles", vehicles);
+  }, [vehicles])
   return (
     <>
       <div>
@@ -215,112 +225,6 @@ function TravelTicket() {
                 >
                   Vehicle Details
                 </label>
-                {/* <div className="card" style={{ width: "" }}>
-                  <div className="card-body">
-                    <h6
-                      className="card-title"
-                      style={{ fontWeight: "600", fontSize: "12px" }}
-                    >
-                      Vehicle 1
-                    </h6>
-                    <p className="card-text">
-                      <div className="form-group mt-4">
-                        <label for="inputAddress" style={{ fontSize: "12px" }}>
-                          Vehicle Number
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control pass_input"
-                          id="inputAddress"
-                          placeholder="Enter the license plate number"
-                          style={{
-                            fontSize: "11px",
-                            marginLeft: "-5px",
-                            border: "none",
-                          }}
-                        />
-                      </div>
-                      <div className="form-group mt-4">
-                        <label for="inputAddress" style={{ fontSize: "12px" }}>
-                          Driver Name
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control pass_input"
-                          id="inputAddress"
-                          placeholder="Enter the license plate number"
-                          style={{
-                            fontSize: "11px",
-                            marginLeft: "-5px",
-                            border: "none",
-                          }}
-                        />
-                      </div>
-
-                      <div className="form-row genderform pt-3 d-flex ">
-                        <div className="col m-2 w-50">
-                          <label
-                            for="inputAddress"
-                            style={{ fontSize: "12px" }}
-                          >
-                            Gender
-                          </label>
-                          <div className="d-flex pt-2">
-                            <ButtonComponent
-                              style={{
-                                width: "50%",
-                                whiteSpace: "nowrap",
-                                fontSize: "12px",
-                              }}
-                              data={button_Data}
-                              activeButton={activeButton}
-                              trigerOnClickEmpSideBtn={onSideBtnClick}
-                            />
-                          </div>
-                        </div>
-                        <div className="col m-2 w-50">
-                          <label
-                            for="inputAddress"
-                            style={{ fontSize: "12px" }}
-                          >
-                            Age
-                          </label>
-                          <br />
-                          <input
-                            type="text"
-                            className="form-control pass_input w-70 pt-2"
-                            placeholder="Enter Age"
-                            style={{
-                              width: "110px",
-                              marginLeft: "-5px",
-                              fontSize: "12px",
-                              whiteSpace: "nowrap",
-                              height: "33px",
-                              border: "none",
-                            }}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="form-group mt-4 pt-2">
-                        <label for="inputAddress" style={{ fontSize: "12px" }}>
-                          Aadhar Card Number{" "}
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control pass_input"
-                          id="inputAddress"
-                          placeholder=" Enter 12 digit Aadhar Card Number"
-                          style={{
-                            fontSize: "11px",
-                            marginLeft: "-5px",
-                            border: "none",
-                          }}
-                        />
-                      </div>
-                    </p>
-                  </div>
-                </div> */}
                 <div className="traveller_div" style={{ marginTop: "1rem", justifyContent: "flex-start" }}>
                   {
                     vehicles?.map((item, i) => (
@@ -336,7 +240,7 @@ function TravelTicket() {
                                 id={`vehicle_number${i}`}
                                 placeholder="Enter the license plate number"
                                 style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="vehicle_number" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].vehicle_number}
+                                name="registration_number" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].registration_number}
                               />
                             </div>
                             <div className="form-group pt-3">
@@ -347,7 +251,7 @@ function TravelTicket() {
                                 id={`name${i}`}
                                 placeholder="Enter Driver Name"
                                 style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="name" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].name}
+                                name="driver_name" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].driver_name}
                               />
                             </div>
 
@@ -362,8 +266,7 @@ function TravelTicket() {
                                       whiteSpace: "nowrap",
                                     }}
                                     data={button_Data}
-                                    activeButton={activeButton}
-                                    trigerOnClickEmpSideBtn={onSideBtnClick}
+                                    trigerOnClickEmpSideBtn={(e) => handleVehicle(e.target.name, "gender", i)} activeButton={vehicles[i].gender}
                                   />
                                 </div>
                               </div>
@@ -381,7 +284,6 @@ function TravelTicket() {
                                     whiteSpace: "nowrap",
                                     height: "33px",
                                   }}
-                                  // name="age" onChange={handleChange} value={age}
                                   name="age" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].age}
                                 />
                               </div>
@@ -389,16 +291,16 @@ function TravelTicket() {
 
                             <div className="form-group mt-1 pt-3">
                               <label className="mb-1" for={`aadhaar${i}`}>
-                                Aadhar Card Number{" "}
+                                Adhaar Card Number{" "}
                               </label>
                               <input
                                 type="text"
                                 className="form-control pass_input"
-                                id={`aadhar${i}`}
-                                placeholder=" Enter 12 digit Aadhar Card Number"
+                                id={`adhaar${i}`}
+                                placeholder=" Enter 12 digit Adhaar Card Number"
                                 style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                // name="aadhar" onChange={handleChange} value={aadhar}
-                                name="aadhar" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].aadhar}
+                                // name="adhaar" onChange={handleChange} value={adhaar}
+                                name="adhaar" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].adhaar}
                               />
                             </div>
                           </p>
@@ -423,9 +325,9 @@ function TravelTicket() {
                     onClick={() => setVehicles([...vehicles, {
                       vehicle_number: '',
                       name: '',
-                      gender: '',
+                      gender: 'Male',
                       age: '',
-                      aadhar: '',
+                      adhaar: '',
                     }])}
                   >
                     Add Vehicle
@@ -438,119 +340,12 @@ function TravelTicket() {
                 <label
                   style={{
                     fontSize: "14px",
-                    // marginBottom: "10px",
                     fontWeight: "500",
                     color: "black",
                   }}
                 >
                   Travellers Details
                 </label>
-                {/* <div className="card" style={{ width: "" }}>
-                  <div className="card-body">
-                    <h6
-                      className="card-title"
-                      style={{ fontWeight: "600", fontSize: "12px" }}
-                    >
-                      Vehicle 1
-                    </h6>
-                    <p className="card-text">
-                      <div className="form-group mt-4">
-                        <label for="inputAddress" style={{ fontSize: "12px" }}>
-                          Vehicle Number
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control pass_input"
-                          id="inputAddress"
-                          placeholder="Enter the license plate number"
-                          style={{
-                            fontSize: "11px",
-                            marginLeft: "-5px",
-                            border: "none",
-                          }}
-                        />
-                      </div>
-                      <div className="form-group mt-4">
-                        <label for="inputAddress" style={{ fontSize: "12px" }}>
-                          Driver Name
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control pass_input"
-                          id="inputAddress"
-                          placeholder="Enter the license plate number"
-                          style={{
-                            fontSize: "11px",
-                            marginLeft: "-5px",
-                            border: "none",
-                          }}
-                        />
-                      </div>
-
-                      <div className="form-row genderform pt-3 d-flex ">
-                        <div className="col m-2 w-50">
-                          <label
-                            for="inputAddress"
-                            style={{ fontSize: "12px" }}
-                          >
-                            Gender
-                          </label>
-                          <div className="d-flex pt-2">
-                            <ButtonComponent
-                              style={{
-                                width: "50%",
-                                whiteSpace: "nowrap",
-                                fontSize: "12px",
-                              }}
-                              data={button_Data}
-                              activeButton={activeButton}
-                              trigerOnClickEmpSideBtn={onSideBtnClick}
-                            />
-                          </div>
-                        </div>
-                        <div className="col m-2 w-50">
-                          <label
-                            for="inputAddress"
-                            style={{ fontSize: "12px" }}
-                          >
-                            Age
-                          </label>
-                          <br />
-                          <input
-                            type="text"
-                            className="form-control pass_input w-70 pt-2"
-                            placeholder="Enter Age"
-                            style={{
-                              width: "110px",
-                              marginLeft: "-5px",
-                              fontSize: "12px",
-                              whiteSpace: "nowrap",
-                              height: "33px",
-                              border: "none",
-                            }}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="form-group mt-4 pt-2">
-                        <label for="inputAddress" style={{ fontSize: "12px" }}>
-                          Aadhar Card Number{" "}
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control pass_input"
-                          id="inputAddress"
-                          placeholder=" Enter 12 digit Aadhar Card Number"
-                          style={{
-                            fontSize: "11px",
-                            marginLeft: "-5px",
-                            border: "none",
-                          }}
-                        />
-                      </div>
-                    </p>
-                  </div>
-                </div> */}
 
                 <div className="traveller_div" style={{ marginTop: "1rem", justifyContent: "flex-start" }}>
                   {
@@ -582,8 +377,9 @@ function TravelTicket() {
                                       whiteSpace: "nowrap",
                                     }}
                                     data={button_Data}
-                                    activeButton={activeButton}
-                                    trigerOnClickEmpSideBtn={onSideBtnClick}
+                                    // activeButton={activeButton}
+                                    // trigerOnClickEmpSideBtn={onSideBtnClick}
+                                    trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender}
                                   />
                                 </div>
                               </div>
@@ -608,15 +404,15 @@ function TravelTicket() {
 
                             <div className="form-group mt-1 pt-3">
                               <label className="mb-3" for={`aadhaar${i}`}>
-                                Aadhar Card Number{" "}
+                                Adhaar Card Number{" "}
                               </label>
                               <input
                                 type="text"
                                 className="form-control pass_input"
-                                id={`aadhar${i}`}
-                                placeholder=" Enter 12 digit Aadhar Card Number"
+                                id={`adhaar${i}`}
+                                placeholder=" Enter 12 digit Adhaar Card Number"
                                 style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="aadhar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].aadhar}
+                                name="adhaar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].adhaar}
                               />
                             </div>
                           </p>
@@ -640,9 +436,9 @@ function TravelTicket() {
                     }}
                     onClick={() => setTravellers([...travellers, {
                       name: '',
-                      gender: '',
+                      gender: 'Male',
                       age: '',
-                      aadhar: '',
+                      adhaar: '',
                     }])}
                   >
                     Add Traveller

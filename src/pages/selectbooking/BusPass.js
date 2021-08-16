@@ -4,10 +4,8 @@ import { Link } from "react-router-dom";
 import "../../assets/css/buspass.css";
 import { FaBus, FaCarAlt, FaTicketAlt } from "react-icons/fa";
 import bus from "../../assets/img/bus.png";
-import calendar from "../../assets/img/calendar.png";
 import { useHistory } from "react-router-dom";
 
-import ButtonComponent from "../../containers/Button";
 import Footer from "../travesaly/Footer";
 import Header from "../../components/Header";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +37,7 @@ function BusDetail() {
         .then((response) => response)
         .then((json) => json);
     
-    // history.push('/busdetail')
+    history.push('/busdetail')
     // history.push('/busmonsoon')
   }
   return (

@@ -149,7 +149,7 @@ function DmDetail() {
                                         <div key={i} className="dm__entry_card">
                                             <div className="dm__entry_card_title">
                                                 <div className="left">
-                                                    Tamdaghumar
+                                                    {item?.location?.name}
                                                 </div>
                                                 <div className="right">
                                                     Change

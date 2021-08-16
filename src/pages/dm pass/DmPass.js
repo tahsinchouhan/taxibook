@@ -49,7 +49,7 @@ function DmPass() {
                     <img src={ticket} alt="" />
                   </div>
                   <span style={{ fontWeight: "bolder", fontSize: "15px", color: "#0fa453", paddingTop: "50px" }}>DM Pass</span><br />
-                  <span style={{ fontWeight: "bolder", fontSize: "12px", padding: "10px" }}>
+                  <span style={{ fontSize: "12px", padding: "10px" }}>
                     Get a pass for travellers, vehicles<br /> and duration of your travel
                   </span>
                 </div>

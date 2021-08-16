@@ -28,7 +28,7 @@ function AddForm() {
   const [accType, setAccType] = useState("");
   const [upiId, setUpiId] = useState("");
   const [panNo, setPanNo] = useState("");
-  const [aadharNo, setAadharNo] = useState("");
+  const [adhaarNo, setAdhaarNo] = useState("");
 
 
   useEffect(() => {
@@ -96,7 +96,7 @@ function AddForm() {
       account_type: accType,
       account_number: accNo,
       upi_id: upiId,
-      aadhar_number: aadharNo,
+      adhaar_number: adhaarNo,
       pan_number: panNo,
     };
 
@@ -422,17 +422,17 @@ function AddForm() {
             />
 
             <AvField
-              name="aadharNo"
-              label="Aadhar Number"
+              name="adhaarNo"
+              label="Adhaar Number"
               type="number"
               className=""
-              errorMessage="Enter Your Aadhar Number"
-              value={aadharNo}
-              onChange={(e) => setAadharNo(e.target.value)}
+              errorMessage="Enter Your Adhaar Number"
+              value={adhaarNo}
+              onChange={(e) => setAdhaarNo(e.target.value)}
               validate={{
                 required: {
                   value: true,
-                  errorMessage: "Please enter Valid Aadhar Number",
+                  errorMessage: "Please enter Valid Adhaar Number",
                 },
               }}
             />

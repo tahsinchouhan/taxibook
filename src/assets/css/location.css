@@ -2,25 +2,48 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding-bottom: 100px;
+    /* padding-bottom: 100px; */
 }
-.location-card {
+.MuiAccordion-root:before{
+  background-color: transparent !important;
+}
+
+.MuiAccordionSummary-content{
+  margin-block: 8px !important;
+}
+.location-card{
+  
+  width: 100px;
+  height: 128px;
+  background-color: #864BD8;
+  color: white;
+}
+.location-card-title {
   font-size: 12px;
-  margin-bottom: 7px;
-  white-space: nowrap;
+  /* margin-bottom: 7px; */
+  margin-bottom: 0;
+  line-height: 15px;
+  /* white-space: nowrap; */
   text-align: center;
   margin-top: 10px;
-
+font-weight: 700;
 }
 .location-card-rate {
-  margin-top: -10px;
+  /* margin-top: -10px; */
   text-align: center;
-  color: orange;
+  color: #FFE603;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 32px;
+  margin-bottom: 0;
 }
 .location-card-name {
   text-align: center;
-  font-size: 8px;
-  margin-top: -15px;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+  margin-bottom: 0;
+  /* margin-top: -15px; */
 }
 
 .plus-minus-input {

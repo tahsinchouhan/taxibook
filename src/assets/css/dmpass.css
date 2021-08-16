@@ -1,59 +1,69 @@
-*{
+* {}
 
-}
-.dmpass-div{
-    background-color:#FF814A;
+.dmpass-div {
+    background-color: #FF814A;
     width: 100%;
 }
-.dm-kangervilla{
+
+.dm-kangervilla {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.kanger-valley{
-   color: #FFFFFF;
-   font-size: 20px;
-    
-}
-.kanger-arrow{
-    color: #FFFFFF;;   
-    font-weight: 700;  
-    position: absolute;
-left: 6.67%;
-right: 87.5%;
-top: 4.63%;
-bottom: 97.04%;
-font-size: 20px;
+
+.kanger-valley {
+    color: #FFFFFF;
+    font-size: 14px;
 
 }
-.kangervilla{
+
+.kanger-arrow {
+    color: #FFFFFF;
+    ;
+    font-weight: 700;
+    position: absolute;
+    left: 6.67%;
+    /* right: 87.5%;
+top: 4.63%;
+bottom: 97.04%; */
+    font-size: 20px;
+
+}
+
+.kangervilla {
     text-align: center;
     margin: 10px;
     font-weight: 700;
 }
-.radio_input{
-   background: #FFFFFF;
-border: 1px solid #C4C4C4;
-box-sizing: border-box;
-height: 17px;
-width: 17.724590301513672px;
-left: 47.7672119140625px;
-top: 225px;
-border-radius: 0px;
+
+.radio_input {
+    background: #FFFFFF;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+    height: 17px;
+    width: 17.724590301513672px;
+    left: 47.7672119140625px;
+    top: 225px;
+    border-radius: 0px;
 
 }
 
 /*dm-ticket*/
-.dm-ticket{
+.dm-ticket {
     font-size: 13px;
     font-weight: 600;
 }
-.dm-inputticket{
+
+.dm-inputticket {
     height: 39px;
-    width:92%;
+    width: 92%;
     font-size: 13px;
     border: none;
     background-color: transparent;
-    outline-width:0;
+    outline-width: 0;
     background-color: whitesmoke;
+}
+
+.dmpassData label,.dmpassData .pass_input{
+    font-size: 12px;
 }

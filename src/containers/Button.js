@@ -41,7 +41,7 @@ function ButtonComponent(props)
         <div className="d-flex justify-content-center align-items-center" style={{margin:"-7px"}}>
             {props.data.map(item =>
             {
-                const className = props.activeButton === item.name ? "btn-light" : "btn-success";
+                const className = props.activeButton === item.name ? "btn-success" : "btn-light";
                 return (
                     // <div className="ml-1" key={item.value}>
                         <button

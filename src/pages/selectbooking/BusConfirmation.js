@@ -86,7 +86,7 @@ function BusConfirmation() {
     from: '',
     to: '',
     name: '',
-    aadhar: '',
+    adhaar: '',
     age: '',
     price: '',
     surcharge: tripData?.surcharge,
@@ -97,7 +97,7 @@ function BusConfirmation() {
 
   const [travellers, setTravellers] = useState([])
 
-  const { name, age, gender, aadhar, basic_details, price, surcharge } = values;
+  const { name, age, gender, adhaar, basic_details, price, surcharge } = values;
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value, gender: activeButton })
@@ -119,7 +119,7 @@ function BusConfirmation() {
 
   const handleOk = () => {
     console.log('ok');
-    setValues({ ...values, basic_details: [...basic_details, { name, age, gender, aadhar }], name: "", age: '', gender: '', aadhar: '' })
+    setValues({ ...values, basic_details: [...basic_details, { name, age, gender, adhaar }], name: "", age: '', gender: '', adhaar: '' })
     setShow(false);
   };
 
@@ -331,8 +331,10 @@ function BusConfirmation() {
                                   whiteSpace: "nowrap",
                                 }}
                                 data={button_Data}
-                                activeButton={activeButton}
-                                trigerOnClickEmpSideBtn={onSideBtnClick}
+                                // activeButton={activeButton}
+                                // trigerOnClickEmpSideBtn={onSideBtnClick}
+                                trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender}
+
                               />
                             </div>
                           </div>
@@ -358,16 +360,16 @@ function BusConfirmation() {
 
                         <div className="form-group mt-1 pt-2">
                           <label className="mb-1" for={`aadhaar${i}`}>
-                            Aadhar Card Number{" "}
+                            Adhaar Card Number{" "}
                           </label>
                           <input
                             type="text"
                             className="form-control pass_input"
-                            id={`aadhar${i}`}
-                            placeholder=" Enter 12 digit Aadhar Card Number"
+                            id={`adhaar${i}`}
+                            placeholder=" Enter 12 digit Adhaar Card Number"
                             style={{ fontSize: "11px", marginLeft: "-5px" }}
-                            // name="aadhar" onChange={handleChange} value={aadhar}
-                            name="aadhar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].aadhar}
+                            // name="adhaar" onChange={handleChange} value={adhaar}
+                            name="adhaar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].adhaar}
                           />
                         </div>
                       </p>
@@ -390,9 +392,9 @@ function BusConfirmation() {
                 // onClick={handleClick("top-start")}
                 onClick={() => setTravellers([...travellers, {
                   name: '',
-                  gender: '',
+                  gender: 'Male',
                   age: '',
-                  aadhar: '',
+                  adhaar: '',
                 }])}
               >
                 Add Traveller
@@ -468,15 +470,15 @@ function BusConfirmation() {
 
                       <div className="form-group mt-1 pt-2">
                         <label for="inputAddress">
-                          Aadhar Card Number{" "}
+                          Adhaar Card Number{" "}
                         </label>
                         <input
                           type="text"
                           className="form-control pass_input"
                           id="inputAddress"
-                          placeholder=" Enter 12 digit Aadhar Card Number"
+                          placeholder=" Enter 12 digit Adhaar Card Number"
                           style={{ fontSize: "11px", marginLeft: "-5px" }}
-                          name="aadhar" onChange={handleChange} value={aadhar}
+                          name="adhaar" onChange={handleChange} value={adhaar}
                         />
                       </div>
                       {/* </p> */}
@@ -516,7 +518,7 @@ function BusConfirmation() {
                           }}
                           > {item.name}</span> <br />
                           <span>{item.gender}, {item.age}</span> <br />
-                          <span> Adhaar: {item.aadhar}</span>
+                          <span> Adhaar: {item.adhaar}</span>
                           <div className="p-3">
                             <Button className="checout-btn">EDIT</Button>
                           </div>
@@ -915,7 +917,7 @@ function BusConfirmation() {
                       }}
                       > {item.name}</span> <br />
                       <span>{item.gender}, {item.age}</span> <br />
-                      <span> Adhaar: {item.aadhar}</span>
+                      <span> Adhaar: {item.adhaar}</span>
                       <div className="p-3">
                         <Button className="checout-btn">EDIT</Button>
                       </div>
@@ -926,7 +928,7 @@ function BusConfirmation() {
                 //   <p style={{ marginBottom: "0" }}>{i + 1}. {item.name}</p>
                 //   <small>{item.gender}</small>
                 //   <small> / {item.age} years</small>
-                //   <small> / {item.aadhar}</small>
+                //   <small> / {item.adhaar}</small>
                 // </div>
               )}
             </Row>
@@ -963,9 +965,10 @@ function BusConfirmation() {
                               whiteSpace: "nowrap",
                             }}
                             data={button_Data}
-                            activeButton={activeButton}
-                            trigerOnClickEmpSideBtn={onSideBtnClick}
-                          />
+                            // activeButton={activeButton}
+                            // trigerOnClickEmpSideBtn={onSideBtnClick}
+                            trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender}
+                            />
                         </div>
                       </div>
                       <div className="form-group col m-2 w-50">
@@ -990,16 +993,16 @@ function BusConfirmation() {
 
                     <div className="form-group mt-1 pt-2">
                       <label className="mb-1" for={`aadhaar${i}`}>
-                        Aadhar Card Number{" "}
+                        Adhaar Card Number{" "}
                       </label>
                       <input
                         type="text"
                         className="form-control pass_input"
-                        id={`aadhar${i}`}
-                        placeholder=" Enter 12 digit Aadhar Card Number"
+                        id={`adhaar${i}`}
+                        placeholder=" Enter 12 digit Adhaar Card Number"
                         style={{ fontSize: "11px", marginLeft: "-5px" }}
-                        // name="aadhar" onChange={handleChange} value={aadhar}
-                        name="aadhar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].aadhar}
+                        // name="adhaar" onChange={handleChange} value={adhaar}
+                        name="adhaar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].adhaar}
                       />
                     </div>
                   </p>
@@ -1024,7 +1027,7 @@ function BusConfirmation() {
               name: '',
               gender: '',
               age: '',
-              aadhar: '',
+              adhaar: '',
             }])}
           >
             Add Traveller

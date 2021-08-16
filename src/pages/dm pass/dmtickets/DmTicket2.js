@@ -71,7 +71,7 @@ function DmTicket2() {
                       <Form.Control
                         type="text"
                         className="dm-inputticket"
-                        placeholder=" Vehicles..."
+                        placeholder=" Enter your mobile number"
                         name="mobile"
                         value={mobile} onChange={(e)=>dispatch(setDmData("mobile",e.target.value))}
                       />
@@ -99,7 +99,7 @@ function DmTicket2() {
                       <Form.Control
                         type="text"
                         className="dm-inputticket"
-                        placeholder="Travellers..."
+                        placeholder=" Enter the 6 digit OTP"
                       />
                     </div>
                   </Form.Group>
