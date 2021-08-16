@@ -10,6 +10,8 @@ function Search() {
   const [destinations, setDestinations] = useState([]);
   const [packages, setPackages] = useState([]);
 
+  const [search, setSearch] = useState([]);
+
   const history = useHistory();
   useEffect(() => {
     getDestinations();
@@ -35,22 +37,33 @@ function Search() {
       })
       .catch((e) => console.log(e));
   };
+
+  const searchingData = (value) =>{
+    fetch(API_PATH + `/api/v1/search?searchvalue=${value}`)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json.data);
+      })
+      .catch((e) => console.log(e));
+  }
+
   return (
     <>
       <Header />
       <Container>
         <div className="mt-5 mb-5">
           <div className="explore-search">
-            <form className="d-flex" style={{ position: "relative" }}>
+            <div className="d-flex" style={{ position: "relative" }}>
               <Form.Control
                 type="text"
                 name="search"
-                placeholder="search...."
+                placeholder="Search...."
                 style={{ marginTop: "-10px" }}
+                onChange={(e)=>searchingData(e.target.value)}
               />
               <button
                 className="form__search-btn"
-                type="submit"
+                type="button"
                 style={{
                   position: "absolute",
                   top: 6,
@@ -61,7 +74,7 @@ function Search() {
               >
                 <BsSearch style={{ marginTop: -20 }} color="grey" size="25px" />
               </button>
-            </form>
+            </div>
           </div>
         </div>
         <div className="row  mb-5">
