@@ -1016,7 +1016,7 @@ function BusConfirmation() {
             style={{
               backgroundColor: "#0FA453",
               color: "white",
-              width: "100%",
+              width: "50%",
               height: "51px",
               border: "none",
               borderRadius: "15px",
@@ -1032,6 +1032,57 @@ function BusConfirmation() {
           >
             Add Traveller
           </Button>
+        </div>
+
+        <div>
+          <div style={{display:"flex", marginTop:"50px", flexDirection: 'row',width:"50%" }}>
+            <Col xs={12} md={6} style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px", }}>
+              <div style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px" }}>
+
+                <div style={{ padding: "" }}>
+                  <span style={{ fontSize: "15px", lineHeight: "21px", color: "grey" }}>
+                    Total Amount (*Exclusive of Taxes)
+                  </span>
+                  <br />
+                  <span
+                    style={{
+                      fontSize: "33px",
+                      fontWeight: "bolder",
+                      lineHeight: "40px",
+                      fontSize: " 24px",
+                    }}
+                  >
+
+                    ₹  {price}
+                  </span>
+                </div>
+              </div>
+            </Col>
+            <Col xs={12} md={6}>
+              <div
+                style={{
+                  backgroundColor: "#0FA453",
+                  color: "white",
+                  textAlign: "center",
+                  height: "86px",
+                }}
+                onClick={onCheckout}
+              >
+                <div style={{ paddingTop: "30px" }}>
+                  <span
+                    style={{
+                      fontSize: "21px",
+                      fontWeight: "bolder",
+                      lineHeight: "25px",
+                    }}
+                    onClick={onCheckout}
+                  >
+                    CHECKOUT
+                  </span>
+                </div>
+              </div>
+            </Col>
+          </div>
         </div>
       </div>
     </>

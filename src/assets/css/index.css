@@ -235,7 +235,17 @@ body {
   text-decoration: none;
   color: #212529;
 }
-
+.packages_enquired{
+  border: 2px solid rgb(120, 104, 230);
+  border-radius: 5px;
+  padding:10px;
+  margin: 10px;
+  font-weight: 500;
+}
+.packeges_title{
+  text-align: center;
+  margin-bottom: 40px;
+}
 
 /* ====================== */
 /* Block */

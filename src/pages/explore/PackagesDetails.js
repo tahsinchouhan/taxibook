@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
-import { Container, Row, Col} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import loc from "../../assets/img/location.svg";
 import bg from "../../assets/img/bg_12.jpg";
 import GoogleMapReact from "google-map-react";
 import { API_PATH } from "../../Path/Path";
 import { Button } from "bootstrap";
+import { useHistory } from "react-router-dom";
+import { FaWhatsapp } from "react-icons/fa";
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
@@ -16,7 +18,12 @@ const PackagesDetails = (props) => {
   const [inclusions, setInclusions] = useState([]);
   const [exclusions, setExclusions] = useState([]);
   const [zoom, setZoom] = useState(11);
+  const history = useHistory();
 
+
+  const onClickWhatsapp=()=>{
+    history.push(".")
+  }
   var id;
   useEffect(() => {
     if (props.location.item) {
@@ -164,6 +171,28 @@ const PackagesDetails = (props) => {
           </a>
         </div>
       </Container>
+      <div className="packeges_title">
+        <span
+          className="packages_enquired"
+          style={{ color: "rgb(120, 104, 230)" }}
+        >
+          Enquired Now
+        </span>
+        <span
+          className="packages_enquired"
+          style={{ color: "rgb(120, 104, 230)" }}
+        >
+          TripAdvisor reviews
+        </span>
+        <span
+          className="packages_enquired"
+          style={{ backgroundColor: "rgb(120, 104, 230)", color: "white",textTransform:"capitalize",paddingLeft:"10px"}}
+          onClick={onClickWhatsapp}
+        >
+          <FaWhatsapp style={{fontSize:"25px"}} />
+          Whatsapp
+        </span>
+      </div>
       <Footer />
     </>
   );

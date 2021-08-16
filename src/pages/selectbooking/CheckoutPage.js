@@ -294,7 +294,7 @@ function CheckoutPage() {
             MAKE PAYMENT
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );
