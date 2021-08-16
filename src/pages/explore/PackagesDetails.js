@@ -164,9 +164,6 @@ const PackagesDetails = (props) => {
           </a>
         </div>
       </Container>
-      <div>
-        <Button>whatsapp</Button>
-      </div>
       <Footer />
     </>
   );
