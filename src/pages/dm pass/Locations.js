@@ -14,8 +14,8 @@ const button_Data = [
   },
 ];
 
-function Locations() {
-  const [show, setShow] = useState(1);
+function Locations(props) {
+  const [shows, setShows] = useState(1);
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
   const [data, setData] = useState();
 
@@ -26,13 +26,14 @@ function Locations() {
 
   const onLocationsClick = () => {
     console.log("object");
-    setShow(2);
+    setShows(2);
+    return shows
     // history.push("/locations");
   };
 
   return (
     <>
-      {show == 1 ? (
+      {/* {shows == 1 ? ( */}
         <div>
           <Container className="dmpass-form mt-2">
             <Row className="dmpassData">
@@ -85,14 +86,25 @@ function Locations() {
             </div>
           </Container>
           <div>
-            <Button className="locationpass-btn" onClick={onLocationsClick}>
+            {/* <Row>
+              <Col xs={12} md={6}>
+              <div className="location-amount">
+                <span className="location-total">Total Amount</span>
+                <span className="location-rs">₹ 150</span>
+              </div>
+              </Col>
+              <Col xs={12} md={6}><Button className="" onClick={onLocationsClick}>
               Save Continue
-            </Button>
+            </Button> </Col>
+            </Row> */}
+            {/* <Button className="locationpass-btn" onClick={onLocationsClick}>
+              Save Continue
+            </Button> */}
           </div>
         </div>
-      ) : (
-        <TicketsConfirm />
-      )}
+       {/* ) : (
+         <TicketsConfirm />
+       )} */}
     </>
   );
 }

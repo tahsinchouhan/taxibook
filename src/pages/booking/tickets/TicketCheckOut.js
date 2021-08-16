@@ -1,6 +1,5 @@
 import React from "react";
 import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
-
 import Header from "../../../components/Header";
 import Footer from "../../travesaly/Footer";
 import { useHistory } from "react-router-dom";
@@ -19,12 +18,12 @@ function TicketCheckOut() {
   return (
     <>
       <div className="d-none d-md-block">
-         <Header />
+        <Header />
         <Container style={{ width: "70%", paddingTop: "20px" }}>
           <Row>
             <Col>
-              <div style={{marginTop: "-50px" }}>
-                <img src={mobile} alt="" style={{height:"500px"}} />
+              <div style={{ marginTop: "-50px" }}>
+                <img src={mobile} alt="" style={{ height: "500px" }} />
               </div>
             </Col>
             <Col>
@@ -36,7 +35,9 @@ function TicketCheckOut() {
                   </span>
 
                   <h3 style={{ fontWeight: "bolder" }}>Order ID</h3>
-                  <span style={{ color: "black", marginBottom: "50px" }}>{dmpass_id}</span>
+                  <span style={{ color: "black", marginBottom: "50px" }}>
+                    {dmpass_id}
+                  </span>
                 </div>
                 <div>
                   <div>
@@ -77,7 +78,7 @@ function TicketCheckOut() {
                       Download E-ticket
                     </Button>
                   </div>
-                  
+
                   <div>
                     <Button
                       style={{
@@ -98,13 +99,13 @@ function TicketCheckOut() {
             </Col>
           </Row>
         </Container>
-        <Footer /> 
+        <Footer />
       </div>
 
       <div className="d-md-none">
         <Container style={{ width: "", paddingTop: "20px" }}>
           <Row>
-            <Col>              
+            <Col>
               <div style={{ marginBottom: "20px", textAlign: "center" }}>
                 <h3 style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</h3>
                 <span style={{ color: "black" }}>
@@ -112,24 +113,32 @@ function TicketCheckOut() {
                 </span>
               </div>
             </Col>
-            <Col>             
+            <Col>
               <div style={{ marginTop: "", textAlign: "center" }}>
                 <img src={mobile} alt="" style={{ height: "350px" }} />
-              </div>             
+              </div>
             </Col>
           </Row>
           <Row>
-              <Col> 
-              <div style={{marginBottom:"20px",paddingTop:"-10px"}}>
-                <h3 style={{ fontWeight: "bolder", textAlign: "center",whiteSpace:"nowrap",marginBottom:"10px" }}>
-                Transaction ID
+            <Col>
+              <div style={{ marginBottom: "20px", paddingTop: "-10px" }}>
+                <h3
+                  style={{
+                    fontWeight: "bolder",
+                    textAlign: "center",
+                    whiteSpace: "nowrap",
+                    marginBottom: "10px",
+                  }}
+                >
+                  Transaction ID
                 </h3>
                 <span style={{ color: "black", marginBottom: "50px" }}>
                   {dmpass_id}
                 </span>
-                </div>
-                </Col>
-              <Col><div style={{ textAlign: "center" }}>
+              </div>
+            </Col>
+            <Col>
+              <div style={{ textAlign: "center" }}>
                 <div>
                   <Button
                     className="btn btn-success"
@@ -184,9 +193,19 @@ function TicketCheckOut() {
                     Back to Home
                   </Button>
                 </div>
-              </div></Col>
+              </div>
+            </Col>
           </Row>
-          {/* <div>
+        </Container>
+      </div>
+    </>
+  );
+}
+
+export default TicketCheckOut;
+
+{
+  /* <div>
             <div style={{ paddingTop: "60px" }}>
               <div style={{ marginBottom: "20px", textAlign: "center" }}>
                 <h3 style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</h3>
@@ -261,11 +280,5 @@ function TicketCheckOut() {
                 </div>
               </div>
             </div>
-          </div> */}
-        </Container>
-      </div>
-    </>
-  );
+          </div> */
 }
-
-export default TicketCheckOut;

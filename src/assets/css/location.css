@@ -36,3 +36,19 @@
     width: 45%;
     text-align: center;
 }
+.locatione-title{
+  display: flex;
+}
+.location-amount{
+padding:18px;
+background-color: #F8F8F8;;
+}
+.location-total{
+
+}
+.location-rs{
+font-size: 20px;
+    font-weight: 600;
+    float: right;    
+    /* padding: 10px; */
+}

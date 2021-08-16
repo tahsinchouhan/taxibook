@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col} from "react-bootstrap";
 import loc from "../../assets/img/location.svg";
 import bg from "../../assets/img/bg_12.jpg";
 import GoogleMapReact from "google-map-react";
 import { API_PATH } from "../../Path/Path";
+import { Button } from "bootstrap";
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
@@ -163,6 +164,9 @@ const PackagesDetails = (props) => {
           </a>
         </div>
       </Container>
+      <div>
+        <Button>whatsapp</Button>
+      </div>
       <Footer />
     </>
   );
