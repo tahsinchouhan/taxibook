@@ -240,13 +240,33 @@ body {
   border-radius: 5px;
   padding:10px;
   margin: 10px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .packeges_title{
   text-align: center;
   margin-bottom: 40px;
 }
-
+.packages_whatsapp{
+  border: 2px solid rgb(120, 104, 230);
+  border-radius: 5px;
+  padding:10px;
+  margin: 10px;
+  font-weight: 500;
+  background-color: rgb(120, 104, 230);
+  color:white;
+  text-transform:capitalize;
+}
+.package-whats{
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  margin:5px;
+  font-size: 18px;
+  font-weight: 600;
+}
+.package-whats:hover{
+  color: white;
+}
 /* ====================== */
 /* Block */
 

@@ -14,10 +14,12 @@ function CheckoutPage() {
   const dispatch = useDispatch()
   const { data: apiData, tripData, mobile } = useSelector(state => state.busReducer)
   const { name, age, gender, adhaar, basic_details, price, surcharge } = apiData;
+
+
   const onCongratsClick = () => {
     console.log("object", tripData);
     dispatch(createBusBooking({ ...apiData, trips_id: tripData?._id, route: tripData?.route?._id, from: tripData?.route?.start?._id, to: tripData?.route?.end?._id, bus: tripData?.vehical, mobile }))
-    history.push("/CongratulationPage");
+    history.push("/payment");
   };
   useEffect(() => {
     // setValues({ ...values, price: (BASE_PRICE * basic_details.length)  })
@@ -287,14 +289,13 @@ function CheckoutPage() {
               textAlign: "center",
               paddingTop: " 32px",
               fontWeight: "bolder",
-              color: " #FFFFFF",
-              // marginLeft: "577px"
+              color: " #FFFFFF",              
             }}
           >
             MAKE PAYMENT
           </div>
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </>
   );

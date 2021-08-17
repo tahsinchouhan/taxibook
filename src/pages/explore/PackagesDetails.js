@@ -20,10 +20,9 @@ const PackagesDetails = (props) => {
   const [zoom, setZoom] = useState(11);
   const history = useHistory();
 
-
-  const onClickWhatsapp=()=>{
-    history.push(".")
-  }
+  // const onClickWhatsapp=()=>{
+  //   history.push("")
+  // }
   var id;
   useEffect(() => {
     if (props.location.item) {
@@ -171,27 +170,67 @@ const PackagesDetails = (props) => {
           </a>
         </div>
       </Container>
+        <div fluid className="d-none d-md-block">
+    <div className="packeges_title">
+        <span
+          className="packages_enquired"
+          style={{ color: "rgb(120, 104, 230)" }}
+        >
+          Enquire  Now
+        </span>
+        <span
+          className="packages_enquired"         
+        >
+          <a
+            className=""style={{ color: "rgb(120, 104, 230)",textDecoration:"none"}}
+            href={` https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`}
+          >
+            TripAdvisor reviews
+          </a>
+        </span>
+        <span className="packages_whatsapp">
+          <a
+            className="package-whats"style={{textDecoration:"none"}}
+            href={`https://api.whatsapp.com/send/?phone=+917894512324&text&app_absent=0`}
+          >
+            <FaWhatsapp style={{ fontSize: "30px" }} />
+            <span style={{margin:"5px"}}> Whatsapp</span>
+          </a>
+        </span>
+      </div> 
+      </div>
+      <div fluid className="d-md-none">
       <div className="packeges_title">
+        <div>
         <span
           className="packages_enquired"
           style={{ color: "rgb(120, 104, 230)" }}
         >
-          Enquired Now
+          Enquire Now
         </span>
         <span
-          className="packages_enquired"
-          style={{ color: "rgb(120, 104, 230)" }}
+          className="packages_enquired"         
         >
-          TripAdvisor reviews
+          <a
+            className=""style={{ color: "rgb(120, 104, 230)",textDecoration:"none"}}
+            href={` https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`}
+          >
+            TripAdvisor reviews
+          </a>
         </span>
-        <span
-          className="packages_enquired"
-          style={{ backgroundColor: "rgb(120, 104, 230)", color: "white",textTransform:"capitalize",paddingLeft:"10px"}}
-          onClick={onClickWhatsapp}
-        >
-          <FaWhatsapp style={{fontSize:"25px"}} />
-          Whatsapp
+        </div>
+        <div style={{marginTop:"25px"}}>
+        <span className="packages_whatsapp" >
+          <a
+            className="package-whats"style={{textDecoration:"none"}}
+            href={`https://api.whatsapp.com/send/?phone=+917894512324&text&app_absent=0`}
+          >
+            <FaWhatsapp style={{ fontSize: "25px" }} />
+            <span style={{margin:"5px"}}> Whatsapp</span>
+          </a>
         </span>
+        </div>
+      </div>
       </div>
       <Footer />
     </>

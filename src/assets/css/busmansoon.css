@@ -65,8 +65,9 @@
     width: 100%;    
 }
 .check-payment{
-    position: absolute;
+    /* position: absolute; */
 /* width: 1440px; */
+margin-top: 50px;
 width: 100%;
 display: flex;
 justify-content: center;
