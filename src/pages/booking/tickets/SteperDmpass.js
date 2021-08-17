@@ -44,7 +44,7 @@ function SteperDmpass(shows, ...props) {
 
   const onDmPassClick = () => {
     console.log("object", { ...dmData, basic_details: travellers, vehical_details: vehicles });
-    dispatch(createDmPass({ ...dmData, basic_details: travellers, vehical_details: vehicles }))
+    // dispatch(createDmPass({ ...dmData, basic_details: travellers, vehical_details: vehicles }))
     setShow(1);
   };
 
