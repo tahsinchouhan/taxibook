@@ -348,7 +348,7 @@
 
 // export default TicketsSraech;
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Row,
@@ -363,6 +363,7 @@ import Header from "../../../components/Header";
 import Footer from "../../travesaly/Footer";
 import { FaFilter, FaArrowLeft } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
+import { API_PATH } from "../../../Path/Path";
 
 function TicketsSreach() {
   const history = useHistory();
@@ -370,6 +371,24 @@ function TicketsSreach() {
     console.log("object");
     // dispatch(setApiData(values))
     history.push("/tickets1");
+  };
+
+  useEffect(() => {
+    getLocationsList()
+  }, [])
+
+  const getLocationsList = async () => {
+    let temp = []
+    await fetch(`${API_PATH}/api/v1/dmpass/list`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((json) => {
+        console.log(json);
+        // setLocationList(json.data)
+      });
+
+    console.log("temp", temp);
   };
 
   return (

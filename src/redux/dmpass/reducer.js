@@ -7,8 +7,8 @@ import {
 const INIT_STATE = {
     dmData: {
         mobile:'',
-        start_date:'2021-08-14',
-        end_date:'2021-08-17',
+        start_date:'',
+        end_date:'',
         tp_id:'',
         vp_id:'',
         ep_id:'',

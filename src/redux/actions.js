@@ -34,6 +34,7 @@ export const SET_ROUTE_DATA='SET_ROUTE_DATA';
 export const GET_OTP = "GET_OTP";
 export const GET_OTP_SUCCESS = "GET_OTP_SUCCESS";
 export const GET_OTP_ERROR = "GET_OTP_ERROR";
+export const VERIFY_OTP = "VERIFY_OTP";
 
 //dmpass
 export const SET_DM_DATA = "SET_DM_DATA";

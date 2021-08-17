@@ -51,7 +51,7 @@ function* createDmPass({ payload }) {
         const dmpass = yield call(createTravelPassRequest, payload);
         const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id });
         const entry = yield call(createEntryPassRequest, {  ...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id });
-        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id });
+        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id , ep_id: entry.data._id });
         yield put(setDmPassId(dm.data.dm_pass_id));
         // console.log("bus",busticket);
     } catch (error) {

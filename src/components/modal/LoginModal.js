@@ -5,7 +5,7 @@ import logo from "../../assets/img/logo.png";
 import { NavLink } from "react-router-dom";
 import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from "react-redux";
-import { getOtp } from "../../redux/actions";
+import { getOtp, verifyOtp } from "../../redux/actions";
 
 function LoginModal({ show, handleClose }) {
   // const [modalShow, setModalShow] = useState(false);
@@ -23,7 +23,8 @@ function LoginModal({ show, handleClose }) {
   }
 
   const handleSubmit = () => {
-    if (OTP.length === 4) {
+    if (OTP.length === 6) {
+      dispatch(verifyOtp({mobile,otp: OTP}))
       // dispatch(fetchVerifyPhoneOtp({otp: OTP}))
       // dispatch(setModalStatus(undefined))
     }
@@ -74,7 +75,7 @@ function LoginModal({ show, handleClose }) {
                           inputStyle="input__style"
                           value={OTP}
                           onChange={handleChange}
-                          numInputs={4}
+                          numInputs={6}
                           separator={<span>&nbsp;-&nbsp;</span>}
                         />
 

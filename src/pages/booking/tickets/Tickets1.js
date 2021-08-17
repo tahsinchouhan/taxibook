@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Row, Col, Form, Container } from "react-bootstrap";
 import Header from "../../../components/Header";
 import doodle from "../../../assets/img/doodle.png";
@@ -6,17 +6,60 @@ import DatePicker from "react-datepicker";
 import calendar from "../../../assets/img/calendar.png";
 import { useHistory } from "react-router-dom";
 import Footer from "../../travesaly/Footer";
+import { API_PATH } from "../../../Path/Path";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setDmData } from "../../../redux/actions";
 
 function Tickets1() {
   const history = useHistory();
   const [routes, setRoutes] = useState([]);
+
+  const dispatch = useDispatch()
+  const { dmData } = useSelector(state => state.dmpassReducer)
+
   const [startDate, setStartDate] = useState(new Date());
   const [selected, setSelected] = useState("");
 
-  const onStepreClick=()=>{
+  useEffect(() => {
+    getRoutes();
+  }, []);
+
+  const getRoutes = () => {
+    fetch(`${API_PATH}/api/v1/location/list`)
+      .then((response) => response.json())
+      .then((res) => {
+        setRoutes(res.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
+    <button
+      style={{ border: "none", background: "transparent", fontSize: "25px", color: "#a5a5a5" }}
+      onClick={onClick}
+      ref={ref}
+    >
+      {value}
+    </button>
+  ));
+  const onStepreClick = () => {
     console.log("steper")
     history.push("/steper_dmpass")
-}
+  }
+  const handleDate = (d) => {
+    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
+    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+    console.log(`${ye}-${mo}-${da}`);
+    dispatch(setDmData('start_date',`${ye}-${mo}-${da}`))
+    setStartDate(d)
+  }
+  
+  // useEffect(() => {
+  //   console.log("dmData",dmData);
+  // }, [dmData])
+
 
   return (
     <>
@@ -63,6 +106,11 @@ function Tickets1() {
                     style={{ border: "none", fontSize: "12px" }}
                   >
                     <option>select a destination...</option>
+                    {routes.map((item) => (
+                      <option key={item._id} value={item._id}>
+                        {item.name}
+                      </option>
+                    ))}
                   </Form.Select>
                 </Form.Group>
               </Col>
@@ -98,9 +146,10 @@ function Tickets1() {
                     />
                     <DatePicker
                       selected={startDate}
-                      onChange={(date) => setStartDate(date)}
-                      // customInput={<ExampleCustomInput/>}
-                      dateFormat="dd,MMM"
+                      // onChange={(date) => setStartDate(date)}
+                      onChange={handleDate}
+                      customInput={<ExampleCustomInput />}
+                      dateFormat="dd MMM"
                     />
                   </div>
                 </Form.Group>
@@ -120,7 +169,7 @@ function Tickets1() {
                 color: "white",
                 fontWeight: "900",
                 fontSize: "15px",
-                marginBottom:"50px"
+                marginBottom: "50px"
               }}
               onClick={onStepreClick}
             >
@@ -129,7 +178,7 @@ function Tickets1() {
           </div>
           <Footer />
         </div>
-      
+
         <div className="d-md-none">
           <Button
             className=""

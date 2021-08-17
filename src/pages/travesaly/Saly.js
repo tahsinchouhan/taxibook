@@ -15,6 +15,10 @@ function Saly() {
     console.log("object");
     history.push("/select-booking");
   };
+  const gotoTickets_sraech = () => {
+    console.log("object");
+    history.push("/tickets_sraech");
+  };
   return (
     <>
       <Container fluid style={{ padding: 0, margin: 0 }}>
@@ -129,6 +133,7 @@ function Saly() {
                   <Button
                     variant="danger"
                     style={{ cursor: "pointer", marginTop: "32px" }}
+                    onClick={gotoTickets_sraech}
                   >
                     View your Tickets
                   </Button>

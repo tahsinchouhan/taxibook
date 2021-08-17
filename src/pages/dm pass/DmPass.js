@@ -27,6 +27,14 @@ function DmPass() {
   const { number_of_vehicals,number_of_travellers,duration_of_travel } = dmData
 
   useEffect(() => {
+    let d = new Date();
+    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
+    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+    dispatch(setDmData('start_date',`${ye}-${mo}-${da}`))
+  }, [])
+
+  useEffect(() => {
     console.log("dmData",dmData);
   }, [dmData])
 

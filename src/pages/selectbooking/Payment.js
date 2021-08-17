@@ -18,7 +18,7 @@ function Payment() {
         <div>
         <Form style={{marginLeft:"207px",marginBottom:"50px"}}>
             <Row>
-              <Col xs={12} md={4}>
+              <Col xs={12} md={8}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
@@ -28,7 +28,7 @@ function Payment() {
                   />
                 </Form.Group>
               </Col>
-              <Col xs={12} md={4}>
+              <Col xs={12} md={8}>
                
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
@@ -41,7 +41,7 @@ function Payment() {
               </Col>
             </Row>
             <Row>
-              <Col xs={12} md={4}>
+              <Col xs={12} md={8}>
                 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Whatsapp Number</Form.Label>

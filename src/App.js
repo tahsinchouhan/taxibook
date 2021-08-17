@@ -78,10 +78,10 @@ function App() {
             <Route exact path='/CongratulationPage'component={CongratulationPage}/>
             <Route exact path='/ratancard'component={RatanCard}/>
             <Route exact path='/travelticket'component={TravelTicket}/>
-            <Route exact path='/dm-detail'component={DmDetail}/>
+            <Route exact path='/dm-detail/:id'component={DmDetail}/>
             <Route exact path='/dm_congratulate'component={DmCongratulate}/>
             <Route exact path='/tickets_sraech'component={TicketsSraech}/>
-            <Route exact path='/tickets1'component={Tickets1}/>
+            <Route exact path='/tickets'component={Tickets1}/>
             <Route exact path='/steper_dmpass'component={SteperDmpass}/>
             <Route exact path='/ ticket_checkout'component={ TicketCheckOut}/>
             <Route exact path='/payment'component={Payment}/>

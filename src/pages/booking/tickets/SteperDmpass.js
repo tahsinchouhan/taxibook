@@ -12,9 +12,10 @@ import Header from "../../../components/Header";
 import mobile from "../../../assets/img/mobile.png";
 import { FaWhatsapp } from "react-icons/fa";
 import Footer from "../../travesaly/Footer";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel, Paper, Typography } from "@material-ui/core";
-import { createDmPass } from "../../../redux/actions";
+import { createDmPass, setDmData } from "../../../redux/actions";
 import { API_PATH } from "../../../Path/Path";
 
 const button_Data = [
@@ -36,7 +37,8 @@ function SteperDmpass(shows, ...props) {
 
   const dispatch = useDispatch()
   const { dmData } = useSelector(state => state.dmpassReducer)
-  const { dmpass_id, number_of_vehicals, number_of_travellers, duration_of_travel } = dmData
+  const { dmpass_id, number_of_vehicals, number_of_travellers, duration_of_travel, mobile, start_date } = dmData
+
   const onSideBtnClick = (e) => {
     const name = e.target.name;
     setActiveButton(name);
@@ -57,7 +59,7 @@ function SteperDmpass(shows, ...props) {
   const onTicketCheckClick = () => {
     console.log("object");
     //history.push("./ ticket_checkout");
-    dispatch(createDmPass({ ...dmData, basic_details: travellers, vehical_details: vehicles,locations:locServ,total_charges:tot_charges }))
+    dispatch(createDmPass({ ...dmData, basic_details: travellers, vehical_details: vehicles, locations: locServ, total_charges: tot_charges }))
     setShow(3);
   };
   const onClickBack = () => {
@@ -215,6 +217,24 @@ function SteperDmpass(shows, ...props) {
 
     }))
   }
+  const handleDuration = (e) => {
+    console.log(e.target.value);
+    let st_date = new Date(start_date);
+    if (start_date === '') {
+      st_date = new Date()
+      dispatch(setDmData('start_date', getFormatedDate(st_date)))
+    }
+    let en_date = new Date();
+    en_date.setDate(st_date.getDate() + Number(e.target.value));
+    dispatch(setDmData('duration_of_travel', e.target.value))
+    dispatch(setDmData('end_date', getFormatedDate(en_date)))
+  }
+  const getFormatedDate = (d) => {
+    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
+    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+    return `${ye}-${mo}-${da}`
+  }
   return (
     <>
       <div className="d-none d-md-block">
@@ -261,6 +281,7 @@ function SteperDmpass(shows, ...props) {
                     className="form-control pass_input"
                     id="inputAddress"
                     placeholder="Enter mobile number"
+                    value={mobile} onChange={(e) => dispatch(setDmData("mobile", e.target.value))}
                   />
                 </div>
                 <div className="form-row">
@@ -277,7 +298,9 @@ function SteperDmpass(shows, ...props) {
                   </div>
                   <div className="form-group mt-4 ">
                     <label for="inputState">Days of Travel</label>
-                    <select id="inputState" className="form-control pass_input">
+                    <select id="inputState" className="form-control pass_input"
+                      onChange={handleDuration}
+                    >
                       <option selected>1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -1047,6 +1070,21 @@ function SteperDmpass(shows, ...props) {
                       </span>
                     </div>
                     <div>
+                    <div>
+                        <Button
+                          style={{
+                            width: "208px",
+                            textAlign: "center",
+                            height: "52px",
+                            borderRadius: "9px",
+                            backgroundColor: " #FF4A68",
+                            fontWeight: "bold",
+                            marginBottom: "20px",
+                          }}
+                        >
+                          <Link to={`/dm-detail/${dmpass_id}`} style={{textDecoration:"none"}}>View E-ticket</Link>
+                        </Button>
+                      </div>
                       <div>
                         <Button
                           className="btn btn-success"
@@ -1070,21 +1108,7 @@ function SteperDmpass(shows, ...props) {
                           <span> Whatsapp Link</span>
                         </Button>
                       </div>
-                      <div>
-                        <Button
-                          style={{
-                            width: "208px",
-                            textAlign: "center",
-                            height: "52px",
-                            borderRadius: "9px",
-                            backgroundColor: " #FF4A68",
-                            fontWeight: "bold",
-                            marginBottom: "20px",
-                          }}
-                        >
-                          Download E-ticket
-                        </Button>
-                      </div>
+                     
 
                       <div>
                         <Button
