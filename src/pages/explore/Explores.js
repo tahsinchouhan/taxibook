@@ -166,10 +166,8 @@ const Explores = () => {
           </div>
         </div>
         {
-
           (packages.length > 0)
             ?
-
             <Carousel
               ssr
               partialVisbile

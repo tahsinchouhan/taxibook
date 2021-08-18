@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "../../assets/css/buspass.css";
 import { FaBus, FaCarAlt, FaTicketAlt } from "react-icons/fa";
 import bus from "../../assets/img/bus.png";
@@ -9,13 +9,18 @@ import { useHistory } from "react-router-dom";
 import Footer from "../travesaly/Footer";
 import Header from "../../components/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { getOtp, setMobile } from "../../redux/actions";
+import { fetchStart, getOtp, setMobile, verifyOtp } from "../../redux/actions";
 import { API_PATH } from "../../Path/Path";
 import axios from "axios";
+import Loader from "../../components/Loader";
+import { toast } from "react-toastify";
+import Message from "../../components/Message";
 
 function BusDetail() {
   const history = useHistory();
-    const[otp,setOtp]=useState('');
+  const [otp, setOtp] = useState('');
+  const { error, loading, message } = useSelector(state => state.commonReducer)
+  const { user_data } = useSelector(state => state.loginReducer)
   const { mobile } = useSelector(state => state.busReducer)
 
   const dispatch = useDispatch()
@@ -24,25 +29,37 @@ function BusDetail() {
     console.log("object", e.target.value);
     let mob = e.target.value;
     if (mob.length > 9) {
-      dispatch(getOtp(`91${e.target.value}`))
+      // dispatch(getOtp(`91${e.target.value}`))
+      fetchOtp(e.target.value)
     }
     dispatch(setMobile(e.target.value))
   }
+
+  const fetchOtp = (mobile)=>{
+    dispatch(getOtp(`91${mobile}`))
+  }
+  
   const onClickMonsoon = () => {
-    console.log("object");
-    axios.post(`${API_PATH}/api/v1/customer/verifyotp`, {
-          mobile,
-          registrationMobileOTP:otp
-      })
-        .then((response) => response)
-        .then((json) => json);
-    
-    history.push('/busdetail')
+    console.log("object", `91${mobile}`, otp);
+    dispatch(fetchStart())
+    dispatch(verifyOtp(`91${mobile}`, otp))
+    // axios.post(`${API_PATH}/api/v1/customer/verifyotp`, {
+    //       mobile,
+    //       registrationMobileOTP:otp
+    //   })
+    //     .then((response) => response)
+    //     .then((json) => json);
+
+    // history.push('/busdetail')
     // history.push('/busmonsoon')
   }
   return (
     <>
       <Header />
+      {loading ? <Loader /> : null}
+      {message ? <Message msg={message} type="success" /> : null}
+      {error ? <Message msg={error} type="error" /> : null}
+      {(user_data !== null) ? <Redirect to='/busdetail' /> : null}
       <div className="d-none d-md-block">
         <div style={{ textAlign: "center", margin: "50px" }}>
           <div style={{ margin: "10px" }}>
@@ -109,6 +126,7 @@ function BusDetail() {
                   className="bus_input"
                   placeholder="Enter the 6 digit OTP"
                   style={{ height: "50px", fontSize: "12px" }}
+                  value={otp} onChange={(e) => setOtp(e.target.value)}
                 />
               </Form.Group>
             </Col>
@@ -194,7 +212,7 @@ function BusDetail() {
                   className="bus_input"
                   placeholder="Enter OTP"
                   style={{ fontSize: "12px" }}
-                  value={otp} onChange={(e)=>setOtp(e.target.value)}
+                  value={otp} onChange={(e) => setOtp(e.target.value)}
                 />
               </Form.Group>
             </Col>
