@@ -512,7 +512,7 @@ function BusMonsoon() {
                                   <br />
                                   <span
                                     style={{
-                                      fontSize: "25px",
+                                      fontSize: "22px",
                                       fontWeight: "bolder",
                                       fontFamily: "sans-serif",
                                       padding: "5px",

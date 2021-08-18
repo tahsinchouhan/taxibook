@@ -150,84 +150,7 @@ function SelectBooking() {
               </Col>
               </Row>              
             </div>
-          </Container>
-          {/* {Journey ? ( */}
-          {/* <>
-            <Container>
-              <Row>
-                <Col xs={2} md={2}></Col>
-                <Col xs={12} md={3} className="mt-2">
-                  <Form.Group
-                    className="userdatas"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label className="formselect">From</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <img src={city} style={{ width: 20, height: 20 }} />
-                      <Form.Control
-                        type="text"
-                        className="user_input"
-                        placeholder="Enter Source"
-                      />
-                    </div>
-                  </Form.Group>
-                </Col>
-                <Col xs={12} md={3} className="mt-2">
-                  <Form.Group
-                    className="userdatas"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label className="formselect">To</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <img src={city} style={{ width: 20, height: 20 }} />
-                      <Form.Control
-                        type="text"
-                        className="user_input"
-                        placeholder="Enter Source"
-                      />
-                    </div>
-                  </Form.Group>
-                </Col>
-                <Col xs={12} md={2} className="mt-2">
-                  <Form.Group
-                    className="userdatas"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label className="formselect">Journey Date</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row",overflow: 'hidden',border:"none"}}>
-                      <img src={calendar} style={{ width: 20, height: 20 }} />                     
-                      
-                      <DatePicker
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                        showTimeSelect
-                        dateFormat="dd,MMM"
-                       
-                      />
-                    </div>
-                  </Form.Group>
-                </Col>
-                <Col xs={2} md={2}></Col>
-                <Col xs={2} md={2}></Col>
-              </Row>
-              <div className="text-center">
-                <Button
-                  type="submit"
-                  className = "btn btn-success"
-                  style={{
-                    width: "19%",
-                    textAlign: "center",
-                    height: "48px",
-                    borderRadius: "9px",
-                    backgroundColor: "#0fa453",
-                  }}
-                >
-                  Proceed
-                </Button>
-              </div>
-            </Container>
-          </> */}
-          {/* ) : null} */}
+          </Container>         
           {passTab ? <Pass /> : null}
           {busjourney ? <BusPass /> : null}
           {cabjourney ? <doodle/> : null}
@@ -246,134 +169,49 @@ function SelectBooking() {
               </div>
             </div>
           </div>
+          
           <Container>
-            <Row className="user-icon">
-              <div className="icon-item">             
-
-                <span className="tab-icons">
-                  <img
-                    src={bus}
-                    className={busjourney ? "bus-color" : "default-color"}
-                    onClick={onBusClick}
-                  />
-                  <div
-                    onClick={onBusClick}
-                    className={busjourney ? "bus-color" : "default-color"}
-                  >
-                    Bus
+            <div>
+              <Row>
+              <Col xs={12} md={4}>
+                <div   className="userdatas" onClick={ onBusClick } >
+                  <div>
+                  <img src={bus} style={{ width:30, height:30,marginTop:"10px" }} />
                   </div>
-                </span>
-
-                <span className="tab-icons">
-                  <img
-                    src={doodle}
-                    className={cabjourney ? "cab-color" : "default-color"}
-                    
-                  />
-                  <div                   
-                    className={cabjourney ? "cab-color" : "default-color"}
-                  >
-                   
+                  <div className="bus_secation">
+                    <span className="booking_icon"  style={{color:"#FF4A68"}}>Bus</span><br/>
+                    <span>Find buses that will take you to your<br/>favourite destinations</span>
                   </div>
-                </span>
-                <span className="tab-icons">
-                  <img
-                    src={ticket}
-                    alt="ticket"
-                    className={passTab ? "pass-color" : "default-color"}
-                    onClick={onPassClick}
-                  />
-                  <div
-                    onClick={onPassClick}
-                    className={passTab ? "pass-color" : "default-color"}
-                  >
-                    Pass
+                </div>
+              </Col>
+              <Col xs={12} md={4}>
+              <div   className="userdatas" onClick={onClickTicket}>
+                  <div>
+                  <img src={doodle} style={{ width:40, height:40,marginTop:"10px" }} />
                   </div>
-                </span>
-
-              </div>
-            </Row>
+                  <div className="bus_secation">
+                    <span className="booking_icon" style={{color:"#864BD8"}}>Ticket</span><br/>
+                    <span>Registered ticket services for a<br/>personal travel experience</span>
+                  </div>
+                </div>
+              </Col>
+              <Col xs={12} md={4}>
+              <div   className="userdatas" onClick={ onPassClick} >
+                  <div>
+                  <img src={ticket} style={{ width:30, height:30,marginTop:"10px" }} />
+                  </div>
+                  <div className="bus_secation">
+                    <span className="booking_icon" style={{color:"#0FA453"}}>DmPass</span><br/>
+                    <span>Get a pass for travellers, vehicles<br/> and duration of your travel</span>
+                  </div>
+                </div>
+              </Col>
+              </Row>              
+            </div>
           </Container>
           {/* {Journey ? ( */}
           <>
-            <Container>
-              <Row>
-                <Col xs={2} md={2}></Col>
-                <div
-                  className="d-flex"
-                  style={{ borderBlockColor: "#9b98981c" }}
-                >
-                  <Col xs={12} md={3}>
-                    <div className="fromtocontainer">
-                      <Form.Group
-                        className="userDate"
-                        controlId="exampleForm.ControlInput1"
-                        style={{ borderBottom: "2px solid #8888" }}
-                      >
-                        <span className="formselect">From</span>
-                        <div style={{ display: "flex", flexDirection: "row" }}>
-                          <img src={city} style={{ width: 20, height: 20 }} />
-                          <Form.Control
-                            type="text"
-                            className="user_input"
-                            placeholder="Enter Source"
-                          />
-                        </div>
-                      </Form.Group>
-                      <Form.Group
-                        className="userDate"
-                        controlId="exampleForm.ControlInput1"
-                      >
-                        <span className="formselect">To</span>
-                        <div style={{ display: "flex", flexDirection: "row" }}>
-                          <img src={city} style={{ width: 20, height: 20 }} />
-                          <Form.Control
-                            type="text"
-                            className="user_input"
-                            placeholder="Enter Source"
-                          />
-                        </div>
-                      </Form.Group>
-                    </div>
-                  </Col>
-                </div>
-                <Col xs={12} md={2} className="mt-2">
-                  <Form.Group
-                    className="userdata"
-                    controlId="exampleForm.ControlInput1"
-                  >
-                    <Form.Label className="formselect">Journey Date</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <img src={calendar} style={{ width: 20, height: 20 }} />
-                      <DatePicker
-                        className="col-sm-10 user_input"
-                        style={{ marginLeft: "50px" }}
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                      />
-                    </div>
-                  </Form.Group>
-                </Col>
-                <Col xs={2} md={2}></Col>
-                <Col xs={2} md={2}></Col>
-              </Row>
-              <div className="text-center">
-                <Button
-                  type="submit"
-                  className = "btn btn-success"
-                  style={{
-                    width: "60%",
-                    textAlign: "center",
-                    height: "48px",
-                    borderRadius: "9px",
-                    backgroundColor: "#0fa453",
-                    marginBottom: "40px",
-                  }}
-                >
-                  Proceed
-                </Button>
-              </div>
-            </Container>
+           
           </>
           {/* ) : null} */}
           {passTab ? <Pass /> : null}
@@ -381,7 +219,9 @@ function SelectBooking() {
           {cabjourney ? <doodle /> : null}
         </div>
       </Container>
-      <Footer /> 
+      <Button className="locationpass-btn" onClick={onBusClick}>
+          Continue
+        </Button>
     </>
   );
 }
