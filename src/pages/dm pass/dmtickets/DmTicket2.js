@@ -128,6 +128,117 @@ function DmTicket2() {
             </Container>
           </div>
         </Container>
+{/*mobile-view*/}
+        <div>
+        <Container className="my-5" style={{ width: "" }}>
+          <div className="select_div">
+            <div className="row p-3" style={{ textAlign: "center" }}>
+              <div className="col-xs-12  col-sm-12 col-md-12">
+                <div className="booking-div">
+                  <div style={{ marginBottom: "15px" }}>
+                    <img src={ticket} alt="" />
+                  </div>
+                  <span
+                    style={{
+                      fontWeight: "600",
+                      fontSize: "15px",
+                      color: "#0fa453",
+                      paddingTop: "50px",
+                    }}
+                  >
+                    DM Pass
+                  </span>
+                  <br />
+                  <span
+                    style={{
+                      fontWeight: "bolder",
+                      fontSize: "12px",
+                      padding: "10px",
+                      whiteSpace:'nowrap'
+                    }}
+                  >
+                   <span> Get a pass for travellers, vehicles</span>
+                    <br/><span> and duration of your travel</span> 
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <Container style={{ width: "", paddingTop: "20px" }}>
+              <Row>
+                <Col xs={12} md={6} className="mt-2">
+                  <Form.Group
+                    className=""
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label className="dm-ticket">
+                      Enter Mobile no.
+                    </Form.Label>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <Form.Control
+                        type="text"
+                        className="dm-inputticket"
+                        placeholder=" Enter your mobile number"
+                        name="mobile"
+                        value={mobile} onChange={(e)=>dispatch(setDmData("mobile",e.target.value))}
+                      />
+                    </div>
+                    <Button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "#FF4A68",
+                        float: "left",
+                        fontSize: "12px",
+                      }}
+                    >
+                      Sent OTP
+                    </Button>
+                  </Form.Group>
+                </Col>
+                <Col xs={12} md={6} className="mt-2">
+                  <Form.Group
+                    className=""
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label className="dm-ticket">Enter OTP</Form.Label>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <Form.Control
+                        type="text"
+                        className="dm-inputticket"
+                        placeholder=" Enter the 6 digit OTP"
+                      />
+                    </div>
+                  </Form.Group>
+                </Col>
+              </Row>
+              {/* <div
+                className="dmticket-btn"
+                style={{ textAlign: "center", marginTop: "70px" }}
+              >
+                <Button
+                  type="submit"
+                  class="btn btn-success"
+                  style={{
+                    width: "",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    backgroundColor: "#0fa453",
+                    border: "none",
+                  }}
+                  onClick={onDmTicketSecondShow}
+                >
+                  Continue
+                </Button>
+              </div> */}
+            </Container>
+          </div>
+        </Container>
+        <Button className="locationpass-btn" onClick={onDmTicketSecondShow}>
+          Continue
+        </Button>
+        </div>
       </div>
     </>
   );

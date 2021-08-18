@@ -139,6 +139,101 @@ function DmPass() {
           </div>
         </Container>
       </div>
+      {/*mobile-view*/}
+      <div fluid className="d-md-none">
+      <div className="select_div">
+            <div className="row p-3" style={{ textAlign: "center" }}>
+              <div className="col-xs-12  col-sm-12 col-md-12">
+                <div className="booking-div">
+                  <div style={{ marginBottom: "15px" }}>
+                    <img src={ticket} alt="" />
+                  </div>
+                  <span style={{ fontWeight: "bolder", fontSize: "15px", color: "#0fa453", paddingTop: "50px" }}>DM Pass</span><br />
+                  <span style={{ fontSize: "12px", padding: "10px" }}>
+                    Get a pass for travellers, vehicles<br /> and duration of your travel
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <Container style={{ width: "92%", paddingTop: "28px" }}>
+              <Row>
+                <Col xs={12} md={4} className="mt-2">
+                  <Form.Group
+                    className=""
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label className="dm-ticket" >Number of Vehicles</Form.Label>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <Form.Control
+                        type="text"
+                        className="dm-inputticket"
+                        placeholder=" Vehicles..."
+                        name="number_of_vehicals"
+                        value={number_of_vehicals} onChange={(e)=>dispatch(setDmData("number_of_vehicals",e.target.value))}
+                      />
+                    </div>
+                  </Form.Group>
+                </Col>
+                <Col xs={12} md={4} className="mt-2">
+                  <Form.Group
+                    className=""
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label className="dm-ticket">Number of Travellers</Form.Label>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <Form.Control
+                        type="text"
+                        className="dm-inputticket"
+                        placeholder="Travellers..."
+                        name="number_of_travellers"
+                        value={number_of_travellers} onChange={(e)=>dispatch(setDmData("number_of_travellers",e.target.value))}
+                      />
+                    </div>
+                  </Form.Group>
+                </Col>
+                <Col xs={12} md={4} className="mt-2">
+                  <Form.Group
+                    className=""
+                    controlId="exampleForm.ControlInput1"
+                  >
+                    <Form.Label className="dm-ticket">Days of Travel</Form.Label>
+                    <div style={{ display: "flex", flexDirection: "row" }}>
+                      <Form.Control
+                        type="text"
+                        className="dm-inputticket"
+                        placeholder="Days of Travel.."
+                        name="duration_of_travel"
+                        value={duration_of_travel} onChange={(e)=>dispatch(setDmData("duration_of_travel",e.target.value))}
+                      />
+                    </div>
+                  </Form.Group>
+                </Col>
+              </Row>
+              {/* <div className="dmticket-btn" style={{ textAlign: "center", marginTop: "70px" }}>
+                <Button
+                  type="submit"
+                  class="btn btn-success"
+                  style={{
+                    width: "185px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    backgroundColor: "#0fa453",
+                    border: "none"
+                  }}
+                  onClick={onDmTicketShow}
+                >
+                  Continue
+                </Button>
+              </div> */}
+            </Container>
+          </div>
+          <Button className="locationpass-btn" onClick={onDmTicketShow}>
+          Continue
+        </Button>
+      </div>
+     
     </>
   );
 }

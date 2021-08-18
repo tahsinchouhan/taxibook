@@ -342,7 +342,7 @@ function CheckoutPage() {
           </div>
         </Container>
         
-        <Container className="" style={{ width: "", paddingTop: "50%" }}>
+        <Container className="" style={{ width: "", paddingTop:"20px" }}>
           <Row>
             <span
               style={{
@@ -371,7 +371,7 @@ function CheckoutPage() {
                       className="check-passenger"
                       style={{ marginLeft: "25px" }}
                     >
-                      <div style={{ textAlign: "center", padding: "5px" }}>
+                      <div style={{ textAlign: "center", padding: "5px",marginTop:"10px" }}>
                         <span
                           style={{
                             fontWeight: "bolder",

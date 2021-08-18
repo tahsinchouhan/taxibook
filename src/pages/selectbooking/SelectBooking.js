@@ -57,7 +57,7 @@ function SelectBooking() {
           <div className="row p-3" style={{ textAlign: "center" }}>
             <div className="col-xs-12  col-sm-12 col-md-12">
               <div className="booking-div">
-                <span style={{ fontWeight: "bolder", fontSize: "40px" }}>
+                <span style={{ fontWeight: "bolder", fontSize: "20px" }}>
                 What do you wish to book?
                 </span>
               </div>

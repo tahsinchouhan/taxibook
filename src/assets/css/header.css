@@ -105,4 +105,13 @@
   height: 80px;
   width: 74px;
 }
+.dm-inputticket{
+  height: 39px;
+  width: 100%;
+  font-size: 11px;
+  border: none;
+  background-color: transparent;
+  outline-width: 0;
+  background-color: #F8F8F8;;
+}
 }

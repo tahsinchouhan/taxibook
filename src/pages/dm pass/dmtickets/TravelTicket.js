@@ -109,9 +109,10 @@ function TravelTicket() {
   }, [vehicles])
   return (
     <>
-      <div>
+    <Header />
+      <div   className="d-none d-md-block">
         <Header />
-        <Container className="d-none d-md-block my-5" style={{ width: "70%" }}>
+     <Container  className=" my-5" style={{ width: "70%" }}>
           <div className="select_div">
             <div className="row p-3" style={{ textAlign: "center" }}>
               <div className="col-xs-12  col-sm-12 col-md-12">
@@ -213,12 +214,11 @@ function TravelTicket() {
 
         <Container style={{ width: "" }}>
           <Row>
-            <Col>
+            <Col xs={12} md={6}>
               <div style={{ width: "50%", float: "right" }}>
                 <label
                   style={{
                     fontSize: "14px",
-                    // marginBottom: "10px",
                     fontWeight: "500",
                     color: "black",
                   }}
@@ -335,7 +335,7 @@ function TravelTicket() {
                 </div>
               </div>
             </Col>
-            <Col>
+            <Col  xs={12} md={6}>
               <div style={{ width: "50%" }}>
                 <label
                   style={{
@@ -467,9 +467,113 @@ function TravelTicket() {
           </Button>
         </div>
 
-        <div style={{ height: "100px" }}></div>
+        <div style={{ height: "100px" }}></div> 
         <Footer />
       </div>
+      {/*mobile-view*/}
+      <div fluid className="d-md-none" style={{ width:"" }}>
+        <Container className=" my-5" style={{ width: "" }}>
+          <div className="select_div">
+            <div className="row p-3" style={{ textAlign: "center" }}>
+              <div className="col-xs-12  col-sm-12 col-md-12">
+                <div className="booking-div">
+                  <div style={{ marginBottom: "15px" }}>
+                    <img src={ticket} alt="" />
+                  </div>
+                  <span
+                    style={{
+                      fontWeight: "bolder",
+                      fontSize: "15px",
+                      color: "#0fa453",
+                      paddingTop: "50px",
+                    }}
+                  >
+                    DM Pass
+                  </span>
+                  <br />
+                  <span
+                    style={{
+                      fontWeight: "bolder",
+                      fontSize: "12px",
+                      padding: "10px",
+                    }}
+                  >
+                    Get a pass for travellers, vehicles
+                    <br /> and duration of your travel
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+        <Container
+          style={{ width: "", marginBottom: "40px" }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ width: "" }}>
+
+              <div  style={{display: 'flex', flexDirection: 'row' }}>
+                <Col xs={4} style={{ background: "#F8F8F8", width: "85px",textAlign: "center", marginRight: "10px" }}>
+                  <div style={{}}>
+                    <div style={{ }}>
+                      <h2 style={{ textAlign: "center", fontSize: "17px", fontWeight: "700" }}>{number_of_vehicals}</h2>
+                      <span style={{ fontSize: "12px", fontWeight: "700", color: "gray" }}>Vehicles</span><br />
+                      <div style={{ background: "#F8F8F8",textAlign: "center", }}>
+                        <Button
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "#FF4A68",
+                            float: "right",
+                            fontSize: "11px",
+                            float: "left",
+                            fontWeight: "700",
+                            
+                          }}
+                        >Edit</Button>
+                      </div>
+                    </div>
+                  </div>
+                </Col>
+                <Col  xs={4} style={{ background: "#F8F8F8", margin: "2px", width: "85px",textAlign: "center",  }}>
+                  <div style={{ background: "#F8F8F8", }}>
+                    <h2 style={{ textAlign: "center", fontSize: "17px", fontWeight: "700" }}>{number_of_travellers}</h2>
+                    <span style={{ fontSize: "12px", fontWeight: "700", color: "gray" }}>Travellers</span><br />
+                    <Button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "#FF4A68",
+                        float: "right",
+                        fontSize: "11px",
+                        float: "left",
+                        fontWeight: "700"
+                      }}
+                    >Edit</Button>
+                  </div>
+                </Col>
+                <Col  xs={4} style={{ background: "#F8F8F8", margin: "2px" , width: "85px",textAlign: "center", }}>
+                  <div style={{ background: "#F8F8F8", }}>
+                    <h2 style={{ textAlign: "center", fontSize: "17px", fontWeight: "700" }}>{duration_of_travel}</h2>
+                    <span style={{ fontSize: "12px", fontWeight: "700", color: "gray" }}>Days</span><br />
+                    <Button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "#FF4A68",
+                        float: "right",
+                        fontSize: "11px",
+                        float: "left",
+                        fontWeight: "700"
+                      }}
+                    >Edit</Button>
+                  </div>
+                </Col>
+
+              </div>
+            </div>
+          </div>
+        </Container>
+        </div>
     </>
   );
 }
