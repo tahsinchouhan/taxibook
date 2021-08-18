@@ -18,7 +18,8 @@ function Destination() {
     fetch(API_PATH + "/api/v1/destinations/list")
       .then((response) => response.json())
       .then((json) => {
-        setDestinations(json.data);
+        if (json.data !== undefined)
+          setDestinations(json.data);
         console.log(json.data);
       })
       .catch((e) => console.log(e));

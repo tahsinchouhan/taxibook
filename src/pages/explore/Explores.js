@@ -59,20 +59,24 @@ const Explores = () => {
     fetch(API_PATH + "/api/v1/destinations/list")
       .then((response) => response.json())
       .then((json) => {
-        setDestinations(json.data);
-        console.log(json.data);
+        if (json.data !== undefined)
+          setDestinations(json.data);
+        // console.log(json.data);
       })
       .catch((e) => console.log(e));
   };
 
   const getPackages = () => {
     fetch(API_PATH + "/api/v1/packages/list")
-      .then((response) => response.json())
-      .then((json) => {
-        setPackages(json.data);
-        console.log(json.data);
+      .then((response) => {
+        return response.json()
       })
-      .catch((e) => console.log(e));
+      .then((json) => {
+        // console.log("3we", json.data);
+        if (json.data !== undefined)
+          setPackages(json.data);
+      })
+      .catch((e) => console.log("err", e));
   };
 
   const onDestinations = (value) => {
@@ -116,25 +120,31 @@ const Explores = () => {
             <span>Tour</span> Maps
           </h2>
         </div>
-        {tripPackage.map((_item, index) => {
-          return (
-            <div style={{ display: "inline-block" }}>
-              <Image
-                draggable={false}
-                style={{ width: 250, height: 170, borderRadius: 15 }}
-                src={_item.url}
-              />
-              <a href={_item.pdf} target="_blank" className="package__trip">
-                <h6 className="packages__block-title mt-3 mb-0">
-                  {_item.title}
-                </h6>
-                <small className="packages__block-subtitle">
-                  {_item.subtTitle}
-                </small>
-              </a>
-            </div>
-          );
-        })}
+        {
+          (tripPackage.length > 0)
+            ?
+            tripPackage.map((_item, index) => {
+              return (
+                <div key={index} style={{ display: "inline-block" }}>
+                  <Image
+                    draggable={false}
+                    style={{ width: 250, height: 170, borderRadius: 15 }}
+                    src={_item.url}
+                  />
+                  <a href={_item.pdf} target="_blank" className="package__trip">
+                    <h6 className="packages__block-title mt-3 mb-0">
+                      {_item.title}
+                    </h6>
+                    <small className="packages__block-subtitle">
+                      {_item.subtTitle}
+                    </small>
+                  </a>
+                </div>
+              );
+            })
+            :
+            null
+        }
         <div className="mb-5 mt-5">
           <div
             style={{
@@ -155,58 +165,72 @@ const Explores = () => {
             </h6>
           </div>
         </div>
-        <Carousel
-          ssr
-          partialVisbile
-          itemClass="image-item"
-          responsive={responsive}
-        >
-          {packages.map((item) => {
-            return (
-              <div
-                onClick={() =>
-                  history.push({
-                    pathname: `/packages_details/${item.title}`,
-                    item: item._id,
+        {
+
+          (packages.length > 0)
+            ?
+
+            <Carousel
+              ssr
+              partialVisbile
+              itemClass="image-item"
+              responsive={responsive}
+            >
+              {
+                (packages.length > 0)
+                  ?
+                  packages.map((item, key) => {
+                    return (
+                      <div
+                        key={key}
+                        onClick={() =>
+                          history.push({
+                            pathname: `/packages_details/${item.title}`,
+                            item: item._id,
+                          })
+                        }
+                      >
+                        <Image
+                          draggable={false}
+                          style={{ width: "100%", height: "100%" }}
+                          src={item.upload_images}
+                        />
+                        <div>
+                          <h6 className="packages__block-title_ mt-3 mb-0">
+                            {item.title}
+                          </h6>
+                          <div
+                            style={{
+                              paddingTop: 2,
+                            }}
+                          >
+                            <h6
+                              style={{
+                                background: "#BEBEBE",
+                                display: "inline",
+                                padding: "3px",
+                                borderRadius: "4px",
+                                fontSize: "14px",
+                              }}
+                            >
+                              {item.sub_title}
+                            </h6>
+                          </div>
+                          <div>
+                            <small className="packages__block-subtitle">
+                              ₹ {item.price}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    );
                   })
-                }
-              >
-                <Image
-                  draggable={false}
-                  style={{ width: "100%", height: "100%" }}
-                  src={item.upload_images}
-                />
-                <div>
-                  <h6 className="packages__block-title_ mt-3 mb-0">
-                    {item.title}
-                  </h6>
-                  <div
-                    style={{
-                      paddingTop: 2,
-                    }}
-                  >
-                    <h6
-                      style={{
-                        background: "#BEBEBE",
-                        display: "inline",
-                        padding: "3px",
-                        borderRadius: "4px",
-                        fontSize: "14px",
-                      }}
-                    >
-                      {item.sub_title}
-                    </h6>
-                  </div>
-                  <div>
-                    <small className="packages__block-subtitle">
-                      ₹ {item.price}
-                    </small>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </Carousel>
+                  : null
+              }
+            </Carousel>
+            :
+            null
+        }
       </Container>
 
       <div
@@ -241,32 +265,39 @@ const Explores = () => {
               </h6>
             </div>
           </div>
-          <Carousel
-            ssr
-            partialVisbile
-            itemClass="image-item"
-            responsive={responsive}
-          >
-            {destinations.map((item) => {
-              return (
-                <div onClick={() => onDestinations(item)}>
-                  <Image
-                    draggable={false}
-                    style={{ width: "100%", height: "100%" }}
-                    src={item.upload_images}
-                  />
-                  <div style={{ color: "white" }} className="package__trip">
-                    <h6 className="packages__block-title mt-3 mb-0">
-                      {item.title}
-                    </h6>
-                    <small className="packages__block-subtitle">
-                      {item.sub_title}
-                    </small>
-                  </div>
-                </div>
-              );
-            })}
-          </Carousel>
+          {
+            (destinations.length > 0)
+              ?
+              <Carousel
+                ssr
+                partialVisbile
+                itemClass="image-item"
+                responsive={responsive}
+              >
+                {
+                  destinations.map((item, key) => {
+                    return (
+                      <div key={key} onClick={() => onDestinations(item)}>
+                        <Image
+                          draggable={false}
+                          style={{ width: "100%", height: "100%" }}
+                          src={item.upload_images}
+                        />
+                        <div style={{ color: "white" }} className="package__trip">
+                          <h6 className="packages__block-title mt-3 mb-0">
+                            {item.title}
+                          </h6>
+                          <small className="packages__block-subtitle">
+                            {item.sub_title}
+                          </small>
+                        </div>
+                      </div>
+                    );
+                  })}
+              </Carousel>
+              :
+              null
+          }
         </Container>
       </div>
       <Footer />
