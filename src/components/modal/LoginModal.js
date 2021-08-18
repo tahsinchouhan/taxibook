@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import logo from "../../assets/img/logo.png";
@@ -6,6 +6,9 @@ import { NavLink } from "react-router-dom";
 import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from "react-redux";
 import { getOtp, verifyOtp } from "../../redux/actions";
+import Loader from "../Loader";
+import Message from "../Message";
+
 
 function LoginModal({ show, handleClose }) {
   // const [modalShow, setModalShow] = useState(false);
@@ -14,6 +17,9 @@ function LoginModal({ show, handleClose }) {
   const [showDiv, setShowDiv] = useState(false);
 
   const dispatch = useDispatch();
+  const { error, loading, message } = useSelector(state => state.commonReducer)
+  const { user_data } = useSelector(state => state.loginReducer)
+
   const fetchOtp = _ => {
     dispatch(getOtp(mobile))
     setShowDiv(true);
@@ -24,15 +30,23 @@ function LoginModal({ show, handleClose }) {
 
   const handleSubmit = () => {
     if (OTP.length === 6) {
-      dispatch(verifyOtp({mobile,otp: OTP}))
-      // dispatch(fetchVerifyPhoneOtp({otp: OTP}))
-      // dispatch(setModalStatus(undefined))
+      dispatch(verifyOtp(mobile, OTP))
     }
   }
+  useEffect(() => {
+    if (user_data !== null) {
+      handleClose()
+    }
+  }, [user_data])
 
   return (
     <>
       <div>
+        {loading ? <Loader /> : null}
+        {message ? <Message msg={message} type="success" /> : null}
+        {error ? <Message msg={error} type="error" /> : null}
+        {/* {(user_data !== null) ? <Redirect to='/busdetail' /> : null} */}
+
         <Modal show={show} size="lg">
           <Modal.Header onClick={handleClose} closeButton>
             {/* <Modal.Title id="contained-modal-title-vcenter">
@@ -61,15 +75,15 @@ function LoginModal({ show, handleClose }) {
                         >
                           Enter mobile number
                         </Form.Label>
-                        <Form.Control type="text" placeholder="Phone Number" value={mobile} onChange={(e)=>setMobile(e.target.value)} />
+                        <Form.Control type="text" placeholder="Phone Number" value={mobile} onChange={(e) => setMobile(e.target.value)} />
                       </Form.Group>
 
                       <Button variant="dark" onClick={fetchOtp} style={{ fontWeight: "bolder", width: "95px", marginBottom: "50px" }}>
                         Get OTP
                       </Button>
 
-                      <div className="modal__block" style={{display: `${showDiv ? "block" : "none" }` }} >
-                        <h5 className="modal__title mt-2 mb-4" style={{ fontWeight: "bolder"}}>Enter Verification Code</h5>
+                      <div className="modal__block" style={{ display: `${showDiv ? "block" : "none"}` }} >
+                        <h5 className="modal__title mt-2 mb-4" style={{ fontWeight: "bolder" }}>Enter Verification Code</h5>
                         <OtpInput
                           // containerStyle="container__style"
                           inputStyle="input__style"

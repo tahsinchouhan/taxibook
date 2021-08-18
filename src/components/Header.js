@@ -12,22 +12,26 @@ import { HiMenu } from "react-icons/hi";
 import logo from "../assets/img/logo.png";
 import { NavLink, useHistory } from "react-router-dom";
 import { FaUser, FaSistrix } from "react-icons/fa";
-import { useDispatch, connect } from "react-redux";
+import { useDispatch, connect, useSelector } from "react-redux";
 import LoginModal from "../components/modal/LoginModal";
 import Modal from 'react-bootstrap'
+import { logout } from "../redux/actions";
 
 function Header() {
   const [modalShow, setModalShow] = useState(false);
 
-const modalHadler=()=>{
-  setModalShow(true)
-  console.log("helllo")
-}
-const  handleLoginClose=()=>{
-  setModalShow(false)
-}
+  const modalHadler = () => {
+    setModalShow(true)
+    console.log("helllo")
+  }
+  const handleLoginClose = () => {
+    setModalShow(false)
+  }
 
   const dispatch = useDispatch();
+
+  const { user_data } = useSelector(state => state.loginReducer)
+
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState(false);
   const [explore, setExpolre] = useState(false);
@@ -160,16 +164,34 @@ const  handleLoginClose=()=>{
                       marginRight: "10px",
                     }}
                   />
-                  <h4
-                    style={{
-                      fontSize: "18px",
-                      color: "purple",
-                      marginRight: "10px",
-                    }}
-                    onClick={() =>  modalHadler()}
-                  >                                   
-                    login
-                  </h4>
+                  {
+                    (user_data !== null)
+                      ?
+                      <h4
+                        style={{
+                          fontSize: "18px",
+                          color: "purple",
+                          marginRight: "10px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => dispatch(logout())}
+                      >
+                        Logout
+                      </h4>
+                      :
+                      <h4
+                        style={{
+                          fontSize: "18px",
+                          color: "purple",
+                          marginRight: "10px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => modalHadler()}
+                      >
+                        Login
+                      </h4>
+                  }
+
                 </div>
                 <div>
                   <FaSistrix
@@ -188,7 +210,7 @@ const  handleLoginClose=()=>{
           </Navbar.Collapse>
         </Navbar>
       </Container>
-      <LoginModal show={modalShow} handleClose={handleLoginClose}/>    
+      <LoginModal show={modalShow} handleClose={handleLoginClose} />
     </>
   );
 }

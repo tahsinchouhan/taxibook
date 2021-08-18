@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel, Paper, Typography } from "@material-ui/core";
 import { createDmPass, setDmData } from "../../../redux/actions";
 import { API_PATH } from "../../../Path/Path";
+import axios from "axios";
 
 const button_Data = [
   {
@@ -37,12 +38,39 @@ function SteperDmpass(shows, ...props) {
 
   const dispatch = useDispatch()
   const { dmData } = useSelector(state => state.dmpassReducer)
+  const { user_data } = useSelector(state => state.loginReducer)
   const { dmpass_id, number_of_vehicals, number_of_travellers, duration_of_travel, mobile, start_date } = dmData
 
   const onSideBtnClick = (e) => {
     const name = e.target.name;
     setActiveButton(name);
   };
+
+  useEffect(() => {
+    let mob;
+    if (user_data !== null) {
+      mob = user_data?.user?.mobile?.slice(2, user_data?.user?.mobile?.length)
+      dispatch(setDmData('mobile', mob))
+      getDmPassData(mob)
+      console.log();
+    }
+  }, [user_data])
+
+  const getDmPassData = async (mobile) => {
+    await axios.post(`${API_PATH}/api/v1/dmpass/search` , {
+      mobile
+    })
+      .then((response) => {
+        return response.data
+      })
+      .then((json) => {
+        console.log("js",json);
+        return json
+      })
+      .catch((error) => {
+        console.log("js",error);
+      })
+  }
 
   const onDmPassClick = () => {
     console.log("object", { ...dmData, basic_details: travellers, vehical_details: vehicles });
@@ -155,7 +183,7 @@ function SteperDmpass(shows, ...props) {
         return response.json()
       })
       .then((json) => {
-        console.log(json);
+        // console.log(json);
         // setLocationList(json.data)
         json?.data?.map(async (item, i) => {
           let tempServ = []
@@ -164,9 +192,8 @@ function SteperDmpass(shows, ...props) {
               return response.json()
             })
             .then((res) => {
-              console.log(res);
               res?.data?.map((service, i) => {
-                console.log("service", service);
+                // console.log("service", service);
                 tempServ.push({
                   service_id: service._id,
                   service_name: service.service_name,
@@ -1070,7 +1097,7 @@ function SteperDmpass(shows, ...props) {
                       </span>
                     </div>
                     <div>
-                    <div>
+                      <div>
                         <Button
                           style={{
                             width: "208px",
@@ -1082,7 +1109,7 @@ function SteperDmpass(shows, ...props) {
                             marginBottom: "20px",
                           }}
                         >
-                          <Link to={`/dm-detail/${dmpass_id}`} style={{textDecoration:"none"}}>View E-ticket</Link>
+                          <Link to={`/dm-detail/${dmpass_id}`} style={{ textDecoration: "none" }}>View E-ticket</Link>
                         </Button>
                       </div>
                       <div>
@@ -1108,7 +1135,7 @@ function SteperDmpass(shows, ...props) {
                           <span> Whatsapp Link</span>
                         </Button>
                       </div>
-                     
+
 
                       <div>
                         <Button
