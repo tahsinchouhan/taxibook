@@ -69,21 +69,31 @@ body {
   font-size: 12px;
 }
 .userdatas{
-  color: grey;
-  font-size: 19px;
+  /* color: grey; */
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
   background-color: #9b98981c;
   margin: 0 0 20px 0;
   padding:10px 20px;
   border-radius: 10px;
+  cursor: pointer;
 }
-.userdata {
-  color: grey;
-  font-size: 19px;
+.userdatas {
+  /* color: grey; */
+  font-size:12px;
   background-color: #9b98981c;
-  margin: 20px 0;
-  padding:10px 20px;
+  /* margin:;
+  padding:10px 20px; */
   border-radius: 10px;
 }
 .airoIcon {
   margin-right: 20px;
+}
+.booking_icon{
+  font-size: 15px;
+  font-weight: 600;
+}
+.bus_secation{
+padding-left: 15px;
 }

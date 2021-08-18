@@ -270,7 +270,6 @@ body {
 /* ====================== */
 /* Block */
 
-.block__content {}
 
 .block__content-list {
   margin-bottom: 7px;
@@ -491,14 +490,7 @@ body {
   background: #3e82f7;
   background-color: #3e82f7 !important;
 }
-.loginBtn--google:before {
-  /* border-right: #BB3F30 1px solid !important; */
-  /* background: url('../assets/search.png') 13px 9px no-repeat !important; */
-}
-.loginBtn--google:hover,
-.loginBtn--google:focus {
-  /* background: #E74B37 !important; */
-}
+
 
 /* ===========login Screen========= */
 

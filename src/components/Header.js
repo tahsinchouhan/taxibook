@@ -90,7 +90,7 @@ function Header() {
                 EXPLORE
               </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/select-booking"> */}
-              <NavLink className="sidebar__navlink" to="/buspass">
+              <NavLink className="sidebar__navlink" to="/select-booking">
                 BOOKING
               </NavLink>
               <NavLink className="sidebar__navlink" to="/dmpass">
@@ -137,7 +137,7 @@ function Header() {
                 EXPLORE
               </NavLink>
               {/* <NavLink className="sidebar_item" to="/select-booking"> */}
-              <NavLink className="sidebar_item" to="/buspass">
+              <NavLink className="sidebar_item" to="/select-booking">
                 BOOKING
               </NavLink>
               <NavLink className="sidebar_item" to="/dmpass">

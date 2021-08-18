@@ -7,29 +7,48 @@ import Footer from "../travesaly/Footer";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createBusBooking } from "../../redux/actions";
+import { FaArrowLeft } from "react-icons/fa";
+import Typography from "@material-ui/core/Typography";
 
 function CheckoutPage() {
   const history = useHistory();
 
-  const dispatch = useDispatch()
-  const { data: apiData, tripData, mobile } = useSelector(state => state.busReducer)
-  const { name, age, gender, adhaar, basic_details, price, surcharge } = apiData;
-
+  const dispatch = useDispatch();
+  const {
+    data: apiData,
+    tripData,
+    mobile,
+  } = useSelector((state) => state.busReducer);
+  const { name, age, gender, adhaar, basic_details, price, surcharge } =
+    apiData;
 
   const onCongratsClick = () => {
     console.log("object", tripData);
-    dispatch(createBusBooking({ ...apiData, trips_id: tripData?._id, route: tripData?.route?._id, from: tripData?.route?.start?._id, to: tripData?.route?.end?._id, bus: tripData?.vehical, mobile }))
+    dispatch(
+      createBusBooking({
+        ...apiData,
+        trips_id: tripData?._id,
+        route: tripData?.route?._id,
+        from: tripData?.route?.start?._id,
+        to: tripData?.route?.end?._id,
+        bus: tripData?.vehical,
+        mobile,
+      })
+    );
     history.push("/payment");
   };
   useEffect(() => {
     // setValues({ ...values, price: (BASE_PRICE * basic_details.length)  })
     // setValues({ ...values, price: (basePrice * basic_details.length) })
     console.log("enosdkl", apiData);
-  }, [basic_details])
+  }, [basic_details]);
 
+  const onClickBack = () => {
+    history.push("/busconfirmation");
+  };
   return (
     <>
-      <div>
+      <div className="d-none d-md-block">
         <Header />
         <div>
           <Container className="" style={{ width: "42%", paddingTop: "50px" }}>
@@ -45,7 +64,7 @@ function CheckoutPage() {
             </h5>
             <Row>
               <Col>
-                <div style={{ marginLeft: "25px", }}>
+                <div style={{ marginLeft: "25px" }}>
                   <div className="p-2">
                     <span
                       style={{
@@ -146,7 +165,8 @@ function CheckoutPage() {
                             fontSize: "13px",
                           }}
                         >
-                          {tripData?.departure_time} - {tripData?.estimated_time_of_arrival}
+                          {tripData?.departure_time} -{" "}
+                          {tripData?.estimated_time_of_arrival}
                         </span>
                         <br />
                         <div style={{ marginLeft: "-8px" }}>
@@ -177,7 +197,6 @@ function CheckoutPage() {
                           }}
                         >
                           {tripData?.trip_name}
-
                         </span>
                       </div>
                       <span
@@ -197,91 +216,68 @@ function CheckoutPage() {
           </Container>
           <Container className="" style={{ width: "42%", paddingTop: "20px" }}>
             <Row>
-              <span style={{
-                fontWeight: "bolder",
-                fontFamily: "sans-serif",
-                fontSize: "16px",
-                color: "black",
-                marginLeft: "25px",
-              }}
-              >Passenger Details</span>
-              {
-                (basic_details?.length > 0) ?
-
-                  <Row>
-                    {/* <h3
+              <span
+                style={{
+                  fontWeight: "bolder",
+                  fontFamily: "sans-serif",
+                  fontSize: "16px",
+                  color: "black",
+                  marginLeft: "25px",
+                }}
+              >
+                Passenger Details
+              </span>
+              {basic_details?.length > 0 ? (
+                <Row>
+                  {/* <h3
                     style={{
                       fontSize: "19px",
                       color: "#0FA453",
                       fontWeight: "bolder",
                     }}>Passengers ({`${basic_details?.length}`})</h3> */}
-                    {basic_details?.map((item, i) =>
-
-                      <Col md={6}>
-                        <div className="check-passenger" style={{ marginLeft: "25px", }}>
-                          <div style={{ textAlign: "center", padding: "10px" }}>
-                            <span style={{
+                  {basic_details?.map((item, i) => (
+                    <Col md={6}>
+                      <div
+                        className="check-passenger"
+                        style={{ marginLeft: "25px" }}
+                      >
+                        <div style={{ textAlign: "center", padding: "10px" }}>
+                          <span
+                            style={{
                               fontWeight: "bolder",
                               fontFamily: "sans-serif",
                               fontSize: "13px",
                               color: "black",
                             }}
-                            > {item.name}</span> <br />
-                            <span>{item.gender}, {item.age}</span> <br />
-                            <span> Adhaar: {item.adhaar}</span>
-                            <div className="p-3">
-                              <Button className="checout-btn">EDIT</Button>
-                            </div>
+                          >
+                            {item.name}
+                          </span>
+                          <br />
+                          <span>
+                            {item.gender}, {item.age}
+                          </span>
+                          <br />
+                          <span> Adhaar: {item.adhaar}</span>
+                          <div className="p-3">
+                            <Button className="checout-btn">EDIT</Button>
                           </div>
                         </div>
-                      </Col>
-                    )}
-                  </Row>
-                  : null
-              }
-              {/* <Col>
-                <div className="check-passenger" style={{ marginLeft: "25px", }}>
-                  <div style={{ textAlign: "center", padding: "10px" }}>
-                    <span style={{
-                      fontWeight: "bolder",
-                      fontFamily: "sans-serif",
-                      fontSize: "13px",
-                      color: "black",
-                    }}
-                    >Rajesh Sharma</span> <br />
-                    <span>Male, 25</span> <br />
-                    <span> Adhaar: 1298 2954 1926</span>
-                    <div className="p-3">
-                      <Button className="checout-btn">EDIT</Button>
-                    </div>
-                  </div>
-                </div>
-              </Col> */}
-              {/* <Col>
-                <div className="check-passenger" style={{ marginLeft: "15px", }}>
-                  <div style={{ textAlign: "center", padding: "10px" }}>
-                    <span style={{
-                      fontWeight: "bolder",
-                      fontFamily: "sans-serif",
-                      fontSize: "13px",
-                      color: "black",
-                    }}
-                    >Sunita Sharma</span>  <br />
-                    <span>Female, 22</span> <br />
-                    <span> Adhaar: 1298 2954 1926</span>
-                    <div className="p-3">
-                      <Button className="checout-btn">EDIT</Button>
-                    </div>
-                  </div>
-                </div>
-              </Col> */}
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+              ) : null}
             </Row>
           </Container>
         </div>
-        <div style={{ height: "250px" }}>
-        </div>
-        <div className="check-payment" style={{ background: "#0FA453" }} onClick={onCongratsClick}>
-          <div className="checkout-payment"
+        <div style={{ height: "250px" }}></div>
+        <div
+          className="check-payment"
+          style={{ background: "#0FA453" }}
+          onClick={onCongratsClick}
+        >
+          <div
+            className="checkout-payment"
             style={{
               position: "absolute",
               lineHeight: "25px",
@@ -289,13 +285,150 @@ function CheckoutPage() {
               textAlign: "center",
               paddingTop: " 32px",
               fontWeight: "bolder",
-              color: " #FFFFFF",              
+              color: " #FFFFFF",
             }}
           >
             MAKE PAYMENT
           </div>
         </div>
         <Footer />
+      </div>
+      {/*Mobile_view*/}
+      <div fluid className="d-md-none">
+        <div
+          className="tatibandh d-flex"
+          style={{
+            height: "85px",
+            backgroundColor: "#0FA453",
+            color: "white",
+          }}
+        >
+          <div
+            style={{
+              // marginRight: "62px",
+              paddingTop: " 20px",
+              fontSize: " 24px",
+              marginLeft: "20px",
+            }}
+          >
+            <FaArrowLeft onClick={onClickBack} />
+          </div>
+          <div>
+            <h5
+              style={{
+                marginLeft: "110px",
+                paddingTop: "29px",
+                fontSize: "17px",
+                backgroundColor: "#0FA453",
+                fontWeight: "bolder",
+                color: "white",
+                textAlign: "center",
+              }}
+            >
+              Checkout
+            </h5>
+          </div>
+        </div>
+        <Container>
+          <div style={{textAlign:"center",marginTop:"20px"}}>
+            <span>Destination</span>
+            <h3 style={{fontWeight:"700"}}> Chitrakote, Bastar
+                    {tripData?.route?.end?.name}</h3>
+            <span>31 July, 2021</span>
+            <br />
+            <span>Total Amount</span> <br />
+            <span style={{fontWeight:"700",fontSize:"22px",color:"#FF4A68"}}>  ₹ {price} </span> <br />
+            <span>*Excluding taxes</span>
+          </div>
+        </Container>
+        
+        <Container className="" style={{ width: "", paddingTop: "50%" }}>
+          <Row>
+            <span
+              style={{
+                fontWeight: "bolder",
+                fontFamily: "sans-serif",
+                fontSize: "13px",
+                color: "black",
+                // marginLeft: "10px",
+                whiteSpace:'nowrap',
+                textAlign:""
+              }}
+            >
+              Passenger Details
+            </span>
+            {basic_details?.length > 0 ? (
+              <Row>
+                {/* <h3
+                    style={{
+                      fontSize: "19px",
+                      color: "#0FA453",
+                      fontWeight: "bolder",
+                    }}>Passengers ({`${basic_details?.length}`})</h3> */}
+                {basic_details?.map((item, i) => (
+                  <Col xs={6} md={6}>
+                    <div
+                      className="check-passenger"
+                      style={{ marginLeft: "25px" }}
+                    >
+                      <div style={{ textAlign: "center", padding: "5px" }}>
+                        <span
+                          style={{
+                            fontWeight: "bolder",
+                            fontFamily: "sans-serif",
+                            fontSize: "13px",
+                            color: "black",
+                          }}
+                        >
+                          {item.name}
+                        </span>
+                        <br />
+                        <span   style={{
+                            fontWeight: "bold",
+                            fontFamily: "sans-serif",
+                            fontSize: "11px",
+                            color: "black",
+                          }}>
+                          {item.gender}, {item.age}
+                        </span>
+                        <br />
+                        <span  style={{
+                            fontWeight: "bold",
+                            fontFamily: "sans-serif",
+                            fontSize: "11px",
+                            color: "black",
+                          }}> Adhaar: {item.adhaar}</span>
+                        <div className="">
+                          <Button className="checout-btn">EDIT</Button>
+                        </div>
+                      </div>
+                    </div>
+                  </Col>
+                ))}
+              </Row>
+            ) : null}
+          </Row>
+        </Container>
+        <div
+          className="check-payment"
+          style={{ background: "#0FA453" }}
+          onClick={onCongratsClick}
+        >
+          <div
+            className="checkout-payment"
+            style={{
+              position: "absolute",
+              lineHeight: "25px",
+              fontSize: "21px",
+              textAlign: "center",
+              paddingTop: " 32px",
+              fontWeight: "bolder",
+              color: " #FFFFFF",
+            }}
+          >
+            MAKE PAYMENT
+          </div>
+        </div>
       </div>
     </>
   );

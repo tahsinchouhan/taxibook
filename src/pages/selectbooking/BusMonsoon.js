@@ -173,7 +173,7 @@ function BusMonsoon() {
                     <Container onClick={() => onClickTrain(item._id)} style={{ cursor: "pointer" }} >
                       <Row>
                         <Col>
-                          <div className="rajratan-train" style={{ float: "left" }}>
+                          <div className="rajratan-train" style={{}}>
                             <div className="d-flex p-1">
                               <img src={bus1} alt="bus" style={{ height: "20px", paddingRight: "10px" }} />
                               <span style={{ fontWeight: "bolder", fontFamily: "sans-serif" }}>{item.trip_name}</span>
@@ -189,7 +189,7 @@ function BusMonsoon() {
                         </Col>
                         <Col>
                           <div className="d-flex" style={{ float: "right", padding: "10px" }}>
-                            <div className="pt-2">
+                            <div className="pt-2" style={{ float: "right" }}>
                               <span style={{ color: "grey", fontFamily: "sans-serif", padding: "5px" }}>*per person</span><br />
                               <span style={{ fontWeight: "bolder", fontFamily: "sans-serif", padding: "5px" }}>₹ {item?.ticket_price}</span>
                             </div>
@@ -492,7 +492,7 @@ function BusMonsoon() {
                           </div>
                         </Col>
                         <Col style={{ float: "right" }}>
-                          <Row>
+                          <Row  style={{ float: "right"}}>
                             <div
                               className=" ml-4"
                               style={{ float: "right", padding: "10px" }}
@@ -512,7 +512,7 @@ function BusMonsoon() {
                                   <br />
                                   <span
                                     style={{
-                                      fontSize: "25px",
+                                      fontSize: "22px",
                                       fontWeight: "bolder",
                                       fontFamily: "sans-serif",
                                       padding: "5px",

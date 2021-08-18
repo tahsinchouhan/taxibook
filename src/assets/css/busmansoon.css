@@ -1,6 +1,6 @@
 
 .mansoon-div{
-    width: 60%;
+    width: 100%;
 }
 .mansoon-row{
     background-color:#F8F8F8;
@@ -34,7 +34,7 @@
     border-radius: 5px;
     box-shadow: 1px 0px 1px 1px grey;
     height: 68px;
-    width: 38%;
+    width: 75px;
 }
 .train-seatsmobile {
     background-color: #0FA453;
@@ -43,7 +43,7 @@
     border-radius: 5px;
     box-shadow: 1px 0px 1px 1px grey;
     height: 80px;
-    width: 75%;
+    width: 68px;
 }
 .select-train{
     background-color:#F8F8F8;

@@ -661,17 +661,7 @@ function BusConfirmation() {
                 >
                   Boarding from
                 </span>
-                {/* <button
-                  style={{
-                    backgroundColor: "transparent",
-                    border: "none",
-                    color: "#FF4A68",
-                    float: "right",
-                    fontSize: "12px",
-                  }}
-                >
-                  Change
-                </button> */}
+                
               </div>
               <div className=" select-train mt-2 d-flex">
                 <Form className="d-flex">
@@ -713,9 +703,7 @@ function BusConfirmation() {
                       fontFamily: "sans-serif",
                     }}
                   >
-                    {/* Raj Ratan Travels, Borivali East,
-                    <br />
-                    Devipada Subway */}
+                    
 
                     {tripData?.route?.start?.name}
                   </span>
@@ -732,17 +720,7 @@ function BusConfirmation() {
                 >
                   Dropoff At
                 </span>
-                {/* <button
-                  style={{
-                    backgroundColor: "transparent",
-                    border: "none",
-                    color: "#FF4A68",
-                    float: "right",
-                    fontSize: "12px",
-                  }}
-                >
-                  Change
-                </button> */}
+               
               </div>
               <div className=" select-train mt-2 d-flex">
                 <Form className="d-flex">
@@ -784,10 +762,7 @@ function BusConfirmation() {
                       fontFamily: "sans-serif",
                     }}
                   >
-                    {/* Raj Ratan Travels, Borivali East,
-                    <br />
-                    Devipada Subway */}
-
+                    
                     {tripData?.route?.end?.name}
                   </span>
                 </div>
@@ -935,12 +910,12 @@ function BusConfirmation() {
             : null
         } */}
 
-        <div className="traveller_div">
+        <div className="traveller_div" >
           {
             travellers?.map((item, i) => (
-              <Paper key={i} className="traveller__card">
+              <Paper key={i} className="traveller__card" style={{marginBottom:"15px"}}>
                 <div className="traveller__card_body" className="py-0">
-                  <h5 className="traveller__card_title" style={{fontSize:"12px"}}>Travellers {i + 1}</h5>
+                  <h5 className="traveller__card_title" style={{fontSize:"12px",marginBottom:"15px"}}>Travellers {i + 1}</h5>
                   <p className="traveller__card_text">
                     <div className="form-group mt-0">
                       <label className="mb-1" for={`name${i}`}>Name</label>
@@ -949,7 +924,7 @@ function BusConfirmation() {
                         className="form-control pass_input"
                         id={`name${i}`}
                         placeholder="Enter passenger name"
-                        style={{ fontSize: "11px", marginLeft: "-5px" }}
+                        style={{ fontSize: "11px", marginLeft: "-5px",marginTop:"7px" }}
                         name="name" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].name}
                       />
                     </div>
@@ -963,6 +938,7 @@ function BusConfirmation() {
                               width: "50%",
                               fontSize: "11px",
                               whiteSpace: "nowrap",
+                              marginTop:"7px"
                             }}
                             data={button_Data}
                             // activeButton={activeButton}
@@ -984,6 +960,7 @@ function BusConfirmation() {
                             fontSize: "12px",
                             whiteSpace: "nowrap",
                             height: "33px",
+                            marginTop:"7px"
                           }}
                           // name="age" onChange={handleChange} value={age}
                           name="age" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].age}
@@ -1000,7 +977,7 @@ function BusConfirmation() {
                         className="form-control pass_input"
                         id={`adhaar${i}`}
                         placeholder=" Enter 12 digit Adhaar Card Number"
-                        style={{ fontSize: "11px", marginLeft: "-5px" }}
+                        style={{ fontSize: "11px", marginLeft: "-5px",marginTop:"7px" }}
                         // name="adhaar" onChange={handleChange} value={adhaar}
                         name="adhaar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].adhaar}
                       />
@@ -1020,6 +997,7 @@ function BusConfirmation() {
               height: "51px",
               border: "none",
               borderRadius: "15px",
+              marginTop:'40px'
             }}
             // onClick={handleShow}
             // onClick={handleClick("top-start")}
@@ -1040,7 +1018,7 @@ function BusConfirmation() {
               <div style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px" }}>
 
                 <div style={{ padding: "" }}>
-                  <span style={{ fontSize: "15px", lineHeight: "21px", color: "grey" }}>
+                  <span style={{ fontSize: "13px", lineHeight: "21px", color: "grey" }}>
                     Total Amount (*Exclusive of Taxes)
                   </span>
                   <br />

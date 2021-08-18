@@ -76,7 +76,7 @@ function Saly() {
                   <p className="saly-para"> Destinations 4</p>
                 </Col>
                 <div className="pt-5">
-                  <Button variant="" style={{ backgroundColor: "#58b839",color:"white" ,fontSize:"17px",fontWeight:"bolder"}}>
+                  <Button variant="" style={{justifyContent:"center", backgroundColor: "#58b839",color:"white" ,fontSize:"17px",fontWeight:"bolder"}}>
                     View all destinations
                   </Button>
                 </div>
@@ -84,10 +84,6 @@ function Saly() {
             </div>
           </Col>
         </Row>
-
-        {/*Make-Booking*/}
-        {/* <div style={{ height: "100px" }}></div> */}
-
         <div
           style={{ backgroundColor: "black", color: "white", height: "370px" }}
         >
@@ -121,7 +117,7 @@ function Saly() {
             <Row>
               <Col sm={6} md={6}>
                 <div>
-                  <h3 className="ml-5">Tictets</h3>
+                  <h3 className="ml-5">Tickets</h3>
                   <p>
                     View all part tickets and check out where you have visited
                   </p>
