@@ -18,7 +18,8 @@ function Packages() {
     fetch(API_PATH + "/api/v1/packages/list")
       .then((response) => response.json())
       .then((json) => {
-        setPackages(json.data);
+        if (json.data !== undefined)
+          setPackages(json.data);
         console.log(json.data);
       })
       .catch((e) => console.log(e));
@@ -52,7 +53,7 @@ function Packages() {
             </form>
           </div>
         </div>
-        <h2 className = "package__title mb-5">
+        <h2 className="package__title mb-5">
           <span>Packages</span>
         </h2>
         <>
