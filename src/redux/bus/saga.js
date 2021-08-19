@@ -16,9 +16,12 @@ const TripByRouteIdAsync = async (payload) =>
 
 const createBusBookingRequest = async (payload) =>
     await axios.post(`${API_PATH}/api/v1/busticket/create`, {
+        name: payload.name,
+        email: payload.email,
+        whatsapp: payload.whatsapp,
         mobile: payload.mobile,
         trips_id: payload.trips_id,
-        name: payload.nameoftrip,
+        nameoftrip: payload.nameoftrip,
         date: payload.date,
         time: payload.time,
         route: payload.route,

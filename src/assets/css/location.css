@@ -1,23 +1,26 @@
-.card-Caintainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    /* padding-bottom: 100px; */
+.card-Caintainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* padding-bottom: 100px; */
 }
-.MuiAccordion-root:before{
+
+.MuiAccordion-root:before {
   background-color: transparent !important;
 }
 
-.MuiAccordionSummary-content{
+.MuiAccordionSummary-content {
   margin-block: 8px !important;
 }
-.location-card{
-  
+
+.location-card {
+
   width: 100px;
   height: 128px;
   background-color: #864BD8;
   color: white;
 }
+
 .location-card-title {
   font-size: 12px;
   /* margin-bottom: 7px; */
@@ -26,8 +29,9 @@
   /* white-space: nowrap; */
   text-align: center;
   margin-top: 10px;
-font-weight: 700;
+  font-weight: 700;
 }
+
 .location-card-rate {
   /* margin-top: -10px; */
   text-align: center;
@@ -37,6 +41,7 @@ font-weight: 700;
   line-height: 32px;
   margin-bottom: 0;
 }
+
 .location-card-name {
   text-align: center;
   font-size: 10px;
@@ -48,30 +53,38 @@ font-weight: 700;
 
 .plus-minus-input {
   display: flex;
-  flex-direction:row;
-  margin:auto;
+  flex-direction: row;
+  margin: auto;
   justify-content: center;
 }
-.button{
-    margin-top: -0.5px;
-}
-.input-group-field {
-    width: 45%;
-    text-align: center;
-}
-.locatione-title{
-  display: flex;
-}
-.location-amount{
-padding:18px;
-background-color: #F8F8F8;;
-}
-.location-total{
 
+.button {
+  margin-top: -0.5px;
 }
-.location-rs{
-font-size: 20px;
-    font-weight: 600;
-    float: right;    
-    /* padding: 10px; */
+
+.input-group-field {
+  width: 45%;
+  text-align: center;
+}
+
+.locatione-title {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.location-amount {
+  padding: 18px;
+  background-color: #F8F8F8;
+  ;
+}
+
+.location-total {}
+
+.location-rs {
+  font-size: 20px;
+  font-weight: 600;
+  float: right;
+  /* padding: 10px; */
 }

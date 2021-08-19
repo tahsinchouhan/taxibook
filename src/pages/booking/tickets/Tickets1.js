@@ -9,7 +9,7 @@ import Footer from "../../travesaly/Footer";
 import { API_PATH } from "../../../Path/Path";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getOtp, setDmData } from "../../../redux/actions";
+import { fetchStart, getOtp, hideMessage, setDmData, verifyOtp } from "../../../redux/actions";
 
 import Loader from "../../../components/Loader";
 import Message from "../../../components/Message";
@@ -31,6 +31,17 @@ function Tickets1() {
     getRoutes();
   }, []);
 
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        console.log("Er", error);
+        dispatch(hideMessage())
+
+      }, 100);
+      // dispatch(hideMessage())
+    }
+  }, [error]);
+
   const getRoutes = () => {
     fetch(`${API_PATH}/api/v1/location/list`)
       .then((response) => response.json())
@@ -51,7 +62,12 @@ function Tickets1() {
   ));
   const onStepreClick = () => {
     console.log("steper")
-    history.push("/steper_dmpass")
+    if(user_data !==null){
+      history.push("/steper_dmpass")
+    }else{
+      dispatch(fetchStart())
+      dispatch(verifyOtp(`91${mobile}`, otp))
+    }
   }
   const handleDate = (d) => {
     let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
@@ -72,7 +88,7 @@ function Tickets1() {
     console.log("object", e.target.value);
     let mob = e.target.value;
     if (mob.length > 9) {
-      // fetchOtp(e.target.value)
+      fetchOtp(e.target.value)
     }
     dispatch(setDmData("mobile", e.target.value))
   }

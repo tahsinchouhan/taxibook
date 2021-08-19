@@ -23,6 +23,7 @@ function Search() {
     fetch(API_PATH + "/api/v1/destinations/list")
       .then((response) => response.json())
       .then((json) => {
+        if(json.data !== undefined)
         setDestinations(json.data);
         console.log(json.data);
       })
@@ -32,6 +33,7 @@ function Search() {
     fetch(API_PATH + "/api/v1/packages/list")
       .then((response) => response.json())
       .then((json) => {
+        if(json.data !== undefined)
         setPackages(json.data);
         console.log(json.data);
       })
@@ -42,6 +44,7 @@ function Search() {
     fetch(API_PATH + `/api/v1/search?searchvalue=${value}`)
       .then((response) => response.json())
       .then((json) => {
+        if(json.data !== undefined)
         console.log(json.data);
       })
       .catch((e) => console.log(e));

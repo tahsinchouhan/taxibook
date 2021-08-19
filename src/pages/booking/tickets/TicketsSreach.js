@@ -348,7 +348,7 @@
 
 // export default TicketsSraech;
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -364,32 +364,50 @@ import Footer from "../../travesaly/Footer";
 import { FaFilter, FaArrowLeft } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import { API_PATH } from "../../../Path/Path";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 function TicketsSreach() {
   const history = useHistory();
-  const onTicketsClick = () => {
+  const dispatch = useDispatch()
+  const { user_data } = useSelector(state => state.loginReducer)
+  const [list, setList] = useState([])
+  const onTicketsClick = (id) => {
     console.log("object");
     // dispatch(setApiData(values))
-    history.push("/tickets1");
+    history.push("/dm-detail/" + id);
+    // history.push("/tickets1");
   };
 
-  useEffect(() => {
-    getLocationsList()
-  }, [])
+  useEffect(async () => {
+    let mob;
+    if (user_data !== null) {
+      mob = user_data?.user?.mobile?.slice(2, user_data?.user?.mobile?.length)
+      getDmPassData(mob)
+    }
+  }, [user_data])
 
-  const getLocationsList = async () => {
-    let temp = []
-    await fetch(`${API_PATH}/api/v1/dmpass/list`)
+  const getDmPassData = async (mobile) => {
+    await axios.post(`${API_PATH}/api/v1/dmpass/search`, {
+      mobile
+    })
       .then((response) => {
-        return response.json()
+        return response.data
       })
       .then((json) => {
-        console.log(json);
-        // setLocationList(json.data)
-      });
+        console.log("js", json.data);
+        if (json !== undefined)
+          setList(json.data)
+        return json
+      })
+      .catch((error) => {
+        console.log("js", error);
+      })
+  }
 
-    console.log("temp", temp);
-  };
+  useEffect(() => {
+    console.log("list", list);
+  }, [list])
 
   return (
     <>
@@ -462,7 +480,59 @@ function TicketsSreach() {
           </Container>
           <Container style={{ width: "72%" }}>
             <Row>
-              <Col xs={12} md={6} onClick={onTicketsClick}>
+              {
+                list.map((item, key) => {
+                  return <Col key={key} xs={12} md={6} onClick={() => onTicketsClick(item?.dm_pass_id)}>
+                    <div className="">
+                      <Row style={{ backgroundColor: "#F8F8F8", margin: "7px" }}>
+                        <Col>
+                          <div
+                            style={{
+                              margin: "10px",
+                              whiteSpace: "nowrap",
+                              fontSize: "12px",
+                              fontWeight: "bolder",
+                              fontFamily: "sans-serif",
+                            }}
+                          >
+                            <span style={{ fontSize: "15px", fontWeight: "700" }}>
+                              {" "}
+                              Chitrakote, Bastar
+                            </span>
+                            <br />
+                            <span style={{ color: "grey" }}>
+                              31 July, 2021, 19:45
+                            </span>
+                          </div>
+                        </Col>
+                        <Col>
+                          <div
+                            style={{
+                              margin: "10px",
+                              whiteSpace: "nowrap",
+                              fontSize: "12px",
+                              fontWeight: "bolder",
+                              fontFamily: "sans-serif",
+                              float: "right",
+                            }}
+                          >
+                            <span style={{ fontSize: "15px", fontWeight: "700" }}>
+                              Order ID{" "}
+                            </span>
+                            <br />
+                            <span style={{ color: "grey" }}>{item?.dm_pass_id}</span>
+                          </div>
+                        </Col>
+                      </Row>
+                    </div>
+                  </Col>
+                })
+              }
+            </Row>
+          </Container>
+          {/* <Container style={{ width: "72%" }}>
+            <Row>
+              <Col xs={12} md={6}>
                 <div className="">
                   <Row style={{ backgroundColor: "#F8F8F8", margin: "7px" }}>
                     <Col x>
@@ -497,7 +567,7 @@ function TicketsSreach() {
                         }}
                       >
                         <span style={{ fontSize: "15px", fontWeight: "700" }}>
-                          Order ID{" "}
+                          Order ID12345{" "}
                         </span>
                         <br />
                         <span style={{ color: "grey" }}>BAS05493</span>
@@ -551,8 +621,8 @@ function TicketsSreach() {
                 </div>
               </Col>
             </Row>
-          </Container>
-          <Container style={{ width: "72%" }}>
+          </Container> */}
+          {/* <Container style={{ width: "72%" }}>
             <Row>
               <Col xs={12} md={6}>
                 <div className="">
@@ -643,99 +713,7 @@ function TicketsSreach() {
                 </div>
               </Col>
             </Row>
-          </Container>
-          <Container style={{ width: "72%" }}>
-            <Row>
-              <Col xs={12} md={6}>
-                <div className="">
-                  <Row style={{ backgroundColor: "#F8F8F8", margin: "7px" }}>
-                    <Col x>
-                      <div
-                        style={{
-                          margin: "10px",
-                          whiteSpace: "nowrap",
-                          fontSize: "12px",
-                          fontWeight: "bolder",
-                          fontFamily: "sans-serif",
-                        }}
-                      >
-                        <span style={{ fontSize: "15px", fontWeight: "700" }}>
-                          {" "}
-                          Chitrakote, Bastar
-                        </span>
-                        <br />
-                        <span style={{ color: "grey" }}>
-                          31 July, 2021, 19:45
-                        </span>
-                      </div>
-                    </Col>
-                    <Col>
-                      <div
-                        style={{
-                          margin: "10px",
-                          whiteSpace: "nowrap",
-                          fontSize: "12px",
-                          fontWeight: "bolder",
-                          fontFamily: "sans-serif",
-                          float: "right",
-                        }}
-                      >
-                        <span style={{ fontSize: "15px", fontWeight: "700" }}>
-                          Order ID{" "}
-                        </span>
-                        <br />
-                        <span style={{ color: "grey" }}>BAS05493</span>
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              </Col>
-              <Col xs={12} md={6}>
-                <div className="">
-                  <Row style={{ backgroundColor: "#F8F8F8", margin: "7px" }}>
-                    <Col>
-                      <div
-                        style={{
-                          margin: "10px",
-                          whiteSpace: "nowrap",
-                          fontSize: "12px",
-                          fontWeight: "bolder",
-                          fontFamily: "sans-serif",
-                        }}
-                      >
-                        <span style={{ fontSize: "15px", fontWeight: "700" }}>
-                          {" "}
-                          Chitrakote, Bastar
-                        </span>
-                        <br />
-                        <span style={{ color: "grey" }}>
-                          31 July, 2021, 19:45
-                        </span>
-                      </div>
-                    </Col>
-                    <Col>
-                      <div
-                        style={{
-                          margin: "10px",
-                          whiteSpace: "nowrap",
-                          fontSize: "12px",
-                          fontWeight: "bolder",
-                          fontFamily: "sans-serif",
-                          float: "right",
-                        }}
-                      >
-                        <span style={{ fontSize: "15px", fontWeight: "700" }}>
-                          Order ID{" "}
-                        </span>
-                        <br />
-                        <span style={{ color: "grey" }}>BAS05493</span>
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              </Col>
-            </Row>
-          </Container>
+          </Container> */}
         </Container>
         <Footer />
       </div>
@@ -747,28 +725,28 @@ function TicketsSreach() {
           style={{ width: "100%", paddingTop: "40px", marginBottom: "70px" }}
         >
           <Container style={{ width: "95%%" }}>
-            <div className="d-flex"  style={{marginTop:"-10px"}}>
-              <FaArrowLeft  style={{marginTop:"10px"}} />
-              <div style={{ float: "right",marginLeft:"15px" }}>
+            <div className="d-flex" style={{ marginTop: "-10px" }}>
+              <FaArrowLeft style={{ marginTop: "10px" }} />
+              <div style={{ float: "right", marginLeft: "15px" }}>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                 <Form.Control type="password" placeholder=" Chitrakote" />
+                  <Form.Control type="password" placeholder=" Chitrakote" />
                 </Form.Group>
               </div>
             </div>
             <Row style={{}}>
-              <Col xs={4} md={6}>                
-                  <FaFilter />
-                  <span
-                    style={{
-                      color: "black",
-                      fontFamily: "sans-serif",                      
-                      whiteSpace:"nowrap",
-                      padding:"5px"
-                    }}
-                  >
-                    Filter by
-                  </span>
-               
+              <Col xs={4} md={6}>
+                <FaFilter />
+                <span
+                  style={{
+                    color: "black",
+                    fontFamily: "sans-serif",
+                    whiteSpace: "nowrap",
+                    padding: "5px"
+                  }}
+                >
+                  Filter by
+                </span>
+
               </Col>
               <Col xs={4} md={6}>
                 <div
@@ -777,130 +755,94 @@ function TicketsSreach() {
                     fontFamily: "sans-serif",
                   }}
                 >
-                
-                    <Button
-                      style={{
-                        backgroundColor: "white",
-                        color: "black",
-                        border: "2px solid #C4C4C4",
-                        width: "90px",
-                        height:"38px"
-                       
-                      }}
-                    > Date
-                    </Button>
-                                
+
+                  <Button
+                    style={{
+                      backgroundColor: "white",
+                      color: "black",
+                      border: "2px solid #C4C4C4",
+                      width: "90px",
+                      height: "38px"
+
+                    }}
+                  > Date
+                  </Button>
+
                 </div>
               </Col>
               <Col xs={4} md={6}>
-              <Button
-                      style={{
-                        backgroundColor: "white",
-                        color: "black",
-                        border: "2px solid #C4C4C4",
-                        // msarginLeft: "50px",
-                        width: "90px", 
-                        height:"38px"                    
-                        
-                      }}
-                    >
-                      Location
-                    </Button>
+                <Button
+                  style={{
+                    backgroundColor: "white",
+                    color: "black",
+                    border: "2px solid #C4C4C4",
+                    // msarginLeft: "50px",
+                    width: "90px",
+                    height: "38px"
+
+                  }}
+                >
+                  Location
+                </Button>
               </Col>
             </Row>
           </Container>
-          <Container style={{ width: "100%" }}>
-            <Row>
-              <Col xs={12} onClick={onTicketsClick}>
-                <div className="">
-                  <Row style={{ backgroundColor: "#F8F8F8", margin: "7px" }}>
-                    <Col x>
-                      <div
-                        style={{
-                          margin: "10px",
-                          whiteSpace: "nowrap",
-                          fontSize: "12px",
-                          fontWeight: "bolder",
-                          fontFamily: "sans-serif",
-                        }}
-                      >
-                        <span style={{ fontSize: "15px", fontWeight: "700" }}>
-                          {" "}
-                          Chitrakote, Bastar
-                        </span>
-                        <br />
-                        <span style={{ color: "grey" }}>
-                          31 July, 2021, 19:45
-                        </span>
-                      </div>
-                    </Col>
-                    <Col>
-                      <div
-                        style={{
-                          margin: "10px",
-                          whiteSpace: "nowrap",
-                          fontSize: "12px",
-                          fontWeight: "bolder",
-                          fontFamily: "sans-serif",
-                          float: "right",
-                        }}
-                      >
-                        <span style={{ fontSize: "15px", fontWeight: "700" }}>
-                          Order ID{" "}
-                        </span>
-                        <br />
-                        <span style={{ color: "grey" }}>BAS05493</span>
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              </Col>
-              <Col xs={12}>
-                <div className="">
-                  <Row style={{ backgroundColor: "#F8F8F8", margin: "7px" }}>
-                    <Col>
-                      <div
-                        style={{
-                          margin: "10px",
-                          whiteSpace: "nowrap",
-                          fontSize: "12px",
-                          fontWeight: "bolder",
-                          fontFamily: "sans-serif",
-                        }}
-                      >
-                        <span style={{ fontSize: "15px", fontWeight: "700" }}>                        
-                          Chitrakote, Bastar
-                        </span>
-                        <br />
-                        <span style={{ color: "grey" }}>
-                          31 July, 2021, 19:45
-                        </span>
-                      </div>
-                    </Col>
-                    <Col>
-                      <div
-                        style={{
-                          margin: "10px",
-                          whiteSpace: "nowrap",
-                          fontSize: "12px",
-                          fontWeight: "bolder",
-                          fontFamily: "sans-serif",
-                          float: "right",
-                        }}
-                      >
-                        <span style={{ fontSize: "15px", fontWeight: "700" }}>
-                          Order ID{" "}
-                        </span>
-                        <br />
-                        <span style={{ color: "grey" }}>BAS05493</span>
-                      </div>
-                    </Col>
-                  </Row>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-          <Container style={{ width: "100%" }}>
+
+          {
+
+            list.map((item, key) => (
+              <Container key={key} style={{ width: "100%" }}>
+                <Row>
+                  <Col xs={12} onClick={()=>onTicketsClick(item?.dm_pass_id)}>
+                    <div className="">
+                      <Row style={{ backgroundColor: "#F8F8F8", margin: "7px" }}>
+                        <Col x>
+                          <div
+                            style={{
+                              margin: "10px",
+                              whiteSpace: "nowrap",
+                              fontSize: "12px",
+                              fontWeight: "bolder",
+                              fontFamily: "sans-serif",
+                            }}
+                          >
+                            <span style={{ fontSize: "15px", fontWeight: "700" }}>
+                              {" "}
+                              Chitrakote, Bastar
+                            </span>
+                            <br />
+                            <span style={{ color: "grey" }}>
+                              31 July, 2021, 19:45
+                            </span>
+                          </div>
+                        </Col>
+                        <Col>
+                          <div
+                            style={{
+                              margin: "10px",
+                              whiteSpace: "nowrap",
+                              fontSize: "12px",
+                              fontWeight: "bolder",
+                              fontFamily: "sans-serif",
+                              float: "right",
+                            }}
+                          >
+                            <span style={{ fontSize: "15px", fontWeight: "700" }}>
+                              Order ID{" "}
+                            </span>
+                            <br />
+                            <span style={{ color: "grey" }}>{item?.dm_pass_id}</span>
+                          </div>
+                        </Col>
+                      </Row>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            ))
+          }
+
+          {/* <Container style={{ width: "100%" }}>
             <Row>
               <Col xs={12} md={6}>
                 <div className="">
@@ -959,7 +901,7 @@ function TicketsSreach() {
                           fontFamily: "sans-serif",
                         }}
                       >
-                        <span style={{ fontSize: "15px", fontWeight: "700" }}>                        
+                        <span style={{ fontSize: "15px", fontWeight: "700" }}>
                           Chitrakote, Bastar
                         </span>
                         <br />
@@ -990,8 +932,8 @@ function TicketsSreach() {
                 </div>
               </Col>
             </Row>
-          </Container>
-          <Container style={{ width: "100%" }}>
+          </Container> */}
+          {/* <Container style={{ width: "100%" }}>
             <Row>
               <Col xs={12} md={6}>
                 <div className="">
@@ -1082,7 +1024,7 @@ function TicketsSreach() {
                 </div>
               </Col>
             </Row>
-          </Container>
+          </Container> */}
         </Container>
       </div>
     </>
