@@ -77,7 +77,7 @@ function Saly() {
                   </Col>
                 ))} */}
 
-                {/* <Col>
+                <Col>
                   <Card className="saly_card">
                     <img
                       src={Layer12}
@@ -106,7 +106,7 @@ function Saly() {
                     />
                   </Card>
                   <p className="saly-para"> Destinations 4</p>
-                </Col> */}
+                </Col>
                 <div className="travel_home_btn pt-5">
                   <Button
                     variant=""
