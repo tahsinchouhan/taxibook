@@ -71,7 +71,7 @@ function Payment() {
     }
 
     var options = {
-      key: __DEV__ ? "rzp_test_lS3QWpplq93lr5" : "PRODUCTION_KEY",
+      key: __DEV__ ? "rzp_test_DuapYrmQwcWLGy" : "PRODUCTION_KEY",
       currency: "INR",
       amount: data.amount.toString(),
       order_id: data.id,

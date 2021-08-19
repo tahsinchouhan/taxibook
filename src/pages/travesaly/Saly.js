@@ -21,8 +21,21 @@ function Saly() {
     console.log("object");
     history.push("/tickets_sraech");
   };
-  let destination = localStorage.getItem("Destination");
-  console.log("destination",destination)
+
+  const getDestinations = () => {
+    fetch(API_PATH + "/api/v1/destinations/list")
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.data !== undefined)
+          // setDestinations(json.data);
+        console.log(json.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  useEffect(() => {
+    getDestinations();
+  }, [])
   return (
 
     <>
@@ -45,7 +58,7 @@ function Saly() {
               </div>
               <Row className="pt-5">
 
-                {destination.map((data, index) => (
+                {/* {destination.map((data, index) => (
                   <Col key={index}>
                     <Card className="saly_card">
                       <img
@@ -62,7 +75,7 @@ function Saly() {
                             {data.sub_title}
                           </small>
                   </Col>
-                ))}
+                ))} */}
 
                 {/* <Col>
                   <Card className="saly_card">
