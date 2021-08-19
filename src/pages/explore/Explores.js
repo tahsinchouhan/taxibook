@@ -49,6 +49,8 @@ const Explores = () => {
     },
   };
 
+  
+
   useEffect(() => {
     getDestinations();
     getPackages();
@@ -60,8 +62,9 @@ const Explores = () => {
       .then((response) => response.json())
       .then((json) => {
         if (json.data !== undefined)
+        localStorage.setItem('Destination',JSON.stringify(json.data));
           setDestinations(json.data);
-        // console.log(json.data);
+        // console.log("data",json.data);
       })
       .catch((e) => console.log(e));
   };
