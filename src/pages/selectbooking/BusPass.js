@@ -35,10 +35,10 @@ function BusDetail() {
     dispatch(setMobile(e.target.value))
   }
 
-  const fetchOtp = (mobile)=>{
+  const fetchOtp = (mobile) => {
     dispatch(getOtp(`91${mobile}`))
   }
-  
+
   const onClickMonsoon = () => {
     console.log("object", `91${mobile}`, otp);
     dispatch(fetchStart())
