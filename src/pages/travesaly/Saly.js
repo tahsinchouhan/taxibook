@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from 'react'
 import { Button, Row, Col, Form, Container, Card } from "react-bootstrap";
 import Salyimg from "../../assets/img/Saly-1.svg";
 import Layer11 from "../../assets/img/hil.svg";
@@ -10,6 +10,7 @@ import Inform from "./Footer";
 import { NavLink, useHistory } from "react-router-dom";
 import TravellerCard from "./TravellerCard";
 import TravellerTicket from "./TravellerTicket";
+import { API_PATH } from "../../Path/Path";
 
 function Saly() {
   const history = useHistory();
