@@ -41,7 +41,7 @@ function BusConfirmation() {
   const history = useHistory();
 
   const dispatch = useDispatch()
-  const { tripData } = useSelector(state => state.busReducer)
+  const { tripData, data: apiData, } = useSelector(state => state.busReducer)
 
   const onSideBtnClick = (e) => {
     const name = e.target.name;
@@ -91,11 +91,11 @@ function BusConfirmation() {
     price: '',
     surcharge: tripData?.surcharge,
     gender: '',
-    basic_details: [],
+    basic_details: apiData?.basic_details || [],
   })
   const [basePrice, setBasePrice] = useState(tripData?.ticket_price || 0)
 
-  const [travellers, setTravellers] = useState([])
+  const [travellers, setTravellers] = useState(apiData?.basic_details || [])
 
   const { name, age, gender, adhaar, basic_details, price, surcharge } = values;
 
@@ -176,7 +176,7 @@ function BusConfirmation() {
               </div>
 
               <div
-                className=" select-train mt-2 d-flex"
+                className=" select-train mt-2 d-flex align-items-center"
                 style={{ width: "100%" }}
               >
                 <Form className="d-flex">
@@ -186,26 +186,27 @@ function BusConfirmation() {
                       className="mb-3"
                       style={{ margin: "10px", marginLeft: "10px" }}
                     >
-                      <Form.Check
+                      {/* <Form.Check
                         inline
                         label=""
                         name="group1"
                         type={type}
                         id={`inline-${type}-1`}
-                      />
+                      /> */}
                     </div>
                   ))}
 
                   <span
                     style={{
-                      marginTop: "10px",
+                      // marginTop: "10px",
                       marginRight: "10px",
                       color: "black",
                       fontWeight: "bolder",
                       fontFamily: "sans-serif",
                     }}
                   >
-                    19:45
+                    {/* 19:45 */}
+                    {tripData?.departure_time}
                   </span>
                 </Form>
                 <div className="d-flex">
@@ -247,7 +248,7 @@ function BusConfirmation() {
               </div>
 
               <div
-                className=" select-train mt-2 d-flex"
+                className=" select-train mt-2 d-flex align-items-center"
                 style={{ width: "100%" }}
               >
                 <Form className="d-flex">
@@ -257,26 +258,27 @@ function BusConfirmation() {
                       className="mb-3"
                       style={{ margin: "10px", marginLeft: "10px" }}
                     >
-                      <Form.Check
+                      {/* <Form.Check
                         inline
                         label=""
                         name="group1"
                         type={type}
                         id={`inline-${type}-1`}
-                      />
+                      /> */}
                     </div>
                   ))}
 
                   <span
                     style={{
-                      marginTop: "10px",
+                      // marginTop: "10px",
                       marginRight: "10px",
                       color: "black",
                       fontWeight: "bolder",
                       fontFamily: "sans-serif",
                     }}
                   >
-                    19:45
+                    {/* 19:45 */}
+                    {tripData?.estimated_time_of_arrival}
                   </span>
                 </Form>
                 <div className="d-flex">
@@ -314,7 +316,7 @@ function BusConfirmation() {
                             type="text"
                             className="form-control pass_input"
                             id={`name${i}`}
-                            placeholder="Enter passenger name"
+                            placeholder="Enter traveller name"
                             style={{ fontSize: "11px", marginLeft: "-5px" }}
                             name="name" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].name}
                           />
@@ -389,7 +391,6 @@ function BusConfirmation() {
                   border: "none",
                   borderRadius: "15px",
                 }}
-                // onClick={handleClick("top-start")}
                 onClick={() => setTravellers([...travellers, {
                   name: '',
                   gender: 'Male',
@@ -406,7 +407,7 @@ function BusConfirmation() {
               placement={placement}
               transition
             > */}
-            <Modal
+            {/* <Modal
               show={show}
               onHide={handleClose}
               backdrop="static"
@@ -419,8 +420,6 @@ function BusConfirmation() {
                 <Paper>
                   <Typography className={classes.typography}>
                     <div className="card-body" className="py-0">
-                      {/* <h5 className="card-title">Travellers 1</h5> */}
-                      {/* <p className="card-text"> */}
                       <div className="form-group mt-0">
                         <label for="inputAddress">Name</label>
                         <input
@@ -481,11 +480,9 @@ function BusConfirmation() {
                           name="adhaar" onChange={handleChange} value={adhaar}
                         />
                       </div>
-                      {/* </p> */}
                     </div>
                   </Typography>
                 </Paper>
-                {/* </Popper> */}
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
@@ -493,9 +490,9 @@ function BusConfirmation() {
                 </Button>
                 <Button variant="primary" onClick={handleOk}>Add</Button>
               </Modal.Footer>
-            </Modal>
+            </Modal> */}
 
-            {
+            {/* {
               (basic_details?.length > 0) ?
 
                 <Row>
@@ -528,7 +525,7 @@ function BusConfirmation() {
                   )}
                 </Row>
                 : null
-            }
+            } */}
             {/* <div style={{ textAlign: "center", margin: "55px" }}>
               <Button
                 style={{
@@ -566,7 +563,7 @@ function BusConfirmation() {
                     }}
                   >
 
-                    ₹  {price}
+                    ₹  {price + surcharge}
                   </span>
                 </div>
               </div>
@@ -1030,8 +1027,7 @@ function BusConfirmation() {
                       fontSize: " 24px",
                     }}
                   >
-
-                    ₹  {price}
+                    ₹  {price + surcharge}
                   </span>
                 </div>
               </div>

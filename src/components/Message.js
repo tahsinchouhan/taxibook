@@ -3,7 +3,6 @@ import { toast, ToastContainer } from 'react-toastify'
 
 function Message({msg,type}) {
     useEffect(() => {
-        console.log(msg);
         toast?.[type](msg, {
             position: "top-right",
             autoClose: 2500,

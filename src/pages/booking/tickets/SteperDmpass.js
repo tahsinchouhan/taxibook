@@ -9,7 +9,7 @@ import { Stepper } from "react-form-stepper";
 //import TicketsConfirm from "../../../pages/booking/tickets/TicketsConfirm";
 import Cards from "../../dm pass/Cards";
 import Header from "../../../components/Header";
-import mobile from "../../../assets/img/mobile.png";
+import congo from "../../../assets/img/mobile.png";
 import { FaWhatsapp } from "react-icons/fa";
 import Footer from "../../travesaly/Footer";
 
@@ -57,18 +57,18 @@ function SteperDmpass(shows, ...props) {
   }, [user_data])
 
   const getDmPassData = async (mobile) => {
-    await axios.post(`${API_PATH}/api/v1/dmpass/search` , {
+    await axios.post(`${API_PATH}/api/v1/dmpass/search`, {
       mobile
     })
       .then((response) => {
         return response.data
       })
       .then((json) => {
-        console.log("js",json);
+        console.log("js", json);
         return json
       })
       .catch((error) => {
-        console.log("js",error);
+        console.log("js", error);
       })
   }
 
@@ -92,7 +92,7 @@ function SteperDmpass(shows, ...props) {
   };
   const onClickBack = () => {
     console.log("object");
-    history.push("./travelticket");
+    history.push("./tickets");
     // setShow(3);
   };
 
@@ -114,6 +114,7 @@ function SteperDmpass(shows, ...props) {
     return temp
   }
   const [travellers, setTravellers] = useState(initialTravellers)
+  const [showDate, setShowDate] = useState('')
 
   const handleTraveller = (val, lbl, i) => {
     setTravellers([...travellers].map((obj, key) => {
@@ -125,7 +126,6 @@ function SteperDmpass(shows, ...props) {
       } else {
         return obj
       }
-
     }))
   }
 
@@ -174,11 +174,21 @@ function SteperDmpass(shows, ...props) {
 
   useEffect(() => {
     getLocationsList()
+    let st_date = new Date(start_date);
+    if (start_date === '') {
+      st_date = new Date()
+      dispatch(setDmData('start_date', getFormatedDate(st_date)))
+    }
+    showFormatedDate(st_date)
+    let en_date = new Date();
+    en_date.setDate(st_date.getDate() + Number(1));
+    dispatch(setDmData('duration_of_travel', 1))
+    dispatch(setDmData('end_date', getFormatedDate(en_date)))
   }, [])
 
   const getLocationsList = async () => {
     let temp = []
-    await fetch(`${API_PATH}/api/v1/location/list`)
+    await fetch(`${API_PATH}/api/v1/location/list?ischecked=true`)
       .then((response) => {
         return response.json()
       })
@@ -262,6 +272,14 @@ function SteperDmpass(shows, ...props) {
     let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
     return `${ye}-${mo}-${da}`
   }
+
+  const showFormatedDate = (d) => {
+    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    let mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d);
+    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+    setShowDate(`${da}, ${mo} ${ye}`)
+  }
+  
   return (
     <>
       <div className="d-none d-md-block">
@@ -272,9 +290,10 @@ function SteperDmpass(shows, ...props) {
           <FaArrowLeft className="kanger-arrow" onClick={onClickBack} />
           <div className="kangervilla">
             <span className="kanger-valley">
-              Tickets for Kanger Valley
+              Tickets
               <br />
-              30th July, 2021
+              {/* 30th July, 2021 */}
+              {showDate}
             </span>
           </div>
         </Container>
@@ -299,9 +318,9 @@ function SteperDmpass(shows, ...props) {
               <h3 style={{ fontWeight: "bolder", fontSize: "20px", textAlign: "center" }}>
                 Book your DM Pass
               </h3>
-              <form>
+              <form onSubmit={(e) => e.preventDefault()} >
                 <div className="form-row"></div>
-                <div className="form-group mt-4">
+                {/* <div className="form-group mt-4">
                   <label for="inputAddress">Mobile Number</label>
                   <input
                     type="text"
@@ -310,16 +329,18 @@ function SteperDmpass(shows, ...props) {
                     placeholder="Enter mobile number"
                     value={mobile} onChange={(e) => dispatch(setDmData("mobile", e.target.value))}
                   />
-                </div>
+                </div> */}
                 <div className="form-row">
                   <div className="form-group mt-4 ">
                     <label for="inputState">Number of Travellers</label>
-                    <select id="inputState" className="form-control pass_input">
+                    <select id="inputState" className="form-control pass_input"
+                      // onChange={handleTravellerCount}
+                    >
                       <option selected>1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
-                      <option value="5">5</option>
+                      <option value="5">5</option>  
                       <option value="6">6</option>
                     </select>
                   </div>
@@ -397,6 +418,7 @@ function SteperDmpass(shows, ...props) {
                                       <label className="mb-1" for={`gender${i}`}>Gender</label>
                                       <div className="d-flex pt-2">
                                         <ButtonComponent
+                                          type="button"
                                           style={{
                                             width: "50%",
                                             fontSize: "11px",
@@ -512,6 +534,7 @@ function SteperDmpass(shows, ...props) {
                                             fontSize: "11px",
                                             whiteSpace: "nowrap",
                                           }}
+                                          type="button"
                                           data={button_Data}
                                           // activeButton={activeButton}
                                           // trigerOnClickEmpSideBtn={onSideBtnClick}
@@ -877,7 +900,7 @@ function SteperDmpass(shows, ...props) {
             </Button> */}
           </div>
           <div>
-            <div className="d-md-none">
+            <div className="d-md-none" style={{position:"fixed",width:"100%",bottom:"0"}}>
               <Col xs={12} md={6}>
                 <div className="location-amount">
                   <span className="location-total">Total Amount</span>
@@ -924,7 +947,7 @@ function SteperDmpass(shows, ...props) {
                       ?
                       locServ?.map((item, key) => (
                         <>
-                          <Row>
+                          <Row className="mb-1">
                             <Col xs={6} md={6}>
                               <span className="confirm-title">{item?.location_name}</span>
                             </Col>
@@ -934,28 +957,33 @@ function SteperDmpass(shows, ...props) {
                                   color: "#FF4A68",
                                   fontSize: "15px",
                                   fontWeight: "600",
+                                  cursor: "pointer",
                                 }}
+                                onClick={() => setShow(1)}
                               >
                                 Change
                               </span>
                             </Col>
+                            <Col>
+                              {
+                                (item?.services?.length > 0)
+                                  ?
+                                  item?.services?.map((service, j) => (
+                                    <Row>
+                                      <Col xs={6} md={6}>
+                                        <span className="confirm_part">{service?.service_name} x {service?.unit}</span>
+                                      </Col>
+                                      <Col xs={6} md={6}>
+                                        <span className="confirm_part">{service?.total_charges} </span>
+                                      </Col>
+                                    </Row>
+                                  ))
+                                  :
+                                  null
+                              }
+                            </Col>
                           </Row>
-                          {
-                            (item?.services?.length > 0)
-                              ?
-                              item?.services?.map((service, j) => (
-                                <Row>
-                                  <Col xs={6} md={6}>
-                                    <span className="confirm_part">{service?.service_name} x {service?.unit}</span>
-                                  </Col>
-                                  <Col xs={6} md={6}>
-                                    <span className="confirm_part">{service?.total_charges} </span>
-                                  </Col>
-                                </Row>
-                              ))
-                              :
-                              null
-                          }
+
                         </>
                       ))
                       : null
@@ -1080,7 +1108,7 @@ function SteperDmpass(shows, ...props) {
               <Row>
                 <Col>
                   <div style={{ marginTop: "-50px" }}>
-                    <img src={mobile} alt="" style={{ height: "500px" }} />
+                    <img src={congo} alt="" style={{ height: "500px" }} />
                   </div>
                 </Col>
                 <Col>
@@ -1173,13 +1201,13 @@ function SteperDmpass(shows, ...props) {
                 </Col>
                 <Col>
                   <div style={{ marginTop: "", textAlign: "center" }}>
-                    <img src={mobile} alt="" style={{ height: "350px" }} />
+                    <img src={congo} alt="" style={{ height: "350px" }} />
                   </div>
                 </Col>
               </Row>
               <Row>
                 <Col>
-                  <div style={{ marginBottom: "20px", paddingTop: "-10px" }}>
+                  <div style={{ marginBottom: "20px", paddingTop: "-10px", textAlign: "center" }}>
                     <h3
                       style={{
                         fontWeight: "bolder",

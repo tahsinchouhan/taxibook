@@ -13,7 +13,7 @@ import { getTripByRouteId, setRouteId, setTripData } from "../../redux/actions";
 function BusMonsoon() {
   const history = useHistory();
   // const [trips, setTrips] = useState([]);
-  const { tripList: trips, route_id ,routeData} = useSelector(state => state.busReducer)
+  const { tripList: trips, route_id, routeData } = useSelector(state => state.busReducer)
 
   const dispatch = useDispatch()
 
@@ -43,16 +43,16 @@ function BusMonsoon() {
     history.push("/busconfirmation");
   };
 
-  const onClickBoarding = () => {
-    console.log("object");
-    history.push("/booking");
+  const onClickChange = () => {
+    // console.log("object");
+    history.push("/busdetail");
   };
 
   return (
     <>
       <div className="d-none d-md-block">
         <Header />
-        <div style={{ backgroundColor: "white", marginTop: "40px" }}>
+        <div style={{ backgroundColor: "white", marginTop: "40px", paddingInline: "20%" }}>
           <Container className="mansoon-div">
             <Row>
               <Col md={8}>
@@ -65,7 +65,7 @@ function BusMonsoon() {
                 >
                   {`${routeData?.start?.name} to ${routeData?.end?.name} `}
                 </h5>
-                <span style={{ color: "black", fontWeight: "bolder" }}>
+                <span style={{ color: "black", fontWeight: "bolder" }} onClick={onClickChange}>
                   Change
                 </span>
               </Col>
@@ -82,7 +82,9 @@ function BusMonsoon() {
                   }}
                 >
                   {/* 30 July  */}
-                  {`${routeData?.startDate?.toLocaleDateString("en-US", {  day: 'numeric', month: 'short'})} `}
+                  {/* {`${routeData?.startDate?.toLocaleDateString("en-US", {  day: 'numeric', month: 'short'})} `} */}
+                  {`${routeData?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+                  {`${routeData?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
                 </Form.Label>
               </Col>
             </Row>
@@ -181,7 +183,9 @@ function BusMonsoon() {
                             <span className="train-sleeper">Bus 30 Seater</span>
                             <div>
                               <img src={city1} />
-                              <span style={{ color: "grey", padding: "10px", fontFamily: "sans-serif" }}>2 Stops</span>
+                              <span style={{ color: "grey", padding: "10px", fontFamily: "sans-serif" }}>
+                                {/* 2 Stops */}
+                              </span>
                               <span style={{ fontWeight: "bolder", fontFamily: "sans-serif" }}>{item?.departure_time} - {item?.estimated_time_of_arrival}</span>
                               <span style={{ color: "grey", padding: "10px", fontFamily: "sans-serif" }}>{item.duration_of_travel}</span>
                             </div>
@@ -193,8 +197,8 @@ function BusMonsoon() {
                               <span style={{ color: "grey", fontFamily: "sans-serif", padding: "5px" }}>*per person</span><br />
                               <span style={{ fontWeight: "bolder", fontFamily: "sans-serif", padding: "5px" }}>₹ {item?.ticket_price}</span>
                             </div>
-                            <div className="train-seats d-flex justify-content-center flex-column" style={{ lineHeight:"12px",}}>
-                              <span style={{ fontSize: "22px", lineHeight:"27px", fontWeight: "bolder",display:"block" }}>14</span>
+                            <div className="train-seats d-flex justify-content-center flex-column" style={{ lineHeight: "12px", }}>
+                              <span style={{ fontSize: "22px", lineHeight: "27px", fontWeight: "bolder", display: "block" }}>14</span>
                               <span style={{ fontSize: "12px" }}>seats available</span>
                             </div>
                           </div>
@@ -215,12 +219,12 @@ function BusMonsoon() {
       <div >
         <div fluid className="d-md-none">
           <Row >
-            <Col xs={12}>
+            <Col xs={12} className="p-0">
               <div className="">
                 <div >
                   <h5
                     style={{
-                      paddingTop: "15px",
+                      padding: "15px",
                       fontSize: "19px",
                       backgroundColor: "#0FA453",
                       fontWeight: "bolder",
@@ -228,9 +232,12 @@ function BusMonsoon() {
                       textAlign: "center",
                     }}
                   >
-                    Tatibandh, Boarding
+                    {/* Tatibandh, Boarding
                     <br />
-                    to Chitrakote{" "}
+                    to Chitrakote{" "} */}
+                    {routeData?.start?.name}
+                    <br />
+                    {` to ${routeData?.end?.name} `}
                   </h5>
                 </div>
               </div>
@@ -248,7 +255,9 @@ function BusMonsoon() {
                   }}
                 >
                   <div style={{ margin: "30px" }}>
-                    30 July
+                    {/* 30 July */}
+                    {`${routeData?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+                    {`${routeData?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
                   </div>
                 </Form.Label>
               </div>
@@ -439,7 +448,7 @@ function BusMonsoon() {
                                   fontFamily: "sans-serif",
                                 }}
                               >
-                                2 Stops
+                                {/* 2 Stops */}
                               </span>
                               <br />
                               <span
@@ -492,7 +501,7 @@ function BusMonsoon() {
                           </div>
                         </Col>
                         <Col style={{ float: "right" }}>
-                          <Row  style={{ float: "right"}}>
+                          <Row style={{ float: "right" }}>
                             <div
                               className=" ml-4"
                               style={{ float: "right", padding: "10px" }}
@@ -518,7 +527,7 @@ function BusMonsoon() {
                                       padding: "5px",
                                     }}
                                   >
-                                    ₹ 1500
+                                    ₹ {item?.ticket_price}
                                   </span>
                                 </div>
                               </Col>
@@ -547,6 +556,7 @@ function BusMonsoon() {
                 null
             }
           </div>
+          <Footer />
         </div>
       </div>
 

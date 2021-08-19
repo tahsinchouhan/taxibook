@@ -35,6 +35,7 @@ function CongratulationPage() {
 
                   <h3 style={{fontWeight:"bolder"}}>Order ID</h3>
                   <span style={{color:"black", marginBottom:"50px"}}>{booking_id}</span>
+                  {/* <span style={{color:"black", marginBottom:"50px"}}>{apiData?.order_id}</span> */}
                 </div>
                 <div>
                      <div >

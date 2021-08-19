@@ -1,5 +1,5 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { GET_OTP, VERIFY_OTP } from "../actions";
+import { GET_OTP, LOGOUT, VERIFY_OTP } from "../actions";
 import { API_PATH } from "../../Path/Path";
 import {
   getOtpSuccess, setUser
@@ -14,12 +14,12 @@ const OtpAsync = (mobile) =>
     .then((response) => response)
     .then((json) => json)
     .catch(error => error);
-
-const fetchVerifyOtpAsync = async (payload) =>
-  await axios.post(API_PATH + "/api/v1/customer/verifyotp", {
-    mobile: payload.mobile,
-    registrationMobileOTP: payload.otp
-  })
+    
+    const fetchVerifyOtpAsync = async (payload) =>
+    await axios.post(API_PATH + "/api/v1/customer/verifyotp", {
+      mobile: payload.mobile,
+      registrationMobileOTP: payload.otp
+    })
     .then((response) => {
       return response
     })
@@ -29,6 +29,7 @@ const fetchVerifyOtpAsync = async (payload) =>
     .catch(error => {
       return error
     });
+    
 
 function* Otp({ payload }) {
   try {
@@ -47,10 +48,18 @@ function* fetchVerifyOtp({ payload }) {
       localStorage.setItem('user_data', JSON.stringify(user_data.data.data));
       yield put(hideMessage())
     } else {
-      yield put(fetchError(user_data.message))
+      yield put(fetchError("Invalid OTP"))
     }
   } catch (error) {
-    yield put(fetchError(error.message))
+    yield put(fetchError("Invalid OTP"))
+  }
+}
+
+function* fetchLogout({ payload }) {
+  try {
+    localStorage.removeItem('user_data');
+  } catch (error) {
+    yield put(fetchError("Something went wrong"))
   }
 }
 
@@ -62,7 +71,12 @@ function* verifyOtp() {
   yield takeEvery(VERIFY_OTP, fetchVerifyOtp);
 }
 
+function* logout() {
+  yield takeEvery(LOGOUT, fetchLogout);
+}
+
 export default function* rootSaga() {
   yield all([fork(watchGetPlaceholder)]);
   yield all([fork(verifyOtp)]);
+  yield all([fork(logout)]);
 }

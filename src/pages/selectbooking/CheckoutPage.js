@@ -18,25 +18,26 @@ function CheckoutPage() {
     data: apiData,
     tripData,
     mobile,
+    routeData
   } = useSelector((state) => state.busReducer);
-  const { name, age, gender, adhaar, basic_details, price, surcharge } =
-    apiData;
+  const { name, age, gender, adhaar, basic_details, price, surcharge } = apiData;
 
   const onCongratsClick = () => {
-    console.log("object", tripData);
-    dispatch(
-      createBusBooking({
-        ...apiData,
-        trips_id: tripData?._id,
-        route: tripData?.route?._id,
-        from: tripData?.route?.start?._id,
-        to: tripData?.route?.end?._id,
-        bus: tripData?.vehical,
-        mobile,
-      })
-    );
+    // console.log("object", tripData);
+    // dispatch(
+    //   createBusBooking({
+    //     ...apiData,
+    //     trips_id: tripData?._id,
+    //     route: tripData?.route?._id,
+    //     from: tripData?.route?.start?._id,
+    //     to: tripData?.route?.end?._id,
+    //     bus: tripData?.vehical,
+    //     mobile,
+    //   })
+    // );
     history.push("/payment");
   };
+
   useEffect(() => {
     // setValues({ ...values, price: (BASE_PRICE * basic_details.length)  })
     // setValues({ ...values, price: (basePrice * basic_details.length) })
@@ -94,7 +95,11 @@ function CheckoutPage() {
                         fontWeight: "bold",
                       }}
                     >
-                      31 July, 2021
+                      {/* 31 July, 2021 */}
+                      {/* {tripData?.route?.end?.name} */}
+                      {`${routeData?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+                      {`${routeData?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
+                      {`${routeData?.startDate?.toLocaleDateString("en-US", { year: 'numeric' })} `}
                     </span>
                   </div>
                   <div className="p-2">
@@ -115,7 +120,7 @@ function CheckoutPage() {
                         color: "#FF4A68",
                       }}
                     >
-                      ₹ {price}
+                      ₹ {price + surcharge}
                     </span>
                     <br />
                     <span
@@ -148,7 +153,7 @@ function CheckoutPage() {
                     >
                       <div style={{}}>
                         <img src={city1} />
-                        <span
+                        {/*  <span
                           style={{
                             color: "grey",
                             padding: "10px",
@@ -156,6 +161,16 @@ function CheckoutPage() {
                           }}
                         >
                           2 Stops
+                        </span> */}
+                        <span
+                          style={{
+                            whiteSpace: "nowrap",
+                            fontSize: "13px",
+                            fontWeight: "bolder",
+                            fontFamily: "sans-serif",
+                          }}
+                        >
+                          {" "} {tripData?.trip_name}
                         </span>
                         <br />
                         <span
@@ -196,7 +211,7 @@ function CheckoutPage() {
                             fontFamily: "sans-serif",
                           }}
                         >
-                          {tripData?.trip_name}
+                          {tripData?.route?.vehical?.registration_number}
                         </span>
                       </div>
                       <span
@@ -206,7 +221,8 @@ function CheckoutPage() {
                           fontSize: "13px",
                         }}
                       >
-                        Volvo Multi-Axle Sleeper A/C (2+1)
+                        {/* Volvo Multi-Axle Sleeper A/C (2+1) */}
+                        Bus 30 Seater
                       </span>
                     </div>
                   </div>
@@ -259,7 +275,7 @@ function CheckoutPage() {
                           <br />
                           <span> Adhaar: {item.adhaar}</span>
                           <div className="p-3">
-                            <Button className="checout-btn">EDIT</Button>
+                            <Button className="checout-btn" onClick={onClickBack} >EDIT</Button>
                           </div>
                         </div>
                       </div>
@@ -270,7 +286,7 @@ function CheckoutPage() {
             </Row>
           </Container>
         </div>
-        <div style={{ height: "250px" }}></div>
+        {/* <div style={{ height: "250px" }}></div> */}
         <div
           className="check-payment"
           style={{ background: "#0FA453" }}
@@ -288,7 +304,8 @@ function CheckoutPage() {
               color: " #FFFFFF",
             }}
           >
-            MAKE PAYMENT
+            NEXT
+            {/* MAKE PAYMENT */}
           </div>
         </div>
         <Footer />
@@ -330,19 +347,25 @@ function CheckoutPage() {
           </div>
         </div>
         <Container>
-          <div style={{textAlign:"center",marginTop:"20px"}}>
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
             <span>Destination</span>
-            <h3 style={{fontWeight:"700"}}> Chitrakote, Bastar
-                    {tripData?.route?.end?.name}</h3>
-            <span>31 July, 2021</span>
+            <h3 style={{ fontWeight: "700" }}>
+              {/* Chitrakote, Bastar */}
+              {tripData?.route?.end?.name}</h3>
+            <span>
+              {/* 31 July, 2021 */}
+              {`${routeData?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+              {`${routeData?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
+              {`${routeData?.startDate?.toLocaleDateString("en-US", { year: 'numeric' })} `}
+            </span>
             <br />
             <span>Total Amount</span> <br />
-            <span style={{fontWeight:"700",fontSize:"22px",color:"#FF4A68"}}>  ₹ {price} </span> <br />
+            <span style={{ fontWeight: "700", fontSize: "22px", color: "#FF4A68" }}>  ₹ {price + surcharge} </span> <br />
             <span>*Excluding taxes</span>
           </div>
         </Container>
-        
-        <Container className="" style={{ width: "", paddingTop:"20px" }}>
+
+        <Container className="" style={{ width: "", paddingTop: "20px" }}>
           <Row>
             <span
               style={{
@@ -351,8 +374,8 @@ function CheckoutPage() {
                 fontSize: "13px",
                 color: "black",
                 // marginLeft: "10px",
-                whiteSpace:'nowrap',
-                textAlign:""
+                whiteSpace: 'nowrap',
+                textAlign: ""
               }}
             >
               Passenger Details
@@ -371,7 +394,7 @@ function CheckoutPage() {
                       className="check-passenger"
                       style={{ marginLeft: "25px" }}
                     >
-                      <div style={{ textAlign: "center", padding: "5px",marginTop:"10px" }}>
+                      <div style={{ textAlign: "center", padding: "5px", marginTop: "10px" }}>
                         <span
                           style={{
                             fontWeight: "bolder",
@@ -383,23 +406,23 @@ function CheckoutPage() {
                           {item.name}
                         </span>
                         <br />
-                        <span   style={{
-                            fontWeight: "bold",
-                            fontFamily: "sans-serif",
-                            fontSize: "11px",
-                            color: "black",
-                          }}>
+                        <span style={{
+                          fontWeight: "bold",
+                          fontFamily: "sans-serif",
+                          fontSize: "11px",
+                          color: "black",
+                        }}>
                           {item.gender}, {item.age}
                         </span>
                         <br />
-                        <span  style={{
-                            fontWeight: "bold",
-                            fontFamily: "sans-serif",
-                            fontSize: "11px",
-                            color: "black",
-                          }}> Adhaar: {item.adhaar}</span>
+                        <span style={{
+                          fontWeight: "bold",
+                          fontFamily: "sans-serif",
+                          fontSize: "11px",
+                          color: "black",
+                        }}> Adhaar: {item.adhaar}</span>
                         <div className="">
-                          <Button className="checout-btn">EDIT</Button>
+                          <Button className="checout-btn" onClick={onClickBack} >EDIT</Button>
                         </div>
                       </div>
                     </div>
@@ -426,7 +449,8 @@ function CheckoutPage() {
               color: " #FFFFFF",
             }}
           >
-            MAKE PAYMENT
+            {/* MAKE PAYMENT */}
+            NEXT
           </div>
         </div>
       </div>

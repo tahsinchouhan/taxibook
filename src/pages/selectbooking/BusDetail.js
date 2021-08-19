@@ -14,6 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { API_PATH } from "../../Path/Path";
 import { useDispatch } from "react-redux";
 import { getTripByRouteId, setBookinStartDate, setRouteData, setRouteId } from "../../redux/actions";
+import Footer from "../travesaly/Footer";
 
 function BusPass() {
   const history = useHistory();
@@ -25,7 +26,7 @@ function BusPass() {
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
-      style={{ border: "none", background: "transparent", fontSize:"25px", color:"#a5a5a5" }}
+      style={{ border: "none", background: "transparent", fontSize: "25px", color: "#a5a5a5" }}
       onClick={onClick}
       ref={ref}
     >
@@ -50,7 +51,7 @@ function BusPass() {
     // dispatch(setRouteId(selected))
     // dispatch(getTripByRouteId(selected))
     dispatch(setRouteId(selected))
-    dispatch(setRouteData({...routes[routes.findIndex(x => x._id == selected)], startDate }))
+    dispatch(setRouteData({ ...routes[routes.findIndex(x => x._id == selected)], startDate }))
     history.push('/busmonsoon')
     // console.log(startDate,"erty",selected,startDate)
     // toast("Wow so easy!");
@@ -147,6 +148,9 @@ function BusPass() {
             Continue
           </Button>
         </div>
+        <div className="pt-5 mt-5" >
+          <Footer />
+        </div>
       </Container>
 
       {/* Mobile View */}
@@ -233,6 +237,9 @@ function BusPass() {
         <Button className="locationpass-btn" onClick={onSubmit}>
           Continue
         </Button>
+        <div className="" style={{paddingBottom:"85px"}} >
+          <Footer />
+        </div>
       </div>
     </div>
   );
