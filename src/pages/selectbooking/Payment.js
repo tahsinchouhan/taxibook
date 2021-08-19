@@ -1,14 +1,87 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { useHistory } from "react-router-dom";
 
+
+
+async function loadScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+}
+
+const __DEV__ = document.domain === "localhost";
+
+
 function Payment() {
   const history = useHistory();
+  const [data, setData] = useState();
 
-  const onNextPage = () => {
-    history.push("/CongratulationPage");
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [number, setNumber] = useState('');
+
+  useEffect(() => {
+    fetch("http://localhost:1337/razorpay", {
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setData(result);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+
+  const displayRazorpaysss = async() => {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    console.log(res)
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    var options = {
+      key: __DEV__ ? "rzp_test_lS3QWpplq93lr5" : "PRODUCTION_KEY",
+      currency: data.currency,
+      amount: data.amount.toString(),
+      order_id: data.id,
+      name: "Aamcho Bastar",
+      description: "Tankyou for nothink.",
+      image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
+      handler: function (response) {
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature);
+        if(response.razorpay_payment_id){
+          history.push("/CongratulationPage")
+        }    
+    },
+      prefill: {
+        name: name,
+        email: email,
+        contact: number,
+      },
+    };
+    const paymentOpject = new window.Razorpay(options);
+    paymentOpject.open();
   };
   return (
     <>
@@ -22,8 +95,10 @@ function Payment() {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
-                    type="email"
+                    type="text"
                     placeholder="Enter name"
+                    value={name}
+                    onChange={(e)=> setName(e.target.value)}
                     style={{ backgroundColor: " #F8F8F8" }}
                   />
                 </Form.Group>
@@ -34,6 +109,8 @@ function Payment() {
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
                     type="email"
+                    value={email}
+                    onChange={(e)=> setEmail(e.target.value)}
                     placeholder="Enter email"
                     style={{ backgroundColor: " #F8F8F8" }}
                   />
@@ -46,7 +123,9 @@ function Payment() {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Whatsapp Number</Form.Label>
                   <Form.Control
-                    type="email"
+                    type="number"
+                    value={number}
+                    onChange={(e)=> setNumber(e.target.value)}
                     placeholder="Enter whatsapp number"
                     style={{ backgroundColor: " #F8F8F8" }}
                   />
@@ -69,7 +148,7 @@ function Payment() {
             color: "white",
             height: "60px",
           }}
-          onClick={onNextPage}
+          onClick={displayRazorpaysss}
         >
           <span
             variant="primary"
@@ -99,8 +178,10 @@ function Payment() {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Name</Form.Label>
                   <Form.Control
-                    type="email"
+                    type="text"
                     placeholder="Enter name"
+                    value={name}
+                    onChange={(e)=> setName(e.target.value)}
                     style={{ backgroundColor: " #F8F8F8" }}
                   />
                 </Form.Group>
@@ -111,6 +192,8 @@ function Payment() {
                   <Form.Label>Email address</Form.Label>
                   <Form.Control
                     type="email"
+                    value={email}
+                    onChange={(e)=> setEmail(e.target.value)}
                     placeholder="Enter email"
                     style={{ backgroundColor: " #F8F8F8" }}
                   />
@@ -123,7 +206,9 @@ function Payment() {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Whatsapp Number</Form.Label>
                   <Form.Control
-                    type="email"
+                    type="number"
+                    value={number}
+                    onChange={(e)=> setNumber(e.target.value)}
                     placeholder="Enter whatsapp number"
                     style={{ backgroundColor: " #F8F8F8" }}
                   />
@@ -146,9 +231,9 @@ function Payment() {
             color: "white",
             height: "60px",
           }}
-          onClick={onNextPage}
+          onClick={displayRazorpaysss}
         >
-          <span
+          <Button
             variant="primary"
             size="lg"
             type="submit"
@@ -159,7 +244,7 @@ function Payment() {
             }}
           >
             PAYMENT
-          </span>
+          </Button>
         </div>
         <Footer />
       </div>
