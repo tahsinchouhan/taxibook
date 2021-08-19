@@ -123,7 +123,7 @@ function DmPass() {
                   type="submit"
                   class="btn btn-success"
                   style={{
-                    width: "20%",
+                    width: "200px",
                     textAlign: "center",
                     height: "52px",
                     borderRadius: "9px",

@@ -281,15 +281,15 @@ function SteperDmpass(shows, ...props) {
       </div>
 
       <Container>
-        <Stepper
+        <Stepper 
           steps={[
-            { label: "DM Pass" },
-            { label: "Locations" },
-            { label: "Confirm" },
-            { label: "Checkout" },
+            { label: <b style={{whiteSpace:"nowrap"}}>DM Pass</b> },
+            { label: <b>Locations</b>},
+            { label:<b>Confirm</b> },
+            { label:<b>Checkout</b>},
           ]}
           activeStep={show}
-          className="pb-0"
+          className="pb-0"         
         />
       </Container>
       {show == 0 ? (
@@ -1161,8 +1161,100 @@ function SteperDmpass(shows, ...props) {
           </div>
 
           <div className="d-md-none">
-            <Container style={{ width: "", paddingTop: "20px" }}>
-              <Row>
+            <Container style={{ width: "", paddingTop: "20px" }}>              
+               <div>
+            <div style={{ textAlign: "center", marginTop: "15px" }}>
+              <span style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</span>
+              <br />
+              <span style={{ color: "black", fontSize: "13px" }}>
+                Your Passes are ready
+              </span>
+            </div>
+            <Col xs={12} md={6} >
+              <div style={{ marginTop: "" }}>
+                <img
+                  src={mobile}
+                  alt=""
+                  style={{ width: "100%", height: "" }}
+                />
+              </div>
+            </Col>
+            <Col xs={12} md={6}>            
+                <div style={{ marginBottom: "20px", textAlign: "center" }}>
+                  <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
+                  <span style={{ color: "black", marginBottom: "50px" }}>
+                    {dmpass_id}
+                  </span>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  <div>
+                    <Button
+                      className="btn btn-success"
+                      style={{
+                        width: "200px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: "#0fa453",
+                        fontWeight: "bold",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      <FaWhatsapp
+                        style={{
+                          fontWeight: "bold",
+                          marginLeft: "-23px",
+                          fontSize: "30px",
+                        }}
+                      />
+                      <span> Whatsapp Link</span>
+                    </Button>
+                  </div>
+                  <div>
+                    <Button
+                      style={{
+                        width: "208px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: " #FF4A68",
+                        fontWeight: "bold",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      Download E-ticket
+                    </Button>
+                  </div>
+
+                  <div>
+                    <Button
+                      style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: "#864BD8",
+                        fontWeight: "bold",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      Back to Home
+                    </Button>
+                  </div>
+                </div>              
+            </Col>
+          </div>
+            </Container>
+          </div>
+        </>
+      )}
+    </>
+  );
+}
+
+export default SteperDmpass;
+
+{/* <Row>
                 <Col>
                   <div style={{ marginBottom: "20px", textAlign: "center" }}>
                     <h3 style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</h3>
@@ -1213,7 +1305,6 @@ function SteperDmpass(shows, ...props) {
                         <FaWhatsapp
                           style={{
                             fontWeight: "bold",
-                            // marginLeft: "-23px",
                             fontSize: "30px",
                           }}
                         />
@@ -1253,13 +1344,4 @@ function SteperDmpass(shows, ...props) {
                     </div>
                   </div>
                 </Col>
-              </Row>
-            </Container>
-          </div>
-        </>
-      )}
-    </>
-  );
-}
-
-export default SteperDmpass;
+              </Row> */}

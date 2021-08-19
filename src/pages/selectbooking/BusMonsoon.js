@@ -214,23 +214,24 @@ function BusMonsoon() {
       {/*mobile View*/}
       <div >
         <div fluid className="d-md-none">
-          <Row >
+          <div >
             <Col xs={12}>
               <div className="">
                 <div >
                   <h5
                     style={{
                       paddingTop: "15px",
-                      fontSize: "19px",
+                      fontSize: "18px",
                       backgroundColor: "#0FA453",
                       fontWeight: "bolder",
                       color: "white",
                       textAlign: "center",
+                      height:'75px'
                     }}
                   >
                     Tatibandh, Boarding
                     <br />
-                    to Chitrakote{" "}
+                    to Chitrakotex
                   </h5>
                 </div>
               </div>
@@ -253,7 +254,7 @@ function BusMonsoon() {
                 </Form.Label>
               </div>
             </Col>
-          </Row>
+          </div>
           <div style={{ marginLeft: "15px" }}>
             {/* <Container sty={{ marginLeft: "10px" }}>
               <div>

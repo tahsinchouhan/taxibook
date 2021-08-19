@@ -227,9 +227,10 @@ function Payment() {
           classNmae="pay-div"
           style={{
             textAlign: "center",
-            backgroundColor: "#0FA453",
+          
             color: "white",
             height: "60px",
+            widow:"100%"
           }}
           onClick={displayRazorpaysss}
         >
@@ -241,6 +242,8 @@ function Payment() {
               marginTop: "15px",
               fontWeight: "600",
               fontSize: "20px",
+              width:"100%",
+              backgroundColor: "#0FA453",
             }}
           >
             PAYMENT

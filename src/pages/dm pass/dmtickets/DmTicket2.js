@@ -113,7 +113,7 @@ function DmTicket2() {
                   type="submit"
                   class="btn btn-success"
                   style={{
-                    width: "20%",
+                    width: "200px",
                     textAlign: "center",
                     height: "52px",
                     borderRadius: "9px",
@@ -129,7 +129,7 @@ function DmTicket2() {
           </div>
         </Container>
 {/*mobile-view*/}
-        <div>
+        <div  fluid className="d-md-none">
         <Container className="my-5" style={{ width: "" }}>
           <div className="select_div">
             <div className="row p-3" style={{ textAlign: "center" }}>

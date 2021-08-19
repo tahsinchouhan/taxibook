@@ -36,6 +36,8 @@ import SteperDmpass from './pages/booking/tickets/SteperDmpass';
 import TicketCheckOut from './pages/booking/tickets/TicketCheckOut';
 
 import Payment from './pages/selectbooking/Payment';
+import TravellerCard from './pages/travesaly/TravellerCard';
+import TravellerTicket from './pages/travesaly/TravellerTicket';
 // import DmTicket from './pages/dm pass/dmtickets/DmTicket';
 
 function App() {
@@ -56,8 +58,8 @@ function App() {
             <Route exact path='/curatedexperiences' component={Packages} />
             <Route exact path='/select-booking' component={SelectBooking} />
 
-            {/* <Route exact path='/dmpass' component={DmPass} />
-            <Route exact path='/dmticket2'component={ DmTicket2}/> */}
+            <Route exact path='/traveller_card' component={TravellerCard} />
+           <Route exact path='/traveller_ticket'component={ TravellerTicket}/>
             <Route exact path='/dmpass' component={DmTicket2} />
             <Route exact path='/dmticket'component={DmPass}/>
 
