@@ -11,7 +11,7 @@ import Message from "../Message";
 
 
 function LoginModal({ show, handleClose }) {
-  // const [modalShow, setModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const [mobile, setMobile] = useState("");
   const [OTP, setOTP] = useState("");
   const [showDiv, setShowDiv] = useState(false);

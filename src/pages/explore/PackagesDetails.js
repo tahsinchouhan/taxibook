@@ -9,17 +9,50 @@ import { API_PATH } from "../../Path/Path";
 import { Button } from "bootstrap";
 import { useHistory } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
+import Modal from 'react-bootstrap'
+import RettingModal from "../../components/modal/RettingModal";
+import EnquireModal from "../../components/modal/EnquireModal";
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
 };
 const PackagesDetails = (props) => {
+const [enquireModal,setEnquireModal]=useState();
+  const[modalReviewShow,setModalReviewShow]=useState(false);
   const [packages, setPackages] = useState("");
   const [inclusions, setInclusions] = useState([]);
   const [exclusions, setExclusions] = useState([]);
   const [zoom, setZoom] = useState(11);
   const history = useHistory();
 
+  const [modalShow, setModalShow] = useState(false);
+
+  const  modalReviewHadler = () => {
+    setModalReviewShow(true)
+    console.log("helllo")
+  }
+
+  const handleReviewClose = () => {
+    setModalReviewShow(false)
+  }
+  const modalEnquireHadler = () => {
+    setEnquireModal(true)
+    console.log("helllo")
+  }
+
+  const handEnquireClose = () => {
+    setEnquireModal(false)
+  }
+  // const [modalRettShow, setModalRettShow] = useState(false);
+  // const [show, setShow] = useState(false);
+
+
+  
+  // const handleLoginClose = () => {
+  //   setModalShow(false)
+  // }
+
+  
   // const onClickWhatsapp=()=>{
   //   history.push("")
   // }
@@ -172,9 +205,18 @@ const PackagesDetails = (props) => {
       </Container>
         <div fluid className="d-none d-md-block">
     <div className="packeges_title">
+
+    <span
+          className="packages_enquired"
+          style={{ color: "rgb(120, 104, 230)" }}
+          onClick={()=> modalReviewHadler()}
+        >
+          Review
+        </span>
         <span
           className="packages_enquired"
           style={{ color: "rgb(120, 104, 230)" }}
+          onClick={()=> modalEnquireHadler()}
         >
           Enquire  Now
         </span>
@@ -200,14 +242,26 @@ const PackagesDetails = (props) => {
       </div> 
       </div>
       <div fluid className="d-md-none">
-      <div className="packeges_title">
-        <div>
-        <span
+      <div className="packeges_title">        
+       <div>
+       <span
           className="packages_enquired"
           style={{ color: "rgb(120, 104, 230)" }}
+          onClick={()=> modalReviewHadler()}
+        >
+          Review
+        </span>
+       </div><br/>
+       <div style={{marginTop:"12px"}}>
+       <span
+          className="packages_enquired"
+          style={{ color: "rgb(120, 104, 230)" }}
+          onClick={()=> modalEnquireHadler()}
         >
           Enquire Now
         </span>
+       </div><br/>
+        <div style={{marginTop:"12px"}}>
         <span
           className="packages_enquired"         
         >
@@ -218,8 +272,8 @@ const PackagesDetails = (props) => {
             TripAdvisor reviews
           </a>
         </span>
-        </div>
-        <div style={{marginTop:"25px"}}>
+        </div><br/>       
+        <div style={{marginTop:"12px"}}>
         <span className="packages_whatsapp" >
           <a
             className="package-whats"style={{textDecoration:"none"}}
@@ -233,6 +287,8 @@ const PackagesDetails = (props) => {
       </div>
       </div>
       <Footer />
+      <RettingModal show={modalReviewShow} handleClose={handleReviewClose} />
+      <EnquireModal  show={enquireModal} handleClose={handEnquireClose}/>
     </>
   );
 };
