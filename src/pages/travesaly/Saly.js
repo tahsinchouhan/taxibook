@@ -1,5 +1,13 @@
-import React from "react";
-import { Button, Row, Col, Form, Container, Card } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import {
+  Button,
+  Row,
+  Col,
+  Form,
+  Container,
+  Card,
+  Image,
+} from "react-bootstrap";
 import Salyimg from "../../assets/img/Saly-1.svg";
 import Layer11 from "../../assets/img/hil.svg";
 import Layer12 from "../../assets/img/adivash.svg";
@@ -10,9 +18,12 @@ import Inform from "./Footer";
 import { NavLink, useHistory } from "react-router-dom";
 import TravellerCard from "./TravellerCard";
 import TravellerTicket from "./TravellerTicket";
+import { API_PATH } from "../../Path/Path";
+import Carousel from "react-multi-carousel";
 
 function Saly() {
   const history = useHistory();
+  const [destinations, setDestinations] = useState([]);
   const onButtonclick = () => {
     console.log("object");
     history.push("/select-booking");
@@ -22,22 +33,39 @@ function Saly() {
     history.push("/tickets_sraech");
   };
 
+  useEffect(() => {
+    getDestinations();
+  }, []);
+
   const getDestinations = () => {
     fetch(API_PATH + "/api/v1/destinations/list")
       .then((response) => response.json())
       .then((json) => {
-        if (json.data !== undefined)
-          // setDestinations(json.data);
+        setDestinations(json.data);
         console.log(json.data);
       })
       .catch((e) => console.log(e));
   };
 
-  useEffect(() => {
-    getDestinations();
-  }, [])
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 2.5,
+      slidesToSlide: 2,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      slidesToSlide: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1,
+    },
+  };
+  
   return (
-
     <>
       <Container
         fluid
@@ -57,65 +85,50 @@ function Saly() {
                 <p>Check out the best tourism destinations around Bastar</p>
               </div>
               <Row className="pt-5">
+                <Carousel
+                  partialVisbile
+                  itemClass="image-item"
+                  responsive={responsive}
+                >
+                  {destinations.length ? (
+                    destinations.map((item, key) => {
+                      return (
+                        <div key={key}>
+                          <Image
+                            draggable={false}
+                            style={{ width: "100%", height: "100%" }}
+                            src={item.upload_images}
+                          />
+                          <div
+                            style={{ color: "black" }}
+                            className="package__trip"
+                          >
+                            <h6 className="packages__block-title mt-3">
+                              {item.title}
+                            </h6>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <h1></h1>
+                  )}
+                </Carousel>
 
-                {/* {destination.map((data, index) => (
-                  <Col key={index}>
-                    <Card className="saly_card">
-                      <img
-                        src={data.upload_images}
-                        alt="saly"
-                        style={{ width: "100%", borderRadius: "10px" }}
-                      />
-                    </Card>
-                    <p className="saly-para"> {item.title}</p>
-                    <h6 className="packages__block-title mt-3 mb-0">
-                           
-                          </h6>
-                          <small className="packages__block-subtitle">
-                            {data.sub_title}
-                          </small>
-                  </Col>
-                ))} */}
-
-                <Col>
-                  <Card className="saly_card">
-                    <img
-                      src={Layer12}
-                      alt="saly"
-                      style={{ width: "100%", borderRadius: "10px" }}
-                    />
-                  </Card>
-                  <p className="saly-para"> Destinations 2</p>
-                </Col>
-                <Col>
-                  <Card className="saly_card">
-                    <img
-                      src={Layer11}
-                      alt="saly"
-                      style={{ width: "100%", borderRadius: "10px" }}
-                    />
-                  </Card>
-                  <p className="saly-para"> Destinations 3</p>
-                </Col>
-                <Col>
-                  <Card className="saly_card">
-                    <img
-                      src={Layer12}
-                      alt="saly"
-                      style={{ width: "100%", borderRadius: "10px" }}
-                    />
-                  </Card>
-                  <p className="saly-para"> Destinations 4</p>
-                </Col>
-                <div className="travel_home_btn pt-5">
+                <div className="travel_home_btn pt-0">
                   <Button
-                    variant=""
+                   onClick={() => history.push("/populardestinations")}
                     style={{
+                      marginTop: 20,
                       justifyContent: "center",
                       backgroundColor: "#58b839",
                       color: "white",
-                      fontSize: "17px",
+                      fontSize: "15px",
                       fontWeight: "bolder",
+                      padding: 15,
+                      width: 300,
+                      outline: 'none',
+                      border: 'none'
                     }}
                   >
                     View all destinations
@@ -179,63 +192,10 @@ function Saly() {
             </Row>
             <div className="pt-4">
               <Container>
-                <h4>Recent Tickets</h4>
-                <Row>
-                  <Col>
-                    <img src={doodle1} />
-                    <br />
-                    <p>
-                      Chitrakote
-                      <br />
-                      24 Feb
-                    </p>
-                  </Col>
-                  <Col>
-                    <img src={doodle1} />
-                    <br />
-                    <p>
-                      Tamda Ghumar
-                      <br />
-                      24 Feb
-                    </p>
-                  </Col>
-                  <Col>
-                    <img src={doodle1} />
-                    <br />
-                    <p>
-                      Nendi Ghumar
-                      <br />
-                      24 Feb
-                    </p>
-                  </Col>
-                  <Col>
-                    <img src={doodle1} />
-                    <br />
-                    <p>
-                      Chitrakote
-                      <br />
-                      24 Feb
-                    </p>
-                  </Col>
-                  <Col>
-                    <img src={doodle1} />
-                    <br />
-                    <p>
-                      Tamda Ghumar
-                      <br />
-                      24 Feb
-                    </p>
-                  </Col>
-                  <Col>
-                    <img src={doodle1} />
-                    <br />
-                    <p>
-                      Nendi Ghumar
-                      <br />
-                      24 Feb
-                    </p>
-                  </Col>
-                </Row>
+                <h4>
+                  <b>Recent Tickets</b>
+                </h4>
+                <TravellerTicket />
               </Container>
             </div>
           </div>
@@ -256,11 +216,36 @@ function Saly() {
                   <h2 className="explore_div">Explore</h2>
                   <p>Check out the best tourism destinations around Bastar</p>
                 </div>
-                <div>
-                  <TravellerCard />
-                </div>
+                <Carousel
+                  partialVisbile
+                  itemClass="image-item"
+                  responsive={responsive}
+                >
+                  {destinations.length ? (
+                    destinations.map((item, key) => {
+                      return (
+                        <div key={key}>
+                          <Image
+                            draggable={false}
+                            style={{ width: "100%", height: "100%" }}
+                            src={item.upload_images}
+                          />
+                          <div
+                            style={{ color: "black" }}
+                            className="package__trip"
+                          >
+                            <h6 className="mt-3">{item.title}</h6>
+                          </div>
+                        </div>
+                      );
+                    })
+                  ) : (
+                    <h1></h1>
+                  )}
+                </Carousel>
                 <div className="travel_home_btn pt-5">
                   <Button
+                  onClick={() => history.push("/populardestinations")}
                     variant=""
                     style={{
                       justifyContent: "center",
@@ -336,9 +321,7 @@ function Saly() {
                   <h4>
                     <b>Recent Tickets</b>
                   </h4>
-                  <div>
-                    <TravellerTicket />
-                  </div>
+                  <TravellerTicket />
                 </Container>
               </div>
             </div>

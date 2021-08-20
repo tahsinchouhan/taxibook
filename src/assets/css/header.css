@@ -28,6 +28,8 @@
   width: 100%;
   color: #fff;
   padding: 1rem;
+  text-decoration: none;
+  font-size: large;
 }
 .sidebar__navlink:hover {
   color: #fff;
@@ -49,8 +51,9 @@
 .sidebar_item {
   padding: 10px;
   margin: 10px;
-  font-size: 15px;
   font-weight: 600;
+  color: black;
+  text-decoration: none;
 }
 .explore-search{
   width: 50%;
@@ -64,9 +67,6 @@
   color: white;
 }
 @media screen and (max-width: 700px) {
-  .sidebar_item {
-    width: 40% !important;
-  }
   .header_image {
     width: 40% !important;
   }

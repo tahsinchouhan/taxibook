@@ -14,23 +14,23 @@ import { NavLink, useHistory } from "react-router-dom";
 import { FaUser, FaSistrix } from "react-icons/fa";
 import { useDispatch, connect, useSelector } from "react-redux";
 import LoginModal from "../components/modal/LoginModal";
-import Modal from 'react-bootstrap'
+import Modal from "react-bootstrap";
 import { logout } from "../redux/actions";
 
 function Header() {
   const [modalShow, setModalShow] = useState(false);
 
   const modalHadler = () => {
-    setModalShow(true)
-    console.log("helllo")
-  }
+    setModalShow(true);
+    console.log("helllo");
+  };
   const handleLoginClose = () => {
-    setModalShow(false)
-  }
+    setModalShow(false);
+  };
 
   const dispatch = useDispatch();
 
-  const { user_data } = useSelector(state => state.loginReducer)
+  const { user_data } = useSelector((state) => state.loginReducer);
 
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState(false);
@@ -79,7 +79,15 @@ function Header() {
         <Offcanvas show={show} onHide={handleClose} className="sidebar">
           <Offcanvas.Header style={{ flexDirection: "row-reverse" }}>
             <HiMenu onClick={handleClose} className="sidebar__toggler" />
-            <Offcanvas.Title>Login</Offcanvas.Title>
+            {user_data !== null ? (
+              <Offcanvas.Title onClick={() => dispatch(logout())}>
+                Logout
+              </Offcanvas.Title>
+            ) : (
+              <Offcanvas.Title onClick={() => modalHadler()}>
+                Login
+              </Offcanvas.Title>
+            )}
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="me-auto sidebar__nav">
@@ -164,34 +172,31 @@ function Header() {
                       marginRight: "10px",
                     }}
                   />
-                  {
-                    (user_data !== null)
-                      ?
-                      <h4
-                        style={{
-                          fontSize: "18px",
-                          color: "purple",
-                          marginRight: "10px",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => dispatch(logout())}
-                      >
-                        Logout
-                      </h4>
-                      :
-                      <h4
-                        style={{
-                          fontSize: "18px",
-                          color: "purple",
-                          marginRight: "10px",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => modalHadler()}
-                      >
-                        Login
-                      </h4>
-                  }
-
+                  {user_data !== null ? (
+                    <h4
+                      style={{
+                        fontSize: "18px",
+                        color: "purple",
+                        marginRight: "10px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => dispatch(logout())}
+                    >
+                      Logout
+                    </h4>
+                  ) : (
+                    <h4
+                      style={{
+                        fontSize: "18px",
+                        color: "purple",
+                        marginRight: "10px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => modalHadler()}
+                    >
+                      Login
+                    </h4>
+                  )}
                 </div>
                 <div>
                   <FaSistrix

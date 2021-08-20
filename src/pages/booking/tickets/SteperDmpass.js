@@ -14,7 +14,15 @@ import { FaWhatsapp } from "react-icons/fa";
 import Footer from "../../travesaly/Footer";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Accordion, AccordionDetails, AccordionSummary, Checkbox, FormControlLabel, Paper, Typography } from "@material-ui/core";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Checkbox,
+  FormControlLabel,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import { createDmPass, setDmData } from "../../../redux/actions";
 import { API_PATH } from "../../../Path/Path";
 import axios from "axios";
@@ -36,10 +44,17 @@ function SteperDmpass(shows, ...props) {
   // const [data, setData] = useState();
   const history = useHistory();
 
-  const dispatch = useDispatch()
-  const { dmData } = useSelector(state => state.dmpassReducer)
-  const { user_data } = useSelector(state => state.loginReducer)
-  const { dmpass_id, number_of_vehicals, number_of_travellers, duration_of_travel, mobile, start_date } = dmData
+  const dispatch = useDispatch();
+  const { dmData } = useSelector((state) => state.dmpassReducer);
+  const { user_data } = useSelector((state) => state.loginReducer);
+  const {
+    dmpass_id,
+    number_of_vehicals,
+    number_of_travellers,
+    duration_of_travel,
+    mobile,
+    start_date,
+  } = dmData;
 
   const onSideBtnClick = (e) => {
     const name = e.target.name;
@@ -49,31 +64,36 @@ function SteperDmpass(shows, ...props) {
   useEffect(() => {
     let mob;
     if (user_data !== null) {
-      mob = user_data?.user?.mobile?.slice(2, user_data?.user?.mobile?.length)
-      dispatch(setDmData('mobile', mob))
-      getDmPassData(mob)
+      mob = user_data?.user?.mobile?.slice(2, user_data?.user?.mobile?.length);
+      dispatch(setDmData("mobile", mob));
+      getDmPassData(mob);
       console.log();
     }
-  }, [user_data])
+  }, [user_data]);
 
   const getDmPassData = async (mobile) => {
-    await axios.post(`${API_PATH}/api/v1/dmpass/search`, {
-      mobile
-    })
+    await axios
+      .post(`${API_PATH}/api/v1/dmpass/search`, {
+        mobile,
+      })
       .then((response) => {
-        return response.data
+        return response.data;
       })
       .then((json) => {
         console.log("js", json);
-        return json
+        return json;
       })
       .catch((error) => {
         console.log("js", error);
-      })
-  }
+      });
+  };
 
   const onDmPassClick = () => {
-    console.log("object", { ...dmData, basic_details: travellers, vehical_details: vehicles });
+    console.log("object", {
+      ...dmData,
+      basic_details: travellers,
+      vehical_details: vehicles,
+    });
     // dispatch(createDmPass({ ...dmData, basic_details: travellers, vehical_details: vehicles }))
     setShow(1);
   };
@@ -87,7 +107,15 @@ function SteperDmpass(shows, ...props) {
   const onTicketCheckClick = () => {
     console.log("object");
     //history.push("./ ticket_checkout");
-    dispatch(createDmPass({ ...dmData, basic_details: travellers, vehical_details: vehicles, locations: locServ, total_charges: tot_charges }))
+    dispatch(
+      createDmPass({
+        ...dmData,
+        basic_details: travellers,
+        vehical_details: vehicles,
+        locations: locServ,
+        total_charges: tot_charges,
+      })
+    );
     setShow(3);
   };
   const onClickBack = () => {
@@ -97,109 +125,123 @@ function SteperDmpass(shows, ...props) {
   };
 
   const onDmByeClick = () => {
-    console.log("object", { ...dmData, basic_details: travellers, vehical_details: vehicles });
+    console.log("object", {
+      ...dmData,
+      basic_details: travellers,
+      vehical_details: vehicles,
+    });
     history.push("/dm_congratulate");
   };
 
   const initialTravellers = () => {
-    let temp = []
+    let temp = [];
     for (let v = 0; v < 1; v++) {
       temp.push({
-        name: '',
-        gender: 'Male',
-        age: '',
-        adhaar: '',
-      })
+        name: "",
+        gender: "Male",
+        age: "",
+        adhaar: "",
+      });
     }
-    return temp
-  }
-  const [travellers, setTravellers] = useState(initialTravellers)
-  const [showDate, setShowDate] = useState('')
+    return temp;
+  };
+  const [travellers, setTravellers] = useState(initialTravellers);
+  const [showDate, setShowDate] = useState("");
 
   const handleTraveller = (val, lbl, i) => {
-    setTravellers([...travellers].map((obj, key) => {
-      if (key === i) {
-        return {
-          ...obj,
-          [lbl]: val
+    setTravellers(
+      [...travellers].map((obj, key) => {
+        if (key === i) {
+          return {
+            ...obj,
+            [lbl]: val,
+          };
+        } else {
+          return obj;
         }
-      } else {
-        return obj
-      }
-    }))
-  }
+      })
+    );
+  };
 
   const initialVehicles = () => {
-    let temp = []
+    let temp = [];
     for (let v = 0; v < 1; v++) {
       temp.push({
-        vehicle_number: '',
-        name: '',
-        gender: 'Male',
-        age: '',
-        adhaar: '',
-      })
+        vehicle_number: "",
+        name: "",
+        gender: "Male",
+        age: "",
+        adhaar: "",
+      });
     }
-    return temp
-  }
+    return temp;
+  };
 
-  const [vehicles, setVehicles] = useState(initialVehicles)
+  const [vehicles, setVehicles] = useState(initialVehicles);
   const handleVehicle = (val, lbl, i) => {
-    setVehicles([...vehicles].map((obj, key) => {
-      if (key === i) {
-        return {
-          ...obj,
-          [lbl]: val
+    setVehicles(
+      [...vehicles].map((obj, key) => {
+        if (key === i) {
+          return {
+            ...obj,
+            [lbl]: val,
+          };
+        } else {
+          return obj;
         }
-      } else {
-        return obj
-      }
-    }))
-  }
+      })
+    );
+  };
 
-  const [tot_charges, setTot_charges] = useState(0)
-  const [locServ, setLocServ] = useState([{
-    locations: [{
-      location: '',
-      location_name: '',
-      services: [{
-        service_id: '',
-        service_name: '',
-        charge: '',
-        total_charges: '',
-        unit: ''
-      }]
-    }]
-  }])
+  const [tot_charges, setTot_charges] = useState(0);
+  const [locServ, setLocServ] = useState([
+    {
+      locations: [
+        {
+          location: "",
+          location_name: "",
+          services: [
+            {
+              service_id: "",
+              service_name: "",
+              charge: "",
+              total_charges: "",
+              unit: "",
+            },
+          ],
+        },
+      ],
+    },
+  ]);
 
   useEffect(() => {
-    getLocationsList()
+    getLocationsList();
     let st_date = new Date(start_date);
-    if (start_date === '') {
-      st_date = new Date()
-      dispatch(setDmData('start_date', getFormatedDate(st_date)))
+    if (start_date === "") {
+      st_date = new Date();
+      dispatch(setDmData("start_date", getFormatedDate(st_date)));
     }
-    showFormatedDate(st_date)
+    showFormatedDate(st_date);
     let en_date = new Date();
     en_date.setDate(st_date.getDate() + Number(1));
-    dispatch(setDmData('duration_of_travel', 1))
-    dispatch(setDmData('end_date', getFormatedDate(en_date)))
-  }, [])
+    dispatch(setDmData("duration_of_travel", 1));
+    dispatch(setDmData("end_date", getFormatedDate(en_date)));
+  }, []);
 
   const getLocationsList = async () => {
-    let temp = []
+    let temp = [];
     await fetch(`${API_PATH}/api/v1/location/list?ischecked=true`)
       .then((response) => {
-        return response.json()
+        return response.json();
       })
       .then((json) => {
         // console.log(json);
         // setLocationList(json.data)
         json?.data?.map(async (item, i) => {
-          let tempServ = []
+          let tempServ = [];
           fetch(`${API_PATH}/api/v1/services/list?location=${item?._id}`)
             .then((response) => {
-              return response.json()
+              return response.json();
             })
             .then((res) => {
               res?.data?.map((service, i) => {
@@ -208,78 +250,99 @@ function SteperDmpass(shows, ...props) {
                   service_id: service._id,
                   service_name: service.service_name,
                   charge: service.price,
-                  total_charges: '0',
-                  unit: '0'
-                })
-              })
+                  total_charges: "0",
+                  unit: "0",
+                });
+              });
             });
-          temp.push({ location: item?._id, location_name: item?.name, services: tempServ })
-        })
+          temp.push({
+            location: item?._id,
+            location_name: item?.name,
+            services: tempServ,
+          });
+        });
       });
 
     console.log("temp", temp);
-    setLocServ(temp)
+    setLocServ(temp);
   };
 
   useEffect(() => {
     console.log("locServ", locServ);
-  }, [locServ])
+  }, [locServ]);
 
   const handleService = (val, lbl, i, j) => {
     console.log("handleService", { val, lbl, i, j });
-    setLocServ([...locServ].map((obj, key) => {
-      if (key === i) {
-        return {
-          ...obj,
-          services: obj.services.map((service, key2) => {
-            if (key2 === j) {
-              console.log("acc11", service);
-              if (lbl === '-' && val != 0) {
-                setTot_charges(tot_charges + Number(service?.charge * (val - 1)) - service?.total_charges)
-                return { ...service, unit: val - 1, total_charges: Number(service?.charge * (val - 1)) }
-              } else if (lbl === '+') {
-                setTot_charges(tot_charges + Number(service?.charge * (Number(val) + 1)) - service?.total_charges)
-                return { ...service, unit: Number(val) + 1, total_charges: Number(service?.charge * (Number(val) + 1)) }
+    setLocServ(
+      [...locServ].map((obj, key) => {
+        if (key === i) {
+          return {
+            ...obj,
+            services: obj.services.map((service, key2) => {
+              if (key2 === j) {
+                console.log("acc11", service);
+                if (lbl === "-" && val != 0) {
+                  setTot_charges(
+                    tot_charges +
+                      Number(service?.charge * (val - 1)) -
+                      service?.total_charges
+                  );
+                  return {
+                    ...service,
+                    unit: val - 1,
+                    total_charges: Number(service?.charge * (val - 1)),
+                  };
+                } else if (lbl === "+") {
+                  setTot_charges(
+                    tot_charges +
+                      Number(service?.charge * (Number(val) + 1)) -
+                      service?.total_charges
+                  );
+                  return {
+                    ...service,
+                    unit: Number(val) + 1,
+                    total_charges: Number(service?.charge * (Number(val) + 1)),
+                  };
+                } else {
+                  return service;
+                }
               } else {
-                return service
+                return service;
               }
-            } else {
-              return service
-            }
-          })
+            }),
+          };
+        } else {
+          return obj;
         }
-      } else {
-        return obj
-      }
-
-    }))
-  }
+      })
+    );
+  };
   const handleDuration = (e) => {
     console.log(e.target.value);
     let st_date = new Date(start_date);
-    if (start_date === '') {
-      st_date = new Date()
-      dispatch(setDmData('start_date', getFormatedDate(st_date)))
+    if (start_date === "") {
+      st_date = new Date();
+      dispatch(setDmData("start_date", getFormatedDate(st_date)));
     }
     let en_date = new Date();
     en_date.setDate(st_date.getDate() + Number(e.target.value));
-    dispatch(setDmData('duration_of_travel', e.target.value))
-    dispatch(setDmData('end_date', getFormatedDate(en_date)))
-  }
+    dispatch(setDmData("duration_of_travel", e.target.value));
+    dispatch(setDmData("end_date", getFormatedDate(en_date)));
+  };
   const getFormatedDate = (d) => {
-    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-    let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
-    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-    return `${ye}-${mo}-${da}`
-  }
+    let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
+    let mo = new Intl.DateTimeFormat("en", { month: "2-digit" }).format(d);
+    let da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+    return `${ye}-${mo}-${da}`;
+  };
 
   const showFormatedDate = (d) => {
-    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-    let mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d);
-    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-    setShowDate(`${da}, ${mo} ${ye}`)
-  }
-  
+    let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
+    let mo = new Intl.DateTimeFormat("en", { month: "long" }).format(d);
+    let da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+    setShowDate(`${da}, ${mo} ${ye}`);
+  };
+
   return (
     <>
       <div className="d-none d-md-block">
@@ -300,25 +363,31 @@ function SteperDmpass(shows, ...props) {
       </div>
 
       <Container>
-        <Stepper 
+        <Stepper
           steps={[
-            { label: <b style={{whiteSpace:"nowrap"}}>DM Pass</b> },
-            { label: <b>Locations</b>},
-            { label:<b>Confirm</b> },
-            { label:<b>Checkout</b>},
+            { label: <b style={{ whiteSpace: "nowrap" }}>DM Pass</b> },
+            { label: <b>Locations</b> },
+            { label: <b>Confirm</b> },
+            { label: <b>Checkout</b> },
           ]}
           activeStep={show}
-          className="pb-0"         
+          className="pb-0"
         />
       </Container>
       {show == 0 ? (
         <div>
           <Container className="dmpass-form mt-4">
             <Row className="dmpassData">
-              <h3 style={{ fontWeight: "bolder", fontSize: "20px", textAlign: "center" }}>
+              <h3
+                style={{
+                  fontWeight: "bolder",
+                  fontSize: "20px",
+                  textAlign: "center",
+                }}
+              >
                 Book your DM Pass
               </h3>
-              <form onSubmit={(e) => e.preventDefault()} >
+              <form onSubmit={(e) => e.preventDefault()}>
                 <div className="form-row"></div>
                 {/* <div className="form-group mt-4">
                   <label for="inputAddress">Mobile Number</label>
@@ -333,20 +402,24 @@ function SteperDmpass(shows, ...props) {
                 <div className="form-row">
                   <div className="form-group mt-4 ">
                     <label for="inputState">Number of Travellers</label>
-                    <select id="inputState" className="form-control pass_input"
+                    <select
+                      id="inputState"
+                      className="form-control pass_input"
                       // onChange={handleTravellerCount}
                     >
                       <option selected>1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
-                      <option value="5">5</option>  
+                      <option value="5">5</option>
                       <option value="6">6</option>
                     </select>
                   </div>
                   <div className="form-group mt-4 ">
                     <label for="inputState">Days of Travel</label>
-                    <select id="inputState" className="form-control pass_input"
+                    <select
+                      id="inputState"
+                      className="form-control pass_input"
                       onChange={handleDuration}
                     >
                       <option selected>1</option>
@@ -383,37 +456,82 @@ function SteperDmpass(shows, ...props) {
                       >
                         Vehicle Details
                       </label>
-                      <div className="traveller_div" style={{ marginTop: "1rem", justifyContent: "flex-start" }}>
-                        {
-                          vehicles?.map((item, i) => (
-                            <Paper key={i} className="traveller__card py-3 px-4 flex-grow-1">
-                              <div className="traveller__card_body" className="py-0">
-                                <h5 className="traveller__card_title" style={{ fontSize: "12px" }}>Vehicle {i + 1}</h5>
-                                <p className="traveller__card_text">
-                                  <div className="form-group pt-3">
-                                    <label className="mb-1" for={`vehicle_number${i}`}>Vehicle Number</label>
-                                    <input
-                                      type="text"
-                                      className="form-control pass_input"
-                                      id={`vehicle_number${i}`}
-                                      placeholder="Enter the license plate number"
-                                      style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                      name="registration_number" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].registration_number}
-                                    />
-                                  </div>
-                                  <div className="form-group pt-3">
-                                    <label className="mb-1" for={`name${i}`}>Driver Name</label>
-                                    <input
-                                      type="text"
-                                      className="form-control pass_input"
-                                      id={`name${i}`}
-                                      placeholder="Enter Driver Name"
-                                      style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                      name="driver_name" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].driver_name}
-                                    />
-                                  </div>
+                      <div
+                        className="traveller_div"
+                        style={{
+                          marginTop: "1rem",
+                          justifyContent: "flex-start",
+                        }}
+                      >
+                        {vehicles?.map((item, i) => (
+                          <Paper
+                            key={i}
+                            className="traveller__card py-3 px-4 flex-grow-1"
+                          >
+                            <div
+                              className="traveller__card_body"
+                              className="py-0"
+                            >
+                              <h5
+                                className="traveller__card_title"
+                                style={{ fontSize: "12px" }}
+                              >
+                                Vehicle {i + 1}
+                              </h5>
+                              <p className="traveller__card_text">
+                                <div className="form-group pt-3">
+                                  <label
+                                    className="mb-1"
+                                    for={`vehicle_number${i}`}
+                                  >
+                                    Vehicle Number
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`vehicle_number${i}`}
+                                    placeholder="Enter the license plate number"
+                                    style={{
+                                      fontSize: "11px",
+                                      marginLeft: "-5px",
+                                    }}
+                                    name="registration_number"
+                                    onChange={(e) =>
+                                      handleVehicle(
+                                        e.target.value,
+                                        e.target.name,
+                                        i
+                                      )
+                                    }
+                                    value={vehicles[i].registration_number}
+                                  />
+                                </div>
+                                <div className="form-group pt-3">
+                                  <label className="mb-1" for={`name${i}`}>
+                                    Driver Name
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`name${i}`}
+                                    placeholder="Enter Driver Name"
+                                    style={{
+                                      fontSize: "11px",
+                                      marginLeft: "-5px",
+                                    }}
+                                    name="driver_name"
+                                    onChange={(e) =>
+                                      handleVehicle(
+                                        e.target.value,
+                                        e.target.name,
+                                        i
+                                      )
+                                    }
+                                    value={vehicles[i].driver_name}
+                                  />
+                                </div>
 
-                                  <div className="form-row genderform pt-3 d-flex ">
+                                {/* <div className="form-row genderform pt-3 d-flex ">
                                     <div className="col m-2 w-50">
                                       <label className="mb-1" for={`gender${i}`}>Gender</label>
                                       <div className="d-flex pt-2">
@@ -446,27 +564,37 @@ function SteperDmpass(shows, ...props) {
                                         name="age" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].age}
                                       />
                                     </div>
-                                  </div>
+                                  </div> */}
 
-                                  <div className="form-group mt-1 pt-3">
-                                    <label className="mb-1" for={`aadhaar${i}`}>
-                                      Adhaar Card Number{" "}
-                                    </label>
-                                    <input
-                                      type="text"
-                                      className="form-control pass_input"
-                                      id={`adhaar${i}`}
-                                      placeholder=" Enter 12 digit Adhaar Card Number"
-                                      style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                      // name="adhaar" onChange={handleChange} value={adhaar}
-                                      name="adhaar" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].adhaar}
-                                    />
-                                  </div>
-                                </p>
-                              </div>
-                            </Paper>
-                          ))
-                        }
+                                <div className="form-group mt-1 pt-3">
+                                  <label className="mb-1" for={`aadhaar${i}`}>
+                                    Driver License Number
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`adhaar${i}`}
+                                    placeholder="Driver License Number"
+                                    style={{
+                                      fontSize: "11px",
+                                      marginLeft: "-5px",
+                                    }}
+                                    // name="adhaar" onChange={handleChange} value={adhaar}
+                                    name="adhaar"
+                                    onChange={(e) =>
+                                      handleVehicle(
+                                        e.target.value,
+                                        e.target.name,
+                                        i
+                                      )
+                                    }
+                                    value={vehicles[i].adhaar}
+                                  />
+                                </div>
+                              </p>
+                            </div>
+                          </Paper>
+                        ))}
                       </div>
                       <div style={{ marginTop: "23px", textAlign: "center" }}>
                         <Button
@@ -480,13 +608,18 @@ function SteperDmpass(shows, ...props) {
                             border: "none",
                             fontWeight: "600",
                           }}
-                          onClick={() => setVehicles([...vehicles, {
-                            vehicle_number: '',
-                            name: '',
-                            gender: 'Male',
-                            age: '',
-                            adhaar: '',
-                          }])}
+                          onClick={() =>
+                            setVehicles([
+                              ...vehicles,
+                              {
+                                vehicle_number: "",
+                                name: "",
+                                gender: "Male",
+                                age: "",
+                                adhaar: "",
+                              },
+                            ])
+                          }
                         >
                           Add Vehicle
                         </Button>
@@ -505,80 +638,139 @@ function SteperDmpass(shows, ...props) {
                         Travellers Details
                       </label>
 
-                      <div className="traveller_div" style={{ marginTop: "1rem", justifyContent: "flex-start" }}>
-                        {
-                          travellers?.map((item, i) => (
-                            <Paper key={i} className="traveller__card p-4 flex-grow-1" style={{ minHeight: "364px" }}>
-                              <div className="traveller__card_body" className="py-0">
-                                <h5 className="traveller__card_title" style={{ fontSize: "12px" }}>Travellers {i + 1}</h5>
-                                <p className="traveller__card_text">
-                                  <div className="form-group pt-3">
-                                    <label className="mb-3" for={`name${i}`}>Name</label>
-                                    <input
-                                      type="text"
-                                      className="form-control pass_input"
-                                      id={`name${i}`}
-                                      placeholder="Enter Traveller Name"
-                                      style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                      name="name" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].name}
-                                    />
-                                  </div>
+                      <div
+                        className="traveller_div"
+                        style={{
+                          marginTop: "1rem",
+                          justifyContent: "flex-start",
+                        }}
+                      >
+                        {travellers?.map((item, i) => (
+                          <Paper
+                            key={i}
+                            className="traveller__card p-4 flex-grow-1"
+                            style={{ minHeight: "364px" }}
+                          >
+                            <div
+                              className="traveller__card_body"
+                              className="py-0"
+                            >
+                              <h5
+                                className="traveller__card_title"
+                                style={{ fontSize: "12px" }}
+                              >
+                                Travellers {i + 1}
+                              </h5>
+                              <p className="traveller__card_text">
+                                <div className="form-group pt-3">
+                                  <label className="mb-3" for={`name${i}`}>
+                                    Name
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`name${i}`}
+                                    placeholder="Enter Traveller Name"
+                                    style={{
+                                      fontSize: "11px",
+                                      marginLeft: "-5px",
+                                    }}
+                                    name="name"
+                                    onChange={(e) =>
+                                      handleTraveller(
+                                        e.target.value,
+                                        e.target.name,
+                                        i
+                                      )
+                                    }
+                                    value={travellers[i].name}
+                                  />
+                                </div>
 
-                                  <div className="form-row genderform pt-3 d-flex ">
-                                    <div className="col m-2 w-50">
-                                      <label className="mb-3" for={`gender${i}`}>Gender</label>
-                                      <div className="d-flex pt-2">
-                                        <ButtonComponent
-                                          style={{
-                                            width: "50%",
-                                            fontSize: "11px",
-                                            whiteSpace: "nowrap",
-                                          }}
-                                          type="button"
-                                          data={button_Data}
-                                          // activeButton={activeButton}
-                                          // trigerOnClickEmpSideBtn={onSideBtnClick}
-                                          trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender}
-                                        />
-                                      </div>
-                                    </div>
-                                    <div className="form-group col m-2 w-50">
-                                      <label className="mb-3" for={`age${i}`}>Age</label>
-                                      <input
-                                        type="text"
-                                        className="form-control pass_input w-70 pt-2"
-                                        placeholder="Enter Age"
-                                        id={`age${i}`}
+                                <div className="form-row genderform pt-3 d-flex ">
+                                  <div className="col m-2 w-50">
+                                    <label className="mb-3" for={`gender${i}`}>
+                                      Gender
+                                    </label>
+                                    <div className="d-flex pt-2">
+                                      <ButtonComponent
                                         style={{
-                                          width: "110px",
-                                          marginLeft: "-5px",
-                                          fontSize: "12px",
+                                          width: "50%",
+                                          fontSize: "11px",
                                           whiteSpace: "nowrap",
-                                          height: "33px",
                                         }}
-                                        name="age" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].age}
+                                        type="button"
+                                        data={button_Data}
+                                        // activeButton={activeButton}
+                                        // trigerOnClickEmpSideBtn={onSideBtnClick}
+                                        trigerOnClickEmpSideBtn={(e) =>
+                                          handleTraveller(
+                                            e.target.name,
+                                            "gender",
+                                            i
+                                          )
+                                        }
+                                        activeButton={travellers[i].gender}
                                       />
                                     </div>
                                   </div>
-
-                                  <div className="form-group mt-1 pt-3">
-                                    <label className="mb-3" for={`aadhaar${i}`}>
-                                      Adhaar Card Number{" "}
+                                  <div className="form-group col m-2 w-50">
+                                    <label className="mb-3" for={`age${i}`}>
+                                      Age
                                     </label>
                                     <input
                                       type="text"
-                                      className="form-control pass_input"
-                                      id={`adhaar${i}`}
-                                      placeholder=" Enter 12 digit Adhaar Card Number"
-                                      style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                      name="adhaar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].adhaar}
+                                      className="form-control pass_input w-70 pt-2"
+                                      placeholder="Enter Age"
+                                      id={`age${i}`}
+                                      style={{
+                                        width: "110px",
+                                        marginLeft: "-5px",
+                                        fontSize: "12px",
+                                        whiteSpace: "nowrap",
+                                        height: "33px",
+                                      }}
+                                      name="age"
+                                      onChange={(e) =>
+                                        handleTraveller(
+                                          e.target.value,
+                                          e.target.name,
+                                          i
+                                        )
+                                      }
+                                      value={travellers[i].age}
                                     />
                                   </div>
-                                </p>
-                              </div>
-                            </Paper>
-                          ))
-                        }
+                                </div>
+
+                                <div className="form-group mt-1 pt-3">
+                                  <label className="mb-3" for={`aadhaar${i}`}>
+                                    Adhaar Card Number{" "}
+                                  </label>
+                                  <input
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`adhaar${i}`}
+                                    placeholder=" Enter 12 digit Adhaar Card Number"
+                                    style={{
+                                      fontSize: "11px",
+                                      marginLeft: "-5px",
+                                    }}
+                                    name="adhaar"
+                                    onChange={(e) =>
+                                      handleTraveller(
+                                        e.target.value,
+                                        e.target.name,
+                                        i
+                                      )
+                                    }
+                                    value={travellers[i].adhaar}
+                                  />
+                                </div>
+                              </p>
+                            </div>
+                          </Paper>
+                        ))}
                       </div>
                       <div style={{ marginTop: "23px", textAlign: "center" }}>
                         <Button
@@ -593,12 +785,17 @@ function SteperDmpass(shows, ...props) {
                             border: "none",
                             fontWeight: "600",
                           }}
-                          onClick={() => setTravellers([...travellers, {
-                            name: '',
-                            gender: 'Male',
-                            age: '',
-                            adhaar: '',
-                          }])}
+                          onClick={() =>
+                            setTravellers([
+                              ...travellers,
+                              {
+                                name: "",
+                                gender: "Male",
+                                age: "",
+                                adhaar: "",
+                              },
+                            ])
+                          }
                         >
                           Add Traveller
                         </Button>
@@ -607,200 +804,32 @@ function SteperDmpass(shows, ...props) {
                     </Col>
                   </Row>
                 </Container>
-                {/* <div className="traveller-detail">
-                  <label for="inputAddress" style={{ paddingTop: "30px" }}>
-                    Vehicle Details
-                  </label>
-                  <div className="card w-100">
-                    <div className="card-body">
-                      <h5 className="card-title">Vehicle 1</h5>
-                      <p className="card-text">
-                        <div className="form-group mt-4">
-                          <label for="inputAddress">Name</label>
-                          <input
-                            type="text"
-                            className="form-control pass_input"
-                            id="inputAddress"
-                            placeholder="Enter passenger name"
-                            style={{ fontSize: "11px" }}
-                          />
-                        </div>
-
-                        <div className="form-row genderform pt-3 d-flex ">
-                          <div className="col m-2 w-50">
-                            <label for="inputAddress">Gender</label>
-                            <div className="d-flex pt-2">
-                              <ButtonComponent
-                                style={{
-                                  width: "50%",
-                                  fontSize: "11px",
-                                  whiteSpace: "nowrap",
-                                }}
-                                data={button_Data}
-                                activeButton={activeButton}
-                                trigerOnClickEmpSideBtn={onSideBtnClick}
-                              />
-                            </div>
-                          </div>
-                          <div className="col m-2 w-50">
-                            <label for="inputAddress">Age</label>
-                            <br />
-                            <input
-                              type="text"
-                              className="form-control pass_input w-70 pt-2"
-                              placeholder="Enter Age"
-                              style={{
-                                fontSize: "12px",
-                                whiteSpace: "nowrap",
-                                height: "33px",
-                              }}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="form-group mt-4 pt-2">
-                          <label for="inputAddress">Aadhar Card Number </label>
-                          <input
-                            type="text"
-                            className="form-control pass_input"
-                            id="inputAddress"
-                            placeholder=" Enter 12 digit Aadhar Card Number"
-                            style={{ fontSize: "11px" }}
-                          />
-                        </div>
-                      </p>
-                      <Link
-                        className="btn"
-                        style={{ backgroundColor: "#0FA453", color: "white" }}
-                      >
-                        Add Vehicle
-                      </Link>
-                    </div>
-                  </div>
-                </div> */}
-                {/* <div className="traveller-detail">
-                  <label for="inputAddress" style={{ paddingTop: "30px" }}>
-                    Traveller Details
-                  </label>
-                  <div className="card w-100">
-                    <div className="card-body">
-                      <h5 className="card-title">Traveller 1</h5>
-                      <p className="card-text">
-                        <div className="form-group mt-4">
-                          <label for="inputAddress">Name</label>
-                          <input
-                            type="text"
-                            className="form-control pass_input"
-                            id="inputAddress"
-                            placeholder="Enter passenger name"
-                            style={{ fontSize: "11px" }}
-                          />
-                        </div>
-
-                        <div className="form-row genderform pt-3 d-flex ">
-                          <div className="col m-2 w-50">
-                            <label for="inputAddress">Gender</label>
-                            <div className="d-flex pt-2">
-                              <ButtonComponent
-                                style={{
-                                  width: "50%",
-                                  fontSize: "11px",
-                                  whiteSpace: "nowrap",
-                                }}
-                                data={button_Data}
-                                activeButton={activeButton}
-                                trigerOnClickEmpSideBtn={onSideBtnClick}
-                              />
-                            </div>
-                          </div>
-                          <div className="col m-2 w-50">
-                            <label for="inputAddress">Age</label>
-                            <br />
-                            <input
-                              type="text"
-                              className="form-control pass_input w-70 pt-2"
-                              placeholder="Enter Age"
-                              style={{
-                                fontSize: "12px",
-                                whiteSpace: "nowrap",
-                                height: "33px",
-                              }}
-                            />
-                          </div>
-                        </div>
-
-                        <div className="form-group mt-4 pt-2">
-                          <label for="inputAddress">Aadhar Card Number </label>
-                          <input
-                            type="text"
-                            className="form-control pass_input"
-                            id="inputAddress"
-                            placeholder=" Enter 12 digit Aadhar Card Number"
-                            style={{ fontSize: "11px" }}
-                          />
-                        </div>
-                      </p>
-                      <Link
-                        className="btn"
-                        style={{ backgroundColor: "#0FA453", color: "#FFFFFF" }}
-                      >
-                        Add Passenger
-                      </Link>
-                    </div>
-                  </div>
-                </div> */}
               </form>
             </Row>
           </Container>
-          <Button className="locationpass-btn" onClick={onDmPassClick}>
-            Save & Continue
-          </Button>
+          <div>
+            <div className="mb-5">
+              <Button className="locationpass-btn" onClick={onDmPassClick}>
+                Save & Continue
+              </Button>
+            </div>
+          </div>
         </div>
       ) : show == 1 ? (
         <div>
           <Container className="dmpass-form mt-2">
             <Row className="dmpassData">
-              <h3 style={{ fontWeight: "bolder", fontSize: "20px", textAlign: "center" }}>
+              <h3
+                style={{
+                  fontWeight: "bolder",
+                  fontSize: "20px",
+                  textAlign: "center",
+                }}
+              >
                 Select Locations
               </h3>
-
-              {/* <div
-                className="location_pass d-flex"
-                style={{
-                  border: "1px solid #888",
-                  backgroundColor: " #F8F8F8",
-                  marginBottom: "15px",
-                  borderRadius: 5,
-                }}
-              >
-                <Form.Check
-                  type="radio"
-                  label="Chitrakote"
-                  name="formHorizontalRadios"
-                  id="formHorizontalRadios2"
-                  style={{ margin: "8px", color: "black", fontWeight: "600" }}
-                />
-              </div>
-              <div
-                className="location_pass d-flex"
-                style={{
-                  border: "1px solid #888",
-                  backgroundColor: " #F8F8F8",
-                  borderRadius: 5,
-                }}
-              >
-                <Form.Check
-                  type="radio"
-                  label="Tirathgarh"
-                  name="formHorizontalRadios"
-                  id="formHorizontalRadios2"
-                  style={{ margin: "8px", color: "black", fontWeight: "600" }}
-                />
-              </div> */}
-              {
-                (locServ.length > 0)
-                  ?
-                  locServ?.map((item, key) => (
+              {locServ.length > 0
+                ? locServ?.map((item, key) => (
                     <Accordion className="p-0" style={{ boxShadow: "none" }}>
                       <AccordionSummary
                         className="p-0"
@@ -820,16 +849,18 @@ function SteperDmpass(shows, ...props) {
                             label={item?.location_name}
                             name="formHorizontalRadios"
                             id="formHorizontalRadios2"
-                            style={{ margin: "8px", color: "black", fontWeight: "600" }}
+                            style={{
+                              margin: "8px",
+                              color: "black",
+                              fontWeight: "600",
+                            }}
                           />
                         </div>
                       </AccordionSummary>
                       <AccordionDetails className="py-0">
                         <div className="card-Caintainer">
-                          {
-                            (item?.services?.length > 0)
-                              ?
-                              item?.services?.map((service, j) => (
+                          {item?.services?.length > 0
+                            ? item?.services?.map((service, j) => (
                                 <Cards
                                   key={j}
                                   parname={service?.service_name}
@@ -841,32 +872,13 @@ function SteperDmpass(shows, ...props) {
                                   onClick={handleService}
                                 />
                               ))
-                              :
-                              null
-                          }
-                          {/* <Cards parname="Car Parking" rate="20" />
-                          <Cards parname="Bus Parking" rate="40" />
-                          <Cards parname="Bike Parking" rate="10" />
-
-                          <Cards parname="Trekking" rate="100" />
-                          <Cards parname="Boating" rate="20" />
-                          <Cards parname="Sightseeing" rate="40" /> */}
+                            : null}
                         </div>
                       </AccordionDetails>
                     </Accordion>
                   ))
-                  : null
-              }
+                : null}
             </Row>
-            {/* <div className="card-Caintainer">
-              <Cards parname="Car Parking" rate="20" />
-              <Cards parname="Bus Parking" rate="40" />
-              <Cards parname="Bike Parking" rate="10" />
-
-              <Cards parname="Trekking" rate="100" />
-              <Cards parname="Boating" rate="20" />
-              <Cards parname="Sightseeing" rate="40" />
-            </div> */}
           </Container>
           <div className=" d-none d-md-block">
             <div className="locatione-title">
@@ -877,7 +889,7 @@ function SteperDmpass(shows, ...props) {
                 </div>
               </Col>
               <Col md={6}>
-                <div className="">
+                <div className="mb-5">
                   <div
                     className=""
                     style={{
@@ -895,12 +907,12 @@ function SteperDmpass(shows, ...props) {
                 </div>
               </Col>
             </div>
-            {/* <Button className="locationpass-btn" onClick={onLocationsClick}>
-              Save Continue
-            </Button> */}
           </div>
           <div>
-            <div className="d-md-none" style={{position:"fixed",width:"100%",bottom:"0"}}>
+            <div
+              className="d-md-none"
+              style={{ position: "fixed", width: "100%", bottom: "0" }}
+            >
               <Col xs={12} md={6}>
                 <div className="location-amount">
                   <span className="location-total">Total Amount</span>
@@ -942,14 +954,14 @@ function SteperDmpass(shows, ...props) {
                     marginBottom: "10px",
                   }}
                 >
-                  {
-                    (locServ.length > 0)
-                      ?
-                      locServ?.map((item, key) => (
+                  {locServ.length > 0
+                    ? locServ?.map((item, key) => (
                         <>
                           <Row className="mb-1">
                             <Col xs={6} md={6}>
-                              <span className="confirm-title">{item?.location_name}</span>
+                              <span className="confirm-title">
+                                {item?.location_name}
+                              </span>
                             </Col>
                             <Col xs={6} md={6}>
                               <span
@@ -965,141 +977,37 @@ function SteperDmpass(shows, ...props) {
                               </span>
                             </Col>
                             <Col>
-                              {
-                                (item?.services?.length > 0)
-                                  ?
-                                  item?.services?.map((service, j) => (
+                              {item?.services?.length > 0
+                                ? item?.services?.map((service, j) => (
                                     <Row>
                                       <Col xs={6} md={6}>
-                                        <span className="confirm_part">{service?.service_name} x {service?.unit}</span>
+                                        <span className="confirm_part">
+                                          {service?.service_name} x{" "}
+                                          {service?.unit}
+                                        </span>
                                       </Col>
                                       <Col xs={6} md={6}>
-                                        <span className="confirm_part">{service?.total_charges} </span>
+                                        <span className="confirm_part">
+                                          {service?.total_charges}{" "}
+                                        </span>
                                       </Col>
                                     </Row>
                                   ))
-                                  :
-                                  null
-                              }
+                                : null}
                             </Col>
                           </Row>
-
                         </>
                       ))
-                      : null
-                  }
-                  {/* <Row>
-                    <Col xs={6} md={6}>
-                      <span className="confirm-title">Tirathgarh</span>
-                    </Col>
-                    <Col xs={6} md={6}>
-                      <span
-                        style={{
-                          color: "#FF4A68",
-                          fontSize: "15px",
-                          fontWeight: "600",
-                        }}
-                      >
-                        Change
-                      </span>
-                    </Col>
-                  </Row> */}
-                  {/* <Row>
-                    <Col xs={6} md={6}>
-                      <span className="confirm_part">Car Parking x 2</span>
-                    </Col>
-                    <Col xs={6} md={6}>
-                      <span className="confirm_part">40 </span>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={6} md={6}>
-                      <span className="confirm_part">Trekking x 5</span>
-                    </Col>
-                    <Col xs={6} md={6}>
-                      <span className="confirm_part"> 500</span>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={6} md={6}>
-                      <span className="confirm_part"> Boating x 5 </span>
-                    </Col>
-                    <Col xs={6} md={6}>
-                      <span className="confirm_part">100</span>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={6} md={6}>
-                      <span className="confirm_part">Sightseeing x 6</span>
-                    </Col>
-                    <Col xs={6} md={6}>
-                      <span className="confirm_part">240</span>
-                    </Col>
-                  </Row> */}
+                    : null}
                 </div>
               </div>
-              {/* <div
-                className="confirm_div"
-                style={{
-                  textAlign: "center",
-                  backgroundColor: "#F8F8F8",
-                  marginBottom: "10px",
-                }}
-              >
-                <Row>
-                  <Col xs={6} md={6}>
-                    <span className="confirm-title">Tamdaghumar</span>
-                  </Col>
-                  <Col xs={6} md={6}>
-                    <span
-                      style={{
-                        color: "#FF4A68",
-                        fontSize: "15px",
-                        fontWeight: "600",
-                      }}
-                    >
-                      Change
-                    </span>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={6} md={6}>
-                    <span className="confirm_part">Car Parking x 2</span>
-                  </Col>
-                  <Col xs={6} md={6}>
-                    <span className="confirm_part">40 </span>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={6} md={6}>
-                    <span className="confirm_part">Trekking x 5</span>
-                  </Col>
-                  <Col xs={6} md={6}>
-                    <span className="confirm_part"> 500</span>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={6} md={6}>
-                    <span className="confirm_part"> Boating x 5 </span>
-                  </Col>
-                  <Col xs={6} md={6}>
-                    <span className="confirm_part">100</span>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col xs={6} md={6}>
-                    <span className="confirm_part">Sightseeing x 6</span>
-                  </Col>
-                  <Col xs={6} md={6}>
-                    <span className="confirm_part">240</span>
-                  </Col>
-                </Row>
-              </div> */}
             </Container>
           </div>
-          <Button className="locationpass-btn" onClick={onTicketCheckClick}>
-            Save & Continue
-          </Button>
+          <div>
+            <Button className="locationpass-btn" onClick={onTicketCheckClick}>
+              Save & Continue
+            </Button>
+          </div>
         </>
       ) : (
         <>
@@ -1137,7 +1045,12 @@ function SteperDmpass(shows, ...props) {
                             marginBottom: "20px",
                           }}
                         >
-                          <Link to={`/dm-detail/${dmpass_id}`} style={{ textDecoration: "none" }}>View E-ticket</Link>
+                          <Link
+                            to={`/dm-detail/${dmpass_id}`}
+                            style={{ textDecoration: "none" }}
+                          >
+                            View E-ticket
+                          </Link>
                         </Button>
                       </div>
                       <div>
@@ -1164,7 +1077,6 @@ function SteperDmpass(shows, ...props) {
                         </Button>
                       </div>
 
-
                       <div>
                         <Button
                           style={{
@@ -1185,137 +1097,35 @@ function SteperDmpass(shows, ...props) {
                 </Col>
               </Row>
             </Container>
-            <Footer />
+            {/* <Footer /> */}
           </div>
 
           <div className="d-md-none">
-            <Container style={{ width: "", paddingTop: "20px" }}>              
-               <div>
-            <div style={{ textAlign: "center", marginTop: "15px" }}>
-              <span style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</span>
-              <br />
-              <span style={{ color: "black", fontSize: "13px" }}>
-                Your Passes are ready
-              </span>
-            </div>
-            <Col xs={12} md={6} >
-              <div style={{ marginTop: "" }}>
-                <img
-                  src={mobile}
-                  alt=""
-                  style={{ width: "100%", height: "" }}
-                />
-              </div>
-            </Col>
-            <Col xs={12} md={6}>            
-                <div style={{ marginBottom: "20px", textAlign: "center" }}>
-                  <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
-                  <span style={{ color: "black", marginBottom: "50px" }}>
-                    {dmpass_id}
+            <Container style={{ width: "", paddingTop: "20px" }}>
+              <div>
+                <div style={{ textAlign: "center", marginTop: "15px" }}>
+                  <span style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</span>
+                  <br />
+                  <span style={{ color: "black", fontSize: "13px" }}>
+                    Your Passes are ready
                   </span>
                 </div>
-                <div style={{ textAlign: "center" }}>
-                  <div>
-                    <Button
-                      className="btn btn-success"
-                      style={{
-                        width: "200px",
-                        textAlign: "center",
-                        height: "52px",
-                        borderRadius: "9px",
-                        backgroundColor: "#0fa453",
-                        fontWeight: "bold",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      <FaWhatsapp
-                        style={{
-                          fontWeight: "bold",
-                          marginLeft: "-23px",
-                          fontSize: "30px",
-                        }}
-                      />
-                      <span> Whatsapp Link</span>
-                    </Button>
+                <Col xs={12} md={6}>
+                  <div style={{ marginTop: "" }}>
+                    <img
+                      src={mobile}
+                      alt=""
+                      style={{ width: "100%", height: "" }}
+                    />
                   </div>
-                  <div>
-                    <Button
-                      style={{
-                        width: "208px",
-                        textAlign: "center",
-                        height: "52px",
-                        borderRadius: "9px",
-                        backgroundColor: " #FF4A68",
-                        fontWeight: "bold",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      Download E-ticket
-                    </Button>
-                  </div>
-
-                  <div>
-                    <Button
-                      style={{
-                        width: "186px",
-                        textAlign: "center",
-                        height: "52px",
-                        borderRadius: "9px",
-                        backgroundColor: "#864BD8",
-                        fontWeight: "bold",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      Back to Home
-                    </Button>
-                  </div>
-                </div>              
-            </Col>
-          </div>
-            </Container>
-          </div>
-        </>
-      )}
-    </>
-  );
-}
-
-export default SteperDmpass;
-
-{/* <Row>
-                <Col>
+                </Col>
+                <Col xs={12} md={6}>
                   <div style={{ marginBottom: "20px", textAlign: "center" }}>
-                    <h3 style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</h3>
-                    <span style={{ color: "black" }}>
-                      Your booking has been confirmed
-                    </span>
-                  </div>
-                </Col>
-                <Col>
-                  <div style={{ marginTop: "", textAlign: "center" }}>
-                    <img src={congo} alt="" style={{ height: "350px" }} />
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <div style={{ marginBottom: "20px", paddingTop: "-10px", textAlign: "center" }}>
-                    <h3
-                      style={{
-                        fontWeight: "bolder",
-                        textAlign: "center",
-                        whiteSpace: "nowrap",
-                        marginBottom: "10px",
-                      }}
-                    >
-                      Transaction ID
-                    </h3>
+                    <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
                     <span style={{ color: "black", marginBottom: "50px" }}>
                       {dmpass_id}
                     </span>
                   </div>
-                </Col>
-                <Col>
                   <div style={{ textAlign: "center" }}>
                     <div>
                       <Button
@@ -1333,6 +1143,7 @@ export default SteperDmpass;
                         <FaWhatsapp
                           style={{
                             fontWeight: "bold",
+                            marginLeft: "-23px",
                             fontSize: "30px",
                           }}
                         />
@@ -1372,4 +1183,13 @@ export default SteperDmpass;
                     </div>
                   </div>
                 </Col>
-              </Row> */}
+              </div>
+            </Container>
+          </div>
+        </>
+      )}
+    </>
+  );
+}
+
+export default SteperDmpass;

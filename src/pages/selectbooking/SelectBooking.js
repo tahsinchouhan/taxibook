@@ -52,113 +52,98 @@ function SelectBooking() {
   return (
     <>
       <Header />
-      <Container className="d-none d-md-block my-5">
+      <div className="d-none d-md-block">
         <div className="select_div">
-          <div className="row p-3" style={{ textAlign: "center" }}>
-            <div className="col-xs-12  col-sm-12 col-md-12">
-              <div className="booking-div">
-                <span style={{ fontWeight: "bolder", fontSize: "20px" }}>
-                  What do you wish to book?
-                </span>
-              </div>
+          <div className="col-xs-12  col-sm-12 col-md-12">
+            <div
+              className="booking-div py-5 mt-5"
+              style={{ textAlign: "center" }}
+            >
+              <span style={{ fontWeight: "bolder", fontSize: "20px" }}>
+                What do you wish to book?
+              </span>
             </div>
           </div>
-          <Container>
-            {/* <Row className="user-icon">
-              <div className="icon-item">             
-
-                <span className="tab-icons">
-                  <img
-                    src={bus}
-                    className={busjourney ? "bus-color" : "default-color"}
-                    onClick={onBusClick}
-                  />
-                  <div
-                    onClick={onBusClick}
-                    className={busjourney ? "bus-color" : "default-color"}
-                  >
-                    Bus
-                  </div>
-                </span>
-
-                <span className="tab-icons">
-                  <img
-                    src={doodle}
-                    className={cabjourney ? "cab-color" : "default-color"}
-                    onClick={onCabClick}
-                  />
-                  <div
-                    onClick={onCabClick}
-                    className={cabjourney ? "cab-color" : "default-color"}
-                  >
-                    Cab
-                  </div>
-                </span>
-                <span className="tab-icons">
-                  <img
-                    src={ticket}
-                    alt="ticket"
-                    className={passTab ? "pass-color" : "default-color"}
-                    onClick={onPassClick}
-                  />
-                  <div
-                    onClick={onPassClick}
-                    className={passTab ? "pass-color" : "default-color"}
-                  >
-                    Pass
-                  </div>
-                </span>
-                
-              </div>
-            </Row> */}
-          </Container>
-          <Container>
-            <div>
-              <Row>
-                <Col xs={12} md={4}>
-                  <div className="userdatas" onClick={onBusClick} >
-                    <div>
-                      <img src={bus} style={{ width: 30, height: 30, marginTop: "10px" }} />
-                    </div>
-                    <div className="bus_secation">
-                      <span className="booking_icon" style={{ color: "#FF4A68" }}>Bus</span><br />
-                      <span>Find buses that will take you to your<br />favourite destinations</span>
-                    </div>
-                  </div>
-                </Col>
-                <Col xs={12} md={4}>
-                  <div className="userdatas" onClick={onClickTicket}>
-                    <div>
-                      <img src={doodle} style={{ width: 50, height: 40, marginTop: "10px" }} />
-                    </div>
-                    <div className="bus_secation">
-                      <span className="booking_icon" style={{ color: "#864BD8" }}>Ticket</span><br />
-                      <span>Registered ticket services for a<br />personal travel experience</span>
-                    </div>
-                  </div>
-                </Col>
-                <Col xs={12} md={4}>
-                  <div className="userdatas" onClick={onPassClick} >
-                    <div>
-                      <img src={ticket} style={{ width: 30, height: 30, marginTop: "10px" }} />
-                    </div>
-                    <div className="bus_secation">
-                      <span className="booking_icon" style={{ color: "#0FA453" }}>DmPass</span><br />
-                      <span>Get a pass for travellers, vehicles<br /> and duration of your travel</span>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </div>
-          </Container>
-          {passTab ? <Pass /> : null}
-          {busjourney ? <BusPass /> : null}
-          {cabjourney ? <doodle /> : null}
         </div>
-      </Container>
-
+        <Container>
+          <div>
+            <Row>
+              <Col xs={12} md={4}>
+                <div className="userdatas" onClick={onBusClick}>
+                  <div>
+                    <img
+                      src={bus}
+                      style={{ width: 30, height: 30, marginTop: "10px" }}
+                    />
+                  </div>
+                  <div className="bus_secation">
+                    <span className="booking_icon" style={{ color: "#FF4A68" }}>
+                      Bus
+                    </span>
+                    <br />
+                    <span>
+                      Find buses that will take you to your
+                      <br />
+                      favourite destinations
+                    </span>
+                  </div>
+                </div>
+              </Col>
+              <Col xs={12} md={4}>
+                <div className="userdatas" onClick={onClickTicket}>
+                  <div>
+                    <img
+                      src={doodle}
+                      style={{ width: 50, height: 40, marginTop: "10px" }}
+                    />
+                  </div>
+                  <div className="bus_secation">
+                    <span className="booking_icon" style={{ color: "#864BD8" }}>
+                      Ticket
+                    </span>
+                    <br />
+                    <span>
+                      Registered ticket services for a<br />
+                      personal travel experience
+                    </span>
+                  </div>
+                </div>
+              </Col>
+              <Col xs={12} md={4}>
+                <div className="userdatas" onClick={onPassClick}>
+                  <div>
+                    <img
+                      src={ticket}
+                      style={{ width: 30, height: 30, marginTop: "10px" }}
+                    />
+                  </div>
+                  <div className="bus_secation">
+                    <span className="booking_icon" style={{ color: "#0FA453" }}>
+                      DmPass
+                    </span>
+                    <br />
+                    <span>
+                      Get a pass for travellers, vehicles
+                      <br /> and duration of your travel
+                    </span>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </Container>
+        {passTab ? <Pass /> : null}
+        {busjourney ? <BusPass /> : null}
+        {cabjourney ? <doodle /> : null}
+        <Button className="locationpass-btn  mt-5" onClick={onBusClick}>
+          Continue
+        </Button>
+        <div className="pt-5 mt-5">
+          <Footer />
+        </div>
+      </div>
       {/*mobile*/}
-      <Container className="d-block d-md-none">
+      <div className="d-block d-md-none">
         <div className="select_div">
           <div className="row p-3" style={{ textAlign: "center" }}>
             <div className="col-xs-12  col-sm-12 col-md-12">
@@ -174,35 +159,72 @@ function SelectBooking() {
             <div>
               <Row>
                 <Col xs={12} md={4}>
-                  <div className="userdatas" onClick={onBusClick} >
+                  <div className="userdatas" onClick={onBusClick}>
                     <div>
-                      <img src={bus} style={{ width: 30, height: 30, marginTop: "10px" }} />
+                      <img
+                        src={bus}
+                        style={{ width: 30, height: 30, marginTop: "10px" }}
+                      />
                     </div>
                     <div className="bus_secation">
-                      <span className="booking_icon" style={{ color: "#FF4A68" }}>Bus</span><br />
-                      <span>Find buses that will take you to your<br />favourite destinations</span>
+                      <span
+                        className="booking_icon"
+                        style={{ color: "#FF4A68" }}
+                      >
+                        Bus
+                      </span>
+                      <br />
+                      <span>
+                        Find buses that will take you to your
+                        <br />
+                        favourite destinations
+                      </span>
                     </div>
                   </div>
                 </Col>
                 <Col xs={12} md={4}>
                   <div className="userdatas" onClick={onClickTicket}>
                     <div>
-                      <img src={doodle} style={{ width: 40, height: 40, marginTop: "10px" }} />
+                      <img
+                        src={doodle}
+                        style={{ width: 40, height: 40, marginTop: "10px" }}
+                      />
                     </div>
                     <div className="bus_secation">
-                      <span className="booking_icon" style={{ color: "#864BD8" }}>Ticket</span><br />
-                      <span>Registered ticket services for a<br />personal travel experience</span>
+                      <span
+                        className="booking_icon"
+                        style={{ color: "#864BD8" }}
+                      >
+                        Ticket
+                      </span>
+                      <br />
+                      <span>
+                        Registered ticket services for a<br />
+                        personal travel experience
+                      </span>
                     </div>
                   </div>
                 </Col>
                 <Col xs={12} md={4}>
-                  <div className="userdatas" onClick={onPassClick} >
+                  <div className="userdatas" onClick={onPassClick}>
                     <div>
-                      <img src={ticket} style={{ width: 30, height: 30, marginTop: "10px" }} />
+                      <img
+                        src={ticket}
+                        style={{ width: 30, height: 30, marginTop: "10px" }}
+                      />
                     </div>
                     <div className="bus_secation">
-                      <span className="booking_icon" style={{ color: "#0FA453" }}>DmPass</span><br />
-                      <span>Get a pass for travellers, vehicles<br /> and duration of your travel</span>
+                      <span
+                        className="booking_icon"
+                        style={{ color: "#0FA453" }}
+                      >
+                        DmPass
+                      </span>
+                      <br />
+                      <span>
+                        Get a pass for travellers, vehicles
+                        <br /> and duration of your travel
+                      </span>
                     </div>
                   </div>
                 </Col>
@@ -210,20 +232,15 @@ function SelectBooking() {
             </div>
           </Container>
           {/* {Journey ? ( */}
-          <>
-
-          </>
+          <></>
           {/* ) : null} */}
           {passTab ? <Pass /> : null}
           {busjourney ? <BusPass /> : null}
           {cabjourney ? <doodle /> : null}
         </div>
-      </Container>
-      <Button className="locationpass-btn" onClick={onBusClick}>
-        Continue
-      </Button>
-      <div className="pt-5 mt-5" >
-        <Footer />
+        <Button className="locationpass-btn" onClick={onBusClick}>
+          Continue
+        </Button>
       </div>
     </>
   );

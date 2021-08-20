@@ -22,11 +22,13 @@
     background: orange;
   }
 } */
-@media (min-width: 481px) and (max-width: 767px) {
+@media (min-width: 700px) and (max-width: 767px) {
   .google__map {
     height: 200px !important;
   }
-
+  .login-logo{
+    height: 50px;
+  }
   .package-block {
     margin: 24px 0;
   }

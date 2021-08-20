@@ -18,48 +18,41 @@ import Message from "../../components/Message";
 
 function BusDetail() {
   const history = useHistory();
-  const [otp, setOtp] = useState('');
-  const { error, loading, message } = useSelector(state => state.commonReducer)
-  const { user_data } = useSelector(state => state.loginReducer)
-  const { mobile } = useSelector(state => state.busReducer)
+  const [otp, setOtp] = useState("");
+  const { error, loading, message } = useSelector(
+    (state) => state.commonReducer
+  );
+  const { user_data } = useSelector((state) => state.loginReducer);
+  const { mobile } = useSelector((state) => state.busReducer);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleMobile = (e) => {
     console.log("object", e.target.value);
     let mob = e.target.value;
     if (mob.length > 9) {
       // dispatch(getOtp(`91${e.target.value}`))
-      fetchOtp(e.target.value)
+      fetchOtp(e.target.value);
     }
-    dispatch(setMobile(e.target.value))
-  }
+    dispatch(setMobile(e.target.value));
+  };
 
   const fetchOtp = (mobile) => {
-    dispatch(getOtp(`91${mobile}`))
-  }
+    dispatch(getOtp(`91${mobile}`));
+  };
 
   const onClickMonsoon = () => {
     console.log("object", `91${mobile}`, otp);
-    dispatch(fetchStart())
-    dispatch(verifyOtp(`91${mobile}`, otp))
-    // axios.post(`${API_PATH}/api/v1/customer/verifyotp`, {
-    //       mobile,
-    //       registrationMobileOTP:otp
-    //   })
-    //     .then((response) => response)
-    //     .then((json) => json);
-
-    // history.push('/busdetail')
-    // history.push('/busmonsoon')
-  }
+    dispatch(fetchStart());
+    dispatch(verifyOtp(`91${mobile}`, otp));
+  };
   return (
     <>
       <Header />
       {loading ? <Loader /> : null}
       {message ? <Message msg={message} type="success" /> : null}
       {error ? <Message msg={error} type="error" /> : null}
-      {(user_data !== null) ? <Redirect to='/busdetail' /> : null}
+      {user_data !== null ? <Redirect to="/busdetail" /> : null}
       <div className="d-none d-md-block">
         <div style={{ textAlign: "center", margin: "50px" }}>
           <div style={{ margin: "10px" }}>
@@ -126,14 +119,17 @@ function BusDetail() {
                   className="bus_input"
                   placeholder="Enter the 6 digit OTP"
                   style={{ height: "50px", fontSize: "12px" }}
-                  value={otp} onChange={(e) => setOtp(e.target.value)}
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
                 />
               </Form.Group>
             </Col>
           </Row>
         </Container>
-        <div className="location-btn">
-          <Button className="locationpass-btn" onClick={onClickMonsoon}>Continue</Button>
+        <div className="location-btn my-5">
+          <Button className="locationpass-btn" onClick={onClickMonsoon}>
+            Continue
+          </Button>
         </div>
         <Footer />
       </div>
@@ -212,15 +208,29 @@ function BusDetail() {
                   className="bus_input"
                   placeholder="Enter OTP"
                   style={{ fontSize: "12px" }}
-                  value={otp} onChange={(e) => setOtp(e.target.value)}
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
                 />
               </Form.Group>
             </Col>
           </Row>
         </Container>
-        <Button className="locationpass-btn" onClick={onClickMonsoon}>Continue</Button>
+        <Button
+          style={{
+            width: "100%",
+            textAlign: "center",
+            height: "80px",
+            borderRadius: "0px",
+            backgroundColor: "#0fa453",
+            border: "none",
+            fontWeight: "600",
+            marginTop: 20
+          }}
+          onClick={onClickMonsoon}
+        >
+          Continue
+        </Button>
       </div>
-
     </>
   );
 }

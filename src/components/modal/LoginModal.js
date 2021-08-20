@@ -45,20 +45,15 @@ function LoginModal({ show, handleClose }) {
         {loading ? <Loader /> : null}
         {message ? <Message msg={message} type="success" /> : null}
         {error ? <Message msg={error} type="error" /> : null}
-        {/* {(user_data !== null) ? <Redirect to='/busdetail' /> : null} */}
-
         <Modal show={show} size="lg">
           <Modal.Header onClick={handleClose} closeButton>
-            {/* <Modal.Title id="contained-modal-title-vcenter">
-          Using Grid in Modal
-        </Modal.Title> */}
           </Modal.Header>
           <Modal.Body className="show-grid">
             <Container>
               <Row>
                 <Col style={{ alignSelf: "center" }}>
                   <div style={{ textAlign: "center" }}>
-                    <img src={logo} alt="" style={{ height: "280px" }} />
+                    <img src={logo} alt="" className="login-logo" />
                   </div>
                 </Col>
                 <Col>
@@ -85,50 +80,28 @@ function LoginModal({ show, handleClose }) {
                       <div className="modal__block" style={{ display: `${showDiv ? "block" : "none"}` }} >
                         <h5 className="modal__title mt-2 mb-4" style={{ fontWeight: "bolder" }}>Enter Verification Code</h5>
                         <OtpInput
-                          // containerStyle="container__style"
                           inputStyle="input__style"
                           value={OTP}
                           onChange={handleChange}
                           numInputs={6}
                           separator={<span>&nbsp;-&nbsp;</span>}
                         />
-
                         <div className="mt-4 mb-4">
-
-                          {/* <button className="m-1">Resent otp</button> */}
                           <Button size="sm" style={{
                             background: '#222',
                             border: '1px solid #222'
                           }} className="m-1" onClick={handleSubmit}>Submit</Button>
                         </div>
                       </div>
-
-                      {/* <div style={{ marginBottom: "50px" }}>
-                        <span>Create New Account ?</span>
-                        <NavLink className="sidebar_item" to="/" style={{ marginBottom: "50px" }} >
-                          Click here
-                        </NavLink>
-                      </div> */}
                     </Form>
                   </div>
                 </Col>
               </Row>
             </Container>
           </Modal.Body>
-          {/* <Modal.Footer>
-            <Button onClick={handleClose}>Close</Button>
-          </Modal.Footer> */}
         </Modal>
       </div>
     </>
   );
 }
-
 export default LoginModal;
-
-{
-  /* <Modal {...props} aria-labelledby="contained-modal-title-vcenter"> */
-}
-{
-  /* <Button onClick={props.onHide}>Close</Button> */
-}

@@ -593,6 +593,9 @@ body {
 }
 
 /* Modal Input Style */
+.login-logo{
+  height: 280px;
+}
 
 .modal__block {
   display: flex;

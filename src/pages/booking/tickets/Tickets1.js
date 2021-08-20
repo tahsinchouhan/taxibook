@@ -132,31 +132,6 @@ function Tickets1() {
                   ?
                   <>
                     <Col xs={12} md={3} className="">
-                      {/* <Form.Group as={Col} controlId="formGridState">
-                  <Form.Label
-                    className="formselect"
-                    style={{
-                      fontWeight: "bolder",
-                      paddingLeft: "4px",
-                      fontSize: "12px",
-                      color: "black",
-                      marginBottom: "5px",
-                    }}
-                  >
-                    Enter Destination
-                  </Form.Label>
-                  <Form.Select
-                    className="location-userdatas"
-                    style={{ border: "none", fontSize: "12px" }}
-                  >
-                    <option>select a destination...</option>
-                    {routes.map((item) => (
-                      <option key={item._id} value={item._id}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </Form.Group> */}
                       <Form.Group as={Col} controlId="formGridState">
                         <Form.Label
                           className="formselect"
@@ -271,7 +246,8 @@ function Tickets1() {
                 color: "white",
                 fontWeight: "900",
                 fontSize: "15px",
-                marginBottom: "50px"
+                marginBottom: "50px",
+                border: '1px solid #FF814A'
               }}
               onClick={onStepreClick}
             >
@@ -292,6 +268,8 @@ function Tickets1() {
               color: "white",
               fontWeight: "900",
               fontSize: "15px",
+              border: '1px solid #FF814A',
+              borderRadius: 0
             }}
             onClick={onStepreClick}
           >
