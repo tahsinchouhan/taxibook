@@ -11,7 +11,7 @@ import Message from "../Message";
 
 
 function LoginModal({ show, handleClose }) {
-  // const [modalShow, setModalShow] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
   const [mobile, setMobile] = useState("");
   const [OTP, setOTP] = useState("");
   const [showDiv, setShowDiv] = useState(false);
@@ -95,7 +95,7 @@ function LoginModal({ show, handleClose }) {
 
                         <div className="mt-4 mb-4">
 
-                          {/* <button className="m-1">Resent otp</button> */}
+                         
                           <Button size="sm" style={{
                             background: '#222',
                             border: '1px solid #222'
@@ -103,21 +103,13 @@ function LoginModal({ show, handleClose }) {
                         </div>
                       </div>
 
-                      {/* <div style={{ marginBottom: "50px" }}>
-                        <span>Create New Account ?</span>
-                        <NavLink className="sidebar_item" to="/" style={{ marginBottom: "50px" }} >
-                          Click here
-                        </NavLink>
-                      </div> */}
                     </Form>
                   </div>
                 </Col>
               </Row>
             </Container>
           </Modal.Body>
-          {/* <Modal.Footer>
-            <Button onClick={handleClose}>Close</Button>
-          </Modal.Footer> */}
+        
         </Modal>
       </div>
     </>
