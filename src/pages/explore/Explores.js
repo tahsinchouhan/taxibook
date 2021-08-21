@@ -10,11 +10,30 @@ import Adventure from "../../assets/img/Adventure.jpg";
 import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Geocode from "react-geocode";
+
+Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
+Geocode.setLanguage("en");
+Geocode.setRegion("in");
+Geocode.setLocationType("ROOFTOP");
+Geocode.enableDebug();
 
 const Explores = () => {
   const history = useHistory();
   const [destinations, setDestinations] = useState([]);
   const [packages, setPackages] = useState([]);
+  const [location, setLoation] = useState([]);
+
+  const getCurrentLocation = async () => {
+    await window.navigator.geolocation.getCurrentPosition((pos) => {
+      console.log(pos);
+      setLoation(pos.coords);
+    });
+  };
+
+  useEffect(() => {
+    getCurrentLocation();
+  }, []);
 
   const tripPackage = [
     {
@@ -49,37 +68,50 @@ const Explores = () => {
     },
   };
 
-  
-
   useEffect(() => {
-    getDestinations();
     getPackages();
+    getDestinations();
     window.scrollTo(0, 0);
-  }, []);
+  }, [location]);
 
   const getDestinations = () => {
-    fetch(API_PATH + "/api/v1/destinations/list")
+    fetch(API_PATH + "/api/v1/destinations/location", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        latitude: location.latitude,
+        longitude: location.longitude,
+      }),
+    })
       .then((response) => response.json())
       .then((json) => {
         if (json.data !== undefined)
-        localStorage.setItem('Destination',JSON.stringify(json.data));
-          setDestinations(json.data);
-        // console.log("data",json.data);
+        setDestinations(json.data);
       })
       .catch((e) => console.log(e));
   };
 
   const getPackages = () => {
-    fetch(API_PATH + "/api/v1/packages/list")
-      .then((response) => {
-        return response.json()
-      })
+    fetch(API_PATH + "/api/v1/packages/location", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        latitude: location.latitude,
+        longitude: location.longitude,
+      }),
+    })
+      .then((response) => response.json())
       .then((json) => {
-        // console.log("3we", json.data);
-        if (json.data !== undefined)
+        if (json.data !== undefined) {
+          console.log(json.data)
           setPackages(json.data);
+        }
       })
-      .catch((e) => console.log("err", e));
+      .catch((e) => console.log(e));
   };
 
   const onDestinations = (value) => {
@@ -123,10 +155,8 @@ const Explores = () => {
             <span>Tour</span> Maps
           </h2>
         </div>
-        {
-          (tripPackage.length > 0)
-            ?
-            tripPackage.map((_item, index) => {
+        {tripPackage.length > 0
+          ? tripPackage.map((_item, index) => {
               return (
                 <div key={index} style={{ display: "inline-block" }}>
                   <Image
@@ -145,9 +175,7 @@ const Explores = () => {
                 </div>
               );
             })
-            :
-            null
-        }
+          : null}
         <div className="mb-5 mt-5">
           <div
             style={{
@@ -168,70 +196,63 @@ const Explores = () => {
             </h6>
           </div>
         </div>
-        {
-          (packages.length > 0)
-            ?
-            <Carousel
-              ssr
-              partialVisbile
-              itemClass="image-item"
-              responsive={responsive}
-            >
-              {
-                (packages.length > 0)
-                  ?
-                  packages.map((item, key) => {
-                    return (
-                      <div
-                        key={key}
-                        onClick={() =>
-                          history.push({
-                            pathname: `/packages_details/${item.title}`,
-                            item: item._id,
-                          })
-                        }
-                      >
-                        <Image
-                          draggable={false}
-                          style={{ width: "100%", height: "100%" }}
-                          src={item.upload_images}
-                        />
-                        <div>
-                          <h6 className="packages__block-title_ mt-3 mb-0">
-                            {item.title}
-                          </h6>
-                          <div
+        {packages.length > 0 ? (
+          <Carousel
+            ssr
+            partialVisbile
+            itemClass="image-item"
+            responsive={responsive}
+          >
+            {packages.length > 0
+              ? packages.map((item, key) => {
+                  return (
+                    <div
+                      key={key}
+                      onClick={() =>
+                        history.push({
+                          pathname: `/packages_details/${item.title}`,
+                          item: item._id,
+                        })
+                      }
+                    >
+                      <Image
+                        draggable={false}
+                        style={{ width: "100%", height: "100%" }}
+                        src={item.upload_images}
+                      />
+                      <div>
+                        <h6 className="packages__block-title_ mt-3 mb-0">
+                          {item.title}
+                        </h6>
+                        <div
+                          style={{
+                            paddingTop: 2,
+                          }}
+                        >
+                          <h6
                             style={{
-                              paddingTop: 2,
+                              background: "#BEBEBE",
+                              display: "inline",
+                              padding: "3px",
+                              borderRadius: "4px",
+                              fontSize: "14px",
                             }}
                           >
-                            <h6
-                              style={{
-                                background: "#BEBEBE",
-                                display: "inline",
-                                padding: "3px",
-                                borderRadius: "4px",
-                                fontSize: "14px",
-                              }}
-                            >
-                              {item.sub_title}
-                            </h6>
-                          </div>
-                          <div>
-                            <small className="packages__block-subtitle">
-                              ₹ {item.price}
-                            </small>
-                          </div>
+                            {item.sub_title}
+                          </h6>
+                        </div>
+                        <div>
+                          <small className="packages__block-subtitle">
+                            ₹ {item.price}
+                          </small>
                         </div>
                       </div>
-                    );
-                  })
-                  : null
-              }
-            </Carousel>
-            :
-            null
-        }
+                    </div>
+                  );
+                })
+              : null}
+          </Carousel>
+        ) : null}
       </Container>
 
       <div
@@ -266,39 +287,34 @@ const Explores = () => {
               </h6>
             </div>
           </div>
-          {
-            (destinations.length > 0)
-              ?
-              <Carousel
-                ssr
-                partialVisbile
-                itemClass="image-item"
-                responsive={responsive}
-              >
-                {
-                  destinations.map((item, key) => {
-                    return (
-                      <div key={key} onClick={() => onDestinations(item)}>
-                        <Image
-                          draggable={false}
-                          style={{ width: "100%", height: "100%" }}
-                          src={item.upload_images}
-                        />
-                        <div style={{ color: "white" }} className="package__trip">
-                          <h6 className="packages__block-title mt-3 mb-0">
-                            {item.title}
-                          </h6>
-                          <small className="packages__block-subtitle">
-                            {item.sub_title}
-                          </small>
-                        </div>
-                      </div>
-                    );
-                  })}
-              </Carousel>
-              :
-              null
-          }
+          {destinations.length > 0 ? (
+            <Carousel
+              ssr
+              partialVisbile
+              itemClass="image-item"
+              responsive={responsive}
+            >
+              {destinations.map((item, key) => {
+                return (
+                  <div key={key} onClick={() => onDestinations(item)}>
+                    <Image
+                      draggable={false}
+                      style={{ width: "100%", height: "100%" }}
+                      src={item.upload_images}
+                    />
+                    <div style={{ color: "white" }} className="package__trip">
+                      <h6 className="packages__block-title mt-3 mb-0">
+                        {item.title}
+                      </h6>
+                      <small className="packages__block-subtitle">
+                        {item.sub_title}
+                      </small>
+                    </div>
+                  </div>
+                );
+              })}
+            </Carousel>
+          ) : null}
         </Container>
       </div>
       <Footer />

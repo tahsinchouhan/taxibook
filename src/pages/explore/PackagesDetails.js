@@ -10,6 +10,7 @@ import { Button } from "bootstrap";
 import { useHistory } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import Modal from 'react-bootstrap'
+import ReactPlayer from "react-player";
 import RettingModal from "../../components/modal/RettingModal";
 import EnquireModal from "../../components/modal/EnquireModal";
 
@@ -109,6 +110,23 @@ const [enquireModal,setEnquireModal]=useState();
           <p className="pt-3">{packages.description}</p>
         </div>
       </Container>
+      
+      {packages.youtube_url ? (
+        <Container>
+          <h4 className="block__title know__more mb-4 pt-4">
+            <span>Know More</span>
+          </h4>
+
+          <ReactPlayer
+            url={packages.youtube_url}
+            controls
+            playbackRate={2}
+            width="100%"
+            height="500px"
+          />
+        </Container>
+      ) : null}
+
       <Container className="mb-5 pb-5">
         <h4 className="block__title mt-5">
           <span>Price</span>

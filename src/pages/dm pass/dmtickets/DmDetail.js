@@ -61,20 +61,7 @@ function DmDetail() {
   };
 
   let apiId = localStorage.getItem("data");
-  useEffect(() => {
-    //   if()
-    //     fetch(`${API_PATH}/api/v1/dmpass/qrcode/${apiData[0]._id}`)
-    //       .then((response) => response.json())
-    //       .then((res) => {
-    //         console.log(res.data);
-    //         setQRImage(res.data);
-    //       })
-    //       .catch((e) => {
-    //         setLoading(false);
-    //         setNotFound(true);
-    //       });
-  }, []);
-
+  
   if(apiId == []){
       console.log("sadh", apiId)
   }
@@ -92,32 +79,6 @@ function DmDetail() {
           });
  
   }
-
-  const viewdetail = () => {
-      fetch(`${API_PATH}/api/v1/dmpass/qrcode/${apiData[0]._id}`)
-        .then((response) => response.json())
-        .then((res) => {
-          console.log(res.data);
-          setQRImage(res.data);
-        })
-        .catch((e) => {
-          setLoading(false);
-          setNotFound(true);
-        });
-  };
-
-  const onClickTrain = (id) => {
-    console.log("object");
-    dispatch(setTripData(trips[trips.findIndex((x) => x._id == id)]));
-    // history.push("/boarding");
-    console.log(trips.findIndex((x) => x._id == id));
-    history.push("/busconfirmation");
-  };
-
-  const onClickBoarding = () => {
-    console.log("object");
-    history.push("/booking");
-  };
 
   return (
     <>

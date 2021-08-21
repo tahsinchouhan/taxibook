@@ -10,7 +10,7 @@ function Search() {
   const [destinations, setDestinations] = useState([]);
   const [packages, setPackages] = useState([]);
 
-  const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState();
 
   const history = useHistory();
   useEffect(() => {
@@ -23,8 +23,7 @@ function Search() {
     fetch(API_PATH + "/api/v1/destinations/list")
       .then((response) => response.json())
       .then((json) => {
-        if(json.data !== undefined)
-        setDestinations(json.data);
+        if (json.data !== undefined) setDestinations(json.data);
         console.log(json.data);
       })
       .catch((e) => console.log(e));
@@ -33,22 +32,21 @@ function Search() {
     fetch(API_PATH + "/api/v1/packages/list")
       .then((response) => response.json())
       .then((json) => {
-        if(json.data !== undefined)
-        setPackages(json.data);
+        if (json.data !== undefined) setPackages(json.data);
         console.log(json.data);
       })
       .catch((e) => console.log(e));
   };
 
-  const searchingData = (value) =>{
+  const searchingData = (value) => {
     fetch(API_PATH + `/api/v1/search?searchvalue=${value}`)
       .then((response) => response.json())
       .then((json) => {
-        if(json.data !== undefined)
+        if (json.data !== undefined) setSearch(json.data);
         console.log(json.data);
       })
       .catch((e) => console.log(e));
-  }
+  };
 
   return (
     <>
@@ -62,7 +60,7 @@ function Search() {
                 name="search"
                 placeholder="Search...."
                 style={{ marginTop: "-10px" }}
-                onChange={(e)=>searchingData(e.target.value)}
+                onChange={(e) => searchingData(e.target.value)}
               />
               <button
                 className="form__search-btn"
@@ -141,6 +139,110 @@ function Search() {
             </div>
           </div>
         </div>
+
+        <>
+          {search ? (
+            <div>
+              <h2 className="package__title mb-5 mt-3">
+                <span>Search Result</span>
+              </h2>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  marginBottom: 100,
+                  marginTop: -100,
+                }}
+              >
+                {console.log(search)}
+                {!search.destinations == []
+                  ? search.destinations.map((item) => {
+                      return (
+                        <div
+                          onClick={() =>
+                            history.push({
+                              pathname: `/destination_details/${item.title}`,
+                              id: item._id,
+                            })
+                          }
+                          style={{
+                            width: 300,
+                            height: 200,
+                            marginRight: 15,
+                            marginTop: 100,
+                          }}
+                        >
+                          <Image
+                            draggable={false}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: 10,
+                            }}
+                            src={item.upload_images}
+                          />
+                          <div
+                            style={{ color: "black" }}
+                            className="package__trip"
+                          >
+                            <h6 className="packages__block-title mt-3 mb-0">
+                              {item.title}
+                            </h6>
+                            <small className="packages__block-subtitle">
+                              {item.sub_title}
+                            </small>
+                          </div>
+                        </div>
+                      );
+                    })
+                  : null}
+
+                {!search.packages == []
+                  ? search.packages.map((item) => {
+                      return (
+                        <div
+                          onClick={() =>
+                            history.push({
+                              pathname: `/destination_details/${item.title}`,
+                              id: item._id,
+                            })
+                          }
+                          style={{
+                            width: 300,
+                            height: 200,
+                            marginRight: 15,
+                            marginTop: 100,
+                          }}
+                        >
+                          <Image
+                            draggable={false}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: 10,
+                            }}
+                            src={item.upload_images}
+                          />
+                          <div
+                            style={{ color: "black" }}
+                            className="package__trip"
+                          >
+                            <h6 className="packages__block-title mt-3 mb-0">
+                              {item.title}
+                            </h6>
+                            <small className="packages__block-subtitle">
+                              {item.sub_title}
+                            </small>
+                          </div>
+                        </div>
+                      );
+                    })
+                  : null}
+              </div>
+            </div>
+          ) : null}
+        </>
 
         <h2 className="package__title mb-5">
           <span>Packages</span>
