@@ -287,7 +287,7 @@ function CheckoutPage() {
           </Container>
         </div>
         {/* <div style={{ height: "250px" }}></div> */}
-        <div
+        {/* <div
           className="check-payment"
           style={{ background: "#0FA453" }}
           onClick={onCongratsClick}
@@ -305,11 +305,16 @@ function CheckoutPage() {
             }}
           >
             NEXT
-            {/* MAKE PAYMENT */}
           </div>
-        </div>
+        </div> */}
+
+        <Button className="locationpass-btn  mt-5 mb-5" onClick={onCongratsClick}>
+          NEXT
+        </Button>
         <Footer />
       </div>
+
+
       {/*Mobile_view*/}
       <div fluid className="d-md-none">
         <div
@@ -432,9 +437,14 @@ function CheckoutPage() {
             ) : null}
           </Row>
         </Container>
-        <div
+        {/* <div
           className="check-payment"
-          style={{ background: "#0FA453" }}
+          style={{ 
+            background: "#0FA453",
+            marginTop: "0px",
+            position: "absolute",
+            bottom: 0
+          }}
           onClick={onCongratsClick}
         >
           <div
@@ -449,10 +459,13 @@ function CheckoutPage() {
               color: " #FFFFFF",
             }}
           >
-            {/* MAKE PAYMENT */}
             NEXT
           </div>
-        </div>
+        </div> */}
+
+        <Button className="locationpass-btn  mt-5" onClick={onCongratsClick}>
+          NEXT
+        </Button>
       </div>
     </>
   );

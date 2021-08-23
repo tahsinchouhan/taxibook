@@ -170,15 +170,15 @@ function Payment() {
         </Container>
         <div
           classNmae="pay-div"
-          style={{
-            textAlign: "center",
-            backgroundColor: "#0FA453",
-            color: "white",
-            height: "60px",
-          }}
+          // style={{
+          //   textAlign: "center",
+          //   backgroundColor: "#0FA453",
+          //   color: "white",
+          //   height: "60px",
+          // }}
           onClick={displayRazorpaysss}
         >
-          <span
+          {/* <span
             variant="primary"
             size="lg"
             type="submit"
@@ -189,7 +189,11 @@ function Payment() {
             }}
           >
             PAYMENT
-          </span>
+          </span> */}
+
+        <Button className="locationpass-btn  mb-5">
+          PAYMENT
+        </Button>
         </div>
         <Footer />
       </div>
@@ -253,16 +257,16 @@ function Payment() {
         </Container>
         <div
           classNmae="pay-div"
-          style={{
-            textAlign: "center",
+          // style={{
+          //   textAlign: "center",
           
-            color: "white",
-            height: "60px",
-            widow:"100%"
-          }}
+          //   color: "white",
+          //   height: "60px",
+          //   widow:"100%"
+          // }}
           onClick={displayRazorpaysss}
         >
-          <Button
+          {/* <Button
             variant="primary"
             size="lg"
             type="submit"
@@ -275,9 +279,13 @@ function Payment() {
             }}
           >
             PAYMENT
-          </Button>
+          </Button> */}
+
+        <Button className="locationpass-btn  mt-5">
+          PAYMENT
+        </Button>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
 
 

@@ -238,7 +238,7 @@ function BusPass() {
           Continue
         </Button>
         <div className="" style={{paddingBottom:"85px"}} >
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
     </div>

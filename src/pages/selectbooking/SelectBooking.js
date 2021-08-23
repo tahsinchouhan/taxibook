@@ -135,9 +135,9 @@ function SelectBooking() {
         {passTab ? <Pass /> : null}
         {busjourney ? <BusPass /> : null}
         {cabjourney ? <doodle /> : null}
-        <Button className="locationpass-btn  mt-5" onClick={onBusClick}>
+        {/* <Button className="locationpass-btn  mt-5" onClick={onBusClick}>
           Continue
-        </Button>
+        </Button> */}
         <div className="pt-5 mt-5">
           <Footer />
         </div>
@@ -238,9 +238,9 @@ function SelectBooking() {
           {busjourney ? <BusPass /> : null}
           {cabjourney ? <doodle /> : null}
         </div>
-        <Button className="locationpass-btn" onClick={onBusClick}>
+        {/* <Button className="locationpass-btn" onClick={onBusClick}>
           Continue
-        </Button>
+        </Button> */}
       </div>
     </>
   );

@@ -90,10 +90,10 @@
     width: 100%;
     border-radius: 0px;
     margin: 0px;
-    position: fixed;
-    bottom: 0;
     height: 80px;
     border: 1px solid #0FA453;
+    position:absolute;
+    bottom:0;
 }
 .train-seats{
   /* border: 1px solid red; */

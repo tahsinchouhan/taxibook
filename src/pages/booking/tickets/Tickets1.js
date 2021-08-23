@@ -269,7 +269,9 @@ function Tickets1() {
               fontWeight: "900",
               fontSize: "15px",
               border: '1px solid #FF814A',
-              borderRadius: 0
+              borderRadius: 0,
+              position:"absolute",
+              bottom:0
             }}
             onClick={onStepreClick}
           >
