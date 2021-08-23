@@ -48,6 +48,7 @@ function DmPass() {
     <>
       <div>
         <Header />
+        <div className="d-none d-md-block">
         <Container className="d-none d-md-block my-5" style={{ width: "70%" }}>
           <div className="select_div">
             <div className="row p-3" style={{ textAlign: "center" }}>
@@ -72,15 +73,14 @@ function DmPass() {
                     controlId="exampleForm.ControlInput1"
                   >
                     <Form.Label className="dm-ticket" >Number of Vehicles</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <Form.Control
-                        type="text"
-                        className="dm-inputticket"
-                        placeholder=" Vehicles..."
-                        name="number_of_vehicals"
-                        value={number_of_vehicals} onChange={(e)=>dispatch(setDmData("number_of_vehicals",e.target.value))}
-                      />
-                    </div>
+                    <select id="inputState" className="form-control pass_input">
+                      <option selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
                   </Form.Group>
                 </Col>
                 <Col xs={12} md={4} className="mt-2">
@@ -89,7 +89,7 @@ function DmPass() {
                     controlId="exampleForm.ControlInput1"
                   >
                     <Form.Label className="dm-ticket">Number of Travellers</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
+                    {/* <div style={{ display: "flex", flexDirection: "row" }}>
                       <Form.Control
                         type="text"
                         className="dm-inputticket"
@@ -97,7 +97,19 @@ function DmPass() {
                         name="number_of_travellers"
                         value={number_of_travellers} onChange={(e)=>dispatch(setDmData("number_of_travellers",e.target.value))}
                       />
-                    </div>
+                    </div> */}
+                    <select
+                      id="inputState"
+                      className="form-control pass_input"
+                      // onChange={handleTravellerCount}
+                    >
+                      <option selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
                   </Form.Group>
                 </Col>
                 <Col xs={12} md={4} className="mt-2">
@@ -106,15 +118,17 @@ function DmPass() {
                     controlId="exampleForm.ControlInput1"
                   >
                     <Form.Label className="dm-ticket">Days of Travel</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <Form.Control
-                        type="text"
-                        className="dm-inputticket"
-                        placeholder="Days of Travel.."
-                        name="duration_of_travel"
-                        value={duration_of_travel} onChange={(e)=>dispatch(setDmData("duration_of_travel",e.target.value))}
-                      />
-                    </div>
+                    <select
+                      id="inputState"
+                      className="form-control pass_input"
+                    >
+                      <option selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
                   </Form.Group>
                 </Col>
               </Row>
@@ -138,7 +152,11 @@ function DmPass() {
             </Container>
           </div>
         </Container>
+        <Footer />
+        </div>
       </div>
+
+      
       {/*mobile-view*/}
       <div fluid className="d-md-none">
       <div className="select_div">
@@ -164,15 +182,14 @@ function DmPass() {
                     controlId="exampleForm.ControlInput1"
                   >
                     <Form.Label className="dm-ticket" >Number of Vehicles</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <Form.Control
-                        type="text"
-                        className="dm-inputticket"
-                        placeholder=" Vehicles..."
-                        name="number_of_vehicals"
-                        value={number_of_vehicals} onChange={(e)=>dispatch(setDmData("number_of_vehicals",e.target.value))}
-                      />
-                    </div>
+                    <select id="inputState" className="form-control pass_input">
+                      <option selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
                   </Form.Group>
                 </Col>
                 <Col xs={12} md={4} className="mt-2">
@@ -181,7 +198,7 @@ function DmPass() {
                     controlId="exampleForm.ControlInput1"
                   >
                     <Form.Label className="dm-ticket">Number of Travellers</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
+                    {/* <div style={{ display: "flex", flexDirection: "row" }}>
                       <Form.Control
                         type="text"
                         className="dm-inputticket"
@@ -189,7 +206,19 @@ function DmPass() {
                         name="number_of_travellers"
                         value={number_of_travellers} onChange={(e)=>dispatch(setDmData("number_of_travellers",e.target.value))}
                       />
-                    </div>
+                    </div> */}
+                    <select
+                      id="inputState"
+                      className="form-control pass_input"
+                      // onChange={handleTravellerCount}
+                    >
+                      <option selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
                   </Form.Group>
                 </Col>
                 <Col xs={12} md={4} className="mt-2">
@@ -198,15 +227,17 @@ function DmPass() {
                     controlId="exampleForm.ControlInput1"
                   >
                     <Form.Label className="dm-ticket">Days of Travel</Form.Label>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                      <Form.Control
-                        type="text"
-                        className="dm-inputticket"
-                        placeholder="Days of Travel.."
-                        name="duration_of_travel"
-                        value={duration_of_travel} onChange={(e)=>dispatch(setDmData("duration_of_travel",e.target.value))}
-                      />
-                    </div>
+                    <select
+                      id="inputState"
+                      className="form-control pass_input"
+                    >
+                      <option selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
                   </Form.Group>
                 </Col>
               </Row>

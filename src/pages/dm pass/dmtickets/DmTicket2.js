@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useHistory } from "react-router-dom";
 import ticket from "../../../assets/img/ticket.png";
 import Header from "../../../components/Header";
-
+import Footer from "../../travesaly/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { setDmData } from "../../../redux/actions";
 
@@ -24,6 +24,7 @@ function DmTicket2() {
     <>
       <div>
         <Header />
+        <div className="d-none d-md-block">
         <Container className="d-none d-md-block my-5" style={{ width: "70%" }}>
           <div className="select_div">
             <div className="row p-3" style={{ textAlign: "center" }}>
@@ -81,7 +82,7 @@ function DmTicket2() {
                         backgroundColor: "transparent",
                         border: "none",
                         color: "#FF4A68",
-                        float: "left",
+                        float: "right",
                         fontSize: "12px",
                       }}
                     >
@@ -128,7 +129,8 @@ function DmTicket2() {
             </Container>
           </div>
         </Container>
-
+        <Footer />
+        </div>
         
 {/*mobile-view*/}
         <div  fluid className="d-md-none">
@@ -190,7 +192,7 @@ function DmTicket2() {
                         backgroundColor: "transparent",
                         border: "none",
                         color: "#FF4A68",
-                        float: "left",
+                        float: "right",
                         fontSize: "12px",
                       }}
                     >

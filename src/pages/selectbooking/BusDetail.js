@@ -61,6 +61,7 @@ function BusPass() {
     <div>
       <ToastContainer />
       <Header />
+      <div className="d-none d-md-block" >
       <Container className="d-none d-md-block">
         <div style={{ textAlign: "center", margin: "50px" }}>
           <div style={{ margin: "10px" }}>
@@ -148,10 +149,11 @@ function BusPass() {
             Continue
           </Button>
         </div>
-        <div className="pt-5 mt-5" >
-          <Footer />
-        </div>
       </Container>
+          <div className="mt-5">
+            <Footer />
+          </div>
+        </div>
 
       {/* Mobile View */}
 

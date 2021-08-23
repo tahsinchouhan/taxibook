@@ -1,12 +1,14 @@
 import React from "react";
 import { Button, Row, Col, Form, Container, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import covid from "../../assets/img/covid-19.png";
 import map from "../../assets/img/Map.svg";
 import images from "../../assets/img/image 1.svg";
 import logo from "../../assets/img/logo.png";
 
+
 function Footer() {
+  const history = useHistory();
   return (
     <>
       <footer className="footer pb-3">
@@ -37,30 +39,30 @@ function Footer() {
             <Col sm={4} md={4}>
               <div className="footer__block">
                 <div className="footer__item">
-                  <Link to="/registrationguide" className="link">
-                    <h6 className="footer__item-subtitle">For Operators</h6>
+                  <Link to="/add-form" className="link">
+                    <h6 className="footer__item-subtitle">Vendor & Organization Registration</h6>
                   </Link>
                 </div>
                 <div className="footer__item">
                   <Link
-                    to="#"
+                    to="/add-form"
                     target="_blank"
                     className="link"
-                    onClick={() =>
-                      (window.location.href =
-                        "https://bhuwnesh947131.typeform.com/to/SMfaeorp")
-                    }
+                    // onClick={() =>
+                    //   (window.location.href =
+                    //     "https://bhuwnesh947131.typeform.com/to/SMfaeorp")
+                    // }
                   >
-                    <h5 className="footer__item-title">Registration Guide</h5>
+                    <h5 className="footer__item-title">Registration From</h5>
                   </Link>
-                  <small>How to assosiate with Know Bastar</small>
+                  <small>Vendor & Organization Registration</small>
                 </div>
-                <div className="footer__item">
+                {/* <div className="footer__item">
                   <Link to="/registrationguide" className="link">
                     <h5 className="footer__item-title">Booking Details</h5>
                   </Link>
                   <small>Map, Guides and Packages </small>
-                </div>
+                </div> */}
               </div>
             </Col>
             

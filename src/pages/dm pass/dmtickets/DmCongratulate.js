@@ -9,6 +9,7 @@ import mobile from "../../../assets/img/mobile.png";
 import { useDispatch, useSelector } from "react-redux";
 
 function DmCongratulate() {
+  const history = useHistory();
   // const { data: apiData, tripData,booking_id } = useSelector(state => state.busReducer)
   // const goHome = () => {
   //   history.push("/");
@@ -94,6 +95,7 @@ function DmCongratulate() {
 
                   <div>
                     <Button
+                      onClick={() => history.push("/")}
                       style={{
                         width: "186px",
                         textAlign: "center",
@@ -211,6 +213,7 @@ function DmCongratulate() {
                    
                   <div>
                     <Button
+                      onClick={() => history.push("/")}
                       style={{
                         width: "186px",
                         textAlign: "center",

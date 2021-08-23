@@ -108,12 +108,12 @@ function Header() {
               <NavLink className="sidebar__navlink" to="/tickets">
                 TICKETS
               </NavLink>
-              <NavLink className="sidebar__navlink" to="/pricing">
+              {/* <NavLink className="sidebar__navlink" to="/pricing">
                 CONTACT
               </NavLink>
               <NavLink className="sidebar__navlink" to="/pricing">
                 ABOUT
-              </NavLink>
+              </NavLink> */}
             </Nav>
           </Offcanvas.Body>
         </Offcanvas>
@@ -155,12 +155,12 @@ function Header() {
               <NavLink className="sidebar_item" to="/tickets">
                 TICKETS
               </NavLink>
-              <NavLink className="sidebar_item" to="#">
+              {/* <NavLink className="sidebar_item" to="#">
                 CONTACT
               </NavLink>
               <NavLink className="sidebar_item" to="#">
                 ABOUT
-              </NavLink>
+              </NavLink> */}
             </Nav>
             <Form className="" style={{ marginRight: "70px" }}>
               <div className="header_right d-flex">

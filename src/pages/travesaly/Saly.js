@@ -96,7 +96,7 @@ function Saly() {
                         <div key={key}>
                           <Image
                             draggable={false}
-                            style={{ width: "100%", height: "100%" }}
+                            style={{ width: "95%", height: "100%" }}
                             src={item.upload_images}
                           />
                           <div

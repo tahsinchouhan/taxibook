@@ -78,7 +78,8 @@ function CongratulationPage() {
                    >Sent by Email</Button>
                    </div>
                    <div>
-                   <Button style={{
+                   <Button 
+                   style={{
                     width: "186px",
                     textAlign: "center",
                     height: "52px",

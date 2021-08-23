@@ -372,7 +372,7 @@ function TravelTicket() {
                     </Paper>
                   ))}
                 </div>
-                <div style={{ marginTop: "23px", textAlign: "center" }}>
+                {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
                   <Button
                     type="submit"
                     class="btn btn-success"
@@ -400,7 +400,7 @@ function TravelTicket() {
                   >
                     Add Vehicle
                   </Button>
-                </div>
+                </div> */}
               </div>
             </Col>
             <Col xs={12} md={6}>
@@ -532,9 +532,8 @@ function TravelTicket() {
                     </Paper>
                   ))}
                 </div>
-                <div style={{ marginTop: "23px", textAlign: "center" }}>
+                {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
                   <Button
-                    // type="submit"
                     class="btn btn-success"
                     style={{
                       width: "55%",
@@ -559,7 +558,7 @@ function TravelTicket() {
                   >
                     Add Traveller
                   </Button>
-                </div>
+                </div> */}
               </div>
             </Col>
           </Row>
@@ -1018,9 +1017,8 @@ function TravelTicket() {
                     </Paper>
                   ))}
                 </div>
-                <div style={{ marginTop: "23px", textAlign: "center" }}>
+                {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
                   <Button
-                    // type="submit"
                     class="btn btn-success"
                     style={{
                       width: "55%",
@@ -1045,7 +1043,7 @@ function TravelTicket() {
                   >
                     Add Traveller
                   </Button>
-                </div>
+                </div> */}
               </Col>
             </div>
           </div>   

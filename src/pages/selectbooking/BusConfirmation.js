@@ -381,7 +381,7 @@ function BusConfirmation() {
               }
             </div>
 
-            <div style={{ textAlign: "center", margin: "55px" }}>
+            {/* <div style={{ textAlign: "center", margin: "55px" }}>
               <Button
                 style={{
                   backgroundColor: "#0FA453",
@@ -400,7 +400,8 @@ function BusConfirmation() {
               >
                 Add Traveller
               </Button>
-            </div>
+            </div> */}
+
             {/* <Popper
               open={open}
               anchorEl={anchorEl}
@@ -985,7 +986,7 @@ function BusConfirmation() {
             ))
           }
         </div>
-        <div style={{ textAlign: "center" }}>
+        {/* <div style={{ textAlign: "center" }}>
           <Button
             style={{
               backgroundColor: "#0FA453",
@@ -1007,7 +1008,7 @@ function BusConfirmation() {
           >
             Add Traveller
           </Button>
-        </div>
+        </div> */}
 
         <div>
           <div style={{display:"flex", marginTop:"50px", flexDirection: 'row',width:"50%" }}>

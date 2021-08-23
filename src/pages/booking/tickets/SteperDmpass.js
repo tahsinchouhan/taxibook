@@ -596,7 +596,7 @@ function SteperDmpass(shows, ...props) {
                           </Paper>
                         ))}
                       </div>
-                      <div style={{ marginTop: "23px", textAlign: "center" }}>
+                      {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
                         <Button
                           class="btn btn-success"
                           style={{
@@ -623,7 +623,7 @@ function SteperDmpass(shows, ...props) {
                         >
                           Add Vehicle
                         </Button>
-                      </div>
+                      </div> */}
                       {/* </div> */}
                     </Col>
                     <Col className="pt-3 pb-5">
@@ -772,9 +772,8 @@ function SteperDmpass(shows, ...props) {
                           </Paper>
                         ))}
                       </div>
-                      <div style={{ marginTop: "23px", textAlign: "center" }}>
+                      {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
                         <Button
-                          // type="submit"
                           class="btn btn-success"
                           style={{
                             width: "55%",
@@ -799,7 +798,7 @@ function SteperDmpass(shows, ...props) {
                         >
                           Add Traveller
                         </Button>
-                      </div>
+                      </div> */}
                       {/* </div> */}
                     </Col>
                   </Row>
@@ -807,7 +806,7 @@ function SteperDmpass(shows, ...props) {
               </form>
             </Row>
           </Container>
-          <div>
+          <div  style= {{"paddingBottom": "5px"}}>
             <div className="mb-5">
               <Button className="locationpass-btn" onClick={onDmPassClick}>
                 Save & Continue
@@ -889,7 +888,7 @@ function SteperDmpass(shows, ...props) {
                 </div>
               </Col>
               <Col md={6}>
-                <Button className="locationpass-btn" onClick={onLocationsClick}>
+                <Button style= {{"width": "100%", "marginLeft": "0px", "borderRadius": "0px"}} className="locationpass-btn" onClick={onLocationsClick}>
                   Save & Continue
                 </Button>
                 {/* <div className="mb-5">
@@ -1097,6 +1096,7 @@ function SteperDmpass(shows, ...props) {
                    </div>
                       <div>
                         <Button
+                          onClick={() => history.push("/")}
                           style={{
                             width: "186px",
                             textAlign: "center",
@@ -1196,6 +1196,7 @@ function SteperDmpass(shows, ...props) {
                    </div>
                     <div>
                       <Button
+                        onClick={() => history.push("/")}
                         style={{
                           width: "186px",
                           textAlign: "center",
