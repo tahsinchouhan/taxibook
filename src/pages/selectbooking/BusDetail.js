@@ -50,11 +50,14 @@ function BusPass() {
   const onSubmit = () => {
     // dispatch(setRouteId(selected))
     // dispatch(getTripByRouteId(selected))
-    dispatch(setRouteId(selected))
-    dispatch(setRouteData({ ...routes[routes.findIndex(x => x._id == selected)], startDate }))
-    history.push('/busmonsoon')
-    // console.log(startDate,"erty",selected,startDate)
-    // toast("Wow so easy!");
+    console.log("object bus:::::::", selected);
+    if (selected !== "") {
+      console.log("object bus:::::::", selected);
+      dispatch(setRouteId(selected))
+      dispatch(setRouteData({ ...routes[routes.findIndex(x => x._id == selected)], startDate }))
+      history.push('/busmonsoon')
+    }
+
   };
 
   return (
@@ -62,98 +65,102 @@ function BusPass() {
       <ToastContainer />
       <Header />
       <div className="d-none d-md-block" >
-      <Container className="d-none d-md-block">
-        <div style={{ textAlign: "center", margin: "50px" }}>
-          <div style={{ margin: "10px" }}>
-            <img src={bus} alt="bus" />
-            <h5 style={{ margin: "10px", color: "#FF4A68" }}>Bus</h5>
+        <Container className="d-none d-md-block">
+          <div style={{ textAlign: "center", margin: "50px" }}>
+            <div style={{ margin: "10px" }}>
+              <img src={bus} alt="bus" />
+              <h5 style={{ margin: "10px", color: "#FF4A68" }}>Bus</h5>
+            </div>
+            <span>
+              Find buses that will take you to <br />
+              your favourite destinations
+            </span>
           </div>
-          <span>
-            Find buses that will take you to <br />
-            your favourite destinations
-          </span>
-        </div>
-        <Container style={{ width: "70%" }}>
-          <Row className="row justify-content-center">
-            <Col xs={12} md={4} className="">
-              <Form.Group as={Col} controlId="formGridState">
-                <Form.Label
-                  className="formselect"
-                  style={{
-                    fontWeight: "bolder",
-                    marginLeft: "4px",
-                    fontSize: "12px",
-                    color: "black",
-                  }}
+          <Container style={{ width: "70%" }}>
+            <Row className="row justify-content-center">
+              <Col xs={12} md={4} className="">
+                <Form.Group as={Col} controlId="formGridState">
+                  <Form.Label
+                    className="formselect"
+                    style={{
+                      fontWeight: "bolder",
+                      marginLeft: "4px",
+                      fontSize: "12px",
+                      color: "black",
+                    }}
+
+                  >
+                    Select Route
+                  </Form.Label>
+                  <Form.Select
+                    className="location-userdatas"
+                    style={{ border: "none", fontSize: "12px" }}
+                    defaultValue="Choose..."
+                    value={selected}
+                    onChange={(e) => setSelected(e.target.value)}
+                    isInvalid={!selected}
+                    isValid={selected}
+                  // required
+                  >
+                    <option>Choose your preferred route</option>
+                    {routes.map((item) => (
+                      <option key={item._id} value={item._id}>
+                        {item.routename}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              </Col>
+              <Col xs={12} md={4} className="">
+                <Form.Group
+                  // className="location-userdatas"
+                  controlId="exampleForm.ControlInput1"
                 >
-                  Select Route
-                </Form.Label>
-                <Form.Select
-                  className="location-userdatas"
-                  style={{ border: "none", fontSize: "12px" }}
-                  defaultValue="Choose..."
-                  value={selected}
-                  onChange={(e) => setSelected(e.target.value)}
-                >
-                  <option>Choose your preferred route</option>
-                  {routes.map((item) => (
-                    <option key={item._id} value={item._id}>
-                      {item.routename}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-            </Col>
-            <Col xs={12} md={4} className="">
-              <Form.Group
-                // className="location-userdatas"
-                controlId="exampleForm.ControlInput1"
-              >
-                <Form.Label
-                  className="formselect"
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "bolder",
-                    marginLeft: "4px",
-                    color: "black",
-                  }}
-                >
-                  Journey Date
-                </Form.Label>
-                <div
-                  className="location-userdatas"
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    overflow: "hidden",
-                  }}
-                >
-                  <img
-                    className="location-userdatas-calendar"
-                    src={calendar}
-                    style={{ width: 25, height: 30 }}
-                  />
-                  <DatePicker
-                    selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    customInput={<ExampleCustomInput />}
-                    dateFormat="dd MMM"
-                  />
-                </div>
-              </Form.Group>
-            </Col>
-          </Row>
+                  <Form.Label
+                    className="formselect"
+                    style={{
+                      fontSize: "12px",
+                      fontWeight: "bolder",
+                      marginLeft: "4px",
+                      color: "black",
+                    }}
+                  >
+                    Journey Date
+                  </Form.Label>
+                  <div
+                    className="location-userdatas"
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <img
+                      className="location-userdatas-calendar"
+                      src={calendar}
+                      style={{ width: 25, height: 30 }}
+                    />
+                    <DatePicker
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                      customInput={<ExampleCustomInput />}
+                      dateFormat="dd MMM"
+                    />
+                  </div>
+                </Form.Group>
+              </Col>
+            </Row>
+          </Container>
+          <div className="location-btn">
+            <Button className="locationpass-btn" onClick={onSubmit}>
+              Continue
+            </Button>
+          </div>
         </Container>
-        <div className="location-btn">
-          <Button className="locationpass-btn" onClick={onSubmit}>
-            Continue
-          </Button>
+        <div className="mt-5">
+          <Footer />
         </div>
-      </Container>
-          <div className="mt-5">
-            <Footer />
-          </div>
-        </div>
+      </div>
 
       {/* Mobile View */}
 
@@ -189,7 +196,9 @@ function BusPass() {
                   defaultValue="Choose..."
                   value={selected}
                   onChange={(e) => setSelected(e.target.value)}
+
                 >
+                  Please choose a username.
                   <option>Choose your preferred route</option>
                   {routes.map((item) => (
                     <option key={item._id} value={item._id}>
@@ -197,6 +206,7 @@ function BusPass() {
                     </option>
                   ))}
                 </Form.Select>
+
               </Form.Group>
             </Col>
             <Col xs={12} md={4} className="">
@@ -239,7 +249,7 @@ function BusPass() {
         <Button className="locationpass-btn" onClick={onSubmit}>
           Continue
         </Button>
-        <div className="" style={{paddingBottom:"85px"}} >
+        <div className="" style={{ paddingBottom: "85px" }} >
           {/* <Footer /> */}
         </div>
       </div>
