@@ -128,6 +128,8 @@ function DmTicket2() {
             </Container>
           </div>
         </Container>
+
+        
 {/*mobile-view*/}
         <div  fluid className="d-md-none">
         <Container className="my-5" style={{ width: "" }}>

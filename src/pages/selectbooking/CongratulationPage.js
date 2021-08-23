@@ -42,7 +42,7 @@ function CongratulationPage() {
                      <Button  
                   className="btn btn-success"
                   style={{
-                    width: "200px",
+                    width: "186px",
                     textAlign: "center",
                     height: "52px",
                     borderRadius: "9px",
@@ -50,12 +50,12 @@ function CongratulationPage() {
                     fontWeight:"bold",
                     marginBottom:"20px"
                   }} 
-                     ><FaWhatsapp style={{fontWeight:"bold",marginLeft:"-23px",fontSize:"30px"}}/>
+                     ><FaWhatsapp style={{fontWeight:"bold",fontSize:"30px"}}/>
                       <span> Whatsapp Link</span></Button>
                      </div>
                  <div>
                  <Button style={{
-                    width: "208px",
+                    width: "186px",
                     textAlign: "center",
                     height: "52px",
                     borderRadius: "9px",
@@ -141,7 +141,7 @@ function CongratulationPage() {
                      <Button  
                   className="btn btn-success"
                   style={{
-                    width: "200px",
+                    width: "186px",
                     textAlign: "center",
                     height: "52px",
                     borderRadius: "9px",
@@ -149,12 +149,12 @@ function CongratulationPage() {
                     fontWeight:"bold",
                     marginBottom:"20px"
                   }} 
-                     ><FaWhatsapp style={{fontWeight:"bold",marginLeft:"-23px",fontSize:"30px"}}/>
+                     ><FaWhatsapp style={{fontWeight:"bold",fontSize:"30px"}}/>
                       <span> Whatsapp Link</span></Button>
                      </div>
                  <div>
                  <Button style={{
-                    width: "208px",
+                    width: "186px",
                     textAlign: "center",
                     height: "52px",
                     borderRadius: "9px",

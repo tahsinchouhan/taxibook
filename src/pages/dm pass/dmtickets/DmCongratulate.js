@@ -45,7 +45,7 @@ function DmCongratulate() {
                     <Button
                       className="btn btn-success"
                       style={{
-                        width: "200px",
+                        width: "186px",
                         textAlign: "center",
                         height: "52px",
                         borderRadius: "9px",
@@ -57,7 +57,6 @@ function DmCongratulate() {
                       <FaWhatsapp
                         style={{
                           fontWeight: "bold",
-                          marginLeft: "-23px",
                           fontSize: "30px",
                         }}
                       />
@@ -67,7 +66,7 @@ function DmCongratulate() {
                   <div>
                     <Button
                       style={{
-                        width: "208px",
+                        width: "186px",
                         textAlign: "center",
                         height: "52px",
                         borderRadius: "9px",
@@ -79,6 +78,19 @@ function DmCongratulate() {
                       Download E-ticket
                     </Button>
                   </div>
+
+                  <div>
+                   <Button style={{
+                    width: "186px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    backgroundColor: "",
+                    fontWeight:"bold",
+                    marginBottom:"20px"
+                  }} 
+                   >Sent by Email</Button>
+                   </div>
 
                   <div>
                     <Button
@@ -108,7 +120,7 @@ function DmCongratulate() {
         <div>
           <h5
             style={{
-              paddingTop: "15px",
+              paddingTop: "23px",
               fontSize: "18px",
               backgroundColor: "#0FA453",
               fontWeight: "bolder",
@@ -150,7 +162,7 @@ function DmCongratulate() {
                     <Button
                       className="btn btn-success"
                       style={{
-                        width: "200px",
+                        width: "186px",
                         textAlign: "center",
                         height: "52px",
                         borderRadius: "9px",
@@ -162,7 +174,6 @@ function DmCongratulate() {
                       <FaWhatsapp
                         style={{
                           fontWeight: "bold",
-                          marginLeft: "-23px",
                           fontSize: "30px",
                         }}
                       />
@@ -172,7 +183,7 @@ function DmCongratulate() {
                   <div>
                     <Button
                       style={{
-                        width: "208px",
+                        width: "186px",
                         textAlign: "center",
                         height: "52px",
                         borderRadius: "9px",
@@ -185,6 +196,19 @@ function DmCongratulate() {
                     </Button>
                   </div>
 
+                  <div>
+                   <Button style={{
+                    width: "186px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    backgroundColor: "",
+                    fontWeight:"bold",
+                    marginBottom:"20px"
+                  }} 
+                   >Sent by Email</Button>
+                   </div>
+                   
                   <div>
                     <Button
                       style={{
