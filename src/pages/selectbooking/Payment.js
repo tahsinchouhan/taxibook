@@ -9,8 +9,15 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createBusBooking, setApiData } from "../../redux/actions";
+import { Formik, Field } from "formik";
+import * as yup from "yup";
 
+const schema = yup.object().shape({
+  name: yup.string().required(),
+  email: yup.string().required(),
+  number: yup.string().required(),
 
+});
 
 async function loadScript(src) {
   return new Promise((resolve) => {
@@ -40,9 +47,9 @@ function Payment() {
   } = useSelector((state) => state.busReducer);
   const { age, gender, adhaar, basic_details, price, surcharge } = apiData;
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [number, setNumber] = useState('');
+  // const [name, setName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [number, setNumber] = useState('');
 
   useEffect(() => {
     console.log("wrds", price, surcharge);
@@ -60,7 +67,7 @@ function Payment() {
   }, []);
 
 
-  const displayRazorpaysss = async () => {
+  const displayRazorpaysss = async (values) => {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -69,7 +76,7 @@ function Payment() {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
-
+    console.log("data", data.amount);
     var options = {
       key: __DEV__ ? "rzp_test_DuapYrmQwcWLGy" : "PRODUCTION_KEY",
       currency: "INR",
@@ -92,19 +99,19 @@ function Payment() {
               to: tripData?.route?.end?._id,
               bus: tripData?.vehical,
               mobile,
-              name,
-              email,
-              whatsapp:number,
+              // name,
+              // email,
+              // whatsapp: number,
             })
           );
-          dispatch(setApiData({ ...apiData, order_id:response.razorpay_order_id }))
+          dispatch(setApiData({ ...apiData, order_id: response.razorpay_order_id }))
           history.push("/CongratulationPage")
         }
       },
       prefill: {
-        name: name,
-        email: email,
-        contact: number,
+        name: values.name,
+        email: values.email,
+        contact: values.number,
       },
     };
     const paymentOpject = new window.Razorpay(options);
@@ -117,84 +124,98 @@ function Payment() {
         <Header />
         <Container style={{ width: "75%", marginTop: "50px" }}>
           <div>
-            <Form style={{ marginLeft: "207px", marginBottom: "50px" }}>
-              <Row>
-                <Col xs={12} md={8}>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      style={{ backgroundColor: " #F8F8F8" }}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={12} md={8}>
+            <Formik
+              validationSchema={schema}
+              onSubmit={(values) => displayRazorpaysss(values)}
+              initialValues={{
+                name: '',
+                email: '',
+                number: '',
+              }}
+            >
+              {({
+                handleSubmit,
+                handleChange,
+                handleBlur,
+                values,
+                touched,
+                isValid,
+                errors,
+              }) => (
+                <Form noValidate onSubmit={handleSubmit} style={{ marginLeft: "207px", marginBottom: "50px" }}>
+                  <Row>
+                    <Col xs={12} md={8}>
+                      <Form.Group
+                        md="3"
+                        controlId="validationFormik101"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="name"
+                          placeholder="Enter name"
+                          value={values.name}
+                          onChange={handleChange}
+                          isInvalid={!!errors.name}
+                        />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.name}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={8}>
+                      <Form.Group
 
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter email"
-                      style={{ backgroundColor: " #F8F8F8" }}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12} md={8}>
+                        md="3"
+                        controlId="validationFormik102"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                          type="email"
+                          name="email"
+                          placeholder="Enter email"
+                          value={values.email}
+                          onChange={handleChange}
+                          isInvalid={!!errors.email}
+                        />
 
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Whatsapp Number</Form.Label>
-                    <Form.Control
-                      type="number"
-                      value={number}
-                      onChange={(e) => setNumber(e.target.value)}
-                      placeholder="Enter whatsapp number"
-                      style={{ backgroundColor: " #F8F8F8" }}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={12} md={4}></Col>
-              </Row>
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.email}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={8}>
+                      <Form.Group
 
-              {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group> */}
-            </Form>
+                        md="3"
+                        controlId="validationFormik103"
+                        className="position-relative mb-3"
+
+                      >
+                        <Form.Label>Whatsapp Number</Form.Label>
+                        <Form.Control
+                          type="number"
+                          placeholder="Enter whatsapp number"
+                          name="number"
+                          value={values.number}
+                          onChange={handleChange}
+                          isInvalid={!!errors.number}
+                        />
+
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.number}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Button type="submit" className="locationpass-btn mt-3 mb-5" style={{ margin: " 0% 22% 0%", width: "33%" }} >PAYMENT</Button>
+                </Form>
+              )}
+            </Formik>
           </div>
         </Container>
-        <div
-          classNmae="pay-div"
-          // style={{
-          //   textAlign: "center",
-          //   backgroundColor: "#0FA453",
-          //   color: "white",
-          //   height: "60px",
-          // }}
-          onClick={displayRazorpaysss}
-        >
-          {/* <span
-            variant="primary"
-            size="lg"
-            type="submit"
-            style={{
-              marginTop: "15px",
-              fontWeight: "600",
-              fontSize: "20px",
-            }}
-          >
-            PAYMENT
-          </span> */}
-
-        <Button className="locationpass-btn  mb-5">
-          PAYMENT
-        </Button>
-        </div>
         <Footer />
       </div>
 
@@ -204,88 +225,127 @@ function Payment() {
         <Header />
         <Container style={{ width: "80%", marginTop: "50px" }}>
           <div>
-            <Form style={{ marginBottom: "40px" }}>
-              <Row>
-                <Col xs={12} md={4}>
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Enter name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      style={{ backgroundColor: " #F8F8F8" }}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={12} md={4}>
+            <Formik
+              validationSchema={schema}
+              onSubmit={(values) => displayRazorpaysss(values)}
+              initialValues={{
+                name: '',
+                email: '',
+                number: '',
+              }}
+            >
+              {({
+                handleSubmit,
+                handleChange,
+                handleBlur,
+                values,
+                touched,
+                isValid,
+                errors,
+              }) => (
+                <Form noValidate onSubmit={handleSubmit} style={{ marginBottom: "40px" }}>
+                  <Row>
+                    <Col xs={12} md={8}>
+                      <Form.Group
+                        md="3"
+                        controlId="validationFormik101"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Name</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="name"
+                          placeholder="Enter name"
+                          value={values.name}
+                          onChange={handleChange}
+                          isInvalid={!!errors.name}
+                        />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.name}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={8}>
+                      <Form.Group
 
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter email"
-                      style={{ backgroundColor: " #F8F8F8" }}
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-              <Row>
-                <Col xs={12} md={4}>
+                        md="3"
+                        controlId="validationFormik102"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Email</Form.Label>
+                        <Form.Control
+                          type="email"
+                          name="email"
+                          placeholder="Enter email"
+                          value={values.email}
+                          onChange={handleChange}
+                          isInvalid={!!errors.email}
+                        />
 
-                  <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Whatsapp Number</Form.Label>
-                    <Form.Control
-                      type="number"
-                      value={number}
-                      onChange={(e) => setNumber(e.target.value)}
-                      placeholder="Enter whatsapp number"
-                      style={{ backgroundColor: " #F8F8F8" }}
-                    />
-                  </Form.Group>
-                </Col>
-                <Col xs={12} md={4}></Col>
-              </Row>
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.email}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={8}>
+                      <Form.Group
 
-              {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group> */}
-            </Form>
-          </div>
-        </Container>
-        <div
-          classNmae="pay-div"
-          // style={{
-          //   textAlign: "center",
-          
-          //   color: "white",
-          //   height: "60px",
-          //   widow:"100%"
-          // }}
-          onClick={displayRazorpaysss}
-        >
-          {/* <Button
-            variant="primary"
-            size="lg"
-            type="submit"
-            style={{
-              marginTop: "15px",
-              fontWeight: "600",
-              fontSize: "20px",
-              width:"100%",
-              backgroundColor: "#0FA453",
-            }}
-          >
+                        md="3"
+                        controlId="validationFormik103"
+                        className="position-relative mb-3"
+
+                      >
+                        <Form.Label>Whatsapp Number</Form.Label>
+                        <Form.Control
+                          type="number"
+                          placeholder="Enter whatsapp number"
+                          name="number"
+                          value={values.number}
+                          onChange={handleChange}
+                          isInvalid={!!errors.number}
+                        />
+
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.number}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <div className="pay-div"
+                  // style={{
+                  //   textAlign: "center",
+                  //   color: "white",
+                  //   height: "60px",
+                  //   widow:"100%"
+                  // }}
+                  // onClick={displayRazorpaysss}
+                  >
+                    <Button
+                      variant="primary"
+                      size="lg"
+                      type="submit"
+                      style={{
+                        marginTop: "15px",
+                        fontWeight: "600",
+                        fontSize: "20px",
+                        width: "100%",
+                        backgroundColor: "#0FA453",
+                      }}
+                    >
+                      PAYMENT
+                    </Button>
+
+                    {/* <Button className="locationpass-btn  mt-5">
             PAYMENT
           </Button> */}
+                  </div>
 
-        <Button className="locationpass-btn  mt-5">
-          PAYMENT
-        </Button>
-        </div>
-        {/* <Footer /> */}
+                </Form>
+              )}
+            </Formik>
+          </div>
+        </Container>
+
       </div>
 
 
