@@ -107,7 +107,7 @@ function Tickets1() {
         <Container className="">
           <div style={{ textAlign: "center", margin: "50px" }}>
             <div style={{ margin: "10px" }}>
-              <img src={doodle} alt="doodle" style={{ height: "100px" }} />
+              <img src={doodle} alt="doodle" style={{ height: "60px" }} />
               <h5 style={{ margin: "10px", color: "black", fontWeight: "700" }}>
                 Tickets
               </h5>
