@@ -12,8 +12,9 @@ import { getTripByRouteId, setRouteId, setTripData } from "../../redux/actions";
 
 function BusMonsoon() {
   const history = useHistory();
-  // const [trips, setTrips] = useState([]);
+  const [seats, setSeats] = useState([]);
   const { tripList: trips, route_id, routeData } = useSelector(state => state.busReducer)
+
 
   const dispatch = useDispatch()
 
@@ -24,6 +25,8 @@ function BusMonsoon() {
 
   useEffect(() => {
     console.log("ddd", routeData);
+    
+    // seatAvailable();
   }, [routeData]);
   // const getTrips = () => {
   //   fetch(API_PATH + `/api/v1/trips/list`)
@@ -47,6 +50,26 @@ function BusMonsoon() {
     // console.log("object");
     history.push("/busdetail");
   };
+
+ 
+  // const seatAvailable = () => {
+  //   fetch("http://15.206.92.158/api/v1/trips/list", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       console.log("on success", res.data);
+  //       //  setSeats(res[0].seat_avilable)
+  //     })
+  //     .catch((error) => {
+  //       console.log("on error", error);
+  //     });
+  // };
+
+
 
   return (
     <>
@@ -180,7 +203,7 @@ function BusMonsoon() {
                               <img src={bus1} alt="bus" style={{ height: "20px", paddingRight: "10px" }} />
                               <span style={{ fontWeight: "bolder", fontFamily: "sans-serif" }}>{item.trip_name}</span>
                             </div>
-                            <span className="train-sleeper">Bus 30 Seater</span>
+                            <span className="train-sleeper">Bus {routeData?.vehical?.number_of_seats} Seater</span>
                             <div>
                               <img src={city1} />
                               <span style={{ color: "grey", padding: "10px", fontFamily: "sans-serif" }}>
@@ -198,7 +221,7 @@ function BusMonsoon() {
                               <span style={{ fontWeight: "bolder", fontFamily: "sans-serif", padding: "5px" }}>₹ {item?.ticket_price}</span>
                             </div>
                             <div className="train-seats d-flex justify-content-center flex-column" style={{ lineHeight: "12px", }}>
-                              <span style={{ fontSize: "22px", lineHeight: "27px", fontWeight: "bolder", display: "block" }}>14</span>
+                              <span style={{ fontSize: "22px", lineHeight: "27px", fontWeight: "bolder", display: "block" }}> {trips[0]?.seat_avilable}</span>
                               <span style={{ fontSize: "12px" }}>seats available</span>
                             </div>
                           </div>
@@ -230,7 +253,7 @@ function BusMonsoon() {
                       fontWeight: "bolder",
                       color: "white",
                       textAlign: "center",
-                      height:'75px'
+                      height: '75px'
                     }}
                   >
                     {/* Tatibandh, Boarding
@@ -497,7 +520,7 @@ function BusMonsoon() {
                                 whiteSpace: "nowrap",
                               }}
                             >
-                              Bus 30 Seater
+                              Bus {routeData?.vehical?.number_of_seats} Seater
                             </span>
                           </div>
                         </Col>
@@ -537,7 +560,7 @@ function BusMonsoon() {
                                   <span
                                     style={{ fontSize: "22px", fontWeight: "bolder" }}
                                   >
-                                    14
+                                   {trips[0]?.seat_avilable}
                                   </span>
                                   <span
                                     style={{ fontSize: "12px" }}

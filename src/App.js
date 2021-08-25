@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route,} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom';
 import Home from './pages/Home';
 import Packages from './pages/Packages';
 import Destination from './pages/Destination';
@@ -49,44 +49,42 @@ function App() {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/explores' component={Explores} />
-            <Route path="/destination_details/:name" component={DestinationDetails}/>
-            <Route path="/packages_details/:name" component={PackagesDetails}/>
-            <Route path="/covidresponse" component={CovidResponse}/>
-            <Route path="/registrationguide" component={RegistrationGuide}/>
+            <Route path="/destination_details/:name" component={DestinationDetails} />
+            <Route path="/packages_details/:name" component={PackagesDetails} />
+            <Route path="/covidresponse" component={CovidResponse} />
+            <Route path="/registrationguide" component={RegistrationGuide} />
             <Route exact path='/booking' component={BusPass} />
             <Route exact path='/populardestinations' component={Destination} />
             <Route exact path='/curatedexperiences' component={Packages} />
             <Route exact path='/select-booking' component={SelectBooking} />
-
             <Route exact path='/traveller_card' component={TravellerCard} />
-           <Route exact path='/traveller_ticket'component={ TravellerTicket}/>
+            <Route exact path='/traveller_ticket' component={TravellerTicket} />
             <Route exact path='/dmpass' component={DmTicket2} />
-            <Route exact path='/dmticket'component={DmPass}/>
-
+            <Route exact path='/dmticket' component={DmPass} />
             <Route exact path='/pass' component={Pass} />
             <Route exact path='/buspass' component={BusPass} />
             <Route exact path='/buspass' component={BusDetail} />
-            <Route exact path='/search' component={Search}/>
-            <Route exact path='/locations' component={Locations}/>
-            <Route exact path='/busdetail' component={BusDetail}/>
-            <Route exact path='/busmonsoon' component={BusMonsoon}/>
-            <Route exact path='/boarding' component={Boarding}/>
-            <Route exact path='/busdropoff' component={BusDropoff}/>
-            <Route exact path='/busconfirmation' component={BusConfirmation}/>
-            <Route exact path='/ buscard' component={BusCard}/>
-            <Route exact path='/checkoutpage' component={CheckoutPage}/>
-            <Route exact path='/CongratulationPage' component={CongratulationPage}/>
-            <Route exact path='/add-form' component={AddForm}/>
-            <Route exact path='/CongratulationPage'component={CongratulationPage}/>
-            <Route exact path='/ratancard'component={RatanCard}/>
-            <Route exact path='/travelticket'component={TravelTicket}/>
-            <Route exact path='/dm-detail/:id'component={DmDetail}/>
-            <Route exact path='/dm_congratulate'component={DmCongratulate}/>
-            <Route exact path='/tickets_sraech'component={TicketsSraech}/>
-            <Route exact path='/tickets'component={Tickets1}/>
-            <Route exact path='/steper_dmpass'component={SteperDmpass}/>
-            <Route exact path='/ ticket_checkout'component={ TicketCheckOut}/>
-            <Route exact path='/payment'component={Payment}/>
+            <Route exact path='/search' component={Search} />
+            <Route exact path='/locations' component={Locations} />
+            <Route exact path='/busdetail' component={BusDetail} />
+            <Route exact path='/busmonsoon' component={BusMonsoon} />
+            <Route exact path='/boarding' component={Boarding} />
+            <Route exact path='/busdropoff' component={BusDropoff} />
+            <Route exact path='/busconfirmation' component={BusConfirmation} />
+            <Route exact path='/ buscard' component={BusCard} />
+            <Route exact path='/checkoutpage' component={CheckoutPage} />
+            <Route exact path='/CongratulationPage' component={CongratulationPage} />
+            <Route exact path='/add-form' component={AddForm} />
+            <Route exact path='/CongratulationPage' component={CongratulationPage} />
+            <Route exact path='/ratancard' component={RatanCard} />
+            <Route exact path='/travelticket' component={TravelTicket} />
+            <Route exact path='/dm-detail/:id' component={DmDetail} />
+            <Route exact path='/dm_congratulate' component={DmCongratulate} />
+            <Route exact path='/tickets_sraech' component={TicketsSraech} />
+            <Route exact path='/tickets' component={Tickets1} />
+            <Route exact path='/steper_dmpass' component={SteperDmpass} />
+            <Route exact path='/ ticket_checkout' component={TicketCheckOut} />
+            <Route exact path='/payment' component={Payment} />
 
 
 

@@ -64,7 +64,7 @@ function BusDetail() {
             your favourite destinations
           </span>
         </div>
-        <Container style={{ width: "70%" }}>
+        <Container style={{ width: "70%" }}>          
           <Row className="row justify-content-center">
             <Col xs={12} md={4} className="">
               <Form.Group as={Col} controlId="formGridState">

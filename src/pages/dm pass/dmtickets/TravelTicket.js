@@ -141,13 +141,12 @@ function TravelTicket() {
                       paddingTop: "50px",
                     }}
                   >
-                    DM Pass
+                    Traveller Pass
                   </span>
                   <br />
                   <span
                     style={{
                       fontWeight: "bolder",
-                      fontSize: "12px",
                       padding: "10px",
                     }}
                   >
@@ -605,13 +604,12 @@ function TravelTicket() {
                       paddingTop: "50px",
                     }}
                   >
-                    DM Pass
+                    Traveller Pass
                   </span>
                   <br />
                   <span
                     style={{
                       fontWeight: "bolder",
-                      fontSize: "12px",
                       padding: "10px",
                     }}
                   >

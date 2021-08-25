@@ -78,8 +78,8 @@ function Search() {
             </div>
           </div>
         </div>
-        <div className="row  mb-5">
-          <div className="col-md-3">
+        <div className="mb-5">
+          <div className="col-sm-3">
             <div
               style={{
                 backgroundColor: "#864BD8",
@@ -94,7 +94,7 @@ function Search() {
               Destinations
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-sm-3">
             <div
               style={{
                 backgroundColor: "#0FA453",
@@ -108,7 +108,7 @@ function Search() {
               Packages
             </div>
           </div>
-          <div className="col-md-3">
+          <div className="col-sm-3">
             {" "}
             <div
               style={{
@@ -120,11 +120,11 @@ function Search() {
                 paddingTop: "10px",
               }}
             >
-              DM Pass
+              Traveller Pass
             </div>
           </div>
 
-          <div className="col-md-3">
+          <div className="col-sm-3">
             <div
               style={{
                 backgroundColor: "#FF814A",

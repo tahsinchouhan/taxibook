@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Dropdown, Button, Modal, Card } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { FaArrowLeft } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
-
 import { makeStyles } from "@material-ui/core/styles";
-import Popper from "@material-ui/core/Popper";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-// import Button from '@material-ui/core/Button';
-import Fade from "@material-ui/core/Fade";
 import Paper from "@material-ui/core/Paper";
 import ButtonComponent from "../../containers/Button";
 import { useDispatch, useSelector } from "react-redux";
@@ -303,12 +298,16 @@ function BusConfirmation() {
           </Row>
 
           <div className="">
-            <div className="traveller_div">
+            <div className="traveller_div" >
               {
                 travellers?.map((item, i) => (
-                  <Paper key={i} className="traveller__card">
+                  <Paper key={i} className="traveller__card" >
                     <div className="traveller__card_body" className="py-0">
-                      <h5 className="traveller__card_title" style={{fontSize:"12px"}}>Travellers {i + 1}</h5>
+                      <div className="d-flex">
+                        <h5 className="traveller__card_title" style={{ fontSize: "12px" }}>Travellers {i + 1}</h5>
+                        {/* <div>&times;</div> */}
+                      </div>
+
                       <p className="traveller__card_text">
                         <div className="form-group mt-0">
                           <label className="mb-1" for={`name${i}`}>Name</label>
@@ -318,7 +317,9 @@ function BusConfirmation() {
                             id={`name${i}`}
                             placeholder="Enter traveller name"
                             style={{ fontSize: "11px", marginLeft: "-5px" }}
-                            name="name" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].name}
+                            name="name"
+                            onChange={(e) => handleTraveller(e.target.value, e.target.name, i)}
+                            value={travellers[i].name}
                           />
                         </div>
 
@@ -362,16 +363,21 @@ function BusConfirmation() {
 
                         <div className="form-group mt-1 pt-2">
                           <label className="mb-1" for={`aadhaar${i}`}>
-                            Adhaar Card Number{" "}
+                            Adhaar Card Number
                           </label>
                           <input
-                            type="text"
+                            type="number"
                             className="form-control pass_input"
                             id={`adhaar${i}`}
                             placeholder=" Enter 12 digit Adhaar Card Number"
                             style={{ fontSize: "11px", marginLeft: "-5px" }}
                             // name="adhaar" onChange={handleChange} value={adhaar}
-                            name="adhaar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].adhaar}
+                            name="adhaar"
+                            onChange={(e) => handleTraveller(e.target.value, e.target.name, i)}
+                            value={travellers[i].adhaar}
+                            // min={12}
+                            // max={12}
+                            required
                           />
                         </div>
                       </p>
@@ -381,8 +387,9 @@ function BusConfirmation() {
               }
             </div>
 
-            {/* <div style={{ textAlign: "center", margin: "55px" }}>
+            <div style={{ textAlign: "center", margin: "55px" }}>
               <Button
+                type="submit"
                 style={{
                   backgroundColor: "#0FA453",
                   color: "white",
@@ -400,7 +407,7 @@ function BusConfirmation() {
               >
                 Add Traveller
               </Button>
-            </div> */}
+            </div>
 
             {/* <Popper
               open={open}
@@ -408,7 +415,7 @@ function BusConfirmation() {
               placement={placement}
               transition
             > */}
-            {/* <Modal
+            <Modal
               show={show}
               onHide={handleClose}
               backdrop="static"
@@ -473,12 +480,15 @@ function BusConfirmation() {
                           Adhaar Card Number{" "}
                         </label>
                         <input
-                          type="text"
+                          type="number"
                           className="form-control pass_input"
                           id="inputAddress"
                           placeholder=" Enter 12 digit Adhaar Card Number"
                           style={{ fontSize: "11px", marginLeft: "-5px" }}
                           name="adhaar" onChange={handleChange} value={adhaar}
+                          // min={12}
+                          // max={12}
+                          required
                         />
                       </div>
                     </div>
@@ -491,7 +501,7 @@ function BusConfirmation() {
                 </Button>
                 <Button variant="primary" onClick={handleOk}>Add</Button>
               </Modal.Footer>
-            </Modal> */}
+            </Modal>
 
             {/* {
               (basic_details?.length > 0) ?
@@ -659,7 +669,7 @@ function BusConfirmation() {
                 >
                   Boarding from
                 </span>
-                
+
               </div>
               <div className=" select-train mt-2 d-flex">
                 <Form className="d-flex">
@@ -701,7 +711,7 @@ function BusConfirmation() {
                       fontFamily: "sans-serif",
                     }}
                   >
-                    
+
 
                     {tripData?.route?.start?.name}
                   </span>
@@ -718,7 +728,7 @@ function BusConfirmation() {
                 >
                   Dropoff At
                 </span>
-               
+
               </div>
               <div className=" select-train mt-2 d-flex">
                 <Form className="d-flex">
@@ -760,7 +770,7 @@ function BusConfirmation() {
                       fontFamily: "sans-serif",
                     }}
                   >
-                    
+
                     {tripData?.route?.end?.name}
                   </span>
                 </div>
@@ -911,9 +921,9 @@ function BusConfirmation() {
         <div className="traveller_div" >
           {
             travellers?.map((item, i) => (
-              <Paper key={i} className="traveller__card" style={{marginBottom:"15px"}}>
+              <Paper key={i} className="traveller__card" style={{ marginBottom: "15px" }}>
                 <div className="traveller__card_body" className="py-0">
-                  <h5 className="traveller__card_title" style={{fontSize:"12px",marginBottom:"15px"}}>Travellers {i + 1}</h5>
+                  <h5 className="traveller__card_title" style={{ fontSize: "12px", marginBottom: "15px" }}>Travellers {i + 1}</h5>
                   <p className="traveller__card_text">
                     <div className="form-group mt-0">
                       <label className="mb-1" for={`name${i}`}>Name</label>
@@ -922,7 +932,7 @@ function BusConfirmation() {
                         className="form-control pass_input"
                         id={`name${i}`}
                         placeholder="Enter passenger name"
-                        style={{ fontSize: "11px", marginLeft: "-5px",marginTop:"7px" }}
+                        style={{ fontSize: "11px", marginLeft: "-5px", marginTop: "7px" }}
                         name="name" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].name}
                       />
                     </div>
@@ -936,13 +946,13 @@ function BusConfirmation() {
                               width: "50%",
                               fontSize: "11px",
                               whiteSpace: "nowrap",
-                              marginTop:"7px"
+                              marginTop: "7px"
                             }}
                             data={button_Data}
                             // activeButton={activeButton}
                             // trigerOnClickEmpSideBtn={onSideBtnClick}
                             trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender}
-                            />
+                          />
                         </div>
                       </div>
                       <div className="form-group col m-2 w-50">
@@ -958,7 +968,7 @@ function BusConfirmation() {
                             fontSize: "12px",
                             whiteSpace: "nowrap",
                             height: "33px",
-                            marginTop:"7px"
+                            marginTop: "7px"
                           }}
                           // name="age" onChange={handleChange} value={age}
                           name="age" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].age}
@@ -971,13 +981,18 @@ function BusConfirmation() {
                         Adhaar Card Number{" "}
                       </label>
                       <input
-                        type="text"
+                        type="number"
                         className="form-control pass_input"
                         id={`adhaar${i}`}
                         placeholder=" Enter 12 digit Adhaar Card Number"
-                        style={{ fontSize: "11px", marginLeft: "-5px",marginTop:"7px" }}
+                        style={{ fontSize: "11px", marginLeft: "-5px", marginTop: "7px" }}
                         // name="adhaar" onChange={handleChange} value={adhaar}
-                        name="adhaar" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].adhaar}
+                        name="adhaar"
+                        onChange={(e) => handleTraveller(e.target.value, e.target.name, i)}
+                        value={travellers[i].adhaar}
+                        //  min={12}
+                        //  max={12}
+                        required
                       />
                     </div>
                   </p>
@@ -1011,7 +1026,7 @@ function BusConfirmation() {
         </div> */}
 
         <div>
-          <div style={{display:"flex", marginTop:"50px", flexDirection: 'row',width:"50%" }}>
+          <div style={{ display: "flex", marginTop: "50px", flexDirection: 'row', width: "50%" }}>
             <Col xs={12} md={6} style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px", }}>
               <div style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px" }}>
 
