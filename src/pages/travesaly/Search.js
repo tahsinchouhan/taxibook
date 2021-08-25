@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
-import { Container, Col, Form, Row, Image } from "react-bootstrap";
+import { Container, Col, Form, Row, Image, Button } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 import { API_PATH } from "../../Path/Path";
+// import { Button } from "bootstrap";
 
 function Search() {
   const [destinations, setDestinations] = useState([]);
@@ -78,7 +79,7 @@ function Search() {
             </div>
           </div>
         </div>
-        <div className="mb-5">
+        {/* <div className="mb-5">
           <div className="col-sm-3">
             <div
               style={{
@@ -109,7 +110,7 @@ function Search() {
             </div>
           </div>
           <div className="col-sm-3">
-            {" "}
+          
             <div
               style={{
                 backgroundColor: "#FF4A68",
@@ -138,8 +139,84 @@ function Search() {
               Tickets
             </div>
           </div>
-        </div>
+        </div> */}
 
+        <Container>
+          <div className="col md-6 offset-sm-1">
+            <Row>
+              <Col xs={3} md={3} className="search_cel">
+                <Button
+                  className="destina_search"
+                  style={{ backgroundColor: "#864BD8" }}
+                >
+                  Destinations
+                </Button>
+              </Col>
+              <Col xs={3} md={3} className="search_cel">
+                <Button
+                  className="destina_search"
+                  style={{ backgroundColor: "#0FA453" }}
+                >
+                  Packages
+                </Button>
+              </Col>
+              <Col xs={3} md={3} className="search_cel">
+                <Button
+                  className="destina_search"
+                  style={{ backgroundColor: "#FF4A68", whiteSpace: "nowrap" }}
+                >
+                  Traveller Pass
+                </Button>
+              </Col>
+              <Col xs={3} md={3} className="search_cel">
+                <Button
+                  className="destina_search"
+                  style={{ backgroundColor: "#FF814A" }}
+                >
+                  Tickets
+                </Button>
+              </Col>
+            </Row>
+          </div>
+        </Container>
+        <Container>
+         <div  className="search_video mt-5">
+         <Row>
+            <Col sm={12} md={6} className="">
+              <div>
+                <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/s_W9hNCaZak"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </Col>
+            <Col sm={12} md={6}>
+              <div>
+                <iframe
+                  width="560"
+                  height="315"
+                  src="https://www.youtube.com/embed/7_PdY3bPfmM?start=2"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            </Col>            
+          </Row>
+          <p className="pt-2"><b>Check out the Kanger Valley showcase</b></p>
+         </div>          
+        </Container>
+        <Container>
+          <Row>
+           s
+          </Row>
+        </Container>
         <>
           {search ? (
             <div>
