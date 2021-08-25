@@ -33,7 +33,7 @@ function DmTicket2() {
                 <div className="booking-div">
                   <div style={{ marginBottom: "15px" }}>
                     {/* <img src={ticket} alt="" style={{ height: "100px"}}/> */}
-                    <img src={doodle} alt="doodle" style={{ height: "100px" }} />
+                    <img src={doodle} alt="doodle" style={{ height: "60px" }} />
                   </div>
                   {/* <span
                     style={{
@@ -144,7 +144,7 @@ function DmTicket2() {
               <div className="col-xs-12  col-sm-12 col-md-12">
                 <div className="booking-div">
                   <div style={{ marginBottom: "15px" }}>
-                    <img src={doodle} alt="doodle" style={{ height: "100px" }} />
+                    <img src={doodle} alt="doodle" style={{ height: "60px" }} />
                   </div>
                   {/* <span
                     style={{
