@@ -365,7 +365,7 @@ function SteperDmpass(shows, ...props) {
       <Container>
         <Stepper
           steps={[
-            { label: <b style={{ whiteSpace: "nowrap" }}>DM Pass</b> },
+            { label: <b style={{ whiteSpace: "nowrap" }}>Traveller Pass</b> },
             { label: <b>Locations</b> },
             { label: <b>Confirm</b> },
             { label: <b>Checkout</b> },
@@ -466,7 +466,7 @@ function SteperDmpass(shows, ...props) {
                         {vehicles?.map((item, i) => (
                           <Paper
                             key={i}
-                            className="traveller__card py-3 px-4 flex-grow-1"
+                            className="traveller__card py-5 px-4 flex-grow-1"
                           >
                             <div
                               className="traveller__card_body"
@@ -479,7 +479,7 @@ function SteperDmpass(shows, ...props) {
                                 Vehicle {i + 1}
                               </h5>
                               <p className="traveller__card_text">
-                                <div className="form-group pt-3">
+                                <div className="form-group pt-4">
                                   <label
                                     className="mb-1"
                                     for={`vehicle_number${i}`}
@@ -506,7 +506,7 @@ function SteperDmpass(shows, ...props) {
                                     value={vehicles[i].registration_number}
                                   />
                                 </div>
-                                <div className="form-group pt-3">
+                                <div className="form-group pt-4">
                                   <label className="mb-1" for={`name${i}`}>
                                     Driver Name
                                   </label>
@@ -566,7 +566,7 @@ function SteperDmpass(shows, ...props) {
                                     </div>
                                   </div> */}
 
-                                <div className="form-group mt-1 pt-3">
+                                <div className="form-group mt-1 pt-4">
                                   <label className="mb-1" for={`aadhaar${i}`}>
                                     Driver License Number
                                   </label>
@@ -813,10 +813,33 @@ function SteperDmpass(shows, ...props) {
               </Button>
             </div>
           </div>
+          <div className="d-none d-md-block">
+            <Footer />
+          </div>
         </div>
       ) : show == 1 ? (
         <div>
           <Container className="dmpass-form mt-2">
+            <Row className="dmpassData d-none d-md-block" style={{"backgroundColor": "#FF814A"}}>
+              <h6
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                  paddingTop: "10px"
+                }}
+              >
+                Tickets
+              </h6>
+              <h6
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                  paddingBottom: "10px"
+                }}
+              >
+                30th July 2021
+              </h6>
+              </Row>
             <Row className="dmpassData">
               <h3
                 style={{
@@ -944,11 +967,34 @@ function SteperDmpass(shows, ...props) {
               </Col>
             </div>
           </div>
+          <div className="d-none d-md-block">
+            <Footer />
+          </div>
         </div>
       ) : show == 2 ? (
         <>
           <div>
-            <Container>
+            <Container className="dmpass-form mt-2">
+            <Row className="dmpassData d-none d-md-block" style={{"backgroundColor": "#FF814A"}}>
+              <h6
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                  paddingTop: "10px"
+                }}
+              >
+                Tickets
+              </h6>
+              <h6
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                  paddingBottom: "10px"
+                }}
+              >
+                30th July 2021
+              </h6>
+              </Row>
               <h3 style={{ textAlign: "center" }}>Confirm your Details</h3>
               <div className="confirm-main">
                 <div
@@ -957,18 +1003,19 @@ function SteperDmpass(shows, ...props) {
                     textAlign: "center",
                     backgroundColor: "#F8F8F8",
                     marginBottom: "10px",
+                    padding: "20px"
                   }}
                 >
                   {locServ.length > 0
                     ? locServ?.map((item, key) => (
                         <>
                           <Row className="mb-1">
-                            <Col xs={6} md={6}>
+                            <Col xs={6} md={6} style={{textAlign:"left"}} >
                               <span className="confirm-title">
                                 {item?.location_name}
                               </span>
                             </Col>
-                            <Col xs={6} md={6}>
+                            <Col style={{textAlign:"right"}} xs={6} md={6}>
                               <span
                                 style={{
                                   color: "#FF4A68",
@@ -985,13 +1032,13 @@ function SteperDmpass(shows, ...props) {
                               {item?.services?.length > 0
                                 ? item?.services?.map((service, j) => (
                                     <Row>
-                                      <Col xs={6} md={6}>
+                                      <Col xs={6} md={6} style={{textAlign:"left"}}>
                                         <span className="confirm_part">
                                           {service?.service_name} x{" "}
                                           {service?.unit}
                                         </span>
                                       </Col>
-                                      <Col xs={6} md={6}>
+                                      <Col xs={6} md={6} style={{textAlign:"right"}}>
                                         <span className="confirm_part">
                                           {service?.total_charges}{" "}
                                         </span>
@@ -1008,10 +1055,13 @@ function SteperDmpass(shows, ...props) {
               </div>
             </Container>
           </div>
-          <div>
+          <div style={{"paddingTop": "50px","paddingBottom": "50px"}}>
             <Button className="locationpass-btn" onClick={onTicketCheckClick}>
               Save & Continue
             </Button>
+          </div>
+          <div className="d-none d-md-block">
+            <Footer />
           </div>
         </>
       ) : (
@@ -1020,7 +1070,7 @@ function SteperDmpass(shows, ...props) {
             <Container style={{ width: "70%", paddingTop: "20px" }}>
               <Row>
                 <Col>
-                  <div style={{ marginTop: "-50px" }}>
+                  <div style={{ marginTop: "15px" }}>
                     <img src={congo} alt="" style={{ height: "500px" }} />
                   </div>
                 </Col>
@@ -1115,7 +1165,7 @@ function SteperDmpass(shows, ...props) {
                 </Col>
               </Row>
             </Container>
-            {/* <Footer /> */}
+            <Footer />
           </div>
 
           <div className="d-md-none">
@@ -1131,7 +1181,7 @@ function SteperDmpass(shows, ...props) {
                 <Col xs={12} md={6}>
                   <div style={{ marginTop: "" }}>
                     <img
-                      src={mobile}
+                      src={congo}
                       alt=""
                       style={{ width: "100%", height: "" }}
                     />
@@ -1215,6 +1265,7 @@ function SteperDmpass(shows, ...props) {
               </div>
             </Container>
           </div>
+          
         </>
       )}
     </>
