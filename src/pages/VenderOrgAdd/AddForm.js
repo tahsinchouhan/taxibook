@@ -17,81 +17,86 @@ const schema = yup.object().shape({
   vendor_category: yup.string().required(),
   email: yup.string().required(),
   id_proof: yup.string().required(),
+  acc_number: yup.string().required(),
+});
+
+const schemaTwo = yup.object().shape({
+  serial_number: yup.string().required(),
+  org_name: yup.string().required(),
+  address: yup.string().required(),
+  name: yup.string().required(),
+  org_email: yup.string().required(),
+  phone: yup.string().required(),
+  acc_name: yup.string().required(),
+  acc_number: yup.string().required(),
+  ifsc_code: yup.string().required(),
+  acc_type: yup.string().required(),
+  upi_id: yup.string().required(),
+  pan_number: yup.string().required(),
+  adhaar_number: yup.string().required()
 
 });
 
 function AddForm() {
   const history = useHistory();
   const [show, setShow] = useState(0);
- 
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
 
   const onsubmitVendor = (values) => {
-      
-      fetch(API_PATH + "/api/v1/vendor/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          console.log("Vendor Register successFully", res);
-          if (res.status === "CREATED") {
-            setShow(1);
-          } else {
-            console.log("Error:::::::");
-          }
-        })
 
-        .catch((error) => {
-          console.log("error", error);
-        });
-     
+    fetch(API_PATH + "/api/v1/vendor/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("Vendor Register successFully", res);
+        if (res.status === "CREATED") {
+          setShow(1);
+        } else {
+          console.log("Error:::::::");
+        }
+      })
+
+      .catch((error) => {
+        console.log("error", error);
+      });
+
   };
 
   const backToVender = () => {
     setShow(0);
   };
 
-  // const onSubmitOrg = () => {
-  //   const orgDetails = {
-  //     nameoforganization: orgName,
-  //     address: address,
-  //     name: name,
-  //     email: oEmail,
-  //     mobile: phone,
-  //     account_type: accType,
-  //     account_number: accNo,
-  //     upi_id: upiId,
-  //     adhaar_number: adhaarNo,
-  //     pan_number: panNo,
-  //   };
+  const onSubmitOrg = (values) => {  
 
-  //   fetch(API_PATH + "/api/v1/organization/create", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ orgDetails }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       console.log("org Register successFully", res);
-  //       if (res.status === "CREATED") {
-  //         history.push("/CongratulationPage");
-  //       } else {
-  //         console.log("Error:::::::");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log("error", error);
-  //     });
-  // };
+    fetch(API_PATH + "/api/v1/organization/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log("org Register successFully", res);
+        if (res.status === "CREATED") {
+          history.push("/CongratulationPage");
+        } else {
+          console.log("Error:::::::");
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
 
   return (
     <>
@@ -104,7 +109,7 @@ function AddForm() {
         {show == 0 ? (
           <Formik
             validationSchema={schema}
-            onSubmit={(values)=>onsubmitVendor(values)}
+            onSubmit={(values) => onsubmitVendor(values)}
             initialValues={{
               sNo: '',
               vName: '',
@@ -263,222 +268,328 @@ function AddForm() {
             )}
           </Formik>
         ) : (
-          <h1>dnjd</h1>
-          // <AvForm onSubmit={onSubmitOrg}>
-          //   <AvField
-          //     name="serialNo"
-          //     label="Serial Number:"
-          //     type="number"
-          //     className=""
-          //     errorMessage="Invalid Serial Number"
-          //     value={serialNo}
-          //     onChange={(e) => setSerialNo(e.target.value)}
-          //     validate={{
-          //       required: {
-          //         value: true,
-          //         errorMessage: "Please enter your Serial Number",
-          //       },
-          //     }}
-          //   />
+          <>
+           
+            <Formik
+              validationSchema={schemaTwo}
+              onSubmit={(values) =>onSubmitOrg(values)}
+              initialValues={{
+                serial_number: '',
+                org_name: '',
+                acc_name: '',
+                address: '',
+                name: '',
+                org_email: '',
+                phone: '',
+                acc_name: '',
+                acc_number: '',
+                ifsc_code: '',
+                acc_type: '',
+                upi_id: '',
+                pan_number: '',
+                adhaar_number: '',
 
-          //   <AvField
-          //     name="org"
-          //     label="Name of organization"
-          //     type="text"
-          //     errorMessage="Enter organization Name"
-          //     placeholder="Name of organization"
-          //     value={orgName}
-          //     onChange={(e) => setOrgName(e.target.value)}
-          //     validate={{
-          //       required: {
-          //         defaultValue: true,
-          //         errorMessage: "Please enter organization Name",
-          //       },
-          //     }}
-          //   />
+              }}
+            >
+              {({
+                handleSubmit,
+                handleChange,
+                handleBlur,
+                values,
+                touched,
+                isValid,
+                errors,
+              }) => (
+                <Form noValidate onSubmit={handleSubmit}>
+                  <Row>
+                    < Col xs={12} md={12}>
+                      <Form.Group
+                        md="4"
+                        controlId="validationFormik101"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Serial Number:</Form.Label>
+                        <Form.Control
+                          type="text"
+                          name="number"
+                          value={values.serial_number}
+                          onChange={handleChange}
+                          isInvalid={!!errors.serial_number}
+                        />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.serial_number}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                    < Col xs={12} md={12}>
+                      <Form.Group
+                        md="4"
+                        controlId="validationFormik102"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Name of organization:</Form.Label>
+                        <Form.Control
+                          type="name"
+                          name="org_name"
+                          placeholder="Name of organization"
+                          value={values.org_name}
+                          onChange={handleChange}
+                          isInvalid={!!errors.org_name}
+                        />
 
-          //   <AvField
-          //     name="address"
-          //     label="Address"
-          //     type="text"
-          //     errorMessage="Enter Your Address"
-          //     placeholder="Address"
-          //     value={address}
-          //     onChange={(e) => setAddress(e.target.value)}
-          //     validate={{
-          //       required: {
-          //         defaultValue: true,
-          //         errorMessage: "Please enter Address",
-          //       },
-          //     }}
-          //   />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.org_name}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
 
-          //   <AvField
-          //     name="name"
-          //     label="Name"
-          //     type="text"
-          //     errorMessage="Enter Your Name"
-          //     placeholder="Name"
-          //     value={name}
-          //     onChange={(e) => setName(e.target.value)}
-          //     validate={{
-          //       required: {
-          //         defaultValue: true,
-          //         errorMessage: "Please enter Name",
-          //       },
-          //     }}
-          //   />
 
-          //   <AvField
-          //     name="oEmail"
-          //     label=" Vendor Email Id:"
-          //     type="email"
-          //     errorMessage="Invalid mail Id"
-          //     // className="custom-inputField"
-          //     placeholder="Enter Email Address"
-          //     value={oEmail}
-          //     onChange={(e) => setOEmail(e.target.value)}
-          //     title="Email"
-          //     validate={{
-          //       required: {
-          //         value: true,
-          //         errorMessage: "Please enter your Email Address",
-          //       },
-          //     }}
-          //   />
+                    < Col xs={12} md={12}>
+                      <Form.Group
+                        md="6"
+                        controlId="validationFormik103"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Address:</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Address"
+                          name="address"
+                          value={values.address}
+                          onChange={handleChange}
+                          isInvalid={!!errors.address}
+                        />
 
-          //   <AvField
-          //     name="phone"
-          //     label="Phone"
-          //     type="number"
-          //     errorMessage="Please a valid Phone number"
-          //     //className="custom-inputField"
-          //     placeholder="Enter Phone Number"
-          //     value={phone}
-          //     onChange={(e) => setPhone(e.target.value)}
-          //     validate={{
-          //       required: {
-          //         value: true,
-          //         errorMessage: "Please enter 10 digit Mobile number",
-          //       },
-          //     }}
-          //   />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.address}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                    < Col xs={12} md={12}>
+                      <Form.Group
 
-          //   <AvField
-          //     name="AccName"
-          //     label="Name on Account Number"
-          //     type="text"
-          //     errorMessage="Enter The Name on Account Number"
-          //     placeholder="Name on Account Number"
-          //     value={accName}
-          //     onChange={(e) => setAccName(e.target.value)}
-          //     validate={{
-          //       required: {
-          //         defaultValue: true,
-          //         errorMessage: "Please enter Name on Account Number",
-          //       },
-          //     }}
-          //   />
+                        md="3"
+                        controlId="validationFormik104"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Name:</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Name"
+                          name="name"
+                          value={values.name}
+                          onChange={handleChange}
+                          isInvalid={!!errors.name}
+                        />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.name}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                    < Col xs={12} md={12}>
+                      <Form.Group
 
-          //   <AvField
-          //     name="AccNo"
-          //     label="Account Number"
-          //     type="number"
-          //     className=""
-          //     errorMessage="Invalid Account Number"
-          //     value={accNo}
-          //     onChange={(e) => setAccNo(e.target.value)}
-          //     validate={{
-          //       required: {
-          //         value: true,
-          //         errorMessage: "Please enter Account Number",
-          //       },
-          //     }}
-          //   />
+                        md="3"
+                        controlId="validationFormik105"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Org Email Id:</Form.Label>
+                        <Form.Control
+                          type="email"
+                          placeholder="Enter Email Address"
+                          name="org_email"
+                          value={values.org_email}
+                          onChange={handleChange}
+                          isInvalid={!!errors.org_email}
+                        />
 
-          //   <AvField
-          //     name="ifsc"
-          //     label="IFSC Code"
-          //     type="number"
-          //     className=""
-          //     errorMessage="Enter Valid IFSC Code"
-          //     value={ifscNo}
-          //     onChange={(e) => setIfscNo(e.target.value)}
-          //     validate={{
-          //       required: {
-          //         value: true,
-          //         errorMessage: "Please enter IFSC Code",
-          //       },
-          //     }}
-          //   />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.org_email}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                    < Col xs={12} md={12}>
+                      <Form.Group
+                        md="3"
+                        controlId="validationFormik105"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Phone</Form.Label>
+                        <Form.Control
+                          type="number"
+                          placeholder="Please Enter a valid Phone Number"
+                          name="phone"
+                          value={values.phone}
+                          onChange={handleChange}
+                          isInvalid={!!errors.phone}
+                        />
 
-          //   <AvField
-          //     type="select"
-          //     name="select"
-          //     label="Account Type"
-          //     value={accType}
-          //     onChange={(e) => setAccType(e.target.value)}
-          //   >
-          //     <option>Saving</option>
-          //     <option>Current</option>
-          //   </AvField>
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.phone}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
 
-          //   <AvField
-          //     name="upiId"
-          //     label="UPI Id"
-          //     type="text"
-          //     errorMessage="Enter UPI Id"
-          //     placeholder="UPI Id"
-          //     value={upiId}
-          //     onChange={(e) => setUpiId(e.target.value)}
-          //     validate={{
-          //       required: {
-          //         defaultValue: true,
-          //         errorMessage: "Please enter UPI Id",
-          //       },
-          //     }}
-          //   />
+                    <Col xs={12} md={12}>
+                      <Form.Group
+                        md="3"
+                        controlId="validationFormik105"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Name on Account Number</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter The Name on Account Number"
+                          name="acc_name"
+                          value={values.acc_name}
+                          onChange={handleChange}
+                          isInvalid={!!errors.acc_name}
+                        />
 
-          //   <AvField
-          //     name="panNo"
-          //     label="Pan Number"
-          //     type="number"
-          //     className=""
-          //     errorMessage="Enter Your Pan Number"
-          //     value={panNo}
-          //     onChange={(e) => setPanNo(e.target.value)}
-          //     validate={{
-          //       required: {
-          //         value: true,
-          //         errorMessage: "Please enter Valid Pan Number",
-          //       },
-          //     }}
-          //   />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.acc_name}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={12}>
+                      <Form.Group
+                        md="3"
+                        controlId="validationFormik105"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Account Number</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter your Account Number"
+                          name="acc_number"
+                          value={values.acc_number}
+                          onChange={handleChange}
+                          isInvalid={!!errors.acc_number}
+                        />
 
-          //   <AvField
-          //     name="adhaarNo"
-          //     label="Adhaar Number"
-          //     type="number"
-          //     className=""
-          //     errorMessage="Enter Your Adhaar Number"
-          //     value={adhaarNo}
-          //     onChange={(e) => setAdhaarNo(e.target.value)}
-          //     validate={{
-          //       required: {
-          //         value: true,
-          //         errorMessage: "Please enter Valid Adhaar Number",
-          //       },
-          //     }}
-          //   />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.acc_number}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
 
-          //   <Button type="button" color="success" onClick={backToVender}>
-          //     Back
-          //   </Button>
+                    <Col xs={12} md={12}>
+                      <Form.Group
+                        md="3"
+                        controlId="validationFormik105"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>IFSC Code</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter your IFSC code"
+                          name="ifsc_code"
+                          value={values.ifsc_code}
+                          onChange={handleChange}
+                          isInvalid={!!errors.ifsc_code}
+                        />
 
-          //   <Button type="submit" color="success">
-          //     Submit
-          //   </Button>
-          // </AvForm>
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.ifsc_code}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+
+                    <Col xs={12} md={12}>
+                      <Form.Group
+                        md="3"
+                        controlId="validationFormik105"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Account Type</Form.Label>
+                        <Form.Control
+                          type="text"
+                          placeholder="Enter your Account Type"
+                          name="acc_type"
+                          value={values.acc_type}
+                          onChange={handleChange}
+                          isInvalid={!!errors.acc_type}
+                        />
+
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.acc_type}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+
+                    <Col xs={12} md={12}>
+                      <Form.Group
+                        md="3"
+                        controlId="validationFormik105"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>UPI Id</Form.Label>
+                        <Form.Control
+                          type="number"
+                          placeholder="Enter your UPI Id"
+                          name="upi_id"
+                          value={values.upi_id}
+                          onChange={handleChange}
+                          isInvalid={!!errors.upi_id}
+                        />
+
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.upi_id}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+
+                    <Col xs={12} md={12}>
+                      <Form.Group
+                        md="3"
+                        controlId="validationFormik105"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>PAN Number</Form.Label>
+                        <Form.Control
+                          type="number"
+                          placeholder="Enter your pan Card Number "
+                          name="pan_number"
+                          value={values.pan_number}
+                          onChange={handleChange}
+                          isInvalid={!!errors.pan_number}
+                        />
+
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.pan_number}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+
+                    <Col xs={12} md={12}>
+                      <Form.Group
+                        md="3"
+                        controlId="validationFormik105"
+                        className="position-relative mb-3"
+                      >
+                        <Form.Label>Adhaar Number </Form.Label>
+                        <Form.Control
+                          type="number"
+                          placeholder="Enter your adhaar card Number"
+                          name="adhaar_number"
+                          value={values.adhaar_number}
+                          onChange={handleChange}
+                          isInvalid={!!errors.adhaar_number}
+                        />
+
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.adhaar_number}
+                        </Form.Control.Feedback>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Button type="button" className="locationpass-btn mt-3 mb-5"  onClick={backToVender} >Back</Button>
+                  <Button type="submit" className="locationpass-btn mt-3 mb-5" >Submit</Button>
+                  
+                </Form>
+              )}
+            </Formik>
+          </>
         )}
       </div>
       <Footer />
