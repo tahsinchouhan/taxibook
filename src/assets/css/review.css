@@ -1,9 +1,9 @@
 .review_modal{
-    background-color: rgb(114, 142, 253);
-    color:white;
+    /* background-color: rgb(114, 142, 253); */
+    color:black;
 }
 .review_header{
-    color:white;
+    color:black;
 }
 /* .modal-backdrop {
     background-color: green;

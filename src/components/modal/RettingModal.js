@@ -17,7 +17,7 @@ function RettingModal({ show, handleClose }) {
 
   return (
     <>
-      <div className="login-logo">
+      <div>
         {loading ? <Loader /> : null}
         {message ? <Message msg={message} type="success" /> : null}
         {error ? <Message msg={error} type="error" /> : null}       
@@ -29,13 +29,29 @@ function RettingModal({ show, handleClose }) {
             <Modal.Body className="">
               <Form className="col-sm-6 offset-sm-3">
                 <Form.Group className="review_input mb-3" controlId="formBasicEmail">
-                  <Form.Control type="email" placeholder="Enter Your Email*" />
-                  <br />
-                  <Form.Control type="text" placeholder="Commens" />
-                  <br />
-                  <Form.Control type="text" placeholder="Enter Your mobile" />
-                  <br />
+                  <Form.Label style={{
+                      paddingTop: '5px'
+                    }}>Star Rating:</Form.Label>
                   <Form.Control type="text" placeholder="Star Rating" />
+
+                  <Form.Label style={{
+                      paddingTop: '5px'
+                    }}>Enter Your Mobile:</Form.Label>
+                  <Form.Control type="text" placeholder="Enter Your Mobile" />
+
+                  <Form.Label style={{
+                      paddingTop: '5px'
+                    }}>Enter Your Email:</Form.Label>
+                  <Form.Control type="email" placeholder="Enter Your Email" />
+                  
+                  <Form.Label style={{
+                      paddingTop: '5px'
+                    }}>Comments:</Form.Label>
+                  <Form.Control as="textarea" rows={4} placeholder="Comments"/>
+                  
+                  
+                  
+                  
                 </Form.Group>
 
                 {/* <Form.Group className="mb-3" controlId="formBasicPassword">
