@@ -1055,8 +1055,8 @@ function SteperDmpass(shows, ...props) {
               </div>
             </Container>
           </div>
-          <div>
-            <Button style={{"position": "absolute","bottom": 0}}className="locationpass-btn" onClick={onTicketCheckClick}>
+          <div style={{"paddingTop": "50px","paddingBottom": "50px"}}>
+            <Button className="locationpass-btn" onClick={onTicketCheckClick}>
               Save & Continue
             </Button>
           </div>
@@ -1181,7 +1181,7 @@ function SteperDmpass(shows, ...props) {
                 <Col xs={12} md={6}>
                   <div style={{ marginTop: "" }}>
                     <img
-                      src={mobile}
+                      src={congo}
                       alt=""
                       style={{ width: "100%", height: "" }}
                     />

@@ -24,7 +24,7 @@ function DmCongratulate() {
         <Container style={{ width: "70%", paddingTop: "20px" }}>
           <Row>
             <Col>
-              <div style={{ marginTop: "-50px" }}>
+              <div style={{ marginTop: "15px" }}>
                 <img src={mobile} alt="" style={{ height: "500px" }} />
               </div>
             </Col>
