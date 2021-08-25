@@ -100,7 +100,7 @@ function BusPass() {
                     onChange={(e) => setSelected(e.target.value)}
                     isInvalid={!selected}
                     isValid={selected}
-                  // required
+                 
                   >
                     <option>Choose your preferred route</option>
                     {routes.map((item) => (
@@ -196,7 +196,8 @@ function BusPass() {
                   defaultValue="Choose..."
                   value={selected}
                   onChange={(e) => setSelected(e.target.value)}
-
+                  isInvalid={!selected}
+                  isValid={selected}
                 >
                   Please choose a username.
                   <option>Choose your preferred route</option>
