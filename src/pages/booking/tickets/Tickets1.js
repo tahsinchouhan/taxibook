@@ -107,7 +107,7 @@ function Tickets1() {
         <Container className="">
           <div style={{ textAlign: "center", margin: "50px" }}>
             <div style={{ margin: "10px" }}>
-              <img src={doodle} alt="doodle" style={{ height: "200px" }} />
+              <img src={doodle} alt="doodle" style={{ height: "100px" }} />
               <h5 style={{ margin: "10px", color: "black", fontWeight: "700" }}>
                 Tickets
               </h5>
@@ -148,7 +148,7 @@ function Tickets1() {
                         <Form.Control
                           className="location-userdatas"
                           placeholder=" Enter Mobile No"
-                          style={{ border: "none", fontSize: "12px" }}
+                          style={{ border: "none", fontSize: "12px", margin: "0px !important"}}
                           value={mobile} onChange={handleMobile}
                         >
                         </Form.Control>

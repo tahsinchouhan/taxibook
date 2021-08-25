@@ -146,7 +146,7 @@ function Saly() {
               <div style={{ paddingTop: "100px", textAlign: "center" }}>
                 <div className="bookings-div">
                   <h3>Bookings</h3>
-                  <p>Book tickets for buses,cabs and DM Passees</p>
+                  <p>Book tickets for buses,cabs and Traveller Passees</p>
                 </div>
                 <Button
                   className="makebooking-btn"
@@ -273,7 +273,7 @@ function Saly() {
                 <div style={{ paddingTop: "100px", textAlign: "center" }}>
                   <div className="bookings-div">
                     <h3>Bookings</h3>
-                    <p>Book tickets for buses,cabs and DM Passees</p>
+                    <p>Book tickets for buses,cabs and Traveller Passes</p>
                   </div>
                   <Button
                     className="makebooking-btn"

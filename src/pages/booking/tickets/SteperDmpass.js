@@ -385,7 +385,7 @@ function SteperDmpass(shows, ...props) {
                   textAlign: "center",
                 }}
               >
-                Book your DM Pass
+                Book your Traveller Pass
               </h3>
               <form onSubmit={(e) => e.preventDefault()}>
                 <div className="form-row"></div>

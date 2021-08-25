@@ -66,9 +66,9 @@ console.log("user_data",user_data);
                 <div className="col-xs-12  col-sm-12 col-md-12">
                   <div className="booking-div">
                     <div style={{ marginBottom: "15px" }}>
-                      <img src={ticket} alt="" />
+                      <img src={ticket} alt="" style={{ height: "100px"}}/>
                     </div>
-                    <span style={{ fontWeight: "bolder", fontSize: "15px", color: "#0fa453", paddingTop: "50px" }}>DM Pass</span><br />
+                    <span style={{ fontWeight: "bolder", color: "#0fa453", paddingTop: "50px" }}>Traveller Pass</span><br />
                     <span style={{ fontSize: "12px", padding: "10px" }}>
                       Get a pass for travellers, vehicles<br /> and duration of your travel
                     </span>
@@ -177,7 +177,7 @@ console.log("user_data",user_data);
                 <div style={{ marginBottom: "15px" }}>
                   <img src={ticket} alt="" />
                 </div>
-                <span style={{ fontWeight: "bolder", fontSize: "15px", color: "#0fa453", paddingTop: "50px" }}>DM Pass</span><br />
+                <span style={{ fontWeight: "bolder", color: "#0fa453", paddingTop: "50px" }}>Traveller Pass</span><br />
                 <span style={{ fontSize: "12px", padding: "10px" }}>
                   Get a pass for travellers, vehicles<br /> and duration of your travel
                 </span>

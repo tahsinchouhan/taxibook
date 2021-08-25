@@ -226,14 +226,14 @@ const [enquireModal,setEnquireModal]=useState();
 
     <span
           className="packages_enquired"
-          style={{ color: "rgb(120, 104, 230)" }}
+          style={{ color: "rgb(120, 104, 230)", width:"200px", display: "inline-block" }}
           onClick={()=> modalReviewHadler()}
         >
           Review
         </span>
         <span
           className="packages_enquired"
-          style={{ color: "rgb(120, 104, 230)" }}
+          style={{ color: "rgb(120, 104, 230)", width:"200px", display: "inline-block" }}
           onClick={()=> modalEnquireHadler()}
         >
           Enquire  Now
@@ -242,13 +242,13 @@ const [enquireModal,setEnquireModal]=useState();
           className="packages_enquired"         
         >
           <a
-            className=""style={{ color: "rgb(120, 104, 230)",textDecoration:"none"}}
+            className="" style={{ color: "rgb(120, 104, 230)",textDecoration:"none",  width:"200px", display: "inline-block"}}
             href={` https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`}
           >
             TripAdvisor reviews
           </a>
         </span>
-        <span className="packages_whatsapp">
+        <span className="packages_whatsapp" style={{ width:"200px", display: "inline-block"}}>
           <a
             className="package-whats"style={{textDecoration:"none"}}
             href={`https://api.whatsapp.com/send/?phone=+917894512324&text&app_absent=0`}
@@ -264,23 +264,23 @@ const [enquireModal,setEnquireModal]=useState();
        <div>
        <span
           className="packages_enquired"
-          style={{ color: "rgb(120, 104, 230)" }}
+          style={{ color: "rgb(120, 104, 230)", width:"200px", display: "inline-block" }}
           onClick={()=> modalReviewHadler()}
         >
           Review
         </span>
-       </div><br/>
-       <div style={{marginTop:"12px"}}>
+       </div>
+       <div>
        <span
           className="packages_enquired"
-          style={{ color: "rgb(120, 104, 230)" }}
+          style={{ color: "rgb(120, 104, 230)", width:"200px", display: "inline-block" }}
           onClick={()=> modalEnquireHadler()}
         >
           Enquire Now
         </span>
-       </div><br/>
-        <div style={{marginTop:"12px"}}>
-        <span
+       </div>
+        <div>
+        <span style={{width:"200px", display: "inline-block"}}
           className="packages_enquired"         
         >
           <a
@@ -290,9 +290,9 @@ const [enquireModal,setEnquireModal]=useState();
             TripAdvisor reviews
           </a>
         </span>
-        </div><br/>       
-        <div style={{marginTop:"12px"}}>
-        <span className="packages_whatsapp" >
+        </div>     
+        <div>
+        <span  style={{width:"200px", display: "inline-block"}} className="packages_whatsapp" >
           <a
             className="package-whats"style={{textDecoration:"none"}}
             href={`https://api.whatsapp.com/send/?phone=+917894512324&text&app_absent=0`}

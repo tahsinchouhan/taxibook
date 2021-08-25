@@ -3,6 +3,7 @@ import { Button, Row, Col, Form, Container } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useHistory } from "react-router-dom";
+import doodle from "../../../assets/img/doodle.png";
 import ticket from "../../../assets/img/ticket.png";
 import Header from "../../../components/Header";
 import Footer from "../../travesaly/Footer";
@@ -27,13 +28,14 @@ function DmTicket2() {
         <div className="d-none d-md-block">
         <Container className="d-none d-md-block my-5" style={{ width: "70%" }}>
           <div className="select_div">
-            <div className="row p-3" style={{ textAlign: "center" }}>
+            <div className="row" style={{ textAlign: "center" }}>
               <div className="col-xs-12  col-sm-12 col-md-12">
                 <div className="booking-div">
                   <div style={{ marginBottom: "15px" }}>
-                    <img src={ticket} alt="" />
+                    {/* <img src={ticket} alt="" style={{ height: "100px"}}/> */}
+                    <img src={doodle} alt="doodle" style={{ height: "100px" }} />
                   </div>
-                  <span
+                  {/* <span
                     style={{
                       fontWeight: "bolder",
                       fontSize: "15px",
@@ -41,24 +43,26 @@ function DmTicket2() {
                       paddingTop: "50px",
                     }}
                   >
-                    DM Pass
-                  </span>
-                  <br />
+                    Traveller Pass
+                  </span> */}
+                  <h5 style={{ color: "#0fa453", margin: "10px", color: "black", fontWeight: "700" }}>
+                    Traveller Pass
+                  </h5>
+                  {/* <br /> */}
                   <span
                     style={{
-                      fontWeight: "bolder",
-                      fontSize: "12px",
+                      fontWeight: "500",
                       padding: "10px",
                     }}
                   >
                     Get a pass for travellers, vehicles
                     <br /> and duration of your travel
-                  </span>
+                  </span><br />
                 </div>
               </div>
             </div>
 
-            <Container style={{ width: "69%", paddingTop: "20px" }}>
+            <Container style={{ width: "69%", paddingTop: "50px" }}>
               <Row>
                 <Col xs={12} md={6} className="mt-2">
                   <Form.Group
@@ -140,9 +144,9 @@ function DmTicket2() {
               <div className="col-xs-12  col-sm-12 col-md-12">
                 <div className="booking-div">
                   <div style={{ marginBottom: "15px" }}>
-                    <img src={ticket} alt="" />
+                    <img src={doodle} alt="doodle" style={{ height: "100px" }} />
                   </div>
-                  <span
+                  {/* <span
                     style={{
                       fontWeight: "600",
                       fontSize: "15px",
@@ -150,13 +154,14 @@ function DmTicket2() {
                       paddingTop: "50px",
                     }}
                   >
-                    DM Pass
-                  </span>
-                  <br />
+                    Traveller Pass
+                  </span> */}
+                  <h5 style={{ color: "#0fa453", margin: "10px", color: "black", fontWeight: "700" }}>
+                    Traveller Pass
+                  </h5>
                   <span
                     style={{
-                      fontWeight: "bolder",
-                      fontSize: "12px",
+                      fontWeight: "500",
                       padding: "10px",
                       whiteSpace:'nowrap'
                     }}

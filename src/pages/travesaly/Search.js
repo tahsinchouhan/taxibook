@@ -120,7 +120,7 @@ function Search() {
                 paddingTop: "10px",
               }}
             >
-              DM Pass
+              Traveller Pass
             </div>
           </div>
 
