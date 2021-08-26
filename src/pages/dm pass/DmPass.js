@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Row, Col, Form, Container } from "react-bootstrap";
+import { connect } from "react-redux";
+
 import logo from "../../assets/img/logo.png";
 import city from "../../assets/img/city.png";
 // import calendar from "../../assets/img/calendar.png";
@@ -20,10 +22,18 @@ import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setDmData } from "../../redux/actions";
+import { DmPassDetails, setDmData } from "../../redux/actions";
+import userEvent from "@testing-library/user-event";
 
-function DmPass() {
+function DmPass({DmPassDetails}) {
   const history = useHistory();
+  const [vehicle,setVehicle]=useState("1")
+  const [travellers,setTraveller]=useState("1")
+  const [daysTravel,setDaysTravel]=useState("1")
+
+console.log("vehicle",vehicle);
+console.log("travellers",travellers);
+console.log("daysTravel",daysTravel);
 
   const dispatch = useDispatch()
   const { dmData } = useSelector(state => state.dmpassReducer)
@@ -44,13 +54,21 @@ console.log("user_data",user_data);
   useEffect(() => {
     console.log("dmData", dmData);
   }, [dmData])
-
+  //  const data =[vehicle,travellers,daysTravel]
+  const data = [
+   { "Vehicle": vehicle,
+    "DaysTravel": daysTravel,
+    "Travellers": travellers,}
+  ]
   const onDmTicketShow = () => {
-    console.log('hii')
-    // toast("Wow so easy!");
+    // console.log('Vehicle Data',vehicle)
+
+    DmPassDetails({data})
+
     history.push('/travelticket')
-    // history.push('/dmticket2')
+  
   };
+  
   return (
     <>
       <div>
@@ -84,7 +102,7 @@ console.log("user_data",user_data);
                       controlId="exampleForm.ControlInput1"
                     >
                       <Form.Label className="dm-ticket" >Number of Vehicles</Form.Label>
-                      <select id="inputState" className="form-control pass_input">
+                      <select id="inputState" className="form-control pass_input" onChange={(e)=>setVehicle(e.target.value)}>
                         <option selected>1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -113,6 +131,7 @@ console.log("user_data",user_data);
                         id="inputState"
                         className="form-control pass_input"
                       // onChange={handleTravellerCount}
+                      onChange={(e)=>setTraveller(e.target.value)}
                       >
                         <option selected>1</option>
                         <option value="2">2</option>
@@ -132,6 +151,7 @@ console.log("user_data",user_data);
                       <select
                         id="inputState"
                         className="form-control pass_input"
+                        onChange={(e)=>setDaysTravel(e.target.value)}
                       >
                         <option selected>1</option>
                         <option value="2">2</option>
@@ -280,4 +300,13 @@ console.log("user_data",user_data);
   );
 }
 
-export default DmPass;
+const mapDispatchToProps = (dispatch) => ({
+  // loginUser: (info, history) => dispatch(loginUser(info, history)),
+  // companyDetail: (userInfo, history) => dispatch(companyDetail(userInfo, history))
+  DmPassDetails:(data)=>dispatch(DmPassDetails(data))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(DmPass);

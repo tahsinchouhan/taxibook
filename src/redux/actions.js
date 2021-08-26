@@ -42,6 +42,8 @@ export const LOGOUT = "LOGOUT";
 export const SET_DM_DATA = "SET_DM_DATA";
 export const CREATE_DM_PASS = "CREATE_DM_PASS";
 export const SET_DM_PASS_ID = "SET_DM_PASS_ID";
+export const DM_PASS_DETAILS = "DM_PASS_DETAILS";
+
 
 export * from "./common/actions";
 export * from "./auth/actions";

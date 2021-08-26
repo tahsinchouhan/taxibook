@@ -706,6 +706,7 @@ function AddForm() {
                 </Container>
                 <Footer />
               </div>
+
               {/*mobile-view*/}
               <div fluid className="d-md-none">
                 <div
