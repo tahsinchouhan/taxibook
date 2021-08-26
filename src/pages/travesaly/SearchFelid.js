@@ -7,8 +7,7 @@ import { NavLink, useHistory } from "react-router-dom";
 
 const data = [
   {
-    // width="100%",
-    // height="100%",
+    
     // src="https://www.youtube.com/embed/s_W9hNCaZak",
     // title="YouTube video player",
     // frameborder="0",
@@ -51,35 +50,7 @@ function SearchFelid() {
   const onClickThumb = () => {};
   return (
     <>
-      <div>
-        {/*  <Carousel partialVisbile itemClass="image-item" responsive={responsive}>
-         <div style={{ display: "flex", width: "100%" }}>
-                <Col sm={12} md={6} className="">
-                <iframe
-                    width="100%"
-                    height="315"
-                    src="https://www.youtube.com/embed/s_W9hNCaZak"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
-                  ></iframe>
-                  
-                </Col>
-              </div> */}
-        {/* <div>rhere</div>
-          <div>rhere</div>
-          <div>rhere</div>   */}
-        {/* {data.map((item, index) => ( */}
-        {/* <div className="pt-3">
-              <div style={{ display: "flex", width: "100%" }}>
-                <Col sm={12} md={6} className="">
-                  <div className="">hello</div>
-                </Col>
-              </div>
-            </div> */}
-        {/* ))} 
-        </Carousel>*/}
+      <div>        
         <Carousel className="pt-5"
           showArrows={true}
           onChange={onChange}
