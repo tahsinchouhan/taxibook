@@ -46,7 +46,8 @@ function TravelTicket({ Seleted_Values }) {
     (Seleted_Values && Seleted_Values[0]) || {};
 
   console.log("No of v", number_of_vehicals);
-  const onDmByeClick = () => {
+  const onDmByeClick = (values) => {
+    console.log("fdjjkjgkdfj");
     console.log("object", {
       ...dmData,
       basic_details: travellers,
@@ -59,7 +60,7 @@ function TravelTicket({ Seleted_Values }) {
         vehical_details: vehicles,
       })
     );
-    history.push("/dm_congratulate");
+    // history.push("/dm_congratulate");
   };
 
   const initialTravellers = () => {
@@ -120,18 +121,10 @@ function TravelTicket({ Seleted_Values }) {
       })
     );
   };
-  // console.log("Data dmdmdm:::::::",Seleted_Values[0].Vehicle);
 
-  // if(Seleted_Values){
-
-  // console.log("Data dmdmdm:::::::",typeof(Seleted_Values));
-  // console.log("Data dmdmdm:::::::",Seleted_Values[0].Vehicle);
-
-  // }
 
   useEffect(() => {
     console.log("vehicles", vehicles);
-
   }, [vehicles]);
   return (
     <>
@@ -300,26 +293,25 @@ function TravelTicket({ Seleted_Values }) {
           </div>
         </Container>
 
-        <Container style={{ width: "" }}>
-
+        <Container style={{ marginLeft: "32%" }}>
           <Row>
-            <Col xs={12} md={6}>
-              <div style={{ width: "50%", float: "right" }}>
-                <label
-                  style={{
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    color: "black",
-                  }}
-                >
-                  Vehicle Details
-                </label>
-                <div
-                  className="traveller_div"
-                  style={{ marginTop: "1rem", justifyContent: "flex-start" }}
-                >
-                  {vehicles?.map((item, i) => (
-                    <AvForm>
+            <AvForm>
+              <Col xs={12} md={6}>
+                <div style={{ width: "50%", float: "right" }}>
+                  <label
+                    style={{
+                      fontSize: "14px",
+                      fontWeight: "500",
+                      color: "black",
+                    }}
+                  >
+                    Vehicle Details
+                  </label>
+                  <div
+                    className="traveller_div"
+                    style={{ marginTop: "1rem", justifyContent: "flex-start" }}
+                  >
+                    {vehicles?.map((item, i) => (
                       <Paper key={i} className="traveller__card p-3">
                         <div className="traveller__card_body" className="py-0">
                           <h5
@@ -335,13 +327,6 @@ function TravelTicket({ Seleted_Values }) {
                               </label>
 
                               <AvField
-                                // onChange={(e) => setNumber(e.target.value)}
-                                // value={number}
-                                // name="Mobile Number"
-                                // type="number"
-                                // className="input-password dm-inputticket"
-                                // errorMessage="Invalid Number"
-                                // placeholder="Enter your mobile number"
                                 type="text"
                                 className="form-control pass_input"
                                 id={`vehicle_number${i}`}
@@ -357,21 +342,13 @@ function TravelTicket({ Seleted_Values }) {
                                     value: true,
                                     errorMessage: "Enter the license plate number",
                                   },
-                                  // pattern: {
-                                  //   value: "^[0-9]",
-                                  //   errorMessage:
-                                  //     "Your Number only be 10 numbers"
-                                  // },
-                                  // maxLength: {
-                                  //   value: 10,
-                                  //   errorMessage: "Only 10 digit number"
-                                  // }
+
                                 }}
                               />
 
                               {/* <input
                               type="text"
-                              className="form-control pass_input"
+                              className ="form-control pass_input"
                               id={`vehicle_number${i}`}
                               placeholder="Enter the license plate number"
                               style={{ fontSize: "11px", marginLeft: "-5px", width: 250 }}
@@ -402,15 +379,7 @@ function TravelTicket({ Seleted_Values }) {
                                     value: true,
                                     errorMessage: "Enter Driver Name",
                                   },
-                                  // pattern: {
-                                  //   value: "^[0-9]",
-                                  //   errorMessage:
-                                  //     "Your Number only be 10 numbers"
-                                  // },
-                                  // maxLength: {
-                                  //   value: 10,
-                                  //   errorMessage: "Only 10 digit number"
-                                  // }
+
                                 }}
                               />
                             </div>
@@ -424,7 +393,7 @@ function TravelTicket({ Seleted_Values }) {
                                 id={`name${i}`}
                                 placeholder="Enter Driver License Number"
                                 style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="driver_License"
+                                name="driver_name"
                                 onChange={(e) =>
                                   handleVehicle(e.target.value, e.target.name, i)
                                 }
@@ -434,25 +403,18 @@ function TravelTicket({ Seleted_Values }) {
                                     value: true,
                                     errorMessage: "Enter Driver License Number",
                                   },
-                                  // pattern: {
-                                  //   value: "^[0-9]",
-                                  //   errorMessage:
-                                  //     "Your Number only be 10 numbers"
-                                  // },
-                                  // maxLength: {
-                                  //   value: 10,
-                                  //   errorMessage: "Only 10 digit number"
-                                  // }
+
                                 }}
                               />
                             </div>
                           </p>
                         </div>
                       </Paper>
-                      </AvForm>
-                  ))}
-                </div>
-                {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
+
+                    ))}
+                  </div>
+
+                  {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
                   <Button
                     type="submit"
                     class="btn btn-success"
@@ -481,8 +443,8 @@ function TravelTicket({ Seleted_Values }) {
                     Add Vehicle
                   </Button>
                 </div> */}
-              </div>
-            </Col>
+                </div>
+              </Col>
               <Col xs={12} md={6}>
                 <div style={{ width: "50%" }}>
                   <label
@@ -499,97 +461,32 @@ function TravelTicket({ Seleted_Values }) {
                     className="traveller_div"
                     style={{ marginTop: "1rem", justifyContent: "flex-start" }}
                   >
-                    {travellers?.map((item, i) => (
-                      <AvForm>
-                      <Paper
-                        key={i}
-                        className="traveller__card p-3"
-                        style={{ minHeight: "364px" }}
-                      >
-                        <div className="traveller__card_body" className="py-0">
-                          <h5
-                            className="traveller__card_title"
-                            style={{ fontSize: "12px" }}
-                          >
-                            Travellers {i + 1}
-                          </h5>
-                          <p className="traveller__card_text">
-                            <div className="form-group pt-3">
-                              <label className="mb-3" for={`name${i}`}>
-                                Name
-                              </label>
-                              <AvField
-                                type="text"
-                                className="form-control pass_input"
-                                id={`name${i}`}
-                                placeholder="Enter Traveller Name"
-                                style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="name"
-                                onChange={(e) =>
-                                  handleTraveller(
-                                    e.target.value,
-                                    e.target.name,
-                                    i
-                                  )
-                                }
-                                value={travellers[i].name}
-                                validate={{
-                                  required: {
-                                    value: true,
-                                    errorMessage: "Enter Traveller Name",
-                                  },
-                                  // pattern: {
-                                  //   value: "^[0-9]",
-                                  //   errorMessage:
-                                  //     "Your Number only be 10 numbers"
-                                  // },
-                                  // maxLength: {
-                                  //   value: 10,
-                                  //   errorMessage: "Only 10 digit number"
-                                  // }
-                                }}
-                              />
-                            </div>
-
-                            <div className="form-row genderform pt-3 d-flex ">
-                              <div className="col m-2 w-50">
-                                <label className="mb-3" for={`gender${i}`}>
-                                  Gender
-                                </label>
-                                <div className="d-flex pt-2">
-                                  <ButtonComponent
-                                    style={{
-                                      width: "50%",
-                                      fontSize: "11px",
-                                      whiteSpace: "nowrap",
-                                    }}
-                                    data={button_Data}
-                                    // activeButton={activeButton}
-                                    // trigerOnClickEmpSideBtn={onSideBtnClick}
-                                    trigerOnClickEmpSideBtn={(e) =>
-                                      handleTraveller(e.target.name, "gender", i)
-                                    }
-                                    activeButton={travellers[i].gender}
-                                  />
-                                </div>
-                              </div>
-                              <div className="form-group col m-2 w-50">
-                                <label className="mb-3" for={`age${i}`}>
-                                  Age
+                    {travellers?.map((item, i) => {
+                      return (
+                        <Paper
+                          key={i}
+                          className="traveller__card p-3"
+                          style={{ minHeight: "364px" }}
+                        >
+                          <div className="traveller__card_body" className="py-0">
+                            <h5
+                              className="traveller__card_title"
+                              style={{ fontSize: "12px" }}
+                            >
+                              Travellers {i + 1}
+                            </h5>
+                            <p className="traveller__card_text">
+                              <div className="form-group pt-3">
+                                <label className="mb-3" for={`name${i}`}>
+                                  Name
                                 </label>
                                 <AvField
                                   type="text"
-                                  className="form-control pass_input w-70 pt-2"
-                                  placeholder="Enter Age"
-                                  id={`age${i}`}
-                                  style={{
-                                    width: "110px",
-                                    marginLeft: "-5px",
-                                    fontSize: "12px",
-                                    whiteSpace: "nowrap",
-                                    height: "33px",
-                                  }}
-                                  name="age"
+                                  className="form-control pass_input"
+                                  id={`name${i}`}
+                                  placeholder="Enter Traveller Name"
+                                  style={{ fontSize: "11px", marginLeft: "-5px" }}
+                                  name="name"
                                   onChange={(e) =>
                                     handleTraveller(
                                       e.target.value,
@@ -597,48 +494,129 @@ function TravelTicket({ Seleted_Values }) {
                                       i
                                     )
                                   }
-                                  value={travellers[i].age}
+                                  value={travellers[i].name}
                                   validate={{
                                     required: {
                                       value: true,
-                                      errorMessage: "Enter Age",
-                                    }}}
+                                      errorMessage: "Enter Traveller Name",
+                                    },
+
+                                  }}
                                 />
                               </div>
-                            </div>
 
-                            <div className="form-group mt-1 pt-3">
-                              <label className="mb-3" for={`aadhaar${i}`}>
-                                Adhaar Card Number{" "}
-                              </label>
-                              <AvField
-                              name="Adhaar"
-                                type="text"
-                                className="form-control pass_input"
-                                id={`adhaar${i}`}
-                                placeholder="Enter 12 digit Adhaar Card Number"
-                                style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="adhaar"
-                                onChange={(e) =>
-                                  handleTraveller(
-                                    e.target.value,
-                                    e.target.name,
-                                    i
-                                  )
-                                }
-                                value={travellers[i].adhaar}
-                                validate={{
-                                  required: {
-                                    value: true,
-                                    errorMessage: "Enter 12 digit Adhaar Card Number",
-                                  },}}
-                              />
-                            </div>
-                          </p>
-                        </div>
-                      </Paper>
-                      </AvForm>
-                    ))}
+                              <div className="form-row genderform pt-3 d-flex ">
+                                <div className="col m-2 w-50">
+                                  <label className="mb-3" for={`gender${i}`}>
+                                    Gender
+                                  </label>
+                                  <div className="d-flex pt-2">
+                                    <ButtonComponent
+                                      style={{
+                                        width: "50%",
+                                        fontSize: "11px",
+                                        whiteSpace: "nowrap",
+                                      }}
+                                      data={button_Data}
+                                      // activeButton={activeButton}
+                                      // trigerOnClickEmpSideBtn={onSideBtnClick}
+                                      trigerOnClickEmpSideBtn={(e) =>
+                                        handleTraveller(e.target.name, "gender", i)
+                                      }
+                                      activeButton={travellers[i].gender}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="form-group col m-2 w-50">
+                                  <label className="mb-3" for={`age${i}`}>
+                                    Age
+                                  </label>
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input w-70 pt-2"
+                                    placeholder="Enter Age"
+                                    id={`age${i}`}
+                                    style={{
+                                      width: "110px",
+                                      marginLeft: "-5px",
+                                      fontSize: "12px",
+                                      whiteSpace: "nowrap",
+                                      height: "33px",
+                                    }}
+                                    name="age"
+                                    onChange={(e) =>
+                                      handleTraveller(
+                                        e.target.value,
+                                        e.target.name,
+                                        i
+                                      )
+                                    }
+                                    value={travellers[i].age}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter Age",
+                                      }
+                                    }}
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="form-group mt-1 pt-3">
+                                <label className="mb-3" for={`aadhaar${i}`}>
+                                  Adhaar Card Number{" "}
+                                </label>
+                                <AvField
+                                  type="text"
+                                  className="form-control pass_input"
+                                  id={`adhaar${i}`}
+                                  placeholder="Enter 12 digit Adhaar Card Number"
+                                  style={{ fontSize: "11px", marginLeft: "-5px" }}
+                                  name="adhaar"
+                                  onChange={(e) =>
+                                    handleTraveller(
+                                      e.target.value,
+                                      e.target.name,
+                                      i
+                                    )
+                                  }
+                                  value={travellers[i].adhaar}
+                                  validate={{
+                                    required: {
+                                      value: true,
+                                      errorMessage: "Enter 12 digit Adhaar Card Number",
+                                    },
+                                  }}
+                                />
+                              </div>
+                            </p>
+                          </div>
+
+                        </Paper>
+                      )
+                    })}
+
+
+                    <div style={{ marginTop: "3rem", textAlign: "center", marginLeft: "52%" }}>
+                      <Button
+                        type="submit"
+                        class="btn btn-success"
+                        style={{
+                          width: '250px',
+                          textAlign: "center",
+                          height: "50px",
+                          borderRadius: 10,
+                          backgroundColor: "#0fa453",
+                          border: "none",
+                          fontWeight: "600",
+                        }}
+                        onClick={onDmByeClick}
+                      >
+                        Book your Pass
+                      </Button>
+                    </div>
+
+
                   </div>
                   {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
                   <Button
@@ -669,215 +647,200 @@ function TravelTicket({ Seleted_Values }) {
                 </div> */}
                 </div>
               </Col>
+            </AvForm>
           </Row>
         </Container>
-          <div style={{ marginTop: "3rem", textAlign: "center" }}>
-            <Button
-              type="submit"
-              class="btn btn-success"
-              style={{
-                width: '250px',
-                textAlign: "center",
-                height: "50px",
-                borderRadius: 10,
-                backgroundColor: "#0fa453",
-                border: "none",
-                fontWeight: "600",
-              }}
-              onClick={onDmByeClick}
-            >
-              Book your Pass
-            </Button>
-          </div>
 
-          <div style={{ height: "100px" }}></div>
-          <Footer />
+
+        <div style={{ height: "100px" }}></div>
+        <Footer />
       </div>
 
-        {/*mobile-view*/}
+      {/*mobile-view*/}
 
-        <div fluid className="d-md-none" style={{ width: "" }}>
-          <Container className=" my-5" style={{ width: "" }}>
-            <div className="select_div">
-              <div className="row p-3" style={{ textAlign: "center" }}>
-                <div className="col-xs-12  col-sm-12 col-md-12">
-                  <div className="booking-div">
-                    <div style={{ marginBottom: "15px" }}>
-                      <img src={ticket} alt="" />
-                    </div>
-                    <span
-                      style={{
-                        fontWeight: "bolder",
-                        fontSize: "15px",
-                        color: "#0fa453",
-                        paddingTop: "50px",
-                      }}
-                    >
-                      Traveller Pass
-                    </span>
-                    <br />
-                    <span
-                      style={{
-                        fontWeight: "bolder",
-                        padding: "10px",
-                      }}
-                    >
-                      Get a pass for travellers, vehicles
-                      <br /> and duration of your travel
-                    </span>
+      <div fluid className="d-md-none" style={{ width: "" }}>
+        <Container className=" my-5" style={{ width: "" }}>
+          <div className="select_div">
+            <div className="row p-3" style={{ textAlign: "center" }}>
+              <div className="col-xs-12  col-sm-12 col-md-12">
+                <div className="booking-div">
+                  <div style={{ marginBottom: "15px" }}>
+                    <img src={ticket} alt="" />
                   </div>
+                  <span
+                    style={{
+                      fontWeight: "bolder",
+                      fontSize: "15px",
+                      color: "#0fa453",
+                      paddingTop: "50px",
+                    }}
+                  >
+                    Traveller Pass
+                  </span>
+                  <br />
+                  <span
+                    style={{
+                      fontWeight: "bolder",
+                      padding: "10px",
+                    }}
+                  >
+                    Get a pass for travellers, vehicles
+                    <br /> and duration of your travel
+                  </span>
                 </div>
               </div>
             </div>
-          </Container>
-          <Container style={{ width: "", marginBottom: "40px" }}>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <div style={{ width: "" }}>
-                <div style={{ display: "flex", flexDirection: "row" }}>
-                  <Col
-                    xs={4}
-                    style={{
-                      background: "#F8F8F8",
-                      width: "85px",
-                      textAlign: "center",
-                      marginRight: "10px",
-                    }}
-                  >
+          </div>
+        </Container>
+        <Container style={{ width: "", marginBottom: "40px" }}>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div style={{ width: "" }}>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <Col
+                  xs={4}
+                  style={{
+                    background: "#F8F8F8",
+                    width: "85px",
+                    textAlign: "center",
+                    marginRight: "10px",
+                  }}
+                >
+                  <div style={{}}>
                     <div style={{}}>
-                      <div style={{}}>
-                        <h2
+                      <h2
+                        style={{
+                          textAlign: "center",
+                          fontSize: "17px",
+                          fontWeight: "700",
+                        }}
+                      >
+                        {number_of_vehicals}
+                      </h2>
+                      <span
+                        style={{
+                          fontSize: "12px",
+                          fontWeight: "700",
+                          color: "gray",
+                        }}
+                      >
+                        Vehicles
+                      </span>
+                      <br />
+                      <div style={{ background: "#F8F8F8" }}>
+                        <Button
                           style={{
-                            textAlign: "center",
-                            fontSize: "17px",
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "#FF4A68",
+                            float: "right",
+                            fontSize: "11px",
+                            float: "left",
                             fontWeight: "700",
+                            paddingLeft: "29px",
                           }}
                         >
-                          {number_of_vehicals}
-                        </h2>
-                        <span
-                          style={{
-                            fontSize: "12px",
-                            fontWeight: "700",
-                            color: "gray",
-                          }}
-                        >
-                          Vehicles
-                        </span>
-                        <br />
-                        <div style={{ background: "#F8F8F8" }}>
-                          <Button
-                            style={{
-                              backgroundColor: "transparent",
-                              border: "none",
-                              color: "#FF4A68",
-                              float: "right",
-                              fontSize: "11px",
-                              float: "left",
-                              fontWeight: "700",
-                              paddingLeft: "29px",
-                            }}
-                          >
-                            Edit
-                          </Button>
-                        </div>
+                          Edit
+                        </Button>
                       </div>
                     </div>
-                  </Col>
-                  <Col
-                    xs={4}
-                    style={{
-                      background: "#F8F8F8",
-                      marginRight: "10px",
-                      width: "85px",
-                      textAlign: "center",
-                    }}
-                  >
-                    <div style={{ background: "#F8F8F8" }}>
-                      <h2
-                        style={{
-                          textAlign: "center",
-                          fontSize: "17px",
-                          fontWeight: "700",
-                        }}
-                      >
-                        {number_of_travellers}
-                      </h2>
-                      <span
-                        style={{
-                          fontSize: "12px",
-                          fontWeight: "700",
-                          color: "gray",
-                        }}
-                      >
-                        Travellers
-                      </span>
-                      <br />
-                      <Button
-                        style={{
-                          backgroundColor: "transparent",
-                          border: "none",
-                          color: "#FF4A68",
-                          float: "right",
-                          fontSize: "11px",
-                          float: "left",
-                          fontWeight: "700",
-                          paddingLeft: "29px",
-                        }}
-                      >
-                        Edit
-                      </Button>
-                    </div>
-                  </Col>
-                  <Col
-                    xs={4}
-                    style={{
-                      background: "#F8F8F8",
-                      margin: "2px",
-                      width: "85px",
-                      textAlign: "center",
-                    }}
-                  >
-                    <div style={{ background: "#F8F8F8" }}>
-                      <h2
-                        style={{
-                          textAlign: "center",
-                          fontSize: "17px",
-                          fontWeight: "700",
-                        }}
-                      >
-                        {duration_of_travel}
-                      </h2>
-                      <span
-                        style={{
-                          fontSize: "12px",
-                          fontWeight: "700",
-                          color: "gray",
-                        }}
-                      >
-                        Days
-                      </span>
-                      <br />
-                      <Button
-                        style={{
-                          backgroundColor: "transparent",
-                          border: "none",
-                          color: "#FF4A68",
-                          float: "right",
-                          fontSize: "11px",
-                          float: "left",
-                          fontWeight: "700",
-                          paddingLeft: "29px",
-                        }}
-                      >
-                        Edit
-                      </Button>
-                    </div>
-                  </Col>
-                </div>
+                  </div>
+                </Col>
+                <Col
+                  xs={4}
+                  style={{
+                    background: "#F8F8F8",
+                    marginRight: "10px",
+                    width: "85px",
+                    textAlign: "center",
+                  }}
+                >
+                  <div style={{ background: "#F8F8F8" }}>
+                    <h2
+                      style={{
+                        textAlign: "center",
+                        fontSize: "17px",
+                        fontWeight: "700",
+                      }}
+                    >
+                      {number_of_travellers}
+                    </h2>
+                    <span
+                      style={{
+                        fontSize: "12px",
+                        fontWeight: "700",
+                        color: "gray",
+                      }}
+                    >
+                      Travellers
+                    </span>
+                    <br />
+                    <Button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "#FF4A68",
+                        float: "right",
+                        fontSize: "11px",
+                        float: "left",
+                        fontWeight: "700",
+                        paddingLeft: "29px",
+                      }}
+                    >
+                      Edit
+                    </Button>
+                  </div>
+                </Col>
+                <Col
+                  xs={4}
+                  style={{
+                    background: "#F8F8F8",
+                    margin: "2px",
+                    width: "85px",
+                    textAlign: "center",
+                  }}
+                >
+                  <div style={{ background: "#F8F8F8" }}>
+                    <h2
+                      style={{
+                        textAlign: "center",
+                        fontSize: "17px",
+                        fontWeight: "700",
+                      }}
+                    >
+                      {duration_of_travel}
+                    </h2>
+                    <span
+                      style={{
+                        fontSize: "12px",
+                        fontWeight: "700",
+                        color: "gray",
+                      }}
+                    >
+                      Days
+                    </span>
+                    <br />
+                    <Button
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        color: "#FF4A68",
+                        float: "right",
+                        fontSize: "11px",
+                        float: "left",
+                        fontWeight: "700",
+                        paddingLeft: "29px",
+                      }}
+                    >
+                      Edit
+                    </Button>
+                  </div>
+                </Col>
               </div>
             </div>
-            <div>
-              <div style={{}}>
+          </div>
+          <div>
+            <div style={{}}>
+              <AvForm>
                 <Col xs={12} md={6}>
                   <label
                     style={{
@@ -909,7 +872,7 @@ function TravelTicket({ Seleted_Values }) {
                               <label className="mb-1" for={`vehicle_number${i}`}>
                                 Vehicle Number
                               </label>
-                              <input
+                              <AvField
                                 type="text"
                                 className="form-control pass_input"
                                 id={`vehicle_number${i}`}
@@ -920,13 +883,20 @@ function TravelTicket({ Seleted_Values }) {
                                   handleVehicle(e.target.value, e.target.name, i)
                                 }
                                 value={vehicles[i].registration_number}
+                                validate={{
+                                  required: {
+                                    value: true,
+                                    errorMessage: "Enter the license plate number",
+                                  },
+
+                                }}
                               />
                             </div>
                             <div className="form-group pt-3">
                               <label className="mb-1" for={`name${i}`}>
                                 Driver Name
                               </label>
-                              <input
+                              <AvField
                                 type="text"
                                 className="form-control pass_input"
                                 id={`name${i}`}
@@ -937,6 +907,13 @@ function TravelTicket({ Seleted_Values }) {
                                   handleVehicle(e.target.value, e.target.name, i)
                                 }
                                 value={vehicles[i].driver_name}
+                                validate={{
+                                  required: {
+                                    value: true,
+                                    errorMessage: "Enter Driver Name",
+                                  },
+
+                                }}
                               />
                             </div>
 
@@ -944,17 +921,24 @@ function TravelTicket({ Seleted_Values }) {
                               <label className="mb-1" for={`name${i}`}>
                                 Driver License Number
                               </label>
-                              <input
+                              <AvField
                                 type="text"
                                 className="form-control pass_input"
                                 id={`name${i}`}
                                 placeholder="Enter Driver License Number"
                                 style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="driver_License"
+                                name="driver_name"
                                 onChange={(e) =>
                                   handleVehicle(e.target.value, e.target.name, i)
                                 }
-                                value={vehicles[i].license_number}
+                                value={vehicles[i].driver_name}
+                                validate={{
+                                  required: {
+                                    value: true,
+                                    errorMessage: "Enter Driver License Number",
+                                  },
+
+                                }}
                               />
                             </div>
 
@@ -1029,7 +1013,7 @@ function TravelTicket({ Seleted_Values }) {
                               <label className="mb-3" for={`name${i}`}>
                                 Name
                               </label>
-                              <input
+                              <AvField
                                 type="text"
                                 className="form-control pass_input"
                                 id={`name${i}`}
@@ -1044,6 +1028,13 @@ function TravelTicket({ Seleted_Values }) {
                                   )
                                 }
                                 value={travellers[i].name}
+                                validate={{
+                                  required: {
+                                    value: true,
+                                    errorMessage: "Enter Traveller Name",
+                                  },
+
+                                }}
                               />
                             </div>
 
@@ -1073,7 +1064,7 @@ function TravelTicket({ Seleted_Values }) {
                                 <label className="mb-3" for={`age${i}`}>
                                   Age
                                 </label>
-                                <input
+                                <AvField
                                   type="text"
                                   className="form-control pass_input w-70 pt-2"
                                   placeholder="Enter Age"
@@ -1094,19 +1085,26 @@ function TravelTicket({ Seleted_Values }) {
                                     )
                                   }
                                   value={travellers[i].age}
+                                  validate={{
+                                    required: {
+                                      value: true,
+                                      errorMessage: "Enter Age",
+                                    }
+                                  }}
                                 />
+
                               </div>
                             </div>
 
                             <div className="form-group mt-1 pt-3">
                               <label className="mb-3" for={`aadhaar${i}`}>
-                                Adhaar Card Number{" "}
+                                Adhaar Card Number
                               </label>
-                              <input
+                              <AvField
                                 type="text"
                                 className="form-control pass_input"
                                 id={`adhaar${i}`}
-                                placeholder=" Enter 12 digit Adhaar Card Number"
+                                placeholder="Enter 12 digit Adhaar Card Number"
                                 style={{ fontSize: "11px", marginLeft: "-5px" }}
                                 name="adhaar"
                                 onChange={(e) =>
@@ -1117,7 +1115,14 @@ function TravelTicket({ Seleted_Values }) {
                                   )
                                 }
                                 value={travellers[i].adhaar}
+                                validate={{
+                                  required: {
+                                    value: true,
+                                    errorMessage: "Enter 12 digit Adhaar Card Number",
+                                  },
+                                }}
                               />
+
                             </div>
                           </p>
                         </div>
@@ -1152,44 +1157,46 @@ function TravelTicket({ Seleted_Values }) {
                   </Button>
                 </div> */}
                 </Col>
-              </div>
+                <div style={{ marginTop: "3rem", textAlign: "center" }}>
+                  <Button
+                    type="submit"
+                    class="btn btn-success"
+                    style={{
+                      width: "100%",
+                      textAlign: "center",
+                      height: "80px",
+                      borderRadius: "0px",
+                      backgroundColor: "#0fa453",
+                      border: "none",
+                      fontWeight: "600",
+                    }}
+                    onClick={onDmByeClick}
+                  >
+                    Book your Pass
+                  </Button>
+                </div>
+              </AvForm>
             </div>
-          </Container>
-          <div style={{ marginTop: "3rem", textAlign: "center" }}>
-            <Button
-              type="submit"
-              class="btn btn-success"
-              style={{
-                width: "100%",
-                textAlign: "center",
-                height: "80px",
-                borderRadius: "0px",
-                backgroundColor: "#0fa453",
-                border: "none",
-                fontWeight: "600",
-              }}
-              onClick={onDmByeClick}
-            >
-              Book your Pass
-            </Button>
           </div>
-        </div>
+        </Container>
+
+      </div>
 
     </>
-      );
+  );
 }
 
 
 
 
 
-      const mapStateToProps = ({dmpassReducer}) => {
-  const {Seleted_Values} = dmpassReducer;
-      return {Seleted_Values};
+const mapStateToProps = ({ dmpassReducer }) => {
+  const { Seleted_Values } = dmpassReducer;
+  return { Seleted_Values };
 };
 
-      export default connect(
-      mapStateToProps,
-      null
-      )(TravelTicket);
+export default connect(
+  mapStateToProps,
+  null
+)(TravelTicket);
 

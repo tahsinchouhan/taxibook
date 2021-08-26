@@ -14,7 +14,7 @@ import { getOtp, verifyOtp } from "../../../redux/login/actions";
 
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStart, setDmData } from "../../../redux/actions";
-import { number } from "yup";
+
 
 function DmTicket2() {
   const { user_data } = useSelector((state) => state.loginReducer);
@@ -35,11 +35,12 @@ function DmTicket2() {
     // }
     // console.log("Number",number);
     // console.log("otp",otp);
-    console.log("object", `91${number}`, otp);
-
+    // console.log("object", `91${number}`, otp);
+    if (otp.length === 6) {
     dispatch(fetchStart());
-    dispatch(verifyOtp(`${number}`,otp));
-   
+    dispatch(verifyOtp(number, otp))
+    //dispatch(verifyOtp(`${number}`,otp));
+    }
   };
   const sendOtp = () => {
     dispatch(getOtp(number))
@@ -219,7 +220,7 @@ function DmTicket2() {
               </div>
 
               <Container style={{ width: "", paddingTop: "20px" }}>
-                <AvForm>
+                <AvForm onClick={onDmTicketSecondShow}>
                   <Row>
                     <Col xs={12} md={6} className="mt-2">
                       <Form.Group
@@ -311,7 +312,7 @@ function DmTicket2() {
               </Container>
             </div>
           </Container>
-          <Button className="locationpass-btn" onClick={onDmTicketSecondShow}>
+          <Button className="locationpass-btn" >
             Continue
           </Button>
           <ToastContainer />
