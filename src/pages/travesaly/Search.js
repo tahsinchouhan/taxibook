@@ -181,8 +181,18 @@ function Search() {
           </div>
         </Container>
         <Container>
+          <div className="search_felid">
+          <div style={{textAlign:"center"}}>
           <SearchFelid/>
-          <p className="pt-2">Check out the Kanger Valley showcase</p>
+          </div>
+          <p
+              className="pt-2"
+              style={{ whiteSpace: "nowrap", fontSize: "12px",textAlign:"center" }}
+            >
+             <b> Check out the Kanger Valley showcase</b>
+            </p>
+          </div>
+          
           {/* <div className="pt-4">
             <Row>
               <Col sm={12} md={6} className="">

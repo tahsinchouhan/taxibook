@@ -7,7 +7,6 @@ import { NavLink, useHistory } from "react-router-dom";
 
 const data = [
   {
-    
     // src="https://www.youtube.com/embed/s_W9hNCaZak",
     // title="YouTube video player",
     // frameborder="0",
@@ -45,20 +44,22 @@ function SearchFelid() {
     },
   };
 
-  const onChange = () => {};
-  const onClickItem = () => {};
-  const onClickThumb = () => {};
+  // const onChange = () => {};
+  // const onClickItem = () => {};
+  // const onClickThumb = () => {};
   return (
     <>
-      <div>        
-        <Carousel className="pt-5"
+      <div  className="pt-3">
+        {/* <Carousel
+          className="pt-5"
           showArrows={true}
           onChange={onChange}
           onClickItem={onClickItem}
           onClickThumb={onClickThumb}
-        >
+        > */}
           <div>
             <iframe
+            className="search_view"
               width="100%"
               height="315"
               src="https://www.youtube.com/embed/s_W9hNCaZak"
@@ -66,31 +67,9 @@ function SearchFelid() {
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
-            ></iframe>
-          </div>
-          <div>
-            <iframe
-              width="100%"
-              height="315"
-              src="https://www.youtube.com/embed/7_PdY3bPfmM?start=2"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-          <div>
-            <iframe
-              width="560"
-              height="315"
-              src="https://www.youtube.com/embed/-Dw4_Gf1Plo"
-              title="YouTube video player"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </Carousel>
+            ></iframe>           
+          </div>         
+        {/* </Carousel> */}
       </div>
     </>
   );
