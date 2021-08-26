@@ -5,6 +5,7 @@ import { Container, Col, Form, Row, Image, Button } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 import { API_PATH } from "../../Path/Path";
+import SearchFelid from "./SearchFelid";
 // import { Button } from "bootstrap";
 
 function Search() {
@@ -180,44 +181,44 @@ function Search() {
           </div>
         </Container>
         <Container>
-         <div  className="search_video mt-5">
-         <Row>
-            <Col sm={12} md={6} className="">
-              <div>
-                <iframe
-                  width="560"
-                  height="315"
-                  src="https://www.youtube.com/embed/s_W9hNCaZak"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
-              </div>
-            </Col>
-            <Col sm={12} md={6}>
-              <div>
-                <iframe
-                  width="560"
-                  height="315"
-                  src="https://www.youtube.com/embed/7_PdY3bPfmM?start=2"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
-              </div>
-            </Col>            
-          </Row>
-          <p className="pt-2"><b>Check out the Kanger Valley showcase</b></p>
-         </div>          
+          <SearchFelid/>
+          <p className="pt-2">Check out the Kanger Valley showcase</p>
+          {/* <div className="pt-4">
+            <Row>
+              <Col sm={12} md={6} className="">
+                <div className="">
+                  <iframe
+                    width="100%"
+                    height="315"
+                    src="https://www.youtube.com/embed/s_W9hNCaZak"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </Col>
+              <Col sm={12} md={6}>
+                <div>
+                  <iframe
+                    width="100%"
+                    height="315"
+                    src="https://www.youtube.com/embed/7_PdY3bPfmM?start=2"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </Col>
+            </Row>
+            <p className="pt-2">
+              <b>Check out the Kanger Valley showcase</b>
+            </p>
+          </div> */}
         </Container>
-        <Container>
-          <Row>
-           s
-          </Row>
-        </Container>
-        <>
+       
+        {/* <>
           {search ? (
             <div>
               <h2 className="package__title mb-5 mt-3">
@@ -319,9 +320,9 @@ function Search() {
               </div>
             </div>
           ) : null}
-        </>
+        </> */}
 
-        <h2 className="package__title mb-5">
+        {/* <h2 className="package__title mb-5">
           <span>Packages</span>
         </h2>
         <>
@@ -386,13 +387,196 @@ function Search() {
               );
             })}
           </div>
-        </>
-        <hr />
+        </> 
+        <hr />*/}
         <>
-          <h2 className="package__title mb-5">
-            <span>Destinations</span>{" "}
-          </h2>
-          <div
+          <Container>
+            <h2 className="package__title mb-5">
+              <span>Destinations</span>
+            </h2>
+            <Row>
+              {destinations.map((item) => {
+                return (
+                  <Col xs={12} md={6}>
+                    <div
+                      onClick={() =>
+                        history.push({
+                          pathname: `/destination_details/${item.title}`,
+                          id: item._id,
+                        })
+                      }
+                      className="search_div"
+                      style={{
+                        width:"100%",
+                        height: 200,
+                        // marginRight: 15,
+                        marginTop: 10,
+                        display: "flex",
+                      }}
+                    >
+                      <Image
+                        draggable={false}
+                        className="search_img "
+                        
+                        src={item.upload_images}
+                      />
+                      <div style={{ color: "black" }} className="package__trip">
+                        <h6 className="packages__block-title mt-3 mb-0">
+                          {item.title}
+                        </h6>
+                        <small className="packages__block-subtitle">
+                          {item.sub_title}
+                        </small>
+                      </div>
+                    </div>
+                  </Col>
+                );
+              })}
+              
+            </Row> 
+          </Container>
+          <hr />
+          <Container>
+            <h2 className="package__title mb-5">
+              <span>Packages</span>
+            </h2>
+            <Row>
+              {packages.map((item) => {
+                return (
+                  <Col xs={12} md={4}>
+                    <div
+                      onClick={() =>
+                        history.push({
+                          pathname: `/packages_details/${item.title}`,
+                          item: item._id,
+                         
+                        })
+                      }
+                      className="search_div"
+                      style={{
+                        width:"100%",
+                        height: 200,
+                        // marginRight: 15,
+                        marginTop: 10,
+                        display: "flex",
+                      }}
+                    >
+                      <Image
+                        draggable={false}
+                        className="search_img "                        
+                        src={item.upload_images}
+                      />
+                      <div style={{whiteSpace:"nowrap",paddingTop:"20px"}}>
+                    <h6 className="packages__block-title_ mt-3 mb-0">
+                      {item.title}
+                    </h6>
+                    <div
+                      style={{
+                        paddingTop:"2",
+                      }}
+                    >
+                      <h6
+                        style={{
+                          background: "#BEBEBE",
+                          display: "inline",
+                          padding: "3px",
+                          borderRadius: "4px",
+                          fontSize: "14px",
+                          
+                        }}
+                      >
+                        {item.sub_title}
+                      </h6>
+                    </div>
+                    <div>
+                      <small className="packages__block-subtitle">
+                        ₹ {item.price}
+                      </small>
+                    </div>
+                  </div>
+                    </div>
+                  </Col>
+                );
+              })}
+              
+            </Row>
+          </Container>
+          {/* <Container>
+             <h2 className="package__title mb-5">
+          <span>Packages</span>
+        </h2>
+        <div
+            style={{
+
+              // display: "flex",
+              flexDirection: "row",
+              flexWrap: "wrap",
+              marginBottom: 100,
+              marginTop: -100,
+            }}
+          >
+          <Row>
+          {packages.map((item) => {
+              return (
+            <Col xs={12} md={6}>
+            <div
+                  onClick={() =>
+                    history.push({
+                      pathname: `/packages_details/${item.title}`,
+                      item: item._id,
+                    })
+                  }
+                  className="search_div"
+                  style={{
+                    width:"100%",
+                        height: 200,
+                    marginRight: 15,
+                    marginTop: 10,
+                    display: "flex",
+                  }}
+                >
+                  <Image
+                    draggable={false}
+                    className="search_indian_oil "
+                    style={{ width: "60%", height: "200px", borderRadius: 10 }}
+                    src={item.upload_images}
+                  />
+                  <div style={{whiteSpace:"nowrap",paddingTop:"29px"}}>
+                    <h6 className="packages__block-title_ mt-3 mb-0">
+                      {item.title}
+                    </h6>
+                    <div
+                      style={{
+                        paddingTop:"2",
+                      }}
+                    >
+                      <h6
+                        style={{
+                          background: "#BEBEBE",
+                          display: "inline",
+                          padding: "3px",
+                          borderRadius: "4px",
+                          fontSize: "14px",
+                          
+                        }}
+                      >
+                        {item.sub_title}
+                      </h6>
+                    </div>
+                    <div>
+                      <small className="packages__block-subtitle">
+                        ₹ {item.price}
+                      </small>
+                    </div>
+                  </div>
+                </div>
+            </Col>
+             );
+            })}           
+          </Row>
+          </div>
+        </Container> */}
+          {/* <div
             style={{
               display: "flex",
               flexDirection: "row",
@@ -415,6 +599,8 @@ function Search() {
                     height: 200,
                     marginRight: 15,
                     marginTop: 100,
+                    display:"flex"
+
                   }}
                 >
                   <Image
@@ -433,7 +619,7 @@ function Search() {
                 </div>
               );
             })}
-          </div>
+          </div> */}
         </>
       </Container>
       <Footer />
