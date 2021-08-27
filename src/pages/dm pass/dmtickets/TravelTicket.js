@@ -10,7 +10,7 @@ import Footer from "../../travesaly/Footer";
 
 import { connect, useDispatch, useSelector } from "react-redux";
 import { Paper } from "@material-ui/core";
-import { createDmPass } from "../../../redux/actions";
+import { createDmPassTwo } from "../../../redux/actions";
 import DmPass from "../DmPass";
 import AvField from "availity-reactstrap-validation/lib/AvField";
 import AvForm from "availity-reactstrap-validation/lib/AvForm";
@@ -54,7 +54,7 @@ function TravelTicket({ Seleted_Values }) {
       vehical_details: vehicles,
     });
     dispatch(
-      createDmPass({
+      createDmPassTwo({
         ...dmData,
         basic_details: travellers,
         vehical_details: vehicles,
@@ -99,8 +99,7 @@ function TravelTicket({ Seleted_Values }) {
         vehicle_number: "",
         name: "",
         gender: "Male",
-        age: "",
-        adhaar: "",
+      
       });
     }
     return temp;
@@ -346,18 +345,7 @@ function TravelTicket({ Seleted_Values }) {
                                 }}
                               />
 
-                              {/* <input
-                              type="text"
-                              className ="form-control pass_input"
-                              id={`vehicle_number${i}`}
-                              placeholder="Enter the license plate number"
-                              style={{ fontSize: "11px", marginLeft: "-5px", width: 250 }}
-                              name="registration_number"
-                              onChange={(e) =>
-                                handleVehicle(e.target.value, e.target.name, i)
-                              }
-                              value={vehicles[i].registration_number}
-                            /> */}
+                             
                             </div>
                             <div className="form-group pt-3">
                               <label className="mb-1" for={`name${i}`}>
@@ -390,14 +378,14 @@ function TravelTicket({ Seleted_Values }) {
                               <AvField
                                 type="text"
                                 className="form-control pass_input"
-                                id={`name${i}`}
+                                id={`license_number${i}`}
                                 placeholder="Enter Driver License Number"
                                 style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="driver_name"
+                                name="driver_licence_number"
                                 onChange={(e) =>
                                   handleVehicle(e.target.value, e.target.name, i)
                                 }
-                                value={vehicles[i].driver_name}
+                                value={vehicles[i].driver_licence_number}
                                 validate={{
                                   required: {
                                     value: true,
@@ -1185,10 +1173,6 @@ function TravelTicket({ Seleted_Values }) {
     </>
   );
 }
-
-
-
-
 
 const mapStateToProps = ({ dmpassReducer }) => {
   const { Seleted_Values } = dmpassReducer;

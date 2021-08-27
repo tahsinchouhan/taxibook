@@ -2,8 +2,11 @@ import {
     SET_DM_DATA,
     CREATE_DM_PASS,
     SET_DM_PASS_ID,
-    DM_PASS_DETAILS
+    DM_PASS_DETAILS,
+    CREATE_DM_PASS_TWO
 } from "../actions";
+
+
 
 export const setDmData = (lbl,value) => ({
     type: SET_DM_DATA,
@@ -21,6 +24,17 @@ export const createDmPass = (values) => {
       payload: values
     };
 };
+
+export const createDmPassTwo = (values) => {
+console.log("actions", values);
+
+    return {
+      type: CREATE_DM_PASS_TWO,
+      payload: values
+    };
+};
+
+
   
 export const DmPassDetails = (values) => {
     return {
