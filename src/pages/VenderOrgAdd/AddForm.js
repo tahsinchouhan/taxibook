@@ -12,32 +12,30 @@ import runmen from "../../assets/img/runmen.png";
 import { useSelector } from "react-redux";
 
 const schema = yup.object().shape({
-  vendorSchema: yup.object().shape({
-    serial: yup.string().required(),
-    venderName: yup.string().required(),
-    vender_mobile: yup.string().required(),
-    vendor_category: yup.string(),
-    email: yup.string().required(),
-    id_proof: yup.string().required(),
-    service_name: yup.string(),
-  }),
-  orgSchema: yup.object().shape({
-    serial_number: yup.string().required(),
-    org_name: yup.string().required(),
-    address: yup.string().required(),
-    name: yup.string().required(),
-    org_email: yup.string().required(),
-    phone: yup.string().required(),
-    acc_name: yup.string().required(),
-    acc_number: yup.string().required(),
-    ifsc_code: yup.string().required(),
-    acc_type: yup.string().required(),
-    upi_id: yup.string().required(),
-    pan_number: yup.string().required(),
-    adhaar_number: yup.string().required()
-  }),
-});
+  serial: yup.string().required(),
+  venderName: yup.string().required(),
+  vender_mobile: yup.string().required(),
+  vendor_category: yup.string(),
+  email: yup.string().required(),
+  id_proof: yup.string().required(),
+  service_name: yup.string(),
+})
 
+const orgSchema = yup.object().shape({
+  s_no: yup.string().required(),
+  org_name: yup.string().required(),
+  address: yup.string().required(),
+  name: yup.string().required(),
+  org_email: yup.string().required(),
+  phone: yup.string().required(),
+  acc_name: yup.string().required(),
+  acc_number: yup.string().required(),
+  ifsc_code: yup.string().required(),
+  acc_type: yup.string().required(),
+  upi_id: yup.string().required(),
+  pan_number: yup.string().required(),
+  adhaar_number: yup.string().required()
+})
 
 function AddForm() {
   const history = useHistory();
@@ -58,26 +56,30 @@ function AddForm() {
 
   const onsubmitVendor = (values) => {
     console.log("submit vender");
-    fetch(API_PATH + "/api/v1/vendor/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(values),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log("Vendor Register successFully", res);
-        if (res.status === "CREATED") {
-          setShow(1);
-        } else {
-          console.log("Error:::::::");
-        }
+    if (values != "") {
+      fetch(API_PATH + "/api/v1/vendor/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
       })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log("Vendor Register successFully", res);
+          if (res.status === "CREATED") {
+            setShow(1);
+          } else {
+            console.log("Error:::::::");
+          }
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    } else {
+      console.log("errorrrrrrrrrrr");
+    }
 
-      .catch((error) => {
-        console.log("error", error);
-      });
   };
   const backToVender = () => {
     setShow(0);
@@ -96,7 +98,8 @@ function AddForm() {
       .then((res) => {
         console.log("org Register successFully", res);
         if (res.status === "CREATED") {
-          history.push("/CongratulationPage");
+          setShow(2);
+          //history.push("/CongratulationPage");
         } else {
           console.log("Error:::::::");
         }
@@ -134,7 +137,6 @@ function AddForm() {
         console.log("Book Genre Data", res.data);
       })
       .catch((error) => console.log("Genre Lookup Err::", error));
-
   };
 
   return (
@@ -147,7 +149,7 @@ function AddForm() {
       <div className="container" style={{ width: "70%" }}>
         {show == 0 ?
           <Formik
-            validationSchema={schema.vendorSchema}
+            validationSchema={schema}
             onSubmit={(values) => onsubmitVendor(values)}
 
             initialValues={{
@@ -344,10 +346,10 @@ function AddForm() {
           : show == 1 ?
             <>
               <Formik
-                validationSchema={schema.orgSchema}
+                validationSchema={orgSchema}
                 onSubmit={(values) => onSubmitOrg(values)}
                 initialValues={{
-                  serial_number: '',
+                  s_no: '',
                   org_name: '',
                   acc_name: '',
                   address: '',
@@ -382,14 +384,14 @@ function AddForm() {
                         >
                           <Form.Label>Serial Number:</Form.Label>
                           <Form.Control
-                            type="text"
-                            name="number"
-                            value={values.serial_number}
+                            type="number"
+                            name="s_no"
+                            value={values.s_no}
                             onChange={handleChange}
-                            isInvalid={!!errors.serial_number}
+                            isInvalid={!!errors.s_no}
                           />
                           <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.serial_number}
+                            {errors.s_no}
                           </Form.Control.Feedback>
                         </Form.Group>
                       </Col>
@@ -401,7 +403,7 @@ function AddForm() {
                         >
                           <Form.Label>Name of organization:</Form.Label>
                           <Form.Control
-                            type="name"
+                            type="text"
                             name="org_name"
                             placeholder="Name of organization"
                             value={values.org_name}
@@ -655,16 +657,17 @@ function AddForm() {
                         </Form.Group>
                       </Col>
                     </Row>
-                    {/* <Button type="button" className="locationpass-btn mt-3 mb-5" onClick={backToVender} >Back</Button> */}
+
                     <Button type="submit" className="locationpass-btn mt-3 mb-5" >Submit</Button>
 
                   </Form>
                 )}
               </Formik>
+
             </>
             : <>
               <div className="d-none d-md-block">
-                <Header />
+
                 <Container style={{ width: "70%", paddingTop: "50px" }}>
                   <Row>
                     <Col>
@@ -675,12 +678,12 @@ function AddForm() {
                     <Col>
                       <div style={{ paddingTop: "60px" }}>
                         <div style={{ marginBottom: "20px" }}>
-                          <h3 style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</h3>
-                          <span style={{ color: "black" }}>Your booking has been confirmed</span>
+                          <h3 style={{ fontWeight: "bolder" }}>Thank You For Registration!</h3>
+                          <span style={{ color: "black" }}>Our team will contact with you soon</span>
 
-                          {/* <h3 style={{ fontWeight: "bolder" }}>Order ID</h3>
-                     <span style={{ color: "black", marginBottom: "50px" }}>{booking_id}</span> */}
-                          {/* <span style={{color:"black", marginBottom:"50px"}}>{apiData?.order_id}</span> */}
+                          <h3 style={{ fontWeight: "bolder" }}>Registration ID</h3>
+                          <span style={{ color: "black", marginBottom: "50px" }}>{booking_id}</span>
+                          <span style={{ color: "black", marginBottom: "50px" }}>{apiData?.order_id}</span>
                         </div>
                         <div>
 
@@ -704,7 +707,7 @@ function AddForm() {
                     </Col>
                   </Row>
                 </Container>
-                <Footer />
+
               </div>
 
               {/*mobile-view*/}
@@ -736,56 +739,18 @@ function AddForm() {
                   </div>
                 </div>
                 <div style={{ marginTop: "20px", textAlign: "center" }}>
-                  <span style={{ fontWeight: "700", fontSize: "22px" }}>CONGRATULATIONS!</span><br />
-                  <span style={{ fontSize: "13px" }}>Your booking has been confirmed</span>
+                  <span style={{ fontWeight: "700", fontSize: "22px" }}>Thank You For Registration!</span><br />
+                  <span style={{ fontSize: "13px" }}>Our team will contact with you soon</span>
                 </div>
                 <div>
                   <img src={runmen} alt="" style={{ width: "90%" }} />
                 </div>
                 <div style={{ textAlign: "center" }}>
-                  <h3 style={{ fontWeight: "bolder", marginBottom: "20px" }}>Order ID</h3>
+                  <h3 style={{ fontWeight: "bolder", marginBottom: "20px" }}>Registration ID</h3>
                   <span style={{ color: "black", marginBottom: "50px" }}>{booking_id}</span>
                 </div>
                 <div style={{ textAlign: "center" }}>
-                  <div >
-                    <Button
-                      className="btn btn-success"
-                      style={{
-                        width: "186px",
-                        textAlign: "center",
-                        height: "52px",
-                        borderRadius: "9px",
-                        backgroundColor: "#0fa453",
-                        fontWeight: "bold",
-                        marginBottom: "20px"
-                      }}
-                    ><FaWhatsapp style={{ fontWeight: "bold", fontSize: "30px" }} />
-                      <span> Whatsapp Link</span></Button>
-                  </div>
-                  <div>
-                    <Button style={{
-                      width: "186px",
-                      textAlign: "center",
-                      height: "52px",
-                      borderRadius: "9px",
-                      backgroundColor: " #FF4A68",
-                      fontWeight: "bold",
-                      marginBottom: "20px"
-                    }}
-                    >Download E-ticket</Button>
-                  </div>
-                  <div>
-                    <Button style={{
-                      width: "186px",
-                      textAlign: "center",
-                      height: "52px",
-                      borderRadius: "9px",
-                      backgroundColor: "",
-                      fontWeight: "bold",
-                      marginBottom: "20px"
-                    }}
-                    >Sent by Email</Button>
-                  </div>
+
                   <div>
                     <Button style={{
                       width: "186px",

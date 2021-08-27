@@ -11,8 +11,8 @@ import SearchFelid from "./SearchFelid";
 function Search() {
   const [destinations, setDestinations] = useState([]);
   const [packages, setPackages] = useState([]);
-
   const [search, setSearch] = useState();
+  const [flag, setFlag] = useState(false);
 
   const history = useHistory();
   useEffect(() => {
@@ -41,6 +41,12 @@ function Search() {
   };
 
   const searchingData = (value) => {
+    setSearch(value);
+    if (value) {
+      setFlag(true);
+    } else {
+      setFlag(false);
+    }
     fetch(API_PATH + `/api/v1/search?searchvalue=${value}`)
       .then((response) => response.json())
       .then((json) => {
@@ -182,17 +188,17 @@ function Search() {
         </Container>
         <Container>
           <div className="search_felid">
-          <div style={{textAlign:"center"}}>
-          <SearchFelid/>
-          </div>
-          <p
+            <div style={{ textAlign: "center" }}>
+              <SearchFelid />
+            </div>
+            <p
               className="pt-2"
-              style={{ whiteSpace: "nowrap", fontSize: "12px",textAlign:"center" }}
+              style={{ whiteSpace: "nowrap", fontSize: "12px", textAlign: "center" }}
             >
-             <b> Check out the Kanger Valley showcase</b>
+              <b> Check out the Kanger Valley showcase</b>
             </p>
           </div>
-          
+
           {/* <div className="pt-4">
             <Row>
               <Col sm={12} md={6} className="">
@@ -227,67 +233,26 @@ function Search() {
             </p>
           </div> */}
         </Container>
-       
-        {/* <>
-          {search ? (
-            <div>
-              <h2 className="package__title mb-5 mt-3">
-                <span>Search Result</span>
-              </h2>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  marginBottom: 100,
-                  marginTop: -100,
-                }}
-              >
-                {console.log(search)}
-                {!search.destinations == []
-                  ? search.destinations.map((item) => {
-                      return (
-                        <div
-                          onClick={() =>
-                            history.push({
-                              pathname: `/destination_details/${item.title}`,
-                              id: item._id,
-                            })
-                          }
-                          style={{
-                            width: 300,
-                            height: 200,
-                            marginRight: 15,
-                            marginTop: 100,
-                          }}
-                        >
-                          <Image
-                            draggable={false}
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              borderRadius: 10,
-                            }}
-                            src={item.upload_images}
-                          />
-                          <div
-                            style={{ color: "black" }}
-                            className="package__trip"
-                          >
-                            <h6 className="packages__block-title mt-3 mb-0">
-                              {item.title}
-                            </h6>
-                            <small className="packages__block-subtitle">
-                              {item.sub_title}
-                            </small>
-                          </div>
-                        </div>
-                      );
-                    })
-                  : null}
 
-                {!search.packages == []
-                  ? search.packages.map((item) => {
+        <>
+          {flag ?
+            (search ? (
+              <div>
+                <h2 className="package__title mb-5 mt-3">
+                  <span>Search Result</span>
+                </h2>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    marginBottom: 100,
+                    marginTop: -100,
+                  }}
+                >
+                  {console.log(search)}
+                  {!search.destinations == []
+                    ? search.destinations.map((item) => {
                       return (
                         <div
                           onClick={() =>
@@ -326,11 +291,53 @@ function Search() {
                         </div>
                       );
                     })
-                  : null}
+                    : null}
+
+                  {!search.packages == []
+                    ? search.packages.map((item) => {
+                      return (
+                        <div
+                          onClick={() =>
+                            history.push({
+                              pathname: `/destination_details/${item.title}`,
+                              id: item._id,
+                            })
+                          }
+                          style={{
+                            width: 300,
+                            height: 200,
+                            marginRight: 15,
+                            marginTop: 100,
+                          }}
+                        >
+                          <Image
+                            draggable={false}
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              borderRadius: 10,
+                            }}
+                            src={item.upload_images}
+                          />
+                          <div
+                            style={{ color: "black" }}
+                            className="package__trip"
+                          >
+                            <h6 className="packages__block-title mt-3 mb-0">
+                              {item.title}
+                            </h6>
+                            <small className="packages__block-subtitle">
+                              {item.sub_title}
+                            </small>
+                          </div>
+                        </div>
+                      );
+                    })
+                    : null}
+                </div>
               </div>
-            </div>
-          ) : null}
-        </> */}
+            ) : null) : null}
+        </>
 
         {/* <h2 className="package__title mb-5">
           <span>Packages</span>
@@ -400,117 +407,122 @@ function Search() {
         </> 
         <hr />*/}
         <>
-          <Container>
-            <h2 className="package__title mb-5">
-              <span>Destinations</span>
-            </h2>
-            <Row>
-              {destinations.map((item) => {
-                return (
-                  <Col xs={12} md={6}>
-                    <div
-                      onClick={() =>
-                        history.push({
-                          pathname: `/destination_details/${item.title}`,
-                          id: item._id,
-                        })
-                      }
-                      className="search_div"
-                      style={{
-                        width:"100%",
-                        height: 200,
-                        // marginRight: 15,
-                        marginTop: 10,
-                        display: "flex",
-                      }}
-                    >
-                      <Image
-                        draggable={false}
-                        className="search_img "
-                        
-                        src={item.upload_images}
-                      />
-                      <div style={{ color: "black" }} className="package__trip">
-                        <h6 className="packages__block-title mt-3 mb-0">
-                          {item.title}
-                        </h6>
-                        <small className="packages__block-subtitle">
-                          {item.sub_title}
-                        </small>
-                      </div>
-                    </div>
-                  </Col>
-                );
-              })}
-              
-            </Row> 
-          </Container>
-          <hr />
-          <Container>
-            <h2 className="package__title mb-5">
-              <span>Packages</span>
-            </h2>
-            <Row>
-              {packages.map((item) => {
-                return (
-                  <Col xs={12} md={4}>
-                    <div
-                      onClick={() =>
-                        history.push({
-                          pathname: `/packages_details/${item.title}`,
-                          item: item._id,
-                         
-                        })
-                      }
-                      className="search_div"
-                      style={{
-                        width:"100%",
-                        height: 200,
-                        // marginRight: 15,
-                        marginTop: 10,
-                        display: "flex",
-                      }}
-                    >
-                      <Image
-                        draggable={false}
-                        className="search_img "                        
-                        src={item.upload_images}
-                      />
-                      <div style={{whiteSpace:"nowrap",paddingTop:"20px"}}>
-                    <h6 className="packages__block-title_ mt-3 mb-0">
-                      {item.title}
-                    </h6>
-                    <div
-                      style={{
-                        paddingTop:"2",
-                      }}
-                    >
-                      <h6
+          {!flag &&
+            <Container>
+
+              <h2 className="package__title mb-5">
+                <span>Destinations</span>
+              </h2>
+              <Row>
+                {destinations.map((item) => {
+                  return (
+                    <Col xs={12} md={6}>
+                      <div
+                        onClick={() =>
+                          history.push({
+                            pathname: `/destination_details/${item.title}`,
+                            id: item._id,
+                          })
+                        }
+                        className="search_div"
                         style={{
-                          background: "#BEBEBE",
-                          display: "inline",
-                          padding: "3px",
-                          borderRadius: "4px",
-                          fontSize: "14px",
-                          
+                          width: "100%",
+                          height: 200,
+                          // marginRight: 15,
+                          marginTop: 10,
+                          display: "flex",
                         }}
                       >
-                        {item.sub_title}
-                      </h6>
-                    </div>
-                    <div>
-                      <small className="packages__block-subtitle">
-                        ₹ {item.price}
-                      </small>
-                    </div>
-                  </div>
-                    </div>
-                  </Col>
-                );
-              })}
-              
-            </Row>
-          </Container>
+                        <Image
+                          draggable={false}
+                          className="search_img "
+
+                          src={item.upload_images}
+                        />
+                        <div style={{ color: "black" }} className="package__trip">
+                          <h6 className="packages__block-title mt-3 mb-0">
+                            {item.title}
+                          </h6>
+                          <small className="packages__block-subtitle">
+                            {item.sub_title}
+                          </small>
+                        </div>
+                      </div>
+                    </Col>
+                  );
+                })}
+
+              </Row>
+            </Container>
+          }
+          <hr />
+          {!flag &&
+            <Container>
+              <h2 className="package__title mb-5">
+                <span>Packages</span>
+              </h2>
+              <Row>
+                {packages.map((item) => {
+                  return (
+                    <Col xs={12} md={4}>
+                      <div
+                        onClick={() =>
+                          history.push({
+                            pathname: `/packages_details/${item.title}`,
+                            item: item._id,
+
+                          })
+                        }
+                        className="search_div"
+                        style={{
+                          width: "100%",
+                          height: 200,
+                          // marginRight: 15,
+                          marginTop: 10,
+                          display: "flex",
+                        }}
+                      >
+                        <Image
+                          draggable={false}
+                          className="search_img "
+                          src={item.upload_images}
+                        />
+                        <div style={{ whiteSpace: "nowrap", paddingTop: "20px" }}>
+                          <h6 className="packages__block-title_ mt-3 mb-0">
+                            {item.title}
+                          </h6>
+                          <div
+                            style={{
+                              paddingTop: "2",
+                            }}
+                          >
+                            <h6
+                              style={{
+                                background: "#BEBEBE",
+                                display: "inline",
+                                padding: "3px",
+                                borderRadius: "4px",
+                                fontSize: "14px",
+
+                              }}
+                            >
+                              {item.sub_title}
+                            </h6>
+                          </div>
+                          <div>
+                            <small className="packages__block-subtitle">
+                              ₹ {item.price}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </Col>
+                  );
+                })}
+
+              </Row>
+            </Container>
+          }
           {/* <Container>
              <h2 className="package__title mb-5">
           <span>Packages</span>
