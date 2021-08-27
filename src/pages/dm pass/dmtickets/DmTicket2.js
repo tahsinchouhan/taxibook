@@ -85,11 +85,11 @@ function DmTicket2() {
               </div>
 
               <Container style={{ width: "69%", paddingTop: "50px" }}>
-                <AvForm >
+                <AvForm>
                   <Row>
                     <Col xs={12} md={6} className="mt-2">
                       <Form.Label className="dm-ticket">
-                        Enter Mobile no.
+                        Enter mobile number
                       </Form.Label>
 
                       <AvField
@@ -229,7 +229,7 @@ function DmTicket2() {
                       >
 
                         <Form.Label className="dm-ticket">
-                          Enter Mobile no.
+                          Enter mobile number.
                         </Form.Label>
 
                         <AvField

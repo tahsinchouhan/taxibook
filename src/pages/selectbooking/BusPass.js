@@ -82,7 +82,7 @@ function BusDetail() {
                       color: "black",
                     }}
                   >
-                    Enter Mobile no.
+                    Enter mobile number
                   </Form.Label>
                   <AvField
                     style={{ height: "50px", fontSize: "12px" }}
@@ -92,7 +92,7 @@ function BusDetail() {
                     type="number"
                     className="bus_input"
                     errorMessage="Invalid Number"
-                    placeholder="Enter Mobile No"
+                    placeholder="Enter mobile number"
                     validate={{
                       required: {
                         value: true,
@@ -206,7 +206,7 @@ function BusDetail() {
                       color: "black",
                     }}
                   >
-                    Enter Mobile no.
+                    Enter mobile number
                   </Form.Label>
                   <AvField
                     style={{ height: "50px", fontSize: "12px" }}
@@ -217,7 +217,7 @@ function BusDetail() {
                     type="number"
                     className="bus_input"
                     errorMessage="Invalid Number"
-                    placeholder="Enter Mobile No"
+                    placeholder="Enter mobile number"
                     validate={{
                       required: {
                         value: true,
@@ -237,7 +237,7 @@ function BusDetail() {
                   {/* <Form.Control
                     type="text"
                     className="bus_input"
-                    placeholder="Enter Mobile No"
+                    placeholder="Enter mobile number"
                     style={{ fontSize: "12px" }}
                     value={mobile}
                     onChange={(e) => dispatch(setMobile(e.target.value))}

@@ -62,7 +62,7 @@ function* createDmPassOfTraveller({ payload }) {
 }
 
 function* createDmPass({ payload }) {
-    console.log("pay", payload);
+    console.log("paydata", payload);
     try {
         const dmpass = yield call(createTravelPassRequest, payload);
         const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id });

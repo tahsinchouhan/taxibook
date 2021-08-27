@@ -301,8 +301,6 @@ console.log("user_data",user_data);
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  // loginUser: (info, history) => dispatch(loginUser(info, history)),
-  // companyDetail: (userInfo, history) => dispatch(companyDetail(userInfo, history))
   DmPassDetails:(data)=>dispatch(DmPassDetails(data))
 });
 
