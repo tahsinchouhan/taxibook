@@ -50,13 +50,14 @@ const validateName = (value) => {
 function AddForm() {
   const history = useHistory();
   const [show, setShow] = useState(0);
+  const [id, setId] = useState([]);
   const [catg, setCatg] = useState([]);
   const [serviceNm, setServiceNm] = useState([]);
   const { data: apiData, tripData, booking_id } = useSelector(state => state.busReducer)
   const goHome = () => {
     history.push("/");
   };
-
+  let ID;
   useEffect(() => {
     window.scrollTo(0, 0);
     vendorCategory();
@@ -96,6 +97,7 @@ function AddForm() {
   };
 
   const onSubmitOrg = (values) => {
+    console.log("ID", id)
     console.log("Organization", values)
     fetch(API_PATH + "/api/v1/organization/create", {
       method: "POST",
@@ -106,8 +108,13 @@ function AddForm() {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log("org Register successFully", res);
+        console.log("org Register successFully", res.data._id);
         if (res.status === "CREATED") {
+          setId(res.data._id)
+          localStorage.setItem("Reg ID", res.data._id)
+          ID = res.data._id;
+          console.log("IDDDDDD222222222222222222setid", id)
+          console.log("id", id)
           setShow(2);
           //history.push("/CongratulationPage");
         } else {
@@ -148,7 +155,8 @@ function AddForm() {
       })
       .catch((error) => console.log("Genre Lookup Err::", error));
   };
-
+  const RegID = localStorage.getItem("Reg ID")
+  console.log("IDregLocal", RegID)
 
   return (
     <>
@@ -198,6 +206,9 @@ function AddForm() {
                         onChange={handleChange}
                         isInvalid={!!errors.serial}
                       />
+                      {/* <Form.Control.Feedback type="invalid" tooltip>
+                        {errors.serial}
+                      </Form.Control.Feedback> */}
                       <Form.Control.Feedback type="invalid" tooltip>
                         {errors.serial}
                       </Form.Control.Feedback>
@@ -389,45 +400,22 @@ function AddForm() {
                     <div>
                       <Row>
                         < Col xs={12} md={12}>
-                          {/* <FormGroup
-                          md="4"
-                          controlId="validationFormik101"
-                          className="position-relative mb-3"
-                        >
-                          <label>Serial Number:1234</label>
-                          <Field 
-                          className="form-control"
-                            type="number"
-                            name="s_no"
-                            value={values.s_no}
-                            onChange={handleChange}
-                            isInvalid={!!errors.s_no}
-                            validate={validateName}
 
-                          />
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.s_no}
-                          </Form.Control.Feedback>
-                        </FormGroup> */}
-                          <Form.Group>
-                            <label>Serial Number:</label>
+                          <Form.Group
+                            md="4"
+                            controlId="validationFormik102"
+                            className="position-relative mb-3">
+                            <Form.Label>Serial Number:</Form.Label>
                             <Form.Control
                               placeholder="Serial Number"
                               name="s_no"
                               value={values.s_no}
                               onChange={handleChange}
                               isInvalid={!!errors.s_no}
-                            // validate={validateName}
-                            // validate={this.validateName}
                             />
-                            {/* <Form.Control.Feedback type="invalid" tooltip>
-                              {errors.name}
-                            // </Form.Control.Feedback> */}
-                          
                             <Form.Control.Feedback type="invalid" tooltip>
                               {errors.s_no}
                             </Form.Control.Feedback>
-
                           </Form.Group>
                         </Col>
                         < Col xs={12} md={12}>
@@ -437,19 +425,6 @@ function AddForm() {
                             className="position-relative mb-3"
                           >
                             <Form.Label>Name of organization: </Form.Label>
-                            {/* <Form.Control
-                            type="text"
-                            name="org_name"
-                            placeholder="Name of organization"
-                            value={values.org_name}
-                            onChange={handleChange}
-                            isInvalid={!!errors.org_name}
-                          />
-
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.org_name}
-                          </Form.Control.Feedback>
-                        </Form.Group> */}
 
                             <Form.Control
                               className="form-control"
@@ -458,8 +433,6 @@ function AddForm() {
                               value={values.org_name}
                               onChange={handleChange}
                               isInvalid={!!errors.org_name}
-
-                            // validate={validateName}
                             />
                             <Form.Control.Feedback type="invalid" tooltip>
                               {errors.org_name}
@@ -720,20 +693,22 @@ function AddForm() {
             : <>
               <div className="d-none d-md-block">
 
-                <Container style={{ width: "70%", paddingTop: "50px" }}>
+                <Container style={{ width: "100%", paddingTop: "50px" }}>
                   <Row>
-                    <Col>
+                    <Col md={2}>
                       <div>
-                        <img src={runmen} alt="" />
+                        <img src={runmen} alt="Congrats" />
                       </div>
                     </Col>
-                    <Col>
+                    <Col md={4}></Col>
+                    <Col md={6}>
                       <div style={{ paddingTop: "60px" }}>
                         <div style={{ marginBottom: "20px" }}>
                           <h3 style={{ fontWeight: "bolder" }}>Thank You For Registration!</h3>
                           <span style={{ color: "black" }}>Our team will contact with you soon</span>
 
                           <h3 style={{ fontWeight: "bolder" }}>Registration ID</h3>
+                          <span style={{ color: "black" }}> {RegID}</span>
                           <span style={{ color: "black", marginBottom: "50px" }}>{booking_id}</span>
                           <span style={{ color: "black", marginBottom: "50px" }}>{apiData?.order_id}</span>
                         </div>
@@ -798,7 +773,9 @@ function AddForm() {
                   <img src={runmen} alt="" style={{ width: "90%" }} />
                 </div>
                 <div style={{ textAlign: "center" }}>
-                  <h3 style={{ fontWeight: "bolder", marginBottom: "20px" }}>Registration ID</h3>
+                  <h3 style={{ fontWeight: "bolder", }}>Registration ID</h3>
+                  <span style={{ color: "black", marginBottom: "20px" }}>{RegID}</span>
+
                   <span style={{ color: "black", marginBottom: "50px" }}>{booking_id}</span>
                 </div>
                 <div style={{ textAlign: "center" }}>
@@ -811,7 +788,8 @@ function AddForm() {
                       borderRadius: "9px",
                       backgroundColor: "#864BD8",
                       fontWeight: "bold",
-                      marginBottom: "20px"
+                      marginBottom: "20px",
+                      marginTop: "20px"
                     }}
                       onClick={goHome}
                     >Back to Home</Button>
@@ -819,6 +797,7 @@ function AddForm() {
                 </div>
               </div>
             </>}
+        {console.log("ididididididid", ID)}
       </div>
       <Footer />
 
