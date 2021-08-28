@@ -186,7 +186,7 @@ function Saly() {
             <Row>
               <Col sm={6} md={6}>
                 <div>
-                  <h3 className="ml-5">Tickets</h3>
+                  <h3 className="ml-5">Book Tickets</h3>
                   <p>
                     View all part tickets and check out where you have visited
                   </p>
@@ -208,7 +208,7 @@ function Saly() {
             <div className="pt-4">
               <Container>
                 <h4>
-                  <b>Recent Tickets</b>
+                  {/* <b>Recent Tickets</b> */}
                 </h4>
                 <TravellerTicket />
               </Container>
@@ -310,7 +310,7 @@ function Saly() {
                 <Col sm={6} md={6}>
                   <div>
                     <h3 className="ml-5">
-                      <b>Tickets</b>
+                      <b>Book Tickets</b>
                     </h3>
                     <p>
                       Get tickets to your favourite <br />
@@ -334,7 +334,7 @@ function Saly() {
               <div className="pt-4">
                 <Container>
                   <h4>
-                    <b>Recent Tickets</b>
+                    {/* <b>Recent Tickets</b> */}
                   </h4>
                   <TravellerTicket />
                 </Container>
