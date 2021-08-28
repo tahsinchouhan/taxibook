@@ -3,17 +3,16 @@ import { Button, Row, Col, Form, Container } from "react-bootstrap";
 import ticket from "../../../assets/img/ticket.png";
 import Header from "../../../components/Header";
 import { useHistory } from "react-router-dom";
-
 import { makeStyles } from "@material-ui/core/styles";
 import ButtonComponent from "../../../containers/Button";
 import Footer from "../../travesaly/Footer";
-
 import { connect, useDispatch, useSelector } from "react-redux";
 import { Paper } from "@material-ui/core";
 import { createDmPassTwo } from "../../../redux/actions";
 import DmPass from "../DmPass";
 import AvField from "availity-reactstrap-validation/lib/AvField";
 import AvForm from "availity-reactstrap-validation/lib/AvForm";
+import DatePicker from "react-datepicker";
 
 const button_Data = [
   {
@@ -39,7 +38,8 @@ function TravelTicket({ Seleted_Values }) {
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
   const [data, setData] = useState();
   const history = useHistory();
-
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const dispatch = useDispatch();
   const { dmData } = useSelector((state) => state.dmpassReducer);
   const { Vehicle: number_of_vehicals, Travellers: number_of_travellers, DaysTravel: duration_of_travel } =
@@ -60,7 +60,7 @@ function TravelTicket({ Seleted_Values }) {
         vehical_details: vehicles,
       })
     );
-    // history.push("/dm_congratulate");
+     history.push("/dm_congratulate");
   };
 
   const initialTravellers = () => {
@@ -71,6 +71,9 @@ function TravelTicket({ Seleted_Values }) {
         gender: "Male",
         age: "",
         adhaar: "",
+        start_date: startDate,
+        end_date: endDate,
+       
       });
     }
     return temp;
@@ -78,6 +81,8 @@ function TravelTicket({ Seleted_Values }) {
   const [travellers, setTravellers] = useState(initialTravellers);
 
   const handleTraveller = (val, lbl, i) => {
+    handleDate();
+    handleDateTwo();
     setTravellers(
       [...travellers].map((obj, key) => {
         if (key === i) {
@@ -99,7 +104,7 @@ function TravelTicket({ Seleted_Values }) {
         vehicle_number: "",
         name: "",
         gender: "Male",
-      
+
       });
     }
     return temp;
@@ -107,6 +112,10 @@ function TravelTicket({ Seleted_Values }) {
 
   const [vehicles, setVehicles] = useState(initialVehicles);
   const handleVehicle = (val, lbl, i) => {
+    console.log("object", val);
+    console.log("object lbl", lbl);
+    console.log("object i", i);
+
     setVehicles(
       [...vehicles].map((obj, key) => {
         if (key === i) {
@@ -121,7 +130,33 @@ function TravelTicket({ Seleted_Values }) {
     );
   };
 
+  const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
+    <button
+      style={{ border: "none", background: "transparent", fontSize: "12px", color: "#a5a5a5" }}
+      onClick={onClick}
+      ref={ref}
+    >
+      {value}
+    </button>
+  ))
 
+  const handleDate = (d) => {
+    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
+    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+    console.log(`${ye}-${mo}-${da}`);
+    //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
+    setStartDate(d)
+  }
+
+  const handleDateTwo = (d) => {
+    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+    let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
+    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+    console.log(`${ye}-${mo}-${da}`);
+    //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
+    setEndDate(d)
+  }
   useEffect(() => {
     console.log("vehicles", vehicles);
   }, [vehicles]);
@@ -345,7 +380,7 @@ function TravelTicket({ Seleted_Values }) {
                                 }}
                               />
 
-                             
+
                             </div>
                             <div className="form-group pt-3">
                               <label className="mb-1" for={`name${i}`}>
@@ -577,6 +612,35 @@ function TravelTicket({ Seleted_Values }) {
                                   }}
                                 />
                               </div>
+                              <div className="form-group mt-1 pt-3 row">
+                              <div className="col-sm-6">
+                                <label className="mb-3" for={`start_date${i}`}>
+                                  Start Date
+                                </label>
+                                <DatePicker
+                                  id={`start_date${i}`}
+                                  selected={startDate}
+                                  onChange={handleDate}
+                                  customInput={<ExampleCustomInput />}
+                                  dateFormat="dd/MM/yy"
+                                  value={travellers[i].start_date}
+                                />
+                              </div>
+                              <div className="col-sm-6">
+                                <label className="mb-3" for={`end_date${i}`}>
+                                  End Date
+                                </label>
+                                <DatePicker
+                                  id={`end_date${i}`}
+                                  selected={endDate}
+                                  onChange={handleDateTwo}
+                                  customInput={<ExampleCustomInput />}
+                                  dateFormat="dd/MM/yy"
+                                  value={travellers[i].end_date}
+                                />
+                              </div>
+
+                            </div>
                             </p>
                           </div>
 
@@ -1111,7 +1175,7 @@ function TravelTicket({ Seleted_Values }) {
                                 }}
                               />
 
-                            </div>
+                            </div>                           
                           </p>
                         </div>
                       </Paper>

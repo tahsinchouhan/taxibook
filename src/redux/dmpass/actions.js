@@ -3,7 +3,8 @@ import {
     CREATE_DM_PASS,
     SET_DM_PASS_ID,
     DM_PASS_DETAILS,
-    CREATE_DM_PASS_TWO
+    CREATE_DM_PASS_TWO,
+    SET_ENTRY_PASS_ID
 } from "../actions";
 
 
@@ -17,6 +18,12 @@ export const setDmPassId = (value) => ({
     type: SET_DM_PASS_ID,
     payload: value
 });
+
+export const setentyPassId = (value) => ({
+  type: SET_ENTRY_PASS_ID,
+  payload: value
+});
+
 
 export const createDmPass = (values) => {
     return {

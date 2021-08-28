@@ -2,7 +2,7 @@ import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 import { CREATE_DM_PASS, CREATE_DM_PASS_TWO, GET_TRIP_BY_ROUTE_ID } from "../actions";
 import { API_PATH } from "../../Path/Path";
 import axios from 'axios'
-import { setDmPassId } from "./actions";
+import { setDmPassId, setentyPassId } from "./actions";
 
 
 const createTravelPassRequest = async (payload) =>
@@ -38,6 +38,8 @@ const createEntryPassRequest = async (payload) =>
         vehical_pass_id: payload.vp_id,
         locations: payload.locations,
         total_charges: payload.total_charges,
+        dm_pass_number: payload.dm_pass_number,
+        mobile: payload.mobile,
         createdby: JSON.parse(localStorage.getItem('user_data'))?.user?._id,
     })
         .then(vendor => vendor.data)
@@ -52,7 +54,7 @@ function* createDmPassOfTraveller({ payload }) {
     console.log("pay:::::::", payload);
     try {
         const dmpass = yield call(createTravelPassRequest, payload);
-        const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id });
+        const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id, mobile:localStorage.getItem("mobile") });
         const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id });
         yield put(setDmPassId(dm.data.dm_pass_id));
         // console.log("bus",busticket);
@@ -66,9 +68,24 @@ function* createDmPass({ payload }) {
     try {
         const dmpass = yield call(createTravelPassRequest, payload);
         const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id });
-        const entry = yield call(createEntryPassRequest, { ...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id });
-        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id, ep_id: entry.data._id });
+        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id, mobile:localStorage.getItem("mobile") });
+        const entry = yield call(createEntryPassRequest, { ...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id, dm_pass_number:dm.data.dm_pass_id });
+        console.log("(dm.data",dm.data);
         yield put(setDmPassId(dm.data.dm_pass_id));
+        // console.log("bus",busticket);
+    } catch (error) {
+        // yield put(getRoutesError(error));
+    }
+}
+
+function* createEntryPass({ payload }) {
+    console.log("paydata", payload);
+    try {
+        const dmpass = yield call(createTravelPassRequest, payload);
+        const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id });
+        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id });
+        const entry = yield call(createEntryPassRequest, { ...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id, dm_pass_number:dm.data.dm_pass_id });
+        yield put(setentyPassId(entry.data.dm_pass_id));
         // console.log("bus",busticket);
     } catch (error) {
         // yield put(getRoutesError(error));
@@ -82,7 +99,6 @@ export function* addDmPass() {
 export function* addDmPassTwo() {
     yield takeEvery(CREATE_DM_PASS_TWO, createDmPassOfTraveller);
 }
-
 
 export default function* rootSaga() {
     yield all([fork(addDmPass)])

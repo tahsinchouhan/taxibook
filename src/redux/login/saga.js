@@ -44,8 +44,10 @@ function* fetchVerifyOtp({ payload }) {
   try {
     const user_data = yield call(fetchVerifyOtpAsync, payload);
     if (user_data?.status == 200) {
-      yield put(setUser(user_data.data.data));
+      yield put(setUser(user_data.data.data));      
       localStorage.setItem('user_data', JSON.stringify(user_data.data.data));
+      localStorage.setItem('customer_id', JSON.stringify(user_data.data.data.user._id));
+      localStorage.setItem('mobile', JSON.stringify(user_data.data.data.user.mobile));
       yield put(hideMessage())
     } else {
       yield put(fetchError("Invalid OTP"))
@@ -58,6 +60,8 @@ function* fetchVerifyOtp({ payload }) {
 function* fetchLogout({ payload }) {
   try {
     localStorage.removeItem('user_data');
+    localStorage.removeItem('customer_id');
+
   } catch (error) {
     yield put(fetchError("Something went wrong"))
   }

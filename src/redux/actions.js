@@ -45,6 +45,8 @@ export const CREATE_DM_PASS_TWO = "CREATE_DM_PASS_TWO";
 export const SET_DM_PASS_ID = "SET_DM_PASS_ID";
 export const DM_PASS_DETAILS = "DM_PASS_DETAILS";
 
+//entrypass
+export const SET_ENTRY_PASS_ID ="SET_ENTRY_PASS_ID"
 
 export * from "./common/actions";
 export * from "./auth/actions";

@@ -12,7 +12,6 @@ import Header from "../../../components/Header";
 import congo from "../../../assets/img/mobile.png";
 import { FaWhatsapp } from "react-icons/fa";
 import Footer from "../../travesaly/Footer";
-
 import { useDispatch, useSelector } from "react-redux";
 import {
   Accordion,
@@ -23,12 +22,11 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import { createDmPass, setDmData } from "../../../redux/actions";
+import { createDmPass, setDmData, createBusBooking } from "../../../redux/actions";
 import { API_PATH } from "../../../Path/Path";
 import axios from "axios";
 import AvForm from "availity-reactstrap-validation/lib/AvForm";
 import AvField from "availity-reactstrap-validation/lib/AvField";
-
 
 const button_Data = [
   {
@@ -43,7 +41,7 @@ const button_Data = [
 
 function SteperDmpass(shows, ...props) {
   const [show, setShow] = useState(0);
-
+  
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
   // const [data, setData] = useState();
   const history = useHistory();
@@ -59,6 +57,7 @@ function SteperDmpass(shows, ...props) {
     mobile,
     start_date,
   } = dmData;
+  
 
   const onSideBtnClick = (e) => {
     const name = e.target.name;
@@ -107,6 +106,7 @@ function SteperDmpass(shows, ...props) {
     setShow(2);
     return shows;
     // history.push("/locations");
+
   };
   const onTicketCheckClick = () => {
     console.log("object");
@@ -145,6 +145,7 @@ function SteperDmpass(shows, ...props) {
         gender: "Male",
         age: "",
         adhaar: "",
+        customer_id: JSON.parse(localStorage.getItem("customer_id"))
       });
     }
     return temp;
@@ -152,7 +153,8 @@ function SteperDmpass(shows, ...props) {
   const [travellers, setTravellers] = useState(initialTravellers);
   const [showDate, setShowDate] = useState("");
 
-  const handleTraveller = (val, lbl, i) => {
+  const handleTraveller = (val, lbl, i) => {  
+    console.log("val",val);  
     setTravellers(
       [...travellers].map((obj, key) => {
         if (key === i) {
@@ -354,11 +356,117 @@ function SteperDmpass(shows, ...props) {
   const handleTravellerCount = (e) => {
     console.log("Number of Travellers", e.target.value)
     setTravel(e.target.value)
+    
+    setTravellers([
+      ...travellers,
+      {
+        name: "",
+        gender: "Male",
+        age: "",
+        adhaar: "",
+      },
+    ])
   }
   const handlerVehicles = (e) => {
     console.log("Number of Vehicles", e.target.value)
-    setVehicle(e.target.value)
+    //setVehicle(e.target.value)
+    setVehicles([
+      ...vehicles,
+      {
+        vehicle_number: "",
+        name: "",
+        gender: "Male",
+        age: "",
+        adhaar: "",
+      },
+    ])
   }
+  const [data, setData] = useState();
+
+  // const { tot_charges } = apiData;
+
+
+  useEffect(() => {
+    // console.log("wrds", price, surcharge);
+    axios.post(`${API_PATH}/api/v1/entrypass/pay`, {
+      amount: tot_charges,
+    })
+      // .then((res) => res.json())
+      .then((result) => {
+        console.log("dhshsdh", result);
+        setData(result.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+
+  const __DEV__ = document.domain === "localhost";
+
+  async function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  const displayRazorpaysss = async (values) => {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+    console.log("data", data.amount);
+    var options = {
+      key: __DEV__ ? "rzp_test_DuapYrmQwcWLGy" : "PRODUCTION_KEY",
+      currency: "INR",
+      amount: data.amount.toString(),
+      order_id: data.id,
+      name: "Aamcho Bastar",
+      description: "Thank You For Booking.",
+      image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
+      handler: function (response) {
+        // toast(response.razorpay_payment_id);
+        // toast(response.razorpay_order_id);
+        // toast(response.razorpay_signature);
+        if (response.razorpay_payment_id) {
+          // dispatch(
+          //   createBusBooking({
+          //     ...apiData,
+          //     trips_id: tripData?._id,
+          //     route: tripData?.route?._id,
+          //     from: tripData?.route?.start?._id,
+          //     to: tripData?.route?.end?._id,
+          //     bus: tripData?.vehical,
+          //     mobile,
+
+          //   })
+          // );
+          // dispatch(setApiData({ ...apiData, order_id: response.razorpay_order_id }))
+          // history.push("/CongratulationPage")
+        }
+      },
+      prefill: {
+        name: values.name,
+        email: values.email,
+        contact: values.number,
+      },
+    };
+    const paymentOpject = new window.Razorpay(options);
+    paymentOpject.open();
+  };
+
   return (
     <>
       <div className="d-none d-md-block">
@@ -392,8 +500,9 @@ function SteperDmpass(shows, ...props) {
       </Container>
       {show == 0 ? (
         <div>
-          <AvForm onSubmit={onDmPassClick}>
-            <Container className="dmpass-form mt-4">
+
+          <Container className="dmpass-form mt-4">
+            <AvForm onSubmit={onDmPassClick}>
               <Row className="dmpassData">
                 <h3
                   style={{
@@ -793,6 +902,7 @@ function SteperDmpass(shows, ...props) {
                                       }}
                                     />
                                   </div>
+                                  
                                 </p>
                               </div>
                             </Paper>
@@ -832,18 +942,20 @@ function SteperDmpass(shows, ...props) {
                   </Container>
                 </form>
               </Row>
-            </Container>
-            <div style={{ "paddingBottom": "5px" }}>
-              <div className="mb-5">
-                <Button type="submit" className="locationpass-btn">
-                  Save & Continue
-                </Button>
+              <div style={{ "paddingBottom": "5px" }}>
+                <div className="mb-5">
+                  <Button type="submit" className="locationpass-btn">
+                    Save & Continue
+                  </Button>
+                </div>
               </div>
-            </div>
-            <div className="d-none d-md-block">
-              <Footer />
-            </div>
-          </AvForm>
+            </AvForm>
+          </Container>
+
+          <div className="d-none d-md-block">
+            <Footer />
+          </div>
+
         </div>
       ) : show == 1 ? (
         <div>
@@ -1071,14 +1183,23 @@ function SteperDmpass(shows, ...props) {
                                       {service?.total_charges}{" "}
                                     </span>
                                   </Col>
+
                                 </Row>
                               ))
                               : null}
                           </Col>
                         </Row>
+
                       </>
                     ))
                     : null}
+
+                  <div>
+                    <div className="location-amount">
+                      <span className="location-total">Total Amount</span>
+                      <span className="location-rs">₹ {tot_charges}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </Container>
@@ -1170,7 +1291,14 @@ function SteperDmpass(shows, ...props) {
                           fontWeight: "bold",
                           marginBottom: "20px"
                         }}
-                        >Sent by Email</Button>
+                        >
+                         <Link
+                            to={`/dm-detail/${dmpass_id}`}
+                            style={{ textDecoration: "none" }}
+                          >
+                          View Ticket
+                          </Link>
+                          </Button>
                       </div>
                       <div>
                         <Button

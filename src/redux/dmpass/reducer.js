@@ -29,9 +29,9 @@ const INIT_STATE = {
 
 const dmpassReducer = (state = INIT_STATE, action) => {
     console.log("Vehicle Dataa",action);
+    
     switch (action.type) {
-
-        case SET_DM_DATA:
+                case SET_DM_DATA:
             return { ...state, dmData: { ...state.dmData, [action.payload.lbl]: action.payload.value } }
 
         case SET_DM_PASS_ID:
