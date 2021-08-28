@@ -20,6 +20,7 @@ import TravellerCard from "./TravellerCard";
 import TravellerTicket from "./TravellerTicket";
 import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
+import SearchFelid from "./SearchFelid";
 
 function Saly() {
   const history = useHistory();
@@ -42,7 +43,7 @@ function Saly() {
       .then((response) => response.json())
       .then((json) => {
         setDestinations(json.data);
-        console.log(json.data);
+        console.log("datatata", json.data);
       })
       .catch((e) => console.log(e));
   };
@@ -64,7 +65,7 @@ function Saly() {
       slidesToSlide: 1,
     },
   };
-  
+
   return (
     <>
       <Container
@@ -72,18 +73,32 @@ function Saly() {
         className="d-none d-md-block"
         style={{ padding: 0, margin: 0 }}
       >
-        <Row className="saly_div pt-5 w-100">
+        <Row className="saly_div w-100 ">
           <Col xs={12} md={6}>
-            <div className="rocket-image">
+            <div className="rocket-image pt-3">
               <img src={Salyimg} alt="saly" style={{ width: "100%" }} />
             </div>
           </Col>
-          <Col xs={12} md={6} className="pt-5">
+          <Col xs={12} md={6}>
             <div className="p-5">
               <div className="explore">
                 <h2 className="explore_div">Explore</h2>
                 <p>Check out the best tourism destinations around Bastar</p>
               </div>
+              <div>
+                <iframe
+                  style={{ borderRadius: "10px" }}
+                  // className="search_view"
+                  width="600"
+                  height="350"
+                  src="https://www.youtube.com/embed/s_W9hNCaZak"
+                  title="YouTube video player"
+                  frameborder="0"
+                  // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
               <Row className="pt-5">
                 <Carousel
                   partialVisbile
@@ -96,7 +111,7 @@ function Saly() {
                         <div key={key}>
                           <Image
                             draggable={false}
-                            style={{ width: "95%", height: "100%" }}
+                            // style={{ width: "95%", height: "100%" }}
                             src={item.upload_images}
                           />
                           <div
@@ -117,7 +132,7 @@ function Saly() {
 
                 <div className="travel_home_btn pt-0">
                   <Button
-                   onClick={() => history.push("/populardestinations")}
+                    onClick={() => history.push("/populardestinations")}
                     style={{
                       marginTop: 20,
                       justifyContent: "center",
@@ -245,7 +260,7 @@ function Saly() {
                 </Carousel>
                 <div className="travel_home_btn pt-5">
                   <Button
-                  onClick={() => history.push("/populardestinations")}
+                    onClick={() => history.push("/populardestinations")}
                     variant=""
                     style={{
                       justifyContent: "center",

@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, FormGroup } from "react-bootstrap";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { Stepper } from "react-form-stepper";
 import { API_PATH } from "../../Path/Path";
 import { useHistory } from "react-router-dom";
-import { Formik } from "formik";
+import { Field, Formik } from "formik";
 import * as yup from "yup";
 import { FaWhatsapp } from "react-icons/fa";
 import runmen from "../../assets/img/runmen.png";
 import { useSelector } from "react-redux";
+import AvForm from "availity-reactstrap-validation/lib/AvForm";
 
 const schema = yup.object().shape({
   serial: yup.string().required(),
@@ -36,6 +37,15 @@ const orgSchema = yup.object().shape({
   pan_number: yup.string().required(),
   adhaar_number: yup.string().required()
 })
+const validateName = (value) => {
+  let error;
+  if (!value) {
+    error = "Please enter your name";
+  } else if (value.length < 2) {
+    error = "Value must be longer than 2 characters";
+  }
+  return error;
+}
 
 function AddForm() {
   const history = useHistory();
@@ -55,7 +65,7 @@ function AddForm() {
 
 
   const onsubmitVendor = (values) => {
-    console.log("submit vender");
+    console.log("submit vender", values);
     if (values != "") {
       fetch(API_PATH + "/api/v1/vendor/create", {
         method: "POST",
@@ -79,14 +89,14 @@ function AddForm() {
     } else {
       console.log("errorrrrrrrrrrr");
     }
-
+    values = ""
   };
   const backToVender = () => {
     setShow(0);
   };
 
   const onSubmitOrg = (values) => {
-
+    console.log("Organization", values)
     fetch(API_PATH + "/api/v1/organization/create", {
       method: "POST",
       headers: {
@@ -138,6 +148,7 @@ function AddForm() {
       })
       .catch((error) => console.log("Genre Lookup Err::", error));
   };
+
 
   return (
     <>
@@ -375,34 +386,58 @@ function AddForm() {
                   errors,
                 }) => (
                   <Form noValidate onSubmit={handleSubmit}>
-                    <Row>
-                      < Col xs={12} md={12}>
-                        <Form.Group
+                    <div>
+                      <Row>
+                        < Col xs={12} md={12}>
+                          {/* <FormGroup
                           md="4"
                           controlId="validationFormik101"
                           className="position-relative mb-3"
                         >
-                          <Form.Label>Serial Number:</Form.Label>
-                          <Form.Control
+                          <label>Serial Number:1234</label>
+                          <Field 
+                          className="form-control"
                             type="number"
                             name="s_no"
                             value={values.s_no}
                             onChange={handleChange}
                             isInvalid={!!errors.s_no}
+                            validate={validateName}
+
                           />
                           <Form.Control.Feedback type="invalid" tooltip>
                             {errors.s_no}
                           </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                      < Col xs={12} md={12}>
-                        <Form.Group
-                          md="4"
-                          controlId="validationFormik102"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Name of organization:</Form.Label>
-                          <Form.Control
+                        </FormGroup> */}
+                          <Form.Group>
+                            <label>Serial Number:</label>
+                            <Form.Control
+                              placeholder="Serial Number"
+                              name="s_no"
+                              value={values.s_no}
+                              onChange={handleChange}
+                              isInvalid={!!errors.s_no}
+                            // validate={validateName}
+                            // validate={this.validateName}
+                            />
+                            {/* <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.name}
+                            // </Form.Control.Feedback> */}
+                          
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.s_no}
+                            </Form.Control.Feedback>
+
+                          </Form.Group>
+                        </Col>
+                        < Col xs={12} md={12}>
+                          <Form.Group
+                            md="4"
+                            controlId="validationFormik102"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>Name of organization: </Form.Label>
+                            {/* <Form.Control
                             type="text"
                             name="org_name"
                             placeholder="Name of organization"
@@ -414,252 +449,269 @@ function AddForm() {
                           <Form.Control.Feedback type="invalid" tooltip>
                             {errors.org_name}
                           </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
+                        </Form.Group> */}
+
+                            <Form.Control
+                              className="form-control"
+                              name="org_name"
+                              placeholder="Name of organization"
+                              value={values.org_name}
+                              onChange={handleChange}
+                              isInvalid={!!errors.org_name}
+
+                            // validate={validateName}
+                            />
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.org_name}
+                            </Form.Control.Feedback>
 
 
-                      < Col xs={12} md={12}>
-                        <Form.Group
-                          md="6"
-                          controlId="validationFormik103"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Address:</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Address"
-                            name="address"
-                            value={values.address}
-                            onChange={handleChange}
-                            isInvalid={!!errors.address}
-                          />
+                          </Form.Group>
+                        </Col>
 
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.address}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                      < Col xs={12} md={12}>
-                        <Form.Group
 
-                          md="3"
-                          controlId="validationFormik104"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Name:</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Name"
-                            name="name"
-                            value={values.name}
-                            onChange={handleChange}
-                            isInvalid={!!errors.name}
-                          />
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.name}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                      < Col xs={12} md={12}>
-                        <Form.Group
+                        < Col xs={12} md={12}>
+                          <Form.Group
+                            md="6"
+                            controlId="validationFormik103"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>Address:</Form.Label>
+                            <Form.Control
+                              className="form-control"
+                              type="text"
+                              placeholder="Address"
+                              name="address"
+                              value={values.address}
+                              onChange={handleChange}
+                              isInvalid={!!errors.address}
+                            />
 
-                          md="3"
-                          controlId="validationFormik105"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Org Email Id:</Form.Label>
-                          <Form.Control
-                            type="email"
-                            placeholder="Enter Email Address"
-                            name="org_email"
-                            value={values.org_email}
-                            onChange={handleChange}
-                            isInvalid={!!errors.org_email}
-                          />
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.address}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
+                        < Col xs={12} md={12}>
+                          <Form.Group
 
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.org_email}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                      < Col xs={12} md={12}>
-                        <Form.Group
-                          md="3"
-                          controlId="validationFormik105"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Phone</Form.Label>
-                          <Form.Control
-                            type="number"
-                            placeholder="Please Enter a valid Phone Number"
-                            name="phone"
-                            value={values.phone}
-                            onChange={handleChange}
-                            isInvalid={!!errors.phone}
-                          />
+                            md="3"
+                            controlId="validationFormik104"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>Name:</Form.Label>
+                            <Form.Control
+                              type="text"
+                              placeholder="Name"
+                              name="name"
+                              value={values.name}
+                              onChange={handleChange}
+                              isInvalid={!!errors.name}
+                            />
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.name}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
+                        < Col xs={12} md={12}>
+                          <Form.Group
 
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.phone}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
+                            md="3"
+                            controlId="validationFormik105"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>Org Email Id:</Form.Label>
+                            <Form.Control
+                              type="email"
+                              placeholder="Enter Email Address"
+                              name="org_email"
+                              value={values.org_email}
+                              onChange={handleChange}
+                              isInvalid={!!errors.org_email}
+                            />
 
-                      <Col xs={12} md={12}>
-                        <Form.Group
-                          md="3"
-                          controlId="validationFormik105"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Name on Account Number</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter The Name on Account Number"
-                            name="acc_name"
-                            value={values.acc_name}
-                            onChange={handleChange}
-                            isInvalid={!!errors.acc_name}
-                          />
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.org_email}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
+                        < Col xs={12} md={12}>
+                          <Form.Group
+                            md="3"
+                            controlId="validationFormik105"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>Phone</Form.Label>
+                            <Form.Control
+                              type="number"
+                              placeholder="Please Enter a valid Phone Number"
+                              name="phone"
+                              value={values.phone}
+                              onChange={handleChange}
+                              isInvalid={!!errors.phone}
+                            />
 
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.acc_name}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                      <Col xs={12} md={12}>
-                        <Form.Group
-                          md="3"
-                          controlId="validationFormik105"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Account Number</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter your Account Number"
-                            name="acc_number"
-                            value={values.acc_number}
-                            onChange={handleChange}
-                            isInvalid={!!errors.acc_number}
-                          />
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.phone}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
 
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.acc_number}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
+                        <Col xs={12} md={12}>
+                          <Form.Group
+                            md="3"
+                            controlId="validationFormik105"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>Name on Account Number</Form.Label>
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter The Name on Account Number"
+                              name="acc_name"
+                              value={values.acc_name}
+                              onChange={handleChange}
+                              isInvalid={!!errors.acc_name}
+                            />
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.acc_name}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
+                        <Col xs={12} md={12}>
+                          <Form.Group
+                            md="3"
+                            controlId="validationFormik105"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>Account Number</Form.Label>
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter your Account Number"
+                              name="acc_number"
+                              value={values.acc_number}
+                              onChange={handleChange}
+                              isInvalid={!!errors.acc_number}
+                            />
 
-                      <Col xs={12} md={12}>
-                        <Form.Group
-                          md="3"
-                          controlId="validationFormik105"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>IFSC Code</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter your IFSC code"
-                            name="ifsc_code"
-                            value={values.ifsc_code}
-                            onChange={handleChange}
-                            isInvalid={!!errors.ifsc_code}
-                          />
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.acc_number}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
 
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.ifsc_code}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
+                        <Col xs={12} md={12}>
+                          <Form.Group
+                            md="3"
+                            controlId="validationFormik105"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>IFSC Code</Form.Label>
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter your IFSC code"
+                              name="ifsc_code"
+                              value={values.ifsc_code}
+                              onChange={handleChange}
+                              isInvalid={!!errors.ifsc_code}
+                            />
 
-                      <Col xs={12} md={12}>
-                        <Form.Group
-                          md="3"
-                          controlId="validationFormik105"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Account Type</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="Enter your Account Type"
-                            name="acc_type"
-                            value={values.acc_type}
-                            onChange={handleChange}
-                            isInvalid={!!errors.acc_type}
-                          />
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.ifsc_code}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
 
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.acc_type}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
+                        <Col xs={12} md={12}>
+                          <Form.Group
+                            md="3"
+                            controlId="validationFormik105"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>Account Type</Form.Label>
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter your Account Type"
+                              name="acc_type"
+                              value={values.acc_type}
+                              onChange={handleChange}
+                              isInvalid={!!errors.acc_type}
+                            />
 
-                      <Col xs={12} md={12}>
-                        <Form.Group
-                          md="3"
-                          controlId="validationFormik105"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>UPI Id</Form.Label>
-                          <Form.Control
-                            type="number"
-                            placeholder="Enter your UPI Id"
-                            name="upi_id"
-                            value={values.upi_id}
-                            onChange={handleChange}
-                            isInvalid={!!errors.upi_id}
-                          />
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.acc_type}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
 
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.upi_id}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
+                        <Col xs={12} md={12}>
+                          <Form.Group
+                            md="3"
+                            controlId="validationFormik105"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>UPI Id</Form.Label>
+                            <Form.Control
+                              type="number"
+                              placeholder="Enter your UPI Id"
+                              name="upi_id"
+                              value={values.upi_id}
+                              onChange={handleChange}
+                              isInvalid={!!errors.upi_id}
+                            />
 
-                      <Col xs={12} md={12}>
-                        <Form.Group
-                          md="3"
-                          controlId="validationFormik105"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>PAN Number</Form.Label>
-                          <Form.Control
-                            type="number"
-                            placeholder="Enter your pan Card Number "
-                            name="pan_number"
-                            value={values.pan_number}
-                            onChange={handleChange}
-                            isInvalid={!!errors.pan_number}
-                          />
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.upi_id}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
 
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.pan_number}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
+                        <Col xs={12} md={12}>
+                          <Form.Group
+                            md="3"
+                            controlId="validationFormik105"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>PAN Number</Form.Label>
+                            <Form.Control
+                              type="number"
+                              placeholder="Enter your pan Card Number "
+                              name="pan_number"
+                              value={values.pan_number}
+                              onChange={handleChange}
+                              isInvalid={!!errors.pan_number}
+                            />
 
-                      <Col xs={12} md={12}>
-                        <Form.Group
-                          md="3"
-                          controlId="validationFormik105"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Adhaar Number </Form.Label>
-                          <Form.Control
-                            type="number"
-                            placeholder="Enter your adhaar card Number"
-                            name="adhaar_number"
-                            value={values.adhaar_number}
-                            onChange={handleChange}
-                            isInvalid={!!errors.adhaar_number}
-                          />
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.pan_number}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
 
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.adhaar_number}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                    </Row>
+                        <Col xs={12} md={12}>
+                          <Form.Group
+                            md="3"
+                            controlId="validationFormik105"
+                            className="position-relative mb-3"
+                          >
+                            <Form.Label>Adhaar Number </Form.Label>
+                            <Form.Control
+                              type="number"
+                              placeholder="Enter your adhaar card Number"
+                              name="adhaar_number"
+                              value={values.adhaar_number}
+                              onChange={handleChange}
+                              isInvalid={!!errors.adhaar_number}
+                            />
 
-                    <Button type="submit" className="locationpass-btn mt-3 mb-5" >Submit</Button>
+                            <Form.Control.Feedback type="invalid" tooltip>
+                              {errors.adhaar_number}
+                            </Form.Control.Feedback>
+                          </Form.Group>
+                        </Col>
+                      </Row>
 
+                      <Button type="submit" className="locationpass-btn mt-3 mb-5" >Submit</Button>
+                    </div>
                   </Form>
                 )}
               </Formik>
