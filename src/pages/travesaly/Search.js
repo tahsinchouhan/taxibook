@@ -156,7 +156,7 @@ function Search() {
                   className="destina_search"
                   style={{ backgroundColor: "#864BD8" }}
                 >
-                  Destinations
+                 <a href="#DestinationsScroll" style={{color:"white",textDecoration:"none"}}> Destinations</a>
                 </div>
               </Col>
               <Col xs={3} md={3} className="search_cel">
@@ -164,7 +164,7 @@ function Search() {
                   className="destina_search"
                   style={{ backgroundColor: "#0FA453" }}
                 >
-                  Packages
+                <a href="#PackagesScroll" style={{color:"white",textDecoration:"none"}}>  Packages</a>
                 </div>
               </Col>
               <Col xs={3} md={3} className="search_cel">
@@ -254,7 +254,7 @@ function Search() {
                   {!search.destinations == []
                     ? search.destinations.map((item) => {
                       return (
-                        <div
+                        <div 
                           onClick={() =>
                             history.push({
                               pathname: `/destination_details/${item.title}`,
@@ -411,7 +411,7 @@ function Search() {
             <Container>
 
               <h2 className="package__title mb-5">
-                <span >Destinations</span>
+                <span id="DestinationsScroll">Destinations</span>
               </h2>
               <Row>
                 {destinations.map((item) => {
@@ -427,7 +427,7 @@ function Search() {
                         className="search_div"
                         style={{
                           width: "100%",
-                          height: 200,
+                          height: "180px",
                           // marginRight: 15,
                           marginTop: 10,
                           display: "flex",
@@ -458,7 +458,7 @@ function Search() {
           {!flag &&
             <Container>
               <h2 className="package__title mb-5">
-                <span>Packages</span>
+                <span id="PackagesScroll">Packages</span>
               </h2>
               <Row>
                 {packages.map((item) => {

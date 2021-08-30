@@ -65,7 +65,7 @@ function DmTicket2() {
                   <div className="booking-div">
                     <div style={{ marginBottom: "15px" }}>
 
-                      <img src={ticket} alt="doodle" style={{ height: "60px" }} />
+                      <img src={ticket} alt="doodle" />
                     </div>
 
                     <h5 style={{ color: "#0fa453", margin: "10px", color: "black", fontWeight: "700" }}>
