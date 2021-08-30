@@ -85,7 +85,7 @@ const DestinationDetails = (props) => {
         <Header />
         <Container>
           <h1 className="header__title">
-            <span>{destinations.address}</span>
+            <span>{destinations.title}</span>
           </h1>
         </Container>
       </div>
