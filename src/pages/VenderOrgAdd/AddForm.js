@@ -707,8 +707,8 @@ function AddForm() {
                           <h3 style={{ fontWeight: "bolder" }}>Thank You For Registration!</h3>
                           <span style={{ color: "black" }}>Our team will contact with you soon</span>
 
-                          <h3 style={{ fontWeight: "bolder" }}>Registration ID</h3>
-                          <span style={{ color: "black" }}> {RegID}</span>
+                          {/* <h3 style={{ fontWeight: "bolder" }}>Registration ID</h3>
+                          <span style={{ color: "black" }}> {RegID}</span> */}
                           <span style={{ color: "black", marginBottom: "50px" }}>{booking_id}</span>
                           <span style={{ color: "black", marginBottom: "50px" }}>{apiData?.order_id}</span>
                         </div>
@@ -772,12 +772,12 @@ function AddForm() {
                 <div>
                   <img src={runmen} alt="" style={{ width: "90%" }} />
                 </div>
-                <div style={{ textAlign: "center" }}>
+                {/* <div style={{ textAlign: "center" }}>
                   <h3 style={{ fontWeight: "bolder", }}>Registration ID</h3>
                   <span style={{ color: "black", marginBottom: "20px" }}>{RegID}</span>
 
                   <span style={{ color: "black", marginBottom: "50px" }}>{booking_id}</span>
-                </div>
+                </div> */}
                 <div style={{ textAlign: "center" }}>
 
                   <div>

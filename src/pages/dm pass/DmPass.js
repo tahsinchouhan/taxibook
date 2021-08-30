@@ -63,7 +63,6 @@ function DmPass({ DmPassDetails }) {
   const onDmTicketShow = () => {
     // console.log('Vehicle Data',vehicle)
     DmPassDetails({ data })
-
     history.push('/travelticket')
 
   };
@@ -78,39 +77,7 @@ function DmPass({ DmPassDetails }) {
     </button>
   ))
 
-  // const handleDate = (d) => {
-  //   let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-  //   let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
-  //   let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-  //   console.log(`${ye}-${mo}-${da}`);
-  //   //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
-  //   setStartDate(d)
-  //   console.log("new Date(endDate)",new Date(endDate));
-  //   console.log("new Date(startDate)",new Date(startDate));
 
-  //   const diffInMs = new Date(endDate) - new Date(d)
-  //   duration_of_travel = Math.round(diffInMs / (1000 * 60 * 60 * 24));
-  //   console.log("duration_of_travel", duration_of_travel);
-  //   console.log("d",d);
-  // }
-
-  // const handleDateTwo = (d) => {
-  //   let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-  //   let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
-  //   let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-  //   console.log(`${ye}-${mo}-${da}`);
-  //   //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
-  //   setEndDate(d)
-  //   console.log("new Date(endDate)ss",new Date(endDate));
-  //   console.log("new Date(startDate)dd",new Date(startDate));
-
-  //   const diffInMs = new Date(d) - new Date(startDate)
-  //   duration_of_travel = Math.round(diffInMs / (1000 * 60 * 60 * 24));
-
-  //   console.log("duration_of_travel", duration_of_travel);
-  //   console.log("endd",d);
-
-  // }
 
   return (
     <>
