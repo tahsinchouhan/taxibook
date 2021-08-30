@@ -34,6 +34,7 @@ import TicketsSraech from './pages/booking/tickets/TicketsSreach';
 import Tickets1 from './pages/booking/tickets/Tickets1';
 import SteperDmpass from './pages/booking/tickets/SteperDmpass';
 import TicketCheckOut from './pages/booking/tickets/TicketCheckOut';
+import './assets/css/mediaQuery.css'
 
 import Payment from './pages/selectbooking/Payment';
 import TravellerCard from './pages/travesaly/TravellerCard';

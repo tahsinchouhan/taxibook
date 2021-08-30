@@ -623,9 +623,9 @@ const editDetails = ()=>{
                                 />
                               </div>
                               <div className="form-group mt-1 pt-3 row">
-                              <div className="col-sm-6">
+                              {/* <div className="col-sm-6">
                                 <label className="mb-3" for={`start_date${i}`}>
-                                  Start Date
+                                  Start Date1
                                 </label>
                                 <DatePicker
                                  // id={`start_date${i}`}
@@ -635,10 +635,10 @@ const editDetails = ()=>{
                                   dateFormat="dd/MM/yy"
                                  // value={travellers[i].start_date}
                                 />
-                              </div>
-                              <div className="col-sm-6">
+                              </div> */}
+                              {/* <div className="col-sm-6">
                                 <label className="mb-3" for={`end_date${i}`}>
-                                  End Date
+                                  End Date1
                                 </label>
                                 <DatePicker
                                  // id={`end_date${i}`}
@@ -648,7 +648,7 @@ const editDetails = ()=>{
                                   dateFormat="dd/MM/yy"
                                   //value={travellers[i].end_date}
                                 />
-                              </div>
+                              </div> */}
 
                             </div>
                             </p>

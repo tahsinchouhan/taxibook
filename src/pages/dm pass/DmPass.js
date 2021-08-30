@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 // import Cab from "./Cab";
 import bus from "../../assets/img/bus.png";
 import cab from "../../assets/img/cab.png";
-import ticket from "../../assets/img/ticket.svg";
+import ticket from "../../assets/ticketpage.svg";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 // import calendar from "../../assets/img/calendar.png";
@@ -127,7 +127,7 @@ function DmPass({ DmPassDetails }) {
                 <div className="col-xs-12  col-sm-12 col-md-12">
                   <div className="booking-div">
                     <div style={{ marginBottom: "15px" }}>
-                      <img src={ticket} alt="" style={{ height: "100px" }} />
+                      <img src={ticket} alt="logo" style={{ height: "100px" }} />
                     </div>
                     <span style={{ fontWeight: "bolder", color: "#0fa453", paddingTop: "50px" }}>Traveller Pass</span><br />
                     <span style={{ fontSize: "12px", padding: "10px" }}>
@@ -383,7 +383,7 @@ function DmPass({ DmPassDetails }) {
                 </Form.Group>
               </Col>
             </Row>
-            {/* <div className="dmticket-btn" style={{ textAlign: "center", marginTop: "70px" }}>
+             <div className="dmticket-btn" style={{ textAlign: "center", marginTop: "70px" }}>
                 <Button
                   type="submit"
                   class="btn btn-success"
@@ -399,12 +399,12 @@ function DmPass({ DmPassDetails }) {
                 >
                   Continue
                 </Button>
-              </div> */}
+              </div> 
           </Container>
         </div>
-        <Button className="locationpass-btn" onClick={onDmTicketShow}>
+        {/* <Button className="locationpass-btn" onClick={onDmTicketShow}>
           Continue
-        </Button>
+        </Button> */}
       </div>
 
     </>

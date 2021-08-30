@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Redirect, useHistory } from "react-router-dom";
 import doodle from "../../../assets/img/doodle.png";
-import ticket from "../../../assets/img/ticket.png";
+import ticket from "../../../assets/img/ticket.svg";
 import Header from "../../../components/Header";
 import Footer from "../../travesaly/Footer";
 import { getOtp, verifyOtp } from "../../../redux/login/actions";
@@ -43,6 +43,7 @@ function DmTicket2() {
     }
   };
   const sendOtp = () => {
+    console.log("object::::::::::::::",number)
     dispatch(getOtp(number))
   }
   const submitHandler = () => {
@@ -64,7 +65,7 @@ function DmTicket2() {
                   <div className="booking-div">
                     <div style={{ marginBottom: "15px" }}>
 
-                      <img src={doodle} alt="doodle" style={{ height: "60px" }} />
+                      <img src={ticket} alt="doodle" style={{ height: "60px" }} />
                     </div>
 
                     <h5 style={{ color: "#0fa453", margin: "10px", color: "black", fontWeight: "700" }}>
@@ -199,7 +200,7 @@ function DmTicket2() {
                 <div className="col-xs-12  col-sm-12 col-md-12">
                   <div className="booking-div">
                     <div style={{ marginBottom: "15px" }}>
-                      <img src={doodle} alt="doodle" style={{ height: "60px" }} />
+                      <img src={ticket} alt="doodle" style={{ height: "60px" }} />
                     </div>
 
                     <h5 style={{ color: "#0fa453", margin: "10px", color: "black", fontWeight: "700" }}>

@@ -13,19 +13,21 @@
     margin-bottom: 40px;
   }
   .search_img{
-    width: 50%;
-    height: 160px;
+    width: 50% !important;
+    height: 160px !important; 
     border-radius: 10px;
   }
 }
 
-/* 
 
-@media (min-width: 768px) and (max-width: 1020px) {
-  body {
-    background: orange;
+
+@media (min-width: 500px){
+  .search_img{
+    width: 202px !important;
+    height: 160px !important; 
+    border-radius: 10px;
   }
-} */
+}
 @media (min-width: 700px) and (max-width: 767px) {
   .google__map {
     height: 200px !important;

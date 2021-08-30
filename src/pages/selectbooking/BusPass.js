@@ -39,14 +39,15 @@ function BusDetail() {
   // };
 
   const fetchOtp = (mobile) => {
-    dispatch(getOtp(`91${mobile}`));
+    // console.log("OTP:::::",mobile)
+    dispatch(getOtp(`91${number}`));
   };
 
   const onClickMonsoon = () => {
     console.log("object", `91${mobile}`, otp);
     if (otp.length === 6) {
       dispatch(fetchStart());
-      dispatch(verifyOtp(`91${mobile}`, otp));
+      dispatch(verifyOtp(`91${number}`, otp));
     }
 
   };

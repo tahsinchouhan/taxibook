@@ -411,7 +411,7 @@ function Search() {
             <Container>
 
               <h2 className="package__title mb-5">
-                <span>Destinations</span>
+                <span >Destinations</span>
               </h2>
               <Row>
                 {destinations.map((item) => {
@@ -435,15 +435,14 @@ function Search() {
                       >
                         <Image
                           draggable={false}
-                          className="search_img "
-
+                          className="search_img"
                           src={item.upload_images}
                         />
-                        <div style={{ color: "black" }} className="package__trip">
+                        <div style={{ color: "black" }} className="package__trip" style={{paddingLeft:"20px"}}>
                           <h6 className="packages__block-title mt-3 mb-0">
                             {item.title}
                           </h6>
-                          <small className="packages__block-subtitle">
+                          <small className="packages__block-subtitle" >
                             {item.sub_title}
                           </small>
                         </div>
@@ -476,7 +475,7 @@ function Search() {
                         className="search_div"
                         style={{
                           width: "100%",
-                          height: 200,
+                          height: "180px",
                           // marginRight: 15,
                           marginTop: 10,
                           display: "flex",
@@ -487,7 +486,7 @@ function Search() {
                           className="search_img "
                           src={item.upload_images}
                         />
-                        <div style={{ whiteSpace: "nowrap", paddingTop: "20px" }}>
+                        <div style={{  paddingTop: "20px",paddingLeft: "20px"}}>
                           <h6 className="packages__block-title_ mt-3 mb-0">
                             {item.title}
                           </h6>
