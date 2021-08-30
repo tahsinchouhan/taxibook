@@ -60,7 +60,7 @@ function* createDmPassOfTraveller({ payload }) {
     try {
         const dmpass = yield call(createTravelPassRequest, payload);
         const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id, });
-        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id, mobile: `91${phone}`  });
+        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id, mobile: phone });
         console.log("(dm.data.dm_pass_id",dm.data.dm_pass_id);       
         yield put(setDmPassId(dm.data.dm_pass_id));
         // console.log("bus",busticket);
@@ -76,7 +76,7 @@ function* createDmPass({ payload }) {
         const dmpass = yield call(createTravelPassRequest, payload);
         const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id });
         const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id, mobile:localStorage.getItem("mobile") });
-        const entry = yield call(createEntryPassRequest, {...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id, dm_pass_number:dm.data.dm_pass_id ,mobile:`91${phone}` });
+        const entry = yield call(createEntryPassRequest, {...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id, dm_pass_number:dm.data.dm_pass_id ,mobile:phone });
         console.log("(dm.data",dm.data);
         yield put(setDmPassId(dm.data.dm_pass_id));
         // console.log("bus",busticket);
