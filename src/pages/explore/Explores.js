@@ -306,6 +306,7 @@ const Explores = () => {
                       style={{ width: "100%", height: "100%" }}
                       src={item.upload_images}
                     />
+                   
                     <div style={{ color: "white" }} className="package__trip">
                       <h6 className="packages__block-title mt-3 mb-0">
                         {item.title}
