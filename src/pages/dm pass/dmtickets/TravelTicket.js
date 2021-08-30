@@ -659,7 +659,7 @@ const editDetails = ()=>{
                     })}
 
 
-                    <div style={{ marginTop: "3rem", textAlign: "center", marginLeft: "52%" }}>
+                    <div style={{ marginTop: "10rem", textAlign: "center", marginLeft: "52%" }}>
                       <Button
                         type="submit"
                         class="btn btn-success"

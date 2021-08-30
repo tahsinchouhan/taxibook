@@ -85,13 +85,6 @@ function App() {
             <Route exact path='/steper_dmpass' component={SteperDmpass} />
             <Route exact path='/ ticket_checkout' component={TicketCheckOut} />
             <Route exact path='/payment' component={Payment} />
-
-
-
-
-
-
-
           </Switch>
         </div>
       </Router>

@@ -136,7 +136,7 @@ function DmDetail() {
                       <div className="right">PASS ID</div>
                     </div>
                     <div className="dm__card_body">
-                      <div className="left">TRAVELLER PASS ID</div>
+                      <div className="left">TRAVEL PASS ID</div>
                       <div className="right">
                         {apiData.length > 0 ? apiData[0]?.dm_pass_id : null}
                       </div>
@@ -292,7 +292,7 @@ function DmDetail() {
                   <div className="right">PASS ID</div>
                 </div>
                 <div className="dm__card_body">
-                  <div className="left">TRAVELLER PASS ID</div>
+                  <div className="left">TRAVEL PASS ID</div>
                   <div className="right">
                     {apiData.length > 0 ? apiData[0]?.dm_pass_id : null}
                   </div>

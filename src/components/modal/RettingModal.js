@@ -30,13 +30,22 @@ function RettingModal({ show, handleClose }) {
             <Modal.Body className="">
               <Form className="col-sm-6 offset-sm-3">
                 <Form.Group className="review_input mb-3" controlId="formBasicEmail">
+                  <div className="d-flex">
                   <Form.Label style={{
                       paddingTop: '5px'
-                    }}>Star Rating:</Form.Label>
-                  <Form.Control type="text" placeholder="Star Rating" >
-                    {/* <FaStar  /> */}
+                    }}>Star Rating:&nbsp;</Form.Label>
+                    <div style={{color:"#FF8700", fontSize:"22px"}}>                    
+                    <FaStar  /> 
+                    <FaStar  /> 
+                    <FaStar  /> 
+                    <FaStar  /> 
+                    <FaStar  /> 
+                    </div>
+                    </div>
+                  {/* <Form.Control type="text" placeholder="Star Rating" >
+                     <FaStar  />
                     
-                  </Form.Control>
+                  </Form.Control>  */}
 
                   <Form.Label style={{
                       paddingTop: '5px'
