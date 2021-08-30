@@ -271,8 +271,7 @@ function BusConfirmation() {
                       fontWeight: "bolder",
                       fontFamily: "sans-serif",
                     }}
-                  >
-                    {/* 19:45 */}
+                  >                  
                     {tripData?.estimated_time_of_arrival}
                   </span>
                 </Form>
@@ -698,7 +697,7 @@ function BusConfirmation() {
                       fontFamily: "sans-serif",
                     }}
                   >
-                    19:45
+                    {tripData?.departure_time}
                   </span>
                 </Form>
                 <div className="d-flex">
@@ -711,8 +710,6 @@ function BusConfirmation() {
                       fontFamily: "sans-serif",
                     }}
                   >
-
-
                     {tripData?.route?.start?.name}
                   </span>
                 </div>
@@ -757,7 +754,7 @@ function BusConfirmation() {
                       fontFamily: "sans-serif",
                     }}
                   >
-                    19:45
+                    {tripData?.estimated_time_of_arrival}
                   </span>
                 </Form>
                 <div className="d-flex">

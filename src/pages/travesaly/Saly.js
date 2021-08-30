@@ -21,6 +21,7 @@ import TravellerTicket from "./TravellerTicket";
 import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
 import SearchFelid from "./SearchFelid";
+import { toast, ToastContainer } from 'react-toastify'
 
 function Saly() {
   const history = useHistory();
@@ -29,9 +30,22 @@ function Saly() {
     console.log("object");
     history.push("/select-booking");
   };
+  const dmPassId = localStorage.getItem("dm_pass_id")
   const gotoTickets_sraech = () => {
     console.log("object");
-    history.push("/tickets_sraech");
+    if (dmPassId) {
+      history.push(`/dm-detail/${dmPassId}`);
+    } else {
+      toast.error("Please Create Your Ticket", {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+
+      })
+    }
   };
 
   useEffect(() => {
@@ -136,17 +150,18 @@ function Saly() {
                     style={{
                       marginTop: 20,
                       justifyContent: "center",
-                      backgroundColor: "#58b839",
+                      backgroundColor: "#0FA453",
                       color: "white",
                       fontSize: "15px",
                       fontWeight: "bolder",
                       padding: 15,
-                      width: 300,
+                      width: "186px",
                       outline: 'none',
-                      border: 'none'
+                      border: 'none',
+                      borderRadius: "10px",
                     }}
                   >
-                    View all destinations
+                    View all Destinations
                   </Button>
                 </div>
               </Row>
@@ -161,7 +176,7 @@ function Saly() {
               <div style={{ paddingTop: "100px", textAlign: "center" }}>
                 <div className="bookings-div">
                   <h3>Bookings</h3>
-                  <p>Book tickets for buses,cabs and Traveller Passees</p>
+                  <p>Book tickets for buses,cabs and Traveller Passes</p>
                 </div>
                 <Button
                   className="makebooking-btn"
@@ -196,8 +211,16 @@ function Saly() {
               <Col sm={6} md={6}>
                 <div className="viewbtn">
                   <Button
-                    variant="danger"
-                    style={{ cursor: "pointer", marginTop: "32px" }}
+                    // variant="danger"
+                    style={{
+                      cursor: "pointer",
+                      marginTop: "32px",
+                      backgroundColor: "#FF814A",
+                      borderRadius: "10px",
+                      border: "none", 
+                      width: "186px",
+                      height: "53.63px"
+                    }}
                     onClick={gotoTickets_sraech}
                   >
                     View your Tickets
@@ -215,6 +238,17 @@ function Saly() {
             </div>
           </div>
         </Container>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </Container>
       {/*mobile-view*/}
       <div fluid className="d-md-none">
@@ -264,13 +298,16 @@ function Saly() {
                     variant=""
                     style={{
                       justifyContent: "center",
-                      backgroundColor: "#58b839",
+                      backgroundColor: "#0FA453",
                       color: "white",
-                      fontSize: "17px",
-                      fontWeight: "bolder",
+                      fontSize: "16px",
+                      // fontWeight: "bolder",
+                      width: "186px",
+                      height: "48.41px",
+                      borderRadius: "10px",
                     }}
                   >
-                    View all destinations
+                    View all Destinations
                   </Button>
                 </div>
               </div>
@@ -322,8 +359,16 @@ function Saly() {
                 <Col sm={6} md={6}>
                   <div className="viewbtn">
                     <Button
-                      variant="danger"
-                      style={{ cursor: "pointer", marginTop: "32px" }}
+                      // variant="danger"                      
+                      style={{
+                        cursor: "pointer",
+                        marginTop: "32px",
+                        backgroundColor: "#FF814A",
+                        borderRadius: "10px",
+                        border: "none", 
+                        width: "186px",
+                        height: "53.63px"
+                      }}
                       onClick={gotoTickets_sraech}
                     >
                       View your Tickets
@@ -342,6 +387,17 @@ function Saly() {
             </div>
           </Container>
         </div>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </>
   );

@@ -56,8 +56,7 @@ function SteperDmpass(shows, ...props) {
     duration_of_travel,
     mobile,
     start_date,
-  } = dmData;
-  
+  } = dmData;  
 
   const onSideBtnClick = (e) => {
     const name = e.target.name;
@@ -99,6 +98,7 @@ function SteperDmpass(shows, ...props) {
     });
     dispatch(createDmPass({ ...dmData, basic_details: travellers, vehical_details: vehicles }))
     setShow(1);
+
   };
 
   const onLocationsClick = () => {
@@ -121,6 +121,8 @@ function SteperDmpass(shows, ...props) {
       })
     );
     setShow(3);
+    localStorage.setItem("dm_pass_id",dmData.dmpass_id)
+    
   };
   const onClickBack = () => {
     console.log("object");

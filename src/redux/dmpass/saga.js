@@ -52,11 +52,15 @@ const createDmPassRequest = async (payload) =>
 
 function* createDmPassOfTraveller({ payload }) {
     console.log("pay:::::::", payload);
+    const phone = localStorage.getItem("mobile")
+    console.log("mobile data",phone);
     try {
         const dmpass = yield call(createTravelPassRequest, payload);
-        const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id, mobile:localStorage.getItem("mobile") });
+        const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id, mobile:phone });
         const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id });
+        console.log("(dm.data.dm_pass_id",dm.data.dm_pass_id);       
         yield put(setDmPassId(dm.data.dm_pass_id));
+
         // console.log("bus",busticket);
     } catch (error) {
         // yield put(getRoutesError(error));

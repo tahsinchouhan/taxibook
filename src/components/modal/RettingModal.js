@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOtp, verifyOtp } from "../../redux/actions";
 import Loader from "../Loader";
 import Message from "../Message";
+import { FaStar } from 'react-icons/fa';
 
 
 function RettingModal({ show, handleClose }) {
@@ -32,7 +33,10 @@ function RettingModal({ show, handleClose }) {
                   <Form.Label style={{
                       paddingTop: '5px'
                     }}>Star Rating:</Form.Label>
-                  <Form.Control type="text" placeholder="Star Rating" />
+                  <Form.Control type="text" placeholder="Star Rating" >
+                    {/* <FaStar  /> */}
+                    
+                  </Form.Control>
 
                   <Form.Label style={{
                       paddingTop: '5px'

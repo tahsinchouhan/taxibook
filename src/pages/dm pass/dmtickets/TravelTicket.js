@@ -160,6 +160,12 @@ function TravelTicket({ Seleted_Values }) {
   useEffect(() => {
     console.log("vehicles", vehicles);
   }, [vehicles]);
+
+const editDetails = ()=>{
+  console.log("dbdbbdbbb");
+  history.push("/dmticket")
+
+}
   return (
     <>
       <Header />
@@ -243,6 +249,7 @@ function TravelTicket({ Seleted_Values }) {
                             float: "left",
                             fontWeight: "700",
                           }}
+                          onClick={editDetails}
                         >
                           Edit
                         </Button>
@@ -272,6 +279,7 @@ function TravelTicket({ Seleted_Values }) {
                     </span>
                     <br />
                     <Button
+                    onClick={editDetails}
                       style={{
                         backgroundColor: "transparent",
                         border: "none",
@@ -308,6 +316,7 @@ function TravelTicket({ Seleted_Values }) {
                     </span>
                     <br />
                     <Button
+                    onClick={editDetails}
                       style={{
                         backgroundColor: "transparent",
                         border: "none",

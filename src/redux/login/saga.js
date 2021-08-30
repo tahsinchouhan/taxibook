@@ -61,7 +61,8 @@ function* fetchLogout({ payload }) {
   try {
     localStorage.removeItem('user_data');
     localStorage.removeItem('customer_id');
-
+    localStorage.removeItem('dm_pass_id');
+    localStorage.removeItem('mobile');
   } catch (error) {
     yield put(fetchError("Something went wrong"))
   }

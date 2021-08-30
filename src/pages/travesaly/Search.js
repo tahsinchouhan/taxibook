@@ -152,36 +152,36 @@ function Search() {
           <div className="col md-6 offset-sm-1">
             <Row>
               <Col xs={3} md={3} className="search_cel">
-                <Button
+                <div
                   className="destina_search"
                   style={{ backgroundColor: "#864BD8" }}
                 >
                   Destinations
-                </Button>
+                </div>
               </Col>
               <Col xs={3} md={3} className="search_cel">
-                <Button
+                <div
                   className="destina_search"
                   style={{ backgroundColor: "#0FA453" }}
                 >
                   Packages
-                </Button>
+                </div>
               </Col>
               <Col xs={3} md={3} className="search_cel">
-                <Button
+                <div
                   className="destina_search"
                   style={{ backgroundColor: "#FF4A68", whiteSpace: "nowrap" }}
                 >
                   Traveller Pass
-                </Button>
+                </div>
               </Col>
               <Col xs={3} md={3} className="search_cel">
-                <Button
+                <div
                   className="destina_search"
-                  style={{ backgroundColor: "#FF814A" }}
+                  style={{ backgroundColor: "#FF814A"}}
                 >
                   Tickets
-                </Button>
+                </div>
               </Col>
             </Row>
           </div>

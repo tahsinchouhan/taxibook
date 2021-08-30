@@ -15,7 +15,7 @@ function BusMonsoon() {
   const [seats, setSeats] = useState([]);
   const { tripList: trips, route_id, routeData } = useSelector(state => state.busReducer)
 
-
+console.log("trips liSTTTTT",trips);
   const dispatch = useDispatch()
 
   useEffect(() => {

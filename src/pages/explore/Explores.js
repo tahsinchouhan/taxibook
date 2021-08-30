@@ -121,6 +121,10 @@ const Explores = () => {
     });
   };
 
+  const goToSearch = ()=>{
+    history.push("/search")
+  } 
+
   return (
     <>
       <div
@@ -136,8 +140,8 @@ const Explores = () => {
             <h1 className="search__title pt-5">Near You</h1>
             <div className="search__inner">
               <div className="search__block">
-                <div className="block__location">
-                  <label className="block--text code">
+                <div className="block__location" onClick={goToSearch}>
+                  <label className="block--text code" >
                     Search destinations
                   </label>
                 </div>
