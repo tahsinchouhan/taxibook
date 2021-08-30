@@ -92,9 +92,22 @@
     margin: 0px;
     height: 80px;
     border: 1px solid #0FA453;
-     position:absolute;
+    position:absolute;
     /* bottom:0; */
 }
+
+.locationpass-btn-two {
+  position: relative !important;
+  color: white;
+    background-color: #0FA453;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 5px;
+    margin: 0px;
+    height: 80px;
+    border: 1px solid #0FA453;
+}
+
 .train-seats{
   /* border: 1px solid red; */
   background-color: #0FA453;
@@ -105,16 +118,16 @@
   height: 80px;
   width: 74px;
 }
-.dm-inputticket{
-  height: 39px;
-  width: 100%;
-  font-size: 11px;
-  border: none;
-  background-color: transparent;
-  outline-width: 0;
-  background-color: #F8F8F8;;
-}
-.travel_home_btn{
-  text-align: center;
-}
+  .dm-inputticket{
+    height: 39px;
+    width: 100%;
+    font-size: 11px;
+    border: none;
+    background-color: transparent;
+    outline-width: 0;
+    background-color: #F8F8F8;;
+  }
+  .travel_home_btn{
+    text-align: center;
+  }
 }

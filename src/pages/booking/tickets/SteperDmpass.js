@@ -1207,7 +1207,7 @@ function SteperDmpass(shows, ...props) {
             </Container>
           </div>
           <div style={{ "paddingTop": "50px", "paddingBottom": "50px" }}>
-            <Button className="locationpass-btn" onClick={onTicketCheckClick} >
+            <Button className="locationpass-btn" onClick={onTicketCheckClick}  >
               Save & Continue
             </Button>
           </div>
