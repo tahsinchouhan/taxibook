@@ -139,14 +139,14 @@ function TravelTicket({ Seleted_Values }) {
       {value}
     </button>
   ))
-
-  const handleDate = (d) => {
+const handleDate = (d) => {
     let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
     let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
     let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
     console.log(`${ye}-${mo}-${da}`);
     //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
     setStartDate(d)
+   
   }
 
   const handleDateTwo = (d) => {
@@ -157,6 +157,7 @@ function TravelTicket({ Seleted_Values }) {
     //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
     setEndDate(d)
   }
+  
   useEffect(() => {
     console.log("vehicles", vehicles);
   }, [vehicles]);
@@ -627,12 +628,12 @@ const editDetails = ()=>{
                                   Start Date
                                 </label>
                                 <DatePicker
-                                  id={`start_date${i}`}
+                                 // id={`start_date${i}`}
                                   selected={startDate}
                                   onChange={handleDate}
                                   customInput={<ExampleCustomInput />}
                                   dateFormat="dd/MM/yy"
-                                  value={travellers[i].start_date}
+                                 // value={travellers[i].start_date}
                                 />
                               </div>
                               <div className="col-sm-6">
@@ -640,12 +641,12 @@ const editDetails = ()=>{
                                   End Date
                                 </label>
                                 <DatePicker
-                                  id={`end_date${i}`}
+                                 // id={`end_date${i}`}
                                   selected={endDate}
                                   onChange={handleDateTwo}
                                   customInput={<ExampleCustomInput />}
                                   dateFormat="dd/MM/yy"
-                                  value={travellers[i].end_date}
+                                  //value={travellers[i].end_date}
                                 />
                               </div>
 

@@ -555,7 +555,7 @@ function BusConfirmation() {
           </div>
         </Container>
         <div>
-          <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <div style={{ display: 'flex', flexDirection: 'row' }} >
             <Col style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px", }}>
               <div style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px" }}>
 
@@ -998,7 +998,7 @@ function BusConfirmation() {
             ))
           }
         </div>
-        {/* <div style={{ textAlign: "center" }}>
+        <div style={{ textAlign: "center" }}>
           <Button
             style={{
               backgroundColor: "#0FA453",
@@ -1020,10 +1020,10 @@ function BusConfirmation() {
           >
             Add Traveller
           </Button>
-        </div> */}
+        </div>
 
         <div>
-          <div style={{ display: "flex", marginTop: "50px", flexDirection: 'row', width: "50%" }}>
+          <div style={{ display: "flex", marginTop: "50px", flexDirection: 'row', width: "50%" }} >
             <Col xs={12} md={6} style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px", }}>
               <div style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px" }}>
 

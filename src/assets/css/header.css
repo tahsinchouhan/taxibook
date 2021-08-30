@@ -92,7 +92,7 @@
     margin: 0px;
     height: 80px;
     border: 1px solid #0FA453;
-    /* position:absolute; */
+     position:absolute;
     /* bottom:0; */
 }
 .train-seats{

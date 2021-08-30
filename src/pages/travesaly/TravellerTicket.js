@@ -68,7 +68,7 @@ function TravellerTicket() {
       <Carousel partialVisbile itemClass="image-item" responsive={responsive}>
 
         {data.map((item, index) => (
-          <div className="p-5" onClick={() => history.push(item.path)}>
+          <div className="p-5 " onClick={() => history.push(item.path)}>
             <div style={{ display: "flex", width: "100%" }}>
               <Col>
                 <Image style={{ width: 50 }} src={item.img} />

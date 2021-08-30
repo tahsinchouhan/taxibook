@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 // import Cab from "./Cab";
 import bus from "../../assets/img/bus.png";
 import cab from "../../assets/img/cab.png";
-import ticket from "../../assets/img/ticket.png";
+import ticket from "../../assets/img/ticket.svg";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 // import calendar from "../../assets/img/calendar.png";
@@ -31,15 +31,16 @@ function DmPass({ DmPassDetails }) {
   const [daysTravel, setDaysTravel] = useState("1")
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  
+
   const dispatch = useDispatch()
   const { dmData } = useSelector(state => state.dmpassReducer)
-  const { number_of_vehicals, number_of_travellers, duration_of_travel } = dmData
+  var { number_of_vehicals, number_of_travellers, duration_of_travel } = dmData
   const { error, loading, message } = useSelector(
     (state) => state.commonReducer
   );
   const { user_data } = useSelector((state) => state.loginReducer);
   console.log("user_data", user_data);
+
   useEffect(() => {
     let d = new Date();
     let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
@@ -55,13 +56,12 @@ function DmPass({ DmPassDetails }) {
   const data = [
     {
       "Vehicle": vehicle,
-      "DaysTravel": daysTravel,
+      "DaysTravel":daysTravel,
       "Travellers": travellers,
     }
   ]
   const onDmTicketShow = () => {
     // console.log('Vehicle Data',vehicle)
-
     DmPassDetails({ data })
 
     history.push('/travelticket')
@@ -78,23 +78,39 @@ function DmPass({ DmPassDetails }) {
     </button>
   ))
 
-  const handleDate = (d) => {
-    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-    let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
-    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-    console.log(`${ye}-${mo}-${da}`);
-    //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
-    setStartDate(d)
-  }
+  // const handleDate = (d) => {
+  //   let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+  //   let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
+  //   let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+  //   console.log(`${ye}-${mo}-${da}`);
+  //   //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
+  //   setStartDate(d)
+  //   console.log("new Date(endDate)",new Date(endDate));
+  //   console.log("new Date(startDate)",new Date(startDate));
 
-  const handleDateTwo = (d) => {
-    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-    let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
-    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-    console.log(`${ye}-${mo}-${da}`);
-    //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
-    setEndDate(d)
-  }
+  //   const diffInMs = new Date(endDate) - new Date(d)
+  //   duration_of_travel = Math.round(diffInMs / (1000 * 60 * 60 * 24));
+  //   console.log("duration_of_travel", duration_of_travel);
+  //   console.log("d",d);
+  // }
+
+  // const handleDateTwo = (d) => {
+  //   let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+  //   let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
+  //   let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+  //   console.log(`${ye}-${mo}-${da}`);
+  //   //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
+  //   setEndDate(d)
+  //   console.log("new Date(endDate)ss",new Date(endDate));
+  //   console.log("new Date(startDate)dd",new Date(startDate));
+
+  //   const diffInMs = new Date(d) - new Date(startDate)
+  //   duration_of_travel = Math.round(diffInMs / (1000 * 60 * 60 * 24));
+
+  //   console.log("duration_of_travel", duration_of_travel);
+  //   console.log("endd",d);
+
+  // }
 
   return (
     <>
@@ -174,38 +190,8 @@ function DmPass({ DmPassDetails }) {
                       className=""
                       controlId="exampleForm.ControlInput1"
                     >
-                      <Row>
-                        <Col xs={12} md={4}>
-                          <div>
-                          <Form.Label className="dm-ticket">Start Date</Form.Label>
-                           
-                            <DatePicker
-                              /// id={`start_date${i}`}
-                               selected={startDate}
-                              onChange={handleDate}
-                              customInput={<ExampleCustomInput />}
-                              dateFormat="dd/MM/yy"
-                            //value={travellers[i].start_date}
-                            />
-                          </div>
-                        </Col>
-                        <Col xs={12} md={4}>
-                          <div >
-                          <Form.Label className="dm-ticket">End Date</Form.Label>
-                            <DatePicker
-                              //  id={`end_date${i}`}
-                               selected={endDate}
-                              onChange={handleDateTwo}
-                              customInput={<ExampleCustomInput />}
-                              dateFormat="dd/MM/yy"
-                            //value={travellers[i].end_date}
-                            />
-                          </div>
-                        </Col>
-
-
-
-                        {/* <Form.Label className="dm-ticket">Days of Travel</Form.Label>
+                      
+                        <Form.Label className="dm-ticket">Days of Travel</Form.Label>
                       <select
                         id="inputState"
                         className="form-control pass_input"
@@ -217,8 +203,39 @@ function DmPass({ DmPassDetails }) {
                         <option value="4">4</option>
                         <option value="5">5</option>
                         <option value="6">6</option>
-                      </select> */}
-                      </Row>
+                      </select>
+                      {/* <Row>
+                        <Col xs={12} md={4}>
+                          <div>
+                            <Form.Label className="dm-ticket">Start Date</Form.Label>
+
+                            <DatePicker
+                              /// id={`start_date${i}`}
+                              selected={startDate}
+                              onChange={handleDate}
+                              customInput={<ExampleCustomInput />}
+                              dateFormat="dd/MM/yy"
+                            //value={travellers[i].start_date}
+                            />
+                          </div>
+                        </Col>
+                        <Col xs={12} md={4}>
+                          <div >
+                            <Form.Label className="dm-ticket">End Date</Form.Label>
+                            <DatePicker
+                              //  id={`end_date${i}`}
+                              selected={endDate}
+                              onChange={handleDateTwo}
+                              customInput={<ExampleCustomInput />}
+                              dateFormat="dd/MM/yy"
+                            //value={travellers[i].end_date}
+                            />
+                          </div>
+                        </Col>
+
+
+
+                      </Row> */}
                     </Form.Group>
                   </Col>
                 </Row>
@@ -316,38 +333,7 @@ function DmPass({ DmPassDetails }) {
                   className=""
                   controlId="exampleForm.ControlInput1"
                 >
-                   <Row>
-                        <Col xs={6} md={4}>
-                          <div>
-                          <Form.Label className="dm-ticket">Start Date</Form.Label>
-                           
-                            <DatePicker
-                              /// id={`start_date${i}`}
-                               selected={startDate}
-                              onChange={handleDate}
-                              customInput={<ExampleCustomInput />}
-                              dateFormat="dd/MM/yy"
-                            //value={travellers[i].start_date}
-                            />
-                          </div>
-                        </Col>
-                        <Col xs={6} md={4}>
-                          <div >
-                          <Form.Label className="dm-ticket">End Date</Form.Label>
-                            <DatePicker
-                              //  id={`end_date${i}`}
-                               selected={endDate}
-                              onChange={handleDateTwo}
-                              customInput={<ExampleCustomInput />}
-                              dateFormat="dd/MM/yy"
-                            //value={travellers[i].end_date}
-                            />
-                          </div>
-                        </Col>
-
-
-
-                        {/* <Form.Label className="dm-ticket">Days of Travel</Form.Label>
+                   <Form.Label className="dm-ticket">Days of Travel</Form.Label>
                       <select
                         id="inputState"
                         className="form-control pass_input"
@@ -359,9 +345,41 @@ function DmPass({ DmPassDetails }) {
                         <option value="4">4</option>
                         <option value="5">5</option>
                         <option value="6">6</option>
-                      </select> */}
-                      </Row>
-                 
+                      </select>
+                  {/* <Row>
+                    <Col xs={6} md={4}>
+                      <div>
+                        <Form.Label className="dm-ticket">Start Date</Form.Label>
+
+                        <DatePicker
+                          /// id={`start_date${i}`}
+                          selected={startDate}
+                          onChange={handleDate}
+                          customInput={<ExampleCustomInput />}
+                          dateFormat="dd/MM/yy"
+                        //value={travellers[i].start_date}
+                        />
+                      </div>
+                    </Col>
+                    <Col xs={6} md={4}>
+                      <div >
+                        <Form.Label className="dm-ticket">End Date</Form.Label>
+                        <DatePicker
+                          //  id={`end_date${i}`}
+                          selected={endDate}
+                          onChange={handleDateTwo}
+                          customInput={<ExampleCustomInput />}
+                          dateFormat="dd/MM/yy"
+                        //value={travellers[i].end_date}
+                        />
+                      </div>
+                    </Col>
+
+
+
+                   
+                  </Row> */}
+
                 </Form.Group>
               </Col>
             </Row>

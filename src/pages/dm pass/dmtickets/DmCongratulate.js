@@ -42,7 +42,7 @@ function DmCongratulate() {
                   </span>
                 </div>
                 <div>
-                  <div>
+                  {/* <div>
                     <Button
                       className="btn btn-success"
                       style={{
@@ -63,8 +63,8 @@ function DmCongratulate() {
                       />
                       <span> Whatsapp Link</span>
                     </Button>
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <Button
                       style={{
                         width: "186px",
@@ -78,9 +78,9 @@ function DmCongratulate() {
                     >
                       Download E-ticket
                     </Button>
-                  </div>
+                  </div> */}
 
-                  <div>
+                  {/* <div>
                    <Button style={{
                     width: "186px",
                     textAlign: "center",
@@ -91,7 +91,7 @@ function DmCongratulate() {
                     marginBottom:"20px"
                   }} 
                    >Sent by Email</Button>
-                   </div>
+                   </div> */}
 
                   <div>
                     <Button
@@ -160,7 +160,7 @@ function DmCongratulate() {
                   </span>
                 </div>
                 <div style={{ textAlign: "center" }}>
-                  <div>
+                  {/* <div>
                     <Button
                       className="btn btn-success"
                       style={{
@@ -181,8 +181,8 @@ function DmCongratulate() {
                       />
                       <span> Whatsapp Link</span>
                     </Button>
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <Button
                       style={{
                         width: "186px",
@@ -196,9 +196,9 @@ function DmCongratulate() {
                     >
                       Download E-ticket
                     </Button>
-                  </div>
+                  </div> */}
 
-                  <div>
+                  {/* <div>
                    <Button style={{
                     width: "186px",
                     textAlign: "center",
@@ -209,7 +209,7 @@ function DmCongratulate() {
                     marginBottom:"20px"
                   }} 
                    >Sent by Email</Button>
-                   </div>
+                   </div> */}
                    
                   <div>
                     <Button

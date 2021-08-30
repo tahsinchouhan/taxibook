@@ -1207,7 +1207,7 @@ function SteperDmpass(shows, ...props) {
             </Container>
           </div>
           <div style={{ "paddingTop": "50px", "paddingBottom": "50px" }}>
-            <Button className="locationpass-btn" onClick={onTicketCheckClick}>
+            <Button className="locationpass-btn" onClick={onTicketCheckClick} >
               Save & Continue
             </Button>
           </div>
@@ -1239,7 +1239,7 @@ function SteperDmpass(shows, ...props) {
                       </span>
                     </div>
                     <div>
-                      <div>
+                      {/* <div>
                         <Button
                           className="btn btn-success"
                           style={{
@@ -1260,7 +1260,7 @@ function SteperDmpass(shows, ...props) {
                           />
                           <span> Whatsapp Link</span>
                         </Button>
-                      </div>
+                      </div> */}
 
                       <div>
                         <Button
@@ -1291,12 +1291,12 @@ function SteperDmpass(shows, ...props) {
                           borderRadius: "9px",
                           backgroundColor: "",
                           fontWeight: "bold",
-                          marginBottom: "20px"
+                          marginBottom: "20px"                         
                         }}
                         >
                          <Link
                             to={`/dm-detail/${dmpass_id}`}
-                            style={{ textDecoration: "none" }}
+                            style={{ textDecoration: "none", color:"#fff" }}
                           >
                           View Ticket
                           </Link>
