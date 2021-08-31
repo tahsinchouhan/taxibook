@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import "../../assets/css/buspass.css";
-import { FaBus, FaCarAlt, FaTicketAlt } from "react-icons/fa";
+import { FaBus, FaCarAlt, FaSpinner, FaTicketAlt } from "react-icons/fa";
 import bus from "../../assets/img/bus.png";
 import { useHistory } from "react-router-dom";
 
@@ -113,17 +113,18 @@ function BusDetail() {
 
                 </Form.Group>
                 <Button
-                  onClick={fetchOtp}
-                  style={{
-                    backgroundColor: "transparent",
-                    border: "none",
-                    color: "#FF4A68",
-                    float: "right",
-                    fontSize: "12px",
-                  }}
-                >
-                  Sent OTP
-                </Button>
+                      onClick={fetchOtp}
+                        style={{
+                          backgroundColor: "transparent",
+                          border: "none",
+                          color: "#FF4A68",
+                          float: "right",
+                          fontSize: "12px",
+                        }}
+                        disabled={loading}
+                      >
+                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Sent OTP</>} 
+                      </Button>
               </Col>
               <Col xs={12} md={4} className="">
                 <Form.Group as={Col} controlId="formGridState">
@@ -243,8 +244,8 @@ function BusDetail() {
                     value={mobile}
                     onChange={(e) => dispatch(setMobile(e.target.value))}
                   /> */}
-                  <Button
-                    onClick={fetchOtp}
+                  {/* <Button
+                  
                     style={{
                       marginTop: "0px",
                       color: "#FF4A68",
@@ -255,7 +256,20 @@ function BusDetail() {
                     }}
                   >
                     Sent OTP
-                  </Button>
+                  </Button> */}
+                  <Button
+                        onClick={fetchOtp}
+                        style={{
+                          backgroundColor: "transparent",
+                          border: "none",
+                          color: "#FF4A68",
+                          float: "right",
+                          fontSize: "12px",
+                        }}
+                        disabled={loading}
+                      >
+                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Sent OTP</>} 
+                      </Button>
                 </Form.Group>
               </Col>
               <Col xs={12} md={4} className="" style={{ width: "100%" }}>
