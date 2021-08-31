@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Row, Col, Form, Container } from "react-bootstrap";
 import DatePicker from "react-datepicker";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { FaSpinner } from 'react-icons/fa';
 import "react-datepicker/dist/react-datepicker.css";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { ToastContainer } from "react-toastify";
@@ -12,11 +14,11 @@ import Header from "../../../components/Header";
 import Footer from "../../travesaly/Footer";
 import { getOtp, verifyOtp } from "../../../redux/login/actions";
 
-import { useDispatch, useSelector } from "react-redux";
-import { fetchStart, setDmData } from "../../../redux/actions";
+// import { useDispatch, useSelector } from "react-redux";
+import { fetchStart} from "../../../redux/actions";
 
 
-function DmTicket2() {
+function DmTicket2({loading}) {
   const { user_data } = useSelector((state) => state.loginReducer);
 
   const [number, setNumber] = useState("")
@@ -126,9 +128,11 @@ function DmTicket2() {
                           float: "right",
                           fontSize: "12px",
                         }}
+                        disabled={loading}
                       >
-                        Sent OTP
+                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Sent OTP</>} 
                       </Button>
+
 
                     </Col>
                     <Col xs={12} md={6} className="mt-2">
@@ -257,18 +261,20 @@ function DmTicket2() {
                             }
                           }}
                         />
-                        <Button
+                       <Button
                         onClick={sendOtp}
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "#FF4A68",
-                            float: "right",
-                            fontSize: "12px",
-                          }}
-                        >
-                          Sent OTP
-                        </Button>
+                        style={{
+                          backgroundColor: "transparent",
+                          border: "none",
+                          color: "#FF4A68",
+                          float: "right",
+                          fontSize: "12px",
+                        }}
+                        disabled={loading}
+                      >
+                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Sent OTP</>} 
+                      </Button>
+
 
                       </Form.Group>
                     </Col>
@@ -324,4 +330,12 @@ function DmTicket2() {
   );
 }
 
-export default DmTicket2;
+
+const mapStateToProps = ({ loginReducer }) => {
+  const { loading } = loginReducer;
+  return { loading };
+};
+
+export default connect(
+  mapStateToProps,
+)(DmTicket2);
