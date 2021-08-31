@@ -14,7 +14,7 @@
   }
   .search_img{
     width: 50% !important;
-    height: 160px !important; 
+    /* height: 160px !important;  */
     border-radius: 10px;
   }
 }
@@ -368,8 +368,8 @@
   height: 59;
 } */
    .package__trip {
-    width:50%;
-    margin-left: 2%;
+    /* width:50%; */
+    /* margin-left: 2%; */
    }
    .search_img{
     width: 50%;

@@ -60,7 +60,7 @@ function TravelTicket({ Seleted_Values }) {
         vehical_details: vehicles,
       })
     );
-     history.push("/dm_congratulate");
+    history.push("/dm_congratulate");
   };
 
   const initialTravellers = () => {
@@ -73,7 +73,7 @@ function TravelTicket({ Seleted_Values }) {
         adhaar: "",
         start_date: startDate,
         end_date: endDate,
-       
+
       });
     }
     return temp;
@@ -139,14 +139,14 @@ function TravelTicket({ Seleted_Values }) {
       {value}
     </button>
   ))
-const handleDate = (d) => {
+  const handleDate = (d) => {
     let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
     let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
     let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
     console.log(`${ye}-${mo}-${da}`);
     //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
     setStartDate(d)
-   
+
   }
 
   const handleDateTwo = (d) => {
@@ -157,16 +157,16 @@ const handleDate = (d) => {
     //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
     setEndDate(d)
   }
-  
+
   useEffect(() => {
     console.log("vehicles", vehicles);
   }, [vehicles]);
 
-const editDetails = ()=>{
-  console.log("dbdbbdbbb");
-  history.push("/dmticket")
+  const editDetails = () => {
+    console.log("dbdbbdbbb");
+    history.push("/dmticket")
 
-}
+  }
   return (
     <>
       <Header />
@@ -280,7 +280,7 @@ const editDetails = ()=>{
                     </span>
                     <br />
                     <Button
-                    onClick={editDetails}
+                      onClick={editDetails}
                       style={{
                         backgroundColor: "transparent",
                         border: "none",
@@ -317,7 +317,7 @@ const editDetails = ()=>{
                     </span>
                     <br />
                     <Button
-                    onClick={editDetails}
+                      onClick={editDetails}
                       style={{
                         backgroundColor: "transparent",
                         border: "none",
@@ -623,7 +623,7 @@ const editDetails = ()=>{
                                 />
                               </div>
                               <div className="form-group mt-1 pt-3 row">
-                              {/* <div className="col-sm-6">
+                                {/* <div className="col-sm-6">
                                 <label className="mb-3" for={`start_date${i}`}>
                                   Start Date1
                                 </label>
@@ -636,7 +636,7 @@ const editDetails = ()=>{
                                  // value={travellers[i].start_date}
                                 />
                               </div> */}
-                              {/* <div className="col-sm-6">
+                                {/* <div className="col-sm-6">
                                 <label className="mb-3" for={`end_date${i}`}>
                                   End Date1
                                 </label>
@@ -650,7 +650,7 @@ const editDetails = ()=>{
                                 />
                               </div> */}
 
-                            </div>
+                              </div>
                             </p>
                           </div>
 
@@ -790,6 +790,7 @@ const editDetails = ()=>{
                       <br />
                       <div style={{ background: "#F8F8F8" }}>
                         <Button
+                          onClick={editDetails}
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
@@ -837,6 +838,7 @@ const editDetails = ()=>{
                     </span>
                     <br />
                     <Button
+                      onClick={editDetails}
                       style={{
                         backgroundColor: "transparent",
                         border: "none",
@@ -882,6 +884,7 @@ const editDetails = ()=>{
                     </span>
                     <br />
                     <Button
+                      onClick={editDetails}
                       style={{
                         backgroundColor: "transparent",
                         border: "none",
@@ -1009,7 +1012,7 @@ const editDetails = ()=>{
                       </Paper>
                     ))}
                   </div>
-                  <div style={{ marginTop: "23px", textAlign: "center" }}>
+                  {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
                     <Button
                       type="submit"
                       class="btn btn-success"
@@ -1037,7 +1040,7 @@ const editDetails = ()=>{
                     >
                       Add Vehicle
                     </Button>
-                  </div>
+                  </div> */}
                 </Col>
                 <Col xs={12} md={6}>
                   <label
@@ -1185,7 +1188,7 @@ const editDetails = ()=>{
                                 }}
                               />
 
-                            </div>                           
+                            </div>
                           </p>
                         </div>
                       </Paper>
@@ -1219,25 +1222,26 @@ const editDetails = ()=>{
                   </Button>
                 </div> */}
                 </Col>
-                <div style={{ marginTop: "3rem", textAlign: "center" }}>
+                <div style={{ marginTop: "10rem", textAlign: "center" }}>
                   <Button
                     type="submit"
                     class="btn btn-success"
-                    style={{
-                      width: "100%",
-                      textAlign: "center",
-                      height: "80px",
-                      borderRadius: "0px",
-                      backgroundColor: "#0fa453",
-                      border: "none",
-                      fontWeight: "600",
-                    }}
+                    // style={{
+                    //   width: "100%",
+                    //   textAlign: "center",
+                    //   height: "80px",
+                    //   borderRadius: "0px",
+                    //   backgroundColor: "#0fa453",
+                    //   border: "none",
+                    //   fontWeight: "600",
+                    // }}
                     onClick={onDmByeClick}
                   >
                     Book your Pass
                   </Button>
                 </div>
               </AvForm>
+              <div>dcjjfj</div>
             </div>
           </div>
         </Container>

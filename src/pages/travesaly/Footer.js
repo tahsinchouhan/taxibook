@@ -53,7 +53,7 @@ function Footer() {
                     //     "https://bhuwnesh947131.typeform.com/to/SMfaeorp")
                     // }
                   >
-                    <h5 className="footer__item-title">Registration From</h5>
+                    <h5 className="footer__item-title">Registration Form</h5>
                   </Link>
                   <small>Vendor & Organization Registration</small>
                 </div>

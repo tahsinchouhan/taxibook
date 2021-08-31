@@ -75,7 +75,7 @@ function* createDmPass({ payload }) {
     try {
         const dmpass = yield call(createTravelPassRequest, payload);
         const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id });
-        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id, mobile:localStorage.getItem("mobile") });
+        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id, mobile:phone });
         const entry = yield call(createEntryPassRequest, {...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id, dm_pass_number:dm.data.dm_pass_id ,mobile:phone });
         console.log("(dm.data",dm.data);
         yield put(setDmPassId(dm.data.dm_pass_id));
