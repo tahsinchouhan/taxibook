@@ -350,7 +350,7 @@ function DmDetail() {
               ENTRY TICKET DETAILS
             </Col>
             <Col className="dm__entry_div mobile" xs={12}>
-              {apiData?.length > 0
+              {/* {apiData?.length > 0
                 ? apiData[0]?.ep_id?.locations?.map((item, i) => (
                   <div key={i} className="dm__entry_card">
                     <div className="dm__entry_card_title">
@@ -370,7 +370,37 @@ function DmDetail() {
                     ))}
                   </div>
                 ))
-                : null}
+                : null} */}
+                {entryData?.length > 0
+                  ?
+                  entryData?.map((entry) => {
+                    return entry?.locations?.map((item, i) => {
+                      return (
+                        <div key={i} className="dm__entry_card">
+                          <div className="dm__entry_card_title">
+                            <div className="left">{item?.location?.name}</div>
+                            <div className="right">Change</div>
+                          </div>
+                          {item?.services?.map((service, key) => {
+                            return (service?.unit > 0)
+                              ?
+                              <div key={key} className="dm__entry_card_body">
+                                <div className="left">
+                                  {service?.service_id?.service_name} x{" "}
+                                  {service?.unit}
+                                </div>
+                                <div className="right">
+                                  {service?.service_id?.price}
+                                </div>
+                              </div>
+                              :
+                              null
+                          })}
+                        </div>
+                      )
+                    })
+                  })
+                  : null}
             </Col>
             <Col className="dm__footer_div mobile" xs={12}>
               <div className="dm__footer_card">
