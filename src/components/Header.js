@@ -94,7 +94,7 @@ function Header() {
               <NavLink to="/" className="sidebar__navlink">
                 HOME
               </NavLink>
-              <NavLink className="sidebar__navlink" to="/explores">
+              <NavLink className="sidebar__navlink" to="/explore">
                 EXPLORE
               </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/select-booking"> */}
@@ -141,7 +141,7 @@ function Header() {
               <NavLink className="sidebar_item" to="/">
                 HOME
               </NavLink>
-              <NavLink className="sidebar_item" to="/explores">
+              <NavLink className="sidebar_item" to="/explore">
                 EXPLORE
               </NavLink>
               {/* <NavLink className="sidebar_item" to="/select-booking"> */}

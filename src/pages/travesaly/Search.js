@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 import { API_PATH } from "../../Path/Path";
 import SearchFelid from "./SearchFelid";
 // import { Button } from "bootstrap";
-
+import ticketImg from "../../assets/img/ticket@3x.png";
 function Search() {
   const [destinations, setDestinations] = useState([]);
   const [packages, setPackages] = useState([]);
@@ -60,7 +60,7 @@ function Search() {
     <>
       <Header />
       <Container>
-        <div className="mt-5 mb-5">
+        <div className="mt-5 mb-4">
           <div className="explore-search">
             <div className="d-flex" style={{ position: "relative" }}>
               <Form.Control
@@ -151,51 +151,53 @@ function Search() {
         <Container>
           <div className="col md-6 offset-sm-1">
             <Row>
-              <Col xs={3} md={3} className="search_cel">
+              <Col xs={3} md={3} className="search_cel p-0">
                 <div
                   className="destina_search"
                   style={{ backgroundColor: "#864BD8" }}
                 >
-                 <a href="#DestinationsScroll" style={{color:"white",textDecoration:"none"}}> Destinations</a>
+                  <a href="#DestinationsScroll" style={{ color: "white", textDecoration: "none" }}> Destinations</a>
                 </div>
               </Col>
-              <Col xs={3} md={3} className="search_cel">
+              <Col xs={3} md={3} className="search_cel p-0">
                 <div
                   className="destina_search"
                   style={{ backgroundColor: "#0FA453" }}
                 >
-                <a href="#PackagesScroll" style={{color:"white",textDecoration:"none"}}>  Packages</a>
+                  <a href="#PackagesScroll" style={{ color: "white", textDecoration: "none" }}>  Packages</a>
                 </div>
               </Col>
-              <Col xs={3} md={3} className="search_cel">
+              <Col xs={3} md={3} className="search_cel p-0">
                 <div
                   className="destina_search"
                   style={{ backgroundColor: "#FF4A68", whiteSpace: "nowrap" }}
                 >
-                  Traveller Pass
+                   <a href="#PackagesScroll" style={{ color: "white", textDecoration: "none" }}> Travel Pass</a>
+                 
                 </div>
               </Col>
-              <Col xs={3} md={3} className="search_cel">
+              <Col xs={3} md={3} className="search_cel p-0">
                 <div
                   className="destina_search"
-                  style={{ backgroundColor: "#FF814A"}}
+                  style={{ backgroundColor: "#FF814A" }}
                 >
-                  Tickets
+                   <a href="#PackagesScroll" style={{ color: "white", textDecoration: "none" }}>Tickets</a>
+                  
                 </div>
               </Col>
             </Row>
           </div>
         </Container>
         <Container>
-          <div className="search_felid">
+          <div className="search_felid mt-2">
             <div style={{ textAlign: "center" }}>
-              <SearchFelid />
+              {/* <SearchFelid /> */}
             </div>
             <p
               className="pt-2"
               style={{ whiteSpace: "nowrap", fontSize: "12px", textAlign: "center" }}
             >
-              <b> Check out the Kanger Valley showcase</b>
+              {/* <b> Check out the Kanger Valley showcase</b> */}
             </p>
           </div>
 
@@ -238,7 +240,7 @@ function Search() {
           {flag ?
             (search ? (
               <div>
-                <h2 className="package__title mb-5 mt-3">
+                <h2 className="package__title mb-3 mt-3">
                   <span>Search Result</span>
                 </h2>
                 <div
@@ -254,7 +256,7 @@ function Search() {
                   {!search.destinations == []
                     ? search.destinations.map((item) => {
                       return (
-                        <div 
+                        <div
                           onClick={() =>
                             history.push({
                               pathname: `/destination_details/${item.title}`,
@@ -410,8 +412,8 @@ function Search() {
           {!flag &&
             <Container>
 
-              <h2 className="package__title mb-5">
-                <span id="DestinationsScroll">Destinations</span>
+              <h2 className="package__title mb-3">
+                <span id="DestinationsScroll" style={{}}>Destinations</span>
               </h2>
               <Row>
                 {destinations.map((item) => {
@@ -427,19 +429,19 @@ function Search() {
                         className="search_div"
                         style={{
                           width: "100%",
-                          height: "180px",
-                          // marginRight: 15,
-                          marginTop: 10,
+
+                          marginTop: 25,
                           display: "flex",
                         }}
                       >
                         <Image
                           draggable={false}
-                          className="search_img"
+
+                          className="img-fluid search_img"
                           src={item.upload_images}
                         />
-                        <div style={{ color: "black" }} className="package__trip" style={{paddingLeft:"20px"}}>
-                          <h6 className="packages__block-title mt-3 mb-0">
+                        <div style={{ color: "black" }} className="package__trip" style={{ paddingLeft: "20px" }}>
+                          <h6 className="packages__block-title  mb-0">
                             {item.title}
                           </h6>
                           <small className="packages__block-subtitle" >
@@ -457,7 +459,7 @@ function Search() {
           <hr />
           {!flag &&
             <Container>
-              <h2 className="package__title mb-5">
+              <h2 className="package__title mb-3">
                 <span id="PackagesScroll">Packages</span>
               </h2>
               <Row>
@@ -475,19 +477,19 @@ function Search() {
                         className="search_div"
                         style={{
                           width: "100%",
-                          height: "180px",
-                          // marginRight: 15,
-                          marginTop: 10,
+
+                          marginTop: 25,
                           display: "flex",
                         }}
                       >
                         <Image
                           draggable={false}
-                          className="search_img "
+                          className="img-fluid search_img"
+                          // className="search_img "
                           src={item.upload_images}
                         />
-                        <div style={{  paddingTop: "20px",paddingLeft: "20px"}}>
-                          <h6 className="packages__block-title_ mt-3 mb-0">
+                        <div style={{ paddingLeft: "20px" }}>
+                          <h6 className="packages__block-title_  mb-0">
                             {item.title}
                           </h6>
                           <div
@@ -505,7 +507,7 @@ function Search() {
 
                               }}
                             >
-                              {item.sub_title}
+                              {item.category.category_name}
                             </h6>
                           </div>
                           <div>
@@ -641,6 +643,150 @@ function Search() {
               );
             })}
           </div> */}
+          <hr />
+          {!flag &&
+            <Container>
+              <h2 className="package__title mb-3">
+                <span id="PackagesScroll">Travel Pass</span>
+              </h2>
+              <Row>
+                {/* {packages.map((item) => {
+                  return ( */}
+                    <Col xs={12} md={4}>
+                      <div
+                        onClick={() =>
+                          history.push({
+                            // pathname: `/packages_details/${item.title}`,
+                            // item: item._id,
+
+                          })
+                        }
+                        className="search_div"
+                        style={{
+                          width: "100%",
+
+                          marginTop: 25,
+                          display: "flex",
+                        }}
+                      >
+                        <Image
+                          draggable={false}
+                          className="img-fluid search_img"
+                          // className="search_img "
+                          src={ticketImg}
+                        />
+                        <div style={{ paddingLeft: "20px" }}>
+                          <h6 className="packages__block-title_  mb-0">
+                          Travel PassId
+                            {/* {item.title} */}
+                          </h6>
+                          <div
+                            style={{
+                              paddingTop: "2",
+                            }}
+                          >
+                            <h6
+                              style={{
+                                background: "#BEBEBE",
+                                display: "inline",
+                                padding: "3px",
+                                borderRadius: "4px",
+                                fontSize: "14px",
+
+                              }}
+                            >                              
+                              {/* {item.category.category_name} */}
+                            </h6>
+                          </div>
+                          <div>
+                            <small className="packages__block-subtitle">
+                              {/* ₹ {item.price} */}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </Col>
+                  {/* );
+                })} */}
+
+              </Row>
+
+            </Container>
+          }
+
+          <hr />
+          {!flag &&
+            <Container>
+              <h2 className="package__title mb-3">
+                <span id="PackagesScroll">Ticket</span>
+              </h2>
+              <Row>
+                {/* {packages.map((item) => {
+                  return ( */}
+                    <Col xs={12} md={4}>
+                      <div
+                        // onClick={() =>
+                        //   history.push({
+                        //     pathname: `/packages_details/${item.title}`,
+                        //     item: item._id,
+
+                        //   })
+                        // }
+                        className="search_div"
+                        style={{
+                          width: "100%",
+
+                          marginTop: 25,
+                          display: "flex",
+                        }}
+                      >
+                        <Image
+                          draggable={false}
+                          className="img-fluid search_img"
+                          // className="search_img "
+                          src={ticketImg}
+                        />
+                        <div style={{ paddingLeft: "20px" }}>
+                          <h6 className="packages__block-title_  mb-0">
+                            Ticket Id
+                            {/* {item.title} */}
+                          </h6>
+                          <div
+                            style={{
+                              paddingTop: "2",
+                            }}
+                          >
+                            <h6
+                              style={{
+                                background: "#BEBEBE",
+                                display: "inline",
+                                padding: "3px",
+                                borderRadius: "4px",
+                                fontSize: "14px",
+
+                              }}
+                            >
+                              {/* {item.category.category_name} */}
+                            </h6>
+                          </div>
+                          <div>
+                            <small className="packages__block-subtitle">
+                              {/* ₹ {item.price} */}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    </Col>
+                   {/* );
+                 })} */}
+
+              </Row>
+
+
+            </Container>
+          }
+
+
         </>
       </Container>
       <Footer />

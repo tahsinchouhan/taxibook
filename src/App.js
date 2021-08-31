@@ -49,7 +49,7 @@ function App() {
         <div>
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route exact path='/explores' component={Explores} />
+            <Route exact path='/explore' component={Explores} />
             <Route path="/destination_details/:name" component={DestinationDetails} />
             <Route path="/packages_details/:name" component={PackagesDetails} />
             <Route path="/covidresponse" component={CovidResponse} />

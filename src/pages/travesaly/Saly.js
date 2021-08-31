@@ -22,6 +22,7 @@ import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
 import SearchFelid from "./SearchFelid";
 import { toast, ToastContainer } from 'react-toastify'
+import imageMobile from "../../assets/img/homepageMobie2.png"
 
 function Saly() {
   const history = useHistory();
@@ -79,7 +80,12 @@ function Saly() {
       slidesToSlide: 1,
     },
   };
-
+const viewDetails =(value)=>{
+  history.push({
+    pathname: `/destination_details/${value.title}`,
+    id: value._id,
+  });
+}
   return (
     <>
       <Container
@@ -122,7 +128,7 @@ function Saly() {
                   {destinations.length ? (
                     destinations.map((item, key) => {
                       return (
-                        <div key={key}>
+                        <div key={key} onClick={()=>viewDetails(item)}>
                           <Image
                             draggable={false}
                             // style={{ width: "95%", height: "100%" }}
@@ -253,14 +259,14 @@ function Saly() {
       {/*mobile-view*/}
       <div fluid className="d-md-none">
         <div fluid style={{ padding: 0, margin: 0 }}>
-          <Row className=" saly_div pt-5 w-100">
+          <Row className=" saly_div pt-3 w-100">
             <Col xs={12} md={6}>
-              <div className="rocket-image">
-                <img src={Salyimg} alt="saly" style={{ width: "100%" }} />
+              <div className="rocket-image" style={{textAlign:"center"}}>
+                <img src={Salyimg} alt="saly" style={{ width: "80%" }} />
               </div>
             </Col>
-            <Col xs={12} md={6} className="pt-5">
-              <div className="p-5">
+            <Col xs={12} md={6} className="pt-0">
+              <div style={{padding:"20px"}}>
                 <div className="explore">
                   <h2 className="explore_div">Explore</h2>
                   <p>Check out the best tourism destinations around Bastar</p>
@@ -273,7 +279,7 @@ function Saly() {
                   {destinations.length ? (
                     destinations.map((item, key) => {
                       return (
-                        <div key={key}>
+                        <div key={key} onClick={()=>viewDetails(item)} >
                           <Image
                             draggable={false}
                             style={{ width: "100%", height: "100%" }}
@@ -283,7 +289,7 @@ function Saly() {
                             style={{ color: "black" }}
                             className="package__trip"
                           >
-                            <h6 className="mt-3">{item.title}</h6>
+                            <h6 className="mt-3" style={{fontWeight:"bold"}}>{item.title}</h6>
                           </div>
                         </div>
                       );
@@ -292,7 +298,7 @@ function Saly() {
                     <h1></h1>
                   )}
                 </Carousel>
-                <div className="travel_home_btn pt-5">
+                <div className="travel_home_btn mt-3 ">
                   <Button
                     onClick={() => history.push("/populardestinations")}
                     variant=""
@@ -302,7 +308,7 @@ function Saly() {
                       color: "white",
                       fontSize: "16px",
                       // fontWeight: "bolder",
-                      width: "186px",
+                      width: "258px",
                       height: "48.41px",
                       borderRadius: "10px",
                     }}

@@ -62,10 +62,11 @@ function SearchFelid() {
             className="search_view"
               width="100%"
               height="315"
-              src="https://www.youtube.com/embed/V_JZZ1glvkA"
+               src="https://www.youtube.com/embed/V_JZZ1glvkA"
+              // src={`${youtube_url}`}
               title="YouTube video player"
               frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
             ></iframe>           
           </div>         

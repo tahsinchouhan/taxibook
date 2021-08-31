@@ -258,6 +258,7 @@ function DmTicket2() {
                           }}
                         />
                         <Button
+                        onClick={sendOtp}
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
