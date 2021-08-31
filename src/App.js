@@ -41,6 +41,8 @@ import TravellerCard from './pages/travesaly/TravellerCard';
 import TravellerTicket from './pages/travesaly/TravellerTicket';
 // import DmTicket from './pages/dm pass/dmtickets/DmTicket';
 
+import BusTicketDetail from './pages/selectbooking/BusTicketDetail'
+
 function App() {
 
   return (
@@ -80,6 +82,7 @@ function App() {
             <Route exact path='/ratancard' component={RatanCard} />
             <Route exact path='/travelticket' component={TravelTicket} />
             <Route exact path='/dm-detail/:id' component={DmDetail} />
+            <Route exact path='/bus-detail/:id' component={BusTicketDetail} />
             <Route exact path='/dm_congratulate' component={DmCongratulate} />
             <Route exact path='/tickets_sraech' component={TicketsSraech} />
             <Route exact path='/tickets' component={Tickets1} />
