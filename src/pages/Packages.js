@@ -142,7 +142,7 @@ function Packages() {
                         paddingTop: 2,
                       }}
                     >
-                      <h6
+                      {/* <h6
                         style={{
                           background: "#BEBEBE",
                           display: "inline",
@@ -152,7 +152,7 @@ function Packages() {
                         }}
                       >
                         {item.category.category_name}
-                      </h6>
+                      </h6> */}
                     </div>
                     <div>
                       <small className="packages__block-subtitle">

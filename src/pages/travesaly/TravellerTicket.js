@@ -39,14 +39,15 @@ function TravellerTicket() {
     },
     {
       img: "https://cdn3.iconfinder.com/data/icons/transport-icons-2/512/BT_c3side-512.png",
-      name: "Vehical Pass",
+      name: "Vehicle Pass",
       path: "/dmpass",
     },
     {
       img: "https://static.thenounproject.com/png/61798-200.png",
-      name: "Bus Pass",
+      name: "Bus Ticket",
       path: "/buspass",
-    },
+    },    
+ 
     {
       img: "https://www.iconpacks.net/icons/2/free-parking-sign-icon-1641-thumb.png",
       name: "Parking",
@@ -59,10 +60,10 @@ function TravellerTicket() {
     },
     {
       img: "https://cdn4.iconfinder.com/data/icons/nature-solid-icons-vol-3/72/108-512.png",
-      name: "Nature Treck",
+      name: "Nature Trekking",
       path: "/tickets",
-    },
-  ];
+    }
+  ]
   return (
     <>
       <Carousel partialVisbile itemClass="image-item" responsive={responsive}>
@@ -79,6 +80,37 @@ function TravellerTicket() {
         ))}
         
       </Carousel>
+      {/* <Carousel partialVisbile itemClass="image-item" responsive={responsive}> */}
+      {/* <div >
+        <div style={{display:"inline-flex"}}>
+           {data.map((item, index) => (
+          <div className="p-5 " onClick={() => history.push(item.path)}>
+            <div style={{ display: "flex", width: "100%" }}>
+              <Col>
+                <Image style={{ width: 50 }} src={item.img} />
+                <p style={{ marginLeft: -10 }}>{item.name}</p>
+              </Col>
+            </div>
+          </div>
+        ))} 
+        </div>
+        <div style={{display:"flex"}}>
+           {dataOne.map((item, index) => (
+          <div className="p-5 " onClick={() => history.push(item.path)}>
+            <div style={{ display: "flex", width: "100%" }}>
+              <Col>
+                <Image style={{ width: 50 }} src={item.img} />
+                <p style={{ marginLeft: -10 }}>{item.name}</p>
+              </Col>
+            </div>
+          </div>
+        ))} 
+        </div>
+
+        
+      </div> */}
+
+      {/* </Carousel> */}
     </>
   );
 }

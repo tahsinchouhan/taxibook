@@ -587,8 +587,8 @@ body {
 
 .react-multi-carousel-item > div > img{
   max-width: 250px !important;
-  height: 170px !important;
-  border-radius: 10px;
+  height: 150px !important;
+  border-radius: 10px ;
   cursor: pointer !important;
 }
 
@@ -623,7 +623,7 @@ body {
 
 .search__inner {
   display: inline-block;
-  width: 330px;
+  width: 383px;
 }
 
 .search__block {

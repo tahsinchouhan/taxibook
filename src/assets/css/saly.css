@@ -53,9 +53,13 @@
   /* background: url(illustration-2-transparent.png); */
 }
 .makebooking-btn {
-  background-color: #864bd8;
+  /* font-size: 16px; */
+  background-color: #0FA453;
   color: white;
-  border: 2px solid #864bd8 !important;
+  width: 250px;
+  height: 52px;
+  border: 2px solid #0FA453 !important; 
+  border-radius: 10px;
 }
 .ticket-div h3 h4 {
   position: absolute;

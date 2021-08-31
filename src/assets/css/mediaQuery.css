@@ -3,9 +3,9 @@
     /* background: red !important; */
   }
 
-  .package__trip {
+  /* .package__trip {
     padding: 16px;
-  }
+  } */
   .package-block {
     margin: 20px 0 8px;
   }
@@ -348,7 +348,7 @@
 
   .search__inner {
     /* display: inline-block; */
-    width: 80%;
+    width: 88%;
   }
 
   .navbar-toggler-icon {

@@ -95,6 +95,7 @@ const Explores = () => {
   
 
   const getPackages = () => {
+
     fetch(API_PATH + "/api/v1/packages/location", {
       method: "POST",
       headers: {
@@ -236,7 +237,7 @@ const Explores = () => {
                             paddingTop: 2,
                           }}
                         >
-                          <h6
+                          {/* <h6
                             style={{
                               background: "#BEBEBE",
                               display: "inline",
@@ -246,7 +247,7 @@ const Explores = () => {
                             }}
                           >
                             {item.category.category_name}
-                          </h6>
+                          </h6> */}
                         </div>
                         <div>
                           <small className="packages__block-subtitle">

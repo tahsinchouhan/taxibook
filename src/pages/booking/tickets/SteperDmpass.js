@@ -41,7 +41,7 @@ const button_Data = [
 
 function SteperDmpass(shows, ...props) {
   const [show, setShow] = useState(0);
-  
+
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
   // const [data, setData] = useState();
   const history = useHistory();
@@ -56,7 +56,7 @@ function SteperDmpass(shows, ...props) {
     duration_of_travel,
     mobile,
     start_date,
-  } = dmData;  
+  } = dmData;
 
   const onSideBtnClick = (e) => {
     const name = e.target.name;
@@ -121,8 +121,8 @@ function SteperDmpass(shows, ...props) {
       })
     );
     setShow(3);
-    localStorage.setItem("dm_pass_id",dmData.dmpass_id)
-    
+    localStorage.setItem("dm_pass_id", dmData.dmpass_id)
+
   };
   const onClickBack = () => {
     console.log("object");
@@ -155,8 +155,8 @@ function SteperDmpass(shows, ...props) {
   const [travellers, setTravellers] = useState(initialTravellers);
   const [showDate, setShowDate] = useState("");
 
-  const handleTraveller = (val, lbl, i) => {  
-    console.log("val",val);  
+  const handleTraveller = (val, lbl, i) => {
+    console.log("val", val);
     setTravellers(
       [...travellers].map((obj, key) => {
         if (key === i) {
@@ -358,7 +358,7 @@ function SteperDmpass(shows, ...props) {
   const handleTravellerCount = (e) => {
     console.log("Number of Travellers", e.target.value)
     setTravel(e.target.value)
-    
+
     setTravellers([
       ...travellers,
       {
@@ -904,7 +904,7 @@ function SteperDmpass(shows, ...props) {
                                       }}
                                     />
                                   </div>
-                                  
+
                                 </p>
                               </div>
                             </Paper>
@@ -1261,6 +1261,25 @@ function SteperDmpass(shows, ...props) {
                           <span> Whatsapp Link</span>
                         </Button>
                       </div> */}
+                       <div>
+                        <Button style={{
+                          width: "186px",
+                          textAlign: "center",
+                          height: "52px",
+                          borderRadius: "9px",
+                          backgroundColor: "",
+                          fontWeight: "bold",
+                          marginBottom: "20px"
+                        }}
+                        >
+                          <Link
+                            to={`/dm-detail/${dmpass_id}`}
+                            style={{ textDecoration: "none", color: "#fff" }}
+                          >
+                            View Ticket
+                          </Link>
+                        </Button>
+                      </div>
 
                       <div>
                         <Button
@@ -1283,25 +1302,7 @@ function SteperDmpass(shows, ...props) {
                         </Button>
                       </div>
 
-                      <div>
-                        <Button style={{
-                          width: "186px",
-                          textAlign: "center",
-                          height: "52px",
-                          borderRadius: "9px",
-                          backgroundColor: "",
-                          fontWeight: "bold",
-                          marginBottom: "20px"                         
-                        }}
-                        >
-                         <Link
-                            to={`/dm-detail/${dmpass_id}`}
-                            style={{ textDecoration: "none", color:"#fff" }}
-                          >
-                          View Ticket
-                          </Link>
-                          </Button>
-                      </div>
+                     
                       <div>
                         <Button
                           onClick={() => history.push("/")}
@@ -1353,7 +1354,7 @@ function SteperDmpass(shows, ...props) {
                     </span>
                   </div>
                   <div style={{ textAlign: "center" }}>
-                    <div>
+                    {/* <div>
                       <Button
                         className="btn btn-success"
                         style={{
@@ -1374,6 +1375,23 @@ function SteperDmpass(shows, ...props) {
                         />
                         <span> Whatsapp Link</span>
                       </Button>
+                    </div> */}
+                    <div>
+                      <Button style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: "",
+                        fontWeight: "bold",
+                        marginBottom: "20px"
+                      }}
+                      ><Link
+                        to={`/dm-detail/${dmpass_id}`}
+                        style={{ textDecoration: "none", color: "#fff" }}
+                      >
+                          View Ticket
+                        </Link></Button>
                     </div>
                     <div>
                       <Button
@@ -1390,18 +1408,7 @@ function SteperDmpass(shows, ...props) {
                         Download E-ticket
                       </Button>
                     </div>
-                    <div>
-                      <Button style={{
-                        width: "186px",
-                        textAlign: "center",
-                        height: "52px",
-                        borderRadius: "9px",
-                        backgroundColor: "",
-                        fontWeight: "bold",
-                        marginBottom: "20px"
-                      }}
-                      >Sent by Email</Button>
-                    </div>
+
                     <div>
                       <Button
                         onClick={() => history.push("/")}
