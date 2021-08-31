@@ -31,12 +31,12 @@ height: 46.67px; */
   /* margin: 30px; */
 }
 .locationpass-btn {
-  margin: auto;
+  margin: 0 auto;
   color: white;
   background-color: #0fa453;
   border-color: #0fa453;
   font-weight: bold;
-  width: 18%;
+  width: 200px;
   height: 49px;
   border-radius: 11px;
   margin: 0% 40% 0%;
