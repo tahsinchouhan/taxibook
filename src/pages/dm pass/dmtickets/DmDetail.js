@@ -91,7 +91,7 @@ function DmDetail() {
             <Row className="p-3">
               <Col xs={5} sm={5} className="p-0 dm__barcode">
                 <div className="booking-div">
-                  <img src={qrImage} alt="" width={250} />
+                  <img src={qrImage} alt="" width={300} />
                 </div>
               </Col>
               <Col xs={5} sm={5}>
@@ -189,19 +189,27 @@ function DmDetail() {
               </Col>
               <Col className="dm__traveller_div" xs={12}>
                 {apiData?.length > 0
-                  ? apiData[0]?.vp_id?.vehical_details?.map((item, i) => (
-                    <div key={i} className="dm__trav_card">
-                      <div className="dm__trav_card_title">{item?.driver_name}</div>
-                      <div className="dm__trav_card_body">
-                        {/* <div className="top">
+                  ? (apiData[0]?.vp_id?.vehical_details?.length > 0)
+                    ? apiData[0]?.vp_id?.vehical_details?.map((item, i) => (
+                      <div key={i} className="dm__trav_card">
+                        <div className="dm__trav_card_title">{item?.driver_name}</div>
+                        <div className="dm__trav_card_body">
+                          {/* <div className="top">
                             {item?.driver_license_number}
                           </div> */}
-                        <div className="bottom">Driver License No: {item?.driver_license_number}</div>
-                        <div className="bottom">Vehicle No: {item?.registration_number}</div>
+                          <div className="bottom">Vehicle No: {item?.registration_number}</div>
+                          {(item?.driver_license_number !== '') ?? <div className="bottom">Driver License No: {item?.driver_license_number}</div>}
+                        </div>
                       </div>
+                    ))
+                    :
+                    <div className="text-center bg-white py-3" style={{ flexGrow: 1 }}>
+                      <h6>Vehicle Detail Not Found</h6>
                     </div>
-                  ))
-                  : null}
+                  :
+                  <div className="text-center bg-white py-3" style={{ flexGrow: 1 }}>
+                    <h6>Vehicle Detail Not Found</h6>
+                  </div>}
               </Col>
             </Row>
             <Row>
@@ -240,7 +248,12 @@ function DmDetail() {
                       )
                     })
                   })
-                  : null}
+                  :
+                  <div className="text-center">
+                    <h6>Ticket Not Found</h6>
+                    <h5>Please Buy a Ticket</h5>
+                  </div>
+                }
                 {/* <div className="dm__entry_card">
                                 <div className="dm__entry_card_title">
                                     <div className="left">
@@ -312,7 +325,7 @@ function DmDetail() {
           <Row className="m-0">
             <Col xs={12}>
               <div className="text-center mt-2">
-                <img src={qrImage} alt="" width={130} />
+                <img src={qrImage} alt="" width={130} style={{ width: "90%" }} />
               </div>
             </Col>
             <Col
@@ -372,19 +385,27 @@ function DmDetail() {
             </Col>
             <Col className="dm__traveller_div mobile" xs={12}>
               {apiData?.length > 0
-                ? apiData[0]?.vp_id?.vehical_details?.map((item, i) => (
-                  <div key={i} className="dm__trav_card">
-                    <div className="dm__trav_card_title">{item?.driver_name}</div>
-                    <div className="dm__trav_card_body">
-                      {/* <div className="top">
+                ? (apiData[0]?.vp_id?.vehical_details?.length > 0)
+                  ? apiData[0]?.vp_id?.vehical_details?.map((item, i) => (
+                    <div key={i} className="dm__trav_card mobile">
+                      <div className="dm__trav_card_title">{item?.driver_name}</div>
+                      <div className="dm__trav_card_body">
+                        {/* <div className="top">
                             {item?.driver_license_number}
                           </div> */}
-                      <div className="bottom">Driver License No: {item?.driver_license_number}</div>
-                      <div className="bottom">Vehicle No: {item?.registration_number}</div>
+                        <div className="bottom">Vehicle No: {item?.registration_number}</div>
+                        {(item?.driver_license_number !== '') ?? <div className="bottom">Driver License No: {item?.driver_license_number}</div>}
+                      </div>
                     </div>
+                  ))
+                  :
+                  <div className="text-center bg-white py-3" style={{ flexGrow: 1 }}>
+                    <h6>Vehicle Detail Not Found</h6>
                   </div>
-                ))
-                : null}
+                :
+                <div className="text-center bg-white py-3" style={{ flexGrow: 1 }}>
+                  <h6>Vehicle Detail Not Found</h6>
+                </div>}
             </Col>
             <Col className="dm__title mobile" xs={12}>
               ENTRY TICKET DETAILS
@@ -440,7 +461,11 @@ function DmDetail() {
                     )
                   })
                 })
-                : null}
+                :
+                <div className="text-center bg-white py-3" style={{ flexGrow: 1 }}>
+                  <h6>Ticket Not Found</h6>
+                  <h5>Please Buy a Ticket</h5>
+                </div>}
             </Col>
             <Col className="dm__footer_div mobile" xs={12}>
               <div className="dm__footer_card">

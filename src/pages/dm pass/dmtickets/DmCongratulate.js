@@ -65,26 +65,6 @@ function DmCongratulate() {
                       <span> Whatsapp Link</span>
                     </Button>
                   </div> */}
-                  <div>
-                    <Button
-                      style={{
-                        width: "186px",
-                        textAlign: "center",
-                        height: "52px",
-                        borderRadius: "9px",
-                        backgroundColor: " #FF4A68",
-                        fontWeight: "bold",
-                        marginBottom: "20px",
-                      }}
-                    > 
-                    <Link
-                    to={`/dm-detail/${dmpass_id}`}
-                    style={{ textDecoration: "none", color:"#fff" }}
-                  >
-                  View Ticket
-                  </Link>
-                    </Button>
-                  </div>
 
                   {/* <div>
                    <Button style={{
@@ -100,19 +80,42 @@ function DmCongratulate() {
                    </div> */}
 
                   <div>
-                    <Button
+                    {/* <Button
                       onClick={() => history.push("/")}
                       style={{
                         width: "186px",
                         textAlign: "center",
                         height: "52px",
                         borderRadius: "9px",
+                        borderColor: "#864BD8",
                         backgroundColor: "#864BD8",
                         fontWeight: "bold",
                         marginBottom: "20px",
                       }}
                     >
                       Back to Home
+                    </Button> */}
+                    <Link to="/">Back to Home</Link>
+                  </div>
+                  <div>
+                    <Button
+                      style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        borderColor: " #FF4A68",
+                        backgroundColor: " #FF4A68",
+                        fontWeight: "bold",
+                        marginTop: "20px",
+                      }}
+                    >
+                      <Link
+                        to={`/dm-detail/${dmpass_id}`}
+                        style={{ textDecoration: "none", color: "#fff" }}
+                      >
+                        View Ticket
+                      </Link>
                     </Button>
                   </div>
                 </div>
@@ -158,15 +161,15 @@ function DmCongratulate() {
                 />
               </div>
             </Col>
-            <Col xs={12} md={6}>            
-                <div style={{ marginBottom: "20px", textAlign: "center" }}>
-                  <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
-                  <span style={{ color: "black", marginBottom: "50px" }}>
-                    {dmpass_id}
-                  </span>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                  {/* <div>
+            <Col xs={12} md={6}>
+              <div style={{ marginBottom: "20px", textAlign: "center" }}>
+                <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
+                <span style={{ color: "black", marginBottom: "50px" }}>
+                  {dmpass_id}
+                </span>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                {/* <div>
                     <Button
                       className="btn btn-success"
                       style={{
@@ -188,7 +191,7 @@ function DmCongratulate() {
                       <span> Whatsapp Link</span>
                     </Button>
                   </div> */}
-                  {/* <div>
+                {/* <div>
                     <Button
                       style={{
                         width: "186px",
@@ -204,7 +207,7 @@ function DmCongratulate() {
                     </Button>
                   </div> */}
 
-                  {/* <div>
+                {/* <div>
                    <Button style={{
                     width: "186px",
                     textAlign: "center",
@@ -216,24 +219,50 @@ function DmCongratulate() {
                   }} 
                    >Sent by Email</Button>
                    </div> */}
-                   
-                  <div>
-                    <Button
-                      onClick={() => history.push("/")}
-                      style={{
-                        width: "186px",
-                        textAlign: "center",
-                        height: "52px",
-                        borderRadius: "9px",
-                        backgroundColor: "#864BD8",
-                        fontWeight: "bold",
-                        marginBottom: "20px",
-                      }}
+
+                {/* <div> */}
+                  <Button
+                    style={{
+                      // width: "186px",
+                      textAlign: "center",
+                      borderColor: " #FF4A68",
+                      backgroundColor: " #FF4A68",
+                      fontWeight: "bold",
+                      height: "86px",
+                      borderRadius:"0",
+                      position:"fixed",
+                      width:"100%",
+                      bottom:"0",
+                      left:"0"
+                    }}
+                  >
+                    <Link
+                      to={`/dm-detail/${dmpass_id}`}
+                      style={{ textDecoration: "none", color: "#fff" }}
                     >
-                      Back to Home
-                    </Button>
-                  </div>
-                </div>              
+                      View Ticket
+                    </Link>
+                  </Button>
+                {/* </div> */}
+                <div>
+                  {/* <Button
+                    onClick={() => history.push("/")}
+                    style={{
+                      width: "186px",
+                      textAlign: "center",
+                      height: "52px",
+                      borderRadius: "9px",
+                      borderColor: "#864BD8",
+                      backgroundColor: "#864BD8",
+                      fontWeight: "bold",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Back to Home
+                  </Button> */}
+                    <Link to="/">Back to Home</Link>
+                </div>
+              </div>
             </Col>
           </div>
         </Container>

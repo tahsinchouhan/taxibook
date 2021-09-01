@@ -187,7 +187,7 @@ function TravelTicket({ Seleted_Values }) {
                       paddingTop: "50px",
                     }}
                   >
-                    Traveller Pass
+                    Travel Pass
                   </span>
                   <br />
                   <span
@@ -339,115 +339,119 @@ function TravelTicket({ Seleted_Values }) {
 
         <Container style={{ marginLeft: "32%" }}>
           <Row>
-            <AvForm>
-              <Col xs={12} md={6}>
-                <div style={{ width: "50%", float: "right" }}>
-                  <label
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: "500",
-                      color: "black",
-                    }}
-                  >
-                    Vehicle Details
-                  </label>
-                  <div
-                    className="traveller_div"
-                    style={{ marginTop: "1rem", justifyContent: "flex-start" }}
-                  >
-                    {vehicles?.map((item, i) => (
-                      <Paper key={i} className="traveller__card p-3">
-                        <div className="traveller__card_body" className="py-0">
-                          <h5
-                            className="traveller__card_title"
-                            style={{ fontSize: "12px" }}
-                          >
-                            Vehicle {i + 1}
-                          </h5>
-                          <p className="traveller__card_text">
-                            <div className="form-group pt-3">
-                              <label className="mb-1" for={`vehicle_number${i}`}>
-                                Vehicle Number
-                              </label>
+            <AvForm onValidSubmit={onDmByeClick}>
 
-                              <AvField
-                                type="text"
-                                className="form-control pass_input"
-                                id={`vehicle_number${i}`}
-                                placeholder="Enter the license plate number"
-                                style={{ fontSize: "11px", marginLeft: "-5px", width: 250 }}
-                                name="registration_number"
-                                onChange={(e) =>
-                                  handleVehicle(e.target.value, e.target.name, i)
-                                }
-                                value={vehicles[i].registration_number}
-                                validate={{
-                                  required: {
-                                    value: true,
-                                    errorMessage: "Enter the license plate number",
-                                  },
+              {
+                (vehicles?.length > 0)
+                  ?
+                  <Col xs={12} md={6}>
+                    <div style={{ width: "50%", float: "right" }}>
+                      <label
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: "500",
+                          color: "black",
+                        }}
+                      >
+                        Vehicle Details
+                      </label>
+                      <div
+                        className="traveller_div"
+                        style={{ marginTop: "1rem", justifyContent: "flex-start" }}
+                      >
+                        {vehicles?.map((item, i) => (
+                          <Paper key={i} className="traveller__card p-3">
+                            <div className="traveller__card_body" className="py-0">
+                              <h5
+                                className="traveller__card_title"
+                                style={{ fontSize: "12px" }}
+                              >
+                                Vehicle {i + 1}
+                              </h5>
+                              <p className="traveller__card_text">
+                                <div className="form-group pt-3">
+                                  <label className="mb-1" for={`vehicle_number${i}`}>
+                                    Vehicle Number
+                                  </label>
 
-                                }}
-                              />
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`vehicle_number${i}`}
+                                    placeholder="Enter the license plate number"
+                                    style={{ fontSize: "11px", marginLeft: "-5px", width: 250 }}
+                                    name="registration_number"
+                                    onChange={(e) =>
+                                      handleVehicle(e.target.value, e.target.name, i)
+                                    }
+                                    value={vehicles[i].registration_number}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter the license plate number",
+                                      },
+
+                                    }}
+                                  />
 
 
+                                </div>
+                                <div className="form-group pt-3">
+                                  <label className="mb-1" for={`name${i}`}>
+                                    Driver Name
+                                  </label>
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`name${i}`}
+                                    placeholder="Enter Driver Name"
+                                    style={{ fontSize: "11px", marginLeft: "-5px" }}
+                                    name="driver_name"
+                                    onChange={(e) =>
+                                      handleVehicle(e.target.value, e.target.name, i)
+                                    }
+                                    value={vehicles[i].driver_name}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter Driver Name",
+                                      },
+
+                                    }}
+                                  />
+                                </div>
+                                <div className="form-group pt-3">
+                                  <label className="mb-1" for={`name${i}`}>
+                                    Driver License Number (Optional)
+                                  </label>
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`license_number${i}`}
+                                    placeholder="Enter Driver License Number"
+                                    style={{ fontSize: "11px", marginLeft: "-5px" }}
+                                    name="driver_licence_number"
+                                    onChange={(e) =>
+                                      handleVehicle(e.target.value, e.target.name, i)
+                                    }
+                                    value={vehicles[i].driver_licence_number}
+                                  // validate={{
+                                  //   required: {
+                                  //     value: true,
+                                  //     errorMessage: "Enter Driver License Number",
+                                  //   },
+
+                                  // }}
+                                  />
+                                </div>
+                              </p>
                             </div>
-                            <div className="form-group pt-3">
-                              <label className="mb-1" for={`name${i}`}>
-                                Driver Name
-                              </label>
-                              <AvField
-                                type="text"
-                                className="form-control pass_input"
-                                id={`name${i}`}
-                                placeholder="Enter Driver Name"
-                                style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="driver_name"
-                                onChange={(e) =>
-                                  handleVehicle(e.target.value, e.target.name, i)
-                                }
-                                value={vehicles[i].driver_name}
-                                validate={{
-                                  required: {
-                                    value: true,
-                                    errorMessage: "Enter Driver Name",
-                                  },
+                          </Paper>
 
-                                }}
-                              />
-                            </div>
-                            <div className="form-group pt-3">
-                              <label className="mb-1" for={`name${i}`}>
-                                Driver License Number
-                              </label>
-                              <AvField
-                                type="text"
-                                className="form-control pass_input"
-                                id={`license_number${i}`}
-                                placeholder="Enter Driver License Number"
-                                style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="driver_licence_number"
-                                onChange={(e) =>
-                                  handleVehicle(e.target.value, e.target.name, i)
-                                }
-                                value={vehicles[i].driver_licence_number}
-                                validate={{
-                                  required: {
-                                    value: true,
-                                    errorMessage: "Enter Driver License Number",
-                                  },
+                        ))}
+                      </div>
 
-                                }}
-                              />
-                            </div>
-                          </p>
-                        </div>
-                      </Paper>
-
-                    ))}
-                  </div>
-
-                  {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
+                      {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
                   <Button
                     type="submit"
                     class="btn btn-success"
@@ -476,8 +480,11 @@ function TravelTicket({ Seleted_Values }) {
                     Add Vehicle
                   </Button>
                 </div> */}
-                </div>
-              </Col>
+                    </div>
+                  </Col>
+                  : null
+
+              }
               <Col xs={12} md={6}>
                 <div style={{ width: "50%" }}>
                   <label
@@ -672,7 +679,7 @@ function TravelTicket({ Seleted_Values }) {
                           border: "none",
                           fontWeight: "600",
                         }}
-                        onClick={onDmByeClick}
+                      // onClick={onDmByeClick}
                       >
                         Book your Pass
                       </Button>
@@ -737,7 +744,7 @@ function TravelTicket({ Seleted_Values }) {
                       paddingTop: "50px",
                     }}
                   >
-                    Traveller Pass
+                    Travel Pass
                   </span>
                   <br />
                   <span
@@ -905,114 +912,117 @@ function TravelTicket({ Seleted_Values }) {
           </div>
           <div>
             <div style={{}}>
-              <AvForm>
-                <Col xs={12} md={6}>
-                  <label
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: "500",
-                      color: "black",
-                      display: "flex",
-                      justifyContent: "center",
-                      paddingTop: "15px"
-                    }}
-                  >
-                    Vehicle Details
-                  </label>
-                  <div
-                    className="traveller_div"
-                    style={{ marginTop: "1rem", justifyContent: "center" }}
-                  >
-                    {vehicles?.map((item, i) => (
-                      <Paper key={i} className="traveller__card p-3" style={{ marginBottom: "12px" }}>
-                        <div className="traveller__card_body" className="py-0" >
-                          <h5
-                            className="traveller__card_title"
-                            style={{ fontSize: "12px" }}
-                          >
-                            Vehicle {i + 1}
-                          </h5>
-                          <p className="traveller__card_text">
-                            <div className="form-group pt-3">
-                              <label className="mb-1" for={`vehicle_number${i}`}>
-                                Vehicle Number
-                              </label>
-                              <AvField
-                                type="text"
-                                className="form-control pass_input"
-                                id={`vehicle_number${i}`}
-                                placeholder="Enter the license plate number"
-                                style={{ fontSize: "11px", marginLeft: "-5px", width: 250 }}
-                                name="registration_number"
-                                onChange={(e) =>
-                                  handleVehicle(e.target.value, e.target.name, i)
-                                }
-                                value={vehicles[i].registration_number}
-                                validate={{
-                                  required: {
-                                    value: true,
-                                    errorMessage: "Enter the license plate number",
-                                  },
+              <AvForm onValidSubmit={onDmByeClick}>
+                {
+                  (vehicles?.length > 0)
+                    ?
+                    <Col xs={12} md={6}>
+                      <label
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: "500",
+                          color: "black",
+                          display: "flex",
+                          justifyContent: "center",
+                          paddingTop: "15px"
+                        }}
+                      >
+                        Vehicle Details
+                      </label>
+                      <div
+                        className="traveller_div"
+                        style={{ marginTop: "1rem", justifyContent: "center" }}
+                      >
+                        {vehicles?.map((item, i) => (
+                          <Paper key={i} className="traveller__card p-3" style={{ marginBottom: "12px" }}>
+                            <div className="traveller__card_body" className="py-0" >
+                              <h5
+                                className="traveller__card_title"
+                                style={{ fontSize: "12px" }}
+                              >
+                                Vehicle {i + 1}
+                              </h5>
+                              <p className="traveller__card_text">
+                                <div className="form-group pt-3">
+                                  <label className="mb-1" for={`vehicle_number${i}`}>
+                                    Vehicle Number
+                                  </label>
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`vehicle_number${i}`}
+                                    placeholder="Enter the license plate number"
+                                    style={{ fontSize: "11px", marginLeft: "-5px", width: 250 }}
+                                    name="registration_number"
+                                    onChange={(e) =>
+                                      handleVehicle(e.target.value, e.target.name, i)
+                                    }
+                                    value={vehicles[i].registration_number}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter the license plate number",
+                                      },
 
-                                }}
-                              />
+                                    }}
+                                  />
+                                </div>
+                                <div className="form-group pt-3">
+                                  <label className="mb-1" for={`name${i}`}>
+                                    Driver Name
+                                  </label>
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`name${i}`}
+                                    placeholder="Enter Driver Name"
+                                    style={{ fontSize: "11px", marginLeft: "-5px" }}
+                                    name="driver_name"
+                                    onChange={(e) =>
+                                      handleVehicle(e.target.value, e.target.name, i)
+                                    }
+                                    value={vehicles[i].driver_name}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter Driver Name",
+                                      },
+
+                                    }}
+                                  />
+                                </div>
+
+                                <div className="form-group pt-3">
+                                  <label className="mb-1" for={`name${i}`}>
+                                    Driver License Number (Optional)
+                                  </label>
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`name${i}`}
+                                    placeholder="Enter Driver License Number"
+                                    style={{ fontSize: "11px", marginLeft: "-5px" }}
+                                    name="driver_licence_number"
+                                    onChange={(e) =>
+                                      handleVehicle(e.target.value, e.target.name, i)
+                                    }
+                                    value={vehicles[i].driver_licence_number}
+                                  // validate={{
+                                  //   required: {
+                                  //     value: true,
+                                  //     errorMessage: "Enter Driver License Number",
+                                  //   },
+
+                                  // }}
+                                  />
+                                </div>
+
+                              </p>
                             </div>
-                            <div className="form-group pt-3">
-                              <label className="mb-1" for={`name${i}`}>
-                                Driver Name
-                              </label>
-                              <AvField
-                                type="text"
-                                className="form-control pass_input"
-                                id={`name${i}`}
-                                placeholder="Enter Driver Name"
-                                style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="driver_name"
-                                onChange={(e) =>
-                                  handleVehicle(e.target.value, e.target.name, i)
-                                }
-                                value={vehicles[i].driver_name}
-                                validate={{
-                                  required: {
-                                    value: true,
-                                    errorMessage: "Enter Driver Name",
-                                  },
-
-                                }}
-                              />
-                            </div>
-
-                            <div className="form-group pt-3">
-                              <label className="mb-1" for={`name${i}`}>
-                                Driver License Number
-                              </label>
-                              <AvField
-                                type="text"
-                                className="form-control pass_input"
-                                id={`name${i}`}
-                                placeholder="Enter Driver License Number"
-                                style={{ fontSize: "11px", marginLeft: "-5px" }}
-                                name="driver_name"
-                                onChange={(e) =>
-                                  handleVehicle(e.target.value, e.target.name, i)
-                                }
-                                value={vehicles[i].driver_name}
-                                validate={{
-                                  required: {
-                                    value: true,
-                                    errorMessage: "Enter Driver License Number",
-                                  },
-
-                                }}
-                              />
-                            </div>
-
-                          </p>
-                        </div>
-                      </Paper>
-                    ))}
-                  </div>
-                  {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
+                          </Paper>
+                        ))}
+                      </div>
+                      {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
                     <Button
                       type="submit"
                       class="btn btn-success"
@@ -1041,7 +1051,11 @@ function TravelTicket({ Seleted_Values }) {
                       Add Vehicle
                     </Button>
                   </div> */}
-                </Col>
+                    </Col>
+
+                    : null
+
+                }
                 <Col xs={12} md={6}>
                   <label
                     style={{
@@ -1222,26 +1236,31 @@ function TravelTicket({ Seleted_Values }) {
                   </Button>
                 </div> */}
                 </Col>
+                <div style={{ marginTop: "86px", textAlign: "center" }}>1</div>
                 <div style={{ marginTop: "10rem", textAlign: "center" }}>
                   <Button
                     type="submit"
                     class="btn btn-success"
-                    // style={{
-                    //   width: "100%",
-                    //   textAlign: "center",
-                    //   height: "80px",
-                    //   borderRadius: "0px",
-                    //   backgroundColor: "#0fa453",
-                    //   border: "none",
-                    //   fontWeight: "600",
-                    // }}
-                    onClick={onDmByeClick}
+                    style={{
+                      width: "100%",
+                      textAlign: "center",
+                      // height: "80px",
+                      borderRadius: "0px",
+                      backgroundColor: "#0fa453",
+                      border: "none",
+                      fontWeight: "600",
+                      height: "86px",
+                      position:"fixed",
+                      width:"100%",
+                      bottom:"0",
+                      left:"0"
+                    }}
+                  // onClick={onDmByeClick}
                   >
                     Book your Pass
                   </Button>
                 </div>
               </AvForm>
-              <div>dcjjfj</div>
             </div>
           </div>
         </Container>
