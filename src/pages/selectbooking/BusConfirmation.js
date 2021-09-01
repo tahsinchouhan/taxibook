@@ -1115,7 +1115,7 @@ function BusConfirmation() {
           </div>
         </AvForm>
         <div>
-          <div style={{ display: "flex", marginTop: "50px", flexDirection: 'row', width: "50%" }} >
+          <div style={{ display: "flex", marginTop: "50px", flexDirection: 'row', width: "50%",position:"absolute",bottom:"0px" }} >
             <Col xs={12} md={6} style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px", }}>
               <div style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px" }}>
 

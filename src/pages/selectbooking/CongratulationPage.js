@@ -7,7 +7,7 @@ import Footer from "../travesaly/Footer";
 import { useHistory } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import runmen from "../../assets/img/runmen.png";
-
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 function CongratulationPage() {
@@ -16,6 +16,12 @@ function CongratulationPage() {
   const goHome = () => {
     history.push("/");
   };
+
+  const dwnlPDF = () => {
+    console.log("object")
+  }
+
+  console.log("booking_id", booking_id);
   return (
     <>
       <div className="d-none d-md-block">
@@ -38,7 +44,7 @@ function CongratulationPage() {
                   {/* <span style={{color:"black", marginBottom:"50px"}}>{apiData?.order_id}</span> */}
                 </div>
                 <div>
-                  {/* <div >
+                  <div >
                     <Button
                       className="btn btn-success"
                       style={{
@@ -50,22 +56,38 @@ function CongratulationPage() {
                         fontWeight: "bold",
                         marginBottom: "20px"
                       }}
-                    ><FaWhatsapp style={{ fontWeight: "bold", fontSize: "30px" }} />
-                      <span> Whatsapp Link</span></Button>
-                  </div> */}
-                  <div>
-                    <Button style={{
-                      width: "186px",
-                      textAlign: "center",
-                      height: "52px",
-                      borderRadius: "9px",
-                      backgroundColor: " #FF4A68",
-                      fontWeight: "bold",
-                      marginBottom: "20px"
-                    }}
-                    >Download E-ticket</Button>
+                    >
+
+                      <a href={`https://wa.me?text=http://15.206.92.158/bus-detail/${booking_id}`}
+                        style={{ textDecoration: "none", color: "#fff" }}
+                        target="_blank"
+                      >
+                        Share in Whatsapp
+                      </a>
+                    </Button>
                   </div>
                   <div>
+                    <Button
+                      style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: " #FF4A68",
+                        fontWeight: "bold",
+                        marginBottom: "20px"
+                      }}
+                    >
+                      <Link
+                        to={`/bus-detail/${booking_id}`}
+                        style={{ textDecoration: "none", color: "#fff" }}
+                      >
+                        Download E-ticket
+                      </Link>
+
+                    </Button>
+                  </div>
+                  {/* <div>
                     <Button style={{
                       width: "186px",
                       textAlign: "center",
@@ -76,7 +98,7 @@ function CongratulationPage() {
                       marginBottom: "20px"
                     }}
                     >Sent by Email</Button>
-                  </div>
+                  </div> */}
                   <div>
                     <Button
                       style={{
@@ -138,7 +160,7 @@ function CongratulationPage() {
           <span style={{ color: "black", marginBottom: "50px" }}>{booking_id}</span>
         </div>
         <div style={{ textAlign: "center" }}>
-          {/* <div >
+          <div >
             <Button
               className="btn btn-success"
               style={{
@@ -150,9 +172,15 @@ function CongratulationPage() {
                 fontWeight: "bold",
                 marginBottom: "20px"
               }}
-            ><FaWhatsapp style={{ fontWeight: "bold", fontSize: "30px" }} />
-              <span> Whatsapp Link</span></Button>
-          </div> */}
+            >
+              <a href={`https://wa.me?text=http://15.206.92.158/bus-detail/${booking_id}`}
+                style={{ textDecoration: "none", color: "#fff" }}
+                target="_blank"
+              >
+                Share in Whatsapp
+              </a>
+            </Button>
+          </div>
           <div>
             <Button style={{
               width: "186px",
@@ -163,9 +191,16 @@ function CongratulationPage() {
               fontWeight: "bold",
               marginBottom: "20px"
             }}
-            >Download E-ticket</Button>
+            ><Link
+              to={`/bus-detail/${booking_id}`}
+              style={{ textDecoration: "none", color: "#fff" }}
+            >
+                Download E-ticket
+              </Link>
+
+            </Button>
           </div>
-          <div>
+          {/* <div>
             <Button style={{
               width: "186px",
               textAlign: "center",
@@ -176,7 +211,7 @@ function CongratulationPage() {
               marginBottom: "20px"
             }}
             >Sent by Email</Button>
-          </div>
+          </div> */}
           <div>
             <Button style={{
               width: "186px",

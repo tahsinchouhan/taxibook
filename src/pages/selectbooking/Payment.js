@@ -106,7 +106,7 @@ function Payment() {
             })
           );
           dispatch(setApiData({ ...apiData, order_id: response.razorpay_order_id }))
-          history.push("/CongratulationPage")
+          history.push("/congratulation-page")
         }
       },
       prefill: {

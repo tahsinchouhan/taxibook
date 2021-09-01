@@ -66,6 +66,7 @@
   background-color: blue;
   color: white;
 }
+
 @media screen and (max-width: 700px) {
   .header_image {
     width: 40% !important;
@@ -85,6 +86,15 @@
   }
   .locationpass-btn{
     color: white;
+    background-color: #0fa453;
+    border-color: #0fa453;
+    font-weight: bold;
+    width: 100%;
+    height: 80px;
+    border-radius: 11px;
+  }
+  .locationpass-btn{
+    color: white;
     background-color: #0FA453;
     font-weight: bold;
     width: 100%;
@@ -92,8 +102,11 @@
     margin: 0px;
     height: 80px;
     border: 1px solid #0FA453;
-    position:absolute;
-    /* bottom:0; */
+    position:absolute; 
+     bottom:0;
+}
+.location-pass{
+ display: block;
 }
 
 .locationpass-btn-two {
