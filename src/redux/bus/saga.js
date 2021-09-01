@@ -55,7 +55,7 @@ function* createBusBooking({ payload }) {
     console.log("pay",payload); 
     const phone = JSON.parse(localStorage.getItem("mobile"))  
     try {
-        const busticket = yield call(createBusBookingRequest, {...payload, mobile:phone, email: busticket.data.email});       
+        const busticket = yield call(createBusBookingRequest, {...payload, mobile:phone});       
         yield put(setBookingId(busticket.data.booking_Id));
         console.log("bus",busticket);
     } catch (error) {
