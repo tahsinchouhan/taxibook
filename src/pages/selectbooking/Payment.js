@@ -26,8 +26,6 @@ async function loadScript(src) {
   });
 }
 
-const __DEV__ = document.domain === "localhost";
-
 function Payment() {
   const history = useHistory();
   const [data, setData] = useState();
@@ -71,7 +69,7 @@ function Payment() {
     }
 
     var options = {
-      key: __DEV__ ? "rzp_test_DuapYrmQwcWLGy" : "PRODUCTION_KEY",
+      key: "rzp_test_DuapYrmQwcWLGy",
       currency: "INR",
       amount: data.amount.toString(),
       order_id: data.id,
