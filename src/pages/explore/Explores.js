@@ -263,6 +263,10 @@ const Explores = () => {
         ) : null}
       </Container>
 
+
+
+
+
       <div
         className="py-5 mt-5"
         style={{ backgroundColor: "black", color: "white" }}

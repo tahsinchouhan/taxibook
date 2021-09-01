@@ -314,24 +314,38 @@ function BusConfirmation() {
                     <Paper key={i} className="traveller__card" >
                       <div className="traveller__card_body" className="py-0">
                         <div>
-                          <h5 className="traveller__card_title" style={{ fontSize: "12px",float:"left" }}>Travellers {i + 1}</h5>
-                       
-                          <button className="btn" style={{float:"right",position:"relative",top:"-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
+                          <h5 className="traveller__card_title" style={{ fontSize: "12px", float: "left" }}>Travellers {i + 1}</h5>
+
+                          <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
                         </div>
 
-                        <p className="traveller__card_text" style={{clear:"both"}}>
+                        <p className="traveller__card_text" style={{ clear: "both" }}>
                           <div className="form-group mt-0">
                             <label className="mb-1" for={`name${i}`}>Name</label>
                             <AvField
                               type="text"
                               className="form-control pass_input"
                               id={`name${i}`}
-                              placeholder="Enter traveller name"
+                              placeholder="Enter Traveller Name"
                               style={{ fontSize: "11px", marginLeft: "-5px" }}
                               name="name"
-                              onChange={(e) => handleTraveller(e.target.value, e.target.name, i)}
+                              onChange={(e) =>
+                                handleTraveller(
+                                  e.target.value,
+                                  e.target.name,
+                                  i
+                                )
+                              }
                               value={travellers[i].name}
+                              validate={{
+                                required: {
+                                  value: true,
+                                  errorMessage: "Enter Traveller Name",
+                                },
+
+                              }}
                             />
+
                           </div>
 
                           <div className="form-row genderform pt-3 d-flex ">
@@ -354,7 +368,8 @@ function BusConfirmation() {
                             </div>
                             <div className="form-group col m-2 w-50">
                               <label className="mb-1" for={`age${i}`}>Age</label>
-                              <input
+
+                              <AvField
                                 type="text"
                                 className="form-control pass_input w-70 pt-2"
                                 placeholder="Enter Age"
@@ -366,9 +381,23 @@ function BusConfirmation() {
                                   whiteSpace: "nowrap",
                                   height: "33px",
                                 }}
-                                // name="age" onChange={handleChange} value={age}
-                                name="age" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].age}
+                                name="age"
+                                onChange={(e) =>
+                                  handleTraveller(
+                                    e.target.value,
+                                    e.target.name,
+                                    i
+                                  )
+                                }
+                                value={travellers[i].age}
+                                validate={{
+                                  required: {
+                                    value: true,
+                                    errorMessage: "Enter Age",
+                                  }
+                                }}
                               />
+
                             </div>
                           </div>
 
@@ -376,20 +405,29 @@ function BusConfirmation() {
                             <label className="mb-1" for={`aadhaar${i}`}>
                               Adhaar Card Number
                             </label>
-                            <input
-                              type="number"
+                            <AvField
+                              type="text"
                               className="form-control pass_input"
                               id={`adhaar${i}`}
-                              placeholder=" Enter 12 digit Adhaar Card Number"
+                              placeholder="Enter 12 digit Adhaar Card Number"
                               style={{ fontSize: "11px", marginLeft: "-5px" }}
-                              // name="adhaar" onChange={handleChange} value={adhaar}
                               name="adhaar"
-                              onChange={(e) => handleTraveller(e.target.value, e.target.name, i)}
+                              onChange={(e) =>
+                                handleTraveller(
+                                  e.target.value,
+                                  e.target.name,
+                                  i
+                                )
+                              }
                               value={travellers[i].adhaar}
-                              // min={12}
-                              // max={12}
-                              required
+                              validate={{
+                                required: {
+                                  value: true,
+                                  errorMessage: "Enter 12 digit Adhaar Card Number",
+                                },
+                              }}
                             />
+
                           </div>
                         </p>
                       </div>
@@ -568,6 +606,7 @@ function BusConfirmation() {
             </div>
           </AvForm>
         </Container>
+
         <div>
           <div style={{ display: 'flex', flexDirection: 'row' }} >
             <Col style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px", }}>
@@ -928,117 +967,153 @@ function BusConfirmation() {
             </Row>
             : null
         } */}
-
-        <div className="traveller_div" >
-          {
-            travellers?.map((item, i) => (
-              <Paper key={i} className="traveller__card" style={{ marginBottom: "15px" }}>
-                <div className="traveller__card_body" className="py-0">
-                  <div> 
-                   <h5 className="traveller__card_title" style={{ fontSize: "12px", marginBottom: "15px",float:"left" }}>Travellers {i + 1}</h5>
-                   <button className="btn" style={{float:"right",position:"relative",top:"-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
-                  </div>
-                  <p className="traveller__card_text" style={{clear:"both"}}>
-                    <div className="form-group mt-0">
-                      <label className="mb-1" for={`name${i}`}>Name</label>
-                      <input
-                        type="text"
-                        className="form-control pass_input"
-                        id={`name${i}`}
-                        placeholder="Enter passenger name"
-                        style={{ fontSize: "11px", marginLeft: "-5px", marginTop: "7px" }}
-                        name="name" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].name}
-                      />
+        <AvForm>
+          <div className="traveller_div" >
+            {
+              travellers?.map((item, i) => (
+                <Paper key={i} className="traveller__card" style={{ marginBottom: "15px" }}>
+                  <div className="traveller__card_body" className="py-0">
+                    <div>
+                      <h5 className="traveller__card_title" style={{ fontSize: "12px", marginBottom: "15px", float: "left" }}>Travellers {i + 1}</h5>
+                      <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
                     </div>
+                    <p className="traveller__card_text" style={{ clear: "both" }}>
+                      <div className="form-group mt-0">
+                        <label className="mb-1" for={`name${i}`}>Name</label>
+                        <AvField
+                          type="text"
+                          className="form-control pass_input"
+                          id={`name${i}`}
+                          placeholder="Enter Traveller Name"
+                          style={{ fontSize: "11px", marginLeft: "-5px" }}
+                          name="name"
+                          onChange={(e) =>
+                            handleTraveller(
+                              e.target.value,
+                              e.target.name,
+                              i
+                            )
+                          }
+                          value={travellers[i].name}
+                          validate={{
+                            required: {
+                              value: true,
+                              errorMessage: "Enter Traveller Name",
+                            },
 
-                    <div className="form-row genderform pt-3 d-flex ">
-                      <div className="col m-2 w-50">
-                        <label className="mb-1" for={`gender${i}`}>Gender</label>
-                        <div className="d-flex pt-2">
-                          <ButtonComponent
+                          }}
+                        />
+
+                      </div>
+
+                      <div className="form-row genderform pt-3 d-flex ">
+                        <div className="col m-2 w-50">
+                          <label className="mb-1" for={`gender${i}`}>Gender</label>
+                          <div className="d-flex pt-2">
+                            <ButtonComponent
+                              style={{
+                                width: "50%",
+                                fontSize: "11px",
+                                whiteSpace: "nowrap",
+                              }}
+                              data={button_Data}
+                              // activeButton={activeButton}
+                              // trigerOnClickEmpSideBtn={onSideBtnClick}
+                              trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender}/>
+                          </div>
+                        </div>
+                        <div className="form-group col m-2 w-50">
+                          <label className="mb-1" for={`age${i}`}>Age</label>
+                          <AvField
+                            type="text"
+                            className="form-control pass_input w-70 pt-2"
+                            placeholder="Enter Age"
+                            id={`age${i}`}
                             style={{
-                              width: "50%",
-                              fontSize: "11px",
+                              width: "110px",
+                              marginLeft: "-5px",
+                              fontSize: "12px",
                               whiteSpace: "nowrap",
-                              marginTop: "7px"
+                              height: "33px",
                             }}
-                            data={button_Data}
-                            // activeButton={activeButton}
-                            // trigerOnClickEmpSideBtn={onSideBtnClick}
-                            trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender}
+                            name="age"
+                            onChange={(e) =>
+                              handleTraveller(
+                                e.target.value,
+                                e.target.name,
+                                i
+                              )
+                            }
+                            value={travellers[i].age}
+                            validate={{
+                              required: {
+                                value: true,
+                                errorMessage: "Enter Age",
+                              }
+                            }}
                           />
+
                         </div>
                       </div>
-                      <div className="form-group col m-2 w-50">
-                        <label className="mb-1" for={`age${i}`}>Age</label>
-                        <input
+
+                      <div className="form-group mt-1 pt-2">
+                        <label className="mb-1" for={`aadhaar${i}`}>
+                          Adhaar Card Number{" "}
+                        </label>
+                        <AvField
                           type="text"
-                          className="form-control pass_input w-70 pt-2"
-                          placeholder="Enter Age"
-                          id={`age${i}`}
-                          style={{
-                            width: "110px",
-                            marginLeft: "-5px",
-                            fontSize: "12px",
-                            whiteSpace: "nowrap",
-                            height: "33px",
-                            marginTop: "7px"
+                          className="form-control pass_input"
+                          id={`adhaar${i}`}
+                          placeholder="Enter 12 digit Adhaar Card Number"
+                          style={{ fontSize: "11px", marginLeft: "-5px", marginTop: "7px" }}
+                          name="adhaar"
+                          onChange={(e) =>
+                            handleTraveller(
+                              e.target.value,
+                              e.target.name,
+                              i
+                            )
+                          }
+                          value={travellers[i].adhaar}
+                          validate={{
+                            required: {
+                              value: true,
+                              errorMessage: "Enter 12 digit Adhaar Card Number",
+                            },
                           }}
-                          // name="age" onChange={handleChange} value={age}
-                          name="age" onChange={(e) => handleTraveller(e.target.value, e.target.name, i)} value={travellers[i].age}
                         />
+
                       </div>
-                    </div>
-
-                    <div className="form-group mt-1 pt-2">
-                      <label className="mb-1" for={`aadhaar${i}`}>
-                        Adhaar Card Number{" "}
-                      </label>
-                      <input
-                        type="number"
-                        className="form-control pass_input"
-                        id={`adhaar${i}`}
-                        placeholder=" Enter 12 digit Adhaar Card Number"
-                        style={{ fontSize: "11px", marginLeft: "-5px", marginTop: "7px" }}
-                        // name="adhaar" onChange={handleChange} value={adhaar}
-                        name="adhaar"
-                        onChange={(e) => handleTraveller(e.target.value, e.target.name, i)}
-                        value={travellers[i].adhaar}
-                        //  min={12}
-                        //  max={12}
-                        required
-                      />
-                    </div>
-                  </p>
-                </div>
-              </Paper>
-            ))
-          }
-        </div>
-        <div style={{ textAlign: "center" }}>
-          <Button
-            style={{
-              backgroundColor: "#0FA453",
-              color: "white",
-              width: "50%",
-              height: "51px",
-              border: "none",
-              borderRadius: "15px",
-              marginTop: '40px'
-            }}
-            // onClick={handleShow}
-            // onClick={handleClick("top-start")}
-            onClick={() => setTravellers([...travellers, {
-              name: '',
-              gender: '',
-              age: '',
-              adhaar: '',
-            }])}
-          >
-            Add Traveller
-          </Button>
-        </div>
-
+                    </p>
+                  </div>
+                </Paper>
+              ))
+            }
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <Button
+              style={{
+                backgroundColor: "#0FA453",
+                color: "white",
+                width: "50%",
+                height: "51px",
+                border: "none",
+                borderRadius: "15px",
+                marginTop: '40px'
+              }}
+              // onClick={handleShow}
+              // onClick={handleClick("top-start")}
+              onClick={() => setTravellers([...travellers, {
+                name: '',
+                gender: '',
+                age: '',
+                adhaar: '',
+              }])}
+            >
+              Add Traveller
+            </Button>
+          </div>
+        </AvForm>
         <div>
           <div style={{ display: "flex", marginTop: "50px", flexDirection: 'row', width: "50%" }} >
             <Col xs={12} md={6} style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px", }}>

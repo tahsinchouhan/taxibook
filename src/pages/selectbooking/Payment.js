@@ -99,10 +99,10 @@ function Payment() {
               from: tripData?.route?.start?._id,
               to: tripData?.route?.end?._id,
               bus: tripData?.vehical,
-              mobile,
-              // name,
-              // email,
-              // whatsapp: number,
+              mobile:JSON.parse(localStorage.getItem("mobile")),
+              name:values.name,
+              email:values.email,
+              whatsapp: values.number,
             })
           );
           dispatch(setApiData({ ...apiData, order_id: response.razorpay_order_id }))

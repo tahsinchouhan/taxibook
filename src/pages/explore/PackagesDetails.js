@@ -77,7 +77,7 @@ const PackagesDetails = (props) => {
     fetch(API_PATH + `/api/v1/packages/${id}`)
       .then((response) => response.json())
       .then((res) => {
-        console.log("fjjfjjdj",res.data);
+        console.log("fjjfjjdj", res.data);
         setPackages(res.data);
         setInclusions(res.data.inclusions);
         setExclusions(res.data.exclusions);
@@ -210,39 +210,44 @@ const PackagesDetails = (props) => {
           </Row>
         </div>
         {/* <Block title="Contact Details" boolean={true}> */}
+
         <div>
           <h4 className="block__title">
             <span>Contact Details</span>
           </h4>
-          <h5 className="price__title pt-3 mb-1">
-            {/* {packages.tour_operator_account.name} */}
+          {packages ? <div>
+            <h5 className="price__title pt-3 mb-1">
+              {packages.tour_operator_account.name}
             </h5>
-          <a className="code"
-          //  href={`tel:${packages.tour_operator_account.mobile}`}
-           >
-            {/* {packages?.tour_operator_account.mobile} */}
-          </a>
-          <br />
-          <a className="code" 
-          // href={`mailto:${packages.tour_operator_account.email}`}
-          >
-            {/* {packages?.tour_operator_account.email} */}
-          </a>
+            <a className="code"
+             href={`tel:${packages.tour_operator_account.mobile}`}
+            >
+              {packages?.tour_operator_account.mobile}
+            </a>
+            <br />
+            <a className="code"
+            href={`mailto:${packages.tour_operator_account.email}`}
+            >
+              {packages?.tour_operator_account.email}
+            </a>
+          </div> : null }
+          
         </div>
       </Container>
       <div fluid className="d-none d-md-block">
         <div className="packeges_title">
+        {packages ? 
           <span
             className="packages_enquired"
-            style={{width: "200px", display: "inline-block" }}
+            style={{ width: "200px", display: "inline-block" }}
           // onClick={() => modalReviewHadler()}
           >
-            <a className="code" 
-            // href={`tel:${packages.tour_operator_account.mobile}`}
-             style={{color:"#7868E6"}}>
+            <a className="code"
+              href={`tel:${packages.tour_operator_account.mobile}`}
+              style={{ color: "#7868E6" }}>
               Call Now
             </a>
-          </span>
+          </span> : null}
 
           {/* <span
             className="packages_enquired"
@@ -300,6 +305,18 @@ const PackagesDetails = (props) => {
             </span>
           </div> */}
           <div>
+          {packages ? 
+          <span
+            className="packages_enquired"
+            style={{ width: "200px", display: "inline-block" }}
+          // onClick={() => modalReviewHadler()}
+          >
+            <a className="code"
+              href={`tel:${packages.tour_operator_account.mobile}`}
+              style={{ color: "#7868E6" }}>
+              Call Now
+            </a>
+          </span> : null}
             <span style={{ width: "200px", display: "inline-block" }}
               className="packages_enquired"
             >

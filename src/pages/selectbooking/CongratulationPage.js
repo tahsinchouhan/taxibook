@@ -38,7 +38,7 @@ function CongratulationPage() {
                   {/* <span style={{color:"black", marginBottom:"50px"}}>{apiData?.order_id}</span> */}
                 </div>
                 <div>
-                  <div >
+                  {/* <div >
                     <Button
                       className="btn btn-success"
                       style={{
@@ -52,7 +52,7 @@ function CongratulationPage() {
                       }}
                     ><FaWhatsapp style={{ fontWeight: "bold", fontSize: "30px" }} />
                       <span> Whatsapp Link</span></Button>
-                  </div>
+                  </div> */}
                   <div>
                     <Button style={{
                       width: "186px",
@@ -138,7 +138,7 @@ function CongratulationPage() {
           <span style={{ color: "black", marginBottom: "50px" }}>{booking_id}</span>
         </div>
         <div style={{ textAlign: "center" }}>
-          <div >
+          {/* <div >
             <Button
               className="btn btn-success"
               style={{
@@ -152,7 +152,7 @@ function CongratulationPage() {
               }}
             ><FaWhatsapp style={{ fontWeight: "bold", fontSize: "30px" }} />
               <span> Whatsapp Link</span></Button>
-          </div>
+          </div> */}
           <div>
             <Button style={{
               width: "186px",
