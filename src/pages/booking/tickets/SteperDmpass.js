@@ -149,23 +149,10 @@ function SteperDmpass(shows, ...props) {
     axios.post(`${API_PATH}/api/v1/entrypass/pay`, {
       amount: tot_charges,
     })
-      // .then((res) => res.json())
       .then((result) => {
         console.log("dhshsdh", result);
         setData(result.data);
-
-        // dispatch(
-        //   createDmPass({
-        //     ...dmData,
-        //     basic_details: travellers,
-        //     vehical_details: vehicles,
-        //     locations: locServ,
-        //     total_charges: tot_charges,
-        //   })
-        // );
-
         setPaymentCustom(true)
-
       })
       .catch((e) => {
         console.log(e);
@@ -404,7 +391,6 @@ function SteperDmpass(shows, ...props) {
   const [vehicle, setVehicle] = useState("");
 
   const handleTravellerCount = (e) => {
-    // console.log("Number of Travellers", e.target.value)
     setTravel(e.target.value)
     console.log("travller seleted", travel)
     setTravellers([
@@ -419,7 +405,6 @@ function SteperDmpass(shows, ...props) {
   }
   const handlerVehicles = (e) => {
     console.log("Number of Vehicles", e.target.value)
-    //setVehicle(e.target.value)
     setVehicles([
       ...vehicles,
       {
@@ -436,18 +421,12 @@ function SteperDmpass(shows, ...props) {
 
 
   const onLocationsClick = () => {
-    // <span className="location-rs">₹ {tot_charges}</span>
-    // console.log("object", {tot_charges});
+
     console.log("object", tot_charges);
     if (tot_charges > 0) {
       setShow(2);
     }
-    // else{
-    //   document.getElementByID('panel1a-header0').click(handleService)
-    // }
-
     return shows;
-    // history.push("/locations");
   };
 
 
@@ -468,7 +447,7 @@ function SteperDmpass(shows, ...props) {
   }
 
   const displayRazorpaysss = async (values) => {
-    console.log("objec::::::::::::::::::::::t")
+    console.log("objec::::::::::::::::::::::t", values.email)
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -487,39 +466,19 @@ function SteperDmpass(shows, ...props) {
       description: "Thank You For Booking.",
       image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
       handler: function (response) {
-        // toast(response.razorpay_payment_id);
-        // toast(response.razorpay_order_id);
-        // toast(response.razorpay_signature);
-        if (response.razorpay_payment_id) {
 
+        if (response.razorpay_payment_id) {
           dispatch(
-            createDmPass({ ...dmData, basic_details: travellers, vehical_details: vehicles })
-            // createBusBooking({
-            //   ...dmData,
-            //   basic_details: travellers,
-            //   vehical_details: vehicles,
-            //   locations: locServ,
-            //   total_charges: tot_charges,
-            // })
+            createDmPass({ ...dmData,
+               basic_details: travellers, 
+               vehical_details: vehicles,
+               name:values.name,
+               email:values.email,
+               whatsapp: values.number})
           );
           dispatch(setDmData({ ...dmData, order_id: response.razorpay_order_id }))
           localStorage.setItem("dm_pass_id", dmData.dmpass_id)
-          // history.push("/CongratulationPage")
-
           setShow(3);
-          // dispatch(
-          //   createBusBooking({
-          //     ...apiData,
-          //     trips_id: tripData?._id,
-          //     route: tripData?.route?._id,
-          //     from: tripData?.route?.start?._id,
-          //     to: tripData?.route?.end?._id,
-          //     bus: tripData?.vehical,
-          //     mobile,
-
-          //   })
-          // );
-
         }
       },
       prefill: {
@@ -1156,396 +1115,396 @@ function SteperDmpass(shows, ...props) {
         </div>
       ) : show == 2 ? (
         <>
-          {!paymentCustom ? <> 
-          
+          {!paymentCustom ? <>
+
             <div>
-            <div>
-              <Container className="dmpass-form mt-2">
-                <Row className="dmpassData d-none d-md-block" style={{ "backgroundColor": "#FF814A" }}>
-                  <h6
-                    style={{
-                      textAlign: "center",
-                      color: "white",
-                      paddingTop: "10px"
-                    }}
-                  >
-                    Tickets
-                  </h6>
-                  <h6
-                    style={{
-                      textAlign: "center",
-                      color: "white",
-                      paddingBottom: "10px"
-                    }}
-                  >
-                    {showDate}
-                  </h6>
-                </Row>
-                <h3 style={{ textAlign: "center" }}>Confirm your Details</h3>
-                <div className="confirm-main">
-                  <div
-                    className="confirm_div"
-                    style={{
-                      textAlign: "center",
-                      backgroundColor: "#F8F8F8",
-                      marginBottom: "10px",
-                      padding: "20px"
-                    }}
-                  >
-                    {locServ.length > 0
-                      ? locServ?.map((item, key) => (
-                        <>
-                          <Row className="mb-1">
-                            <Col xs={6} md={6} style={{ textAlign: "left" }} >
-                              <span className="confirm-title">
-                                {item?.location_name}
-                              </span>
-                            </Col>
-                            <Col style={{ textAlign: "right" }} xs={6} md={6}>
-                              <span
-                                style={{
-                                  color: "#FF4A68",
-                                  fontSize: "15px",
-                                  fontWeight: "600",
-                                  cursor: "pointer",
-                                }}
-                                onClick={() => setShow(1)}
-                              >
-                                Change
-                              </span>
-                            </Col>
-                            <Col>
-                              {item?.services?.length > 0
-                                ? item?.services?.map((service, j) => (
-                                  <Row>
-                                    <Col xs={6} md={6} style={{ textAlign: "left" }}>
-                                      <span className="confirm_part">
-                                        {service?.service_name} x{" "}
-                                        {service?.unit}
-                                      </span>
-                                    </Col>
-                                    <Col xs={6} md={6} style={{ textAlign: "right" }}>
-                                      <span className="confirm_part">
-                                        {service?.total_charges}{" "}
-                                      </span>
-                                    </Col>
+              <div>
+                <Container className="dmpass-form mt-2">
+                  <Row className="dmpassData d-none d-md-block" style={{ "backgroundColor": "#FF814A" }}>
+                    <h6
+                      style={{
+                        textAlign: "center",
+                        color: "white",
+                        paddingTop: "10px"
+                      }}
+                    >
+                      Tickets
+                    </h6>
+                    <h6
+                      style={{
+                        textAlign: "center",
+                        color: "white",
+                        paddingBottom: "10px"
+                      }}
+                    >
+                      {showDate}
+                    </h6>
+                  </Row>
+                  <h3 style={{ textAlign: "center" }}>Confirm your Details</h3>
+                  <div className="confirm-main">
+                    <div
+                      className="confirm_div"
+                      style={{
+                        textAlign: "center",
+                        backgroundColor: "#F8F8F8",
+                        marginBottom: "10px",
+                        padding: "20px"
+                      }}
+                    >
+                      {locServ.length > 0
+                        ? locServ?.map((item, key) => (
+                          <>
+                            <Row className="mb-1">
+                              <Col xs={6} md={6} style={{ textAlign: "left" }} >
+                                <span className="confirm-title">
+                                  {item?.location_name}
+                                </span>
+                              </Col>
+                              <Col style={{ textAlign: "right" }} xs={6} md={6}>
+                                <span
+                                  style={{
+                                    color: "#FF4A68",
+                                    fontSize: "15px",
+                                    fontWeight: "600",
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={() => setShow(1)}
+                                >
+                                  Change
+                                </span>
+                              </Col>
+                              <Col>
+                                {item?.services?.length > 0
+                                  ? item?.services?.map((service, j) => (
+                                    <Row>
+                                      <Col xs={6} md={6} style={{ textAlign: "left" }}>
+                                        <span className="confirm_part">
+                                          {service?.service_name} x{" "}
+                                          {service?.unit}
+                                        </span>
+                                      </Col>
+                                      <Col xs={6} md={6} style={{ textAlign: "right" }}>
+                                        <span className="confirm_part">
+                                          {service?.total_charges}{" "}
+                                        </span>
+                                      </Col>
 
-                                  </Row>
-                                ))
-                                : null}
-                            </Col>
-                          </Row>
+                                    </Row>
+                                  ))
+                                  : null}
+                              </Col>
+                            </Row>
 
-                        </>
-                      ))
-                      : null}
+                          </>
+                        ))
+                        : null}
 
-                    <div>
-                      <div className="location-amount">
-                        <span className="location-total">Total Amount</span>
-                        <span className="location-rs">₹ {tot_charges}</span>
+                      <div>
+                        <div className="location-amount">
+                          <span className="location-total">Total Amount</span>
+                          <span className="location-rs">₹ {tot_charges}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </Container>
-            </div>
+                </Container>
+              </div>
 
-            <div className="d-none d-md-block">
-              <div style={{ textAlign: "center" }}>
+              <div className="d-none d-md-block">
+                <div style={{ textAlign: "center" }}>
+                  <Button
+                    onClick={onTicketCheckClick}
+                    type="submit"
+                    style={{
+                      marginTop: "50px",
+                      width: "200px",
+                      height: "50px",
+                      backgroundColor: "#0fa453",
+                      color: "white",
+                      fontWeight: "900",
+                      fontSize: "15px",
+                      marginBottom: "50px",
+                      border: '1px solid #0fa453'
+                    }}
+                  >
+                    Save & Continue
+                  </Button>
+                </div>
+              </div>
+              <div className="d-md-none">
                 <Button
                   onClick={onTicketCheckClick}
                   type="submit"
                   style={{
                     marginTop: "50px",
-                    width: "200px",
-                    height: "50px",
-                    backgroundColor: "#0fa453",
+                    width: "100%",
+                    height: "71px",
+                    border: '1px solid #0fa453',
                     color: "white",
                     fontWeight: "900",
                     fontSize: "15px",
-                    marginBottom: "50px",
-                    border: '1px solid #0fa453'
+                    backgroundColor: "#0fa453",
+                    borderRadius: 0,
+                    // position: "absolute",
+                    // bottom: 0
                   }}
                 >
                   Save & Continue
                 </Button>
               </div>
             </div>
-            <div className="d-md-none">
-              <Button
-                onClick={onTicketCheckClick}
-                type="submit"
-                style={{
-                  marginTop: "50px",
-                  width: "100%",
-                  height: "71px",
-                  border: '1px solid #0fa453',
-                  color: "white",
-                  fontWeight: "900",
-                  fontSize: "15px",
-                  backgroundColor: "#0fa453",
-                  borderRadius: 0,
-                  // position: "absolute",
-                  // bottom: 0
-                }}
-              >
-                Save & Continue
-              </Button>
-            </div>
-          </div>
 
-          <div className="d-none d-md-block">
-            <Footer />
-          </div>
-          </>:<>
-          <ToastContainer />
-        <div className="d-none d-md-block">
-
-          <Container style={{ width: "75%", marginTop: "50px" }}>
-            <div>
-              <Formik
-                validationSchema={schema}
-                onSubmit={(values) => displayRazorpaysss(values)}
-                initialValues={{
-                  name: '',
-                  email: '',
-                  number: '',
-                }}
-              >
-                {({
-                  handleSubmit,
-                  handleChange,
-                  handleBlur,
-                  values,
-                  touched,
-                  isValid,
-                  errors,
-                }) => (
-                  <Form noValidate onSubmit={handleSubmit} style={{ marginLeft: "207px", marginBottom: "50px" }}>
-                    <Row>
-                      <Col xs={12} md={8}>
-                        <Form.Group
-                          md="3"
-                          controlId="validationFormik101"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Name</Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="name"
-                            placeholder="Enter name"
-                            value={values.name}
-                            onChange={handleChange}
-                            isInvalid={!!errors.name}
-                          />
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.name}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                      <Col xs={12} md={8}>
-                        <Form.Group
-
-                          md="3"
-                          controlId="validationFormik102"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Email</Form.Label>
-                          <Form.Control
-                            type="email"
-                            name="email"
-                            placeholder="Enter email"
-                            value={values.email}
-                            onChange={handleChange}
-                            isInvalid={!!errors.email}
-                          />
-
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.email}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                      <Col xs={12} md={8}>
-                        <Form.Group
-
-                          md="3"
-                          controlId="validationFormik103"
-                          className="position-relative mb-3"
-
-                        >
-                          <Form.Label>Whatsapp Number</Form.Label>
-                          <Form.Control
-                            type="number"
-                            placeholder="Enter whatsapp number"
-                            name="number"
-                            value={values.number}
-                            onChange={handleChange}
-                            isInvalid={!!errors.number}
-                          />
-
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.number}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <Button type="submit" className="locationpass-btn mt-3 mb-5" style={{ margin: " 0% 22% 0%", width: "33%" }} >PAYMENT</Button>
-                  </Form>
-                )}
-              </Formik>
-            </div>
-          </Container>
-          <Footer />
-        </div>
-
-        {/*mobile-view*/}
-
-        <div fluid className="d-md-none">
-          <Container style={{ width: "80%", marginTop: "50px" }}>
-            <div>
-              <Formik
-                validationSchema={schema}
-                onSubmit={(values) => displayRazorpaysss(values)}
-                initialValues={{
-                  name: '',
-                  email: '',
-                  number: '',
-                }}
-              >
-                {({
-                  handleSubmit,
-                  handleChange,
-                  handleBlur,
-                  values,
-                  touched,
-                  isValid,
-                  errors,
-                }) => (
-                  <Form noValidate onSubmit={handleSubmit} style={{ marginBottom: "40px" }}>
-                    <Row>
-                      <Col xs={12} md={8}>
-                        <Form.Group
-                          md="3"
-                          controlId="validationFormik101"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Name</Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="name"
-                            placeholder="Enter name"
-                            value={values.name}
-                            onChange={handleChange}
-                            isInvalid={!!errors.name}
-                          />
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.name}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                      <Col xs={12} md={8}>
-                        <Form.Group
-
-                          md="3"
-                          controlId="validationFormik102"
-                          className="position-relative mb-3"
-                        >
-                          <Form.Label>Email</Form.Label>
-                          <Form.Control
-                            type="email"
-                            name="email"
-                            placeholder="Enter email"
-                            value={values.email}
-                            onChange={handleChange}
-                            isInvalid={!!errors.email}
-                          />
-
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.email}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                      <Col xs={12} md={8}>
-                        <Form.Group
-
-                          md="3"
-                          controlId="validationFormik103"
-                          className="position-relative mb-3"
-
-                        >
-                          <Form.Label>Whatsapp Number</Form.Label>
-                          <Form.Control
-                            type="number"
-                            placeholder="Enter whatsapp number"
-                            name="number"
-                            value={values.number}
-                            onChange={handleChange}
-                            isInvalid={!!errors.number}
-                          />
-
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.number}
-                          </Form.Control.Feedback>
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                    <div className="pay-div">
-                      <Button
-                        variant="primary"
-                        size="lg"
-                        type="submit"
-                        style={{
-                          marginTop: "15px",
-                          fontWeight: "600",
-                          fontSize: "20px",
-                          width: "100%",
-                          backgroundColor: "#0FA453",
-                        }}
-                      >
-                        PAYMENT
-                      </Button>
-
-
-                    </div>
-
-                  </Form>
-                )}
-              </Formik>
-            </div>
-          </Container>
-
-        </div>
-          
-          
-          </> }
-          
-        </>
-      ) : show == 3 ? 
-          (<>
             <div className="d-none d-md-block">
-              <Container style={{ width: "70%", paddingTop: "20px" }}>
-                <Row>
-                  <Col>
-                    <div style={{ marginTop: "15px" }}>
-                      <img src={congo} alt="" style={{ height: "500px" }} />
-                    </div>
-                  </Col>
-                  <Col>
-                    <div style={{ paddingTop: "60px" }}>
-                      <div style={{ marginBottom: "20px" }}>
-                        <h3 style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</h3>
-                        <span style={{ color: "black" }}>
-                          Your booking has been confirmed
-                        </span>
+              <Footer />
+            </div>
+          </> : <>
+            <ToastContainer />
+            <div className="d-none d-md-block">
 
-                        <h3 style={{ fontWeight: "bolder" }}>Order ID</h3>
-                        <span style={{ color: "black", marginBottom: "50px" }}>
-                          {dmpass_id}
-                        </span>
-                      </div>
+              <Container style={{ width: "75%", marginTop: "50px" }}>
+                <div>
+                  <Formik
+                    validationSchema={schema}
+                    onSubmit={(values) => displayRazorpaysss(values)}
+                    initialValues={{
+                      name: '',
+                      email: '',
+                      number: '',
+                    }}
+                  >
+                    {({
+                      handleSubmit,
+                      handleChange,
+                      handleBlur,
+                      values,
+                      touched,
+                      isValid,
+                      errors,
+                    }) => (
+                      <Form noValidate onSubmit={handleSubmit} style={{ marginLeft: "207px", marginBottom: "50px" }}>
+                        <Row>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+                              md="3"
+                              controlId="validationFormik101"
+                              className="position-relative mb-3"
+                            >
+                              <Form.Label>Name</Form.Label>
+                              <Form.Control
+                                type="text"
+                                name="name"
+                                placeholder="Enter name"
+                                value={values.name}
+                                onChange={handleChange}
+                                isInvalid={!!errors.name}
+                              />
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.name}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+
+                              md="3"
+                              controlId="validationFormik102"
+                              className="position-relative mb-3"
+                            >
+                              <Form.Label>Email</Form.Label>
+                              <Form.Control
+                                type="email"
+                                name="email"
+                                placeholder="Enter email"
+                                value={values.email}
+                                onChange={handleChange}
+                                isInvalid={!!errors.email}
+                              />
+
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.email}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+
+                              md="3"
+                              controlId="validationFormik103"
+                              className="position-relative mb-3"
+
+                            >
+                              <Form.Label>Whatsapp Number</Form.Label>
+                              <Form.Control
+                                type="number"
+                                placeholder="Enter whatsapp number"
+                                name="number"
+                                value={values.number}
+                                onChange={handleChange}
+                                isInvalid={!!errors.number}
+                              />
+
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.number}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                        <Button type="submit" className="locationpass-btn mt-3 mb-5" style={{ margin: " 0% 22% 0%", width: "33%" }} >PAYMENT</Button>
+                      </Form>
+                    )}
+                  </Formik>
+                </div>
+              </Container>
+              <Footer />
+            </div>
+
+            {/*mobile-view*/}
+
+            <div fluid className="d-md-none">
+              <Container style={{ width: "80%", marginTop: "50px" }}>
+                <div>
+                  <Formik
+                    validationSchema={schema}
+                    onSubmit={(values) => displayRazorpaysss(values)}
+                    initialValues={{
+                      name: '',
+                      email: '',
+                      number: '',
+                    }}
+                  >
+                    {({
+                      handleSubmit,
+                      handleChange,
+                      handleBlur,
+                      values,
+                      touched,
+                      isValid,
+                      errors,
+                    }) => (
+                      <Form noValidate onSubmit={handleSubmit} style={{ marginBottom: "40px" }}>
+                        <Row>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+                              md="3"
+                              controlId="validationFormik101"
+                              className="position-relative mb-3"
+                            >
+                              <Form.Label>Name</Form.Label>
+                              <Form.Control
+                                type="text"
+                                name="name"
+                                placeholder="Enter name"
+                                value={values.name}
+                                onChange={handleChange}
+                                isInvalid={!!errors.name}
+                              />
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.name}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+
+                              md="3"
+                              controlId="validationFormik102"
+                              className="position-relative mb-3"
+                            >
+                              <Form.Label>Email</Form.Label>
+                              <Form.Control
+                                type="email"
+                                name="email"
+                                placeholder="Enter email"
+                                value={values.email}
+                                onChange={handleChange}
+                                isInvalid={!!errors.email}
+                              />
+
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.email}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+
+                              md="3"
+                              controlId="validationFormik103"
+                              className="position-relative mb-3"
+
+                            >
+                              <Form.Label>Whatsapp Number</Form.Label>
+                              <Form.Control
+                                type="number"
+                                placeholder="Enter whatsapp number"
+                                name="number"
+                                value={values.number}
+                                onChange={handleChange}
+                                isInvalid={!!errors.number}
+                              />
+
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.number}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                        <div className="pay-div">
+                          <Button
+                            variant="primary"
+                            size="lg"
+                            type="submit"
+                            style={{
+                              marginTop: "15px",
+                              fontWeight: "600",
+                              fontSize: "20px",
+                              width: "100%",
+                              backgroundColor: "#0FA453",
+                            }}
+                          >
+                            PAYMENT
+                          </Button>
+
+
+                        </div>
+
+                      </Form>
+                    )}
+                  </Formik>
+                </div>
+              </Container>
+
+            </div>
+
+
+          </>}
+
+        </>
+      ) : show == 3 ?
+        (<>
+          <div className="d-none d-md-block">
+            <Container style={{ width: "70%", paddingTop: "20px" }}>
+              <Row>
+                <Col>
+                  <div style={{ marginTop: "15px" }}>
+                    <img src={congo} alt="" style={{ height: "500px" }} />
+                  </div>
+                </Col>
+                <Col>
+                  <div style={{ paddingTop: "60px" }}>
+                    <div style={{ marginBottom: "20px" }}>
+                      <h3 style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</h3>
+                      <span style={{ color: "black" }}>
+                        Your booking has been confirmed
+                      </span>
+
+                      <h3 style={{ fontWeight: "bolder" }}>Order ID</h3>
+                      <span style={{ color: "black", marginBottom: "50px" }}>
+                        {dmpass_id}
+                      </span>
+                    </div>
+                    <div>
                       <div>
-                        {/* <div>
                         <Button
                           className="btn btn-success"
                           style={{
@@ -1566,75 +1525,75 @@ function SteperDmpass(shows, ...props) {
                           />
                           <span> Whatsapp Link</span>
                         </Button>
-                      </div> */}
+                      </div> 
 
-                        <div>
-                          <Button
-                            style={{
-                              width: "186px",
-                              textAlign: "center",
-                              height: "52px",
-                              borderRadius: "9px",
-                              backgroundColor: " #FF4A68",
-                              fontWeight: "bold",
-                              marginBottom: "20px",
-                            }}
-                          >
-                            {/* <Link
-                            to={`/dm-detail/${dmpass_id}`}
-                            style={{ textDecoration: "none" }}
-                          > */}
-                            Download E-ticket
-                            {/* </Link> */}
-                          </Button>
-                        </div>
-
-                        <div>
-                          <Button style={{
+                      <div>
+                        <Button
+                          style={{
                             width: "186px",
                             textAlign: "center",
                             height: "52px",
                             borderRadius: "9px",
-                            backgroundColor: "",
+                            backgroundColor: " #FF4A68",
                             fontWeight: "bold",
-                            marginBottom: "20px"
+                            marginBottom: "20px",
                           }}
+                        >
+                          {/* <Link
+                            to={`/dm-detail/${dmpass_id}`}
+                            style={{ textDecoration: "none" }}
+                          > */}
+                          Download E-ticket
+                          {/* </Link> */}
+                        </Button>
+                      </div>
+
+                      <div>
+                        <Button style={{
+                          width: "186px",
+                          textAlign: "center",
+                          height: "52px",
+                          borderRadius: "9px",
+                          backgroundColor: "",
+                          fontWeight: "bold",
+                          marginBottom: "20px"
+                        }}
+                        >
+                          <Link
+                            to={`/dm-detail/${dmpass_id}`}
+                            style={{ textDecoration: "none", color: "#fff" }}
                           >
-                            <Link
-                              to={`/dm-detail/${dmpass_id}`}
-                              style={{ textDecoration: "none", color: "#fff" }}
-                            >
-                              View Ticket
-                            </Link>
-                          </Button>
-                        </div>
-                        <div>
-                          <Button
-                            onClick={() => history.push("/")}
-                            style={{
-                              width: "186px",
-                              textAlign: "center",
-                              height: "52px",
-                              borderRadius: "9px",
-                              backgroundColor: "#864BD8",
-                              fontWeight: "bold",
-                              marginBottom: "20px",
-                            }}
-                          >
-                            Back to Home
-                          </Button>
-                        </div>
+                            View Ticket
+                          </Link>
+                        </Button>
+                      </div>
+                      <div>
+                        <Button
+                          onClick={() => history.push("/")}
+                          style={{
+                            width: "186px",
+                            textAlign: "center",
+                            height: "52px",
+                            borderRadius: "9px",
+                            backgroundColor: "#864BD8",
+                            fontWeight: "bold",
+                            marginBottom: "20px",
+                          }}
+                        >
+                          Back to Home
+                        </Button>
                       </div>
                     </div>
-                  </Col>
-                </Row>
-              </Container>
-              <Footer />
-            </div>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+            <Footer />
+          </div>
 
-            <div className="d-md-none">
-              <Container style={{ width: "", paddingTop: "20px" }}>
-                {/* <div>
+          <div className="d-md-none">
+            <Container style={{ width: "", paddingTop: "20px" }}>
+              {/* <div>
                   <div style={{ textAlign: "center", marginTop: "15px" }}>
                     <span style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</span>
                     <br />
@@ -1751,24 +1710,24 @@ function SteperDmpass(shows, ...props) {
 
                   </Col>
                 </div> */}
-                <Col xs={12} md={6}>
-                  <div style={{ marginTop: "" }}>
-                    <img
-                      src={congo}
-                      alt=""
-                      style={{ width: "100%", height: "" }}
-                    />
-                  </div>
-                </Col>
-                <Col xs={12} md={6}>
-                  <div style={{ marginBottom: "20px", textAlign: "center" }}>
-                    <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
-                    <span style={{ color: "black", marginBottom: "50px" }}>
-                      {dmpass_id}
-                    </span>
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    {/* <div>
+              <Col xs={12} md={6}>
+                <div style={{ marginTop: "" }}>
+                  <img
+                    src={congo}
+                    alt=""
+                    style={{ width: "100%", height: "" }}
+                  />
+                </div>
+              </Col>
+              <Col xs={12} md={6}>
+                <div style={{ marginBottom: "20px", textAlign: "center" }}>
+                  <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
+                  <span style={{ color: "black", marginBottom: "50px" }}>
+                    {dmpass_id}
+                  </span>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  {/* <div>
                       <Button
                         className="btn btn-success"
                         style={{
@@ -1790,62 +1749,62 @@ function SteperDmpass(shows, ...props) {
                         <span> Whatsapp Link</span>
                       </Button>
                     </div> */}
-                    <div>
-                      <Button style={{
+                  <div>
+                    <Button style={{
+                      width: "186px",
+                      textAlign: "center",
+                      height: "52px",
+                      borderRadius: "9px",
+                      backgroundColor: "",
+                      fontWeight: "bold",
+                      marginBottom: "20px"
+                    }}
+                    ><Link
+                      to={`/dm-detail/${dmpass_id}`}
+                      style={{ textDecoration: "none", color: "#fff" }}
+                    >
+                        View Ticket
+                      </Link></Button>
+                  </div>
+                  <div>
+                    <Button
+                      style={{
                         width: "186px",
                         textAlign: "center",
                         height: "52px",
                         borderRadius: "9px",
-                        backgroundColor: "",
+                        backgroundColor: " #FF4A68",
                         fontWeight: "bold",
-                        marginBottom: "20px"
+                        marginBottom: "20px",
                       }}
-                      ><Link
-                        to={`/dm-detail/${dmpass_id}`}
-                        style={{ textDecoration: "none", color: "#fff" }}
-                      >
-                          View Ticket
-                        </Link></Button>
-                    </div>
-                    <div>
-                      <Button
-                        style={{
-                          width: "186px",
-                          textAlign: "center",
-                          height: "52px",
-                          borderRadius: "9px",
-                          backgroundColor: " #FF4A68",
-                          fontWeight: "bold",
-                          marginBottom: "20px",
-                        }}
-                      >
-                        Download E-ticket
-                      </Button>
-                    </div>
-
-                    <div>
-                      <Button
-                        onClick={() => history.push("/")}
-                        style={{
-                          width: "186px",
-                          textAlign: "center",
-                          height: "52px",
-                          borderRadius: "9px",
-                          backgroundColor: "#864BD8",
-                          fontWeight: "bold",
-                          marginBottom: "20px",
-                        }}
-                      >
-                        Back to Home
-                      </Button>
-                    </div>
+                    >
+                      Download E-ticket
+                    </Button>
                   </div>
-                </Col>
-              </Container>
-            </div>
+
+                  <div>
+                    <Button
+                      onClick={() => history.push("/")}
+                      style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: "#864BD8",
+                        fontWeight: "bold",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      Back to Home
+                    </Button>
+                  </div>
+                </div>
+              </Col>
+            </Container>
+          </div>
 
 
-          </>) : <></>}
+        </>) : <></>}
 
     </>
   );
