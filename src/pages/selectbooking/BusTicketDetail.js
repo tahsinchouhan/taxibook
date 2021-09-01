@@ -75,6 +75,10 @@ function BusBookingDetail() {
 
   }
 
+  const printPdf = () => {
+    window.print();
+  }
+
   return (
     <>
       <div className="d-none d-md-block">
@@ -140,7 +144,7 @@ function BusBookingDetail() {
                 </Row>
               </Col>
             </Row>
-            
+
             <Row>
               <Col className="dm__title" xs={12}>
                 TRAVELLER DETAILS
@@ -326,7 +330,23 @@ function BusBookingDetail() {
                     </div>
                   </div>
                 </div>
+
               </Col>
+              
+              <Col className="dm__entry_div" xs={12}>
+                <Button onClick={() => printPdf()} style={{
+                  width: "186px",
+                  textAlign: "center",
+                  height: "52px",
+                  borderRadius: "9px",
+                  border:"none",
+                  backgroundColor: "#0FA453",
+                  fontWeight: "bold",
+                  marginTop: "20px",
+                  marginBottom: "20px"
+                }}>Print Ticket</Button>
+              </Col>
+
             </Row>
 
           </div>
@@ -484,23 +504,23 @@ function BusBookingDetail() {
                 </div>
               </div>
               <div className="dm__entry_card">
-                  <span
-                    style={{
-                      color: "black",
-                      fontSize: "15px",
-                      fontWeight: "bold",
-                    }}
+                <span
+                  style={{
+                    color: "black",
+                    fontSize: "15px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {/* Bus Details */}
+                </span>
+                <div>
+                  <div
+                    className="rajratan-train p-2"
+                    style={{ float: "", backgroundColor: "#F8F8F8" }}
                   >
-                    {/* Bus Details */}
-                  </span>
-                  <div>
-                    <div
-                      className="rajratan-train p-2"
-                      style={{ float: "", backgroundColor: "#F8F8F8" }}
-                    >
-                      <div style={{}}>
-                        <img src={city1} />
-                        {/*  <span
+                    <div style={{}}>
+                      <img src={city1} />
+                      {/*  <span
                           style={{
                             color: "grey",
                             padding: "10px",
@@ -509,71 +529,71 @@ function BusBookingDetail() {
                         >
                           2 Stops
                         </span> */}
-                        <span
-                          style={{
-                            whiteSpace: "nowrap",
-                            fontSize: "13px",
-                            fontWeight: "bolder",
-                            fontFamily: "sans-serif",
-                          }}
-                        >
-                          {" "} {apiData[0]?.trips_id?.trip_name}
-                        </span>
-                        <br />
-                        <span
-                          style={{
-                            fontWeight: "bolder",
-                            fontFamily: "sans-serif",
-                            fontSize: "13px",
-                          }}
-                        >
-                          {apiData[0]?.trips_id?.departure_time} -{" "}
-                          {apiData[0]?.trips_id?.estimated_time_of_arrival}
-                        </span>
-                        <br />
-                        <div style={{ marginLeft: "-8px" }}>
-                          <span
-                            style={{
-                              marginRight: "20px",
-                              color: "grey",
-                              padding: "12px",
-                              fontFamily: "sans-serif",
-                            }}
-                          >
-                            {apiData[0]?.trips_id?.duration_of_travel}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="d-flex p-1">
-                        <img
-                          src={bus1}
-                          alt="bus"
-                          style={{ height: "20px", paddingRight: "10px" }}
-                        />
-                        <span
-                          style={{
-                            whiteSpace: "nowrap",
-                            fontSize: "13px",
-                            fontWeight: "bolder",
-                            fontFamily: "sans-serif",
-                          }}
-                        >
-                          {apiData[0]?.trips_id?.route?.vehical?.registration_number}
-                        </span>
-                      </div>
                       <span
-                        className="train-sleeper"
                         style={{
                           whiteSpace: "nowrap",
                           fontSize: "13px",
+                          fontWeight: "bolder",
+                          fontFamily: "sans-serif",
                         }}
                       >
-                        {/* Volvo Multi-Axle Sleeper A/C (2+1) */}
-                        Bus 30 Seater
+                        {" "} {apiData[0]?.trips_id?.trip_name}
+                      </span>
+                      <br />
+                      <span
+                        style={{
+                          fontWeight: "bolder",
+                          fontFamily: "sans-serif",
+                          fontSize: "13px",
+                        }}
+                      >
+                        {apiData[0]?.trips_id?.departure_time} -{" "}
+                        {apiData[0]?.trips_id?.estimated_time_of_arrival}
+                      </span>
+                      <br />
+                      <div style={{ marginLeft: "-8px" }}>
+                        <span
+                          style={{
+                            marginRight: "20px",
+                            color: "grey",
+                            padding: "12px",
+                            fontFamily: "sans-serif",
+                          }}
+                        >
+                          {apiData[0]?.trips_id?.duration_of_travel}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="d-flex p-1">
+                      <img
+                        src={bus1}
+                        alt="bus"
+                        style={{ height: "20px", paddingRight: "10px" }}
+                      />
+                      <span
+                        style={{
+                          whiteSpace: "nowrap",
+                          fontSize: "13px",
+                          fontWeight: "bolder",
+                          fontFamily: "sans-serif",
+                        }}
+                      >
+                        {apiData[0]?.trips_id?.route?.vehical?.registration_number}
                       </span>
                     </div>
+                    <span
+                      className="train-sleeper"
+                      style={{
+                        whiteSpace: "nowrap",
+                        fontSize: "13px",
+                      }}
+                    >
+                      {/* Volvo Multi-Axle Sleeper A/C (2+1) */}
+                      Bus 30 Seater
+                    </span>
                   </div>
                 </div>
+              </div>
             </Col>
             {/* <Col className="dm__footer_div mobile" xs={12}>
               <div className="dm__footer_card">
@@ -585,6 +605,19 @@ function BusBookingDetail() {
                 <Button className="dm__footer_card_body">VIEW</Button>
               </div>
             </Col> */}
+             <Col className="dm__entry_div" xs={12}>
+                <Button onClick={() => printPdf()} style={{
+                  width: "186px",
+                  textAlign: "center",
+                  height: "52px",
+                  borderRadius: "9px",
+                  border:"none",
+                  backgroundColor: "#0FA453",
+                  fontWeight: "bold",
+                  marginTop: "20px",
+                  marginBottom: "20px"
+                }}>Print Ticket</Button>
+              </Col>
           </Row>
         ) : loading == false ? (
           <h1 style={{ height: "96vh", textAlign: "center" }}>No data found</h1>

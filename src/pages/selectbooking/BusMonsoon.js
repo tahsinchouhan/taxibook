@@ -15,7 +15,7 @@ function BusMonsoon() {
   const [seats, setSeats] = useState([]);
   const { tripList: trips, route_id, routeData } = useSelector(state => state.busReducer)
 
-console.log("trips liSTTTTT",trips);
+  console.log("trips liSTTTTT", trips);
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -25,7 +25,7 @@ console.log("trips liSTTTTT",trips);
 
   useEffect(() => {
     console.log("ddd", routeData);
-    
+
     // seatAvailable();
   }, [routeData]);
   // const getTrips = () => {
@@ -51,7 +51,7 @@ console.log("trips liSTTTTT",trips);
     history.push("/busdetail");
   };
 
- 
+
   // const seatAvailable = () => {
   //   fetch("http://15.206.92.158/api/v1/trips/list", {
   //     method: "GET",
@@ -287,7 +287,7 @@ console.log("trips liSTTTTT",trips);
               </div>
             </Col>
           </div>
-          <div style={{ marginLeft: "15px" }}>
+          <div >
             {/* <Container sty={{ marginLeft: "10px" }}>
               <div>
                 <span
@@ -458,11 +458,12 @@ console.log("trips liSTTTTT",trips);
               (trips?.length > 0)
                 ?
                 trips?.map((item, i) =>
-                  <React.Fragment key={i}>
+                <>
+                  <div key={i}>
                     <Container>
                       <Row>
                         <Col>
-                          <div className="rajratan-train" style={{ float: "" }} onClick={() => onClickTrain(item._id)}>
+                          <div className="rajratan-train" style={{ float: "" }} >
                             <div style={{}}>
                               <img src={city1} />
                               <span
@@ -560,7 +561,7 @@ console.log("trips liSTTTTT",trips);
                                   <span
                                     style={{ fontSize: "22px", fontWeight: "bolder" }}
                                   >
-                                  {item?.seat_avilable}
+                                    {item?.seat_avilable}
                                   </span>
                                   <span
                                     style={{ fontSize: "12px" }}
@@ -573,13 +574,21 @@ console.log("trips liSTTTTT",trips);
                           </Row>
                         </Col>
                       </Row>
-                    </Container><hr />
-                  </React.Fragment>
+
+                    </Container>
+                    <hr />
+
+                  </div>
+                   <Button className="locationpass-btn"  onClick={() => onClickTrain(item._id)} >
+                   Continue
+                 </Button>
+                 </>
                 )
                 :
                 null
             }
           </div>
+         
           {/* <Footer /> */}
         </div>
       </div>

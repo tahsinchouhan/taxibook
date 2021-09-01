@@ -76,7 +76,7 @@ function App() {
             <Route exact path='/busconfirmation' component={BusConfirmation} />
             <Route exact path='/ buscard' component={BusCard} />
             <Route exact path='/checkoutpage' component={CheckoutPage} />
-            <Route exact path='/CongratulationPage' component={CongratulationPage} />
+            <Route exact path='/congratulation-page' component={CongratulationPage} />
             <Route exact path='/add-form' component={AddForm} />
             <Route exact path='/CongratulationPage' component={CongratulationPage} />
             <Route exact path='/ratancard' component={RatanCard} />
