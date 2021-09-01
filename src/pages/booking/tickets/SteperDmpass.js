@@ -106,9 +106,8 @@ function SteperDmpass(shows, ...props) {
       basic_details: travellers,
       vehical_details: vehicles,
     });
-    dispatch(createDmPass({ ...dmData, basic_details: travellers, vehical_details: vehicles }))
+    // dispatch(createDmPass({ ...dmData, basic_details: travellers, vehical_details: vehicles }))
     setShow(1);
-
   };
 
   // const onTicketCheckClick = () => {
@@ -127,6 +126,50 @@ function SteperDmpass(shows, ...props) {
   //   localStorage.setItem("dm_pass_id", dmData.dmpass_id)
 
   // };
+  // };
+  // const onTicketCheckClick = () => {
+  //   console.log("object");
+  //   //history.push("./ ticket_checkout");
+  //   dispatch(
+  //     createDmPass({
+  //       ...dmData,
+  //       basic_details: travellers,
+  //       vehical_details: vehicles,
+  //       locations: locServ,
+  //       total_charges: tot_charges,
+  //     })
+  //   );
+  //   setShow(3);
+  //   localStorage.setItem("dm_pass_id", dmData.dmpass_id)
+
+  // };
+  const onTicketCheckClick = () => {
+    console.log("object");
+    axios.post(`${API_PATH}/api/v1/entrypass/pay`, {
+      amount: tot_charges,
+    })
+      // .then((res) => res.json())
+      .then((result) => {
+        console.log("dhshsdh", result);
+        setData(result.data);
+
+        // dispatch(
+        //   createDmPass({
+        //     ...dmData,
+        //     basic_details: travellers,
+        //     vehical_details: vehicles,
+        //     locations: locServ,
+        //     total_charges: tot_charges,
+        //   })
+        // );
+        setShow(3);
+
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+  };
   const onClickBack = () => {
     console.log("object");
     history.push("./tickets");
@@ -387,41 +430,14 @@ function SteperDmpass(shows, ...props) {
     ])
   }
   const [data, setData] = useState();
-  const onTicketCheckClick = () => {
-    console.log("object");
-    axios.post(`${API_PATH}/api/v1/entrypass/pay`, {
-      amount: tot_charges,
-    })
-      // .then((res) => res.json())
-      .then((result) => {
-        console.log("dhshsdh", result);
-        setData(result.data);
-        // dispatch(
-        //   createDmPass({
-        //     ...dmData,
-        //     basic_details: travellers,
-        //     vehical_details: vehicles,
-        //     locations: locServ,
-        //     total_charges: tot_charges,
-        //   })
-        // );
-        setShow(3);
-       localStorage.setItem("dm_pass_id", dmData.dmpass_id)
-    
-      })
-      .catch((e) => {
-        console.log(e);
-      });
 
-  };
 
-  
+
   const onLocationsClick = () => {
     console.log("object");
     setShow(2);
     return shows;
     // history.push("/locations");
-
   };
 
 
@@ -493,7 +509,7 @@ function SteperDmpass(shows, ...props) {
 
           //   })
           // );
-       
+
         }
       },
       prefill: {
@@ -542,65 +558,65 @@ function SteperDmpass(shows, ...props) {
         <div>
 
           <Container className="dmpass-form mt-4">
-            <AvForm onSubmit={onDmPassClick}>
-              <Row className="dmpassData">
-                <h3
-                  style={{
-                    fontWeight: "bolder",
-                    fontSize: "20px",
-                    textAlign: "center",
-                  }}
-                >
-                  Book your Traveller Pass
-                </h3>
-                <form onSubmit={(e) => e.preventDefault()}>
-                  <div className="form-row"></div>
+          <AvForm onSubmit={onDmPassClick}>
+            <Row className="dmpassData">
+              <h3
+                style={{
+                  fontWeight: "bolder",
+                  fontSize: "20px",
+                  textAlign: "center",
+                }}
+              >
+                Book your Traveller Pass
+              </h3>
+              <form onSubmit={(e) => e.preventDefault()}>
+                <div className="form-row"></div>
 
-                  <div className="form-row">
-                    <div className="form-group mt-4 ">
-                      <label for="inputState">Number of Travellers</label>
-                      <select
-                        id="inputState"
-                        className="form-control pass_input"
-                        onChange={handleTravellerCount}
-                      >
-                        <option selected>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                      </select>
-                    </div>
-                    <div className="form-group mt-4 ">
-                      <label for="inputState">Days of Travel</label>
-                      <select
-                        id="inputState"
-                        className="form-control pass_input"
-                        onChange={handleDuration}
-                      >
-                        <option selected>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                      </select>
-                    </div>
-                    <div className="form-group mt-4 ">
-                      <label for="inputState">Number of Vehicles</label>
-                      <select id="inputState" className="form-control pass_input" onChange={(e) => handlerVehicles(e)}>
-                        <option selected>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                      </select>
-                    </div>
+                <div className="form-row">
+                  <div className="form-group mt-4 ">
+                    <label for="inputState">Number of Travellers</label>
+                    <select
+                      id="inputState"
+                      className="form-control pass_input"
+                      onChange={handleTravellerCount}
+                    >
+                      <option selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
                   </div>
-                  <Container className="p-0 pb-5">
-
+                  <div className="form-group mt-4 ">
+                    <label for="inputState">Days of Travel</label>
+                    <select
+                      id="inputState"
+                      className="form-control pass_input"
+                      onChange={handleDuration}
+                    >
+                      <option selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
+                  </div>
+                  <div className="form-group mt-4 ">
+                    <label for="inputState">Number of Vehicles</label>
+                    <select id="inputState" className="form-control pass_input" onChange={(e) => handlerVehicles(e)}>
+                      <option selected>1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                    </select>
+                  </div>
+                </div>
+                <Container className="p-0 pb-5">
+               
                     <Row>
                       <Col className="pt-3">
                         {/* <div style={{ width: "50%", float: "right" }}> */}
@@ -967,19 +983,21 @@ function SteperDmpass(shows, ...props) {
                         </Button>
                       </div> */}
                         {/* </div> */}
+
                       </Col>
                     </Row>
-
-                  </Container>
-                </form>
-              </Row>
-              <div style={{ "paddingBottom": "5px" }}>
-                <div className="mb-5">
-                  <Button type="submit" className="locationpass-btn">
-                    Save & Continue
-                  </Button>
-                </div>
-              </div>
+                   
+                  
+                </Container>
+              </form>
+            </Row>
+            <div style={{ paddingBottom: "5px", paddingTop: "5px",display:"flex",justifyContent:"center" }}>
+                      <div className="mb-5">
+                        <Button type="submit" className="locationpass-btn">
+                          Save & Continue
+                        </Button>
+                      </div>
+                    </div>
             </AvForm>
           </Container>
 
@@ -1247,7 +1265,7 @@ function SteperDmpass(shows, ...props) {
       ) : show == 3 ? <>
         <ToastContainer />
         <div className="d-none d-md-block">
-          
+
           <Container style={{ width: "75%", marginTop: "50px" }}>
             <div>
               <Formik
@@ -1464,8 +1482,8 @@ function SteperDmpass(shows, ...props) {
         </div>
 
       </>
-        : show == 4?
-        (<>
+        : show == 4 ?
+          (<>
             <div className="d-none d-md-block">
               <Container style={{ width: "70%", paddingTop: "20px" }}>
                 <Row>
@@ -1624,59 +1642,175 @@ function SteperDmpass(shows, ...props) {
                           <span> Whatsapp Link</span>
                         </Button>
                       </div>
-                      <div>
-                        <Button
-                          style={{
-                            width: "186px",
-                            textAlign: "center",
-                            height: "52px",
-                            borderRadius: "9px",
-                            backgroundColor: " #FF4A68",
-                            fontWeight: "bold",
-                            marginBottom: "20px",
-                          }}
+                    </div>
+                    <div>
+                      <Button style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: "",
+                        fontWeight: "bold",
+                        marginBottom: "20px"
+                      }}
+                      >
+                        <Link
+                          to={`/dm-detail/${dmpass_id}`}
+                          style={{ textDecoration: "none", color: "#fff" }}
                         >
-                          Download E-ticket
-                        </Button>
-                      </div>
-                      <div>
-                        <Button style={{
+                          View Ticket
+                        </Link>
+                      </Button>
+                    </div>
+
+                    <div>
+                      <Button
+                        style={{
                           width: "186px",
                           textAlign: "center",
                           height: "52px",
                           borderRadius: "9px",
-                          backgroundColor: "",
+                          backgroundColor: " #FF4A68",
                           fontWeight: "bold",
-                          marginBottom: "20px"
+                          marginBottom: "20px",
                         }}
-                        >Sent by Email</Button>
-                      </div>
-                      <div>
-                        <Button
-                          onClick={() => history.push("/")}
-                          style={{
-                            width: "186px",
-                            textAlign: "center",
-                            height: "52px",
-                            borderRadius: "9px",
-                            backgroundColor: "#864BD8",
-                            fontWeight: "bold",
-                            marginBottom: "20px",
-                          }}
-                        >
-                          Back to Home
-                        </Button>
-                      </div>
+                      >
+                        Download E-ticket
+                      </Button>
                     </div>
+                    <div>
+                      <Button style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: "",
+                        fontWeight: "bold",
+                        marginBottom: "20px"
+                      }}
+                      >Sent by Email</Button>
+                    </div>
+
+
+                    <div>
+                      <Button
+                        onClick={() => history.push("/")}
+                        style={{
+                          width: "186px",
+                          textAlign: "center",
+                          height: "52px",
+                          borderRadius: "9px",
+                          backgroundColor: "#864BD8",
+                          fontWeight: "bold",
+                          marginBottom: "20px",
+                        }}
+                      >
+                        Back to Home
+                      </Button>
+                    </div>
+                    {/* </div> */}
+
                   </Col>
                 </div>
+                <Col xs={12} md={6}>
+                  <div style={{ marginTop: "" }}>
+                    <img
+                      src={congo}
+                      alt=""
+                      style={{ width: "100%", height: "" }}
+                    />
+                  </div>
+                </Col>
+                <Col xs={12} md={6}>
+                  <div style={{ marginBottom: "20px", textAlign: "center" }}>
+                    <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
+                    <span style={{ color: "black", marginBottom: "50px" }}>
+                      {dmpass_id}
+                    </span>
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    {/* <div>
+                      <Button
+                        className="btn btn-success"
+                        style={{
+                          width: "186px",
+                          textAlign: "center",
+                          height: "52px",
+                          borderRadius: "9px",
+                          backgroundColor: "#0fa453",
+                          fontWeight: "bold",
+                          marginBottom: "20px",
+                        }}
+                      >
+                        <FaWhatsapp
+                          style={{
+                            fontWeight: "bold",
+                            fontSize: "30px",
+                          }}
+                        />
+                        <span> Whatsapp Link</span>
+                      </Button>
+                    </div> */}
+                    <div>
+                      <Button style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: "",
+                        fontWeight: "bold",
+                        marginBottom: "20px"
+                      }}
+                      ><Link
+                        to={`/dm-detail/${dmpass_id}`}
+                        style={{ textDecoration: "none", color: "#fff" }}
+                      >
+                          View Ticket
+                        </Link></Button>
+                    </div>
+                    <div>
+                      <Button
+                        style={{
+                          width: "186px",
+                          textAlign: "center",
+                          height: "52px",
+                          borderRadius: "9px",
+                          backgroundColor: " #FF4A68",
+                          fontWeight: "bold",
+                          marginBottom: "20px",
+                        }}
+                      >
+                        Download E-ticket
+                      </Button>
+                    </div>
+
+                    <div>
+                      <Button
+                        onClick={() => history.push("/")}
+                        style={{
+                          width: "186px",
+                          textAlign: "center",
+                          height: "52px",
+                          borderRadius: "9px",
+                          backgroundColor: "#864BD8",
+                          fontWeight: "bold",
+                          marginBottom: "20px",
+                        }}
+                      >
+                        Back to Home
+                      </Button>
+                    </div>
+                  </div>
+                </Col>
               </Container>
             </div>
 
-          </>
-        ):<></>}
+
+          </>) : <></>}
+
     </>
   );
 }
+
 
 export default SteperDmpass;

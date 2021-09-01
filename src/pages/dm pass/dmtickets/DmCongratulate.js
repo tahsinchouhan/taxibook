@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import mobile from "../../../assets/img/mobile.png";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function DmCongratulate() {
   const history = useHistory();
@@ -64,7 +65,7 @@ function DmCongratulate() {
                       <span> Whatsapp Link</span>
                     </Button>
                   </div> */}
-                  {/* <div>
+                  <div>
                     <Button
                       style={{
                         width: "186px",
@@ -75,10 +76,15 @@ function DmCongratulate() {
                         fontWeight: "bold",
                         marginBottom: "20px",
                       }}
-                    >
-                      Download E-ticket
+                    > 
+                    <Link
+                    to={`/dm-detail/${dmpass_id}`}
+                    style={{ textDecoration: "none", color:"#fff" }}
+                  >
+                  View Ticket
+                  </Link>
                     </Button>
-                  </div> */}
+                  </div>
 
                   {/* <div>
                    <Button style={{
@@ -90,7 +96,7 @@ function DmCongratulate() {
                     fontWeight:"bold",
                     marginBottom:"20px"
                   }} 
-                   >Sent by Email</Button>
+                   >Download E-ticket</Button>
                    </div> */}
 
                   <div>

@@ -77,13 +77,17 @@ const PackagesDetails = (props) => {
     fetch(API_PATH + `/api/v1/packages/${id}`)
       .then((response) => response.json())
       .then((res) => {
-        console.log(res.data);
+        console.log("fjjfjjdj",res.data);
         setPackages(res.data);
         setInclusions(res.data.inclusions);
         setExclusions(res.data.exclusions);
       })
       .catch((e) => console.log(e));
   };
+
+  const ontripAdviser = () => {
+    window.location.href(`https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`)
+  }
 
   return (
     <>
@@ -104,7 +108,7 @@ const PackagesDetails = (props) => {
       <Container>
         <div className="block pt-5">
           <h4 className="block__title">
-            <span>About</span> the Destination
+            <span>About</span> the Package
           </h4>
           <p className="pt-3">{packages.description}</p>
         </div>
@@ -210,33 +214,50 @@ const PackagesDetails = (props) => {
           <h4 className="block__title">
             <span>Contact Details</span>
           </h4>
-          <h5 className="price__title pt-3 mb-1">admin</h5>
-          <a className="code" href={`tel:7894512324`}>
-            +91 7894512324
+          <h5 className="price__title pt-3 mb-1">
+            {/* {packages.tour_operator_account.name} */}
+            </h5>
+          <a className="code"
+          //  href={`tel:${packages.tour_operator_account.mobile}`}
+           >
+            {/* {packages?.tour_operator_account.mobile} */}
           </a>
           <br />
-          <a className="code" href={`mailto:admintest@gmail.com`}>
-            admintest@gmail.com
+          <a className="code" 
+          // href={`mailto:${packages.tour_operator_account.email}`}
+          >
+            {/* {packages?.tour_operator_account.email} */}
           </a>
         </div>
       </Container>
       <div fluid className="d-none d-md-block">
         <div className="packeges_title">
-
           <span
+            className="packages_enquired"
+            style={{width: "200px", display: "inline-block" }}
+          // onClick={() => modalReviewHadler()}
+          >
+            <a className="code" 
+            // href={`tel:${packages.tour_operator_account.mobile}`}
+             style={{color:"#7868E6"}}>
+              Call Now
+            </a>
+          </span>
+
+          {/* <span
             className="packages_enquired"
             style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
             onClick={() => modalReviewHadler()}
           >
             Review
-          </span>
-          <span
+          </span> */}
+          {/* <span
             className="packages_enquired"
             style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
             onClick={() => modalEnquireHadler()}
           >
             Enquire  Now
-          </span>
+          </span> */}
           <span
             className="packages_enquired"
           >
@@ -260,7 +281,7 @@ const PackagesDetails = (props) => {
       </div>
       <div fluid className="d-md-none">
         <div className="packeges_title">
-          <div>
+          {/* <div>
             <span
               className="packages_enquired"
               style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
@@ -268,8 +289,8 @@ const PackagesDetails = (props) => {
             >
               Review
             </span>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <span
               className="packages_enquired"
               style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
@@ -277,14 +298,16 @@ const PackagesDetails = (props) => {
             >
               Enquire Now
             </span>
-          </div>
+          </div> */}
           <div>
             <span style={{ width: "200px", display: "inline-block" }}
               className="packages_enquired"
             >
               <a
                 className="" style={{ color: "rgb(120, 104, 230)", textDecoration: "none" }}
-                href={` https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`}
+                target="_blank"
+                onClick={ontripAdviser}
+              //href={`https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`}
               >
                 TripAdvisor reviews
               </a>

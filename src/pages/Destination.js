@@ -175,7 +175,7 @@ function Destination() {
                     <h6 className="packages__block-title mt-3 mb-0">
                       {item.title}
                     </h6>
-                    <small className="packages__block-subtitle mt-3 mb-0" style={{color:"#757575"}} >
+                    <small className="packages__block-subtitle mt-3 mb-2" style={{color:"#757575"}} >
                       {item.sub_title}
                     </small>
                   </div>

@@ -18,11 +18,14 @@ import Inform from "./Footer";
 import { NavLink, useHistory } from "react-router-dom";
 import TravellerCard from "./TravellerCard";
 import TravellerTicket from "./TravellerTicket";
+import TravellerTicketMobile from "./TravellerTicketMobile";
 import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
 import SearchFelid from "./SearchFelid";
 import { toast, ToastContainer } from 'react-toastify'
-import imageMobile from "../../assets/img/homepageMobie2.png"
+import { BsSearch } from "react-icons/bs";
+import manWithMobile from "../../assets/img/Saly-14@2x.png"
+import manWithMobile2 from "../../assets/img/Saly-14.png"
 
 function Saly() {
   const history = useHistory();
@@ -32,6 +35,7 @@ function Saly() {
     history.push("/select-booking");
   };
   const dmPassId = localStorage.getItem("dm_pass_id")
+
   const gotoTickets_sraech = () => {
     console.log("object");
     if (dmPassId) {
@@ -76,16 +80,20 @@ function Saly() {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1,
-      slidesToSlide: 1,
+      items: 2,
+      slidesToSlide: 2,
     },
   };
-const viewDetails =(value)=>{
-  history.push({
-    pathname: `/destination_details/${value.title}`,
-    id: value._id,
-  });
-}
+  const viewDetails = (value) => {
+    history.push({
+      pathname: `/destination_details/${value.title}`,
+      id: value._id,
+    });
+  }
+
+  const bookTickets = () => {
+    history.push('/select-booking')
+  }
   return (
     <>
       <Container
@@ -128,10 +136,10 @@ const viewDetails =(value)=>{
                   {destinations.length ? (
                     destinations.map((item, key) => {
                       return (
-                        <div key={key} onClick={()=>viewDetails(item)}>
+                        <div key={key} onClick={() => viewDetails(item)}>
                           <Image
                             draggable={false}
-                            // style={{ width: "95%", height: "100%" }}
+                            //  style={{ width: "150px", height: "150px" }}
                             src={item.upload_images}
                           />
                           <div
@@ -182,22 +190,26 @@ const viewDetails =(value)=>{
               <div style={{ paddingTop: "100px", textAlign: "center" }}>
                 <div className="bookings-div">
                   <h3>Bookings</h3>
-                  <p>Book tickets for buses,cabs and Traveller Passes</p>
+                  <p>Book tickets for Bus,Location wise Tickets and Traveller Passes</p>
                 </div>
                 <Button
                   className="makebooking-btn"
-                  style={{ backgroundColor: " #864BD8", color: "white" }}
+                  // style={{ backgroundColor: "#864BD8", color: "white" }}                 
                   onClick={onButtonclick}
                 >
-                  Make a Booking
+                  Step 1 - Book Travel Pass
                 </Button>
-              </div>
+
+              </div>              
+              {/* <div style={{position: "relative"}}>
+                <div className="men-image" style={{ width: "189px", height: "413px", position:"absolute", left:"38%" }}>
+                  <Image src={manWithMobile2} alt="men" />
+                </div>
+              </div> */}
             </Col>
-            <Col>
-              {/* <div className="men-image">
-                                <img src={men1} alt="" />
-                            </div> */}
-            </Col>
+            <Col></Col>
+
+
           </div>
         </div>
 
@@ -213,8 +225,22 @@ const viewDetails =(value)=>{
                   </p>
                 </div>
               </Col>
+              <Col sm={3} md={3}>
+                <div className="search__inner" style={{ marginTop: "33px", width: "199px" }} onClick={gotoTickets_sraech}>
+                  <div className="search__block">
+                    <div className="block__location">
+                      <label className="block--text code" >
+                        Search Tickets
+                      </label>
+                    </div>
+                    <button className="search__btn">
+                      <BsSearch color="white" size="25px" />
+                    </button>
+                  </div>
+                </div>
+              </Col>
 
-              <Col sm={6} md={6}>
+              <Col sm={3} md={3}>
                 <div className="viewbtn">
                   <Button
                     // variant="danger"
@@ -223,16 +249,21 @@ const viewDetails =(value)=>{
                       marginTop: "32px",
                       backgroundColor: "#FF814A",
                       borderRadius: "10px",
-                      border: "none", 
+                      border: "none",
                       width: "186px",
                       height: "53.63px"
                     }}
-                    onClick={gotoTickets_sraech}
+                    // onClick={gotoTickets_sraech}
+                    onClick={bookTickets}
+
                   >
-                    View your Tickets
+                    Book Tickets
                   </Button>
                 </div>
               </Col>
+
+
+
             </Row>
             <div className="pt-4">
               <Container>
@@ -242,8 +273,12 @@ const viewDetails =(value)=>{
                 <TravellerTicket />
               </Container>
             </div>
+
           </div>
         </Container>
+
+
+
         <ToastContainer
           position="top-right"
           autoClose={3000}
@@ -261,12 +296,12 @@ const viewDetails =(value)=>{
         <div fluid style={{ padding: 0, margin: 0 }}>
           <Row className=" saly_div pt-3 w-100">
             <Col xs={12} md={6}>
-              <div className="rocket-image" style={{textAlign:"center"}}>
+              <div className="rocket-image" style={{ textAlign: "center" }}>
                 <img src={Salyimg} alt="saly" style={{ width: "80%" }} />
               </div>
             </Col>
             <Col xs={12} md={6} className="pt-0">
-              <div style={{padding:"20px"}}>
+              <div style={{ padding: "20px" }}>
                 <div className="explore">
                   <h2 className="explore_div">Explore</h2>
                   <p>Check out the best tourism destinations around Bastar</p>
@@ -275,21 +310,26 @@ const viewDetails =(value)=>{
                   partialVisbile
                   itemClass="image-item"
                   responsive={responsive}
+                // removeArrowOnDeviceType={["tablet", "mobile"]}
                 >
+                  {/* <div>Item 1</div>
+                  <div>Item 2</div>
+                  <div>Item 3</div>
+                  <div>Item 4</div> */}
                   {destinations.length ? (
                     destinations.map((item, key) => {
                       return (
-                        <div key={key} onClick={()=>viewDetails(item)} >
+                        <div key={key} onClick={() => viewDetails(item)} >
                           <Image
                             draggable={false}
-                            style={{ width: "100%", height: "100%" }}
+                            style={{ width: "150px", paddingRight: "10px", borderRadius: "0px" }}
                             src={item.upload_images}
                           />
                           <div
                             style={{ color: "black" }}
                             className="package__trip"
                           >
-                            <h6 className="mt-3" style={{fontWeight:"bold"}}>{item.title}</h6>
+                            <h6 className="mt-3" style={{ fontWeight: "bold" }}>{item.title}</h6>
                           </div>
                         </div>
                       );
@@ -298,7 +338,7 @@ const viewDetails =(value)=>{
                     <h1></h1>
                   )}
                 </Carousel>
-                <div className="travel_home_btn mt-3 ">
+                <div className="travel_home_btn mt-4 mb-3 ">
                   <Button
                     onClick={() => history.push("/populardestinations")}
                     variant=""
@@ -323,23 +363,25 @@ const viewDetails =(value)=>{
             style={{
               backgroundColor: "black",
               color: "white",
-              height: "370px",
-            }}
-          >
+              height: "595px",
+            }} >
             <div style={{ flexDirection: "row" }}>
               <Col>
                 <div style={{ paddingTop: "100px", textAlign: "center" }}>
                   <div className="bookings-div">
                     <h3>Bookings</h3>
-                    <p>Book tickets for buses,cabs and Traveller Passes</p>
+                    <p>Book tickets for Bus,Location wise Tickets and Traveller Passes</p>
                   </div>
                   <Button
                     className="makebooking-btn"
-                    style={{ backgroundColor: " #864BD8", color: "white" }}
+                    // style={{ backgroundColor: "#0FA453", color: "white" }}
                     onClick={onButtonclick}
                   >
-                    Make a Booking
+                    Step 1 - Book Travel Pass
                   </Button>
+                  <div style={{ width: "266px", height: "487px", marginLeft: "42px" }}>
+                    <Image className="img-fluid" src={manWithMobile} />
+                  </div>
                 </div>
               </Col>
               <Col></Col>
@@ -362,7 +404,7 @@ const viewDetails =(value)=>{
                   </div>
                 </Col>
 
-                <Col sm={6} md={6}>
+                {/* <Col sm={6} md={6}>
                   <div className="viewbtn">
                     <Button
                       // variant="danger"                      
@@ -371,7 +413,7 @@ const viewDetails =(value)=>{
                         marginTop: "32px",
                         backgroundColor: "#FF814A",
                         borderRadius: "10px",
-                        border: "none", 
+                        border: "none",
                         width: "186px",
                         height: "53.63px"
                       }}
@@ -380,18 +422,98 @@ const viewDetails =(value)=>{
                       View your Tickets
                     </Button>
                   </div>
-                </Col>
+                </Col> */}
               </Row>
               <div className="pt-4">
                 <Container>
                   <h4>
                     {/* <b>Recent Tickets</b> */}
                   </h4>
-                  <TravellerTicket />
+                  <TravellerTicketMobile />
                 </Container>
               </div>
+              {/* <div className="viewbtn">
+                <Button
+                  // variant="danger"                      
+                  style={{
+                    cursor: "pointer",
+                    marginTop: "32px",
+                    backgroundColor: "#FF814A",
+                    borderRadius: "10px",
+                    border: "none",
+                    width: "186px",
+                    height: "53.63px"
+                  }}
+                  onClick={gotoTickets_sraech}
+                >
+                  Book Now
+                </Button>
+              </div> */}
             </div>
           </Container>
+          <div className="py-5 " style={{ backgroundColor: "black", color: "white" }}
+          >
+            <Container>
+              <div className="mb-5">
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <div>
+                    <h2 className="package__title">
+                      <span>Popular</span> Destinations
+                    </h2>
+                    <h6>
+                      The best tourist loactions across Bastar, rated and curated by
+                      travellers.
+                    </h6>
+                  </div>
+
+                  <h6
+                    style={{ cursor: "pointer" }}
+                    onClick={() => history.push("/populardestinations")}
+                    className="package__title pt-5"
+                  >
+                    View All
+                  </h6>
+                </div>
+              </div>
+              {destinations.length > 0 ? (
+                <Carousel
+                  ssr
+                  partialVisbile
+                  itemClass="image-item"
+                  responsive={responsive}
+                >
+                  {destinations.map((item, key) => {
+                    return (
+                      <div key={key} onClick={() => viewDetails(item)} >
+                        <Image
+                          draggable={false}
+                          //  style={{ width: "150px", height: "150px", paddingRight:"10px" }}
+                          src={item.upload_images}
+                        />
+
+                        <div style={{ color: "white" }} className="package__trip">
+                          <h6 className="packages__block-title mt-3 mb-0">
+                            {item.title}
+                          </h6>
+                          <small className="packages__block-subtitle">
+                            {item.sub_title}
+                          </small>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </Carousel>
+              ) : null}
+            </Container>
+          </div>
+
+
         </div>
         <ToastContainer
           position="top-right"

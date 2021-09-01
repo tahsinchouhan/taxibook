@@ -102,7 +102,7 @@ function Header() {
                 BOOKING
               </NavLink>
               <NavLink className="sidebar__navlink" to="/dmpass">
-                TRAVELLER PASS
+                TRAVEL PASS
               </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/tickets_sraech"> */}
               <NavLink className="sidebar__navlink" to="/tickets">
@@ -149,7 +149,7 @@ function Header() {
                 BOOKING
               </NavLink>
               <NavLink className="sidebar_item" to="/dmpass">
-                TRAVELLER PASS
+                TRAVEL PASS
               </NavLink>
               {/* <NavLink className="sidebar_item" to="/tickets_sraech"> */}
               <NavLink className="sidebar_item" to="/tickets">

@@ -96,7 +96,7 @@ function DmPass({ DmPassDetails }) {
                     <div style={{ marginBottom: "15px" }}>
                       <img src={ticket} alt="logo" />
                     </div>
-                    <span style={{ fontWeight: "bolder", color: "#0fa453", paddingTop: "50px" }}>Traveller Pass</span><br />
+                    <span style={{ fontWeight: "bolder", color: "#0fa453", paddingTop: "50px" }}>Travel Pass</span><br />
                     <span style={{ fontSize: "12px", padding: "10px" }}>
                       Get a pass for travellers, vehicles<br /> and duration of your travel
                     </span>
@@ -240,7 +240,7 @@ function DmPass({ DmPassDetails }) {
                 <div style={{ marginBottom: "15px" }}>
                   <img src={ticket} alt="" />
                 </div>
-                <span style={{ fontWeight: "bolder", color: "#0fa453", paddingTop: "50px" }}>Traveller Pass</span><br />
+                <span style={{ fontWeight: "bolder", color: "#0fa453", paddingTop: "50px" }}>Travel Pass</span><br />
                 <span style={{ fontSize: "12px", padding: "10px" }}>
                   Get a pass for travellers, vehicles<br /> and duration of your travel
                 </span>

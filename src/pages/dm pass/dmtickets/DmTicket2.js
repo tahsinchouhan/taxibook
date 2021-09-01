@@ -71,7 +71,7 @@ function DmTicket2({loading}) {
                     </div>
 
                     <h5 style={{ color: "#0fa453", margin: "10px", color: "black", fontWeight: "700" }}>
-                      Traveller Pass
+                      Travel Pass
                     </h5>
                     {/* <br /> */}
                     <span
@@ -208,7 +208,7 @@ function DmTicket2({loading}) {
                     </div>
 
                     <h5 style={{ color: "#0fa453", margin: "10px", color: "black", fontWeight: "700" }}>
-                      Traveller Pass
+                      Travel Pass
                     </h5>
                     <span
                       style={{
