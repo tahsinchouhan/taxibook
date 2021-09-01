@@ -10,7 +10,9 @@ import {
 
 const TripByRouteIdAsync = async (payload) =>
     await fetch(`${API_PATH}/api/v1/trips/list?route=${payload}`)
-        .then((response) => response.json())
+        .then((response) => response.json() )
+        // console.log("tripssssss", response);
+       
         .then((json) => json);
 
 
@@ -50,9 +52,11 @@ function* TripByRouteId({ payload }) {
 }
 
 function* createBusBooking({ payload }) {
-    console.log("pay",payload);   
+    console.log("pay",payload); 
+    const phone = JSON.parse(localStorage.getItem("mobile"))  
     try {
-        const busticket = yield call(createBusBookingRequest, payload);
+        const busticket = yield call(createBusBookingRequest, {...payload, mobile:phone});
+       
         yield put(setBookingId(busticket.data.booking_Id));
         console.log("bus",busticket);
     } catch (error) {

@@ -221,7 +221,7 @@ console.log("trips liSTTTTT",trips);
                               <span style={{ fontWeight: "bolder", fontFamily: "sans-serif", padding: "5px" }}>₹ {item?.ticket_price}</span>
                             </div>
                             <div className="train-seats d-flex justify-content-center flex-column" style={{ lineHeight: "12px", }}>
-                              <span style={{ fontSize: "22px", lineHeight: "27px", fontWeight: "bolder", display: "block" }}> {trips[0]?.seat_avilable}</span>
+                              <span style={{ fontSize: "22px", lineHeight: "27px", fontWeight: "bolder", display: "block" }}> {item?.seat_avilable}</span>
                               <span style={{ fontSize: "12px" }}>seats available</span>
                             </div>
                           </div>
@@ -560,7 +560,7 @@ console.log("trips liSTTTTT",trips);
                                   <span
                                     style={{ fontSize: "22px", fontWeight: "bolder" }}
                                   >
-                                   {trips[0]?.seat_avilable}
+                                  {item?.seat_avilable}
                                   </span>
                                   <span
                                     style={{ fontSize: "12px" }}
