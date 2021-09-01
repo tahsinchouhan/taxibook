@@ -51,6 +51,7 @@ const button_Data = [
 
 function SteperDmpass(shows, ...props) {
   const [show, setShow] = useState(0);
+  const [paymentCustom, setPaymentCustom] = useState(0);
 
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
   // const [data, setData] = useState();
@@ -163,6 +164,7 @@ function SteperDmpass(shows, ...props) {
         //   })
         // );
         setShow(3);
+        setPaymentCustom(1)
 
       })
       .catch((e) => {
@@ -402,9 +404,9 @@ function SteperDmpass(shows, ...props) {
   const [vehicle, setVehicle] = useState("");
 
   const handleTravellerCount = (e) => {
-    console.log("Number of Travellers", e.target.value)
+    // console.log("Number of Travellers", e.target.value)
     setTravel(e.target.value)
-
+    console.log("travller seleted", travel)
     setTravellers([
       ...travellers,
       {
@@ -434,8 +436,16 @@ function SteperDmpass(shows, ...props) {
 
 
   const onLocationsClick = () => {
-    console.log("object");
-    setShow(2);
+    // <span className="location-rs">₹ {tot_charges}</span>
+    // console.log("object", {tot_charges});
+    console.log("object", tot_charges);
+    if (tot_charges > 0) {
+      setShow(2);
+    }
+    // else{
+    //   document.getElementByID('panel1a-header0').click(handleService)
+    // }
+
     return shows;
     // history.push("/locations");
   };
@@ -521,6 +531,9 @@ function SteperDmpass(shows, ...props) {
     const paymentOpject = new window.Razorpay(options);
     paymentOpject.open();
   };
+  const onInvalidSubmit = (e) => {
+    console.log("Invalid", e)
+  }
 
   return (
     <>
@@ -544,32 +557,34 @@ function SteperDmpass(shows, ...props) {
       <Container>
         <Stepper
           steps={[
-            { label: <b style={{ whiteSpace: "nowrap" }}>Traveller Pass</b> },
+            { label: <b>Travel Pass</b> },
             { label: <b>Locations</b> },
-            { label: <b>Confirm</b> },
-            { label: <b>Payment</b> },
-            { label: <b>Checkout</b> },
+            { label: <b>Confirm Payment</b> },
+            { label: <b>View Ticket</b> },
           ]}
           activeStep={show}
           className="pb-0"
         />
       </Container>
+
       {show == 0 ? (
         <div>
 
           <Container className="dmpass-form mt-4">
-          <AvForm onSubmit={onDmPassClick}>
-            <Row className="dmpassData">
-              <h3
-                style={{
-                  fontWeight: "bolder",
-                  fontSize: "20px",
-                  textAlign: "center",
-                }}
-              >
-                Book your Traveller Pass
-              </h3>
-              <form onSubmit={(e) => e.preventDefault()}>
+            <AvForm onValidSubmit={onDmPassClick}
+              onInvalidSubmit={onInvalidSubmit}>
+              {/* <AvForm onSubmit={onDmPassClick}> */}
+              <Row className="dmpassData">
+                <h3
+                  style={{
+                    fontWeight: "bolder",
+                    fontSize: "20px",
+                    textAlign: "center",
+                  }}
+                >
+                  Book your Travel Pass
+                </h3>
+                {/* <form onSubmit={(e) => e.preventDefault()}> */}
                 <div className="form-row"></div>
 
                 <div className="form-row">
@@ -595,7 +610,7 @@ function SteperDmpass(shows, ...props) {
                       className="form-control pass_input"
                       onChange={handleDuration}
                     >
-                      <option selected>1</option>
+                      <option value="1" selected>1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
@@ -606,6 +621,7 @@ function SteperDmpass(shows, ...props) {
                   <div className="form-group mt-4 ">
                     <label for="inputState">Number of Vehicles</label>
                     <select id="inputState" className="form-control pass_input" onChange={(e) => handlerVehicles(e)}>
+                      <option >0</option>
                       <option selected>1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -616,322 +632,261 @@ function SteperDmpass(shows, ...props) {
                   </div>
                 </div>
                 <Container className="p-0 pb-5">
-               
-                    <Row>
-                      <Col className="pt-3">
-                        {/* <div style={{ width: "50%", float: "right" }}> */}
-                        <label
-                          style={{
-                            fontSize: "14px",
-                            // marginBottom: "10px",
-                            fontWeight: "500",
-                            color: "black",
-                          }}
-                        >
-                          Vehicle Details
-                        </label>
-                        <div
-                          className="traveller_div"
-                          style={{
-                            marginTop: "1rem",
-                            justifyContent: "flex-start",
-                          }}
-                        >
-                          {vehicles.map((item, i) => (
-                            <Paper
-                              key={i}
-                              className="traveller__card py-5 px-4 flex-grow-1"
+
+                  <Row>
+                    <Col className="pt-3">
+                      {/* <div style={{ width: "50%", float: "right" }}> */}
+                      <label
+                        style={{
+                          fontSize: "14px",
+                          // marginBottom: "10px",
+                          fontWeight: "500",
+                          color: "black",
+                        }}
+                      >
+                        Vehicle Details
+                      </label>
+                      <div
+                        className="traveller_div"
+                        style={{
+                          marginTop: "1rem",
+                          justifyContent: "flex-start",
+                        }}
+                      >
+                        {vehicles.map((item, i) => (
+                          <Paper
+                            key={i}
+                            className="traveller__card py-5 px-4 flex-grow-1"
+                          >
+                            <div
+                              className="traveller__card_body"
+                              className="py-0"
                             >
-                              <div
-                                className="traveller__card_body"
-                                className="py-0"
+                              <h5
+                                className="traveller__card_title"
+                                style={{ fontSize: "12px" }}
                               >
-                                <h5
-                                  className="traveller__card_title"
-                                  style={{ fontSize: "12px" }}
-                                >
-                                  Vehicle {i + 1}
-                                </h5>
-                                <p className="traveller__card_text">
-                                  <div className="form-group pt-4">
-                                    <label
-                                      className="mb-1"
-                                      for={`vehicle_number${i}`}
-                                    >
-                                      Vehicle Number
-                                    </label>
-                                    <AvField
-                                      type="text"
-                                      className="form-control pass_input"
-                                      id={`vehicle_number${i}`}
-                                      placeholder="Enter the license plate number"
-                                      style={{
-                                        fontSize: "11px",
-                                        marginLeft: "-5px",
-                                      }}
-                                      name="registration_number"
-                                      onChange={(e) =>
-                                        handleVehicle(
-                                          e.target.value,
-                                          e.target.name,
-                                          i
-                                        )
-                                      }
-                                      value={vehicles[i].registration_number}
-                                      validate={{
-                                        required: {
-                                          value: true,
-                                          errorMessage: "Enter the license plate number",
-                                        },
+                                Vehicle {i + 1}
+                              </h5>
+                              <p className="traveller__card_text">
+                                <div className="form-group pt-4">
+                                  <label
+                                    className="mb-1"
+                                    for={`vehicle_number${i}`}
+                                  >
+                                    Vehicle Number
+                                  </label>
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`vehicle_number${i}`}
+                                    placeholder="Enter the license plate number"
+                                    style={{
+                                      fontSize: "11px",
+                                      marginLeft: "-5px",
+                                    }}
+                                    name="registration_number"
+                                    onChange={(e) =>
+                                      handleVehicle(
+                                        e.target.value,
+                                        e.target.name,
+                                        i
+                                      )
+                                    }
+                                    value={vehicles[i].registration_number}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter the license plate number",
+                                      },
 
-                                      }}
-                                    />
-                                  </div>
-                                  <div className="form-group pt-4">
-                                    <label className="mb-1" for={`name${i}`}>
-                                      Driver Name
-                                    </label>
-                                    <AvField
-                                      type="text"
-                                      className="form-control pass_input"
-                                      id={`name${i}`}
-                                      placeholder="Enter Driver Name"
-                                      style={{
-                                        fontSize: "11px",
-                                        marginLeft: "-5px",
-                                      }}
-                                      name="driver_name"
-                                      onChange={(e) =>
-                                        handleVehicle(
-                                          e.target.value,
-                                          e.target.name,
-                                          i
-                                        )
-                                      }
-                                      value={vehicles[i].driver_name}
-                                      validate={{
-                                        required: {
-                                          value: true,
-                                          errorMessage: "Enter Driver Name",
-                                        },
+                                    }}
+                                  />
+                                </div>
+                                <div className="form-group pt-4">
+                                  <label className="mb-1" for={`name${i}`}>
+                                    Driver Name
+                                  </label>
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`name${i}`}
+                                    placeholder="Enter Driver Name"
+                                    style={{
+                                      fontSize: "11px",
+                                      marginLeft: "-5px",
+                                    }}
+                                    name="driver_name"
+                                    onChange={(e) =>
+                                      handleVehicle(
+                                        e.target.value,
+                                        e.target.name,
+                                        i
+                                      )
+                                    }
+                                    value={vehicles[i].driver_name}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter Driver Name",
+                                      },
 
-                                      }}
-                                    />
-                                  </div>
+                                    }}
+                                  />
+                                </div>
 
 
-                                  <div className="form-group mt-1 pt-4">
-                                    <label className="mb-1" for={`aadhaar${i}`}>
-                                      Driver License Number
-                                    </label>
-                                    <AvField
-                                      type="text"
-                                      className="form-control pass_input"
-                                      id={`adhaar${i}`}
-                                      placeholder="Driver License Number"
-                                      style={{
-                                        fontSize: "11px",
-                                        marginLeft: "-5px",
-                                      }}
-                                      // name="adhaar" onChange={handleChange} value={adhaar}
-                                      name="driver_license_number"
-                                      onChange={(e) =>
-                                        handleVehicle(
-                                          e.target.value,
-                                          e.target.name,
-                                          i
-                                        )
-                                      }
-                                      value={vehicles[i].adhaar}
-                                      validate={{
-                                        required: {
-                                          value: true,
-                                          errorMessage: "Driver License Number",
-                                        },
+                                <div className="form-group mt-1 pt-4">
+                                  <label className="mb-1" for={`aadhaar${i}`}>
+                                    Driver License Number
+                                  </label>
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`adhaar${i}`}
+                                    placeholder="Driver License Number"
+                                    style={{
+                                      fontSize: "11px",
+                                      marginLeft: "-5px",
+                                    }}
+                                    // name="adhaar" onChange={handleChange} value={adhaar}
+                                    name="driver_license_number"
+                                    onChange={(e) =>
+                                      handleVehicle(
+                                        e.target.value,
+                                        e.target.name,
+                                        i
+                                      )
+                                    }
+                                    value={vehicles[i].adhaar}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Driver License Number",
+                                      },
 
-                                      }}
-                                    />
-                                  </div>
-                                </p>
-                              </div>
-                            </Paper>
-                          ))}
-                        </div>
-                        {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
-                        <Button
-                          class="btn btn-success"
-                          style={{
-                            width: "55%",
-                            textAlign: "center",
-                            height: "50px",
-                            borderRadius: "9px",
-                            backgroundColor: "#0fa453",
-                            border: "none",
-                            fontWeight: "600",
-                          }}
-                          onClick={() =>
-                            setVehicles([
-                              ...vehicles,
-                              {
-                                vehicle_number: "",
-                                name: "",
-                                gender: "Male",
-                                age: "",
-                                adhaar: "",
-                              },
-                            ])
-                          }
-                        >
-                          Add Vehicle
-                        </Button>
-                      </div> */}
-                        {/* </div> */}
-                      </Col>
-                      <Col className="pt-3 pb-5">
-                        {/* <div style={{ width: "50%" }}> */}
-                        <label
-                          style={{
-                            fontSize: "14px",
-                            fontWeight: "500",
-                            color: "black",
-                          }}
-                        >
-                          Travellers Details
-                        </label>
+                                    }}
+                                  />
+                                </div>
+                              </p>
+                            </div>
+                          </Paper>
+                        ))}
+                      </div>
 
-                        <div
-                          className="traveller_div"
-                          style={{
-                            marginTop: "1rem",
-                            justifyContent: "flex-start",
-                          }}
-                        >
-                          {travellers?.map((item, i) => (
-                            <Paper
-                              key={i}
-                              className="traveller__card p-4 flex-grow-1"
-                              style={{ minHeight: "364px" }}
+                    </Col>
+                    <Col className="pt-3 pb-5">
+                      {/* <div style={{ width: "50%" }}> */}
+                      <label
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: "500",
+                          color: "black",
+                        }}
+                      >
+                        Travellers Details
+                      </label>
+
+                      <div
+                        className="traveller_div"
+                        style={{
+                          marginTop: "1rem",
+                          justifyContent: "flex-start",
+                        }}
+                      >
+                        {travellers?.map((item, i) => (
+                          <Paper
+                            key={i}
+                            className="traveller__card p-4 flex-grow-1"
+                            style={{ minHeight: "364px" }}
+                          >
+                            <div
+                              className="traveller__card_body"
+                              className="py-0"
                             >
-                              <div
-                                className="traveller__card_body"
-                                className="py-0"
+                              <h5
+                                className="traveller__card_title"
+                                style={{ fontSize: "12px" }}
                               >
-                                <h5
-                                  className="traveller__card_title"
-                                  style={{ fontSize: "12px" }}
-                                >
-                                  Travellers {i + 1}
-                                </h5>
-                                <p className="traveller__card_text">
-                                  <div className="form-group pt-3">
-                                    <label className="mb-3" for={`name${i}`}>
-                                      Name
+                                Travellers {i + 1}
+                              </h5>
+                              <p className="traveller__card_text">
+                                <div className="form-group pt-3">
+                                  <label className="mb-3" for={`name${i}`}>
+                                    Name
+                                  </label>
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`name${i}`}
+                                    placeholder="Enter Traveller Name"
+                                    style={{
+                                      fontSize: "11px",
+                                      marginLeft: "-5px",
+                                    }}
+                                    name="name"
+                                    onChange={(e) =>
+                                      handleTraveller(
+                                        e.target.value,
+                                        e.target.name,
+                                        i
+                                      )
+                                    }
+                                    value={travellers[i].name}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter Traveller Name",
+                                      },
+
+                                    }}
+                                  />
+                                </div>
+
+                                <div className="form-row genderform pt-3 d-flex ">
+                                  <div className="col m-2 w-50">
+                                    <label className="mb-3" for={`gender${i}`}>
+                                      Gender
                                     </label>
-                                    <AvField
-                                      type="text"
-                                      className="form-control pass_input"
-                                      id={`name${i}`}
-                                      placeholder="Enter Traveller Name"
-                                      style={{
-                                        fontSize: "11px",
-                                        marginLeft: "-5px",
-                                      }}
-                                      name="name"
-                                      onChange={(e) =>
-                                        handleTraveller(
-                                          e.target.value,
-                                          e.target.name,
-                                          i
-                                        )
-                                      }
-                                      value={travellers[i].name}
-                                      validate={{
-                                        required: {
-                                          value: true,
-                                          errorMessage: "Enter Traveller Name",
-                                        },
-
-                                      }}
-                                    />
-                                  </div>
-
-                                  <div className="form-row genderform pt-3 d-flex ">
-                                    <div className="col m-2 w-50">
-                                      <label className="mb-3" for={`gender${i}`}>
-                                        Gender
-                                      </label>
-                                      <div className="d-flex pt-2">
-                                        <ButtonComponent
-                                          style={{
-                                            width: "50%",
-                                            fontSize: "11px",
-                                            whiteSpace: "nowrap",
-                                          }}
-                                          type="button"
-                                          data={button_Data}
-                                          // activeButton={activeButton}
-                                          // trigerOnClickEmpSideBtn={onSideBtnClick}
-                                          trigerOnClickEmpSideBtn={(e) =>
-                                            handleTraveller(
-                                              e.target.name,
-                                              "gender",
-                                              i
-                                            )
-                                          }
-                                          activeButton={travellers[i].gender}
-                                        />
-                                      </div>
-                                    </div>
-                                    <div className="form-group col m-2 w-50">
-                                      <label className="mb-3" for={`age${i}`}>
-                                        Age
-                                      </label>
-                                      <AvField
-                                        type="text"
-                                        className="form-control pass_input w-70 pt-2"
-                                        placeholder="Enter Age"
-                                        id={`age${i}`}
+                                    <div className="d-flex pt-2">
+                                      <ButtonComponent
                                         style={{
-                                          width: "110px",
-                                          marginLeft: "-5px",
-                                          fontSize: "12px",
+                                          width: "50%",
+                                          fontSize: "11px",
                                           whiteSpace: "nowrap",
-                                          height: "33px",
                                         }}
-                                        name="age"
-                                        onChange={(e) =>
+                                        type="button"
+                                        data={button_Data}
+                                        // activeButton={activeButton}
+                                        // trigerOnClickEmpSideBtn={onSideBtnClick}
+                                        trigerOnClickEmpSideBtn={(e) =>
                                           handleTraveller(
-                                            e.target.value,
                                             e.target.name,
+                                            "gender",
                                             i
                                           )
                                         }
-                                        value={travellers[i].age}
-                                        validate={{
-                                          required: {
-                                            value: true,
-                                            errorMessage: "Enter Age",
-                                          },
-
-                                        }}
+                                        activeButton={travellers[i].gender}
                                       />
                                     </div>
                                   </div>
-
-                                  <div className="form-group mt-1 pt-3">
-                                    <label className="mb-3" for={`aadhaar${i}`}>
-                                      Adhaar Card Number{" "}
+                                  <div className="form-group col m-2 w-50">
+                                    <label className="mb-3" for={`age${i}`}>
+                                      Age
                                     </label>
                                     <AvField
                                       type="text"
-                                      className="form-control pass_input"
-                                      id={`adhaar${i}`}
-                                      placeholder="Enter 12 digit Adhaar Card Number"
+                                      className="form-control pass_input w-70 pt-2"
+                                      placeholder="Enter Age"
+                                      id={`age${i}`}
                                       style={{
-                                        fontSize: "11px",
+                                        width: "110px",
                                         marginLeft: "-5px",
+                                        fontSize: "12px",
+                                        whiteSpace: "nowrap",
+                                        height: "33px",
                                       }}
-                                      name="adhaar"
+                                      name="age"
                                       onChange={(e) =>
                                         handleTraveller(
                                           e.target.value,
@@ -939,66 +894,120 @@ function SteperDmpass(shows, ...props) {
                                           i
                                         )
                                       }
-                                      value={travellers[i].adhaar}
+                                      value={travellers[i].age}
                                       validate={{
                                         required: {
                                           value: true,
-                                          errorMessage: "Enter 12 digit Adhaar Card Number",
+                                          errorMessage: "Enter Age",
                                         },
 
                                       }}
                                     />
                                   </div>
+                                </div>
 
-                                </p>
-                              </div>
-                            </Paper>
-                          ))}
-                        </div>
-                        {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
-                        <Button
-                          class="btn btn-success"
-                          style={{
-                            width: "55%",
-                            textAlign: "center",
-                            height: "50px",
-                            borderRadius: "9px",
-                            backgroundColor: "#0fa453",
-                            border: "none",
-                            fontWeight: "600",
-                          }}
-                          onClick={() =>
-                            setTravellers([
-                              ...travellers,
-                              {
-                                name: "",
-                                gender: "Male",
-                                age: "",
-                                adhaar: "",
-                              },
-                            ])
-                          }
-                        >
-                          Add Traveller
-                        </Button>
-                      </div> */}
-                        {/* </div> */}
+                                <div className="form-group mt-1 pt-3">
+                                  <label className="mb-3" for={`aadhaar${i}`}>
+                                    Adhaar Card Number{" "}
+                                  </label>
+                                  <AvField
+                                    type="text"
+                                    className="form-control pass_input"
+                                    id={`adhaar${i}`}
+                                    placeholder="Enter 12 digit Adhaar Card Number"
+                                    style={{
+                                      fontSize: "11px",
+                                      marginLeft: "-5px",
+                                    }}
+                                    name="adhaar"
+                                    onChange={(e) =>
+                                      handleTraveller(
+                                        e.target.value,
+                                        e.target.name,
+                                        i
+                                      )
+                                    }
+                                    value={travellers[i].adhaar}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter 12 digit Adhaar Card Number",
+                                      },
 
-                      </Col>
-                    </Row>
-                   
-                  
-                </Container>
-              </form>
-            </Row>
-            <div style={{ paddingBottom: "5px", paddingTop: "5px",display:"flex",justifyContent:"center" }}>
-                      <div className="mb-5">
-                        <Button type="submit" className="locationpass-btn">
-                          Save & Continue
-                        </Button>
+                                    }}
+                                  />
+                                </div>
+
+                              </p>
+                            </div>
+                          </Paper>
+                        ))}
                       </div>
-                    </div>
+
+
+                    </Col>
+                  </Row>
+
+
+                </Container>
+                {/* </form> */}
+              </Row>
+
+
+
+              <div className="d-none d-md-block">
+                <div style={{ textAlign: "center" }}>
+                  <Button
+                    type="submit"
+                    style={{
+                      marginTop: "50px",
+                      width: "200px",
+                      height: "50px",
+                      backgroundColor: "#0fa453",
+                      color: "white",
+                      fontWeight: "900",
+                      fontSize: "15px",
+                      marginBottom: "50px",
+                      border: '1px solid #0fa453'
+                    }}
+                  >
+                    Save & Continue
+                  </Button>
+                </div>
+              </div>
+
+
+
+
+              <div className="d-md-none">
+                <Button
+                  type="submit"
+                  style={{
+                    marginTop: "50px",
+                    width: "100%",
+                    height: "71px",
+                    border: '1px solid #0fa453',
+                    color: "white",
+                    fontWeight: "900",
+                    fontSize: "15px",
+                    backgroundColor: "#0fa453",
+                    borderRadius: 0,
+                    // position: "absolute",
+                    // bottom: 0
+                  }}
+                >
+                  Save & Continue
+                </Button>
+              </div>
+              {/* <div className="location-pa">
+                <div>
+                  <Button style={{ "width": "100%", "marginLeft": "0px", "borderRadius": "0px" }} className="locationpass-btn" type="submit">
+                    Save & Continue123
+                  </Button>
+                </div>
+              </div> */}
             </AvForm>
+            <ToastContainer />
           </Container>
 
           <div className="d-none d-md-block">
@@ -1026,7 +1035,7 @@ function SteperDmpass(shows, ...props) {
                   paddingBottom: "10px"
                 }}
               >
-                30th July 2021
+                {showDate}
               </h6>
             </Row>
             <Row className="dmpassData">
@@ -1046,6 +1055,7 @@ function SteperDmpass(shows, ...props) {
                       className="p-0"
                       aria-controls="panel1a-content"
                       id="panel1a-header"
+                    // index=
                     >
                       <div
                         className="location_pass w-100 d-flex"
@@ -1100,7 +1110,7 @@ function SteperDmpass(shows, ...props) {
                 </div>
               </Col>
               <Col md={6}>
-                <Button style={{ "width": "100%", "marginLeft": "0px", "borderRadius": "0px" }} className="locationpass-btn" onClick={onLocationsClick}>
+                <Button style={{ width: "100%", marginLeft: "0px", borderRadius: "0px", height: "100%" }} className="locationpass-btn" onClick={onLocationsClick}>
                   Save & Continue
                 </Button>
                 {/* <div className="mb-5">
@@ -1134,23 +1144,7 @@ function SteperDmpass(shows, ...props) {
                 </div>
               </Col>
               <Col xs={12} md={6}>
-                {/* <div className="">
-                  <div
-                    className=""
-                    style={{
-                      textAlign: " center",
-                      fontSize: " 20px",
-                      fontWeight: " 600",
-                      color: "white",
-                      padding: " 15px",
-                      backgroundColor: "#0FA453",
-                    }}
-                    onClick={onLocationsClick}
-                  >
-                    Save & Continue
-                  </div>
-                </div> */}
-                <Button className="locationpass-btn" onClick={onLocationsClick}>
+                <Button className="locationpass-btn fw-bold" onClick={onLocationsClick}>
                   Save & Continue
                 </Button>
               </Col>
@@ -1162,6 +1156,9 @@ function SteperDmpass(shows, ...props) {
         </div>
       ) : show == 2 ? (
         <>
+          {paymentCustom == 1 ?
+            <> </> : <>No</>}
+            <div>
           <div>
             <Container className="dmpass-form mt-2">
               <Row className="dmpassData d-none d-md-block" style={{ "backgroundColor": "#FF814A" }}>
@@ -1181,7 +1178,7 @@ function SteperDmpass(shows, ...props) {
                     paddingBottom: "10px"
                   }}
                 >
-                  30th July 2021
+                  {showDate}
                 </h6>
               </Row>
               <h3 style={{ textAlign: "center" }}>Confirm your Details</h3>
@@ -1253,11 +1250,51 @@ function SteperDmpass(shows, ...props) {
               </div>
             </Container>
           </div>
-          <div style={{ "paddingTop": "50px", "paddingBottom": "50px" }}>
-            <Button className="locationpass-btn" onClick={onTicketCheckClick}  >
+
+          <div className="d-none d-md-block">
+            <div style={{ textAlign: "center" }}>
+              <Button
+                onClick={onTicketCheckClick}
+                type="submit"
+                style={{
+                  marginTop: "50px",
+                  width: "200px",
+                  height: "50px",
+                  backgroundColor: "#0fa453",
+                  color: "white",
+                  fontWeight: "900",
+                  fontSize: "15px",
+                  marginBottom: "50px",
+                  border: '1px solid #0fa453'
+                }}
+              >
+                Save & Continue
+              </Button>
+            </div>
+          </div>
+          <div className="d-md-none">
+            <Button
+              onClick={onTicketCheckClick}
+              type="submit"
+              style={{
+                marginTop: "50px",
+                width: "100%",
+                height: "71px",
+                border: '1px solid #0fa453',
+                color: "white",
+                fontWeight: "900",
+                fontSize: "15px",
+                backgroundColor: "#0fa453",
+                borderRadius: 0,
+                // position: "absolute",
+                // bottom: 0
+              }}
+            >
               Save & Continue
             </Button>
           </div>
+          </div>
+
           <div className="d-none d-md-block">
             <Footer />
           </div>
@@ -1595,7 +1632,7 @@ function SteperDmpass(shows, ...props) {
 
             <div className="d-md-none">
               <Container style={{ width: "", paddingTop: "20px" }}>
-                <div>
+                {/* <div>
                   <div style={{ textAlign: "center", marginTop: "15px" }}>
                     <span style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</span>
                     <br />
@@ -1708,10 +1745,10 @@ function SteperDmpass(shows, ...props) {
                         Back to Home
                       </Button>
                     </div>
-                    {/* </div> */}
+                    </div> 
 
                   </Col>
-                </div>
+                </div> */}
                 <Col xs={12} md={6}>
                   <div style={{ marginTop: "" }}>
                     <img

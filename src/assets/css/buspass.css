@@ -30,9 +30,14 @@ height: 46.67px; */
   text-align: center;
   /* margin: 30px; */
 }
-.locationpass-btn {
-  /* margin: 0 auto; */
-  
+/* .btn-location{
+  style={{ paddingBottom: "5px", paddingTop: "5px", display: "flex", justifyContent: "center" }}
+   display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  padding-top: 5px;
+} */
+.locationpass-btn-ticket {
   color: white;
   background-color: #0fa453;
   border-color: #0fa453;
@@ -40,12 +45,13 @@ height: 46.67px; */
   width: 200px;
   height: 49px;
   border-radius: 11px;
-  /* margin: 0% 40% 0%; */
+ 
 }
-/* .locationpass-btn:hover{
-    color: white;
-    background-color: #0FA453;
-} */
+.location-pass{
+  display: flex;
+  justify-content: center;
+}
+
 
 .formbus {
   color: grey;
