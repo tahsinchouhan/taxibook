@@ -117,6 +117,46 @@ function DmCongratulate() {
                         View Ticket
                       </Link>
                     </Button>
+                    <Button
+                      style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        borderColor: "#01e675",
+                        backgroundColor: "#01e675",
+                        fontWeight: "bold",
+                        marginTop: "20px",
+                      }}
+                    >
+                      <a
+                        href={`https://wa.me?text=http://15.206.92.158/dm-detail/${dmpass_id}`}
+                        style={{ textDecoration: "none", color: "#fff" }}
+                        target="_blank"
+                      >
+                        Share in Whatsapp1
+                      </a>
+                    </Button>
+                    <Button
+                      style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        borderColor: " #FF4A68",
+                        backgroundColor: " #FF4A68",
+                        fontWeight: "bold",
+                        marginTop: "20px",
+                      }}
+                    >
+                      <a
+                        href={`https://wa.me/send?text=http://15.206.92.158/dm-detail/${dmpass_id}`}
+                        style={{ textDecoration: "none", color: "#fff" }}
+                        target="_blank"
+                      >
+                        Share in Whatsapp2
+                      </a>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -221,28 +261,70 @@ function DmCongratulate() {
                    </div> */}
 
                 {/* <div> */}
-                  <Button
-                    style={{
-                      // width: "186px",
-                      textAlign: "center",
-                      borderColor: " #FF4A68",
-                      backgroundColor: " #FF4A68",
-                      fontWeight: "bold",
-                      height: "86px",
-                      borderRadius:"0",
-                      position:"fixed",
-                      width:"100%",
-                      bottom:"0",
-                      left:"0"
-                    }}
+                <Button
+                  style={{
+                    width: "186px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    borderColor: "#01e675",
+                    backgroundColor: "#01e675",
+                    fontWeight: "bold",
+                    marginTop: "20px",
+                  }}
+                >
+                  <a
+                    href={`https://wa.me?text=http://15.206.92.158/dm-detail/${dmpass_id}`}
+                    style={{ textDecoration: "none", color: "#fff" }}
+                    target="_blank"
                   >
-                    <Link
-                      to={`/dm-detail/${dmpass_id}`}
-                      style={{ textDecoration: "none", color: "#fff" }}
-                    >
-                      View Ticket
-                    </Link>
-                  </Button>
+                    Share in Whatsapp1
+                  </a>
+                </Button>
+                <Button
+                  style={{
+                    width: "186px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    borderColor: " #FF4A68",
+                    backgroundColor: " #FF4A68",
+                    fontWeight: "bold",
+                    marginTop: "20px",
+                    marginBottom: "90px",
+                  }}
+                >
+                  <a
+                    href={`https://wa.me/send?text=http://15.206.92.158/dm-detail/${dmpass_id}`}
+                    style={{ textDecoration: "none", color: "#fff" }}
+                    target="_blank"
+                  >
+                    Share in Whatsapp2
+                  </a>
+                </Button>
+                <Button
+                  style={{
+                    // width: "186px",
+                    textAlign: "center",
+                    borderColor: " #FF4A68",
+                    backgroundColor: " #FF4A68",
+                    fontWeight: "bold",
+                    height: "86px",
+                    borderRadius: "0",
+                    position: "fixed",
+                    width: "100%",
+                    bottom: "0",
+                    left: "0"
+                  }}
+                >
+                  <Link
+                    to={`/dm-detail/${dmpass_id}`}
+                    style={{ textDecoration: "none", color: "#fff" }}
+                  >
+                    View Ticket
+                  </Link>
+                </Button>
+
                 {/* </div> */}
                 <div>
                   {/* <Button
@@ -260,7 +342,7 @@ function DmCongratulate() {
                   >
                     Back to Home
                   </Button> */}
-                    <Link to="/">Back to Home</Link>
+                  <Link to="/">Back to Home</Link>
                 </div>
               </div>
             </Col>

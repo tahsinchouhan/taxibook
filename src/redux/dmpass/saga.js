@@ -7,7 +7,7 @@ import { setDmPassId, setentyPassId } from "./actions";
 
 const createTravelPassRequest = async (payload) =>
     await axios.post(`${API_PATH}/api/v1/travelpass/create`, {
-        'Content-Type' : 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded',
         crossdomain: true,
         withCredentials: false,
         mobile: payload.mobile,
@@ -16,7 +16,7 @@ const createTravelPassRequest = async (payload) =>
         end_date: payload.end_date,
         basic_details: payload.basic_details,
         number_of_travellers: payload.basic_details.length,
-        where:"Create from Website",
+        where: "Create from Website",
         createdby: JSON.parse(localStorage.getItem('user_data'))?.user?._id
     })
         .then(busticket => busticket.data)
@@ -28,7 +28,7 @@ const createVehiclePassRequest = async (payload) =>
         travelpass_id: payload.tp_id,
         vehical_details: payload.vehical_details,
         number_of_vehicals: payload.vehical_details.length,
-        where:"Create from Website",
+        where: "Create from Website",
         createdby: JSON.parse(localStorage.getItem('user_data'))?.user?._id
     })
         .then(busticket => busticket.data)
@@ -42,7 +42,7 @@ const createEntryPassRequest = async (payload) =>
         total_charges: payload.total_charges,
         dm_pass_number: payload.dm_pass_number,
         mobile: payload.mobile,
-        where:"Create from Website",
+        where: "Create from Website",
         createdby: JSON.parse(localStorage.getItem('user_data'))?.user?._id,
     })
         .then(vendor => vendor.data)
@@ -56,12 +56,16 @@ const createDmPassRequest = async (payload) =>
 function* createDmPassOfTraveller({ payload }) {
     console.log("pay:::::::", payload);
     const phone = JSON.parse(localStorage.getItem("mobile"))
-    console.log("mobile data",phone);
+    console.log("mobile data", phone);
     try {
-        const dmpass = yield call(createTravelPassRequest, payload);
-        const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id, });
-        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id, mobile: phone });
-        console.log("(dm.data.dm_pass_id",dm.data.dm_pass_id);       
+        const dmpass = yield call(createTravelPassRequest, {...payload, mobile: phone});
+        let dmPayload = { tp_id: dmpass.data._id, mobile: phone }
+        if (payload.vehical_details.length > 0) {
+            const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id, });
+            dmPayload = { ...dmPayload, vp_id: vehicle.data._id }
+        }
+        const dm = yield call(createDmPassRequest, dmPayload);
+        console.log("(dm.data.dm_pass_id", dm.data.dm_pass_id);
         yield put(setDmPassId(dm.data.dm_pass_id));
         // console.log("bus",busticket);
     } catch (error) {
@@ -75,9 +79,9 @@ function* createDmPass({ payload }) {
     try {
         const dmpass = yield call(createTravelPassRequest, payload);
         const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id });
-        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id, mobile:phone });
-        const entry = yield call(createEntryPassRequest, {...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id, dm_pass_number:dm.data.dm_pass_id ,mobile:phone });
-        console.log("(dm.data",dm.data);
+        const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id, mobile: phone });
+        const entry = yield call(createEntryPassRequest, { ...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id, dm_pass_number: dm.data.dm_pass_id, mobile: phone });
+        console.log("(dm.data", dm.data);
         yield put(setDmPassId(dm.data.dm_pass_id));
         // console.log("bus",busticket);
     } catch (error) {
@@ -91,7 +95,7 @@ function* createEntryPass({ payload }) {
         const dmpass = yield call(createTravelPassRequest, payload);
         const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id });
         const dm = yield call(createDmPassRequest, { tp_id: dmpass.data._id, vp_id: vehicle.data._id });
-        const entry = yield call(createEntryPassRequest, { ...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id, dm_pass_number:dm.data.dm_pass_id });
+        const entry = yield call(createEntryPassRequest, { ...payload, tp_id: dmpass.data._id, vp_id: vehicle.data._id, dm_pass_number: dm.data.dm_pass_id });
         yield put(setentyPassId(entry.data.dm_pass_id));
         // console.log("bus",busticket);
     } catch (error) {

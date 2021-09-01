@@ -318,11 +318,11 @@ function DmDetail() {
               style={{ width: "30px", height: "30px" }}
               onClick={goHome}
             />
-            <div className="dmpass__mob_header_title">Your Details</div>
+            <div className="dmpass__mob_header_title">Travel Details</div>
           </Col>
         </Row>
         {loading == false && notFound == false ? (
-          <Row className="m-0">
+          <Row className="mx-0" style={{marginTop: "100px"}} >
             <Col xs={12}>
               <div className="text-center mt-2">
                 <img src={qrImage} alt="" width={130} style={{ width: "90%" }} />
