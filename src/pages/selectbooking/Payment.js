@@ -312,15 +312,7 @@ function Payment() {
                       </Form.Group>
                     </Col>
                   </Row>
-                  <div className="pay-div"
-                  // style={{
-                  //   textAlign: "center",
-                  //   color: "white",
-                  //   height: "60px",
-                  //   widow:"100%"
-                  // }}
-                  // onClick={displayRazorpaysss}
-                  >
+                  <div className="pay-div">
                     <Button
                       variant="primary"
                       size="lg"
@@ -336,9 +328,7 @@ function Payment() {
                       PAYMENT
                     </Button>
 
-                    {/* <Button className="locationpass-btn  mt-5">
-            PAYMENT
-          </Button> */}
+                   
                   </div>
 
                 </Form>

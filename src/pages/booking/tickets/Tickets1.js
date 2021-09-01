@@ -8,8 +8,8 @@ import calendar from "../../../assets/img/calendar.png";
 import { Redirect, useHistory } from "react-router-dom";
 import Footer from "../../travesaly/Footer";
 import { API_PATH } from "../../../Path/Path";
-
-import { useDispatch, useSelector } from "react-redux";
+import { FaSpinner } from 'react-icons/fa';
+import { connect, useDispatch, useSelector } from "react-redux";
 import { fetchStart, getOtp, hideMessage, setDmData, verifyOtp } from "../../../redux/actions";
 
 import Loader from "../../../components/Loader";
@@ -19,6 +19,7 @@ import Message from "../../../components/Message";
 function Tickets1() {
   const history = useHistory();
   const [routes, setRoutes] = useState([]);
+  const [number, setNumber] = useState([]);
 
   const dispatch = useDispatch()
   const { error, loading, message } = useSelector(state => state.commonReducer)
@@ -85,9 +86,14 @@ function Tickets1() {
   // }, [dmData])
 
   const [otp, setOtp] = useState('');
+  const sendOtp = () => {
+    // console.log("object::::::::::::::",number)
+    dispatch(getOtp(number))
+  }
 
   const handleMobile = (e) => {
     console.log("object", e.target.value);
+    setNumber(e.target.value)
     let mob = e.target.value;
     if (mob.length > 9) {
       fetchOtp(e.target.value)
@@ -170,7 +176,8 @@ function Tickets1() {
                         />
 
 
-                        <Button
+                        <Button 
+                        // onClick={sendOtp}
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
@@ -179,7 +186,9 @@ function Tickets1() {
                             fontSize: "12px",
                           }}
                         >
-                          Sent OTP
+                          {loading ? 
+                          <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : 
+                          <>Sent OTP</>} 
                         </Button>
                       </Col>
                       <Col xs={12} md={3} className="">
@@ -314,4 +323,12 @@ function Tickets1() {
   );
 }
 
-export default Tickets1;
+export default Tickets1
+// const mapStateToProps = ({ commonReducer }) => {
+//   const { loading } = commonReducer;
+//   return { loading };
+// };
+
+// export default connect(
+//   mapStateToProps,
+// )(Tickets1);
