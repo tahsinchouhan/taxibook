@@ -78,7 +78,7 @@ function Packages() {
               <Form.Control
                 type="text"
                 name="search"
-                placeholder="search...."
+                placeholder="search packages"
                 style={{ marginTop: "-10px" }}
                 onChange={(e) => searchingData(e.target.value)}
               />
@@ -129,6 +129,7 @@ function Packages() {
                 >
                   <Image
                     draggable={false}
+                    // className="img-fluid"
                     style={{ width: "100%", height: "100%", borderRadius: 10 }}
                     src={item.upload_images}
                   />
@@ -141,7 +142,7 @@ function Packages() {
                         paddingTop: 2,
                       }}
                     >
-                      <h6
+                      {/* <h6
                         style={{
                           background: "#BEBEBE",
                           display: "inline",
@@ -150,8 +151,8 @@ function Packages() {
                           fontSize: "14px",
                         }}
                       >
-                        {item.sub_title}
-                      </h6>
+                        {item.category.category_name}
+                      </h6> */}
                     </div>
                     <div>
                       <small className="packages__block-subtitle">

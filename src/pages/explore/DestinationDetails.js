@@ -9,6 +9,7 @@ import ReactPlayer from "react-player";
 import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
 import { NavLink, useHistory } from "react-router-dom";
+import TravellerTicket from "../travesaly/TravellerTicket";
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
@@ -85,7 +86,7 @@ const DestinationDetails = (props) => {
         <Header />
         <Container>
           <h1 className="header__title">
-            <span>{destinations.address}</span>
+            <span>{destinations.title}</span>
           </h1>
         </Container>
       </div>
@@ -97,7 +98,7 @@ const DestinationDetails = (props) => {
           <p className="pt-3">{destinations.description}</p>
         </div>
       </Container>
-      
+
       {destinations.youtube_url ? (
         <Container>
           <h4 className="block__title know__more mb-4 pt-4">
@@ -192,6 +193,8 @@ const DestinationDetails = (props) => {
             </div>
           </div>
 
+
+
           <Carousel
             partialVisbile
             itemClass="image-item"
@@ -258,6 +261,16 @@ const DestinationDetails = (props) => {
               <h1></h1>
             )}
           </Carousel>
+        </Container>
+      </div>
+      <div className="pt-4">
+        <Container>
+
+          <h2 className="package__title">
+            <span>Book</span> Tickets
+          </h2>
+
+          <TravellerTicket />
         </Container>
       </div>
       <Footer />

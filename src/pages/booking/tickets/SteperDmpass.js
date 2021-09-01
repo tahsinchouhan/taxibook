@@ -12,8 +12,11 @@ import Header from "../../../components/Header";
 import congo from "../../../assets/img/mobile.png";
 import { FaWhatsapp } from "react-icons/fa";
 import Footer from "../../travesaly/Footer";
-
 import { useDispatch, useSelector } from "react-redux";
+import { Formik, Field } from "formik";
+import { ToastContainer } from 'react-toastify';
+import * as yup from "yup";
+
 import {
   Accordion,
   AccordionDetails,
@@ -23,10 +26,18 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import { createDmPass, setDmData } from "../../../redux/actions";
+import { createDmPass, setDmData, createBusBooking } from "../../../redux/actions";
 import { API_PATH } from "../../../Path/Path";
 import axios from "axios";
+import { AvForm, AvField } from "availity-reactstrap-validation";
+import Payment from "../../selectbooking/Payment";
 
+const schema = yup.object().shape({
+  name: yup.string().required(),
+  email: yup.string().required(),
+  number: yup.string().required(),
+
+});
 const button_Data = [
   {
     name: "Male",
@@ -40,6 +51,8 @@ const button_Data = [
 
 function SteperDmpass(shows, ...props) {
   const [show, setShow] = useState(0);
+  const [paymentCustom, setPaymentCustom] = useState(false);
+
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
   // const [data, setData] = useState();
   const history = useHistory();
@@ -89,7 +102,7 @@ function SteperDmpass(shows, ...props) {
   };
 
   const onDmPassClick = () => {
-    console.log("object", {
+    console.log("objectNEwwwwwwwww", {
       ...dmData,
       basic_details: travellers,
       vehical_details: vehicles,
@@ -98,25 +111,53 @@ function SteperDmpass(shows, ...props) {
     setShow(1);
   };
 
-  const onLocationsClick = () => {
-    console.log("object");
-    setShow(2);
-    return shows;
-    // history.push("/locations");
-  };
+  // const onTicketCheckClick = () => {
+  //   console.log("object");
+  //   //history.push("./ ticket_checkout");
+  //   dispatch(
+  //     createDmPass({
+  //       ...dmData,
+  //       basic_details: travellers,
+  //       vehical_details: vehicles,
+  //       locations: locServ,
+  //       total_charges: tot_charges,
+  //     })
+  //   );
+  //   setShow(3);
+  //   localStorage.setItem("dm_pass_id", dmData.dmpass_id)
+
+  // };
+  // };
+  // const onTicketCheckClick = () => {
+  //   console.log("object");
+  //   //history.push("./ ticket_checkout");
+  //   dispatch(
+  //     createDmPass({
+  //       ...dmData,
+  //       basic_details: travellers,
+  //       vehical_details: vehicles,
+  //       locations: locServ,
+  //       total_charges: tot_charges,
+  //     })
+  //   );
+  //   setShow(3);
+  //   localStorage.setItem("dm_pass_id", dmData.dmpass_id)
+
+  // };
   const onTicketCheckClick = () => {
     console.log("object");
-    //history.push("./ ticket_checkout");
-    dispatch(
-      createDmPass({
-        ...dmData,
-        basic_details: travellers,
-        vehical_details: vehicles,
-        locations: locServ,
-        total_charges: tot_charges,
+    axios.post(`${API_PATH}/api/v1/entrypass/pay`, {
+      amount: tot_charges,
+    })
+      .then((result) => {
+        console.log("dhshsdh", result);
+        setData(result.data);
+        setPaymentCustom(true)
       })
-    );
-    setShow(3);
+      .catch((e) => {
+        console.log(e);
+      });
+
   };
   const onClickBack = () => {
     console.log("object");
@@ -141,6 +182,7 @@ function SteperDmpass(shows, ...props) {
         gender: "Male",
         age: "",
         adhaar: "",
+        customer_id: JSON.parse(localStorage.getItem("customer_id"))
       });
     }
     return temp;
@@ -149,6 +191,7 @@ function SteperDmpass(shows, ...props) {
   const [showDate, setShowDate] = useState("");
 
   const handleTraveller = (val, lbl, i) => {
+    console.log("val", val);
     setTravellers(
       [...travellers].map((obj, key) => {
         if (key === i) {
@@ -284,8 +327,8 @@ function SteperDmpass(shows, ...props) {
                 if (lbl === "-" && val != 0) {
                   setTot_charges(
                     tot_charges +
-                      Number(service?.charge * (val - 1)) -
-                      service?.total_charges
+                    Number(service?.charge * (val - 1)) -
+                    service?.total_charges
                   );
                   return {
                     ...service,
@@ -295,8 +338,8 @@ function SteperDmpass(shows, ...props) {
                 } else if (lbl === "+") {
                   setTot_charges(
                     tot_charges +
-                      Number(service?.charge * (Number(val) + 1)) -
-                      service?.total_charges
+                    Number(service?.charge * (Number(val) + 1)) -
+                    service?.total_charges
                   );
                   return {
                     ...service,
@@ -343,6 +386,111 @@ function SteperDmpass(shows, ...props) {
     setShowDate(`${da}, ${mo} ${ye}`);
   };
 
+
+  const [travel, setTravel] = useState("");
+  const [vehicle, setVehicle] = useState("");
+
+  const handleTravellerCount = (e) => {
+    setTravel(e.target.value)
+    console.log("travller seleted", travel)
+    setTravellers([
+      ...travellers,
+      {
+        name: "",
+        gender: "Male",
+        age: "",
+        adhaar: "",
+      },
+    ])
+  }
+  const handlerVehicles = (e) => {
+    console.log("Number of Vehicles", e.target.value)
+    setVehicles([
+      ...vehicles,
+      {
+        vehicle_number: "",
+        name: "",
+        gender: "Male",
+        age: "",
+        adhaar: "",
+      },
+    ])
+  }
+  const [data, setData] = useState();
+
+
+
+  const onLocationsClick = () => {
+
+    console.log("object", tot_charges);
+    if (tot_charges > 0) {
+      setShow(2);
+    }
+    return shows;
+  };
+  
+  async function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  const displayRazorpaysss = async (values) => {
+    console.log("objec::::::::::::::::::::::t", values.email)
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+    console.log("data", data.amount);
+    var options = {
+      key: "rzp_test_DuapYrmQwcWLGy",
+      currency: "INR",
+      amount: data.amount.toString(),
+      order_id: data.id,
+      name: "Aamcho Bastar",
+      description: "Thank You For Booking.",
+      image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
+      handler: function (response) {
+
+        if (response.razorpay_payment_id) {
+          dispatch(
+            createDmPass({ ...dmData,
+               basic_details: travellers, 
+               vehical_details: vehicles,
+               name:values.name,
+               email:values.email,
+               whatsapp: values.number})
+          );
+          dispatch(setDmData({ ...dmData, order_id: response.razorpay_order_id }))
+          localStorage.setItem("dm_pass_id", dmData.dmpass_id)
+          setShow(3);
+        }
+      },
+      prefill: {
+        name: values.name,
+        email: values.email,
+        contact: values.number,
+      },
+    };
+    const paymentOpject = new window.Razorpay(options);
+    paymentOpject.open();
+  };
+  const onInvalidSubmit = (e) => {
+    console.log("Invalid", e)
+  }
+
   return (
     <>
       <div className="d-none d-md-block">
@@ -365,47 +513,43 @@ function SteperDmpass(shows, ...props) {
       <Container>
         <Stepper
           steps={[
-            { label: <b style={{ whiteSpace: "nowrap" }}>DM Pass</b> },
+            { label: <b>Travel Pass</b> },
             { label: <b>Locations</b> },
-            { label: <b>Confirm</b> },
-            { label: <b>Checkout</b> },
+            { label: <b>Confirm Payment</b> },
+            { label: <b>View Ticket</b> },
           ]}
           activeStep={show}
           className="pb-0"
         />
       </Container>
+
       {show == 0 ? (
         <div>
+
           <Container className="dmpass-form mt-4">
-            <Row className="dmpassData">
-              <h3
-                style={{
-                  fontWeight: "bolder",
-                  fontSize: "20px",
-                  textAlign: "center",
-                }}
-              >
-                Book your DM Pass
-              </h3>
-              <form onSubmit={(e) => e.preventDefault()}>
+            <AvForm onValidSubmit={onDmPassClick}
+              onInvalidSubmit={onInvalidSubmit}>
+              {/* <AvForm onSubmit={onDmPassClick}> */}
+              <Row className="dmpassData">
+                <h3
+                  style={{
+                    fontWeight: "bolder",
+                    fontSize: "20px",
+                    textAlign: "center",
+                  }}
+                >
+                  Book your Travel Pass
+                </h3>
+                {/* <form onSubmit={(e) => e.preventDefault()}> */}
                 <div className="form-row"></div>
-                {/* <div className="form-group mt-4">
-                  <label for="inputAddress">Mobile Number</label>
-                  <input
-                    type="text"
-                    className="form-control pass_input"
-                    id="inputAddress"
-                    placeholder="Enter mobile number"
-                    value={mobile} onChange={(e) => dispatch(setDmData("mobile", e.target.value))}
-                  />
-                </div> */}
+
                 <div className="form-row">
                   <div className="form-group mt-4 ">
                     <label for="inputState">Number of Travellers</label>
                     <select
                       id="inputState"
                       className="form-control pass_input"
-                      // onChange={handleTravellerCount}
+                      onChange={handleTravellerCount}
                     >
                       <option selected>1</option>
                       <option value="2">2</option>
@@ -422,7 +566,7 @@ function SteperDmpass(shows, ...props) {
                       className="form-control pass_input"
                       onChange={handleDuration}
                     >
-                      <option selected>1</option>
+                      <option value="1" selected>1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
@@ -432,7 +576,8 @@ function SteperDmpass(shows, ...props) {
                   </div>
                   <div className="form-group mt-4 ">
                     <label for="inputState">Number of Vehicles</label>
-                    <select id="inputState" className="form-control pass_input">
+                    <select id="inputState" className="form-control pass_input" onChange={(e) => handlerVehicles(e)}>
+                      <option >0</option>
                       <option selected>1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
@@ -443,6 +588,7 @@ function SteperDmpass(shows, ...props) {
                   </div>
                 </div>
                 <Container className="p-0 pb-5">
+
                   <Row>
                     <Col className="pt-3">
                       {/* <div style={{ width: "50%", float: "right" }}> */}
@@ -463,10 +609,10 @@ function SteperDmpass(shows, ...props) {
                           justifyContent: "flex-start",
                         }}
                       >
-                        {vehicles?.map((item, i) => (
+                        {vehicles.map((item, i) => (
                           <Paper
                             key={i}
-                            className="traveller__card py-3 px-4 flex-grow-1"
+                            className="traveller__card py-5 px-4 flex-grow-1"
                           >
                             <div
                               className="traveller__card_body"
@@ -479,14 +625,14 @@ function SteperDmpass(shows, ...props) {
                                 Vehicle {i + 1}
                               </h5>
                               <p className="traveller__card_text">
-                                <div className="form-group pt-3">
+                                <div className="form-group pt-4">
                                   <label
                                     className="mb-1"
                                     for={`vehicle_number${i}`}
                                   >
                                     Vehicle Number
                                   </label>
-                                  <input
+                                  <AvField
                                     type="text"
                                     className="form-control pass_input"
                                     id={`vehicle_number${i}`}
@@ -504,13 +650,20 @@ function SteperDmpass(shows, ...props) {
                                       )
                                     }
                                     value={vehicles[i].registration_number}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter the license plate number",
+                                      },
+
+                                    }}
                                   />
                                 </div>
-                                <div className="form-group pt-3">
+                                <div className="form-group pt-4">
                                   <label className="mb-1" for={`name${i}`}>
                                     Driver Name
                                   </label>
-                                  <input
+                                  <AvField
                                     type="text"
                                     className="form-control pass_input"
                                     id={`name${i}`}
@@ -528,49 +681,22 @@ function SteperDmpass(shows, ...props) {
                                       )
                                     }
                                     value={vehicles[i].driver_name}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter Driver Name",
+                                      },
+
+                                    }}
                                   />
                                 </div>
 
-                                {/* <div className="form-row genderform pt-3 d-flex ">
-                                    <div className="col m-2 w-50">
-                                      <label className="mb-1" for={`gender${i}`}>Gender</label>
-                                      <div className="d-flex pt-2">
-                                        <ButtonComponent
-                                          type="button"
-                                          style={{
-                                            width: "50%",
-                                            fontSize: "11px",
-                                            whiteSpace: "nowrap",
-                                          }}
-                                          data={button_Data}
-                                          trigerOnClickEmpSideBtn={(e) => handleVehicle(e.target.name, "gender", i)} activeButton={vehicles[i].gender}
-                                        />
-                                      </div>
-                                    </div>
-                                    <div className="form-group col m-2 w-50">
-                                      <label className="mb-1" for={`age${i}`}>Age</label>
-                                      <input
-                                        type="text"
-                                        className="form-control pass_input w-70 pt-2"
-                                        placeholder="Enter Age"
-                                        id={`age${i}`}
-                                        style={{
-                                          width: "110px",
-                                          marginLeft: "-5px",
-                                          fontSize: "12px",
-                                          whiteSpace: "nowrap",
-                                          height: "33px",
-                                        }}
-                                        name="age" onChange={(e) => handleVehicle(e.target.value, e.target.name, i)} value={vehicles[i].age}
-                                      />
-                                    </div>
-                                  </div> */}
 
-                                <div className="form-group mt-1 pt-3">
+                                <div className="form-group mt-1 pt-4">
                                   <label className="mb-1" for={`aadhaar${i}`}>
                                     Driver License Number
                                   </label>
-                                  <input
+                                  <AvField
                                     type="text"
                                     className="form-control pass_input"
                                     id={`adhaar${i}`}
@@ -580,7 +706,7 @@ function SteperDmpass(shows, ...props) {
                                       marginLeft: "-5px",
                                     }}
                                     // name="adhaar" onChange={handleChange} value={adhaar}
-                                    name="adhaar"
+                                    name="driver_license_number"
                                     onChange={(e) =>
                                       handleVehicle(
                                         e.target.value,
@@ -589,6 +715,13 @@ function SteperDmpass(shows, ...props) {
                                       )
                                     }
                                     value={vehicles[i].adhaar}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Driver License Number",
+                                      },
+
+                                    }}
                                   />
                                 </div>
                               </p>
@@ -596,35 +729,7 @@ function SteperDmpass(shows, ...props) {
                           </Paper>
                         ))}
                       </div>
-                      {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
-                        <Button
-                          class="btn btn-success"
-                          style={{
-                            width: "55%",
-                            textAlign: "center",
-                            height: "50px",
-                            borderRadius: "9px",
-                            backgroundColor: "#0fa453",
-                            border: "none",
-                            fontWeight: "600",
-                          }}
-                          onClick={() =>
-                            setVehicles([
-                              ...vehicles,
-                              {
-                                vehicle_number: "",
-                                name: "",
-                                gender: "Male",
-                                age: "",
-                                adhaar: "",
-                              },
-                            ])
-                          }
-                        >
-                          Add Vehicle
-                        </Button>
-                      </div> */}
-                      {/* </div> */}
+
                     </Col>
                     <Col className="pt-3 pb-5">
                       {/* <div style={{ width: "50%" }}> */}
@@ -666,7 +771,7 @@ function SteperDmpass(shows, ...props) {
                                   <label className="mb-3" for={`name${i}`}>
                                     Name
                                   </label>
-                                  <input
+                                  <AvField
                                     type="text"
                                     className="form-control pass_input"
                                     id={`name${i}`}
@@ -684,6 +789,13 @@ function SteperDmpass(shows, ...props) {
                                       )
                                     }
                                     value={travellers[i].name}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter Traveller Name",
+                                      },
+
+                                    }}
                                   />
                                 </div>
 
@@ -718,7 +830,7 @@ function SteperDmpass(shows, ...props) {
                                     <label className="mb-3" for={`age${i}`}>
                                       Age
                                     </label>
-                                    <input
+                                    <AvField
                                       type="text"
                                       className="form-control pass_input w-70 pt-2"
                                       placeholder="Enter Age"
@@ -739,6 +851,13 @@ function SteperDmpass(shows, ...props) {
                                         )
                                       }
                                       value={travellers[i].age}
+                                      validate={{
+                                        required: {
+                                          value: true,
+                                          errorMessage: "Enter Age",
+                                        },
+
+                                      }}
                                     />
                                   </div>
                                 </div>
@@ -747,11 +866,11 @@ function SteperDmpass(shows, ...props) {
                                   <label className="mb-3" for={`aadhaar${i}`}>
                                     Adhaar Card Number{" "}
                                   </label>
-                                  <input
+                                  <AvField
                                     type="text"
                                     className="form-control pass_input"
                                     id={`adhaar${i}`}
-                                    placeholder=" Enter 12 digit Adhaar Card Number"
+                                    placeholder="Enter 12 digit Adhaar Card Number"
                                     style={{
                                       fontSize: "11px",
                                       marginLeft: "-5px",
@@ -765,58 +884,116 @@ function SteperDmpass(shows, ...props) {
                                       )
                                     }
                                     value={travellers[i].adhaar}
+                                    validate={{
+                                      required: {
+                                        value: true,
+                                        errorMessage: "Enter 12 digit Adhaar Card Number",
+                                      },
+
+                                    }}
                                   />
                                 </div>
+
                               </p>
                             </div>
                           </Paper>
                         ))}
                       </div>
-                      {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
-                        <Button
-                          class="btn btn-success"
-                          style={{
-                            width: "55%",
-                            textAlign: "center",
-                            height: "50px",
-                            borderRadius: "9px",
-                            backgroundColor: "#0fa453",
-                            border: "none",
-                            fontWeight: "600",
-                          }}
-                          onClick={() =>
-                            setTravellers([
-                              ...travellers,
-                              {
-                                name: "",
-                                gender: "Male",
-                                age: "",
-                                adhaar: "",
-                              },
-                            ])
-                          }
-                        >
-                          Add Traveller
-                        </Button>
-                      </div> */}
-                      {/* </div> */}
+
+
                     </Col>
                   </Row>
+
+
                 </Container>
-              </form>
-            </Row>
+                {/* </form> */}
+              </Row>
+
+
+
+              <div className="d-none d-md-block">
+                <div style={{ textAlign: "center" }}>
+                  <Button
+                    type="submit"
+                    style={{
+                      marginTop: "50px",
+                      width: "200px",
+                      height: "50px",
+                      backgroundColor: "#0fa453",
+                      color: "white",
+                      fontWeight: "900",
+                      fontSize: "15px",
+                      marginBottom: "50px",
+                      border: '1px solid #0fa453'
+                    }}
+                  >
+                    Save & Continue
+                  </Button>
+                </div>
+              </div>
+
+
+
+
+              <div className="d-md-none">
+                <Button
+                  type="submit"
+                  style={{
+                    marginTop: "50px",
+                    width: "100%",
+                    height: "71px",
+                    border: '1px solid #0fa453',
+                    color: "white",
+                    fontWeight: "900",
+                    fontSize: "15px",
+                    backgroundColor: "#0fa453",
+                    borderRadius: 0,
+                    // position: "absolute",
+                    // bottom: 0
+                  }}
+                >
+                  Save & Continue
+                </Button>
+              </div>
+              {/* <div className="location-pa">
+                <div>
+                  <Button style={{ "width": "100%", "marginLeft": "0px", "borderRadius": "0px" }} className="locationpass-btn" type="submit">
+                    Save & Continue123
+                  </Button>
+                </div>
+              </div> */}
+            </AvForm>
+            <ToastContainer />
           </Container>
-          <div  style= {{"paddingBottom": "5px"}}>
-            <div className="mb-5">
-              <Button className="locationpass-btn" onClick={onDmPassClick}>
-                Save & Continue
-              </Button>
-            </div>
+
+          <div className="d-none d-md-block">
+            <Footer />
           </div>
+
         </div>
       ) : show == 1 ? (
         <div>
           <Container className="dmpass-form mt-2">
+            <Row className="dmpassData d-none d-md-block" style={{ "backgroundColor": "#FF814A" }}>
+              <h6
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                  paddingTop: "10px"
+                }}
+              >
+                Tickets
+              </h6>
+              <h6
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                  paddingBottom: "10px"
+                }}
+              >
+                {showDate}
+              </h6>
+            </Row>
             <Row className="dmpassData">
               <h3
                 style={{
@@ -829,53 +1006,54 @@ function SteperDmpass(shows, ...props) {
               </h3>
               {locServ.length > 0
                 ? locServ?.map((item, key) => (
-                    <Accordion className="p-0" style={{ boxShadow: "none" }}>
-                      <AccordionSummary
-                        className="p-0"
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
+                  <Accordion className="p-0" style={{ boxShadow: "none" }}>
+                    <AccordionSummary
+                      className="p-0"
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    // index=
+                    >
+                      <div
+                        className="location_pass w-100 d-flex"
+                        style={{
+                          border: "1px solid #888",
+                          backgroundColor: " #F8F8F8",
+                          borderRadius: 5,
+                        }}
                       >
-                        <div
-                          className="location_pass w-100 d-flex"
+                        <Form.Check
+                          type="radio"
+                          label={item?.location_name}
+                          name="formHorizontalRadios"
+                          id="formHorizontalRadios2"
                           style={{
-                            border: "1px solid #888",
-                            backgroundColor: " #F8F8F8",
-                            borderRadius: 5,
+                            margin: "8px",
+                            color: "black",
+                            fontWeight: "600",
                           }}
-                        >
-                          <Form.Check
-                            type="radio"
-                            label={item?.location_name}
-                            name="formHorizontalRadios"
-                            id="formHorizontalRadios2"
-                            style={{
-                              margin: "8px",
-                              color: "black",
-                              fontWeight: "600",
-                            }}
-                          />
-                        </div>
-                      </AccordionSummary>
-                      <AccordionDetails className="py-0">
-                        <div className="card-Caintainer">
-                          {item?.services?.length > 0
-                            ? item?.services?.map((service, j) => (
-                                <Cards
-                                  key={j}
-                                  parname={service?.service_name}
-                                  rate={service?.charge}
-                                  value={service?.unit}
-                                  i={key}
-                                  j={j}
-                                  // onMinus={()=> setLocServ([...locServ,])}
-                                  onClick={handleService}
-                                />
-                              ))
-                            : null}
-                        </div>
-                      </AccordionDetails>
-                    </Accordion>
-                  ))
+                        />
+                      </div>
+                    </AccordionSummary>
+                    <AccordionDetails className="py-0">
+                      <div className="card-Caintainer">
+                        {item?.services?.length > 0
+                          ? item?.services?.map((service, j) => (
+                            <Cards
+                              key={j}
+                              parname={service?.service_name}
+                              rate={service?.charge}
+                              value={service?.unit}
+                              i={key}
+                              j={j}
+                              // onMinus={()=> setLocServ([...locServ,])}
+                              onClick={handleService}
+                            />
+                          ))
+                          : null}
+                      </div>
+                    </AccordionDetails>
+                  </Accordion>
+                ))
                 : null}
             </Row>
           </Container>
@@ -888,7 +1066,7 @@ function SteperDmpass(shows, ...props) {
                 </div>
               </Col>
               <Col md={6}>
-                <Button style= {{"width": "100%", "marginLeft": "0px", "borderRadius": "0px"}} className="locationpass-btn" onClick={onLocationsClick}>
+                <Button style={{ width: "100%", marginLeft: "0px", borderRadius: "0px", height: "100%" }} className="locationpass-btn" onClick={onLocationsClick}>
                   Save & Continue
                 </Button>
                 {/* <div className="mb-5">
@@ -922,105 +1100,390 @@ function SteperDmpass(shows, ...props) {
                 </div>
               </Col>
               <Col xs={12} md={6}>
-                {/* <div className="">
-                  <div
-                    className=""
-                    style={{
-                      textAlign: " center",
-                      fontSize: " 20px",
-                      fontWeight: " 600",
-                      color: "white",
-                      padding: " 15px",
-                      backgroundColor: "#0FA453",
-                    }}
-                    onClick={onLocationsClick}
-                  >
-                    Save & Continue
-                  </div>
-                </div> */}
-                <Button className="locationpass-btn" onClick={onLocationsClick}>
+                <Button className="locationpass-btn fw-bold" onClick={onLocationsClick}>
                   Save & Continue
                 </Button>
               </Col>
             </div>
           </div>
+          <div className="d-none d-md-block">
+            <Footer />
+          </div>
         </div>
       ) : show == 2 ? (
         <>
-          <div>
-            <Container>
-              <h3 style={{ textAlign: "center" }}>Confirm your Details</h3>
-              <div className="confirm-main">
-                <div
-                  className="confirm_div"
-                  style={{
-                    textAlign: "center",
-                    backgroundColor: "#F8F8F8",
-                    marginBottom: "10px",
-                  }}
-                >
-                  {locServ.length > 0
-                    ? locServ?.map((item, key) => (
-                        <>
-                          <Row className="mb-1">
-                            <Col xs={6} md={6}>
-                              <span className="confirm-title">
-                                {item?.location_name}
-                              </span>
-                            </Col>
-                            <Col xs={6} md={6}>
-                              <span
-                                style={{
-                                  color: "#FF4A68",
-                                  fontSize: "15px",
-                                  fontWeight: "600",
-                                  cursor: "pointer",
-                                }}
-                                onClick={() => setShow(1)}
-                              >
-                                Change
-                              </span>
-                            </Col>
-                            <Col>
-                              {item?.services?.length > 0
-                                ? item?.services?.map((service, j) => (
+          {!paymentCustom ? <>
+
+            <div>
+              <div>
+                <Container className="dmpass-form mt-2">
+                  <Row className="dmpassData d-none d-md-block" style={{ "backgroundColor": "#FF814A" }}>
+                    <h6
+                      style={{
+                        textAlign: "center",
+                        color: "white",
+                        paddingTop: "10px"
+                      }}
+                    >
+                      Tickets
+                    </h6>
+                    <h6
+                      style={{
+                        textAlign: "center",
+                        color: "white",
+                        paddingBottom: "10px"
+                      }}
+                    >
+                      {showDate}
+                    </h6>
+                  </Row>
+                  <h3 style={{ textAlign: "center" }}>Confirm your Details</h3>
+                  <div className="confirm-main">
+                    <div
+                      className="confirm_div"
+                      style={{
+                        textAlign: "center",
+                        backgroundColor: "#F8F8F8",
+                        marginBottom: "10px",
+                        padding: "20px"
+                      }}
+                    >
+                      {locServ.length > 0
+                        ? locServ?.map((item, key) => (
+                          <>
+                            <Row className="mb-1">
+                              <Col xs={6} md={6} style={{ textAlign: "left" }} >
+                                <span className="confirm-title">
+                                  {item?.location_name}
+                                </span>
+                              </Col>
+                              <Col style={{ textAlign: "right" }} xs={6} md={6}>
+                                <span
+                                  style={{
+                                    color: "#FF4A68",
+                                    fontSize: "15px",
+                                    fontWeight: "600",
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={() => setShow(1)}
+                                >
+                                  Change
+                                </span>
+                              </Col>
+                              <Col>
+                                {item?.services?.length > 0
+                                  ? item?.services?.map((service, j) => (
                                     <Row>
-                                      <Col xs={6} md={6}>
+                                      <Col xs={6} md={6} style={{ textAlign: "left" }}>
                                         <span className="confirm_part">
                                           {service?.service_name} x{" "}
                                           {service?.unit}
                                         </span>
                                       </Col>
-                                      <Col xs={6} md={6}>
+                                      <Col xs={6} md={6} style={{ textAlign: "right" }}>
                                         <span className="confirm_part">
                                           {service?.total_charges}{" "}
                                         </span>
                                       </Col>
+
                                     </Row>
                                   ))
-                                : null}
-                            </Col>
-                          </Row>
-                        </>
-                      ))
-                    : null}
+                                  : null}
+                              </Col>
+                            </Row>
+
+                          </>
+                        ))
+                        : null}
+
+                      <div>
+                        <div className="location-amount">
+                          <span className="location-total">Total Amount</span>
+                          <span className="location-rs">₹ {tot_charges}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Container>
+              </div>
+
+              <div className="d-none d-md-block">
+                <div style={{ textAlign: "center" }}>
+                  <Button
+                    onClick={onTicketCheckClick}
+                    type="submit"
+                    style={{
+                      marginTop: "50px",
+                      width: "200px",
+                      height: "50px",
+                      backgroundColor: "#0fa453",
+                      color: "white",
+                      fontWeight: "900",
+                      fontSize: "15px",
+                      marginBottom: "50px",
+                      border: '1px solid #0fa453'
+                    }}
+                  >
+                    Save & Continue
+                  </Button>
                 </div>
               </div>
-            </Container>
-          </div>
-          <div>
-            <Button className="locationpass-btn" onClick={onTicketCheckClick}>
-              Save & Continue
-            </Button>
-          </div>
+              <div className="d-md-none">
+                <Button
+                  onClick={onTicketCheckClick}
+                  type="submit"
+                  style={{
+                    marginTop: "50px",
+                    width: "100%",
+                    height: "71px",
+                    border: '1px solid #0fa453',
+                    color: "white",
+                    fontWeight: "900",
+                    fontSize: "15px",
+                    backgroundColor: "#0fa453",
+                    borderRadius: 0,
+                    // position: "absolute",
+                    // bottom: 0
+                  }}
+                >
+                  Save & Continue
+                </Button>
+              </div>
+            </div>
+
+            <div className="d-none d-md-block">
+              <Footer />
+            </div>
+          </> : <>
+            <ToastContainer />
+            <div className="d-none d-md-block">
+
+              <Container style={{ width: "75%", marginTop: "50px" }}>
+                <div>
+                  <Formik
+                    validationSchema={schema}
+                    onSubmit={(values) => displayRazorpaysss(values)}
+                    initialValues={{
+                      name: '',
+                      email: '',
+                      number: '',
+                    }}
+                  >
+                    {({
+                      handleSubmit,
+                      handleChange,
+                      handleBlur,
+                      values,
+                      touched,
+                      isValid,
+                      errors,
+                    }) => (
+                      <Form noValidate onSubmit={handleSubmit} style={{ marginLeft: "207px", marginBottom: "50px" }}>
+                        <Row>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+                              md="3"
+                              controlId="validationFormik101"
+                              className="position-relative mb-3"
+                            >
+                              <Form.Label>Name</Form.Label>
+                              <Form.Control
+                                type="text"
+                                name="name"
+                                placeholder="Enter name"
+                                value={values.name}
+                                onChange={handleChange}
+                                isInvalid={!!errors.name}
+                              />
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.name}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+
+                              md="3"
+                              controlId="validationFormik102"
+                              className="position-relative mb-3"
+                            >
+                              <Form.Label>Email</Form.Label>
+                              <Form.Control
+                                type="email"
+                                name="email"
+                                placeholder="Enter email"
+                                value={values.email}
+                                onChange={handleChange}
+                                isInvalid={!!errors.email}
+                              />
+
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.email}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+
+                              md="3"
+                              controlId="validationFormik103"
+                              className="position-relative mb-3"
+
+                            >
+                              <Form.Label>Whatsapp Number</Form.Label>
+                              <Form.Control
+                                type="number"
+                                placeholder="Enter whatsapp number"
+                                name="number"
+                                value={values.number}
+                                onChange={handleChange}
+                                isInvalid={!!errors.number}
+                              />
+
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.number}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                        <Button type="submit" className="locationpass-btn mt-3 mb-5" style={{ margin: " 0% 22% 0%", width: "33%" }} >PAYMENT</Button>
+                      </Form>
+                    )}
+                  </Formik>
+                </div>
+              </Container>
+              <Footer />
+            </div>
+
+            {/*mobile-view*/}
+
+            <div fluid className="d-md-none">
+              <Container style={{ width: "80%", marginTop: "50px" }}>
+                <div>
+                  <Formik
+                    validationSchema={schema}
+                    onSubmit={(values) => displayRazorpaysss(values)}
+                    initialValues={{
+                      name: '',
+                      email: '',
+                      number: '',
+                    }}
+                  >
+                    {({
+                      handleSubmit,
+                      handleChange,
+                      handleBlur,
+                      values,
+                      touched,
+                      isValid,
+                      errors,
+                    }) => (
+                      <Form noValidate onSubmit={handleSubmit} style={{ marginBottom: "40px" }}>
+                        <Row>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+                              md="3"
+                              controlId="validationFormik101"
+                              className="position-relative mb-3"
+                            >
+                              <Form.Label>Name</Form.Label>
+                              <Form.Control
+                                type="text"
+                                name="name"
+                                placeholder="Enter name"
+                                value={values.name}
+                                onChange={handleChange}
+                                isInvalid={!!errors.name}
+                              />
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.name}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+
+                              md="3"
+                              controlId="validationFormik102"
+                              className="position-relative mb-3"
+                            >
+                              <Form.Label>Email</Form.Label>
+                              <Form.Control
+                                type="email"
+                                name="email"
+                                placeholder="Enter email"
+                                value={values.email}
+                                onChange={handleChange}
+                                isInvalid={!!errors.email}
+                              />
+
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.email}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                          <Col xs={12} md={8}>
+                            <Form.Group
+
+                              md="3"
+                              controlId="validationFormik103"
+                              className="position-relative mb-3"
+
+                            >
+                              <Form.Label>Whatsapp Number</Form.Label>
+                              <Form.Control
+                                type="number"
+                                placeholder="Enter whatsapp number"
+                                name="number"
+                                value={values.number}
+                                onChange={handleChange}
+                                isInvalid={!!errors.number}
+                              />
+
+                              <Form.Control.Feedback type="invalid" tooltip>
+                                {errors.number}
+                              </Form.Control.Feedback>
+                            </Form.Group>
+                          </Col>
+                        </Row>
+                        <div className="pay-div">
+                          <Button
+                            variant="primary"
+                            size="lg"
+                            type="submit"
+                            style={{
+                              marginTop: "15px",
+                              fontWeight: "600",
+                              fontSize: "20px",
+                              width: "100%",
+                              backgroundColor: "#0FA453",
+                            }}
+                          >
+                            PAYMENT
+                          </Button>
+
+
+                        </div>
+
+                      </Form>
+                    )}
+                  </Formik>
+                </div>
+              </Container>
+
+            </div>
+
+
+          </>}
+
         </>
-      ) : (
-        <>
+      ) : show == 3 ?
+        (<>
           <div className="d-none d-md-block">
             <Container style={{ width: "70%", paddingTop: "20px" }}>
               <Row>
                 <Col>
-                  <div style={{ marginTop: "-50px" }}>
+                  <div style={{ marginTop: "15px" }}>
                     <img src={congo} alt="" style={{ height: "500px" }} />
                   </div>
                 </Col>
@@ -1059,7 +1522,7 @@ function SteperDmpass(shows, ...props) {
                           />
                           <span> Whatsapp Link</span>
                         </Button>
-                      </div>
+                      </div> 
 
                       <div>
                         <Button
@@ -1077,23 +1540,30 @@ function SteperDmpass(shows, ...props) {
                             to={`/dm-detail/${dmpass_id}`}
                             style={{ textDecoration: "none" }}
                           > */}
-                            Download E-ticket
+                          Download E-ticket
                           {/* </Link> */}
                         </Button>
                       </div>
 
                       <div>
-                   <Button style={{
-                    width: "186px",
-                    textAlign: "center",
-                    height: "52px",
-                    borderRadius: "9px",
-                    backgroundColor: "",
-                    fontWeight:"bold",
-                    marginBottom:"20px"
-                  }} 
-                   >Sent by Email</Button>
-                   </div>
+                        <Button style={{
+                          width: "186px",
+                          textAlign: "center",
+                          height: "52px",
+                          borderRadius: "9px",
+                          backgroundColor: "",
+                          fontWeight: "bold",
+                          marginBottom: "20px"
+                        }}
+                        >
+                          <Link
+                            to={`/dm-detail/${dmpass_id}`}
+                            style={{ textDecoration: "none", color: "#fff" }}
+                          >
+                            View Ticket
+                          </Link>
+                        </Button>
+                      </div>
                       <div>
                         <Button
                           onClick={() => history.push("/")}
@@ -1115,37 +1585,146 @@ function SteperDmpass(shows, ...props) {
                 </Col>
               </Row>
             </Container>
-            {/* <Footer /> */}
+            <Footer />
           </div>
 
           <div className="d-md-none">
             <Container style={{ width: "", paddingTop: "20px" }}>
-              <div>
-                <div style={{ textAlign: "center", marginTop: "15px" }}>
-                  <span style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</span>
-                  <br />
-                  <span style={{ color: "black", fontSize: "13px" }}>
-                    Your Passes are ready
-                  </span>
-                </div>
-                <Col xs={12} md={6}>
-                  <div style={{ marginTop: "" }}>
-                    <img
-                      src={mobile}
-                      alt=""
-                      style={{ width: "100%", height: "" }}
-                    />
-                  </div>
-                </Col>
-                <Col xs={12} md={6}>
-                  <div style={{ marginBottom: "20px", textAlign: "center" }}>
-                    <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
-                    <span style={{ color: "black", marginBottom: "50px" }}>
-                      {dmpass_id}
+              {/* <div>
+                  <div style={{ textAlign: "center", marginTop: "15px" }}>
+                    <span style={{ fontWeight: "bolder" }}>CONGRATULATIONS!</span>
+                    <br />
+                    <span style={{ color: "black", fontSize: "13px" }}>
+                      Your Passes are ready
                     </span>
                   </div>
-                  <div style={{ textAlign: "center" }}>
+                  <Col xs={12} md={6}>
+                    <div style={{ marginTop: "" }}>
+                      <img
+                        src={congo}
+                        alt=""
+                        style={{ width: "100%", height: "" }}
+                      />
+                    </div>
+                  </Col>
+                  <Col xs={12} md={6}>
+                    <div style={{ marginBottom: "20px", textAlign: "center" }}>
+                      <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
+                      <span style={{ color: "black", marginBottom: "50px" }}>
+                        {dmpass_id}
+                      </span>
+                    </div>
+                    <div style={{ textAlign: "center" }}>
+                      <div>
+                        <Button
+                          className="btn btn-success"
+                          style={{
+                            width: "186px",
+                            textAlign: "center",
+                            height: "52px",
+                            borderRadius: "9px",
+                            backgroundColor: "#0fa453",
+                            fontWeight: "bold",
+                            marginBottom: "20px",
+                          }}
+                        >
+                          <FaWhatsapp
+                            style={{
+                              fontWeight: "bold",
+                              fontSize: "30px",
+                            }}
+                          />
+                          <span> Whatsapp Link</span>
+                        </Button>
+                      </div>
+                    </div>
                     <div>
+                      <Button style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: "",
+                        fontWeight: "bold",
+                        marginBottom: "20px"
+                      }}
+                      >
+                        <Link
+                          to={`/dm-detail/${dmpass_id}`}
+                          style={{ textDecoration: "none", color: "#fff" }}
+                        >
+                          View Ticket
+                        </Link>
+                      </Button>
+                    </div>
+
+                    <div>
+                      <Button
+                        style={{
+                          width: "186px",
+                          textAlign: "center",
+                          height: "52px",
+                          borderRadius: "9px",
+                          backgroundColor: " #FF4A68",
+                          fontWeight: "bold",
+                          marginBottom: "20px",
+                        }}
+                      >
+                        Download E-ticket
+                      </Button>
+                    </div>
+                    <div>
+                      <Button style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: "",
+                        fontWeight: "bold",
+                        marginBottom: "20px"
+                      }}
+                      >Sent by Email</Button>
+                    </div>
+
+
+                    <div>
+                      <Button
+                        onClick={() => history.push("/")}
+                        style={{
+                          width: "186px",
+                          textAlign: "center",
+                          height: "52px",
+                          borderRadius: "9px",
+                          backgroundColor: "#864BD8",
+                          fontWeight: "bold",
+                          marginBottom: "20px",
+                        }}
+                      >
+                        Back to Home
+                      </Button>
+                    </div>
+                    </div> 
+
+                  </Col>
+                </div> */}
+              <Col xs={12} md={6}>
+                <div style={{ marginTop: "" }}>
+                  <img
+                    src={congo}
+                    alt=""
+                    style={{ width: "100%", height: "" }}
+                  />
+                </div>
+              </Col>
+              <Col xs={12} md={6}>
+                <div style={{ marginBottom: "20px", textAlign: "center" }}>
+                  <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
+                  <span style={{ color: "black", marginBottom: "50px" }}>
+                    {dmpass_id}
+                  </span>
+                </div>
+                <div style={{ textAlign: "center" }}>
+                  {/* <div>
                       <Button
                         className="btn btn-success"
                         style={{
@@ -1166,59 +1745,67 @@ function SteperDmpass(shows, ...props) {
                         />
                         <span> Whatsapp Link</span>
                       </Button>
-                    </div>
-                    <div>
-                      <Button
-                        style={{
-                          width: "186px",
-                          textAlign: "center",
-                          height: "52px",
-                          borderRadius: "9px",
-                          backgroundColor: " #FF4A68",
-                          fontWeight: "bold",
-                          marginBottom: "20px",
-                        }}
-                      >
-                        Download E-ticket
-                      </Button>
-                    </div>
-                    <div>
-                   <Button style={{
-                    width: "186px",
-                    textAlign: "center",
-                    height: "52px",
-                    borderRadius: "9px",
-                    backgroundColor: "",
-                    fontWeight:"bold",
-                    marginBottom:"20px"
-                  }} 
-                   >Sent by Email</Button>
-                   </div>
-                    <div>
-                      <Button
-                        onClick={() => history.push("/")}
-                        style={{
-                          width: "186px",
-                          textAlign: "center",
-                          height: "52px",
-                          borderRadius: "9px",
-                          backgroundColor: "#864BD8",
-                          fontWeight: "bold",
-                          marginBottom: "20px",
-                        }}
-                      >
-                        Back to Home
-                      </Button>
-                    </div>
+                    </div> */}
+                  <div>
+                    <Button style={{
+                      width: "186px",
+                      textAlign: "center",
+                      height: "52px",
+                      borderRadius: "9px",
+                      backgroundColor: "",
+                      fontWeight: "bold",
+                      marginBottom: "20px"
+                    }}
+                    ><Link
+                      to={`/dm-detail/${dmpass_id}`}
+                      style={{ textDecoration: "none", color: "#fff" }}
+                    >
+                        View Ticket
+                      </Link></Button>
                   </div>
-                </Col>
-              </div>
+                  <div>
+                    <Button
+                      style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: " #FF4A68",
+                        fontWeight: "bold",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      Download E-ticket
+                    </Button>
+                  </div>
+
+                  <div>
+                    <Button
+                      onClick={() => history.push("/")}
+                      style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        backgroundColor: "#864BD8",
+                        fontWeight: "bold",
+                        marginBottom: "20px",
+                      }}
+                    >
+                      Back to Home
+                    </Button>
+                  </div>
+                </div>
+              </Col>
             </Container>
           </div>
-        </>
-      )}
+
+
+        </>) : <></>}
+
     </>
   );
 }
+
 
 export default SteperDmpass;

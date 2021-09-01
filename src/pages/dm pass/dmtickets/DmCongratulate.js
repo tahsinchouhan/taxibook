@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import mobile from "../../../assets/img/mobile.png";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function DmCongratulate() {
   const history = useHistory();
@@ -24,7 +25,7 @@ function DmCongratulate() {
         <Container style={{ width: "70%", paddingTop: "20px" }}>
           <Row>
             <Col>
-              <div style={{ marginTop: "-50px" }}>
+              <div style={{ marginTop: "15px" }}>
                 <img src={mobile} alt="" style={{ height: "500px" }} />
               </div>
             </Col>
@@ -42,7 +43,7 @@ function DmCongratulate() {
                   </span>
                 </div>
                 <div>
-                  <div>
+                  {/* <div>
                     <Button
                       className="btn btn-success"
                       style={{
@@ -63,24 +64,9 @@ function DmCongratulate() {
                       />
                       <span> Whatsapp Link</span>
                     </Button>
-                  </div>
-                  <div>
-                    <Button
-                      style={{
-                        width: "186px",
-                        textAlign: "center",
-                        height: "52px",
-                        borderRadius: "9px",
-                        backgroundColor: " #FF4A68",
-                        fontWeight: "bold",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      Download E-ticket
-                    </Button>
-                  </div>
+                  </div> */}
 
-                  <div>
+                  {/* <div>
                    <Button style={{
                     width: "186px",
                     textAlign: "center",
@@ -90,23 +76,86 @@ function DmCongratulate() {
                     fontWeight:"bold",
                     marginBottom:"20px"
                   }} 
-                   >Sent by Email</Button>
-                   </div>
+                   >Download E-ticket</Button>
+                   </div> */}
 
                   <div>
-                    <Button
+                    {/* <Button
                       onClick={() => history.push("/")}
                       style={{
                         width: "186px",
                         textAlign: "center",
                         height: "52px",
                         borderRadius: "9px",
+                        borderColor: "#864BD8",
                         backgroundColor: "#864BD8",
                         fontWeight: "bold",
                         marginBottom: "20px",
                       }}
                     >
                       Back to Home
+                    </Button> */}
+                    <Link to="/">Back to Home</Link>
+                  </div>
+                  <div>
+                    <Button
+                      style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        borderColor: " #FF4A68",
+                        backgroundColor: " #FF4A68",
+                        fontWeight: "bold",
+                        marginTop: "20px",
+                      }}
+                    >
+                      <Link
+                        to={`/dm-detail/${dmpass_id}`}
+                        style={{ textDecoration: "none", color: "#fff" }}
+                      >
+                        View Ticket
+                      </Link>
+                    </Button>
+                    <Button
+                      style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        borderColor: "#01e675",
+                        backgroundColor: "#01e675",
+                        fontWeight: "bold",
+                        marginTop: "20px",
+                      }}
+                    >
+                      <a
+                        href={`https://wa.me?text=http://15.206.92.158/dm-detail/${dmpass_id}`}
+                        style={{ textDecoration: "none", color: "#fff" }}
+                        target="_blank"
+                      >
+                        Share in Whatsapp1
+                      </a>
+                    </Button>
+                    <Button
+                      style={{
+                        width: "186px",
+                        textAlign: "center",
+                        height: "52px",
+                        borderRadius: "9px",
+                        borderColor: " #FF4A68",
+                        backgroundColor: " #FF4A68",
+                        fontWeight: "bold",
+                        marginTop: "20px",
+                      }}
+                    >
+                      <a
+                        href={`https://wa.me/send?text=http://15.206.92.158/dm-detail/${dmpass_id}`}
+                        style={{ textDecoration: "none", color: "#fff" }}
+                        target="_blank"
+                      >
+                        Share in Whatsapp2
+                      </a>
                     </Button>
                   </div>
                 </div>
@@ -152,15 +201,15 @@ function DmCongratulate() {
                 />
               </div>
             </Col>
-            <Col xs={12} md={6}>            
-                <div style={{ marginBottom: "20px", textAlign: "center" }}>
-                  <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
-                  <span style={{ color: "black", marginBottom: "50px" }}>
-                    {dmpass_id}
-                  </span>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                  <div>
+            <Col xs={12} md={6}>
+              <div style={{ marginBottom: "20px", textAlign: "center" }}>
+                <h3 style={{ fontWeight: "bolder" }}>Transaction ID</h3>
+                <span style={{ color: "black", marginBottom: "50px" }}>
+                  {dmpass_id}
+                </span>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                {/* <div>
                     <Button
                       className="btn btn-success"
                       style={{
@@ -181,8 +230,8 @@ function DmCongratulate() {
                       />
                       <span> Whatsapp Link</span>
                     </Button>
-                  </div>
-                  <div>
+                  </div> */}
+                {/* <div>
                     <Button
                       style={{
                         width: "186px",
@@ -196,9 +245,9 @@ function DmCongratulate() {
                     >
                       Download E-ticket
                     </Button>
-                  </div>
+                  </div> */}
 
-                  <div>
+                {/* <div>
                    <Button style={{
                     width: "186px",
                     textAlign: "center",
@@ -209,25 +258,93 @@ function DmCongratulate() {
                     marginBottom:"20px"
                   }} 
                    >Sent by Email</Button>
-                   </div>
-                   
-                  <div>
-                    <Button
-                      onClick={() => history.push("/")}
-                      style={{
-                        width: "186px",
-                        textAlign: "center",
-                        height: "52px",
-                        borderRadius: "9px",
-                        backgroundColor: "#864BD8",
-                        fontWeight: "bold",
-                        marginBottom: "20px",
-                      }}
-                    >
-                      Back to Home
-                    </Button>
-                  </div>
-                </div>              
+                   </div> */}
+
+                {/* <div> */}
+                <Button
+                  style={{
+                    width: "186px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    borderColor: "#01e675",
+                    backgroundColor: "#01e675",
+                    fontWeight: "bold",
+                    marginTop: "20px",
+                  }}
+                >
+                  <a
+                    href={`https://wa.me?text=http://15.206.92.158/dm-detail/${dmpass_id}`}
+                    style={{ textDecoration: "none", color: "#fff" }}
+                    target="_blank"
+                  >
+                    Share in Whatsapp1
+                  </a>
+                </Button>
+                <Button
+                  style={{
+                    width: "186px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    borderColor: " #FF4A68",
+                    backgroundColor: " #FF4A68",
+                    fontWeight: "bold",
+                    marginTop: "20px",
+                    marginBottom: "90px",
+                  }}
+                >
+                  <a
+                    href={`https://wa.me/send?text=http://15.206.92.158/dm-detail/${dmpass_id}`}
+                    style={{ textDecoration: "none", color: "#fff" }}
+                    target="_blank"
+                  >
+                    Share in Whatsapp2
+                  </a>
+                </Button>
+                <Button
+                  style={{
+                    // width: "186px",
+                    textAlign: "center",
+                    borderColor: " #FF4A68",
+                    backgroundColor: " #FF4A68",
+                    fontWeight: "bold",
+                    height: "86px",
+                    borderRadius: "0",
+                    position: "fixed",
+                    width: "100%",
+                    bottom: "0",
+                    left: "0"
+                  }}
+                >
+                  <Link
+                    to={`/dm-detail/${dmpass_id}`}
+                    style={{ textDecoration: "none", color: "#fff" }}
+                  >
+                    View Ticket
+                  </Link>
+                </Button>
+
+                {/* </div> */}
+                <div>
+                  {/* <Button
+                    onClick={() => history.push("/")}
+                    style={{
+                      width: "186px",
+                      textAlign: "center",
+                      height: "52px",
+                      borderRadius: "9px",
+                      borderColor: "#864BD8",
+                      backgroundColor: "#864BD8",
+                      fontWeight: "bold",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    Back to Home
+                  </Button> */}
+                  <Link to="/">Back to Home</Link>
+                </div>
+              </div>
             </Col>
           </div>
         </Container>

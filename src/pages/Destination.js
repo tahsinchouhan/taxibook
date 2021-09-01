@@ -77,7 +77,7 @@ function Destination() {
               <Form.Control
                 type="text"
                 name="search"
-                placeholder="search...."
+                placeholder="search destinations"
                 style={{ marginTop: "-10px" }}
                 onChange={(e) => searchingData(e.target.value)}
               />
@@ -99,8 +99,46 @@ function Destination() {
         </div>
         <>
           <h2 className="package__title mb-5">
-            <span>Destinations</span>{" "}
+            <span>Popular Destinations</span>
           </h2>
+
+          {/* <div>
+            <div>
+            {destinations.map((item) => {
+              return (
+                <div
+                  onClick={() =>
+                    history.push({
+                      pathname: `/destination_details/${item.title}`,
+                      id: item._id,
+                    })
+                  }
+                  style={{
+                    width: 300,
+                    height: 200,
+                    // marginRight: 15,
+                    marginTop: 71,
+                  }}
+                >
+                  <Image
+                    draggable={false}
+                    className=""
+                    style={{ width: "100%", height: "100%", borderRadius: 10 }}
+                    src={item.upload_images}
+                  />
+                  <div style={{ color: "black" }} className="package__trip d-flex">
+                    <h6 className="packages__block-title mt-3 mb-0">
+                      {item.title}
+                    </h6>
+                    <small className="packages__block-subtitle">
+                      {item.sub_title}
+                    </small>
+                  </div>
+                </div>
+              );
+            })}
+            </div>
+          </div> */}
 
           <div
             style={{
@@ -124,19 +162,20 @@ function Destination() {
                     width: 300,
                     height: 200,
                     marginRight: 15,
-                    marginTop: 100,
+                    marginTop: 71,
                   }}
                 >
                   <Image
                     draggable={false}
+                    // className="img-fluid"
                     style={{ width: "100%", height: "100%", borderRadius: 10 }}
                     src={item.upload_images}
                   />
-                  <div style={{ color: "black" }} className="package__trip">
+                  <div style={{ color: "black" }} className="package__trip ">
                     <h6 className="packages__block-title mt-3 mb-0">
                       {item.title}
                     </h6>
-                    <small className="packages__block-subtitle">
+                    <small className="packages__block-subtitle mt-3 mb-2" style={{color:"#757575"}} >
                       {item.sub_title}
                     </small>
                   </div>

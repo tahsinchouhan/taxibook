@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Row, Col, Form, Container } from "react-bootstrap";
+import { AvForm, AvField } from "availity-reactstrap-validation";
 import Header from "../../../components/Header";
 import doodle from "../../../assets/img/doodle.png";
 import DatePicker from "react-datepicker";
@@ -7,16 +8,18 @@ import calendar from "../../../assets/img/calendar.png";
 import { Redirect, useHistory } from "react-router-dom";
 import Footer from "../../travesaly/Footer";
 import { API_PATH } from "../../../Path/Path";
-
-import { useDispatch, useSelector } from "react-redux";
+import { FaSpinner } from 'react-icons/fa';
+import { connect, useDispatch, useSelector } from "react-redux";
 import { fetchStart, getOtp, hideMessage, setDmData, verifyOtp } from "../../../redux/actions";
 
 import Loader from "../../../components/Loader";
 import Message from "../../../components/Message";
 
+
 function Tickets1() {
   const history = useHistory();
   const [routes, setRoutes] = useState([]);
+  const [number, setNumber] = useState([]);
 
   const dispatch = useDispatch()
   const { error, loading, message } = useSelector(state => state.commonReducer)
@@ -62,9 +65,9 @@ function Tickets1() {
   ));
   const onStepreClick = () => {
     console.log("steper")
-    if(user_data !==null){
+    if (user_data !== null) {
       history.push("/steper_dmpass")
-    }else{
+    } else {
       dispatch(fetchStart())
       dispatch(verifyOtp(`91${mobile}`, otp))
     }
@@ -83,9 +86,14 @@ function Tickets1() {
   // }, [dmData])
 
   const [otp, setOtp] = useState('');
+  const sendOtp = () => {
+    // console.log("object::::::::::::::",number)
+    dispatch(getOtp(number))
+  }
 
   const handleMobile = (e) => {
     console.log("object", e.target.value);
+    setNumber(e.target.value)
     let mob = e.target.value;
     if (mob.length > 9) {
       fetchOtp(e.target.value)
@@ -99,41 +107,45 @@ function Tickets1() {
   return (
     <>
       <div>
-        <Header />
-        {loading ? <Loader /> : null}
-        {message ? <Message msg={message} type="success" /> : null}
-        {error ? <Message msg={error} type="error" /> : null}
-        {/* {(user_data !== null) ? <Redirect to='/busdetail' /> : null} */}
-        <Container className="">
-          <div style={{ textAlign: "center", margin: "50px" }}>
-            <div style={{ margin: "10px" }}>
-              <img src={doodle} alt="doodle" style={{ height: "200px" }} />
-              <h5 style={{ margin: "10px", color: "black", fontWeight: "700" }}>
-                Tickets
-              </h5>
+        <AvForm>
+          <Header />
+          {loading ? <Loader /> : null}
+          {message ? <Message msg={message} type="success" /> : null}
+          {error ? <Message msg={error} type="error" /> : null}
+          {/* {(user_data !== null) ? <Redirect to='/busdetail' /> : null} */}
+          <Container className="">
+            <div style={{ textAlign: "center", margin: "50px" }}>
+              <div style={{ margin: "10px" }}>
+                <img src={doodle} alt="doodle" style={{ height: "60px" }} />
+                <h5 style={{ margin: "10px", color: "black", fontWeight: "700" }}>
+                  Tickets
+                </h5>
+              </div>
+              <span
+                style={{
+                  margin: "10px",
+                  color: "black",
+                  fontWeight: "500",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Book tickets to your favourite <br />
+                destinations right from your mobile
+              </span>
             </div>
-            <span
-              style={{
-                margin: "10px",
-                color: "black",
-                fontWeight: "500",
-                whiteSpace: "nowrap",
-              }}
-            >
-              Book tickets to your favourite <br />
-              destinations right from your mobile
-            </span>
-          </div>
-          <Container style={{ width: "%" }}>
-            <Row className="row justify-content-center">
-              {
 
-                (user_data === null)
-                  ?
-                  <>
-                    <Col xs={12} md={3} className="">
-                      <Form.Group as={Col} controlId="formGridState">
-                        <Form.Label
+            <Container>
+
+              <Row className="row justify-content-center">
+                {
+
+                  (user_data === null)
+                    ?
+                    <>
+                      <Col xs={12} md={3} className="">
+
+
+                        <label
                           className="formselect"
                           style={{
                             fontWeight: "bolder",
@@ -143,31 +155,44 @@ function Tickets1() {
                             marginBottom: "5px",
                           }}
                         >
-                          Mobile
-                        </Form.Label>
-                        <Form.Control
-                          className="location-userdatas"
-                          placeholder=" Enter Mobile No"
-                          style={{ border: "none", fontSize: "12px" }}
+                          Enter mobile number
+                        </label>
+
+                        <AvField
+                          name="Mobile Number"
+                          type="text"
+                          className="location-userdatas form-control"
+                          placeholder="Enter mobile number"
+                          style={{ border: "none", fontSize: "12px", margin: "0px !important" }}
                           value={mobile} onChange={handleMobile}
+                          validate={{
+                            required: {
+                              value: true,
+                              errorMessage: "Enter mobile number",
+                            },
+
+                          }}
+
+                        />
+
+
+                        <Button 
+                        // onClick={sendOtp}
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "#FF4A68",
+                            float: "right",
+                            fontSize: "12px",
+                          }}
                         >
-                        </Form.Control>
-                      </Form.Group>
-                      <Button
-                        style={{
-                          backgroundColor: "transparent",
-                          border: "none",
-                          color: "#FF4A68",
-                          float: "right",
-                          fontSize: "12px",
-                        }}
-                      >
-                        Sent OTP
-                      </Button>
-                    </Col>
-                    <Col xs={12} md={3} className="">
-                      <Form.Group as={Col} controlId="formGridState">
-                        <Form.Label
+                          {loading ? 
+                          <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : 
+                          <>Sent OTP</>} 
+                        </Button>
+                      </Col>
+                      <Col xs={12} md={3} className="">
+                        <label
                           className="formselect"
                           style={{
                             fontSize: "12px",
@@ -177,110 +202,133 @@ function Tickets1() {
                           }}
                         >
                           Enter OTP
-                        </Form.Label>
 
-                        <Form.Control
+                        </label>
+
+                        <AvField
+                          name="OTP"
                           type="text"
-                          className="location-userdatas"
+                          className="location-userdatas form-control"
                           placeholder="Enter the 6 digit OTP"
                           style={{ border: "none", height: "50px", fontSize: "12px" }}
                           value={otp} onChange={(e) => setOtp(e.target.value)}
+                          validate={{
+                            required: {
+                              value: true,
+                              errorMessage: "Enter the 6 digit OTP",
+                            },
+
+                          }}
                         />
+
+
+                      </Col>
+
+                    </>
+                    :
+                    <Col xs={12} md={3}>
+                      <Form.Group
+                        // className="location-userdatas"
+                        controlId="exampleForm.ControlInput1"
+                      >
+                        <Form.Label
+                          className="formselect"
+                          style={{
+                            fontSize: "12px",
+                            fontWeight: "bolder",
+                            paddingLeft: "4px",
+                            color: "black",
+                            marginBottom: "5px",
+                          }}
+                        >
+                          Journey Date
+                        </Form.Label>
+                        <div
+                          className="location-userdatas"
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            overflow: "hidden",
+                          }}
+                        >
+                          <img
+                            className="location-userdatas-calendar"
+                            src={calendar}
+                            style={{ width: 25, height: 30 }}
+                          />
+                          <DatePicker
+                            selected={startDate}
+                            // onChange={(date) => setStartDate(date)}
+                            onChange={handleDate}
+                            customInput={<ExampleCustomInput />}
+                            dateFormat="dd MMM"
+
+                          />
+                        </div>
                       </Form.Group>
                     </Col>
-                  </>
-                  :
-                  <Col xs={12} md={3} className="" style={{}}>
-                    <Form.Group
-                      // className="location-userdatas"
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label
-                        className="formselect"
-                        style={{
-                          fontSize: "12px",
-                          fontWeight: "bolder",
-                          paddingLeft: "4px",
-                          color: "black",
-                          marginBottom: "5px",
-                        }}
-                      >
-                        Journey Date
-                      </Form.Label>
-                      <div
-                        className="location-userdatas"
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          overflow: "hidden",
-                        }}
-                      >
-                        <img
-                          className="location-userdatas-calendar"
-                          src={calendar}
-                          style={{ width: 25, height: 30 }}
-                        />
-                        <DatePicker
-                          selected={startDate}
-                          // onChange={(date) => setStartDate(date)}
-                          onChange={handleDate}
-                          customInput={<ExampleCustomInput />}
-                          dateFormat="dd MMM"
-                        />
-                      </div>
-                    </Form.Group>
-                  </Col>
-              }
-            </Row>
+                }
+              </Row>
+            </Container>
+
           </Container>
-        </Container>
-        <div className="d-none d-md-block">
-          <div style={{ textAlign: "center" }}>
+
+
+          <div className="d-none d-md-block">
+            <div style={{ textAlign: "center" }}>
+              <Button
+                type="submit"
+                style={{
+                  marginTop: "50px",
+                  width: "19%",
+                  height: "50px",
+                  backgroundColor: "#FF814A",
+                  color: "white",
+                  fontWeight: "900",
+                  fontSize: "15px",
+                  marginBottom: "50px",
+                  border: '1px solid #FF814A'
+                }}
+                onClick={onStepreClick}
+              >
+                Book Tickets
+              </Button>
+            </div>
+            <Footer />
+          </div>
+          <div className="d-md-none">
             <Button
-              className=""
+              type="submit"
               style={{
                 marginTop: "50px",
-                width: "19%",
-                height: "50px",
+                width: "100%",
+                height: "71px",
                 backgroundColor: "#FF814A",
                 color: "white",
                 fontWeight: "900",
                 fontSize: "15px",
-                marginBottom: "50px",
-                border: '1px solid #FF814A'
+                border: '1px solid #FF814A',
+                borderRadius: 0,
+                position: "absolute",
+                bottom: 0
               }}
               onClick={onStepreClick}
             >
               Book Tickets
             </Button>
           </div>
-          <Footer />
-        </div>
-
-        <div className="d-md-none">
-          <Button
-            className=""
-            style={{
-              marginTop: "50px",
-              width: "100%",
-              height: "71px",
-              backgroundColor: "#FF814A",
-              color: "white",
-              fontWeight: "900",
-              fontSize: "15px",
-              border: '1px solid #FF814A',
-              borderRadius: 0,
-              position:"absolute",
-              bottom:0
-            }}
-            onClick={onStepreClick}
-          >
-            Book Tickets
-          </Button>
-        </div>
+        </AvForm>
       </div>
     </>
   );
 }
 
-export default Tickets1;
+export default Tickets1
+// const mapStateToProps = ({ commonReducer }) => {
+//   const { loading } = commonReducer;
+//   return { loading };
+// };
+
+// export default connect(
+//   mapStateToProps,
+// )(Tickets1);

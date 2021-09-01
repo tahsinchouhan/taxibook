@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Header from "../components/Header";
 import Footer from "../pages/travesaly/Footer";
+import { Link,useHistory } from "react-router-dom";
 
 const Operators = () => {
   useEffect(() => {
@@ -36,14 +37,22 @@ const Operators = () => {
                 will be provided from admin panel you can enter all your package
                 details along with photos
               </p>
+              <Link
+                    to="/add-form"
+                    target="_blank"
+                    className="link"
+                  >
+                    <a  style={{ textDecoration: "none" }} className="footer__item-title">Registration Link</a>
+              </Link>
             </div>
           </Container>
+          <br />
           <Container>
             <div className="block">
               <h4 className="block__title">
                 <span>Booking </span> details
               </h4>
-              <div className="pb-4">
+              <div className="">
                 <p className="pt-3">Easy Listing and Booking Process. </p>
                 <p>
                   You can simply create your package form dashboard you need
@@ -86,10 +95,18 @@ const Operators = () => {
                   </li>
                 </ul>
               </div>
-            </div>
+              <Link
+                  to="/add-form"
+                  target="_blank"
+                  className="link"
+                >
+                  <a  style={{ textDecoration: "none" }} className="footer__item-title">Registration Link</a>
+            </Link>
+            </div>  
           </Container>
         </div>
       </Container>
+      <br />
       <Footer />
     </>
   );

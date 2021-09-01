@@ -53,7 +53,7 @@ function LoginModal({ show, handleClose }) {
               <Row>
                 <Col style={{ alignSelf: "center" }}>
                   <div style={{ textAlign: "center" }}>
-                    <img src={logo} alt="" className="login-logo" />
+                    <img src={logo} alt="Login logo" className="login-logo" />
                   </div>
                 </Col>
                 <Col>

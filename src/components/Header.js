@@ -94,7 +94,7 @@ function Header() {
               <NavLink to="/" className="sidebar__navlink">
                 HOME
               </NavLink>
-              <NavLink className="sidebar__navlink" to="/explores">
+              <NavLink className="sidebar__navlink" to="/explore">
                 EXPLORE
               </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/select-booking"> */}
@@ -102,7 +102,7 @@ function Header() {
                 BOOKING
               </NavLink>
               <NavLink className="sidebar__navlink" to="/dmpass">
-                DM PASS
+                TRAVEL PASS
               </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/tickets_sraech"> */}
               <NavLink className="sidebar__navlink" to="/tickets">
@@ -141,7 +141,7 @@ function Header() {
               <NavLink className="sidebar_item" to="/">
                 HOME
               </NavLink>
-              <NavLink className="sidebar_item" to="/explores">
+              <NavLink className="sidebar_item" to="/explore">
                 EXPLORE
               </NavLink>
               {/* <NavLink className="sidebar_item" to="/select-booking"> */}
@@ -149,7 +149,7 @@ function Header() {
                 BOOKING
               </NavLink>
               <NavLink className="sidebar_item" to="/dmpass">
-                DM PASS
+                TRAVEL PASS
               </NavLink>
               {/* <NavLink className="sidebar_item" to="/tickets_sraech"> */}
               <NavLink className="sidebar_item" to="/tickets">

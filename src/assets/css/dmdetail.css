@@ -38,6 +38,7 @@
 .dm__card_body .right{
     color: #000;
     font-weight: 700;
+    align-self: center;
 }
 
 .dm__title{
@@ -155,6 +156,7 @@
     color: white;
     display: flex;
     align-items: center;
+    position: fixed;
 }
 
 .dmpass__mob_header_title{

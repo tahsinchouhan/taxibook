@@ -39,10 +39,10 @@ function EnquireModal({ show, handleClose }) {
                   placeholder="Enter Your message (Destination)"
                 />
                 <br />
-                <Form.Control type="text" placeholder="packages ID" />
+                {/* <Form.Control type="text" placeholder="packages ID" />
                 <br />
                 <Form.Control type="text" placeholder="Destination ID" />
-                <br />               
+                <br />                */}
               </Form.Group>
 
               {/* <Form.Group className="mb-3" controlId="formBasicPassword">

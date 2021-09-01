@@ -45,7 +45,7 @@ function Footer() {
                 </div>
                 <div className="footer__item">
                   <Link
-                    to="/add-form"
+                    to="/registrationguide"
                     target="_blank"
                     className="link"
                     // onClick={() =>
@@ -53,16 +53,16 @@ function Footer() {
                     //     "https://bhuwnesh947131.typeform.com/to/SMfaeorp")
                     // }
                   >
-                    <h5 className="footer__item-title">Registration From</h5>
+                    <h5 className="footer__item-title">Registration Form</h5>
                   </Link>
                   <small>Vendor & Organization Registration</small>
                 </div>
-                {/* <div className="footer__item">
+                <div className="footer__item">
                   <Link to="/registrationguide" className="link">
                     <h5 className="footer__item-title">Booking Details</h5>
                   </Link>
                   <small>Map, Guides and Packages </small>
-                </div> */}
+                </div>
               </div>
             </Col>
             

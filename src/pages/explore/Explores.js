@@ -92,8 +92,10 @@ const Explores = () => {
       })
       .catch((e) => console.log(e));
   };
+  
 
   const getPackages = () => {
+
     fetch(API_PATH + "/api/v1/packages/location", {
       method: "POST",
       headers: {
@@ -107,7 +109,7 @@ const Explores = () => {
       .then((response) => response.json())
       .then((json) => {
         if (json.data !== undefined) {
-          console.log(json.data)
+          console.log("json.data",json.data)
           setPackages(json.data);
         }
       })
@@ -120,6 +122,10 @@ const Explores = () => {
       id: value._id,
     });
   };
+
+  const goToSearch = ()=>{
+    history.push("/search")
+  } 
 
   return (
     <>
@@ -136,9 +142,9 @@ const Explores = () => {
             <h1 className="search__title pt-5">Near You</h1>
             <div className="search__inner">
               <div className="search__block">
-                <div className="block__location">
-                  <label className="block--text code">
-                    Search destinations
+                <div className="block__location" onClick={goToSearch}>
+                  <label className="block--text code" >
+                    Search Destinations
                   </label>
                 </div>
                 <button className="search__btn">
@@ -158,17 +164,18 @@ const Explores = () => {
         {tripPackage.length > 0
           ? tripPackage.map((_item, index) => {
               return (
-                <div key={index} style={{ display: "inline-block" }}>
+                <div key={index} style={{ display: "inline-block",width: 348, height: 170, marginRight:"20px"}} className="mt-4">
                   <Image
                     draggable={false}
-                    style={{ width: 250, height: 170, borderRadius: 15 }}
+                    className="img-fluid"
+                     style={{ borderRadius: 15 }}
                     src={_item.url}
                   />
                   <a href={_item.pdf} target="_blank" className="package__trip">
                     <h6 className="packages__block-title mt-3 mb-0">
                       {_item.title}
                     </h6>
-                    <small className="packages__block-subtitle">
+                    <small className="packages__block-subtitle mt-3 mb-0" style={{color:"#757575"}}>
                       {_item.subtTitle}
                     </small>
                   </a>
@@ -205,6 +212,7 @@ const Explores = () => {
           >
             {packages.length > 0
               ? packages.map((item, key) => {
+                console.log("items:::::::",item);
                   return (
                     <div
                       key={key}
@@ -229,7 +237,7 @@ const Explores = () => {
                             paddingTop: 2,
                           }}
                         >
-                          <h6
+                          {/* <h6
                             style={{
                               background: "#BEBEBE",
                               display: "inline",
@@ -238,8 +246,8 @@ const Explores = () => {
                               fontSize: "14px",
                             }}
                           >
-                            {item.sub_title}
-                          </h6>
+                            {item.category.category_name}
+                          </h6> */}
                         </div>
                         <div>
                           <small className="packages__block-subtitle">
@@ -254,6 +262,10 @@ const Explores = () => {
           </Carousel>
         ) : null}
       </Container>
+
+
+
+
 
       <div
         className="py-5 mt-5"
@@ -302,6 +314,7 @@ const Explores = () => {
                       style={{ width: "100%", height: "100%" }}
                       src={item.upload_images}
                     />
+                   
                     <div style={{ color: "white" }} className="package__trip">
                       <h6 className="packages__block-title mt-3 mb-0">
                         {item.title}

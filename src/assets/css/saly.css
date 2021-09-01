@@ -6,6 +6,11 @@
   /* height: 320px; */
   margin-top: 20px;
 }
+.explore_div {
+  /* text-align: center; */
+  font-weight: bold;
+  /* font-size: 10px; */
+}
 @media screen and (max-width: 700px) {
   .rocket-image {
     width: 100% !important;
@@ -14,6 +19,7 @@
   }
   .explore_div {
     text-align: center;
+    font-weight: bold;
   }
   .ticket-div {
     text-align: center;
@@ -40,16 +46,20 @@
 }
 .men-image {
   position: absolute;
-  left: -30.69%;
+  left: -102.69%;
   right: -24.69%;
-  top: 85.17%;
+  top: -93.83%;
   bottom: -65.48%;
-  /* background: url(illustration-2-transparent.png); */
+  
 }
 .makebooking-btn {
-  background-color: #864bd8;
+  /* font-size: 16px; */
+  background-color: #0FA453;
   color: white;
-  border: 2px solid #864bd8 !important;
+  width: 250px;
+  height: 52px;
+  border: 2px solid #0FA453 !important; 
+  border-radius: 10px;
 }
 .ticket-div h3 h4 {
   position: absolute;

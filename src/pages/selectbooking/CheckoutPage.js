@@ -284,6 +284,11 @@ function CheckoutPage() {
                 </Row>
               ) : null}
             </Row>
+            <div style={{margin:"10% 35%"}}>
+              <Button className="locationpass-btn " onClick={onCongratsClick}>
+                NEXT
+              </Button>
+            </div>
           </Container>
         </div>
         {/* <div style={{ height: "250px" }}></div> */}
@@ -308,9 +313,7 @@ function CheckoutPage() {
           </div>
         </div> */}
 
-        <Button className="locationpass-btn  mt-5 mb-5" onClick={onCongratsClick}>
-          NEXT
-        </Button>
+
         <Footer />
       </div>
 

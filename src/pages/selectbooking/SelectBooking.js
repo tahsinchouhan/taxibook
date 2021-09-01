@@ -119,7 +119,7 @@ function SelectBooking() {
                   </div>
                   <div className="bus_secation">
                     <span className="booking_icon" style={{ color: "#0FA453" }}>
-                      DmPass
+                      Travel Pass
                     </span>
                     <br />
                     <span>
@@ -218,7 +218,7 @@ function SelectBooking() {
                         className="booking_icon"
                         style={{ color: "#0FA453" }}
                       >
-                        DmPass
+                        Travel Pass
                       </span>
                       <br />
                       <span>

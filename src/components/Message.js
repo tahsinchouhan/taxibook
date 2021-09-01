@@ -26,8 +26,8 @@ function Message({msg,type}) {
                 pauseOnFocusLoss
                 draggable
                 pauseOnHover
-            >
-            </ToastContainer>
+           />
+           
         </div>
     )
 }
