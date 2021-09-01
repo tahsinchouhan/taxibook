@@ -26,7 +26,7 @@ import userEvent from "@testing-library/user-event";
 
 function DmPass({ DmPassDetails }) {
   const history = useHistory();
-  const [vehicle, setVehicle] = useState("1")
+  const [vehicle, setVehicle] = useState("0")
   const [travellers, setTraveller] = useState("1")
   const [daysTravel, setDaysTravel] = useState("1")
   const [startDate, setStartDate] = useState(new Date());
@@ -113,7 +113,8 @@ function DmPass({ DmPassDetails }) {
                     >
                       <Form.Label className="dm-ticket" >Number of Vehicles</Form.Label>
                       <select id="inputState" className="form-control pass_input" onChange={(e) => setVehicle(e.target.value)}>
-                        <option selected>1</option>
+                        <option selected>0</option>
+                        <option>1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -256,8 +257,9 @@ function DmPass({ DmPassDetails }) {
                   controlId="exampleForm.ControlInput1"
                 >
                   <Form.Label className="dm-ticket" >Number of Vehicles</Form.Label>
-                  <select id="inputState" className="form-control pass_input">
-                    <option selected>1</option>
+                  <select id="inputState" className="form-control pass_input"  onChange={(e) => setVehicle(e.target.value)}>
+                    <option selected>0</option>
+                    <option>1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -284,6 +286,7 @@ function DmPass({ DmPassDetails }) {
                   <select
                     id="inputState"
                     className="form-control pass_input"
+                    onChange={(e) => setTraveller(e.target.value)}
                   // onChange={handleTravellerCount}
                   >
                     <option selected>1</option>
@@ -355,12 +358,16 @@ function DmPass({ DmPassDetails }) {
                   type="submit"
                   class="btn btn-success"
                   style={{
-                    width: "185px",
+                    width: "100%",
                     textAlign: "center",
-                    height: "52px",
-                    borderRadius: "9px",
+                    // borderRadius: "9px",
                     backgroundColor: "#0fa453",
-                    border: "none"
+                    border: "none",
+                    height: "86px",
+                    position:"fixed",
+                    width:"100%",
+                    bottom:"0",
+                    left:"0"
                   }}
                   onClick={onDmTicketShow}
                 >

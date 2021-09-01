@@ -92,7 +92,7 @@ const PackagesDetails = (props) => {
   return (
     <>
       <div style={{
-        backgroundImage: `url(${packages.upload_images})`,
+        backgroundImage: `url("${packages.upload_images}")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: 500,
