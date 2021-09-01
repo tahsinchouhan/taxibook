@@ -66,6 +66,7 @@
   background-color: blue;
   color: white;
 }
+
 @media screen and (max-width: 700px) {
   .header_image {
     width: 40% !important;
@@ -83,7 +84,7 @@
     width: 100%;
     margin: auto;
   }
-  .locationpass-btn-ticket{
+  .locationpass-btn{
     color: white;
     background-color: #0fa453;
     border-color: #0fa453;

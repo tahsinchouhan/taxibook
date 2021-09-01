@@ -51,7 +51,7 @@ const button_Data = [
 
 function SteperDmpass(shows, ...props) {
   const [show, setShow] = useState(0);
-  const [paymentCustom, setPaymentCustom] = useState(0);
+  const [paymentCustom, setPaymentCustom] = useState(false);
 
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
   // const [data, setData] = useState();
@@ -163,8 +163,8 @@ function SteperDmpass(shows, ...props) {
         //     total_charges: tot_charges,
         //   })
         // );
-        setShow(3);
-        setPaymentCustom(1)
+
+        setPaymentCustom(true)
 
       })
       .catch((e) => {
@@ -506,7 +506,7 @@ function SteperDmpass(shows, ...props) {
           localStorage.setItem("dm_pass_id", dmData.dmpass_id)
           // history.push("/CongratulationPage")
 
-          setShow(4);
+          setShow(3);
           // dispatch(
           //   createBusBooking({
           //     ...apiData,
@@ -1156,151 +1156,150 @@ function SteperDmpass(shows, ...props) {
         </div>
       ) : show == 2 ? (
         <>
-          {paymentCustom == 1 ?
-            <> </> : <>No</>}
+          {!paymentCustom ? <> 
+          
             <div>
-          <div>
-            <Container className="dmpass-form mt-2">
-              <Row className="dmpassData d-none d-md-block" style={{ "backgroundColor": "#FF814A" }}>
-                <h6
-                  style={{
-                    textAlign: "center",
-                    color: "white",
-                    paddingTop: "10px"
-                  }}
-                >
-                  Tickets
-                </h6>
-                <h6
-                  style={{
-                    textAlign: "center",
-                    color: "white",
-                    paddingBottom: "10px"
-                  }}
-                >
-                  {showDate}
-                </h6>
-              </Row>
-              <h3 style={{ textAlign: "center" }}>Confirm your Details</h3>
-              <div className="confirm-main">
-                <div
-                  className="confirm_div"
-                  style={{
-                    textAlign: "center",
-                    backgroundColor: "#F8F8F8",
-                    marginBottom: "10px",
-                    padding: "20px"
-                  }}
-                >
-                  {locServ.length > 0
-                    ? locServ?.map((item, key) => (
-                      <>
-                        <Row className="mb-1">
-                          <Col xs={6} md={6} style={{ textAlign: "left" }} >
-                            <span className="confirm-title">
-                              {item?.location_name}
-                            </span>
-                          </Col>
-                          <Col style={{ textAlign: "right" }} xs={6} md={6}>
-                            <span
-                              style={{
-                                color: "#FF4A68",
-                                fontSize: "15px",
-                                fontWeight: "600",
-                                cursor: "pointer",
-                              }}
-                              onClick={() => setShow(1)}
-                            >
-                              Change
-                            </span>
-                          </Col>
-                          <Col>
-                            {item?.services?.length > 0
-                              ? item?.services?.map((service, j) => (
-                                <Row>
-                                  <Col xs={6} md={6} style={{ textAlign: "left" }}>
-                                    <span className="confirm_part">
-                                      {service?.service_name} x{" "}
-                                      {service?.unit}
-                                    </span>
-                                  </Col>
-                                  <Col xs={6} md={6} style={{ textAlign: "right" }}>
-                                    <span className="confirm_part">
-                                      {service?.total_charges}{" "}
-                                    </span>
-                                  </Col>
+            <div>
+              <Container className="dmpass-form mt-2">
+                <Row className="dmpassData d-none d-md-block" style={{ "backgroundColor": "#FF814A" }}>
+                  <h6
+                    style={{
+                      textAlign: "center",
+                      color: "white",
+                      paddingTop: "10px"
+                    }}
+                  >
+                    Tickets
+                  </h6>
+                  <h6
+                    style={{
+                      textAlign: "center",
+                      color: "white",
+                      paddingBottom: "10px"
+                    }}
+                  >
+                    {showDate}
+                  </h6>
+                </Row>
+                <h3 style={{ textAlign: "center" }}>Confirm your Details</h3>
+                <div className="confirm-main">
+                  <div
+                    className="confirm_div"
+                    style={{
+                      textAlign: "center",
+                      backgroundColor: "#F8F8F8",
+                      marginBottom: "10px",
+                      padding: "20px"
+                    }}
+                  >
+                    {locServ.length > 0
+                      ? locServ?.map((item, key) => (
+                        <>
+                          <Row className="mb-1">
+                            <Col xs={6} md={6} style={{ textAlign: "left" }} >
+                              <span className="confirm-title">
+                                {item?.location_name}
+                              </span>
+                            </Col>
+                            <Col style={{ textAlign: "right" }} xs={6} md={6}>
+                              <span
+                                style={{
+                                  color: "#FF4A68",
+                                  fontSize: "15px",
+                                  fontWeight: "600",
+                                  cursor: "pointer",
+                                }}
+                                onClick={() => setShow(1)}
+                              >
+                                Change
+                              </span>
+                            </Col>
+                            <Col>
+                              {item?.services?.length > 0
+                                ? item?.services?.map((service, j) => (
+                                  <Row>
+                                    <Col xs={6} md={6} style={{ textAlign: "left" }}>
+                                      <span className="confirm_part">
+                                        {service?.service_name} x{" "}
+                                        {service?.unit}
+                                      </span>
+                                    </Col>
+                                    <Col xs={6} md={6} style={{ textAlign: "right" }}>
+                                      <span className="confirm_part">
+                                        {service?.total_charges}{" "}
+                                      </span>
+                                    </Col>
 
-                                </Row>
-                              ))
-                              : null}
-                          </Col>
-                        </Row>
+                                  </Row>
+                                ))
+                                : null}
+                            </Col>
+                          </Row>
 
-                      </>
-                    ))
-                    : null}
+                        </>
+                      ))
+                      : null}
 
-                  <div>
-                    <div className="location-amount">
-                      <span className="location-total">Total Amount</span>
-                      <span className="location-rs">₹ {tot_charges}</span>
+                    <div>
+                      <div className="location-amount">
+                        <span className="location-total">Total Amount</span>
+                        <span className="location-rs">₹ {tot_charges}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Container>
-          </div>
+              </Container>
+            </div>
 
-          <div className="d-none d-md-block">
-            <div style={{ textAlign: "center" }}>
+            <div className="d-none d-md-block">
+              <div style={{ textAlign: "center" }}>
+                <Button
+                  onClick={onTicketCheckClick}
+                  type="submit"
+                  style={{
+                    marginTop: "50px",
+                    width: "200px",
+                    height: "50px",
+                    backgroundColor: "#0fa453",
+                    color: "white",
+                    fontWeight: "900",
+                    fontSize: "15px",
+                    marginBottom: "50px",
+                    border: '1px solid #0fa453'
+                  }}
+                >
+                  Save & Continue
+                </Button>
+              </div>
+            </div>
+            <div className="d-md-none">
               <Button
                 onClick={onTicketCheckClick}
                 type="submit"
                 style={{
                   marginTop: "50px",
-                  width: "200px",
-                  height: "50px",
-                  backgroundColor: "#0fa453",
+                  width: "100%",
+                  height: "71px",
+                  border: '1px solid #0fa453',
                   color: "white",
                   fontWeight: "900",
                   fontSize: "15px",
-                  marginBottom: "50px",
-                  border: '1px solid #0fa453'
+                  backgroundColor: "#0fa453",
+                  borderRadius: 0,
+                  // position: "absolute",
+                  // bottom: 0
                 }}
               >
                 Save & Continue
               </Button>
             </div>
           </div>
-          <div className="d-md-none">
-            <Button
-              onClick={onTicketCheckClick}
-              type="submit"
-              style={{
-                marginTop: "50px",
-                width: "100%",
-                height: "71px",
-                border: '1px solid #0fa453',
-                color: "white",
-                fontWeight: "900",
-                fontSize: "15px",
-                backgroundColor: "#0fa453",
-                borderRadius: 0,
-                // position: "absolute",
-                // bottom: 0
-              }}
-            >
-              Save & Continue
-            </Button>
-          </div>
-          </div>
 
           <div className="d-none d-md-block">
             <Footer />
           </div>
-        </>
-      ) : show == 3 ? <>
-        <ToastContainer />
+          </>:<>
+          <ToastContainer />
         <div className="d-none d-md-block">
 
           <Container style={{ width: "75%", marginTop: "50px" }}>
@@ -1517,9 +1516,12 @@ function SteperDmpass(shows, ...props) {
           </Container>
 
         </div>
-
-      </>
-        : show == 4 ?
+          
+          
+          </> }
+          
+        </>
+      ) : show == 3 ? 
           (<>
             <div className="d-none d-md-block">
               <Container style={{ width: "70%", paddingTop: "20px" }}>
