@@ -185,6 +185,27 @@ function DmDetail() {
             </Row>
             <Row>
               <Col className="dm__title" xs={12}>
+                VEHICLE DETAILS
+              </Col>
+              <Col className="dm__traveller_div" xs={12}>
+                {apiData?.length > 0
+                  ? apiData[0]?.vp_id?.vehical_details?.map((item, i) => (
+                    <div key={i} className="dm__trav_card">
+                      <div className="dm__trav_card_title">{item?.driver_name}</div>
+                      <div className="dm__trav_card_body">
+                        {/* <div className="top">
+                            {item?.driver_license_number}
+                          </div> */}
+                        <div className="bottom">Driver License No: {item?.driver_license_number}</div>
+                        <div className="bottom">Vehicle No: {item?.registration_number}</div>
+                      </div>
+                    </div>
+                  ))
+                  : null}
+              </Col>
+            </Row>
+            <Row>
+              <Col className="dm__title" xs={12}>
                 ENTRY TICKET DETAILS
               </Col>
               <Col className="dm__entry_div" xs={12}>
@@ -347,6 +368,25 @@ function DmDetail() {
                 : null}
             </Col>
             <Col className="dm__title mobile" xs={12}>
+              VEHICLE DETAILS
+            </Col>
+            <Col className="dm__traveller_div mobile" xs={12}>
+              {apiData?.length > 0
+                ? apiData[0]?.vp_id?.vehical_details?.map((item, i) => (
+                  <div key={i} className="dm__trav_card">
+                    <div className="dm__trav_card_title">{item?.driver_name}</div>
+                    <div className="dm__trav_card_body">
+                      {/* <div className="top">
+                            {item?.driver_license_number}
+                          </div> */}
+                      <div className="bottom">Driver License No: {item?.driver_license_number}</div>
+                      <div className="bottom">Vehicle No: {item?.registration_number}</div>
+                    </div>
+                  </div>
+                ))
+                : null}
+            </Col>
+            <Col className="dm__title mobile" xs={12}>
               ENTRY TICKET DETAILS
             </Col>
             <Col className="dm__entry_div mobile" xs={12}>
@@ -371,36 +411,36 @@ function DmDetail() {
                   </div>
                 ))
                 : null} */}
-                {entryData?.length > 0
-                  ?
-                  entryData?.map((entry) => {
-                    return entry?.locations?.map((item, i) => {
-                      return (
-                        <div key={i} className="dm__entry_card">
-                          <div className="dm__entry_card_title">
-                            <div className="left">{item?.location?.name}</div>
-                            <div className="right">Change</div>
-                          </div>
-                          {item?.services?.map((service, key) => {
-                            return (service?.unit > 0)
-                              ?
-                              <div key={key} className="dm__entry_card_body">
-                                <div className="left">
-                                  {service?.service_id?.service_name} x{" "}
-                                  {service?.unit}
-                                </div>
-                                <div className="right">
-                                  {service?.service_id?.price}
-                                </div>
-                              </div>
-                              :
-                              null
-                          })}
+              {entryData?.length > 0
+                ?
+                entryData?.map((entry) => {
+                  return entry?.locations?.map((item, i) => {
+                    return (
+                      <div key={i} className="dm__entry_card">
+                        <div className="dm__entry_card_title">
+                          <div className="left">{item?.location?.name}</div>
+                          <div className="right">Change</div>
                         </div>
-                      )
-                    })
+                        {item?.services?.map((service, key) => {
+                          return (service?.unit > 0)
+                            ?
+                            <div key={key} className="dm__entry_card_body">
+                              <div className="left">
+                                {service?.service_id?.service_name} x{" "}
+                                {service?.unit}
+                              </div>
+                              <div className="right">
+                                {service?.service_id?.price}
+                              </div>
+                            </div>
+                            :
+                            null
+                        })}
+                      </div>
+                    )
                   })
-                  : null}
+                })
+                : null}
             </Col>
             <Col className="dm__footer_div mobile" xs={12}>
               <div className="dm__footer_card">

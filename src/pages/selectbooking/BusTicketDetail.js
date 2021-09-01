@@ -84,7 +84,7 @@ function BusBookingDetail() {
             <Row className="p-3">
               <Col xs={5} sm={5} className="p-0 dm__barcode">
                 <div className="booking-div">
-                  <img src={qrImage} alt="" width={250} />
+                  {/* <img src={qrImage} alt="" width={250} /> */}
                 </div>
               </Col>
               <Col xs={5} sm={5}>
