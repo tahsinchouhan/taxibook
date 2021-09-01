@@ -134,27 +134,7 @@ function DmCongratulate() {
                         style={{ textDecoration: "none", color: "#fff" }}
                         target="_blank"
                       >
-                        Share in Whatsapp1
-                      </a>
-                    </Button>
-                    <Button
-                      style={{
-                        width: "186px",
-                        textAlign: "center",
-                        height: "52px",
-                        borderRadius: "9px",
-                        borderColor: " #FF4A68",
-                        backgroundColor: " #FF4A68",
-                        fontWeight: "bold",
-                        marginTop: "20px",
-                      }}
-                    >
-                      <a
-                        href={`https://wa.me/send?text=http://15.206.92.158/dm-detail/${dmpass_id}`}
-                        style={{ textDecoration: "none", color: "#fff" }}
-                        target="_blank"
-                      >
-                        Share in Whatsapp2
+                        Share in Whatsapp
                       </a>
                     </Button>
                   </div>
@@ -278,28 +258,7 @@ function DmCongratulate() {
                     style={{ textDecoration: "none", color: "#fff" }}
                     target="_blank"
                   >
-                    Share in Whatsapp1
-                  </a>
-                </Button>
-                <Button
-                  style={{
-                    width: "186px",
-                    textAlign: "center",
-                    height: "52px",
-                    borderRadius: "9px",
-                    borderColor: " #FF4A68",
-                    backgroundColor: " #FF4A68",
-                    fontWeight: "bold",
-                    marginTop: "20px",
-                    marginBottom: "90px",
-                  }}
-                >
-                  <a
-                    href={`https://wa.me/send?text=http://15.206.92.158/dm-detail/${dmpass_id}`}
-                    style={{ textDecoration: "none", color: "#fff" }}
-                    target="_blank"
-                  >
-                    Share in Whatsapp2
+                    Share in Whatsapp
                   </a>
                 </Button>
                 <Button

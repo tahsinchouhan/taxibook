@@ -108,6 +108,11 @@ function Header() {
               <NavLink className="sidebar__navlink" to="/tickets">
                 TICKETS
               </NavLink>
+              {user_data !== null ? (
+                <NavLink className="sidebar__navlink" to="/search#Tickets">
+                  VIEW TICKETS
+                </NavLink>
+              ) : null}
               {/* <NavLink className="sidebar__navlink" to="/pricing">
                 CONTACT
               </NavLink>
@@ -155,6 +160,11 @@ function Header() {
               <NavLink className="sidebar_item" to="/tickets">
                 TICKETS
               </NavLink>
+              {user_data !== null ? (
+                <NavLink className="sidebar_item" to="/search#Tickets">
+                  VIEW TICKETS
+                </NavLink>
+              ) : null}
               {/* <NavLink className="sidebar_item" to="#">
                 CONTACT
               </NavLink>

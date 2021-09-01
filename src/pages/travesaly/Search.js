@@ -8,16 +8,22 @@ import { API_PATH } from "../../Path/Path";
 import SearchFelid from "./SearchFelid";
 // import { Button } from "bootstrap";
 import ticketImg from "../../assets/img/ticket@3x.png";
+import axios from 'axios'
 function Search() {
   const [destinations, setDestinations] = useState([]);
   const [packages, setPackages] = useState([]);
   const [search, setSearch] = useState();
+  const [dmPass, setDmPass] = useState([]);
   const [flag, setFlag] = useState(false);
 
   const history = useHistory();
   useEffect(() => {
     getDestinations();
     getPackages();
+    let mobile = JSON.parse(localStorage.getItem("mobile"))
+    if (mobile !== null) {
+      getDmPass(mobile);
+    }
     window.scrollTo(0, 0);
   }, []);
 
@@ -35,6 +41,21 @@ function Search() {
       .then((response) => response.json())
       .then((json) => {
         if (json.data !== undefined) setPackages(json.data);
+        console.log(json.data);
+      })
+      .catch((e) => console.log(e));
+  };
+  const getDmPass = async (mobile) => {
+    // fetch(API_PATH + "/api/v1/dmpass/search")
+    await axios.post(`${API_PATH}/api/v1/dmpass/search`, {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      crossdomain: true,
+      withCredentials: false,
+      mobile: mobile
+    })
+      .then(res => res.data)
+      .then((json) => {
+        if (json !== undefined) setDmPass(json.data);
         console.log(json.data);
       })
       .catch((e) => console.log(e));
@@ -172,8 +193,8 @@ function Search() {
                   className="destina_search"
                   style={{ backgroundColor: "#FF4A68", whiteSpace: "nowrap" }}
                 >
-                   <a href="#PackagesScroll" style={{ color: "white", textDecoration: "none" }}> Travel Pass</a>
-                 
+                  <a href="#TravelPass" style={{ color: "white", textDecoration: "none" }}> Travel Pass</a>
+
                 </div>
               </Col>
               <Col xs={3} md={3} className="search_cel p-0">
@@ -181,8 +202,8 @@ function Search() {
                   className="destina_search"
                   style={{ backgroundColor: "#FF814A" }}
                 >
-                   <a href="#PackagesScroll" style={{ color: "white", textDecoration: "none" }}>Tickets</a>
-                  
+                  <a href="#Tickets" style={{ color: "white", textDecoration: "none" }}>Tickets</a>
+
                 </div>
               </Col>
             </Row>
@@ -647,67 +668,73 @@ function Search() {
           {!flag &&
             <Container>
               <h2 className="package__title mb-3">
-                <span id="PackagesScroll">Travel Pass</span>
+                <span id="TravelPass">Travel Pass</span>
               </h2>
               <Row>
-                {/* {packages.map((item) => {
-                  return ( */}
-                    <Col xs={12} md={4}>
-                      <div
-                        onClick={() =>
-                          history.push({
-                            // pathname: `/packages_details/${item.title}`,
-                            // item: item._id,
-
-                          })
-                        }
-                        className="search_div"
-                        style={{
-                          width: "100%",
-
-                          marginTop: 25,
-                          display: "flex",
-                        }}
-                      >
-                        <Image
-                          draggable={false}
-                          className="img-fluid search_img"
-                          // className="search_img "
-                          src={ticketImg}
-                        />
-                        <div style={{ paddingLeft: "20px" }}>
-                          <h6 className="packages__block-title_  mb-0">
-                          Travel PassId
-                            {/* {item.title} */}
-                          </h6>
+                {
+                  (dmPass.length > 0)
+                    ?
+                    dmPass.map((item) => {
+                      return (
+                        <Col xs={12} md={4}>
                           <div
+                            onClick={() =>
+                              history.push({
+                                pathname: `/dm-detail/${item?.dm_pass_id}`,
+                                item: item?.dm_pass_id,
+
+                              })
+                            }
+                            className="search_div"
                             style={{
-                              paddingTop: "2",
+                              width: "100%",
+
+                              marginTop: 25,
+                              display: "flex",
                             }}
                           >
-                            <h6
-                              style={{
-                                background: "#BEBEBE",
-                                display: "inline",
-                                padding: "3px",
-                                borderRadius: "4px",
-                                fontSize: "14px",
+                            <Image
+                              draggable={false}
+                              className="img-fluid search_img"
+                              // className="search_img "
+                              src={ticketImg}
+                            />
+                            <div style={{ paddingLeft: "20px" }}>
+                              <h6 className="packages__block-title_  mb-0">
+                              {item?.dm_pass_id}
+                                {/* {item?.dm_pass_id} */}
+                              </h6>
+                              <div
+                                style={{
+                                  paddingTop: "2",
+                                }}
+                              >
+                                <h6
+                                  style={{
+                                    background: "#BEBEBE",
+                                    display: "inline",
+                                    padding: "3px",
+                                    borderRadius: "4px",
+                                    fontSize: "14px",
 
-                              }}
-                            >                              
-                              {/* {item.category.category_name} */}
-                            </h6>
+                                  }}
+                                >
+                                  
+                                  {/* {item.category.category_name} */}
+                                </h6>
+                              </div>
+                              <div>
+                                <small className="packages__block-subtitle">
+                                  {/* ₹ {item.price} */}
+                                </small>
+                              </div>
+                            </div>
                           </div>
-                          <div>
-                            <small className="packages__block-subtitle">
-                              {/* ₹ {item.price} */}
-                            </small>
-                          </div>
-                        </div>
-                      </div>
-                    </Col>
-                  {/* );
-                })} */}
+                        </Col>
+                      );
+                    })
+                    : null
+                }
 
               </Row>
 
@@ -718,66 +745,66 @@ function Search() {
           {!flag &&
             <Container>
               <h2 className="package__title mb-3">
-                <span id="PackagesScroll">Ticket</span>
+                <span id="Tickets">Ticket</span>
               </h2>
               <Row>
                 {/* {packages.map((item) => {
                   return ( */}
-                    <Col xs={12} md={4}>
+                <Col xs={12} md={4}>
+                  <div
+                    // onClick={() =>
+                    //   history.push({
+                    //     pathname: `/packages_details/${item.title}`,
+                    //     item: item._id,
+
+                    //   })
+                    // }
+                    className="search_div"
+                    style={{
+                      width: "100%",
+
+                      marginTop: 25,
+                      display: "flex",
+                    }}
+                  >
+                    <Image
+                      draggable={false}
+                      className="img-fluid search_img"
+                      // className="search_img "
+                      src={ticketImg}
+                    />
+                    <div style={{ paddingLeft: "20px" }}>
+                      <h6 className="packages__block-title_  mb-0">
+                        Ticket Id
+                        {/* {item.title} */}
+                      </h6>
                       <div
-                        // onClick={() =>
-                        //   history.push({
-                        //     pathname: `/packages_details/${item.title}`,
-                        //     item: item._id,
-
-                        //   })
-                        // }
-                        className="search_div"
                         style={{
-                          width: "100%",
-
-                          marginTop: 25,
-                          display: "flex",
+                          paddingTop: "2",
                         }}
                       >
-                        <Image
-                          draggable={false}
-                          className="img-fluid search_img"
-                          // className="search_img "
-                          src={ticketImg}
-                        />
-                        <div style={{ paddingLeft: "20px" }}>
-                          <h6 className="packages__block-title_  mb-0">
-                            Ticket Id
-                            {/* {item.title} */}
-                          </h6>
-                          <div
-                            style={{
-                              paddingTop: "2",
-                            }}
-                          >
-                            <h6
-                              style={{
-                                background: "#BEBEBE",
-                                display: "inline",
-                                padding: "3px",
-                                borderRadius: "4px",
-                                fontSize: "14px",
+                        <h6
+                          style={{
+                            background: "#BEBEBE",
+                            display: "inline",
+                            padding: "3px",
+                            borderRadius: "4px",
+                            fontSize: "14px",
 
-                              }}
-                            >
-                              {/* {item.category.category_name} */}
-                            </h6>
-                          </div>
-                          <div>
-                            <small className="packages__block-subtitle">
-                              {/* ₹ {item.price} */}
-                            </small>
-                          </div>
-                        </div>
+                          }}
+                        >
+                          {/* {item.category.category_name} */}
+                        </h6>
                       </div>
-                    </Col>
-                   {/* );
+                      <div>
+                        <small className="packages__block-subtitle">
+                          {/* ₹ {item.price} */}
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </Col>
+                {/* );
                  })} */}
 
               </Row>
