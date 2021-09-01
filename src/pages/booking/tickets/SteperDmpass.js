@@ -428,10 +428,7 @@ function SteperDmpass(shows, ...props) {
     }
     return shows;
   };
-
-
-  const __DEV__ = document.domain === "localhost";
-
+  
   async function loadScript(src) {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -458,7 +455,7 @@ function SteperDmpass(shows, ...props) {
     }
     console.log("data", data.amount);
     var options = {
-      key: __DEV__ ? "rzp_test_DuapYrmQwcWLGy" : "PRODUCTION_KEY",
+      key: "rzp_test_DuapYrmQwcWLGy",
       currency: "INR",
       amount: data.amount.toString(),
       order_id: data.id,
