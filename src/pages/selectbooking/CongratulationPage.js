@@ -16,6 +16,8 @@ function CongratulationPage() {
   const goHome = () => {
     history.push("/");
   };
+
+  console.log("booking_id",booking_id);
   return (
     <>
       <div className="d-none d-md-block">
