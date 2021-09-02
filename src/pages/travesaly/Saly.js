@@ -95,7 +95,7 @@ function Saly() {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4,
+      items: 3,
       slidesToSlide: 2,
     },
     tablet: {
@@ -113,7 +113,7 @@ function Saly() {
   const responsiveTwo = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4.5,
+      items: 3,
       slidesToSlide: 4, // optional, default to 1.
     },
     tablet: {
@@ -153,7 +153,7 @@ function Saly() {
           <Col xs={12} md={6}>
             <div className="p-5">
               <div className="explore">
-                <h2 className="explore_div">Explore</h2>
+                <h2 className="explore_div">Explore Bastar</h2>
                 <p>Check out the best tourism destinations around Bastar</p>
               </div>
               <div>
@@ -176,6 +176,7 @@ function Saly() {
         </Row>
 
         <div >
+          
           <Container>
             <Carousel
               partialVisbile
@@ -236,7 +237,7 @@ function Saly() {
         <div style={{ backgroundColor: "black", color: "white", height: "289px", marginTop: "81px" }} >
           <Row style={{ flexDirection: "row", marginRight: "0px" }}>
             <Col sm={8}>
-              <div style={{ paddingTop: "85px", textAlign: "center" }}>
+              <div style={{ paddingTop: "85px", textAlign: "left", paddingLeft:"35%" }}>
                 <div className="bookings-div">
                   <h3>Bookings</h3>
                   <p>Book tickets for Bus,Location wise Tickets and Traveller Passes</p>
@@ -261,9 +262,9 @@ function Saly() {
 
         {/*Tictets*/}
 
-        <Container style={{width:"889px"}}>
+        <Container style={{width:"1010px"}}>
           <div className="ticket-div py-5">
-          <Container style={{marginLeft:"83px"}}>
+          <Container style={{marginLeft:"37px"}}>
             <Row>
               
               <Col sm={6} md={6}>
@@ -328,8 +329,8 @@ function Saly() {
         </Container>
 
         <div style={{ backgroundColor: "black", color: "#fff", height:"521px" }}>
-          <Container className="pt-4 pb-5">
-            <div className="mb-5 mt-5">
+          <Container style={{paddingTop:"4%"}}>
+            <div>
               <div
                 style={{
                   display: "flex",
@@ -361,6 +362,7 @@ function Saly() {
                     console.log("items:::::::", item);
                     return (
                       <div
+                      // style={{width:"376px", height:"237px"}}
                         key={key}
                         onClick={() =>
                           history.push({
@@ -370,8 +372,8 @@ function Saly() {
                         }
                       >
                         <Image
-                          draggable={false}
-                          style={{ width: "100%", height: "100%" }}
+                        className="homepage"
+                          draggable={false}                          
                           src={item.upload_images}
                         />
                         <div>

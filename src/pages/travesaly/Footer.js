@@ -9,6 +9,9 @@ import logo from "../../assets/img/logo.png";
 
 function Footer() {
   const history = useHistory();
+  const goForRegistration = ()=>{
+    history.push("/registrationguide")
+  }
   return (
     <>
       <footer className="footer pb-3">
@@ -44,14 +47,9 @@ function Footer() {
                   </Link>
                 </div>
                 <div className="footer__item">
-                  <Link
-                    to="/registrationguide"
-                    target="_blank"
+                  <Link                   
                     className="link"
-                    // onClick={() =>
-                    //   (window.location.href =
-                    //     "https://bhuwnesh947131.typeform.com/to/SMfaeorp")
-                    // }
+                    onClick={() =>goForRegistration()}
                   >
                     <h5 className="footer__item-title">Registration Form</h5>
                   </Link>

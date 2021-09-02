@@ -5,9 +5,14 @@ import Footer from "../pages/travesaly/Footer";
 import { Link,useHistory } from "react-router-dom";
 
 const Operators = () => {
+  const history = useHistory();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  const goToVendorReg =()=>{
+    history.push("/add-form")
+  }
   return (
     <>
       <Header />
@@ -38,9 +43,10 @@ const Operators = () => {
                 details along with photos
               </p>
               <Link
-                    to="/add-form"
-                    target="_blank"
-                    className="link"
+                    // to="/add-form"
+                    // target="_blank"
+                    // className="link"
+                    onClick={()=>goToVendorReg()}
                   >
                     <a  style={{ textDecoration: "none" }} className="footer__item-title">Registration Link</a>
               </Link>

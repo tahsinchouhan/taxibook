@@ -43,7 +43,8 @@
   font-weight: 600;
 }
 .viewbtn {
-  margin-left: 10px;
+  /* margin-left: 10px; */
+  text-align: center;
 }
 .men-image {
   position: absolute;

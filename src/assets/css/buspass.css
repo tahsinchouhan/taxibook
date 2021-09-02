@@ -51,6 +51,15 @@ height: 46.67px; */
   justify-content: center;
 }
 
+.vendor-btn {
+  color: white;
+  background-color: #0fa453;
+  border-color: #0fa453;
+  font-weight: bold;
+  width: 200px;
+  height: 49px;
+  border-radius: 11px;
+}
 
 .formbus {
   color: grey;

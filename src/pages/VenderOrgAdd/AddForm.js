@@ -332,7 +332,7 @@ function AddForm() {
                     </Form.Group>
                   </Col>
 
-                  < Col xs={12} md={12}>
+                  {/* < Col xs={12} md={12}>
                     <Form.Group
                       md="3"
                       controlId="validationFormik104"
@@ -357,11 +357,11 @@ function AddForm() {
                         {errors.service_name}
                       </Form.Control.Feedback>
                     </Form.Group>
-                  </Col>
+                  </Col> */}
 
 
                 </Row>
-                <Button type="submit" className="locationpass-btn mt-3 mb-5" >Next</Button>
+                <Button type="submit" className="vendor-btn mt-3 mb-5" >Next</Button>
               </Form>
             )}
           </Formik>

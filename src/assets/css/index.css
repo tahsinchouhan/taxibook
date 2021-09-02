@@ -880,4 +880,10 @@ body {
   align-items: center;
 }
 
+.react-multi-carousel-item > div > .homepage {
+  max-width: 376px !important;
+  height: 237px !important;
+  border-radius: 10px ;
+  cursor: pointer !important;
+}
 
