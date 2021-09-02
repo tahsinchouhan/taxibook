@@ -7,8 +7,8 @@ function Home() {
     return (
         <div>
             <Header />
-            <Saly />
-            <Footer />
+         <Saly />
+            <Footer /> 
         </div>
     )
 }

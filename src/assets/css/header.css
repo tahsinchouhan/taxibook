@@ -49,12 +49,22 @@
   margin-right: 20px;
 }
 .sidebar_item {
-  padding: 10px;
-  margin: 10px;
-  font-weight: 600;
+  /* padding: 10px; */
+  text-decoration: none !important;
+  margin: 20px;
+  font-weight: 600; 
   color: black;
   text-decoration: none;
+ 
+  font-family: 'Inter', sans-serif;
+
 }
+.sidebar_item:hover {
+  color: #0FA453 !important;
+  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+}
+
 .explore-search{
   width: 50%;
   margin: auto;
@@ -143,4 +153,8 @@
   .travel_home_btn{
     text-align: center;
   }
+}
+
+.travel_home_btn{
+  text-align: center;
 }

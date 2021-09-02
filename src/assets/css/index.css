@@ -200,9 +200,9 @@ body {
   font-weight: 600;
 }
 
-.packages__block-subtitle {
+/* .packages__block-subtitle {
   font-weight: 600;
-}
+} */
 
 .package__item {
   display: flex; 

@@ -7,9 +7,10 @@ import {
   Form,
   InputGroup,
   FormControl,
+  Image,
 } from "react-bootstrap";
 import { HiMenu } from "react-icons/hi";
-import logo from "../assets/img/logo.png";
+import logo from "../assets/img/logo1.png";
 import { NavLink, useHistory } from "react-router-dom";
 import { FaUser, FaSistrix } from "react-icons/fa";
 import { useDispatch, connect, useSelector } from "react-redux";
@@ -59,7 +60,7 @@ function Header() {
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
           <div style={{ textAlign: "center" }}>
-            <img className="logo" style={{ width: 80 }} src={logo} />
+            <Image className="image-fluid"  src={logo} />
             <FaSistrix onClick={onSearchClick} className="searchIcon" />
           </div>
         </header>
@@ -125,10 +126,10 @@ function Header() {
       </Container>
 
       <Container fluid className="header_div d-none d-md-block">
-        <Navbar expand="lg" style={{ height: "80px" }}>
+        <Navbar expand="lg" style={{ height: "129px" }}>
           <Navbar.Brand href="#">
-            <div style={{ marginLeft: "100%" }}>
-              <img className="logo" src={logo} />
+            <div style={{ marginLeft: "100%",marginTop:"31%" }}>
+              <Image  src={logo} />
             </div>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" className="toggle-icon" />
@@ -137,12 +138,13 @@ function Header() {
               className="mr-auto my-2 my-lg-0"
               style={{
                 maxHeight: "100px",
-                justifyContent: "center",
+               // justifyContent: "center",
                 alignItems: "center",
                 flex: "1",
               }}
               navbarScroll
             >
+              <div style={{marginLeft:"12%"}}>
               <NavLink className="sidebar_item" to="/">
                 HOME
               </NavLink>
@@ -171,6 +173,7 @@ function Header() {
               <NavLink className="sidebar_item" to="#">
                 ABOUT
               </NavLink> */}
+              </div>
             </Nav>
             <Form className="" style={{ marginRight: "70px" }}>
               <div className="header_right d-flex">

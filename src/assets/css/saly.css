@@ -1,5 +1,6 @@
 .saly_div {
   /* background-color: yellow; */
+  max-height: 109vh;
 }
 .rocket-image {
   width: 100%;
@@ -46,9 +47,8 @@
 }
 .men-image {
   position: absolute;
-  left: -102.69%;
-  right: -24.69%;
-  top: -93.83%;
+  left: -20.69%; 
+  top: -83.83%;
   bottom: -65.48%;
   
 }
