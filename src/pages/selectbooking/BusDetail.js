@@ -21,8 +21,11 @@ function BusPass() {
   const [routes, setRoutes] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [selected, setSelected] = useState("");
-
+  
   const dispatch = useDispatch()
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
@@ -100,7 +103,7 @@ function BusPass() {
                     onChange={(e) => setSelected(e.target.value)}
                     isInvalid={!selected}
                     isValid={selected}
-                  d
+                    d
                   >
                     <option>Choose your preferred route</option>
                     {routes.map((item) => (

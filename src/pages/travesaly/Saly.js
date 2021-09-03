@@ -8,7 +8,7 @@ import {
   Card,
   Image,
 } from "react-bootstrap";
-import Salyimg from "../../assets/img/Saly-1.svg";
+import Salyimg from "../../assets/img/Saly-1.png";
 import Layer11 from "../../assets/img/hil.svg";
 import Layer12 from "../../assets/img/adivash.svg";
 import doodle1 from "../../assets/img/doodle.png";
@@ -70,24 +70,33 @@ function Saly() {
       .catch((e) => console.log(e));
   };
 
-  const getPackages = () => {
+  // const getPackages = () => {
+  //   fetch(API_PATH + "/api/v1/packages/location", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       latitude: location.latitude,
+  //       longitude: location.longitude,
+  //     }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((json) => {
+  //       if (json.data !== undefined) {
+  //         console.log("json.data", json.data)
+  //         setPackages(json.data);
+  //       }
+  //     })
+  //     .catch((e) => console.log(e));
+  // };
 
-    fetch(API_PATH + "/api/v1/packages/location", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        latitude: location.latitude,
-        longitude: location.longitude,
-      }),
-    })
+  const getPackages = () => {
+    fetch(API_PATH + "/api/v1/packages/list")
       .then((response) => response.json())
       .then((json) => {
-        if (json.data !== undefined) {
-          console.log("json.data", json.data)
-          setPackages(json.data);
-        }
+        if (json.data !== undefined) setPackages(json.data);
+        console.log(json.data);
       })
       .catch((e) => console.log(e));
   };
@@ -95,7 +104,7 @@ function Saly() {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 4,
       slidesToSlide: 2,
     },
     tablet: {
@@ -146,22 +155,26 @@ function Saly() {
       >
         <Row className="saly_div w-100 ">
           <Col xs={12} md={6}>
-            <div className="rocket-image pt-3">
+            <div className="rocket-image"
+              style={{
+                position: "absolute",
+                width: "689px",
+                minHeight: "590px",
+                top: "7%",
+                left: "4%"
+              }}>
               <img src={Salyimg} alt="saly" style={{ width: "100%" }} />
             </div>
           </Col>
           <Col xs={12} md={6}>
-            <div className="p-5">
-              <div className="explore">
-                <h2 className="explore_div">Explore Bastar</h2>
-                <p>Check out the best tourism destinations around Bastar</p>
-              </div>
-              <div>
+            <div style={{paddingTop:"8%"}}>
+
+              <div style={{ width: "650px", height: "389.85px" }}>
                 <iframe
                   style={{ borderRadius: "10px" }}
                   // className="search_view"
-                  width="700"
-                  height="350"
+                  width="100%"
+                  height="100%"
                   src="https://www.youtube.com/embed/V_JZZ1glvkA"
                   title="YouTube video player"
                   frameborder="0"
@@ -175,8 +188,11 @@ function Saly() {
           </Col>
         </Row>
 
-        <div >
-          
+        <div style={{paddingTop:"7%"}} >
+          <div className="homepage-heading">
+            <h1>Explore Bastar</h1>
+            <p>Check out the best tourism destinations around Bastar</p>
+          </div>
           <Container>
             <Carousel
               partialVisbile
@@ -212,7 +228,7 @@ function Saly() {
               <Button
                 onClick={() => history.push("/populardestinations")}
                 style={{
-                  marginTop: 20,
+                  marginTop: "48px",
                   justifyContent: "center",
                   backgroundColor: "#0FA453",
                   color: "white",
@@ -237,7 +253,7 @@ function Saly() {
         <div style={{ backgroundColor: "black", color: "white", height: "289px", marginTop: "81px" }} >
           <Row style={{ flexDirection: "row", marginRight: "0px" }}>
             <Col sm={8}>
-              <div style={{ paddingTop: "85px", textAlign: "left", paddingLeft:"35%" }}>
+              <div style={{ paddingTop: "85px", textAlign: "left", paddingLeft: "35%" }}>
                 <div className="bookings-div">
                   <h3>Bookings</h3>
                   <p>Book tickets for Bus,Location wise Tickets and Traveller Passes</p>
@@ -262,60 +278,76 @@ function Saly() {
 
         {/*Tictets*/}
 
-        <Container style={{width:"1010px"}}>
+        <Container style={{ width: "1010px" }}>
           <div className="ticket-div py-5">
-          <Container style={{marginLeft:"37px"}}>
-            <Row>
-              
-              <Col sm={6} md={6}>
-                <div>
-                  <h3 className="ml-5">Book Tickets</h3>
-                  <p>
-                    View all part tickets and check out where you have visited
-                  </p>
-                </div>
-              </Col>
+            <Container style={{ marginLeft: "37px" }}>
+              <Row>
 
-              <Col sm={6} md={6}>
-                <div className="viewbtn">
-                  <Button
-                    // variant="danger"
-                    style={{
-                      cursor: "pointer",
-                      marginTop: "32px",
-                      backgroundColor: "#FF814A",
-                      borderRadius: "10px",
-                      border: "none",
-                      width: "186px",
-                      height: "53.63px"
-                    }}
-                    // onClick={gotoTickets_sraech}
-                    onClick={bookTickets}
+                <Col sm={6} md={6}>
+                  <div>
+                    <h3 className="ml-5">Book Tickets</h3>
+                    <p>
+                      View all part tickets and check out where you have visited
+                    </p>
+                  </div>
+                </Col>
 
-                  >
-                    Book Tickets
-                  </Button>
-                </div>
-              </Col>
-              
-            </Row>
-            </Container>
-            {/* <Row>
-              <Col sm={12} md={12}>
-                <div className="search__inner" onClick={gotoTickets_sraech} style={{width:"711px"}}>
-                  <div className="search__block">
-                    <div className="block__location">
-                      <label className="block--text code" >
-                        Search Tickets
-                      </label>
-                    </div>
-                    <button className="search__btn">
-                      <BsSearch color="white" size="25px" />
+                <Col sm={6} md={6}>
+                  <div className="viewbtn">
+                    <Button
+                      // variant="danger"
+                      style={{
+                        cursor: "pointer",
+                        marginTop: "32px",
+                        backgroundColor: "#FF814A",
+                        borderRadius: "10px",
+                        border: "none",
+                        width: "186px",
+                        height: "53.63px"
+                      }}
+                      // onClick={gotoTickets_sraech}
+                      onClick={bookTickets}
+
+                    >
+                      Book Tickets
+                    </Button>
+                  </div>
+                </Col>
+
+              </Row>
+
+
+              {/* Search Field */}
+
+
+              <Row style={{ marginTop: "20px" }}>
+                <Col sm={12} md={12}>
+                  <div className="d-flex" style={{ position: "relative" }} onClick={gotoTickets_sraech} >
+                    <Form.Control
+                      type="text"
+                      name="search"
+                      placeholder="Search Tickets"
+                      style={{ marginTop: "3px", width: "823px", height: "70px" }}
+
+                    />
+                    <button
+                      className="form__search-btn"
+                      type="button"
+                      style={{
+                        position: "absolute",
+                        top: "35px",
+                        right: 0,
+                        left: "78%",
+                        background: "none",
+                        border: "none",
+                      }}
+                    >
+                      <BsSearch style={{ marginTop: -20 }} color="grey" size="25px" />
                     </button>
                   </div>
-                </div>
-              </Col>
-            </Row> */}
+                </Col>
+              </Row>
+            </Container>
             <div className="pt-4">
               <Container>
                 <h4>
@@ -328,8 +360,8 @@ function Saly() {
           </div>
         </Container>
 
-        <div style={{ backgroundColor: "black", color: "#fff", height:"521px" }}>
-          <Container style={{paddingTop:"4%"}}>
+        <div style={{ backgroundColor: "black", color: "#fff", height: "521px" }}>
+          <Container style={{ paddingTop: "4%" }}>
             <div>
               <div
                 style={{
@@ -338,11 +370,11 @@ function Saly() {
                   alignItems: "center",
                 }}
               >
-                <h2 className="package__title">
+                <h2 className="package__title" style={{ fontSize: "28px", fontFamily: 'Inter', paddingLeft: "32px" }}>
                   <span>Curated</span> Experiences
                 </h2>
                 <h6
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer",fontWeight:"normal" }}
                   onClick={() => history.push("/curatedexperiences")}
                   className="package__title pt-5"
                 >
@@ -362,7 +394,7 @@ function Saly() {
                     console.log("items:::::::", item);
                     return (
                       <div
-                      // style={{width:"376px", height:"237px"}}
+                        // style={{width:"376px", height:"237px"}}
                         key={key}
                         onClick={() =>
                           history.push({
@@ -372,8 +404,8 @@ function Saly() {
                         }
                       >
                         <Image
-                        className="homepage"
-                          draggable={false}                          
+                          className="homepage"
+                          draggable={false}
                           src={item.upload_images}
                         />
                         <div>
@@ -385,9 +417,9 @@ function Saly() {
                               paddingTop: 2,
                             }}
                           >
-                            {/* <h6
+                            <h6
                             style={{
-                              background: "#BEBEBE",
+                              // background: "#BEBEBE",
                               display: "inline",
                               padding: "3px",
                               borderRadius: "4px",
@@ -395,7 +427,7 @@ function Saly() {
                             }}
                           >
                             {item.category.category_name}
-                          </h6> */}
+                          </h6>
                           </div>
                           <div>
                             <small className="packages__block-subtitle">
@@ -647,9 +679,9 @@ function Saly() {
                               paddingTop: 2,
                             }}
                           >
-                            {/* <h6
+                            <h6
                             style={{
-                              background: "#BEBEBE",
+                            //  background: "#BEBEBE",
                               display: "inline",
                               padding: "3px",
                               borderRadius: "4px",
@@ -657,7 +689,7 @@ function Saly() {
                             }}
                           >
                             {item.category.category_name}
-                          </h6> */}
+                          </h6>
                           </div>
                           <div>
                             <small className="packages__block-subtitle">

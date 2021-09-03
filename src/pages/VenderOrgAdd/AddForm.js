@@ -136,9 +136,9 @@ function AddForm() {
       .then((res) => res.json())
       .then((res) => {
         setCatg(res.data);
-        console.log("Book Genre Data", res.data);
+
       })
-      .catch((error) => console.log("Genre Lookup Err::", error));
+      .catch((error) => console.log("Vendor Lookup Err::", error));
 
   };
   const serviceName = () => {
@@ -361,7 +361,10 @@ function AddForm() {
 
 
                 </Row>
-                <Button type="submit" className="vendor-btn mt-3 mb-5" >Next</Button>
+                <div style={{ textAlign: "center" }}>
+                  <Button type="submit" className="vendor-btn mt-3 mb-5" >Next</Button>
+                </div>
+
               </Form>
             )}
           </Formik>

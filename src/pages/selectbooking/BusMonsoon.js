@@ -579,7 +579,7 @@ function BusMonsoon() {
                     <hr />
 
                   </div>
-                   <Button className="locationpass-btn"  onClick={() => onClickTrain(item._id)} >
+                   <Button className="locationpass-btn" onClick={() => onClickTrain(item._id)} >
                    Continue
                  </Button>
                  </>

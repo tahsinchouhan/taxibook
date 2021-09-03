@@ -123,7 +123,7 @@ function BusDetail() {
                         }}
                         disabled={loading}
                       >
-                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Sent OTP</>} 
+                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Send OTP</>} 
                       </Button>
               </Col>
               <Col xs={12} md={4} className="">
@@ -268,7 +268,7 @@ function BusDetail() {
                         }}
                         disabled={loading}
                       >
-                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Sent OTP</>} 
+                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Send OTP</>} 
                       </Button>
                 </Form.Group>
               </Col>

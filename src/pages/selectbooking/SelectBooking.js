@@ -65,7 +65,7 @@ function SelectBooking() {
             </div>
           </div>
         </div>
-        <Container>
+        <Container style={{width:"971px"}}>
           <div>
             <Row>
               <Col xs={12} md={4}>
@@ -73,7 +73,7 @@ function SelectBooking() {
                   <div>
                     <img
                       src={bus}
-                      style={{ width: 30, height: 30, marginTop: "10px" }}
+                      style={{ width: 39, height: 38.37, marginTop: "10px" }}
                     />
                   </div>
                   <div className="bus_secation">
@@ -94,7 +94,7 @@ function SelectBooking() {
                   <div>
                     <img
                       src={doodle}
-                      style={{ width: 50, height: 40, marginTop: "10px" }}
+                      style={{ width: 39, height: 33.37, marginTop: "10px" }}
                     />
                   </div>
                   <div className="bus_secation">
@@ -114,7 +114,7 @@ function SelectBooking() {
                   <div>
                     <img
                       src={ticket}
-                      style={{ width: 30, height: 30, marginTop: "10px" }}
+                      style={{ width: 39, height: 25.58, marginTop: "10px" }}
                     />
                   </div>
                   <div className="bus_secation">

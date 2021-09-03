@@ -29,8 +29,7 @@
   display: inline-block;
   width : 0;
   font-size : 70px;
-  word-wrap: break-word;
-  
+  word-wrap: break-word;  
   margin-left : 100%; 
   margin-top:0;
 }

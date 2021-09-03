@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Row, Col, Form, Container } from "react-bootstrap";
+import { Button, Row, Col, Form, Container, Image } from "react-bootstrap";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import Header from "../../../components/Header";
 import doodle from "../../../assets/img/doodle.png";
@@ -29,6 +29,10 @@ function Tickets1() {
 
   const [startDate, setStartDate] = useState(new Date());
   const [selected, setSelected] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     getRoutes();
@@ -129,34 +133,65 @@ function Tickets1() {
                   whiteSpace: "nowrap",
                 }}
               >
-                Book tickets to your favourite <br />
-                destinations right from your mobile
+                Book tickets for <br />
+                Nature Trekking, Parking, Boating etc.
               </span>
             </div>
+            <div className="d-none d-md-block" style={{ width: "388px",margin:"0 auto" }} >
+              <div className="row d-flex text-center">
+                <div className="col-4" >
+                  <Image style={{ width: 36 }} src="https://cdn4.iconfinder.com/data/icons/nature-solid-icons-vol-3/72/108-512.png" />
+                  <p className="ticket-icons" style={{ marginLeft:" -10px", fontSize: "13px" }}>Nature Trekking</p>
+                </div>
+                <div className="col-4">
+                  <Image style={{ width: 36 }} src="https://www.iconpacks.net/icons/2/free-parking-sign-icon-1641-thumb.png" />
+                  <p className="ticket-icons" style={{ marginLeft: "-10px", fontSize: "13px" }}>Parking</p>
+                </div>
+                <div className="col-4">
+                  <Image style={{ width: 36 }} src="https://cdn3.iconfinder.com/data/icons/common-sports/4096/oarsmanship-512.png" />
+                  <p className="ticket-icons" style={{ marginLeft: "-10px", fontSize: "13px" }}>Boating</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* mobile view */}
+            <div className="d-md-none"  >
+              <div className="row d-flex text-center">
+                <div className="col-4" >
+                  <Image style={{ width: 27 }} src="https://cdn4.iconfinder.com/data/icons/nature-solid-icons-vol-3/72/108-512.png" />
+                  <p className="ticket-icons" style={{ marginLeft:" -10px", fontSize: "13px" }}>Nature Trekking</p>
+                </div>
+                <div className="col-4">
+                  <Image style={{ width: 27 }} src="https://www.iconpacks.net/icons/2/free-parking-sign-icon-1641-thumb.png" />
+                  <p className="ticket-icons" style={{ marginLeft: "-10px", fontSize: "13px" }}>Parking</p>
+                </div>
+                <div className="col-4">
+                  <Image style={{ width: 27 }} src="https://cdn3.iconfinder.com/data/icons/common-sports/4096/oarsmanship-512.png" />
+                  <p className="ticket-icons" style={{ marginLeft: "-10px", fontSize: "13px" }}>Boating</p>
+                </div>
+              </div>
+            </div>
+             {/* mobile view */}
 
             <Container>
 
-              <Row className="row justify-content-center">
+              <Row className="custom-row" style={{marginLeft:"34%",marginTop:"25px"}}>
                 {
-
                   (user_data === null)
                     ?
                     <>
-                      <Col xs={12} md={3} className="">
-
-
-                        <label
-                          className="formselect"
-                          style={{
-                            fontWeight: "bolder",
-                            paddingLeft: "4px",
-                            fontSize: "12px",
-                            color: "black",
-                            marginBottom: "5px",
-                          }}
-                        >
-                          Enter mobile number
-                        </label>
+                      <Col xs={12} md={3} className=""> 
+                      <label className="formselect"
+                        style={{
+                          fontWeight: "bolder",
+                          paddingLeft: "4px",
+                          fontSize: "12px",
+                          color: "black",
+                          marginBottom: "5px",
+                        }}
+                      >
+                        Enter mobile number
+                      </label>
 
                         <AvField
                           name="Mobile Number"
@@ -172,12 +207,9 @@ function Tickets1() {
                             },
 
                           }}
-
                         />
-
-
-                        <Button 
-                        // onClick={sendOtp}
+                        <Button
+                          // onClick={sendOtp}
                           style={{
                             backgroundColor: "transparent",
                             border: "none",
@@ -186,9 +218,9 @@ function Tickets1() {
                             fontSize: "12px",
                           }}
                         >
-                          {loading ? 
-                          <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : 
-                          <>Sent OTP</>} 
+                          {loading ?
+                            <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> :
+                            <>Send OTP</>}
                         </Button>
                       </Col>
                       <Col xs={12} md={3} className="">
@@ -220,13 +252,11 @@ function Tickets1() {
 
                           }}
                         />
-
-
                       </Col>
 
                     </>
                     :
-                    <Col xs={12} md={3}>
+                    <Col xs={12} md={5}>
                       <Form.Group
                         // className="location-userdatas"
                         controlId="exampleForm.ControlInput1"
@@ -234,14 +264,14 @@ function Tickets1() {
                         <Form.Label
                           className="formselect"
                           style={{
-                            fontSize: "12px",
+                            fontSize: "15px",
                             fontWeight: "bolder",
                             paddingLeft: "4px",
                             color: "black",
                             marginBottom: "5px",
                           }}
                         >
-                          Journey Date
+                          Select Booking Date
                         </Form.Label>
                         <div
                           className="location-userdatas"
@@ -249,6 +279,7 @@ function Tickets1() {
                             display: "flex",
                             flexDirection: "row",
                             overflow: "hidden",
+                            backgroundColor:"#F8F8F8"
                           }}
                         >
                           <img
@@ -261,8 +292,7 @@ function Tickets1() {
                             // onChange={(date) => setStartDate(date)}
                             onChange={handleDate}
                             customInput={<ExampleCustomInput />}
-                            dateFormat="dd MMM"
-
+                            dateFormat="dd MMM"                           
                           />
                         </div>
                       </Form.Group>
@@ -279,14 +309,14 @@ function Tickets1() {
               <Button
                 type="submit"
                 style={{
-                  marginTop: "50px",
-                  width: "19%",
+                  marginTop: "21px",
+                  width: "21%",
                   height: "50px",
                   backgroundColor: "#FF814A",
                   color: "white",
                   fontWeight: "900",
                   fontSize: "15px",
-                  marginBottom: "50px",
+                  marginBottom: "47px",
                   border: '1px solid #FF814A'
                 }}
                 onClick={onStepreClick}
@@ -300,7 +330,7 @@ function Tickets1() {
             <Button
               type="submit"
               style={{
-                marginTop: "50px",
+                marginTop: "21px",
                 width: "100%",
                 height: "71px",
                 backgroundColor: "#FF814A",
@@ -309,7 +339,7 @@ function Tickets1() {
                 fontSize: "15px",
                 border: '1px solid #FF814A',
                 borderRadius: 0,
-                position: "absolute",
+                // position: "absolute",
                 bottom: 0
               }}
               onClick={onStepreClick}

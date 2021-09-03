@@ -70,27 +70,30 @@ function LoginModal({ show, handleClose }) {
                         >
                           Enter mobile number
                         </Form.Label>
-                        <Form.Control type="text" placeholder="Phone Number" value={mobile} onChange={(e) => setMobile(e.target.value)} />
+                        <Form.Control type="number" placeholder="Phone Number" value={mobile} onChange={(e) => setMobile(e.target.value)} />
                       </Form.Group>
 
-                      <Button variant="dark" onClick={fetchOtp} style={{ fontWeight: "bolder", width: "95px", marginBottom: "50px" }}>
+                      <Button className="login-button" variant="dark" onClick={fetchOtp} style={{ fontWeight: "bolder", width: "95px", marginBottom: "50px" }}>
                         Get OTP
                       </Button>
 
                       <div className="modal__block" style={{ display: `${showDiv ? "block" : "none"}` }} >
                         <h5 className="modal__title mt-2 mb-4" style={{ fontWeight: "bolder" }}>Enter Verification Code</h5>
                         <OtpInput
+                          type="number"
                           inputStyle="input__style"
                           value={OTP}
+                          isInputNum={true}
                           onChange={handleChange}
                           numInputs={6}
                           separator={<span>&nbsp;-&nbsp;</span>}
                         />
                         <div className="mt-4 mb-4">
-                          <Button size="sm" style={{
+                          <Button className="login-button m-1" size="sm" onClick={handleSubmit}
+                           style={{
                             background: '#222',
                             border: '1px solid #222'
-                          }} className="m-1" onClick={handleSubmit}>Submit</Button>
+                          }} >Submit</Button>
                         </div>
                       </div>
                     </Form>

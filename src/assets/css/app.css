@@ -13,8 +13,8 @@
   border-color: var(--secondary-color);
   color: #fff;
   border-radius: 0.5em;
-
 }
+
 @import url('./header.css');
 @import url('./home.css');
 @import url('./inform.css');

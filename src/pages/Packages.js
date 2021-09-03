@@ -17,6 +17,8 @@ function Packages() {
   const history = useHistory();
   const [packages, setPackages] = useState([]);
   const [location, setLoation] = useState([]);
+  const [selected, setSelected] = useState("");
+  const [highToLow, sethighToLow] = useState([]);
 
   useEffect(() => {
     getCurrentLocation();
@@ -28,9 +30,10 @@ function Packages() {
       setLoation(pos.coords);
     });
   };
-  
+
   useEffect(() => {
     getPackages();
+    // hightToLowPrice();
     window.scrollTo(0, 0);
   }, [location]);
 
@@ -68,6 +71,38 @@ function Packages() {
       .catch((e) => console.log(e));
   };
 
+  const renderPackages = (e) => {
+    setSelected(e.target.value)
+    console.log("object", e.target.value)
+    if (e.target.value === "highToLow") {
+      fetch(API_PATH + "/api/v1/packages/srt?sort=-price", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          setPackages(res.data);
+          console.log("hightToLowPrice Genre Data", res.data);
+        })
+        .catch((error) => console.log("Genre Lookup Err::", error));
+    } else {
+      fetch(API_PATH + "/api/v1/packages/srt?sort=price", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          setPackages(res.data);
+          console.log("lowToHighPrice  Data", res.data);
+        })
+        .catch((error) => console.log("Genre Lookup Err::", error));
+    }
+  }
+
   return (
     <React.Fragment>
       <Header />
@@ -82,7 +117,7 @@ function Packages() {
                 style={{ marginTop: "-10px" }}
                 onChange={(e) => searchingData(e.target.value)}
               />
-             <div
+              <div
                 className="form__search-btn"
                 type="button"
                 style={{
@@ -98,9 +133,29 @@ function Packages() {
             </form>
           </div>
         </div>
-        <h2 className="package__title mb-5">
-          <span>Packages</span>
-        </h2>
+        <div className="d-flex justify-content-between">
+          <div>
+            <h2 className="package__title mb-5">
+              <span>Packages</span>
+            </h2>
+
+          </div>
+
+          <div>
+            {/* <h6><span>Sort By Price :</span></h6> */}
+            <Form>
+              <Form.Group controlId="formGridState" className="d-flex">
+                <Form.Label style={{width:"100%"}}>Sort By Price :</Form.Label>
+                <Form.Select value={selected}
+                  onChange={(e) => renderPackages(e)}                >
+                  <option value="">sort</option>
+                  <option value="highToLow">High to Low</option>
+                  <option value="lowToHigh">Low to High</option>
+                </Form.Select>
+              </Form.Group>
+            </Form>
+          </div>
+        </div>
         <>
           <div
             style={{

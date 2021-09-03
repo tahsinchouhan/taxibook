@@ -88,11 +88,11 @@ const Explores = () => {
       .then((response) => response.json())
       .then((json) => {
         if (json.data !== undefined)
-        setDestinations(json.data);
+          setDestinations(json.data);
       })
       .catch((e) => console.log(e));
   };
-  
+
 
   const getPackages = () => {
 
@@ -109,7 +109,7 @@ const Explores = () => {
       .then((response) => response.json())
       .then((json) => {
         if (json.data !== undefined) {
-          console.log("json.data",json.data)
+          console.log("json.data", json.data)
           setPackages(json.data);
         }
       })
@@ -123,9 +123,9 @@ const Explores = () => {
     });
   };
 
-  const goToSearch = ()=>{
+  const goToSearch = () => {
     history.push("/search")
-  } 
+  }
 
   return (
     <>
@@ -147,9 +147,9 @@ const Explores = () => {
                     Search Destinations
                   </label>
                 </div>
-                <button className="search__btn">
-                  <BsSearch color="white" size="25px" />
-                </button>
+                <div className="search__btn">
+                  <BsSearch color="#C4C4C4" size="25px" />
+                </div>
               </div>
             </div>
           </div>
@@ -163,25 +163,25 @@ const Explores = () => {
         </div>
         {tripPackage.length > 0
           ? tripPackage.map((_item, index) => {
-              return (
-                <div key={index} style={{ display: "inline-block",width: 348, height: 170, marginRight:"20px"}} className="mt-4">
-                  <Image
-                    draggable={false}
-                    className="img-fluid"
-                     style={{ borderRadius: 15 }}
-                    src={_item.url}
-                  />
-                  <a href={_item.pdf} target="_blank" className="package__trip">
-                    <h6 className="packages__block-title mt-3 mb-0">
-                      {_item.title}
-                    </h6>
-                    <small className="packages__block-subtitle mt-3 mb-0" style={{color:"#757575"}}>
-                      {_item.subtTitle}
-                    </small>
-                  </a>
-                </div>
-              );
-            })
+            return (
+              <div key={index} style={{ display: "inline-block", width: 348, height: 170, marginRight: "20px" }} className="mt-4">
+                <Image
+                  draggable={false}
+                  className="img-fluid"
+                  style={{ borderRadius: 15 }}
+                  src={_item.url}
+                />
+                <a href={_item.pdf} target="_blank" className="package__trip">
+                  <h6 className="packages__block-title mt-3 mb-0">
+                    {_item.title}
+                  </h6>
+                  <small className="packages__block-subtitle mt-3 mb-0" style={{ color: "#757575", fontSize: "-0.125em" }}>
+                    {_item.subtTitle}
+                  </small>
+                </a>
+              </div>
+            );
+          })
           : null}
         <div className="mb-5 mt-5">
           <div
@@ -212,32 +212,32 @@ const Explores = () => {
           >
             {packages.length > 0
               ? packages.map((item, key) => {
-                console.log("items:::::::",item);
-                  return (
-                    <div
-                      key={key}
-                      onClick={() =>
-                        history.push({
-                          pathname: `/packages_details/${item.title}`,
-                          item: item._id,
-                        })
-                      }
-                    >
-                      <Image
-                        draggable={false}
-                        style={{ width: "100%", height: "100%" }}
-                        src={item.upload_images}
-                      />
-                      <div>
-                        <h6 className="packages__block-title_ mt-3 mb-0">
-                          {item.title}
-                        </h6>
-                        <div
-                          style={{
-                            paddingTop: 2,
-                          }}
-                        >
-                          {/* <h6
+                console.log("items:::::::", item);
+                return (
+                  <div
+                    key={key}
+                    onClick={() =>
+                      history.push({
+                        pathname: `/packages_details/${item.title}`,
+                        item: item._id,
+                      })
+                    }
+                  >
+                    <Image
+                      draggable={false}
+                      style={{ width: "100%", height: "100%" }}
+                      src={item.upload_images}
+                    />
+                    <div>
+                      <h6 className="packages__block-title_ mt-3 mb-0">
+                        {item.title}
+                      </h6>
+                      <div
+                        style={{
+                          paddingTop: 2,
+                        }}
+                      >
+                        {/* <h6
                             style={{
                               background: "#BEBEBE",
                               display: "inline",
@@ -248,16 +248,16 @@ const Explores = () => {
                           >
                             {item.category.category_name}
                           </h6> */}
-                        </div>
-                        <div>
-                          <small className="packages__block-subtitle">
-                            ₹ {item.price}
-                          </small>
-                        </div>
+                      </div>
+                      <div>
+                        <small className="packages__block-subtitle">
+                          ₹ {item.price}
+                        </small>
                       </div>
                     </div>
-                  );
-                })
+                  </div>
+                );
+              })
               : null}
           </Carousel>
         ) : null}
@@ -285,8 +285,7 @@ const Explores = () => {
                   <span>Popular</span> Destinations
                 </h2>
                 <h6>
-                  The best tourist loactions across Bastar, rated and curated by
-                  travellers.
+                  The best tourist locations across Bastar, rated and curated by travellers.
                 </h6>
               </div>
 
@@ -314,7 +313,7 @@ const Explores = () => {
                       style={{ width: "100%", height: "100%" }}
                       src={item.upload_images}
                     />
-                   
+
                     <div style={{ color: "white" }} className="package__trip">
                       <h6 className="packages__block-title mt-3 mb-0">
                         {item.title}

@@ -130,7 +130,7 @@ function DmTicket2({loading}) {
                         }}
                         disabled={loading}
                       >
-                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Sent OTP</>} 
+                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Send OTP</>} 
                       </Button>
 
 
@@ -272,7 +272,7 @@ function DmTicket2({loading}) {
                         }}
                         disabled={loading}
                       >
-                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Sent OTP</>} 
+                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Send OTP</>} 
                       </Button>
 
 

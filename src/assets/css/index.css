@@ -43,7 +43,7 @@
 
 .code {
   text-decoration: none;
-  color: #000;
+  color: #A5A5A5;
   cursor: pointer;
 }
 
@@ -630,7 +630,7 @@ body {
   display: flex;
   background: #f9f9f9;
   border-radius: 16px;
-  padding: 15px;
+  padding: 27px;
   position: relative;
  
 }
@@ -665,7 +665,7 @@ body {
   border-left: 2px solid #e0e0e0;
 }
 .block--text {
-  font-weight: bold;
+  font-weight: normal;
 }
 
 
@@ -681,12 +681,12 @@ body {
 
 .search__btn {
   position: absolute;
-  right: 4px;
-  top: 5px;
+  right: 17px;
+  top: 17px;
   flex: 1;
   border: none;
-  background: #BEBEBE;
-  color: #fff;
+  /* background: #BEBEBE; */
+  /* color: #fff; */
   font-size: 16px;
   font-weight: bold;
   padding: 10px 15px;

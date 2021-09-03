@@ -287,6 +287,14 @@
     /* background: pink !important; */
   }  
 
+  .custom-row {
+    margin-left: 0px !important ;
+  }
+
+  .ticket-icons {
+    margin-left: 0px !important;
+  }
+
   .header {
     position: relative;
   }
@@ -429,4 +437,11 @@
     height: 100px;
     width: 120px;
   }
+
+  .login-button {
+    width: 290px !important;
   }
+ 
+  }
+
+  

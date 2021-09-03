@@ -60,7 +60,7 @@ function Header() {
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
           <div style={{ textAlign: "center" }}>
-            <Image className="image-fluid"  src={logo} />
+            <Image className="image-fluid" src={logo} />
             <FaSistrix onClick={onSearchClick} className="searchIcon" />
           </div>
         </header>
@@ -99,15 +99,18 @@ function Header() {
                 EXPLORE
               </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/select-booking"> */}
-              <NavLink className="sidebar__navlink" to="/select-booking">
-                BOOKING
-              </NavLink>
               <NavLink className="sidebar__navlink" to="/dmpass">
                 TRAVEL PASS
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/select-booking">
+                BOOKING
               </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/tickets_sraech"> */}
               <NavLink className="sidebar__navlink" to="/tickets">
                 TICKETS
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/buspass">
+                BUS TICKETS
               </NavLink>
               {user_data !== null ? (
                 <NavLink className="sidebar__navlink" to="/search#Tickets">
@@ -126,10 +129,10 @@ function Header() {
       </Container>
 
       <Container fluid className="header_div d-none d-md-block">
-        <Navbar expand="lg" style={{ height: "129px" }}>
+        <Navbar expand="lg" style={{ height: "161px" }}>
           <Navbar.Brand href="#">
-            <div style={{ marginLeft: "100%",marginTop:"31%" }}>
-              <Image  src={logo} />
+            <div style={{ marginLeft: "44%", marginTop: "1%" }}>
+              <Image src={logo} />
             </div>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" className="toggle-icon" />
@@ -138,36 +141,40 @@ function Header() {
               className="mr-auto my-2 my-lg-0"
               style={{
                 maxHeight: "100px",
-               // justifyContent: "center",
+                // justifyContent: "center",
                 alignItems: "center",
                 flex: "1",
               }}
               navbarScroll
             >
-              <div style={{marginLeft:"12%"}}>
-              <NavLink className="sidebar_item" to="/">
-                HOME
-              </NavLink>
-              <NavLink className="sidebar_item" to="/explore">
-                EXPLORE
-              </NavLink>
-              {/* <NavLink className="sidebar_item" to="/select-booking"> */}
-              <NavLink className="sidebar_item" to="/select-booking">
-                BOOKING
-              </NavLink>
-              <NavLink className="sidebar_item" to="/dmpass">
-                TRAVEL PASS
-              </NavLink>
-              {/* <NavLink className="sidebar_item" to="/tickets_sraech"> */}
-              <NavLink className="sidebar_item" to="/tickets">
-                TICKETS
-              </NavLink>
-              {user_data !== null ? (
-                <NavLink className="sidebar_item" to="/search#Tickets">
-                  VIEW TICKETS
+              <div style={{ marginLeft: "6%" }}>
+                <NavLink className="sidebar_item" to="/">
+                  HOME
                 </NavLink>
-              ) : null}
-              {/* <NavLink className="sidebar_item" to="#">
+                <NavLink className="sidebar_item" to="/explore">
+                  EXPLORE
+                </NavLink>
+
+                <NavLink className="sidebar_item" to="/dmpass">
+                  TRAVEL PASS
+                </NavLink>
+                {/* <NavLink className="sidebar_item" to="/select-booking"> */}
+                <NavLink className="sidebar_item" to="/select-booking">
+                  BOOKING
+                </NavLink>
+                {/* <NavLink className="sidebar_item" to="/tickets_sraech"> */}
+                <NavLink className="sidebar_item" to="/tickets">
+                  TICKETS
+                </NavLink>
+                <NavLink className="sidebar_item" to="/buspass">
+                  BUS TICKETS
+                </NavLink>
+                {user_data !== null ? (
+                  <NavLink className="sidebar_item" to="/search#Tickets">
+                    VIEW TICKETS
+                  </NavLink>
+                ) : null}
+                {/* <NavLink className="sidebar_item" to="#">
                 CONTACT
               </NavLink>
               <NavLink className="sidebar_item" to="#">

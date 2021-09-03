@@ -31,8 +31,10 @@ function DmPass({ DmPassDetails }) {
   const [daysTravel, setDaysTravel] = useState("1")
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
   const dispatch = useDispatch()
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { dmData } = useSelector(state => state.dmpassReducer)
   var { number_of_vehicals, number_of_travellers, duration_of_travel } = dmData
   const { error, loading, message } = useSelector(
@@ -40,6 +42,8 @@ function DmPass({ DmPassDetails }) {
   );
   const { user_data } = useSelector((state) => state.loginReducer);
   console.log("user_data", user_data);
+
+
 
   useEffect(() => {
     let d = new Date();
@@ -56,7 +60,7 @@ function DmPass({ DmPassDetails }) {
   const data = [
     {
       "Vehicle": vehicle,
-      "DaysTravel":daysTravel,
+      "DaysTravel": daysTravel,
       "Travellers": travellers,
     }
   ]
@@ -158,12 +162,12 @@ function DmPass({ DmPassDetails }) {
                       className=""
                       controlId="exampleForm.ControlInput1"
                     >
-                      
-                        <Form.Label className="dm-ticket">Days of Travel</Form.Label>
+
+                      <Form.Label className="dm-ticket">Days of Travel</Form.Label>
                       <select
                         id="inputState"
                         className="form-control pass_input"
-                        onChange={(e)=>setDaysTravel(e.target.value)}
+                        onChange={(e) => setDaysTravel(e.target.value)}
                       >
                         <option selected>1</option>
                         <option value="2">2</option>
@@ -257,7 +261,7 @@ function DmPass({ DmPassDetails }) {
                   controlId="exampleForm.ControlInput1"
                 >
                   <Form.Label className="dm-ticket" >Number of Vehicles</Form.Label>
-                  <select id="inputState" className="form-control pass_input"  onChange={(e) => setVehicle(e.target.value)}>
+                  <select id="inputState" className="form-control pass_input" onChange={(e) => setVehicle(e.target.value)}>
                     <option selected>0</option>
                     <option>1</option>
                     <option value="2">2</option>
@@ -303,19 +307,19 @@ function DmPass({ DmPassDetails }) {
                   className=""
                   controlId="exampleForm.ControlInput1"
                 >
-                   <Form.Label className="dm-ticket">Days of Travel</Form.Label>
-                      <select
-                        id="inputState"
-                        className="form-control pass_input"
-                        onChange={(e)=>setDaysTravel(e.target.value)}
-                      >
-                        <option selected>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                      </select>
+                  <Form.Label className="dm-ticket">Days of Travel</Form.Label>
+                  <select
+                    id="inputState"
+                    className="form-control pass_input"
+                    onChange={(e) => setDaysTravel(e.target.value)}
+                  >
+                    <option selected>1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
                   {/* <Row>
                     <Col xs={6} md={4}>
                       <div>
@@ -353,27 +357,27 @@ function DmPass({ DmPassDetails }) {
                 </Form.Group>
               </Col>
             </Row>
-             <div className="dmticket-btn" style={{ textAlign: "center", marginTop: "70px" }}>
-                <Button
-                  type="submit"
-                  class="btn btn-success"
-                  style={{
-                    width: "100%",
-                    textAlign: "center",
-                    // borderRadius: "9px",
-                    backgroundColor: "#0fa453",
-                    border: "none",
-                    height: "86px",
-                    position:"fixed",
-                    width:"100%",
-                    bottom:"0",
-                    left:"0"
-                  }}
-                  onClick={onDmTicketShow}
-                >
-                  Continue
-                </Button>
-              </div> 
+            <div className="dmticket-btn" style={{ textAlign: "center", marginTop: "70px" }}>
+              <Button
+                type="submit"
+                class="btn btn-success"
+                style={{
+                  width: "100%",
+                  textAlign: "center",
+                  // borderRadius: "9px",
+                  backgroundColor: "#0fa453",
+                  border: "none",
+                  height: "86px",
+                  position: "fixed",
+                  width: "100%",
+                  bottom: "0",
+                  left: "0"
+                }}
+                onClick={onDmTicketShow}
+              >
+                Continue
+              </Button>
+            </div>
           </Container>
         </div>
         {/* <Button className="locationpass-btn" onClick={onDmTicketShow}>
