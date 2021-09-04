@@ -476,9 +476,19 @@ function BusBookingDetail() {
                       fontWeight: "bold",
                     }}
                   >
-                    {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+                    {/* {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { day: 'numeric' })} `}
                     {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { month: 'short' })} `}
-                    {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { year: 'numeric' })} `}
+                    {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { year: 'numeric' })} `} */}
+                    {
+                        (apiData[0]?.date !== null)
+                          ?
+                          <>
+                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { month: 'short' })} `}
+                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { year: 'numeric' })}`}
+                          </>
+                          : null
+                      }
                   </span>
                 </div>
                 <div className="p-2">
