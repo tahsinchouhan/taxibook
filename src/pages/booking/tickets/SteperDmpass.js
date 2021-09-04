@@ -386,35 +386,80 @@ function SteperDmpass(shows, ...props) {
     setShowDate(`${da}, ${mo} ${ye}`);
   };
 
-
-  const [travel, setTravel] = useState("");
-  const [vehicle, setVehicle] = useState("");
-
   const handleTravellerCount = (e) => {
-    setTravel(e.target.value)
-    console.log("travller seleted", travel)
-    setTravellers([
-      ...travellers,
-      {
-        name: "",
-        gender: "Male",
-        age: "",
-        adhaar: "",
-      },
-    ])
+    console.log("travller seleted", e.target.value)
+    console.log("object", travellers)
+    const count = e.target.value;
+
+    if (e.target.value == 1) {
+      setTravellers(
+        [
+          travellers
+        ])
+    } else if (e.target.value == 2) {
+      setTravellers(
+        [
+          travellers, travellers,
+        ])
+    } else if (e.target.value == 3) {
+      setTravellers(
+        [
+          travellers, travellers, travellers,
+        ])
+    } else if (e.target.value == 4) {
+      setTravellers(
+        [
+          travellers, travellers, travellers, travellers,
+        ])
+    }
+    else if (e.target.value == 5) {
+      setTravellers(
+        [
+          travellers, travellers, travellers, travellers, travellers,
+        ])
+    }
+    else if (e.target.value == 6) {
+      setTravellers(
+        [
+          travellers, travellers, travellers, travellers, travellers, travellers,
+        ])
+    }
   }
   const handlerVehicles = (e) => {
     console.log("Number of Vehicles", e.target.value)
-    setVehicles([
-      ...vehicles,
-      {
-        vehicle_number: "",
-        name: "",
-        gender: "Male",
-        age: "",
-        adhaar: "",
-      },
-    ])
+    if (e.target.value == 1) {
+      setVehicles(
+        [
+          vehicles
+        ])
+    } else if (e.target.value == 2) {
+      setVehicles(
+        [
+          vehicles, vehicles,
+        ])
+    } else if (e.target.value == 3) {
+      setVehicles(
+        [
+          vehicles, vehicles, vehicles,
+        ])
+    } else if (e.target.value == 4) {
+      setVehicles(
+        [
+          vehicles, vehicles, vehicles, vehicles,
+        ])
+    }
+    else if (e.target.value == 5) {
+      setVehicles(
+        [
+          vehicles, vehicles, vehicles, vehicles, vehicles,
+        ])
+    }
+    else if (e.target.value == 6) {
+      setVehicles(
+        [
+          vehicles, vehicles, vehicles, vehicles, vehicles, vehicles,
+        ])
+    }
   }
   const [data, setData] = useState();
 
@@ -428,7 +473,7 @@ function SteperDmpass(shows, ...props) {
     }
     return shows;
   };
-  
+
   async function loadScript(src) {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -466,12 +511,14 @@ function SteperDmpass(shows, ...props) {
 
         if (response.razorpay_payment_id) {
           dispatch(
-            createDmPass({ ...dmData,
-               basic_details: travellers, 
-               vehical_details: vehicles,
-               name:values.name,
-               email:values.email,
-               whatsapp: values.number})
+            createDmPass({
+              ...dmData,
+              basic_details: travellers,
+              vehical_details: vehicles,
+              name: values.name,
+              email: values.email,
+              whatsapp: values.number
+            })
           );
           dispatch(setDmData({ ...dmData, order_id: response.razorpay_order_id }))
           localStorage.setItem("dm_pass_id", dmData.dmpass_id)
@@ -551,7 +598,7 @@ function SteperDmpass(shows, ...props) {
                       className="form-control pass_input"
                       onChange={handleTravellerCount}
                     >
-                      <option selected>1</option>
+                      <option value="1" selected>1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
@@ -576,9 +623,8 @@ function SteperDmpass(shows, ...props) {
                   </div>
                   <div className="form-group mt-4 ">
                     <label for="inputState">Number of Vehicles</label>
-                    <select id="inputState" className="form-control pass_input" onChange={(e) => handlerVehicles(e)}>
-                      <option >0</option>
-                      <option selected>1</option>
+                    <select id="inputState" className="form-control pass_input" onChange={handlerVehicles}>
+                      <option value="1" selected>1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
                       <option value="4">4</option>
@@ -602,6 +648,7 @@ function SteperDmpass(shows, ...props) {
                       >
                         Vehicle Details
                       </label>
+                      
                       <div
                         className="traveller_div"
                         style={{
@@ -612,7 +659,8 @@ function SteperDmpass(shows, ...props) {
                         {vehicles.map((item, i) => (
                           <Paper
                             key={i}
-                            className="traveller__card py-5 px-4 flex-grow-1"
+                            className="traveller__card p-4 flex-grow-1"
+                            style={{width: 200}}
                           >
                             <div
                               className="traveller__card_body"
@@ -767,7 +815,7 @@ function SteperDmpass(shows, ...props) {
                                 Travellers {i + 1}
                               </h5>
                               <p className="traveller__card_text">
-                                <div className="form-group pt-3">
+                                <div className="form-group pt-4">
                                   <label className="mb-3" for={`name${i}`}>
                                     Name
                                   </label>
@@ -1522,7 +1570,7 @@ function SteperDmpass(shows, ...props) {
                           />
                           <span> Whatsapp Link</span>
                         </Button>
-                      </div> 
+                      </div>
 
                       <div>
                         <Button

@@ -21,7 +21,6 @@ function BusPass() {
   const [routes, setRoutes] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [selected, setSelected] = useState("");
-  
   const dispatch = useDispatch()
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -51,8 +50,6 @@ function BusPass() {
   };
 
   const onSubmit = () => {
-    // dispatch(setRouteId(selected))
-    // dispatch(getTripByRouteId(selected))
     console.log("object bus:::::::", selected);
     if (selected !== "") {
       console.log("object bus:::::::", selected);

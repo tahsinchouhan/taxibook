@@ -224,7 +224,7 @@ function DmTicket2({loading}) {
                 </div>
               </div>
 
-              <Container style={{ width: "", paddingTop: "20px" }}>
+              <Container style={{paddingTop: "20px",paddingBottom: 150 }}>
                 <AvForm onClick={onDmTicketSecondShow}>
                   <Row>
                     <Col xs={12} md={6} className="mt-2">

@@ -306,11 +306,12 @@ function BusConfirmation() {
             </Col>
           </Row>
 
-          <AvForm>
-            <div className="">
-              <div className="traveller_div" >
-                {
-                  travellers?.map((item, i) => (
+
+          <div className="">
+            <div className="traveller_div" >
+              {
+                travellers?.map((item, i) => (
+                  <AvForm onsubmit="return Check();">
                     <Paper key={i} className="traveller__card" >
                       <div className="traveller__card_body" className="py-0">
                         <div>
@@ -328,7 +329,7 @@ function BusConfirmation() {
                               id={`name${i}`}
                               placeholder="Enter Traveller Name"
                               style={{ fontSize: "11px", marginLeft: "-5px" }}
-                              name="name"
+                              name='name'
                               onChange={(e) =>
                                 handleTraveller(
                                   e.target.value,
@@ -381,7 +382,7 @@ function BusConfirmation() {
                                   whiteSpace: "nowrap",
                                   height: "33px",
                                 }}
-                                name="age"
+                                name='age'
                                 onChange={(e) =>
                                   handleTraveller(
                                     e.target.value,
@@ -411,7 +412,7 @@ function BusConfirmation() {
                               id={`adhaar${i}`}
                               placeholder="Enter 12 digit Adhaar Card Number"
                               style={{ fontSize: "11px", marginLeft: "-5px" }}
-                              name="adhaar"
+                              name='adhaar'
                               onChange={(e) =>
                                 handleTraveller(
                                   e.target.value,
@@ -432,127 +433,128 @@ function BusConfirmation() {
                         </p>
                       </div>
                     </Paper>
-                  ))
-                }
-              </div>
+                  </AvForm>
+                ))
+              }
+            </div>
 
-              <div style={{ textAlign: "center", margin: "55px" }}>
-                <Button
-                  type="submit"
-                  style={{
-                    backgroundColor: "#0FA453",
-                    color: "white",
-                    width: "29%",
-                    height: "51px",
-                    border: "none",
-                    borderRadius: "15px",
-                  }}
-                  onClick={() => setTravellers([...travellers, {
-                    name: '',
-                    gender: 'Male',
-                    age: '',
-                    adhaar: '',
-                  }])}
-                >
-                  Add Traveller
-                </Button>
-              </div>
-
-              {/* <Popper
-              open={open}
-              anchorEl={anchorEl}
-              placement={placement}
-              transition
-            > */}
-              <Modal
-                show={show}
-                onHide={handleClose}
-                backdrop="static"
-                keyboard={false}
+            <div style={{ textAlign: "center", margin: "55px" }}>
+              <Button
+                type="submit"
+                style={{
+                  backgroundColor: "#0FA453",
+                  color: "white",
+                  width: "29%",
+                  height: "51px",
+                  border: "none",
+                  borderRadius: "15px",
+                }}
+                onClick={() => setTravellers([...travellers, {
+                  name: '',
+                  gender: '',
+                  age: '',
+                  adhaar: '',
+                }])}
               >
-                <Modal.Header closeButton>
-                  <Modal.Title>Travellers</Modal.Title>
-                </Modal.Header>
-                <Modal.Body className="p-0">
-                  <Paper>
-                    <Typography className={classes.typography}>
-                      <div className="card-body" className="py-0">
-                        <div className="form-group mt-0">
-                          <label for="inputAddress">Name</label>
-                          <input
-                            type="text"
-                            className="form-control pass_input"
-                            id="inputAddress"
-                            placeholder="Enter passenger name"
-                            style={{ fontSize: "11px", marginLeft: "-5px" }}
-                            name="name" onChange={handleChange} value={name}
-                          />
-                        </div>
+                Add Traveller
+              </Button>
+            </div>
 
-                        <div className="form-row genderform pt-3 d-flex ">
-                          <div className="col m-2 w-50">
-                            <label for="inputAddress">Gender</label>
-                            <div className="d-flex pt-2">
-                              <ButtonComponent
-                                style={{
-                                  width: "50%",
-                                  fontSize: "11px",
-                                  whiteSpace: "nowrap",
-                                }}
-                                data={button_Data}
-                                activeButton={activeButton}
-                                trigerOnClickEmpSideBtn={onSideBtnClick}
-                              />
-                            </div>
-                          </div>
-                          <div className="col m-2 w-50">
-                            <label for="inputAddress">Age</label>
-                            <br />
-                            <input
-                              type="text"
-                              className="form-control pass_input w-70 pt-2"
-                              placeholder="Enter Age"
+            {/* <Popper
+                    open={open}
+                    anchorEl={anchorEl}
+                    placement={placement}
+                    transition
+                  > */}
+            <Modal
+              show={show}
+              onHide={handleClose}
+              backdrop="static"
+              keyboard={false}
+            >
+              <Modal.Header closeButton>
+                <Modal.Title>Travellers</Modal.Title>
+              </Modal.Header>
+              <Modal.Body className="p-0">
+                <Paper>
+                  <Typography className={classes.typography}>
+                    <div className="card-body" className="py-0">
+                      <div className="form-group mt-0">
+                        <label for="inputAddress">Name</label>
+                        <input
+                          type="text"
+                          className="form-control pass_input"
+                          id="inputAddress"
+                          placeholder="Enter passenger name"
+                          style={{ fontSize: "11px", marginLeft: "-5px" }}
+                          name="name" onChange={handleChange} value={name}
+                        />
+                      </div>
+
+                      <div className="form-row genderform pt-3 d-flex ">
+                        <div className="col m-2 w-50">
+                          <label for="inputAddress">Gender</label>
+                          <div className="d-flex pt-2">
+                            <ButtonComponent
                               style={{
-                                width: "110px",
-                                marginLeft: "-5px",
-                                fontSize: "12px",
+                                width: "50%",
+                                fontSize: "11px",
                                 whiteSpace: "nowrap",
-                                height: "33px",
                               }}
-                              name="age" onChange={handleChange} value={age}
+                              data={button_Data}
+                              activeButton={activeButton}
+                              trigerOnClickEmpSideBtn={onSideBtnClick}
                             />
                           </div>
                         </div>
-
-                        <div className="form-group mt-1 pt-2">
-                          <label for="inputAddress">
-                            Adhaar Card Number{" "}
-                          </label>
+                        <div className="col m-2 w-50">
+                          <label for="inputAddress">Age</label>
+                          <br />
                           <input
-                            type="number"
-                            className="form-control pass_input"
-                            id="inputAddress"
-                            placeholder=" Enter 12 digit Adhaar Card Number"
-                            style={{ fontSize: "11px", marginLeft: "-5px" }}
-                            name="adhaar" onChange={handleChange} value={adhaar}
-                            // min={12}
-                            // max={12}
-                            required
+                            type="text"
+                            className="form-control pass_input w-70 pt-2"
+                            placeholder="Enter Age"
+                            style={{
+                              width: "110px",
+                              marginLeft: "-5px",
+                              fontSize: "12px",
+                              whiteSpace: "nowrap",
+                              height: "33px",
+                            }}
+                            name="age" onChange={handleChange} value={age}
                           />
                         </div>
                       </div>
-                    </Typography>
-                  </Paper>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button variant="secondary" onClick={handleClose}>
-                    Close
-                  </Button>
-                  <Button variant="primary" onClick={handleOk}>Add</Button>
-                </Modal.Footer>
-              </Modal>
 
-              {/* {
+                      <div className="form-group mt-1 pt-2">
+                        <label for="inputAddress">
+                          Adhaar Card Number{" "}
+                        </label>
+                        <input
+                          type="number"
+                          className="form-control pass_input"
+                          id="inputAddress"
+                          placeholder=" Enter 12 digit Adhaar Card Number"
+                          style={{ fontSize: "11px", marginLeft: "-5px" }}
+                          name="adhaar" onChange={handleChange} value={adhaar}
+                          // min={12}
+                          // max={12}
+                          required
+                        />
+                      </div>
+                    </div>
+                  </Typography>
+                </Paper>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" onClick={handleOk}>Add</Button>
+              </Modal.Footer>
+            </Modal>
+
+            {/* {
               (basic_details?.length > 0) ?
 
                 <Row>
@@ -586,7 +588,7 @@ function BusConfirmation() {
                 </Row>
                 : null
             } */}
-              {/* <div style={{ textAlign: "center", margin: "55px" }}>
+            {/* <div style={{ textAlign: "center", margin: "55px" }}>
               <Button
                 style={{
                   backgroundColor: "#0FA453",
@@ -603,8 +605,7 @@ function BusConfirmation() {
               </Button>
             </div> */}
 
-            </div>
-          </AvForm>
+          </div>
         </Container>
 
         <div>
@@ -731,13 +732,13 @@ function BusConfirmation() {
                       className="mb-3"
                       style={{ margin: "10px", marginLeft: "10px" }}
                     >
-                      <Form.Check
+                      {/* <Form.Check
                         inline
                         label=""
                         name="group1"
                         type={type}
                         id={`inline-${type}-1`}
-                      />
+                      /> */}
                     </div>
                   ))}
 
@@ -788,13 +789,13 @@ function BusConfirmation() {
                       className="mb-3"
                       style={{ margin: "10px", marginLeft: "10px" }}
                     >
-                      <Form.Check
+                      {/* <Form.Check
                         inline
                         label=""
                         name="group1"
                         type={type}
                         id={`inline-${type}-1`}
-                      />
+                      /> */}
                     </div>
                   ))}
 
@@ -1019,7 +1020,7 @@ function BusConfirmation() {
                               data={button_Data}
                               // activeButton={activeButton}
                               // trigerOnClickEmpSideBtn={onSideBtnClick}
-                              trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender}/>
+                              trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender} />
                           </div>
                         </div>
                         <div className="form-group col m-2 w-50">
@@ -1090,7 +1091,7 @@ function BusConfirmation() {
               ))
             }
           </div>
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", paddingBottom: "200px" }}>
             <Button
               style={{
                 backgroundColor: "#0FA453",
@@ -1101,8 +1102,6 @@ function BusConfirmation() {
                 borderRadius: "15px",
                 marginTop: '40px'
               }}
-              // onClick={handleShow}
-              // onClick={handleClick("top-start")}
               onClick={() => setTravellers([...travellers, {
                 name: '',
                 gender: '',
@@ -1114,8 +1113,9 @@ function BusConfirmation() {
             </Button>
           </div>
         </AvForm>
+
         <div>
-          <div style={{ display: "flex", marginTop: "50px", flexDirection: 'row', width: "50%",position:"absolute",bottom:"0px" }} >
+          <div style={{ display: "flex", marginTop: "50px", flexDirection: 'row', width: "50%", position: 'fixed', bottom: "0px" }} >
             <Col xs={12} md={6} style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px", }}>
               <div style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px" }}>
 

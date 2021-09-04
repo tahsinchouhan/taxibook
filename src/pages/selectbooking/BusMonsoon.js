@@ -19,6 +19,7 @@ function BusMonsoon() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    console.log("DATADTA::::",route_id)
     dispatch(setRouteId(route_id))
     dispatch(getTripByRouteId(route_id))
   }, [route_id]);
@@ -104,8 +105,6 @@ function BusMonsoon() {
                     paddingRight: "20px",
                   }}
                 >
-                  {/* 30 July  */}
-                  {/* {`${routeData?.startDate?.toLocaleDateString("en-US", {  day: 'numeric', month: 'short'})} `} */}
                   {`${routeData?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
                   {`${routeData?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
                 </Form.Label>

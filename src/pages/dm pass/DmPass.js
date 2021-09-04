@@ -118,7 +118,7 @@ function DmPass({ DmPassDetails }) {
                       <Form.Label className="dm-ticket" >Number of Vehicles</Form.Label>
                       <select id="inputState" className="form-control pass_input" onChange={(e) => setVehicle(e.target.value)}>
                         <option selected>0</option>
-                        <option>1</option>
+                        <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -148,7 +148,7 @@ function DmPass({ DmPassDetails }) {
                         // onChange={handleTravellerCount}
                         onChange={(e) => setTraveller(e.target.value)}
                       >
-                        <option selected>1</option>
+                        <option value="1" selected>1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -169,14 +169,14 @@ function DmPass({ DmPassDetails }) {
                         className="form-control pass_input"
                         onChange={(e) => setDaysTravel(e.target.value)}
                       >
-                        <option selected>1</option>
+                        <option value="1" selected>1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                         <option value="6">6</option>
                       </select>
-                      {/* <Row>
+                      <Row>
                         <Col xs={12} md={4}>
                           <div>
                             <Form.Label className="dm-ticket">Start Date</Form.Label>
@@ -184,9 +184,9 @@ function DmPass({ DmPassDetails }) {
                             <DatePicker
                               /// id={`start_date${i}`}
                               selected={startDate}
-                              onChange={handleDate}
+                              onChange={(date) => setStartDate(date)}
                               customInput={<ExampleCustomInput />}
-                              dateFormat="dd/MM/yy"
+                              dateFormat="dd MMM yyyy"
                             //value={travellers[i].start_date}
                             />
                           </div>
@@ -197,17 +197,14 @@ function DmPass({ DmPassDetails }) {
                             <DatePicker
                               //  id={`end_date${i}`}
                               selected={endDate}
-                              onChange={handleDateTwo}
+                              onChange={(date) => setStartDate(date)}
                               customInput={<ExampleCustomInput />}
-                              dateFormat="dd/MM/yy"
+                              dateFormat="dd MMM yyyy"
                             //value={travellers[i].end_date}
                             />
                           </div>
                         </Col>
-
-
-
-                      </Row> */}
+                      </Row>
                     </Form.Group>
                   </Col>
                 </Row>
@@ -253,7 +250,7 @@ function DmPass({ DmPassDetails }) {
             </div>
           </div>
 
-          <Container style={{ width: "92%", paddingTop: "28px" }}>
+          <Container style={{ width: "92%", paddingTop: "28px",paddingBottom: 100 }}>
             <Row>
               <Col xs={12} md={4} className="mt-2">
                 <Form.Group
@@ -320,7 +317,7 @@ function DmPass({ DmPassDetails }) {
                     <option value="5">5</option>
                     <option value="6">6</option>
                   </select>
-                  {/* <Row>
+                  <Row>
                     <Col xs={6} md={4}>
                       <div>
                         <Form.Label className="dm-ticket">Start Date</Form.Label>
@@ -328,7 +325,7 @@ function DmPass({ DmPassDetails }) {
                         <DatePicker
                           /// id={`start_date${i}`}
                           selected={startDate}
-                          onChange={handleDate}
+                          onChange={(date) => setStartDate(date)}
                           customInput={<ExampleCustomInput />}
                           dateFormat="dd/MM/yy"
                         //value={travellers[i].start_date}
@@ -341,18 +338,14 @@ function DmPass({ DmPassDetails }) {
                         <DatePicker
                           //  id={`end_date${i}`}
                           selected={endDate}
-                          onChange={handleDateTwo}
+                          onChange={(date) => setStartDate(date)}
                           customInput={<ExampleCustomInput />}
                           dateFormat="dd/MM/yy"
                         //value={travellers[i].end_date}
                         />
                       </div>
                     </Col>
-
-
-
-                   
-                  </Row> */}
+                  </Row>
 
                 </Form.Group>
               </Col>
@@ -364,7 +357,7 @@ function DmPass({ DmPassDetails }) {
                 style={{
                   width: "100%",
                   textAlign: "center",
-                  // borderRadius: "9px",
+                  borderRadius: "0px",
                   backgroundColor: "#0fa453",
                   border: "none",
                   height: "86px",

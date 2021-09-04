@@ -20,6 +20,8 @@ function CheckoutPage() {
     mobile,
     routeData
   } = useSelector((state) => state.busReducer);
+
+  console.log("object",routeData)
   const { name, age, gender, adhaar, basic_details, price, surcharge } = apiData;
 
   const onCongratsClick = () => {

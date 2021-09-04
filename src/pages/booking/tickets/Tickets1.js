@@ -16,13 +16,13 @@ import Loader from "../../../components/Loader";
 import Message from "../../../components/Message";
 
 
-function Tickets1() {
+function Tickets1({loading}) {
   const history = useHistory();
   const [routes, setRoutes] = useState([]);
   const [number, setNumber] = useState([]);
 
   const dispatch = useDispatch()
-  const { error, loading, message } = useSelector(state => state.commonReducer)
+  const { error, message } = useSelector(state => state.commonReducer)
   const { user_data } = useSelector(state => state.loginReducer)
   const { dmData } = useSelector(state => state.dmpassReducer)
   const { mobile } = dmData
@@ -113,7 +113,7 @@ function Tickets1() {
       <div>
         <AvForm>
           <Header />
-          {loading ? <Loader /> : null}
+          {/* {loading ? <Loader /> : null} */}
           {message ? <Message msg={message} type="success" /> : null}
           {error ? <Message msg={error} type="error" /> : null}
           {/* {(user_data !== null) ? <Redirect to='/busdetail' /> : null} */}
@@ -353,12 +353,11 @@ function Tickets1() {
   );
 }
 
-export default Tickets1
-// const mapStateToProps = ({ commonReducer }) => {
-//   const { loading } = commonReducer;
-//   return { loading };
-// };
+const mapStateToProps = ({ loginReducer }) => {
+  const { loading } = loginReducer;
+  return { loading };
+};
 
-// export default connect(
-//   mapStateToProps,
-// )(Tickets1);
+export default connect(
+  mapStateToProps,
+)(Tickets1);

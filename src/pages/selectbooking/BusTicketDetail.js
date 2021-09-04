@@ -379,7 +379,7 @@ function BusBookingDetail() {
           </Col>
         </Row>
         {loading == false && notFound == false ? (
-          <Row className="m-0">
+          <Row className="mt-5 pt-5">
             {/* <Col xs={12}>
               <div className="text-center mt-2">
                 <img src={qrImage} alt="" width={130} />
@@ -539,7 +539,7 @@ function BusBookingDetail() {
                     style={{ float: "", backgroundColor: "#F8F8F8" }}
                   >
                     <div style={{}}>
-                      <img src={city1} />
+                      {/* <img src={city1} /> */}
                       {/*  <span
                           style={{
                             color: "grey",
@@ -585,11 +585,11 @@ function BusBookingDetail() {
                       </div>
                     </div>
                     <div className="d-flex p-1">
-                      <img
+                      {/* <img
                         src={bus1}
                         alt="bus"
-                        style={{ height: "20px", paddingRight: "10px" }}
-                      />
+                        style={{ height: "20px", width: "30px", paddingRight: "10px" }}
+                      /> */}
                       <span
                         style={{
                           whiteSpace: "nowrap",

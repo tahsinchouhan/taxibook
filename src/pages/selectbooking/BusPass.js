@@ -5,10 +5,9 @@ import "../../assets/css/buspass.css";
 import { FaBus, FaCarAlt, FaSpinner, FaTicketAlt } from "react-icons/fa";
 import bus from "../../assets/img/bus.png";
 import { useHistory } from "react-router-dom";
-
 import Footer from "../travesaly/Footer";
 import Header from "../../components/Header";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { fetchStart, getOtp, setMobile, verifyOtp } from "../../redux/actions";
 import { API_PATH } from "../../Path/Path";
 import axios from "axios";
@@ -17,10 +16,10 @@ import { toast } from "react-toastify";
 import Message from "../../components/Message";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 
-function BusDetail() {
+function BusDetail({loading}) {
   const history = useHistory();
   const [otp, setOtp] = useState("");
-  const { error, loading, message } = useSelector(
+  const { error, message } = useSelector(
     (state) => state.commonReducer
   );
   const { user_data } = useSelector((state) => state.loginReducer);
@@ -54,7 +53,7 @@ function BusDetail() {
   return (
     <>
       <Header />
-      {loading ? <Loader /> : null}
+      {/* {loading ? <Loader /> : null} */}
       {message ? <Message msg={message} type="success" /> : null}
       {error ? <Message msg={error} type="error" /> : null}
       {user_data !== null ? <Redirect to="/busdetail" /> : null}
@@ -344,4 +343,10 @@ function BusDetail() {
   );
 }
 
-export default BusDetail;
+const mapStateToProps = ({ loginReducer }) => {
+  const { loading } = loginReducer;
+  return { loading };
+};
+export default connect(
+  mapStateToProps,
+)(BusDetail);
