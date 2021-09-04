@@ -202,9 +202,19 @@ function BusBookingDetail() {
                     >
                       {/* 31 July, 2021 */}
                       {/* {tripData?.route?.end?.name} */}
-                      {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+                      {/* {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { day: 'numeric' })} `}
                       {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { month: 'short' })} `}
-                      {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { year: 'numeric' })} `}
+                      {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { year: 'numeric' })} `} */}
+                      {
+                        (apiData[0]?.date !== null)
+                          ?
+                          <>
+                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { month: 'short' })} `}
+                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { year: 'numeric' })}`}
+                          </>
+                          : null
+                      }
                     </span>
                   </div>
                   <div className="p-2">
@@ -332,14 +342,14 @@ function BusBookingDetail() {
                 </div>
 
               </Col>
-              
+
               <Col className="dm__entry_div" xs={12}>
                 <Button onClick={() => printPdf()} style={{
                   width: "186px",
                   textAlign: "center",
                   height: "52px",
                   borderRadius: "9px",
-                  border:"none",
+                  border: "none",
                   backgroundColor: "#0FA453",
                   fontWeight: "bold",
                   marginTop: "20px",
@@ -605,19 +615,19 @@ function BusBookingDetail() {
                 <Button className="dm__footer_card_body">VIEW</Button>
               </div>
             </Col> */}
-             <Col className="dm__entry_div" xs={12}>
-                <Button onClick={() => printPdf()} style={{
-                  width: "186px",
-                  textAlign: "center",
-                  height: "52px",
-                  borderRadius: "9px",
-                  border:"none",
-                  backgroundColor: "#0FA453",
-                  fontWeight: "bold",
-                  marginTop: "20px",
-                  marginBottom: "20px"
-                }}>Print Ticket</Button>
-              </Col>
+            <Col className="dm__entry_div" xs={12}>
+              <Button onClick={() => printPdf()} style={{
+                width: "186px",
+                textAlign: "center",
+                height: "52px",
+                borderRadius: "9px",
+                border: "none",
+                backgroundColor: "#0FA453",
+                fontWeight: "bold",
+                marginTop: "20px",
+                marginBottom: "20px"
+              }}>Print Ticket</Button>
+            </Col>
           </Row>
         ) : loading == false ? (
           <h1 style={{ height: "96vh", textAlign: "center" }}>No data found</h1>
