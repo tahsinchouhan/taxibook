@@ -77,7 +77,7 @@ const DestinationDetails = (props) => {
     <>
       <div
         style={{
-          backgroundImage: `url(${destinations.upload_images})`,
+          backgroundImage: `url("${destinations.upload_images}")`,
           backgroundSize: "cover",
           backgroundPosition: "center top",
           height: 650,

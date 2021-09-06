@@ -61,8 +61,15 @@ function Header() {
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
           <div style={{ textAlign: "center" }}>
-            <Image className="image-fluid" src={logo}  style={{height: "100px", width: "88px"}}  />
-            <FaSistrix onClick={onSearchClick} className="searchIcon" />
+            <Image className="image-fluid" src={logo} style={{ height: "100px", width: "88px" }} />
+            {/* <FaSistrix onClick={onSearchClick} className="searchIcon" /> */}
+            <svg
+              className="searchIcon"
+              onClick={onSearchClick}
+              style={{ cursor: "pointer" }}
+              width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24.6582 21.6162L19.79 16.748C19.5703 16.5283 19.2725 16.4062 18.96 16.4062H18.1641C19.5117 14.6826 20.3125 12.5146 20.3125 10.1562C20.3125 4.5459 15.7666 0 10.1562 0C4.5459 0 0 4.5459 0 10.1562C0 15.7666 4.5459 20.3125 10.1562 20.3125C12.5146 20.3125 14.6826 19.5117 16.4062 18.1641V18.96C16.4062 19.2725 16.5283 19.5703 16.748 19.79L21.6162 24.6582C22.0752 25.1172 22.8174 25.1172 23.2715 24.6582L24.6533 23.2764C25.1123 22.8174 25.1123 22.0752 24.6582 21.6162ZM10.1562 16.4062C6.7041 16.4062 3.90625 13.6133 3.90625 10.1562C3.90625 6.7041 6.69922 3.90625 10.1562 3.90625C13.6084 3.90625 16.4062 6.69922 16.4062 10.1562C16.4062 13.6084 13.6133 16.4062 10.1562 16.4062Z" fill="#C4C4C4" />
+            </svg>
           </div>
         </header>
 
@@ -133,7 +140,7 @@ function Header() {
         <Navbar expand="lg" style={{ height: "161px" }}>
           <Navbar.Brand href="#">
             <div style={{ marginLeft: "44%", marginTop: "1%" }}>
-              <Image src={logo}  style={{height: "97px", width: "85px"}}  />
+              <Image src={logo} style={{ height: "97px", width: "85px" }} />
             </div>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" className="toggle-icon" />
@@ -185,51 +192,70 @@ function Header() {
             </Nav>
             <Form className="" style={{ marginRight: "70px" }}>
               <div className="header_right d-flex">
-                <div className="header_info d-flex">
-                  <FaUser
+                <div className="header_info d-flex align-items-center">
+                  {/* <FaUser
                     style={{
                       fontSize: "21px",
-                      color: "purple",
+                      color: "#864BD8",
                       marginRight: "10px",
                     }}
-                  />
+                  /> */}
+                  <svg
+                    style={{
+                      marginRight: "10px",
+                    }}
+                    width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.5 11.8125C13.7607 11.8125 16.4062 9.16699 16.4062 5.90625C16.4062 2.64551 13.7607 0 10.5 0C7.23926 0 4.59375 2.64551 4.59375 5.90625C4.59375 9.16699 7.23926 11.8125 10.5 11.8125ZM15.75 13.125H13.49C12.5795 13.5434 11.5664 13.7812 10.5 13.7812C9.43359 13.7812 8.42461 13.5434 7.50996 13.125H5.25C2.3502 13.125 0 15.4752 0 18.375V19.0312C0 20.1182 0.881836 21 1.96875 21H19.0312C20.1182 21 21 20.1182 21 19.0312V18.375C21 15.4752 18.6498 13.125 15.75 13.125Z" fill="#864BD8" />
+                  </svg>
+
                   {user_data !== null ? (
                     <h4
                       style={{
-                        fontSize: "18px",
-                        color: "purple",
-                        marginRight: "10px",
+                        fontSize: "16px",
+                        fontWeight: "700",
+                        color: "#864BD8",
+                        margin: "0",
+                        marginRight: "40px",
                         cursor: "pointer",
                       }}
                       onClick={() => dispatch(logout())}
                     >
-                      Logout
+                      LOGOUT
                     </h4>
                   ) : (
                     <h4
                       style={{
-                        fontSize: "18px",
-                        color: "purple",
-                        marginRight: "10px",
+                        fontSize: "16px",
+                        fontWeight: "700",
+                        color: "#864BD8",
+                        margin: "0",
+                        marginRight: "40px",
                         cursor: "pointer",
                       }}
                       onClick={() => modalHadler()}
                     >
-                      Login
+                      LOGIN
                     </h4>
                   )}
                 </div>
                 <div>
-                  <FaSistrix
+                  <svg
+                    onClick={onSearchClick}
+                    style={{ cursor: "pointer" }}
+                    width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24.6582 21.6162L19.79 16.748C19.5703 16.5283 19.2725 16.4062 18.96 16.4062H18.1641C19.5117 14.6826 20.3125 12.5146 20.3125 10.1562C20.3125 4.5459 15.7666 0 10.1562 0C4.5459 0 0 4.5459 0 10.1562C0 15.7666 4.5459 20.3125 10.1562 20.3125C12.5146 20.3125 14.6826 19.5117 16.4062 18.1641V18.96C16.4062 19.2725 16.5283 19.5703 16.748 19.79L21.6162 24.6582C22.0752 25.1172 22.8174 25.1172 23.2715 24.6582L24.6533 23.2764C25.1123 22.8174 25.1123 22.0752 24.6582 21.6162ZM10.1562 16.4062C6.7041 16.4062 3.90625 13.6133 3.90625 10.1562C3.90625 6.7041 6.69922 3.90625 10.1562 3.90625C13.6084 3.90625 16.4062 6.69922 16.4062 10.1562C16.4062 13.6084 13.6133 16.4062 10.1562 16.4062Z" fill="#C4C4C4" />
+                  </svg>
+
+                  {/* <FaSistrix
                     style={{
                       fontSize: "21px",
-                      color: "grey",
-                      fontWeight: "600",
+                      color: "#C4C4C4",
+                      fontWeight: "700",
                       fontStyle: "bold",
                       marginRight: "10px",
                     }}
                     onClick={onSearchClick}
-                  />
+                  /> */}
                 </div>
               </div>
             </Form>

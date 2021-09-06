@@ -893,3 +893,10 @@ body {
   cursor: pointer !important;
 }
 
+.react-multi-carousel-item > div > .homepagemobile {
+  max-width: 376px !important;
+  height: 500px !important;
+  border-radius: 10px ;
+  cursor: pointer !important;
+}
+

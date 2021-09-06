@@ -85,30 +85,30 @@ function TravellerTicketMobile() {
         
       </Carousel> */}
             <div className="row">
-                <div className="col-4" onClick={() => onTravelClick()} >
-                    <Image style={{ width: 50 }} src="https://img.icons8.com/ios/452/passenger-with-baggage.png" />
-                    <p style={{ marginLeft: -10 }}>Traveller Pass</p>
+                <div className="col-6 d-flex flex-column justify-content-between align-items-center" onClick={() => onTravelClick()} >
+                    <Image style={{ width: 63 }} src="https://img.icons8.com/ios/452/passenger-with-baggage.png" />
+                    <p style={{ marginLeft: -10 }}>Travel Pass</p>
                 </div>
-                <div className="col-4" onClick={() => onTravelClick()} >
-                    <Image style={{ width: 50 }} src="https://cdn3.iconfinder.com/data/icons/transport-icons-2/512/BT_c3side-512.png" />
+                <div className="col-6 d-flex flex-column justify-content-between align-items-center" onClick={() => onTravelClick()} >
+                    <Image style={{ width: 74 }} src="https://cdn3.iconfinder.com/data/icons/transport-icons-2/512/BT_c3side-512.png" />
                     <p style={{ marginLeft: -10 }}>Vehicle Pass</p>
                 </div>
-                <div className="col-4" onClick={() => onBusClick()}>
-                    <Image style={{ width: 50 }} src="https://static.thenounproject.com/png/61798-200.png" />
+                <div className="col-6 d-flex flex-column justify-content-between align-items-center" onClick={() => onBusClick()}>
+                    <Image style={{ width: 74 }} src="https://static.thenounproject.com/png/61798-200.png" />
                     <p style={{ marginLeft: -10 }}>Bus Ticket</p>
                 </div>
-            </div>
-            <div className="row">
-                <div className="col-4" onClick={() => onTicketsClick()}>
-                    <Image style={{ width: 50 }} src="https://www.iconpacks.net/icons/2/free-parking-sign-icon-1641-thumb.png" />
+            {/* </div>
+            <div className="row"> */}
+                <div className="col-6 d-flex flex-column justify-content-between align-items-center" onClick={() => onTicketsClick()}>
+                    <Image style={{ width: 74 }} src="https://www.iconpacks.net/icons/2/free-parking-sign-icon-1641-thumb.png" />
                     <p style={{ marginLeft: -10 }}>Parking</p>
                 </div>
-                <div className="col-4" onClick={() => onTicketsClick()}>
-                    <Image style={{ width: 50 }} src="https://cdn3.iconfinder.com/data/icons/common-sports/4096/oarsmanship-512.png" />
+                <div className="col-6 d-flex flex-column justify-content-between align-items-center" onClick={() => onTicketsClick()}>
+                    <Image style={{ width: 74 }} src="https://cdn3.iconfinder.com/data/icons/common-sports/4096/oarsmanship-512.png" />
                     <p style={{ marginLeft: -10 }}>Boating</p>
                 </div>
-                <div className="col-4" onClick={() => onTicketsClick()}>
-                    <Image style={{ width: 50 }} src="https://cdn4.iconfinder.com/data/icons/nature-solid-icons-vol-3/72/108-512.png" />
+                <div className="col-6 d-flex flex-column justify-content-between align-items-center" onClick={() => onTicketsClick()}>
+                    <Image style={{ width: 63 }} src="https://cdn4.iconfinder.com/data/icons/nature-solid-icons-vol-3/72/108-512.png" />
                     <p style={{ marginLeft: -10 }}>Nature Trekking</p>
                 </div>
             </div>

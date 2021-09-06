@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import { useHistory } from "react-router-dom";
 import { API_PATH } from "../Path/Path";
 import Geocode from "react-geocode";
-
+import '../assets/css/destinationList.css'
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
 Geocode.setRegion("in");
@@ -158,17 +158,19 @@ function Destination() {
                       id: item._id,
                     })
                   }
+                  className="destinationListContainer"
                   style={{
-                    width: 300,
-                    height: 200,
-                    marginRight: 15,
-                    marginTop: 71,
+                    // width: 300,
+                    // width: "100%",
+                    // height: 200,
+                    // marginRight: 15,
+                    // marginTop: 71,
                   }}
                 >
                   <Image
                     draggable={false}
                     // className="img-fluid"
-                    style={{ width: "100%", height: "100%", borderRadius: 10 }}
+                    style={{ width: "100%", height: "100%", borderRadius: 10,objectFit:"cover" }}
                     src={item.upload_images}
                   />
                   <div style={{ color: "black" }} className="package__trip ">
