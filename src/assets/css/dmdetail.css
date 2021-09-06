@@ -135,7 +135,8 @@
     padding-inline: 33vw;
     gap: 1rem;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: center;
 }
 
 .dm__footer_card {

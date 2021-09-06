@@ -517,7 +517,9 @@ function SteperDmpass(shows, ...props) {
               vehical_details: vehicles,
               name: values.name,
               email: values.email,
-              whatsapp: values.number
+              whatsapp: values.number,
+              locations: locServ,
+              total_charges: tot_charges,
             })
           );
           dispatch(setDmData({ ...dmData, order_id: response.razorpay_order_id }))
@@ -648,7 +650,7 @@ function SteperDmpass(shows, ...props) {
                       >
                         Vehicle Details
                       </label>
-                      
+
                       <div
                         className="traveller_div"
                         style={{
@@ -660,7 +662,7 @@ function SteperDmpass(shows, ...props) {
                           <Paper
                             key={i}
                             className="traveller__card p-4 flex-grow-1"
-                            style={{width: 200}}
+                            style={{ width: 200 }}
                           >
                             <div
                               className="traveller__card_body"
