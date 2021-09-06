@@ -79,8 +79,8 @@ const DestinationDetails = (props) => {
         style={{
           backgroundImage: `url(${destinations.upload_images})`,
           backgroundSize: "cover",
-          backgroundPosition: "center",
-          height: 500,
+          backgroundPosition: "center top",
+          height: 650,
         }}
       >
         <Header />

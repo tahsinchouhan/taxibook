@@ -26,6 +26,7 @@
     "react-multi-carousel": "^2.6.3",
     "react-otp-input": "^2.4.0",
     "react-player": "^2.9.0",
+    "react-rating-stars-component": "^2.2.0",
     "react-redux": "^7.2.4",
     "react-responsive-carousel": "^3.2.21",
     "react-router-dom": "^5.2.0",

@@ -584,7 +584,13 @@ body {
 .react-multi-carousel-item > div {
   cursor: pointer !important;
 }
-
+.react-multi-carousel-item.home > div > img{
+  max-width: 290px !important;
+  height: 281px !important;
+  object-fit: cover;
+  border-radius: 10px ;
+  cursor: pointer !important;
+}
 .react-multi-carousel-item > div > img{
   max-width: 250px !important;
   height: 150px !important;

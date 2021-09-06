@@ -10,7 +10,8 @@ import {
   Image,
 } from "react-bootstrap";
 import { HiMenu } from "react-icons/hi";
-import logo from "../assets/img/logo1.png";
+// import logo from "../assets/img/logo1.png";
+import logo from "../assets/img/logo.png";
 import { NavLink, useHistory } from "react-router-dom";
 import { FaUser, FaSistrix } from "react-icons/fa";
 import { useDispatch, connect, useSelector } from "react-redux";
@@ -60,7 +61,7 @@ function Header() {
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
           <div style={{ textAlign: "center" }}>
-            <Image className="image-fluid" src={logo} />
+            <Image className="image-fluid" src={logo}  style={{height: "100px", width: "88px"}}  />
             <FaSistrix onClick={onSearchClick} className="searchIcon" />
           </div>
         </header>
@@ -132,7 +133,7 @@ function Header() {
         <Navbar expand="lg" style={{ height: "161px" }}>
           <Navbar.Brand href="#">
             <div style={{ marginLeft: "44%", marginTop: "1%" }}>
-              <Image src={logo} />
+              <Image src={logo}  style={{height: "97px", width: "85px"}}  />
             </div>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" className="toggle-icon" />

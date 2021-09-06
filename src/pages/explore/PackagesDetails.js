@@ -94,8 +94,8 @@ const PackagesDetails = (props) => {
       <div style={{
         backgroundImage: `url("${packages.upload_images}")`,
         backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: 500,
+        backgroundPosition: "center top",
+        height: 650,
       }}
       >
         <Header />
@@ -249,13 +249,13 @@ const PackagesDetails = (props) => {
             </a>
           </span> : null}
 
-          {/* <span
+          <span
             className="packages_enquired"
             style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
             onClick={() => modalReviewHadler()}
           >
             Review
-          </span> */}
+          </span>
           {/* <span
             className="packages_enquired"
             style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
@@ -276,7 +276,7 @@ const PackagesDetails = (props) => {
           <span className="packages_whatsapp" style={{ width: "200px", display: "inline-block" }}>
             <a
               className="package-whats" style={{ textDecoration: "none" }}
-              href={`https://api.whatsapp.com/send/?phone=+917894512324&text&app_absent=0`}
+              href={`https://api.whatsapp.com/send/?phone=${packages?.tour_operator_account?.mobile}&text&app_absent=0`}
             >
               <FaWhatsapp style={{ fontSize: "30px" }} />
               <span style={{ margin: "5px" }}> Whatsapp</span>
@@ -334,7 +334,7 @@ const PackagesDetails = (props) => {
             <span style={{ width: "200px", display: "inline-block" }} className="packages_whatsapp" >
               <a
                 className="package-whats" style={{ textDecoration: "none" }}
-                href={`https://api.whatsapp.com/send/?phone=+917894512324&text&app_absent=0`}
+                href={`https://api.whatsapp.com/send/?phone=${packages?.tour_operator_account?.mobile}&text&app_absent=0`}
               >
                 <FaWhatsapp style={{ fontSize: "25px" }} />
                 <span style={{ margin: "5px" }}> Whatsapp</span>

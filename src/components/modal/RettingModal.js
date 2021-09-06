@@ -9,6 +9,7 @@ import { getOtp, verifyOtp } from "../../redux/actions";
 import Loader from "../Loader";
 import Message from "../Message";
 import { FaStar } from 'react-icons/fa';
+import ReactStars from "react-rating-stars-component";
 
 
 function RettingModal({ show, handleClose }) {
@@ -16,55 +17,69 @@ function RettingModal({ show, handleClose }) {
     (state) => state.commonReducer
   );
 
+  const ratingChanged = (newRating) => {
+    console.log(newRating);
+  };
+
   return (
     <>
       <div>
         {loading ? <Loader /> : null}
         {message ? <Message msg={message} type="success" /> : null}
-        {error ? <Message msg={error} type="error" /> : null}       
-          <Modal show={show} size="lg"  >
-           <div className="review_modal">
-           <Modal.Header onClick={handleClose} closeButton>
-              <h3 className="review_header" style={{fontWeight:"600"}}>Review</h3>
+        {error ? <Message msg={error} type="error" /> : null}
+        <Modal show={show} size="lg"  >
+          <div className="review_modal">
+            <Modal.Header onClick={handleClose} closeButton>
+              <h3 className="review_header" style={{ fontWeight: "600" }}>Review</h3>
             </Modal.Header>
             <Modal.Body className="">
               <Form className="col-sm-6 offset-sm-3">
                 <Form.Group className="review_input mb-3" controlId="formBasicEmail">
                   <div className="d-flex">
-                  <Form.Label style={{
+                    <Form.Label style={{
                       paddingTop: '5px'
                     }}>Star Rating:&nbsp;</Form.Label>
-                    <div style={{color:"#FF8700", fontSize:"22px"}}>                    
-                    <FaStar  /> 
-                    <FaStar  /> 
-                    <FaStar  /> 
-                    <FaStar  /> 
-                    <FaStar  /> 
+                    <div style={{ color: "#FF8700", fontSize: "22px" }}>
+                    <ReactStars
+                      count={5}
+                      onChange={ratingChanged}
+                      size={24}
+                      isHalf={true}
+                      emptyIcon={<FaStar />}
+                      halfIcon={<FaStar />}
+                      fullIcon={<FaStar />}
+                      activeColor="#ffd700"
+                    />
+                      {/* <FaStar />
+                      <FaStar />
+                      <FaStar />
+                      <FaStar />
+                      <FaStar /> */}
                     </div>
-                    </div>
+                  </div>
                   {/* <Form.Control type="text" placeholder="Star Rating" >
                      <FaStar  />
                     
                   </Form.Control>  */}
 
                   <Form.Label style={{
-                      paddingTop: '5px'
-                    }}>Enter Your Mobile:</Form.Label>
+                    paddingTop: '5px'
+                  }}>Enter Your Mobile:</Form.Label>
                   <Form.Control type="text" placeholder="Enter Your Mobile" />
 
                   <Form.Label style={{
-                      paddingTop: '5px'
-                    }}>Enter Your Email:</Form.Label>
+                    paddingTop: '5px'
+                  }}>Enter Your Email:</Form.Label>
                   <Form.Control type="email" placeholder="Enter Your Email" />
-                  
+
                   <Form.Label style={{
-                      paddingTop: '5px'
-                    }}>Comments:</Form.Label>
-                  <Form.Control as="textarea" rows={4} placeholder="Comments"/>
-                  
-                  
-                  
-                  
+                    paddingTop: '5px'
+                  }}>Comments:</Form.Label>
+                  <Form.Control as="textarea" rows={4} placeholder="Comments" />
+
+
+
+
                 </Form.Group>
 
                 {/* <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -77,8 +92,8 @@ function RettingModal({ show, handleClose }) {
                 </Button>
               </Form>
             </Modal.Body>
-           </div>
-          </Modal>       
+          </div>
+        </Modal>
       </div>
     </>
   );

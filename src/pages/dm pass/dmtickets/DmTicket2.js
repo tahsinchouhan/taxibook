@@ -60,7 +60,7 @@ function DmTicket2({loading}) {
       {user_data !== null ? <Redirect to="/dmticket" /> : null}
 
         <div className="d-none d-md-block">
-          <Container className="d-none d-md-block my-5" style={{ width: "70%" }}>
+          <Container className="d-none d-md-block my-5 mt-0" style={{ width: "70%" }}>
             <div className="select_div">
               <div className="row" style={{ textAlign: "center" }}>
                 <div className="col-xs-12  col-sm-12 col-md-12">
@@ -198,7 +198,7 @@ function DmTicket2({loading}) {
 
         {/*mobile-view*/}
         <div fluid className="d-md-none">
-          <Container className="my-5" style={{ width: "" }}>
+          <Container className="my-5 mt-0" style={{ width: "" }}>
             <div className="select_div">
               <div className="row p-3" style={{ textAlign: "center" }}>
                 <div className="col-xs-12  col-sm-12 col-md-12">

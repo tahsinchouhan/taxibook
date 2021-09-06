@@ -160,7 +160,7 @@ function Saly() {
                 position: "absolute",
                 width: "689px",
                 minHeight: "590px",
-                top: "7%",
+                top: "14%",
                 left: "4%"
               }}>
               <img src={Salyimg} alt="saly" style={{ width: "100%" }} />
@@ -196,7 +196,7 @@ function Saly() {
           <Container>
             <Carousel
               partialVisbile
-              itemClass="image-item"
+              itemClass="image-item home"
               responsive={responsive}
               className="pt-4"
             >
@@ -253,7 +253,7 @@ function Saly() {
         <div style={{ backgroundColor: "black", color: "white", height: "289px", marginTop: "81px" }} >
           <Row style={{ flexDirection: "row", marginRight: "0px" }}>
             <Col sm={8}>
-              <div style={{ paddingTop: "85px", textAlign: "left", paddingLeft: "35%" }}>
+              <div style={{ paddingTop: "85px", textAlign: "left", paddingLeft: "31%" }}>
                 <div className="bookings-div">
                   <h3>Bookings</h3>
                   <p>Book tickets for Bus,Location wise Tickets and Traveller Passes</p>
@@ -466,11 +466,11 @@ function Saly() {
       <div fluid className="d-md-none">
         <div fluid style={{ padding: 0, margin: 0 }}>
           <Row className=" saly_div pt-3 w-100">
-            <Col xs={12} md={6}>
+            {/* <Col xs={12} md={6}>
               <div className="rocket-image" style={{ textAlign: "center" }}>
                 <img src={Salyimg} alt="saly" style={{ width: "80%" }} />
               </div>
-            </Col>
+            </Col> */}
             <Col xs={12} md={6} className="pt-0">
               <div style={{ padding: "20px" }}>
                 <div className="explore">
@@ -479,8 +479,8 @@ function Saly() {
                 </div>
                 <Carousel
                   partialVisbile
-                  itemClass="image-item"
-                  responsive={responsive}
+                  itemClass="image-item home"
+                  responsive={responsiveTwo}
                 // removeArrowOnDeviceType={["tablet", "mobile"]}
                 >
                   {/* <div>Item 1</div>
@@ -493,7 +493,7 @@ function Saly() {
                         <div key={key} onClick={() => viewDetails(item)} >
                           <Image
                             draggable={false}
-                            style={{ width: "150px", paddingRight: "10px", borderRadius: "0px" }}
+                            style={{  paddingRight: "10px", borderRadius: "10px" }}
                             src={item.upload_images}
                           />
                           <div

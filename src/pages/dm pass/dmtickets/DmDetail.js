@@ -301,17 +301,17 @@ function DmDetail() {
           </Row>
           <Row>
             <Col className="dm__footer_div" xs={12}>
-              <div className="dm__footer_card">
+              {/* <div className="dm__footer_card">
                 <div className="dm__footer_card_title">BUS BOOKING</div>
                 <Button className="dm__footer_card_body">VIEW</Button>
-              </div>
+              </div> */}
               <div className="d-flex justify-content-center align-items-center">
                 <Button className="dm__footer_card_body" style={{ fontSize: "18px" }} onClick={handlePrint}>PRINT TICKET</Button>
               </div>
-              <div className="dm__footer_card">
+              {/* <div className="dm__footer_card">
                 <div className="dm__footer_card_title">CAB BOOKING</div>
                 <Button className="dm__footer_card_body">VIEW</Button>
-              </div>
+              </div> */}
             </Col>
           </Row>
         </div>
@@ -486,14 +486,14 @@ function DmDetail() {
                 </div>}
             </Col>
             <Col className="dm__footer_div mobile" xs={12}>
-              <div className="dm__footer_card">
+              {/* <div className="dm__footer_card">
                 <div className="dm__footer_card_title">BUS BOOKING</div>
                 <Button className="dm__footer_card_body">VIEW</Button>
-              </div>
-              <div className="dm__footer_card">
+              </div> */}
+              {/* <div className="dm__footer_card">
                 <div className="dm__footer_card_title">CAB BOOKING</div>
                 <Button className="dm__footer_card_body">VIEW</Button>
-              </div>
+              </div> */}
             </Col>
             <div className="d-flex justify-content-center align-items-center">
               <Button className="dm__footer_card_body" style={{ fontSize: "18px" }} onClick={handlePrint}>PRINT TICKET</Button>
