@@ -173,17 +173,6 @@ function BusConfirmation() {
                   >
                     Boarding from
                   </span>
-                  {/* <button
-                  style={{
-                    backgroundColor: "transparent",
-                    border: "none",
-                    color: "#FF4A68",
-                    float: "right",
-                    fontSize: "12px",
-                  }}
-                >
-                  Change
-                </button> */}
                 </div>
 
                 <div
@@ -197,13 +186,6 @@ function BusConfirmation() {
                         className="mb-3"
                         style={{ margin: "10px", marginLeft: "10px" }}
                       >
-                        {/* <Form.Check
-                        inline
-                        label=""
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-1`}
-                      /> */}
                       </div>
                     ))}
 
@@ -245,17 +227,6 @@ function BusConfirmation() {
                   >
                     Dropoff At
                   </span>
-                  {/* <button
-                  style={{
-                    backgroundColor: "transparent",
-                    border: "none",
-                    color: "#FF4A68",
-                    float: "right",
-                    fontSize: "12px",
-                  }}
-                >
-                  Change
-                </button> */}
                 </div>
 
                 <div
@@ -269,13 +240,6 @@ function BusConfirmation() {
                         className="mb-3"
                         style={{ margin: "10px", marginLeft: "10px" }}
                       >
-                        {/* <Form.Check
-                        inline
-                        label=""
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-1`}
-                      /> */}
                       </div>
                     ))}
 
@@ -425,12 +389,18 @@ function BusConfirmation() {
                                   i
                                 )
                               }
+                              maxlength="12"
                               value={travellers[i].adhaar}
                               validate={{
                                 required: {
                                   value: true,
-                                  errorMessage: "Enter 12 digit Adhaar Card Number",
+                                  errorMessage: "Your Adhar Card Number Required",
                                 },
+                                pattern: {
+                                  value: "(?=.{12})",
+                                  errorMessage: "Enter 12 digit Adhaar Card Number"
+                                },
+                                
                               }}
                             />
 
@@ -444,7 +414,7 @@ function BusConfirmation() {
 
               <div style={{ textAlign: "center", margin: "55px" }}>
                 <Button
-                  type="submit"
+                  type="button"
                   style={{
                     backgroundColor: "#0FA453",
                     color: "white",
@@ -906,12 +876,18 @@ function BusConfirmation() {
                               i
                             )
                           }
+                          maxlength="12"
                           value={travellers[i].adhaar}
                           validate={{
                             required: {
                               value: true,
-                              errorMessage: "Enter 12 digit Adhaar Card Number",
+                              errorMessage: "Your Adhar Card Number Required",
                             },
+                            pattern: {
+                              value: "(?=.{12})",
+                              errorMessage: "Enter 12 digit Adhaar Card Number"
+                            },
+                            
                           }}
                         />
 
@@ -924,6 +900,7 @@ function BusConfirmation() {
           </div>
           <div style={{ textAlign: "center", paddingBottom: "200px" }}>
             <Button
+              type="button"
               style={{
                 backgroundColor: "#0FA453",
                 color: "white",

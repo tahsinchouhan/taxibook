@@ -1,37 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { Button, Row, Col, Form, Container } from "react-bootstrap";
 import { connect } from "react-redux";
-import logo from "../../assets/img/logo.png";
-import city from "../../assets/img/city.png";
 import calendar from "../../assets/img/calendar.png";
-// import calendar from "../../assets/img/calendar.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// import Pass from "./Pass";
-// import BusPass from "./BusPass";
 import { useHistory } from "react-router-dom";
-// import Cab from "./Cab";
-import bus from "../../assets/img/bus.png";
-import cab from "../../assets/img/cab.png";
 import ticket from "../../assets/ticketpage.svg";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
-// import calendar from "../../assets/img/calendar.png";
 import { Redirect } from "react-router-dom";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
-
 import { useDispatch, useSelector } from "react-redux";
 import { DmPassDetails, setDmData } from "../../redux/actions";
-import userEvent from "@testing-library/user-event";
+import * as moment from "moment";
 
 function DmPass({ DmPassDetails }) {
   const history = useHistory();
   const [vehicle, setVehicle] = useState("0")
   const [travellers, setTraveller] = useState("1")
-  const [daysTravel, setDaysTravel] = useState("1")
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
+
+  const [errors, setErrors] = useState('');
+
   const dispatch = useDispatch()
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -58,21 +50,17 @@ function DmPass({ DmPassDetails }) {
 
   useEffect(() => {
     console.log("dmData", dmData);
-    // setDaysTravel()
   }, [startDate, endDate])
-  //  const data =[vehicle,travellers,daysTravel]
   const data = [
     {
       "Vehicle": vehicle,
-      "DaysTravel": daysTravel,
+      "DaysTravel": moment(endDate).format("YYYYMMDD")-moment(startDate).format("YYYYMMDD") + 1,
       "Travellers": travellers,
     }
   ]
   const onDmTicketShow = () => {
-    // console.log('Vehicle Data',vehicle)
-    DmPassDetails({ data })
-    history.push('/travelticket')
-
+      DmPassDetails({ data })
+      history.push('/travelticket')
   };
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
@@ -85,9 +73,6 @@ function DmPass({ DmPassDetails }) {
     </button>
 
   ))
-
-
-
   return (
     <>
       <div>
@@ -115,7 +100,7 @@ function DmPass({ DmPassDetails }) {
 
               <Container style={{ width: "100%", paddingTop: "28px" }}>
                 <Row>
-                  <Col xs={12} md={4} className="mt-2">
+                  <Col xs={12} md={3} className="mt-2">
                     <Form.Group
                       className=""
                       controlId="exampleForm.ControlInput1"
@@ -132,21 +117,12 @@ function DmPass({ DmPassDetails }) {
                       </select>
                     </Form.Group>
                   </Col>
-                  <Col xs={12} md={4} className="mt-2">
+                  <Col xs={12} md={3} className="mt-2">
                     <Form.Group
                       className=""
                       controlId="exampleForm.ControlInput1"
                     >
                       <Form.Label className="dm-ticket">Number of Travellers</Form.Label>
-                      {/* <div style={{ display: "flex", flexDirection: "row" }}>
-                      <Form.Control
-                        type="text"
-                        className="dm-inputticket"
-                        placeholder="Travellers..."
-                        name="number_of_travellers"
-                        value={number_of_travellers} onChange={(e)=>dispatch(setDmData("number_of_travellers",e.target.value))}
-                      />
-                    </div> */}
                       <select
                         id="inputState"
                         className="form-control pass_input"
@@ -162,68 +138,57 @@ function DmPass({ DmPassDetails }) {
                       </select>
                     </Form.Group>
                   </Col>
-                  <Col xs={12} md={4} className="mt-2">
+                  <Col xs={12} md={3} className="mt-2">
                     <Form.Group
                       className=""
                       controlId="exampleForm.ControlInput1"
                     >
-
-                      <Form.Label className="dm-ticket">Days of Travel</Form.Label>
-                      {/* <select
-                        id="inputState"
-                        className="form-control pass_input"
-                        onChange={(e) => setDaysTravel(e.target.value)}
-                      >
-                        <option value="1" selected>1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                      </select> */}
-                      <Row>
-                        <Col xs={12} md={4}>
-                          <div>
-                            <Form.Label className="dm-ticket">Start Date</Form.Label>
+                      <div>
+                      <Form.Label className="dm-ticket">Start Date</Form.Label><br />
+                        <Col xs={12} md={6}>
+                          <div style={{width: 200}}>
                             <img
                               className="location-userdatas-calendar"
                               src={calendar}
-                              style={{ width: 25, height: 30 }}
+                              style={{ width: 25, height: 25, marginTop: -8 }}
                             />
-
                             <DatePicker
-                              /// id={`start_date${i}`}
                               selected={startDate}
                               onChange={(date) => setStartDate(date)}
                               customInput={<ExampleCustomInput />}
-                              // dateFormat="dd MMM yyyy"
                               minDate={new Date()}
                               dateFormat="dd MMM"
-                            //value={travellers[i].start_date}
                             />
                           </div>
                         </Col>
-                        <Col xs={12} md={4}>
-                          <div >
-                            <Form.Label className="dm-ticket">End Date</Form.Label>
+                        </div>
+                    </Form.Group>
+                  </Col>
+                  <Col xs={12} md={3} className="mt-2">
+                  <Form.Group
+                      className=""
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <div>
+                      <Form.Label className="dm-ticket">End Date</Form.Label><br />
+                        <Col xs={12} md={6}>
+                          <div style={{width: 200}}>
                             <img
                               className="location-userdatas-calendar"
                               src={calendar}
-                              style={{ width: 25, height: 30 }}
+                              style={{ width: 25, height: 25, marginTop: -8 }}
                             />
+
                             <DatePicker
-                              //  id={`end_date${i}`}
                               selected={endDate}
                               onChange={(date) => setEndDate(date)}
                               customInput={<ExampleCustomInput />}
                               minDate={new Date()}
-                              // dateFormat="dd MMM yyyy"
                               dateFormat="dd MMM"
-                            //value={travellers[i].end_date}
                             />
                           </div>
                         </Col>
-                      </Row>
+                        </div>
                     </Form.Group>
                   </Col>
                 </Row>
@@ -294,20 +259,10 @@ function DmPass({ DmPassDetails }) {
                   controlId="exampleForm.ControlInput1"
                 >
                   <Form.Label className="dm-ticket">Number of Travellers</Form.Label>
-                  {/* <div style={{ display: "flex", flexDirection: "row" }}>
-                      <Form.Control
-                        type="text"
-                        className="dm-inputticket"
-                        placeholder="Travellers..."
-                        name="number_of_travellers"
-                        value={number_of_travellers} onChange={(e)=>dispatch(setDmData("number_of_travellers",e.target.value))}
-                      />
-                    </div> */}
                   <select
                     id="inputState"
                     className="form-control pass_input"
                     onChange={(e) => setTraveller(e.target.value)}
-                  // onChange={handleTravellerCount}
                   >
                     <option selected>1</option>
                     <option value="2">2</option>
@@ -323,58 +278,40 @@ function DmPass({ DmPassDetails }) {
                   className=""
                   controlId="exampleForm.ControlInput1"
                 >
-                  {/* <Form.Label className="dm-ticket">Days of Travel</Form.Label>
-                  <select
-                    id="inputState"
-                    className="form-control pass_input"
-                    onChange={(e) => setDaysTravel(e.target.value)}
-                  >
-                    <option selected>1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select> */}
+                 
                   <Row>
                     <Col xs={6} md={4}>
                       <div>
-                        <Form.Label className="dm-ticket">Start Date</Form.Label>
+                        <Form.Label className="dm-ticket">Start Date</Form.Label><br/>
 
                         <img
                           className="location-userdatas-calendar"
                           src={calendar}
-                          style={{ width: 25, height: 30 }}
+                          style={{ width: 25, height: 30,marginTop: -10 }}
                         />
                         <DatePicker
-                          /// id={`start_date${i}`}
                           selected={startDate}
                           onChange={(date) => setStartDate(date)}
                           customInput={<ExampleCustomInput />}
-                          // dateFormat="dd/MM/yy"
                           dateFormat="dd MMM"
                           minDate={new Date()}
-                        //value={travellers[i].start_date}
                         />
                       </div>
                     </Col>
                     <Col xs={6} md={4}>
                       <div >
-                        <Form.Label className="dm-ticket">End Date</Form.Label>
+                        <Form.Label className="dm-ticket">End Date</Form.Label><br/>
                         <img
                           className="location-userdatas-calendar"
                           src={calendar}
-                          style={{ width: 25, height: 30 }}
+                          style={{ width: 25, height: 30,marginTop: -10 }}
                         />
                         <DatePicker
-                          //  id={`end_date${i}`}
                           selected={endDate}
                           onChange={(date) => setEndDate(date)}
                           customInput={<ExampleCustomInput />}
-                          // dateFormat="dd/MM/yy"
                           dateFormat="dd MMM"
                           minDate={new Date()}
-                        //value={travellers[i].end_date}
                         />
                       </div>
                     </Col>

@@ -14,64 +14,28 @@ function BusMonsoon() {
   const history = useHistory();
   const [seats, setSeats] = useState([]);
   const { tripList: trips, route_id, routeData } = useSelector(state => state.busReducer)
-
-  console.log("trips liSTTTTT", trips);
+  
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log("DATADTA::::",route_id)
-    dispatch(setRouteId(route_id))
-    dispatch(getTripByRouteId(route_id))
+    dispatch(setRouteId(routeData))
+    dispatch(getTripByRouteId(routeData))
   }, [route_id]);
 
   useEffect(() => {
-    console.log("ddd", routeData);
-
-    // seatAvailable();
+    console.log("ddd", routeData,"   ",route_id);
   }, [routeData]);
-  // const getTrips = () => {
-  //   fetch(API_PATH + `/api/v1/trips/list`)
-  //     .then((response) => response.json())
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setTrips(res.data);
-  //     })
-  //     .catch((e) => console.log(e));
-  // };
 
   const onClickTrain = (id) => {
     console.log("object");
     dispatch(setTripData(trips[trips.findIndex(x => x._id == id)]))
-    // history.push("/boarding");
     console.log(trips.findIndex(x => x._id == id));
     history.push("/busconfirmation");
   };
 
   const onClickChange = () => {
-    // console.log("object");
     history.push("/busdetail");
   };
-
-
-  // const seatAvailable = () => {
-  //   fetch("http://15.206.92.158/api/v1/trips/list", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       console.log("on success", res.data);
-  //       //  setSeats(res[0].seat_avilable)
-  //     })
-  //     .catch((error) => {
-  //       console.log("on error", error);
-  //     });
-  // };
-
-
-
   return (
     <>
       <div className="d-none d-md-block">
@@ -110,85 +74,6 @@ function BusMonsoon() {
                 </Form.Label>
               </Col>
             </Row>
-            {/* <Container>
-              <div style={{ textAlign: "center" }}>
-                <span
-                  style={{
-                    color: "black",
-                    fontWeight: "bolder",
-                    fontSize: "12px",
-                  }}
-                >
-                  Available Promo Codes
-                </span>
-              </div>
-              <Row>
-                <Col className="mansoon-row">
-                  <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                    <span className="mansoon-item">MONSOON15</span>
-                    <br />
-                    <span className="mansoon-per">15% off in July 2021</span>
-                  </div>
-                </Col>
-                <Col className="mansoon-row">
-                  <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                    <span className="mansoon-item">TRYNEW</span>
-                    <br />
-                    <span className="mansoon-per">
-                      10% off your first booking
-                    </span>
-                  </div>
-                </Col>
-                <Col className="mansoon-row">
-                  <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                    <span className="mansoon-item">MONSOON15</span>
-                    <br />
-                    <span className="mansoon-per">15% off in July 2021</span>
-                  </div>
-                </Col>
-                <Col className="mansoon-row">
-                  <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                    <span className="mansoon-item">TRYNEW</span>
-                    <br />
-                    <span className="mansoon-per">
-                      10% off your first booking
-                    </span>
-                  </div>
-                </Col>
-              </Row>
-            </Container>
-            <hr /> */}
-            {/* <Container onClick={onClickTrain}>
-              <Row>
-                <Col>
-                  <div className="rajratan-train" style={{ float: "left" }}>
-                    <div className="d-flex p-1">
-                      <img src={bus1} alt="bus" style={{ height: "20px", paddingRight: "10px" }} />
-                      <span style={{ fontWeight: "bolder", fontFamily: "sans-serif" }}>Raj Ratan Tours and Travels</span>
-                    </div>
-                    <span className="train-sleeper">Volvo Multi-Axle Sleeper A/C (2+1)</span>
-                    <div>
-                      <img src={city1} />
-                      <span style={{ color: "grey", padding: "10px", fontFamily: "sans-serif" }}>2 Stops</span>
-                      <span style={{ fontWeight: "bolder", fontFamily: "sans-serif" }}>21:45 - 9:50</span>
-                      <span style={{ color: "grey", padding: "10px", fontFamily: "sans-serif" }}>12h 05m</span>
-                    </div>
-                  </div>
-                </Col>
-                <Col>
-                  <div className="d-flex" style={{ float: "right", padding: "10px" }}>
-                    <div className="pt-2">
-                      <span style={{ color: "grey", fontFamily: "sans-serif", padding: "5px" }}>*per person</span><br />
-                      <span style={{ fontWeight: "bolder", fontFamily: "sans-serif", padding: "5px" }}>₹ 1500</span>
-                    </div>
-                    <div className=" train-seats ">
-                      <span style={{ fontSize: "12px", fontWeight: "bolder" }}>14</span><br />
-                      <span style={{ fontSize: "12px", fontWeight: "bolder" }}>seats available</span>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </Container><hr /> */}
             {
               (trips?.length > 0)
                 ?
@@ -280,179 +165,13 @@ function BusMonsoon() {
                   <div style={{ margin: "30px" }}>
                     {/* 30 July */}
                     {`${routeData?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
-                    {`${routeData?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
+                    {`${routeData?.startDate?.toLocaleDateString("en-US", { month: 'long' })} `}
                   </div>
                 </Form.Label>
               </div>
             </Col>
           </div>
           <div >
-            {/* <Container sty={{ marginLeft: "10px" }}>
-              <div>
-                <span
-                  style={{
-                    color: "black",
-                    fontWeight: "bolder",
-                    fontSize: "12px",
-                  }}
-                >
-                  Available Promo Codes
-                </span>
-              </div>
-              <div style={{ overflow: "auto", width: "100%" }}>
-                <Row>
-                  <Col className="mansoon-row">
-                    <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                      <span className="mansoon-item">MONSOON15</span>
-                      <br />
-                      <span className="mansoon-per">15% off in July 2021</span>
-                    </div>
-                  </Col>
-                  <Col className="mansoon-row">
-                    <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                      <span className="mansoon-item">TRYNEW</span>
-                      <br />
-                      <span className="mansoon-per">
-                        10% off your first booking
-                      </span>
-                    </div>
-                  </Col>
-                  <Col className="mansoon-row">
-                    <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                      <span className="mansoon-item">MONSOON15</span>
-                      <br />
-                      <span className="mansoon-per">15% off in July 2021</span>
-                    </div>
-                  </Col>
-                  <Col className="mansoon-row">
-                    <div style={{ textAlign: "center", paddingTop: "10px" }}>
-                      <span className="mansoon-item">TRYNEW</span>
-                      <br />
-                      <span className="mansoon-per">
-                        10% off your first booking
-                      </span>
-                    </div>
-                  </Col>
-                </Row>
-              </div>
-            </Container>
-            <hr /> */}
-            {/* <Container>
-              <Row>
-                <Col>
-                  <div className="rajratan-train" style={{ float: "" }} onClick={onClickTrain}>
-                    <div style={{}}>
-                      <img src={city1} />
-                      <span
-                        style={{
-                          color: "grey",
-                          padding: "10px",
-                          fontFamily: "sans-serif",
-                        }}
-                      >
-                        2 Stops
-                      </span>
-                      <br />
-                      <span
-                        style={{
-                          fontWeight: "bolder",
-                          fontFamily: "sans-serif",
-                        }}
-                      >
-                        21:45 - 9:50
-                      </span>
-                      <br />
-                      <div style={{ marginLeft: "-8px" }}>
-                        <span
-                          style={{
-                            marginRight: "20px",
-                            color: "grey",
-                            padding: "10px",
-                            fontFamily: "sans-serif",
-                          }}
-                        >
-                          12h 05m
-                        </span>
-                      </div>
-                    </div>
-                    <div className="d-flex p-1">
-                      <img
-                        src={bus1}
-                        alt="bus"
-                        style={{ height: "20px", paddingRight: "10px" }}
-                      />
-                      <span
-                        style={{
-                          whiteSpace: "nowrap",
-                          fontSize: "12px",
-                          fontWeight: "bolder",
-                          fontFamily: "sans-serif",
-                        }}
-                      >
-                        Raj Ratan Tours and Travels
-                      </span>
-                    </div>
-                    <span
-                      className="train-sleeper"
-                      style={{
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      Volvo Multi-Axle Sleeper A/C (2+1)
-                    </span>
-                  </div>
-                </Col>
-                <Col style={{ float: "right" }}>
-                  <Row>
-                    <div
-                      className=" ml-4"
-                      style={{ float: "right", padding: "10px" }}
-                    >
-                      <Col xs={12}>
-                        <div className="">
-                          <span
-                            style={{
-                              fontSize: "15px",
-                              color: "grey",
-                              fontFamily: "sans-serif",
-                              padding: "5px",
-                            }}
-                          >
-                            *per person
-                          </span>
-                          <br />
-                          <span
-                            style={{
-                              fontSize: "25px",
-                              fontWeight: "bolder",
-                              fontFamily: "sans-serif",
-                              padding: "5px",
-                            }}
-                          >
-                            ₹ 1500
-                          </span>
-                        </div>
-                      </Col>
-                      <Col xs={12} >
-                        <div className=" train-seatsmobile ">
-                          <span
-                            style={{ fontSize: "12px", fontWeight: "bolder" }}
-                          >
-                            14
-                          </span>
-                          <br />
-                          <span
-                            style={{ fontSize: "12px", fontWeight: "bolder" }}
-                          >
-                            seats available
-                          </span>
-                        </div>
-                      </Col>
-                    </div>
-                  </Row>
-                </Col>
-              </Row>
-            </Container><hr /> */}
             {
               (trips?.length > 0)
                 ?

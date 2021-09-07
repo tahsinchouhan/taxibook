@@ -47,7 +47,7 @@ function* fetchVerifyOtp({ payload }) {
       yield put(setUser(user_data.data.data));      
       localStorage.setItem('user_data', JSON.stringify(user_data.data.data));
       localStorage.setItem('customer_id', JSON.stringify(user_data.data.data.user._id));
-      localStorage.setItem('mobile', JSON.stringify(user_data.data.data.user.mobile));
+      localStorage.setItem('mobile', user_data.data.data.user.mobile);
       yield put(hideMessage())
     } else {
       yield put(fetchError("Invalid OTP"))

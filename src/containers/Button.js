@@ -45,6 +45,7 @@ function ButtonComponent(props)
                 return (
                     // <div className="ml-1" key={item.value}>
                         <button
+                            type='button'
                             style={props.style}
                             className={`btn ${ className } `}
                             value={item.value}

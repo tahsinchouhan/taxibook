@@ -20,7 +20,7 @@ function Search() {
   useEffect(() => {
     getDestinations();
     getPackages();
-    let mobile = JSON.parse(localStorage.getItem("mobile"))
+    let mobile = localStorage.getItem("mobile")
     if (mobile !== null) {
       getDmPass(mobile);
     }

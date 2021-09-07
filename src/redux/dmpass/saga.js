@@ -60,7 +60,7 @@ const createDmPassRequest = async (payload) =>
 
 function* createDmPassOfTraveller({ payload }) {
     console.log("pay:::::::", payload);
-    const phone = JSON.parse(localStorage.getItem("mobile"))
+    const phone = localStorage.getItem("mobile")
     console.log("mobile data", phone);
     try {
         const dmpass = yield call(createTravelPassRequest, { ...payload, mobile: phone });
@@ -80,7 +80,7 @@ function* createDmPassOfTraveller({ payload }) {
 
 function* createDmPass({ payload }) {
     console.log("paydata", payload);
-    const phone = JSON.parse(localStorage.getItem("mobile"))
+    const phone = localStorage.getItem("mobile")
     try {
         const dmpass = yield call(createTravelPassRequest, payload);
         const vehicle = yield call(createVehiclePassRequest, { ...payload, tp_id: dmpass.data._id });

@@ -50,10 +50,8 @@ function BusPass() {
   };
 
   const onSubmit = () => {
-    console.log("object bus:::::::", selected);
     if (selected !== "") {
-      console.log("object bus:::::::", selected);
-      dispatch(setRouteId(selected))
+      dispatch(setRouteId(selected,startDate))
       dispatch(setRouteData({ ...routes[routes.findIndex(x => x._id == selected)], startDate }))
       history.push('/busmonsoon')
     }
@@ -100,9 +98,8 @@ function BusPass() {
                     onChange={(e) => setSelected(e.target.value)}
                     isInvalid={!selected}
                     isValid={selected}
-                    d
                   >
-                    <option>Choose your preferred route</option>
+                    <option value="" hidden>Choose your preferred route</option>
                     {routes.map((item) => (
                       <option key={item._id} value={item._id}>
                         {item.routename}

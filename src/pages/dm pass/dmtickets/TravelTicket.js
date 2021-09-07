@@ -620,12 +620,18 @@ function TravelTicket({ Seleted_Values }) {
                                       i
                                     )
                                   }
+                                  maxlength="12"
                                   value={travellers[i].adhaar}
                                   validate={{
                                     required: {
                                       value: true,
-                                      errorMessage: "Enter 12 digit Adhaar Card Number",
+                                      errorMessage: "Your Adhar Card Number Required",
                                     },
+                                    pattern: {
+                                      value: "(?=.{12})",
+                                      errorMessage: "Enter 12 digit Adhaar Card Number"
+                                    },
+                                    
                                   }}
                                 />
                               </div>
@@ -679,48 +685,16 @@ function TravelTicket({ Seleted_Values }) {
                           border: "none",
                           fontWeight: "600",
                         }}
-                      // onClick={onDmByeClick}
                       >
                         Book your Pass
                       </Button>
                     </div>
-
-
                   </div>
-                  {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
-                  <Button
-                    class="btn btn-success"
-                    style={{
-                      width: "55%",
-                      textAlign: "center",
-                      height: "50px",
-                      borderRadius: "9px",
-                      backgroundColor: "#0fa453",
-                      border: "none",
-                      fontWeight: "600",
-                    }}
-                    onClick={() =>
-                      setTravellers([
-                        ...travellers,
-                        {
-                          name: "",
-                          gender: "Male",
-                          age: "",
-                          adhaar: "",
-                        },
-                      ])
-                    }
-                  >
-                    Add Traveller
-                  </Button>
-                </div> */}
                 </div>
               </Col>
             </AvForm>
           </Row>
         </Container>
-
-
         <div style={{ height: "100px" }}></div>
         <Footer />
       </div>
@@ -781,6 +755,7 @@ function TravelTicket({ Seleted_Values }) {
                           textAlign: "center",
                           fontSize: "17px",
                           fontWeight: "700",
+                          marginTop: 10
                         }}
                       >
                         {number_of_vehicals}
@@ -830,6 +805,7 @@ function TravelTicket({ Seleted_Values }) {
                         textAlign: "center",
                         fontSize: "17px",
                         fontWeight: "700",
+                        marginTop: 10
                       }}
                     >
                       {number_of_travellers}
@@ -876,6 +852,7 @@ function TravelTicket({ Seleted_Values }) {
                         textAlign: "center",
                         fontSize: "17px",
                         fontWeight: "700",
+                        marginTop: 10
                       }}
                     >
                       {duration_of_travel}
@@ -1007,13 +984,6 @@ function TravelTicket({ Seleted_Values }) {
                                       handleVehicle(e.target.value, e.target.name, i)
                                     }
                                     value={vehicles[i].driver_licence_number}
-                                  // validate={{
-                                  //   required: {
-                                  //     value: true,
-                                  //     errorMessage: "Enter Driver License Number",
-                                  //   },
-
-                                  // }}
                                   />
                                 </div>
 
@@ -1022,35 +992,6 @@ function TravelTicket({ Seleted_Values }) {
                           </Paper>
                         ))}
                       </div>
-                      {/* <div style={{ marginTop: "23px", textAlign: "center" }}>
-                    <Button
-                      type="submit"
-                      class="btn btn-success"
-                      style={{
-                        width: "55%",
-                        textAlign: "center",
-                        height: "50px",
-                        borderRadius: "9px",
-                        backgroundColor: "#0fa453",
-                        border: "none",
-                        fontWeight: "600",
-                      }}
-                      onClick={() =>
-                        setVehicles([
-                          ...vehicles,
-                          {
-                            vehicle_number: "",
-                            name: "",
-                            gender: "Male",
-                            age: "",
-                            adhaar: "",
-                          },
-                        ])
-                      }
-                    >
-                      Add Vehicle
-                    </Button>
-                  </div> */}
                     </Col>
 
                     : null
@@ -1193,12 +1134,18 @@ function TravelTicket({ Seleted_Values }) {
                                     i
                                   )
                                 }
+                                maxlength="12"
                                 value={travellers[i].adhaar}
                                 validate={{
                                   required: {
                                     value: true,
-                                    errorMessage: "Enter 12 digit Adhaar Card Number",
+                                    errorMessage: "Your Adhar Card Number Required",
                                   },
+                                  pattern: {
+                                    value: "(?=.{12})",
+                                    errorMessage: "Enter 12 digit Adhaar Card Number"
+                                  },
+                                  
                                 }}
                               />
 
