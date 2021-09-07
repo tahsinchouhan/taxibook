@@ -86,7 +86,8 @@ const PackagesDetails = (props) => {
   };
 
   const ontripAdviser = () => {
-    window.location.href(`https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`)
+    // window.location.href(`https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`)
+    window.location = `https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`
   }
 
   return (
@@ -220,34 +221,34 @@ const PackagesDetails = (props) => {
               {packages.tour_operator_account.name}
             </h5>
             <a className="code"
-             href={`tel:${packages.tour_operator_account.mobile}`}
+              href={`tel:${packages.tour_operator_account.mobile}`}
             >
               {packages?.tour_operator_account.mobile}
             </a>
             <br />
             <a className="code"
-            href={`mailto:${packages.tour_operator_account.email}`}
+              href={`mailto:${packages.tour_operator_account.email}`}
             >
               {packages?.tour_operator_account.email}
             </a>
-          </div> : null }
-          
+          </div> : null}
+
         </div>
       </Container>
       <div fluid className="d-none d-md-block">
         <div className="packeges_title">
-        {packages ? 
-          <span
-            className="packages_enquired"
-            style={{ width: "200px", display: "inline-block" }}
-          // onClick={() => modalReviewHadler()}
-          >
-            <a className="code"
-              href={`tel:${packages.tour_operator_account.mobile}`}
-              style={{ color: "#7868E6" }}>
-              Call Now
-            </a>
-          </span> : null}
+          {packages ?
+            <span
+              className="packages_enquired"
+              style={{ width: "200px", display: "inline-block" }}
+            // onClick={() => modalReviewHadler()}
+            >
+              <a className="code"
+                href={`tel:${packages.tour_operator_account.mobile}`}
+                style={{ color: "#7868E6" }}>
+                Call Now
+              </a>
+            </span> : null}
 
           <span
             className="packages_enquired"
@@ -268,7 +269,8 @@ const PackagesDetails = (props) => {
           >
             <a
               className="" style={{ color: "rgb(120, 104, 230)", textDecoration: "none", width: "200px", display: "inline-block" }}
-              href={` https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`}
+              // href={` https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`}
+              onClick={ontripAdviser}
             >
               TripAdvisor reviews
             </a>
@@ -295,7 +297,7 @@ const PackagesDetails = (props) => {
               Review
             </span>
           </div> */}
-          {/* <div>
+          <div>
             <span
               className="packages_enquired"
               style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
@@ -303,20 +305,20 @@ const PackagesDetails = (props) => {
             >
               Enquire Now
             </span>
-          </div> */}
+          </div>
           <div>
-          {packages ? 
-          <span
-            className="packages_enquired"
-            style={{ width: "200px", display: "inline-block" }}
-          // onClick={() => modalReviewHadler()}
-          >
-            <a className="code"
-              href={`tel:${packages.tour_operator_account.mobile}`}
-              style={{ color: "#7868E6" }}>
-              Call Now
-            </a>
-          </span> : null}
+            {packages ?
+              <span
+                className="packages_enquired"
+                style={{ width: "200px", display: "inline-block" }}
+              // onClick={() => modalReviewHadler()}
+              >
+                <a className="code"
+                  href={`tel:${packages.tour_operator_account.mobile}`}
+                  style={{ color: "#7868E6" }}>
+                  Call Now
+                </a>
+              </span> : null}
             <span style={{ width: "200px", display: "inline-block" }}
               className="packages_enquired"
             >

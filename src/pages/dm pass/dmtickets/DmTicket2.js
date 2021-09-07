@@ -15,10 +15,10 @@ import Footer from "../../travesaly/Footer";
 import { getOtp, verifyOtp } from "../../../redux/login/actions";
 
 // import { useDispatch, useSelector } from "react-redux";
-import { fetchStart} from "../../../redux/actions";
+import { fetchStart } from "../../../redux/actions";
 
 
-function DmTicket2({loading}) {
+function DmTicket2({ loading }) {
   const { user_data } = useSelector((state) => state.loginReducer);
 
   const [number, setNumber] = useState("")
@@ -32,20 +32,20 @@ function DmTicket2({loading}) {
   const onDmTicketSecondShow = () => {
     // if (otp.length === 6) {
     //   dispatch(verifyOtp(number, otp))
-      // history.push('/dmticket')
+    // history.push('/dmticket')
     //   console.log("hii5555");
     // }
     // console.log("Number",number);
     // console.log("otp",otp);
     // console.log("object", `91${number}`, otp);
     if (otp.length === 6) {
-    dispatch(fetchStart());
-    dispatch(verifyOtp(number, otp))
-    //dispatch(verifyOtp(`${number}`,otp));
+      dispatch(fetchStart());
+      dispatch(verifyOtp(number, otp))
+      //dispatch(verifyOtp(`${number}`,otp));
     }
   };
   const sendOtp = () => {
-    console.log("object::::::::::::::",number)
+    console.log("object::::::::::::::", number)
     dispatch(getOtp(number))
   }
   const submitHandler = () => {
@@ -57,7 +57,7 @@ function DmTicket2({loading}) {
     <>
       <div>
         <Header />
-      {user_data !== null ? <Redirect to="/dmticket" /> : null}
+        {user_data !== null ? <Redirect to="/dmticket" /> : null}
 
         <div className="d-none d-md-block">
           <Container className="d-none d-md-block my-5 mt-0" style={{ width: "70%" }}>
@@ -130,7 +130,7 @@ function DmTicket2({loading}) {
                         }}
                         disabled={loading}
                       >
-                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Send OTP</>} 
+                        {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Send OTP</>}
                       </Button>
 
 
@@ -198,34 +198,34 @@ function DmTicket2({loading}) {
 
         {/*mobile-view*/}
         <div fluid className="d-md-none">
-          <Container className="my-5 mt-0" style={{ width: "" }}>
-            <div className="select_div">
-              <div className="row p-3" style={{ textAlign: "center" }}>
-                <div className="col-xs-12  col-sm-12 col-md-12">
-                  <div className="booking-div">
-                    <div style={{ marginBottom: "15px" }}>
-                      <img src={ticket} alt="doodle" style={{ height: "60px" }} />
-                    </div>
+          <AvForm onValidSubmit={onDmTicketSecondShow}>
+            <Container className="my-5 mt-0" style={{ width: "" }}>
+              <div className="select_div">
+                <div className="row p-3" style={{ textAlign: "center" }}>
+                  <div className="col-xs-12  col-sm-12 col-md-12">
+                    <div className="booking-div">
+                      <div style={{ marginBottom: "15px" }}>
+                        <img src={ticket} alt="doodle" style={{ height: "60px" }} />
+                      </div>
 
-                    <h5 style={{ color: "#0fa453", margin: "10px", color: "black", fontWeight: "700" }}>
-                      Travel Pass
-                    </h5>
-                    <span
-                      style={{
-                        fontWeight: "500",
-                        padding: "10px",
-                        whiteSpace: 'nowrap'
-                      }}
-                    >
-                      <span> Get a pass for travellers, vehicles</span>
-                      <br /><span> and duration of your travel</span>
-                    </span>
+                      <h5 style={{ color: "#0fa453", margin: "10px", color: "black", fontWeight: "700" }}>
+                        Travel Pass
+                      </h5>
+                      <span
+                        style={{
+                          fontWeight: "500",
+                          padding: "10px",
+                          whiteSpace: 'nowrap'
+                        }}
+                      >
+                        <span> Get a pass for travellers, vehicles</span>
+                        <br /><span> and duration of your travel</span>
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <Container style={{paddingTop: "20px",paddingBottom: 150 }}>
-                <AvForm onClick={onDmTicketSecondShow}>
+                <Container style={{ paddingTop: "20px", paddingBottom: 150 }}>
                   <Row>
                     <Col xs={12} md={6} className="mt-2">
                       <Form.Group
@@ -261,19 +261,19 @@ function DmTicket2({loading}) {
                             }
                           }}
                         />
-                       <Button
-                        onClick={sendOtp}
-                        style={{
-                          backgroundColor: "transparent",
-                          border: "none",
-                          color: "#FF4A68",
-                          float: "right",
-                          fontSize: "12px",
-                        }}
-                        disabled={loading}
-                      >
-                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Send OTP</>} 
-                      </Button>
+                        <Button
+                          onClick={sendOtp}
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "#FF4A68",
+                            float: "right",
+                            fontSize: "12px",
+                          }}
+                          disabled={loading}
+                        >
+                          {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Send OTP</>}
+                        </Button>
 
 
                       </Form.Group>
@@ -311,19 +311,17 @@ function DmTicket2({loading}) {
                             }
                           }}
                         />
-
-
                       </Form.Group>
                     </Col>
                   </Row>
-                </AvForm>
-              </Container>
-            </div>
-          </Container>
-          <Button className="locationpass-btn" >
-            Continue
-          </Button>
-          <ToastContainer />
+                </Container>
+              </div>
+            </Container>
+            <Button type="submit" className="locationpass-btn" >
+              Continue
+            </Button>
+            <ToastContainer />
+          </AvForm>
         </div>
       </div>
     </>
