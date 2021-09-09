@@ -40,12 +40,18 @@ function BusConfirmation() {
   const history = useHistory();
 
   const dispatch = useDispatch()
-  const { tripData, data: apiData, } = useSelector(state => state.busReducer)
+  const { tripData, data: apiData,  routeData } = useSelector(state => state.busReducer)
 
   const onSideBtnClick = (e) => {
     const name = e.target.name;
     setActiveButton(name);
   };
+
+  useEffect(() => {
+    if(routeData.startDate === undefined){
+      history.push('/busdetail')
+    }
+  }, [routeData]);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [open, setOpen] = React.useState(false);
@@ -670,104 +676,6 @@ function BusConfirmation() {
                 </div>
               </Col>
             </Row>
-            {/* <Row>
-            <Col xs={12}>
-              <div className=" select-train mt-2 d-flex">
-                <Form className="d-flex">
-                  {["radio"].map((type) => (
-                    <div
-                      key={`inline-${type}`}
-                      className="mb-3"
-                      style={{ margin: "10px", marginLeft: "10px" }}
-                    >
-                      <Form.Check
-                        inline
-                        label=""
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-1`}
-                      />
-                    </div>
-                  ))}
-
-                  <span
-                    style={{
-                      marginTop: "10px",
-                      marginRight: "10px",
-                      color: "black",
-                      fontWeight: "bolder",
-                      fontFamily: "sans-serif",
-                    }}
-                  >
-                    19:45
-                  </span>
-                </Form>
-                <div className="d-flex">
-                  <span
-                    style={{
-                      margin: "10px",
-                      whiteSpace: "nowrap",
-                      fontSize: "12px",
-                      fontWeight: "bolder",
-                      fontFamily: "sans-serif",
-                    }}
-                  >
-                    Raj Ratan Travels, Borivali East,
-                    <br />
-                    Devipada Subway
-                  </span>
-                </div>
-              </div>
-            </Col>
-            <Col xs={12}>
-              <div className=" select-train mt-2 d-flex">
-                <Form className="d-flex">
-                  {["radio"].map((type) => (
-                    <div
-                      key={`inline-${type}`}
-                      className="mb-3"
-                      style={{ margin: "10px", marginLeft: "10px" }}
-                    >
-                      <Form.Check
-                        inline
-                        label=""
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-1`}
-                      />
-                    </div>
-                  ))}
-
-                  <span
-                    style={{
-                      marginTop: "10px",
-                      marginRight: "10px",
-                      color: "black",
-                      fontWeight: "bolder",
-                      fontFamily: "sans-serif",
-                    }}
-                  >
-                    19:45
-                  </span>
-                </Form>
-                <div className="d-flex">
-                  <span
-                    style={{
-                      margin: "10px",
-                      whiteSpace: "nowrap",
-                      fontSize: "12px",
-                      fontWeight: "bolder",
-                      fontFamily: "sans-serif",
-                    }}
-                  >
-                    Raj Ratan Travels, Borivali East,
-                    <br />
-                    Devipada Subway
-                  </span>
-                </div>
-              </div>
-            </Col>
-          </Row> */}
           </Container>
 
           <div className="traveller_div" >

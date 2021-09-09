@@ -22,8 +22,12 @@ function BusMonsoon() {
     dispatch(getTripByRouteId(routeData))
   }, [route_id]);
 
+
+
   useEffect(() => {
-    console.log("ddd", routeData,"   ",route_id);
+    if(routeData.startDate === undefined){
+      history.push('/busdetail')
+    }
   }, [routeData]);
 
   const onClickTrain = (id) => {
@@ -140,9 +144,6 @@ function BusMonsoon() {
                       height: '75px'
                     }}
                   >
-                    {/* Tatibandh, Boarding
-                    <br />
-                    to Chitrakote{" "} */}
                     {routeData?.start?.name}
                     <br />
                     {` to ${routeData?.end?.name} `}

@@ -235,7 +235,7 @@ function BusBookingDetail() {
                         color: "#FF4A68",
                       }}
                     >
-                      ₹ {apiData[0]?.ticketprice + apiData[0]?.surcharge}
+                      ₹ {Number(apiData[0].ticketprice) + Number(apiData[0].surcharge)}
                     </span>
                     <br />
                     <span
@@ -508,8 +508,8 @@ function BusBookingDetail() {
                       fontWeight: "bolder",
                       color: "#FF4A68",
                     }}
-                  >
-                    ₹ {apiData[0]?.ticketprice + apiData[0]?.surcharge}
+                  >  
+                  ₹ {Number(apiData[0].ticketprice) + Number(apiData[0].surcharge)}
                   </span>
                   <br />
                   <span
@@ -539,16 +539,6 @@ function BusBookingDetail() {
                     style={{ float: "", backgroundColor: "#F8F8F8" }}
                   >
                     <div style={{}}>
-                      {/* <img src={city1} /> */}
-                      {/*  <span
-                          style={{
-                            color: "grey",
-                            padding: "10px",
-                            fontFamily: "sans-serif",
-                          }}
-                        >
-                          2 Stops
-                        </span> */}
                       <span
                         style={{
                           whiteSpace: "nowrap",
@@ -585,11 +575,6 @@ function BusBookingDetail() {
                       </div>
                     </div>
                     <div className="d-flex p-1">
-                      {/* <img
-                        src={bus1}
-                        alt="bus"
-                        style={{ height: "20px", width: "30px", paddingRight: "10px" }}
-                      /> */}
                       <span
                         style={{
                           whiteSpace: "nowrap",

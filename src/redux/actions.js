@@ -46,10 +46,22 @@ export const SET_DM_PASS_ID = "SET_DM_PASS_ID";
 export const DM_PASS_DETAILS = "DM_PASS_DETAILS";
 
 //entrypass
-export const SET_ENTRY_PASS_ID ="SET_ENTRY_PASS_ID"
+export const SET_ENTRY_PASS_ID ="SET_ENTRY_PASS_ID";
+
+
+//explore
+export const GET_REVIEW = "GET_REVIEW";
+export const GET_REVIEW_ERROR = "GET_REVIEW_ERROR";
+export const GET_REVIEW_SUCCESS = "GET_REVIEW_SUCCESS";
+
+
+export const GET_ENQUIRE = "GET_ENQUIRE";
+export const GET_ENQUIRE_ERROR = "GET_ENQUIRE_ERROR";
+export const GET_ENQUIRE_SUCCESS = "GET_ENQUIRE_SUCCESS";
 
 export * from "./common/actions";
 export * from "./auth/actions";
 export * from "./bus/actions";
 export * from "./login/actions";
 export * from "./dmpass/actions";
+export * from "./explore/actions";

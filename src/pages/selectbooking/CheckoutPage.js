@@ -25,26 +25,14 @@ function CheckoutPage() {
   const { name, age, gender, adhaar, basic_details, price, surcharge } = apiData;
 
   const onCongratsClick = () => {
-    // console.log("object", tripData);
-    // dispatch(
-    //   createBusBooking({
-    //     ...apiData,
-    //     trips_id: tripData?._id,
-    //     route: tripData?.route?._id,
-    //     from: tripData?.route?.start?._id,
-    //     to: tripData?.route?.end?._id,
-    //     bus: tripData?.vehical,
-    //     mobile,
-    //   })
-    // );
     history.push("/payment");
   };
 
   useEffect(() => {
-    // setValues({ ...values, price: (BASE_PRICE * basic_details.length)  })
-    // setValues({ ...values, price: (basePrice * basic_details.length) })
-    console.log("enosdkl", apiData);
-  }, [basic_details]);
+    if(routeData.startDate === undefined){
+      history.push('/busdetail')
+    }
+  }, [routeData]);
 
   const onClickBack = () => {
     history.push("/busconfirmation");
@@ -155,15 +143,6 @@ function CheckoutPage() {
                     >
                       <div style={{}}>
                         <img src={city1} />
-                        {/*  <span
-                          style={{
-                            color: "grey",
-                            padding: "10px",
-                            fontFamily: "sans-serif",
-                          }}
-                        >
-                          2 Stops
-                        </span> */}
                         <span
                           style={{
                             whiteSpace: "nowrap",
@@ -223,7 +202,6 @@ function CheckoutPage() {
                           fontSize: "13px",
                         }}
                       >
-                        {/* Volvo Multi-Axle Sleeper A/C (2+1) */}
                         Bus 30 Seater
                       </span>
                     </div>
@@ -247,12 +225,6 @@ function CheckoutPage() {
               </span>
               {basic_details?.length > 0 ? (
                 <Row>
-                  {/* <h3
-                    style={{
-                      fontSize: "19px",
-                      color: "#0FA453",
-                      fontWeight: "bolder",
-                    }}>Passengers ({`${basic_details?.length}`})</h3> */}
                   {basic_details?.map((item, i) => (
                     <Col md={6}>
                       <div

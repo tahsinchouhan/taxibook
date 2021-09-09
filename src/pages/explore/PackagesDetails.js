@@ -9,11 +9,10 @@ import { API_PATH } from "../../Path/Path";
 import { Button } from "bootstrap";
 import { useHistory } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
-import Modal from 'react-bootstrap'
+import Modal from "react-bootstrap";
 import ReactPlayer from "react-player";
 import RettingModal from "../../components/modal/RettingModal";
 import EnquireModal from "../../components/modal/EnquireModal";
-import imgtest from "../../assets/img/bus.png"
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
@@ -30,34 +29,19 @@ const PackagesDetails = (props) => {
   const [modalShow, setModalShow] = useState(false);
 
   const modalReviewHadler = () => {
-    setModalReviewShow(true)
-    console.log("helllo")
-  }
+    setModalReviewShow(true);
+  };
 
   const handleReviewClose = () => {
-    setModalReviewShow(false)
-  }
+    setModalReviewShow(false);
+  };
   const modalEnquireHadler = () => {
-    setEnquireModal(true)
-    console.log("helllo")
-  }
+    setEnquireModal(true);
+  };
 
   const handEnquireClose = () => {
-    setEnquireModal(false)
-  }
-  // const [modalRettShow, setModalRettShow] = useState(false);
-  // const [show, setShow] = useState(false);
-
-
-
-  // const handleLoginClose = () => {
-  //   setModalShow(false)
-  // }
-
-
-  // const onClickWhatsapp=()=>{
-  //   history.push("")
-  // }
+    setEnquireModal(false);
+  };
   var id;
   useEffect(() => {
     if (props.location.item) {
@@ -86,18 +70,17 @@ const PackagesDetails = (props) => {
   };
 
   const ontripAdviser = () => {
-    // window.location.href(`https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`)
-    window.location = `https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`
-  }
-
+    window.location = `https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`;
+  };
   return (
     <>
-      <div style={{
-        backgroundImage: `url("${packages.upload_images}")`,
-        backgroundSize: "cover",
-        backgroundPosition: "center top",
-        height: 650,
-      }}
+      <div
+        style={{
+          backgroundImage: `url("${packages.upload_images}")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+          height: 650,
+        }}
       >
         <Header />
         <h1 className="header__title">
@@ -216,68 +199,90 @@ const PackagesDetails = (props) => {
           <h4 className="block__title">
             <span>Contact Details</span>
           </h4>
-          {packages ? <div>
-            <h5 className="price__title pt-3 mb-1">
-              {packages.tour_operator_account.name}
-            </h5>
-            <a className="code"
-              href={`tel:${packages.tour_operator_account.mobile}`}
-            >
-              {packages?.tour_operator_account.mobile}
-            </a>
-            <br />
-            <a className="code"
-              href={`mailto:${packages.tour_operator_account.email}`}
-            >
-              {packages?.tour_operator_account.email}
-            </a>
-          </div> : null}
-
+          {packages ? (
+            <div>
+              <h5 className="price__title pt-3 mb-1">
+                {packages.tour_operator_account.name}
+              </h5>
+              <a
+                className="code"
+                href={`tel:${packages.tour_operator_account.mobile}`}
+              >
+                {packages?.tour_operator_account.mobile}
+              </a>
+              <br />
+              <a
+                className="code"
+                href={`mailto:${packages.tour_operator_account.email}`}
+              >
+                {packages?.tour_operator_account.email}
+              </a>
+            </div>
+          ) : null}
         </div>
       </Container>
       <div fluid className="d-none d-md-block">
         <div className="packeges_title">
-          {packages ?
+          {packages ? (
             <span
               className="packages_enquired"
               style={{ width: "200px", display: "inline-block" }}
-            // onClick={() => modalReviewHadler()}
+              // onClick={() => modalReviewHadler()}
             >
-              <a className="code"
+              <a
+                className="code"
                 href={`tel:${packages.tour_operator_account.mobile}`}
-                style={{ color: "#7868E6" }}>
+                style={{ color: "#7868E6" }}
+              >
                 Call Now
               </a>
-            </span> : null}
+            </span>
+          ) : null}
 
           <span
             className="packages_enquired"
-            style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
+            style={{
+              color: "rgb(120, 104, 230)",
+              width: "200px",
+              display: "inline-block",
+            }}
             onClick={() => modalReviewHadler()}
           >
             Review
           </span>
-          {/* <span
-            className="packages_enquired"
-            style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
-            onClick={() => modalEnquireHadler()}
-          >
-            Enquire  Now
-          </span> */}
           <span
             className="packages_enquired"
+            style={{
+              color: "rgb(120, 104, 230)",
+              width: "200px",
+              display: "inline-block",
+            }}
+            onClick={() => modalEnquireHadler()}
           >
+            Enquire Now
+          </span>
+          <span className="packages_enquired">
             <a
-              className="" style={{ color: "rgb(120, 104, 230)", textDecoration: "none", width: "200px", display: "inline-block" }}
-              // href={` https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`}
-              onClick={ontripAdviser}
+              target="_blank"
+              style={{
+                color: "rgb(120, 104, 230)",
+                textDecoration: "none",
+                width: "200px",
+                display: "inline-block",
+              }}
+              href={`https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`}
             >
               TripAdvisor reviews
             </a>
           </span>
-          <span className="packages_whatsapp" style={{ width: "200px", display: "inline-block" }}>
+          <span
+            className="packages_whatsapp"
+            style={{ width: "200px", display: "inline-block" }}
+          >
             <a
-              className="package-whats" style={{ textDecoration: "none" }}
+              className="package-whats"
+              style={{ textDecoration: "none" }}
+              target="_blank"
               href={`https://api.whatsapp.com/send/?phone=${packages?.tour_operator_account?.mobile}&text&app_absent=0`}
             >
               <FaWhatsapp style={{ fontSize: "30px" }} />
@@ -288,7 +293,7 @@ const PackagesDetails = (props) => {
       </div>
       <div fluid className="d-md-none">
         <div className="packeges_title">
-          {/* <div>
+          <div>
             <span
               className="packages_enquired"
               style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
@@ -296,46 +301,59 @@ const PackagesDetails = (props) => {
             >
               Review
             </span>
-          </div> */}
+          </div>
           <div>
             <span
               className="packages_enquired"
-              style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
+              style={{
+                color: "rgb(120, 104, 230)",
+                width: "200px",
+                display: "inline-block",
+              }}
               onClick={() => modalEnquireHadler()}
             >
               Enquire Now
             </span>
           </div>
           <div>
-            {packages ?
+            {packages ? (
               <span
                 className="packages_enquired"
                 style={{ width: "200px", display: "inline-block" }}
-              // onClick={() => modalReviewHadler()}
               >
-                <a className="code"
+                <a
+                  className="code"
                   href={`tel:${packages.tour_operator_account.mobile}`}
-                  style={{ color: "#7868E6" }}>
+                  style={{ color: "#7868E6" }}
+                >
                   Call Now
                 </a>
-              </span> : null}
-            <span style={{ width: "200px", display: "inline-block" }}
+              </span>
+            ) : null}
+            <span
+              style={{ width: "200px", display: "inline-block" }}
               className="packages_enquired"
             >
               <a
-                className="" style={{ color: "rgb(120, 104, 230)", textDecoration: "none" }}
+                className=""
+                style={{ color: "rgb(120, 104, 230)", textDecoration: "none" }}
                 target="_blank"
-                onClick={ontripAdviser}
-              //href={`https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`}
+                // onClick={ontripAdviser}
+                href={`https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`}
               >
                 TripAdvisor reviews
               </a>
             </span>
           </div>
           <div>
-            <span style={{ width: "200px", display: "inline-block" }} className="packages_whatsapp" >
+            <span
+              style={{ width: "200px", display: "inline-block" }}
+              className="packages_whatsapp"
+            >
               <a
-                className="package-whats" style={{ textDecoration: "none" }}
+                className="package-whats"
+                style={{ textDecoration: "none" }}
+                target="_blank"
                 href={`https://api.whatsapp.com/send/?phone=${packages?.tour_operator_account?.mobile}&text&app_absent=0`}
               >
                 <FaWhatsapp style={{ fontSize: "25px" }} />
@@ -347,9 +365,7 @@ const PackagesDetails = (props) => {
       </div>
       <Footer />
       <RettingModal show={modalReviewShow} handleClose={handleReviewClose} />
-      <EnquireModal show={enquireModal} handleClose={handEnquireClose} />
-
-
+      <EnquireModal show={enquireModal} packages={packages} handleClose={handEnquireClose} />
     </>
   );
 };

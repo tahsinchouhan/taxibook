@@ -125,21 +125,15 @@ function Header() {
                   VIEW TICKETS
                 </NavLink>
               ) : null}
-              {/* <NavLink className="sidebar__navlink" to="/pricing">
-                CONTACT
-              </NavLink>
-              <NavLink className="sidebar__navlink" to="/pricing">
-                ABOUT
-              </NavLink> */}
             </Nav>
           </Offcanvas.Body>
         </Offcanvas>
       </Container>
 
       <Container fluid className="header_div d-none d-md-block">
-        <Navbar expand="lg" style={{ height: "161px" }}>
+        <Navbar expand="lg">
           <Navbar.Brand href="#">
-            <div style={{ marginLeft: "44%", marginTop: "1%" }}>
+            <div style={{ marginLeft: "44%", marginTop: "0%" }}>
               <Image src={logo} style={{ height: "97px", width: "85px" }} />
             </div>
           </Navbar.Brand>

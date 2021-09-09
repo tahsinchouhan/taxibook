@@ -60,6 +60,12 @@ function Payment() {
       });
   }, []);
 
+  useEffect(() => {
+    if(routeData.startDate === undefined){
+      history.push('/busdetail')
+    }
+  }, [routeData]);
+
   const displayRazorpaysss = async (values) => {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
