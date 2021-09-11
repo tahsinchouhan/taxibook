@@ -77,7 +77,7 @@ const DestinationDetails = (props) => {
     <>
       <div
         style={{
-          backgroundImage: `url("${destinations.upload_images}")`,
+          backgroundImage: `url("${destinations?.upload_images}")`,
           backgroundSize: "cover",
           backgroundPosition: "center top",
           height: 650,
@@ -86,7 +86,7 @@ const DestinationDetails = (props) => {
         <Header />
         <Container>
           <h1 className="header__title">
-            <span>{destinations.title}</span>
+            <span>{destinations?.title}</span>
           </h1>
         </Container>
       </div>
@@ -95,18 +95,18 @@ const DestinationDetails = (props) => {
           <h4 className="block__title">
             <span>About</span> the Destination
           </h4>
-          <p className="pt-3">{destinations.description}</p>
+          <p className="pt-3">{destinations?.description}</p>
         </div>
       </Container>
 
-      {destinations.youtube_url ? (
+      {destinations?.youtube_url ? (
         <Container>
           <h4 className="block__title know__more mb-4 pt-4">
             <span>Know More</span>
           </h4>
 
           <ReactPlayer
-            url={destinations.youtube_url}
+            url={destinations?.youtube_url}
             controls
             playbackRate={2}
             width="100%"
@@ -131,13 +131,13 @@ const DestinationDetails = (props) => {
                 <h4 className="block__title">
                   <span>Location</span>
                 </h4>
-                <p className="pt-3">{destinations.address}</p>
+                <p className="pt-3">{destinations?.address}</p>
                 <span className="text-info">
                   <img src={loc} height="40" width="45" />
                   <b>
                     <a
                       className="get__direction"
-                      href={`https://maps.google.com/?q=${destinations.latitude},${destinations.longitude}`}
+                      href={`https://maps.google.com/?q=${destinations?.latitude},${destinations?.longitude}`}
                       target="_blank"
                     >
                       Get Directions
@@ -151,14 +151,14 @@ const DestinationDetails = (props) => {
                 <GoogleMapReact
                   bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API }}
                   defaultCenter={{
-                    lat: parseFloat(destinations.latitude),
-                    lng: parseFloat(destinations.longitude),
+                    lat: parseFloat(destinations?.latitude),
+                    lng: parseFloat(destinations?.longitude),
                   }}
                   defaultZoom={zoom}
                 >
                   <Marker
-                    lat={parseFloat(destinations.latitude)}
-                    lng={parseFloat(destinations.longitude)}
+                    lat={parseFloat(destinations?.latitude)}
+                    lng={parseFloat(destinations?.longitude)}
                     name="My Marker"
                     color="blue"
                   />
