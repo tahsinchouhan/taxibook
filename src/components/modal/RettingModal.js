@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,16 +7,31 @@ import Message from "../Message";
 import { FaStar } from "react-icons/fa";
 import ReactStars from "react-rating-stars-component";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import {getReview} from "../../redux/actions";
+import { getReview } from "../../redux/actions";
+import S3FileUpload from "react-s3";
+
+const config = {
+  bucketName: "travelbastar",
+  dirName: "destination-images",
+  region: "ap-south-1",
+  accessKeyId: "AKIA6Q57UD6XELBTX2LM",
+  secretAccessKey: "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",
+};
 
 function RettingModal({ show, handleClose }) {
-  const { error, loading, message} = useSelector(
+  const { error, loading, message } = useSelector(
     (state) => state.commonReducer
   );
+  const [name, setName] = useState("");
   const [stars, setStars] = useState("");
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
+
+  const [selectfile, setSelectfile] = useState();
+  const [imageupload, setImageupload] = useState("");
+  const [imagePreviewUrl, setImagePreviewUrl] = useState();
+  const fileInput = useRef(null);
 
   const dispatch = useDispatch();
 
@@ -26,17 +41,51 @@ function RettingModal({ show, handleClose }) {
 
   const onsubmit = () => {
     const data = {
+      name: name,
       star_rating: stars,
       mobile: number,
       email: email,
       comments: comment,
+      image: [imageupload],
     };
-    if(!data.mobile == "" && !data.email == ""){
-      dispatch(getReview(data))
-      console.log("object",data)
+    if (!data.mobile == "" && !data.email == "") {
+      handleClose();
+      dispatch(getReview(data));
+      console.log("object", data);
     }
   };
-  
+
+  const handleImageChange = (event) => {
+    setSelectfile(event.target.files[0]);
+    event.preventDefault();
+    let reader = new FileReader();
+    let file = event.target.files[0];
+    reader.onloadend = () => {
+      setImagePreviewUrl(reader.result);
+    };
+    reader.readAsDataURL(file);
+    S3FileUpload.uploadFile(file, config)
+      .then((data) => {
+        if (data.result.ok) {
+          setImageupload(data.location);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  let $imagePreview = null;
+  if (imagePreviewUrl) {
+    $imagePreview = (
+      <img
+        src={imagePreviewUrl}
+        alt={selectfile ? selectfile.name : ""}
+        height="200px"
+      />
+    );
+  }
+
   return (
     <>
       <div>
@@ -53,10 +102,7 @@ function RettingModal({ show, handleClose }) {
             <Modal.Body className="">
               <div className="col-sm-6 offset-sm-3">
                 <AvForm>
-                  <div
-                    className="review_input mb-3"
-                    controlId="formBasicEmail"
-                  >
+                  <div className="review_input mb-3" controlId="formBasicEmail">
                     <div className="d-flex">
                       <Form.Label className="dm-ticket">
                         Star Rating:
@@ -74,6 +120,45 @@ function RettingModal({ show, handleClose }) {
                         />
                       </div>
                     </div>
+
+                    <Form.Label className="dm-ticket">Enter Name</Form.Label>
+
+                    <AvField
+                      onChange={(text) => setName(text.target.value)}
+                      value={number}
+                      name="name"
+                      type="ext"
+                      className="position-relative"
+                      placeholder="Enter Your Name"
+                      validate={{
+                        required: {
+                          value: true,
+                          errorMessage: "Enter your name",
+                        },
+                      }}
+                    />
+                    <Form.Group style={{ marginTop: 20 }}>
+                      <div className="image-show">{$imagePreview}</div>
+                      <Form.Control
+                        type="file"
+                        aria-describedby="inputGroupPrepend"
+                        name="imageupload"
+                        style={{ display: "none" }}
+                        // value={imagePreviewUrl}
+                        onChange={handleImageChange}
+                        ref={fileInput}
+                      />
+                      <div
+                        className="btn btn-primary"
+                        onClick={() => fileInput.current.click()}
+                      >
+                        {selectfile ? "Change Photo" : "Choose Photo"}
+                      </div>
+                      <Form.Control.Feedback type="invalid">
+                        Please Select Image
+                      </Form.Control.Feedback>
+                    </Form.Group>
+
                     <Form.Label className="dm-ticket">Enter Number</Form.Label>
 
                     <AvField
@@ -135,7 +220,7 @@ function RettingModal({ show, handleClose }) {
                     />
                   </div>
                   <Button
-                  type="submit"
+                    type="submit"
                     className="col-sm-6 offset-sm-3"
                     variant="primary"
                     onClick={() => onsubmit()}

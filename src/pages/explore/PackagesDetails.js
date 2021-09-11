@@ -10,9 +10,11 @@ import { Button } from "bootstrap";
 import { useHistory } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import Modal from "react-bootstrap";
+import ReactStars from "react-rating-stars-component";
 import ReactPlayer from "react-player";
 import RettingModal from "../../components/modal/RettingModal";
 import EnquireModal from "../../components/modal/EnquireModal";
+import { FaStar } from "react-icons/fa";
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
@@ -21,6 +23,8 @@ const PackagesDetails = (props) => {
   const [enquireModal, setEnquireModal] = useState();
   const [modalReviewShow, setModalReviewShow] = useState(false);
   const [packages, setPackages] = useState("");
+  const [review, setReview] = useState([]);
+  const [enquiry, setEnquiry] = useState([]);
   const [inclusions, setInclusions] = useState([]);
   const [exclusions, setExclusions] = useState([]);
   const [zoom, setZoom] = useState(11);
@@ -54,14 +58,15 @@ const PackagesDetails = (props) => {
 
   useEffect(() => {
     getPackages();
-    window.scrollTo(0, 0);
+    getReview();
+    getEnquiry();
+    // window.scrollTo(0, 0);
   }, []);
 
   const getPackages = () => {
     fetch(API_PATH + `/api/v1/packages/${id}`)
       .then((response) => response.json())
       .then((res) => {
-        console.log("fjjfjjdj", res.data);
         setPackages(res.data);
         setInclusions(res.data.inclusions);
         setExclusions(res.data.exclusions);
@@ -69,9 +74,57 @@ const PackagesDetails = (props) => {
       .catch((e) => console.log(e));
   };
 
-  const ontripAdviser = () => {
-    window.location = `https://www.tripadvisor.in/Tourism-g800435-Jagdalpur_Bastar_District_Chhattisgarh-Vacations.html`;
+  const getReview = () => {
+    fetch(API_PATH + `/api/v1/review/list`)
+      .then((response) => response.json())
+      .then((res) => {
+        setReview(res.data);
+        console.log(res.data);
+      })
+      .catch((e) => console.log(e));
   };
+
+  const getEnquiry = () => {
+    fetch(API_PATH + `/api/v1/enquiry/list`)
+      .then((response) => response.json())
+      .then((res) => {
+        setEnquiry(res.data);
+        console.log(res.data);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  var current = null;
+  var cnt = 0;
+  // review.map((data) => {
+  //   if (data.star_rating != current) {
+  //     current = data.star_rating;
+  //     cnt = 1;
+  //     console.log(current + " comes --> " + cnt + " times");
+  //   } else {
+  //     cnt++;
+  //   }
+  // });
+  // console.log(current + " comes --> " + cnt + " times");
+
+  for (var i = 0; i < review.length; i++) {
+    if (review[i].star_rating != current) {
+      if (cnt > 0) {
+        console.log(current +" "+ cnt);
+      }
+      current = review[i].star_rating;
+      cnt = 1;
+    // } else {
+    //   cnt++;
+    // }
+    console.log(cnt)
+    }
+    // console.log(i)
+  }
+  // if (cnt > 0) {
+  //   console.log(current + " comes --> " + cnt + " times");
+  // }
+
   return (
     <>
       <div
@@ -296,7 +349,11 @@ const PackagesDetails = (props) => {
           <div>
             <span
               className="packages_enquired"
-              style={{ color: "rgb(120, 104, 230)", width: "200px", display: "inline-block" }}
+              style={{
+                color: "rgb(120, 104, 230)",
+                width: "200px",
+                display: "inline-block",
+              }}
               onClick={() => modalReviewHadler()}
             >
               Review
@@ -363,9 +420,141 @@ const PackagesDetails = (props) => {
           </div>
         </div>
       </div>
+
+      <Container className="mb-5 pb-5">
+        <h4 className="block__title mt-5">
+          <span>Review</span>
+        </h4>
+        <h5
+          className="price__title pt-3 mb-1"
+          style={{ display: "flex", flexDirection: "row" }}
+        >
+          <span
+            style={{
+              margin: 3,
+              fontSize: 15,
+              marginTop: 8,
+              fontWeight: "bold",
+            }}
+          >
+            4.5
+          </span>
+          <ReactStars
+            count={5}
+            size={24}
+            value={4.5}
+            isHalf={true}
+            activeColor="#ffd700"
+          />
+          <span
+            style={{
+              margin: 3,
+              fontSize: 15,
+              marginTop: 8,
+              fontWeight: "bold",
+            }}
+          >
+            {review.length} reviews
+          </span>
+        </h5>
+        <p>
+          <span
+            style={{
+              margin: 3,
+              fontSize: 15,
+              marginTop: 8,
+              fontWeight: "bold",
+            }}
+          >
+            Excellent{" "}
+            {
+              review.filter(
+                (data) => data.star_rating >= "4" && data.star_rating <= "5"
+              ).length
+            }
+          </span>
+        </p>
+        <p>
+          <span
+            style={{
+              margin: 3,
+              fontSize: 15,
+              marginTop: 8,
+              fontWeight: "bold",
+            }}
+          >
+            Very good{" "}
+            {
+              review.filter(
+                (data) => data.star_rating >= "3" && data.star_rating < "4"
+              ).length
+            }
+          </span>
+        </p>
+        <p>
+          <span
+            style={{
+              margin: 3,
+              fontSize: 15,
+              marginTop: 8,
+              fontWeight: "bold",
+            }}
+          >
+            Average{" "}
+            {
+              review.filter(
+                (data) => data.star_rating >= "2" && data.star_rating < "3"
+              ).length
+            }
+          </span>
+        </p>
+        <p>
+          <span
+            style={{
+              margin: 3,
+              fontSize: 15,
+              marginTop: 8,
+              fontWeight: "bold",
+            }}
+          >
+            Poor{" "}
+            {
+              review.filter(
+                (data) => data.star_rating >= "1" && data.star_rating < "2"
+              ).length
+            }
+          </span>
+        </p>
+        <p>
+          <span
+            style={{
+              margin: 3,
+              fontSize: 15,
+              marginTop: 8,
+              fontWeight: "bold",
+            }}
+          >
+            Terrible {review.filter((data) => data.star_rating === "").length}
+          </span>
+        </p>
+        <div>
+          {review
+            .filter((data) => data.star_rating === "4.5")
+            .map((data) => {
+              return (
+                <img src={data.image[0]} alt="hell" width="200" height="200" />
+              );
+            })}
+        </div>
+      </Container>
+
       <Footer />
       <RettingModal show={modalReviewShow} handleClose={handleReviewClose} />
-      <EnquireModal show={enquireModal} packages={packages} handleClose={handEnquireClose} />
+      <EnquireModal
+        show={enquireModal}
+        packages={packages}
+        handleClose={handEnquireClose}
+      />
     </>
   );
 };
