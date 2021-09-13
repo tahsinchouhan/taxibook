@@ -1,27 +1,206 @@
 .saly_div {
   /* background-color: yellow; */
   /* max-height: 109vh; */
+  padding-inline: 7.5vw;
+  padding-block-start: 80px;
+  /* gap: 1rem; */
 }
+
+.video_div,
+.start_quiz,
+.on_quiz {
+  /* width: 650px; */
+  height: 390px;
+  border-radius: 10px;
+}
+
+.start_quiz,
+.quiz_div {
+  position: relative;
+  height: 390px;
+}
+
+.start_quiz {
+  background-color: #69BEED;
+  color: #fff;
+  padding: 48px 58px;
+}
+
+.on_quiz {
+  background-color: #F8F8F8;
+  padding: 39px 29px 23px 53px;
+}
+
+.quiz_title {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 49px;
+}
+
+.quiz_title span {
+  display: block;
+}
+
+.start_quiz p {
+  font-size: 16px;
+  line-height: 18.75px;
+  padding-inline-end: 5vw;
+}
+
+.quiz_content_header {
+  margin-block-start: 22px;
+}
+
+.quiz_start_btn {
+  position: absolute;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+  float: right;
+  right: 32px;
+  bottom: 30px;
+  cursor: pointer;
+}
+
+.quiz_div img {
+  width: 444px;
+  height: 233px;
+  border-radius: 10px;
+}
+
+.quiz_question {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+  padding-block-start: 22px;
+}
+
+.quiz_answer {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  position: relative;
+}
+
+.quiz_yes_btn {
+  background: #1CBD40;
+  border-color: #1CBD40;
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  padding: 0.7em 0.45em;
+  width: 100px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.quiz_no_btn {
+  background: #FF814A;
+  border-color: #FF814A;
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  padding: 0.7em 0.45em;
+  width: 100px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.quiz_skip_btn {
+  position: absolute;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 500;
+  float: right;
+  right: 29px;
+  bottom: 0px;
+  cursor: pointer;
+}
+
+.personality_div{
+  /* display: none; */
+  clip-path: polygon(0 0, 100% 0%, 100% 0, 0 0);
+  transition: all 0.75s ease-in-out;
+  height: 0;
+}
+
+.personality_div.show{
+  display: block;
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+  height: initial;
+
+}
+
+.type_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.type_card {}
+
+.type_percent {
+  /* background-color: #FB7373; */
+  width: 81.6px;
+  height: 80.4px;
+  border-radius: 10px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+}
+
+.type_type {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  padding-block: 10px;
+  text-transform: capitalize;
+}
+
+.type_link {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #A5A5A5;
+  text-transform: capitalize;
+  text-decoration: none;
+  display: block;
+
+}
+
 .rocket-image {
   width: 100%;
   /* height: 320px; */
   margin-top: 20px;
 }
+
 .explore_div {
   /* text-align: center; */
   font-weight: bold;
   /* font-size: 10px; */
 }
+
 @media screen and (max-width: 700px) {
   .rocket-image {
     width: 100% !important;
     /* margin-top: 40px; */
     /* height: 40px; */
   }
+
   .explore_div {
     text-align: center;
     font-weight: bold;
   }
+
   .ticket-div {
     text-align: center;
   }
@@ -33,65 +212,73 @@
   cursor: pointer;
   margin: 0 10px;
 }
-.travel_card{
-  margin:0 5px;
+
+.travel_card {
+  margin: 0 5px;
 }
+
 .saly-para {
   padding-top: 10px;
   font-size: 12px;
   text-align: center;
   font-weight: 600;
 }
+
 .viewbtn {
   /* margin-left: 10px; */
   text-align: center;
 }
+
 .men-image {
   position: absolute;
-  left: -20.69%; 
+  left: -20.69%;
   top: -83.83%;
   bottom: -65.48%;
-  
+
 }
+
 .makebooking-btn {
   /* font-size: 16px; */
   background-color: #0FA453;
   color: white;
   width: 250px;
   height: 52px;
-  border: 2px solid #0FA453 !important; 
+  border: 2px solid #0FA453 !important;
   border-radius: 10px;
 }
+
 .ticket-div h3 h4 {
   position: absolute;
   font-style: normal;
   font-weight: bold;
   font-weight: 600;
 }
+
 @media screen and (max-width: 700px) {
   .explore_div {
     text-align: center;
   }
-  .explore{
+
+  .explore {
     text-align: center;
     justify-content: center;
-}
+  }
 }
 
 .homepage-heading h1 {
-    font-family: 'Inter', sans-serif;
-    font-weight: bold;
-    font-size: 39px;
-    line-height: 47px;
-    text-align: center;
-    color: #000000;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 39px;
+  line-height: 47px;
+  text-align: center;
+  color: #000000;
 }
 
 .homepage-heading p {
   font-family: 'Inter', sans-serif;
-  
+
   font-size: 16px;
-  line-height: 19px;  
+  line-height: 19px;
   text-align: center;
   color: #000000;
 }

@@ -51,6 +51,7 @@ function DmPass({ DmPassDetails }) {
   useEffect(() => {
     console.log("dmData", dmData);
   }, [startDate, endDate])
+
   const data = [
     {
       "Vehicle": vehicle,
@@ -58,6 +59,7 @@ function DmPass({ DmPassDetails }) {
       "Travellers": travellers,
     }
   ]
+
   const onDmTicketShow = () => {
       DmPassDetails({ data })
       history.push('/travelticket')
@@ -71,8 +73,8 @@ function DmPass({ DmPassDetails }) {
     >
       {value}
     </button>
-
   ))
+
   return (
     <>
       <div>
@@ -216,7 +218,6 @@ function DmPass({ DmPassDetails }) {
         </div>
       </div>
 
-
       {/*mobile-view*/}
       <div fluid className="d-md-none">
         <div className="select_div">
@@ -274,16 +275,11 @@ function DmPass({ DmPassDetails }) {
                 </Form.Group>
               </Col>
               <Col xs={12} md={4} className="mt-2">
-                <Form.Group
-                  className=""
-                  controlId="exampleForm.ControlInput1"
-                >
-                 
+                <Form.Group className=""  controlId="exampleForm.ControlInput1" >
                   <Row>
                     <Col xs={6} md={4}>
                       <div>
                         <Form.Label className="dm-ticket">Start Date</Form.Label><br/>
-
                         <img
                           className="location-userdatas-calendar"
                           src={calendar}
@@ -316,7 +312,6 @@ function DmPass({ DmPassDetails }) {
                       </div>
                     </Col>
                   </Row>
-
                 </Form.Group>
               </Col>
             </Row>

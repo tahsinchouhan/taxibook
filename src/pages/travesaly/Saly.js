@@ -14,7 +14,7 @@ import Layer12 from "../../assets/img/adivash.svg";
 import doodle1 from "../../assets/img/doodle.png";
 import "../../assets/css/saly.css";
 import Inform from "./Footer";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import TravellerCard from "./TravellerCard";
 import TravellerTicket from "./TravellerTicket";
 import TravellerTicketMobile from "./TravellerTicketMobile";
@@ -212,6 +212,65 @@ function Saly() {
   const bookTickets = () => {
     history.push('/select-booking')
   }
+
+  const [quizStarted, setQuizStarted] = useState(false)
+  const [quizEnded, setQuizEnded] = useState(false)
+  const [questions, setQuestions] = useState([
+    {
+      gif: "./assets/img/waterfall.gif",
+      question: "Do waterfall fascinate you?",
+      type: "adventure",
+      is_true: false,
+      is_current: true,
+    },
+    {
+      gif: "./assets/img/waterfall.gif",
+      question: "Do Culture fascinate you?",
+      type: "adventure",
+      is_true: false,
+      is_current: false,
+    }
+  ])
+
+  const [percentages, setPercentages] = useState([
+    {
+      type: "leisure",
+      percentages: 0,
+      color: "#FB7373"
+    },
+    {
+      type: "adventure",
+      percentages: 0,
+      color: "#FB7373"
+    },
+    {
+      type: "religious",
+      percentages: 0,
+      color: "#FB7373"
+    },
+    {
+      type: "culture",
+      percentages: 0,
+      color: "#FB7373"
+    },
+  ])
+
+  const onAnswer = (i, value) => {
+    console.log("object", i, value)
+    let newQ = [...questions]
+    newQ[i] = { ...newQ[i], is_true: value, is_current: false }
+    if (i + 1 !== newQ.length) {
+      newQ[i + 1] = { ...newQ[i + 1], is_current: true }
+    } else {
+      setQuizEnded(true)
+    }
+    console.log(newQ)
+    newQ.map((item) => {
+
+    })
+    setQuestions(newQ)
+  }
+
   return (
     <>
       <Container
@@ -219,8 +278,32 @@ function Saly() {
         className="d-none d-md-block"
         style={{ padding: 0, margin: 0 }}
       >
-        <Row className="saly_div w-100  m-0 ">
-          <Col xs={12} md={6}>
+        {
+          quizEnded
+            ?
+            null
+            :
+            <Row className="saly_div w-100  m-0 ">
+              <Col xs={12} md={6}>
+                <div>
+                  {/* <div style={{ paddingTop: "8%" }}> */}
+
+                  <div className="video_div">
+                    <iframe
+                      style={{ borderRadius: "10px" }}
+                      // className="search_view"
+                      width="100%"
+                      height="100%"
+                      src="https://www.youtube.com/embed/V_JZZ1glvkA"
+                      title="YouTube video player"
+                      frameborder="0"
+                      // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                </div>
+              </Col>
+              {/* <Col xs={12} md={6}>
             <div className="rocket-image"
               style={{
                 position: "absolute",
@@ -231,30 +314,65 @@ function Saly() {
               }}>
               <img src={Salyimg} alt="saly" style={{ width: "100%" }} />
             </div>
-          </Col>
-          <Col xs={12} md={6}>
-            <div style={{ paddingTop: "8%" }}>
+          </Col> */}
 
-              <div style={{ width: "650px", height: "389.85px" }}>
-                <iframe
-                  style={{ borderRadius: "10px" }}
-                  // className="search_view"
-                  width="100%"
-                  height="100%"
-                  src="https://www.youtube.com/embed/V_JZZ1glvkA"
-                  title="YouTube video player"
-                  frameborder="0"
-                  // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
-                ></iframe>
-              </div>
+              <Col xs={12} md={6} className="quiz_div">
+                {
+                  (quizStarted)
+                    ?
+                    questions.map((item, i) => {
+                      if (item.is_current) {
+                        return <div className="on_quiz" >
+                          <div className="quiz_gif">
+                            <img src={item.gif} />
+                          </div>
+                          <p className="quiz_question">{item.question}</p>
+                          <div className="quiz_answer">
+                            <button className="btn quiz_yes_btn" onClick={() => onAnswer(i, true)}>Yes </button>
+                            <button className="btn quiz_no_btn" onClick={() => onAnswer(i, false)}>No </button>
+                            <div className="quiz_skip_btn" onClick={() => setQuizStarted(true)}>SKIP QUIZ > </div>
+                          </div>
+                        </div>
+                      }
+                    })
+                    :
+                    <div className="start_quiz" >
+                      <div className="quiz_title">Welcome <span>Traveller,</span> </div>
+                      <p className="quiz_content_header">Want to know what kind of traveller you are?</p>
+                      <p >  Take the quiz to get your travel personality and have curated experiences suggested to you.</p>
+                      <div className="quiz_start_btn" onClick={() => setQuizStarted(true)}>START THE QUIZ > </div>
+                    </div>
+                }
 
+              </Col>
+            </Row>
 
-            </div>
-          </Col>
-        </Row>
+        }
 
-        <div style={{ paddingTop: "7%" }} >
+        <div style={{ paddingTop: "4%" }} className={`personality_div ${quizStarted ? "show" : ""}`} >
+          <div className="homepage-heading">
+            <h1>Your Travel Personality</h1>
+            <p>Wow! You are an avid traveller! Here’s what your personality looks like. </p>
+          </div>
+          <Container className="type_container">
+            {
+              percentages.map((item, key) => (
+                <div key={key} className="type_card">
+                  <div className="type_percent" style={{ backgroundColor: item.color }}>
+                    {item.percentages}%
+                  </div>
+                  <div className="type_type">
+                    {item.type}
+                  </div>
+                  <Link to={`/explore?${item.type}`} className="type_link">
+                    Explore >
+                  </Link >
+                </div>
+              ))
+            }
+          </Container>
+        </div>
+        <div style={{ paddingTop: "4%" }} >
           <div className="homepage-heading">
             <h1>Explore Bastar</h1>
             <p>Check out the best tourism destinations around Bastar</p>
@@ -314,7 +432,6 @@ function Saly() {
             </div>
           </Container>
         </div>
-
 
         <div style={{ backgroundColor: "black", color: "white", height: "289px", marginTop: "81px" }} >
           <Row style={{ flexDirection: "row", marginRight: "0px" }}>
@@ -790,7 +907,6 @@ function Saly() {
               >
                 {packages.length > 0
                   ? packages.map((item, key) => {
-                    console.log("items:::::::", item);
                     return (
                       <div
                         key={key}

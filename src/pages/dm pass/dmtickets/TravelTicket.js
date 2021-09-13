@@ -139,6 +139,7 @@ function TravelTicket({ Seleted_Values }) {
       {value}
     </button>
   ))
+
   const handleDate = (d) => {
     let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
     let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
@@ -146,7 +147,6 @@ function TravelTicket({ Seleted_Values }) {
     console.log(`${ye}-${mo}-${da}`);
     //dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
     setStartDate(d)
-
   }
 
   const handleDateTwo = (d) => {
@@ -165,8 +165,8 @@ function TravelTicket({ Seleted_Values }) {
   const editDetails = () => {
     console.log("dbdbbdbbb");
     history.push("/dmticket")
-
   }
+
   return (
     <>
       <Header />
@@ -340,7 +340,6 @@ function TravelTicket({ Seleted_Values }) {
         <Container style={{ marginLeft: "32%" }}>
           <Row>
             <AvForm onValidSubmit={onDmByeClick}>
-
               {
                 (vehicles?.length > 0)
                   ?
@@ -373,7 +372,6 @@ function TravelTicket({ Seleted_Values }) {
                                   <label className="mb-1" for={`vehicle_number${i}`}>
                                     Vehicle Number
                                   </label>
-
                                   <AvField
                                     type="text"
                                     className="form-control pass_input"
@@ -393,9 +391,8 @@ function TravelTicket({ Seleted_Values }) {
 
                                     }}
                                   />
-
-
                                 </div>
+
                                 <div className="form-group pt-3">
                                   <label className="mb-1" for={`name${i}`}>
                                     Driver Name
@@ -420,6 +417,7 @@ function TravelTicket({ Seleted_Values }) {
                                     }}
                                   />
                                 </div>
+
                                 <div className="form-group pt-3">
                                   <label className="mb-1" for={`name${i}`}>
                                     Driver License Number (Optional)
@@ -482,9 +480,10 @@ function TravelTicket({ Seleted_Values }) {
                 </div> */}
                     </div>
                   </Col>
-                  : null
-
+                  : 
+                  null
               }
+
               <Col xs={12} md={6}>
                 <div style={{ width: "50%" }}>
                   <label
@@ -496,7 +495,6 @@ function TravelTicket({ Seleted_Values }) {
                   >
                     Travellers Details
                   </label>
-
                   <div
                     className="traveller_div"
                     style={{ marginTop: "1rem", justifyContent: "flex-start" }}
@@ -631,7 +629,7 @@ function TravelTicket({ Seleted_Values }) {
                                       value: "(?=.{12})",
                                       errorMessage: "Enter 12 digit Adhaar Card Number"
                                     },
-                                    
+
                                   }}
                                 />
                               </div>
@@ -670,7 +668,6 @@ function TravelTicket({ Seleted_Values }) {
                         </Paper>
                       )
                     })}
-
 
                     <div style={{ marginTop: "10rem", textAlign: "center", marginLeft: "52%" }}>
                       <Button
@@ -735,6 +732,7 @@ function TravelTicket({ Seleted_Values }) {
             </div>
           </div>
         </Container>
+        
         <Container style={{ width: "", marginBottom: "40px" }}>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <div style={{ width: "" }}>
@@ -1145,7 +1143,7 @@ function TravelTicket({ Seleted_Values }) {
                                     value: "(?=.{12})",
                                     errorMessage: "Enter 12 digit Adhaar Card Number"
                                   },
-                                  
+
                                 }}
                               />
 
@@ -1197,10 +1195,10 @@ function TravelTicket({ Seleted_Values }) {
                       border: "none",
                       fontWeight: "600",
                       height: "86px",
-                      position:"fixed",
-                      width:"100%",
-                      bottom:"0",
-                      left:"0"
+                      position: "fixed",
+                      width: "100%",
+                      bottom: "0",
+                      left: "0"
                     }}
                   // onClick={onDmByeClick}
                   >
@@ -1211,7 +1209,6 @@ function TravelTicket({ Seleted_Values }) {
             </div>
           </div>
         </Container>
-
       </div>
 
     </>
