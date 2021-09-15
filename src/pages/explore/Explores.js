@@ -4,7 +4,7 @@ import { BsSearch } from "react-icons/bs";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import bg from "../../assets/img/bg_12.jpg";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Heritage from "../../assets/img/Heritage.jpg";
 import Adventure from "../../assets/img/Adventure.jpg";
 import { API_PATH } from "../../Path/Path";
@@ -19,6 +19,7 @@ Geocode.setLocationType("ROOFTOP");
 Geocode.enableDebug();
 
 const Explores = () => {
+  const { id } = useParams();
   const history = useHistory();
   const [destinations, setDestinations] = useState([]);
   const [packages, setPackages] = useState([]);
@@ -95,7 +96,7 @@ const Explores = () => {
 
 
   const getPackages = () => {
-
+    console.log("object", id)
     fetch(API_PATH + "/api/v1/packages/location", {
       method: "POST",
       headers: {
@@ -109,7 +110,6 @@ const Explores = () => {
       .then((response) => response.json())
       .then((json) => {
         if (json.data !== undefined) {
-          console.log("json.data", json.data)
           setPackages(json.data);
         }
       })
@@ -206,13 +206,12 @@ const Explores = () => {
         {packages.length > 0 ? (
           <Carousel
             ssr
-            partialVisbile
+            partialVisible
             itemClass="image-item"
             responsive={responsive}
           >
             {packages.length > 0
               ? packages.map((item, key) => {
-                console.log("items:::::::", item);
                 return (
                   <div
                     key={key}
@@ -301,7 +300,7 @@ const Explores = () => {
           {destinations.length > 0 ? (
             <Carousel
               ssr
-              partialVisbile
+              partialVisible
               itemClass="image-item"
               responsive={responsive}
             >

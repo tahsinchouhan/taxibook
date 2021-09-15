@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import Header from "../components/Header";
 import Footer from "../pages/travesaly/Footer";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import '../assets/css/footer.css'
 
 const Operators = () => {
   const history = useHistory();
@@ -10,7 +11,7 @@ const Operators = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const goToVendorReg =()=>{
+  const goToVendorReg = () => {
     history.push("/add-form")
   }
   return (
@@ -43,13 +44,49 @@ const Operators = () => {
                 details along with photos
               </p>
               <Link
-                    // to="/add-form"
-                    // target="_blank"
-                    // className="link"
-                    onClick={()=>goToVendorReg()}
-                  >
-                    <a  style={{ textDecoration: "none" }} className="footer__item-title">Registration Link</a>
+                to="#"
+              // target="_blank"
+              // className="link"
+              onClick={()=>goToVendorReg()}
+              >
+                <a style={{ textDecoration: "none" }} className="footer__item-title">Registration Link</a>
               </Link>
+              <div className="linkContainer">
+
+              <Link
+                  to="/add-hotel"
+                  // target="_blank"
+                  className="linkBox"
+                >
+                  <div className="linkBox_top">Register As</div>
+                  <div className="linkBox_bottom">Hotel Owner</div>
+                </Link>
+                <Link
+                  to="/add-form"
+                  // target="_blank"
+                  className="linkBox"
+                >
+                  <div className="linkBox_top">Register As</div>
+                  <div className="linkBox_bottom">Taxi Owner</div>
+                </Link>
+                <Link
+                  to="/add-form"
+                  // target="_blank"
+                  className="linkBox"
+                >
+                  <div className="linkBox_top">Register As</div>
+                  <div className="linkBox_bottom">Influencer</div>
+                </Link>
+                <Link
+                  to="/add-form"
+                  // target="_blank"
+                  className="linkBox"
+                >
+                  <div className="linkBox_top">Register As</div>
+                  <div className="linkBox_bottom">Tour/Travel Agent</div>
+                </Link>
+
+              </div>
             </div>
           </Container>
           <br />
@@ -102,13 +139,13 @@ const Operators = () => {
                 </ul>
               </div>
               <Link
-                  to="/add-form"
-                  target="_blank"
-                  className="link"
-                >
-                  <a  style={{ textDecoration: "none" }} className="footer__item-title">Registration Link</a>
-            </Link>
-            </div>  
+                to="/add-form"
+                target="_blank"
+                className="link"
+              >
+                <a style={{ textDecoration: "none" }} className="footer__item-title">Registration Link</a>
+              </Link>
+            </div>
           </Container>
         </div>
       </Container>

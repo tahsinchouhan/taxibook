@@ -584,7 +584,7 @@ body {
 .react-multi-carousel-item > div {
   cursor: pointer !important;
 }
-.react-multi-carousel-item.home > div > img{
+.react-multi-carousel-item.home > div  img{
   max-width: 290px !important;
   height: 281px !important;
   object-fit: cover;
@@ -597,7 +597,41 @@ body {
   border-radius: 10px ;
   cursor: pointer !important;
 }
+.react-multi-carousel-item.top > div  img{
+  max-width: 192px !important;
+  height: 186px !important;
+  object-fit: cover;
+  border-radius: 10px ;
+  cursor: pointer !important;
+}
+.react-multi-carousel-item.category > div {
+  max-width: 243px !important;
+  /* height: 235px !important; */
 
+}
+.react-multi-carousel-item.category > div  img{
+  max-width: 243px !important;
+  height: 235px !important;
+  object-fit: cover;
+  border-radius: 10px ;
+  cursor: pointer !important;
+}
+
+@media screen and (max-width: 767px) {
+  .react-multi-carousel-item.top > div  img{
+    max-width: 150px !important;
+    height: 150px !important;
+  }
+  .react-multi-carousel-item.category > div {
+    max-width: 150px !important;
+  }
+  .react-multi-carousel-item.category > div  img{
+    max-width: 150px !important;
+    height: 150px !important;
+  }
+  
+
+}
 /* Modal Input Style */
 .login-logo{
   height: 280px;
@@ -794,7 +828,7 @@ body {
 	flex: 1 1 auto;
 	display: flex;
 	flex-direction: column-reverse;
-	align-items: end;
+	align-items: flex-end;
 }
 
 .app .messages .messages-history .message {
@@ -869,6 +903,10 @@ body {
 /* Crosoul Arrow */
 .react-multiple-carousel__arrow--right, .react-multiple-carousel__arrow--left {
   top: 30% !important;
+}
+
+.nearest_div .react-multiple-carousel__arrow--right,.nearest_div  .react-multiple-carousel__arrow--left {
+  top: 43% !important;
 }
 
 

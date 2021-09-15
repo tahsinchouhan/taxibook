@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Col, Form, Row, Image } from "react-bootstrap";
+import { Container, Form, Image } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import Footer from "../pages/travesaly/Footer";
 import Header from "../components/Header";

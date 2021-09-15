@@ -70,7 +70,7 @@ function TravellerTicketMobile() {
 
     return (
         <>
-            {/* <Carousel partialVisbile itemClass="image-item" responsive={responsive}>
+            {/* <Carousel partialVisible itemClass="image-item" responsive={responsive}>
 
         {data.map((item, index) => (
           <div className="p-5 " onClick={() => history.push(item.path)}>

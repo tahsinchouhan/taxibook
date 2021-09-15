@@ -13,10 +13,8 @@ import { HiMenu } from "react-icons/hi";
 // import logo from "../assets/img/logo1.png";
 import logo from "../assets/img/logo.png";
 import { NavLink, useHistory } from "react-router-dom";
-import { FaUser, FaSistrix } from "react-icons/fa";
-import { useDispatch, connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginModal from "../components/modal/LoginModal";
-import Modal from "react-bootstrap";
 import { logout } from "../redux/actions";
 
 function Header() {
@@ -24,7 +22,6 @@ function Header() {
 
   const modalHadler = () => {
     setModalShow(true);
-    console.log("helllo");
   };
   const handleLoginClose = () => {
     setModalShow(false);
@@ -36,10 +33,10 @@ function Header() {
 
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState(false);
-  const [explore, setExpolre] = useState(false);
-  const [booking, setBooking] = useState(false);
+  // const [explore, setExpolre] = useState(false);
+  // const [booking, setBooking] = useState(false);
 
-  const [searching, setSearching] = useState();
+  // const [searching, setSearching] = useState();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -47,7 +44,6 @@ function Header() {
   const history = useHistory();
 
   const onSearchClick = () => {
-    console.log("hiii");
     history.push("/search");
   };
 
@@ -90,11 +86,11 @@ function Header() {
             <HiMenu onClick={handleClose} className="sidebar__toggler" />
             {user_data !== null ? (
               <Offcanvas.Title onClick={() => dispatch(logout())}>
-                Logout
+                LOGOUT
               </Offcanvas.Title>
             ) : (
               <Offcanvas.Title onClick={() => modalHadler()}>
-                Login
+                LOGIN
               </Offcanvas.Title>
             )}
           </Offcanvas.Header>
@@ -103,9 +99,9 @@ function Header() {
               <NavLink to="/" className="sidebar__navlink">
                 HOME
               </NavLink>
-              <NavLink className="sidebar__navlink" to="/explore">
+              {/* <NavLink className="sidebar__navlink" to="/explore">
                 EXPLORE
-              </NavLink>
+              </NavLink> */}
               {/* <NavLink className="sidebar__navlink" to="/select-booking"> */}
               <NavLink className="sidebar__navlink" to="/dmpass">
                 TRAVEL PASS
@@ -153,9 +149,9 @@ function Header() {
                 <NavLink className="sidebar_item" to="/">
                   HOME
                 </NavLink>
-                <NavLink className="sidebar_item" to="/explore">
+                {/* <NavLink className="sidebar_item" to="/explore">
                   EXPLORE
-                </NavLink>
+                </NavLink> */}
 
                 <NavLink className="sidebar_item" to="/dmpass">
                   TRAVEL PASS

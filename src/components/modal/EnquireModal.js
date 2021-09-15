@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Form, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import Message from "../Message";
+import { useDispatch } from "react-redux";
+// import Message from "../Message";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import {getEnquire} from "../../redux/actions";
 
@@ -24,7 +24,7 @@ function EnquireModal({ show, handleClose, packages }) {
       destination_id: packages.destinations,
       type: "",
     };
-    if (!name == "" && !email == "" && !number == "" && !comment == "") {
+    if (!name === "" && !email === "" && !number === "" && !comment === "") {
       dispatch(getEnquire(data))
     }
   };

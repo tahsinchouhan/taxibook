@@ -12,7 +12,7 @@ function Message({msg,type}) {
             draggable: true,
             progress: undefined,
         })
-    }, [])
+    }, [msg,type])
 
     return (
         <div>

@@ -30,7 +30,7 @@
 // }
 
 // export default ButtonComponent
-import React, { useEffect } from 'react'
+import React from 'react'
 // import '../../../assets/css/ReuseableComponents.css'
 
 function ButtonComponent(props)

@@ -25,6 +25,7 @@ import BusCard from './pages/selectbooking/BusCard';
 import CheckoutPage from './pages/selectbooking/CheckoutPage';
 import CongratulationPage from './pages/selectbooking/CongratulationPage';
 import AddForm from './pages/VenderOrgAdd/AddForm';
+import AddHotel from './pages/VenderOrgAdd/AddHotel';
 import RatanCard from './pages/selectbooking/RatanCard';
 import DmTicket2 from './pages/dm pass/dmtickets/DmTicket2';
 import TravelTicket from './pages/dm pass/dmtickets/TravelTicket';
@@ -52,6 +53,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/explore' component={Explores} />
+            <Route exact path='/explore/:id' component={Explores} />
             <Route path="/destination_details/:name" component={DestinationDetails} />
             <Route path="/packages_details/:name" component={PackagesDetails} />
             <Route path="/covidresponse" component={CovidResponse} />
@@ -78,6 +80,7 @@ function App() {
             <Route exact path='/checkoutpage' component={CheckoutPage} />
             <Route exact path='/congratulation-page' component={CongratulationPage} />
             <Route exact path='/add-form' component={AddForm} />
+            <Route exact path='/add-hotel' component={AddHotel} />
             <Route exact path='/CongratulationPage' component={CongratulationPage} />
             <Route exact path='/ratancard' component={RatanCard} />
             <Route exact path='/travelticket' component={TravelTicket} />

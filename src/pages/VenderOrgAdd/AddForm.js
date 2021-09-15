@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button, FormGroup } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { Stepper } from "react-form-stepper";
 import { API_PATH } from "../../Path/Path";
 import { useHistory } from "react-router-dom";
-import { Field, Formik } from "formik";
+import { Formik } from "formik";
 import * as yup from "yup";
-import { FaWhatsapp } from "react-icons/fa";
+// import { FaWhatsapp } from "react-icons/fa";
 import runmen from "../../assets/img/runmen.png";
 import { useSelector } from "react-redux";
-import AvForm from "availity-reactstrap-validation/lib/AvForm";
+// import AvForm from "availity-reactstrap-validation/lib/AvForm";
 
 const schema = yup.object().shape({
   serial: yup.string().required(),
@@ -37,23 +37,24 @@ const orgSchema = yup.object().shape({
   pan_number: yup.string().required(),
   adhaar_number: yup.string().required()
 })
-const validateName = (value) => {
-  let error;
-  if (!value) {
-    error = "Please enter your name";
-  } else if (value.length < 2) {
-    error = "Value must be longer than 2 characters";
-  }
-  return error;
-}
 
-function AddForm() {
+// const validateName = (value) => {
+//   let error;
+//   if (!value) {
+//     error = "Please enter your name";
+//   } else if (value.length < 2) {
+//     error = "Value must be longer than 2 characters";
+//   }
+//   return error;
+// }
+
+function AddHotel() {
   const history = useHistory();
   const [show, setShow] = useState(0);
   const [id, setId] = useState([]);
   const [catg, setCatg] = useState([]);
   const [serviceNm, setServiceNm] = useState([]);
-  const { data: apiData, tripData, booking_id } = useSelector(state => state.busReducer)
+  const { data: apiData, booking_id } = useSelector(state => state.busReducer)
   const goHome = () => {
     history.push("/");
   };
@@ -67,7 +68,7 @@ function AddForm() {
 
   const onsubmitVendor = (values) => {
     console.log("submit vender", values);
-    if (values != "") {
+    if (values !== "") {
       fetch(API_PATH + "/api/v1/vendor/create", {
         method: "POST",
         headers: {
@@ -92,9 +93,10 @@ function AddForm() {
     }
     values = ""
   };
-  const backToVender = () => {
-    setShow(0);
-  };
+  
+  // const backToVender = () => {
+  //   setShow(0);
+  // };
 
   const onSubmitOrg = (values) => {
     console.log("ID", id)
@@ -166,7 +168,7 @@ function AddForm() {
         activeStep={show}
       />
       <div className="container" style={{ width: "70%" }}>
-        {show == 0 ?
+        {show === 0 ?
           <Formik
             validationSchema={schema}
             onSubmit={(values) => onsubmitVendor(values)}
@@ -368,7 +370,7 @@ function AddForm() {
               </Form>
             )}
           </Formik>
-          : show == 1 ?
+          : show === 1 ?
             <>
               <Formik
                 validationSchema={orgSchema}
@@ -376,7 +378,6 @@ function AddForm() {
                 initialValues={{
                   s_no: '',
                   org_name: '',
-                  acc_name: '',
                   address: '',
                   name: '',
                   org_email: '',
@@ -808,5 +809,5 @@ function AddForm() {
   );
 }
 
-export default AddForm;
+export default AddHotel;
 // {show == 0? <h1>rhjrrh</h1> : show ==1 ? <h1>fjnjfn</h1>: <h1></h1>}

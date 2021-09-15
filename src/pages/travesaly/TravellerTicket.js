@@ -87,10 +87,10 @@ function TravellerTicket() {
   ]
   return (
     <>
-      <Carousel partialVisbile itemClass="image-item" responsive={responsive}>
+      <Carousel partialVisible itemClass="image-item" responsive={responsive}>
 
         {data.map((item, index) => (
-          <div className="p-3 text-center" onClick={() => history.push(item.path)}>
+          <div key={item} className="p-3 text-center" onClick={() => history.push(item.path)}>
             <div style={{ display: "flex", width: "100%" }}>
               <Col className="d-flex flex-column justify-content-between align-items-center" style={{minHeight:"114px"}}>
                 <Image style={item.style} src={item.img} />
@@ -101,7 +101,7 @@ function TravellerTicket() {
         ))}
         
       </Carousel>
-      {/* <Carousel partialVisbile itemClass="image-item" responsive={responsive}> */}
+      {/* <Carousel partialVisible itemClass="image-item" responsive={responsive}> */}
       {/* <div >
         <div style={{display:"inline-flex"}}>
            {data.map((item, index) => (

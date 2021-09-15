@@ -231,9 +231,9 @@ function Search() {
                     height="315"
                     src="https://www.youtube.com/embed/s_W9hNCaZak"
                     title="YouTube video player"
-                    frameborder="0"
+                    frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
+                    allowFullScreen
                   ></iframe>
                 </div>
               </Col>
@@ -244,9 +244,9 @@ function Search() {
                     height="315"
                     src="https://www.youtube.com/embed/7_PdY3bPfmM?start=2"
                     title="YouTube video player"
-                    frameborder="0"
+                    frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen
+                    allowFullScreen
                   ></iframe>
                 </div>
               </Col>

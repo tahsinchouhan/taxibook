@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Button, Form, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { NavLink, useHistory } from "react-router-dom";
-import { FaArrowDown, FaArrowLeft } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
+import {  FaArrowLeft } from "react-icons/fa";
 import ButtonComponent from "../../../containers/Button";
 import { Stepper } from "react-form-stepper";
 import DatePicker from "react-datepicker";
@@ -13,33 +13,29 @@ import congo from "../../../assets/img/mobile.png";
 import { FaWhatsapp } from "react-icons/fa";
 import Footer from "../../travesaly/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { Formik, Field } from "formik";
+// import { Formik, Field } from "formik";
 import { ToastContainer } from "react-toastify";
-import * as yup from "yup";
+// import * as yup from "yup";
 
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Checkbox,
-  FormControlLabel,
   Paper,
-  Typography,
 } from "@material-ui/core";
 import {
   createDmPass,
   setDmData,
-  createBusBooking,
 } from "../../../redux/actions";
 import { API_PATH } from "../../../Path/Path";
 import axios from "axios";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 
-const schema = yup.object().shape({
-  name: yup.string().required(),
-  email: yup.string().required(),
-  number: yup.string().required(),
-});
+// const schema = yup.object().shape({
+//   name: yup.string().required(),
+//   email: yup.string().required(),
+//   number: yup.string().required(),
+// });
 const button_Data = [
   {
     name: "Male",
@@ -62,7 +58,7 @@ function SteperDmpass(shows, ...props) {
   const [number, setNumber] = useState("");
 
 
-  const [activeButton, setActiveButton] = useState(button_Data[0].name);
+  // const [activeButton, setActiveButton] = useState(button_Data[0].name);
   // const [data, setData] = useState();
   const history = useHistory();
 
@@ -123,13 +119,11 @@ function SteperDmpass(shows, ...props) {
     setShow(1);
   };
   const onTicketCheckClick = () => {
-    console.log("object");
     axios
       .post(`${API_PATH}/api/v1/entrypass/pay`, {
         amount: tot_charges,
       })
       .then((result) => {
-        console.log("dhshsdh", result);
         setData(result.data);
         setPaymentCustom(true);
       })
@@ -138,17 +132,7 @@ function SteperDmpass(shows, ...props) {
       });
   };
   const onClickBack = () => {
-    console.log("object");
     history.push("./tickets");
-  };
-
-  const onDmByeClick = () => {
-    console.log("object", {
-      ...dmData,
-      basic_details: travellers,
-      vehical_details: vehicles,
-    });
-    history.push("/dm_congratulate");
   };
 
   const initialTravellers = () => {

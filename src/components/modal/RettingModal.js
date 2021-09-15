@@ -48,7 +48,7 @@ function RettingModal({ show, handleClose }) {
       comments: comment,
       image: [imageupload],
     };
-    if (!data.mobile == "" && !data.email == "") {
+    if (!data.mobile === "" && !data.email === "") {
       handleClose();
       dispatch(getReview(data));
       console.log("object", data);

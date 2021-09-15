@@ -59,9 +59,15 @@ export const GET_ENQUIRE = "GET_ENQUIRE";
 export const GET_ENQUIRE_ERROR = "GET_ENQUIRE_ERROR";
 export const GET_ENQUIRE_SUCCESS = "GET_ENQUIRE_SUCCESS";
 
+export const SET_QUIZ_QUESTIONS = "SET_QUIZ_QUESTIONS";
+export const SET_QUIZ_RESULT = "SET_QUIZ_RESULT";
+export const SET_QUIZ_STARTED = "SET_QUIZ_STARTED";
+export const SET_QUIZ_ENDED = "SET_QUIZ_ENDED";
+
 export * from "./common/actions";
 export * from "./auth/actions";
 export * from "./bus/actions";
 export * from "./login/actions";
 export * from "./dmpass/actions";
 export * from "./explore/actions";
+export * from "./quiz/actions";

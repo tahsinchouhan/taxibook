@@ -13,7 +13,6 @@ const INIT_STATE = {
 };
 
 const exploreReducer = (state = INIT_STATE, action) => {
-  console.log("DATATDTDA:::::::", action);
   switch (action.type) {
     case GET_REVIEW:
       return { ...state };

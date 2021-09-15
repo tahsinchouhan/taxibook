@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Row, Col, Form, Container, Card } from "react-bootstrap";
-import { Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import covid from "../../assets/img/covid-19.png";
 import map from "../../assets/img/Map.svg";
 import images from "../../assets/img/image 1.svg";
@@ -9,7 +9,7 @@ import logo from "../../assets/img/logo.png";
 
 function Footer() {
   const history = useHistory();
-  const goForRegistration = ()=>{
+  const goForRegistration = () => {
     history.push("/registrationguide")
   }
   return (
@@ -42,14 +42,15 @@ function Footer() {
             <Col sm={4} md={4}>
               <div className="footer__block">
                 <div className="footer__item">
-                  <Link to="/add-form" className="link">
+                  <Link to="/registrationguide" className="link">
                     <h6 className="footer__item-subtitle">Vendor & Organization Registration</h6>
                   </Link>
                 </div>
                 <div className="footer__item">
-                  <Link                   
+                  <Link
+                    to="#"
                     className="link"
-                    onClick={() =>goForRegistration()}
+                    onClick={() => goForRegistration()}
                   >
                     <h5 className="footer__item-title">Registration Form</h5>
                   </Link>
@@ -63,11 +64,11 @@ function Footer() {
                 </div>
               </div>
             </Col>
-            
+
             <Col sm={4} md={4}>
               <div className="footer__logo">
                 <div className={`header__logo`}>
-                  <img src={logo} id="logo" style={{height: 200, width: 200}} />
+                  <img src={logo} id="logo" style={{ height: 200, width: 200 }} />
                 </div>
               </div>
             </Col>

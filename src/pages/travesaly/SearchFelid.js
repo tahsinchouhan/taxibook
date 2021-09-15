@@ -9,18 +9,18 @@ const data = [
   {
     // src="https://www.youtube.com/embed/s_W9hNCaZak",
     // title="YouTube video player",
-    // frameborder="0",
+    // frameBorder="0",
     // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
-    // allowfullscreen
+    // allowFullScreen
   },
   {
     // width="100%",
     // height="100%",
     // src="https://www.youtube.com/embed/7_PdY3bPfmM?start=2",
     //  title="YouTube video player",
-    // frameborder="0",
+    // frameBorder="0",
     // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
-    // allowfullscreen
+    // allowFullScreen
   },
 ];
 
@@ -65,9 +65,9 @@ function SearchFelid() {
                src="https://www.youtube.com/embed/V_JZZ1glvkA"
               // src={`${youtube_url}`}
               title="YouTube video player"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen
             ></iframe>           
           </div>         
         {/* </Carousel> */}

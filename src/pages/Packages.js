@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Form, Row, Image } from "react-bootstrap";
+import { Container, Form, Image } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import Footer from "../pages/travesaly/Footer";
 import Header from "../components/Header";
@@ -18,7 +18,7 @@ function Packages() {
   const [packages, setPackages] = useState([]);
   const [location, setLoation] = useState([]);
   const [selected, setSelected] = useState("");
-  const [highToLow, sethighToLow] = useState([]);
+  // const [highToLow, sethighToLow] = useState([]);
 
   useEffect(() => {
     getCurrentLocation();

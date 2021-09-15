@@ -1,0 +1,31 @@
+.linkContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin-block-start: 1em;
+}
+.linkBox{
+    border: 1px solid #000;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 1em;
+    width: clamp(150px,200px,500px);
+    text-align: center;
+    color: #000;
+}
+.linkBox:hover,
+.linkBox:focus{
+    color: #000;
+    transform: scale(1.01);
+    outline: none;
+
+}
+
+.linkBox_top{
+    font-size: 14px;
+}
+
+.linkBox_bottom{
+    font-size: 16px;
+    font-weight: bold;
+}

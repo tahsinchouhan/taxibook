@@ -5,6 +5,7 @@ import busReducer from "./bus/reducer";
 import dmpassReducer from "./dmpass/reducer";
 import loginReducer from "./login/reducer";
 import exploreReducer from "./explore/reducer";
+import quizReducer from "./quiz/reducer";
 
 const reducers = combineReducers({
   commonReducer,
@@ -13,5 +14,6 @@ const reducers = combineReducers({
   loginReducer,
   dmpassReducer,
   exploreReducer,
+  quizReducer,
 });
 export default reducers;

@@ -196,7 +196,7 @@ const DestinationDetails = (props) => {
 
 
           <Carousel
-            partialVisbile
+            partialVisible
             itemClass="image-item"
             responsive={responsive}
           >
