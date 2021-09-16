@@ -62,7 +62,7 @@ const Operators = () => {
                   <div className="linkBox_bottom">Hotel Owner</div>
                 </Link>
                 <Link
-                  to="/add-form"
+                  to="/add-taxi"
                   // target="_blank"
                   className="linkBox"
                 >
@@ -70,7 +70,7 @@ const Operators = () => {
                   <div className="linkBox_bottom">Taxi Owner</div>
                 </Link>
                 <Link
-                  to="/add-form"
+                  to="/add-influencer"
                   // target="_blank"
                   className="linkBox"
                 >
@@ -78,7 +78,7 @@ const Operators = () => {
                   <div className="linkBox_bottom">Influencer</div>
                 </Link>
                 <Link
-                  to="/add-form"
+                  to="/add-travel-agent"
                   // target="_blank"
                   className="linkBox"
                 >

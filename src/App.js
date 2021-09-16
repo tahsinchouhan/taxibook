@@ -43,6 +43,9 @@ import TravellerTicket from './pages/travesaly/TravellerTicket';
 // import DmTicket from './pages/dm pass/dmtickets/DmTicket';
 
 import BusTicketDetail from './pages/selectbooking/BusTicketDetail'
+import AddTaxi from './pages/VenderOrgAdd/AddTaxi';
+import AddTravelAgent from './pages/VenderOrgAdd/AddTravelAgent';
+import AddInfluencer from './pages/VenderOrgAdd/AddInfluencer';
 
 function App() {
 
@@ -81,6 +84,9 @@ function App() {
             <Route exact path='/congratulation-page' component={CongratulationPage} />
             <Route exact path='/add-form' component={AddForm} />
             <Route exact path='/add-hotel' component={AddHotel} />
+            <Route exact path='/add-taxi' component={AddTaxi} />
+            <Route exact path='/add-travel-agent' component={AddTravelAgent} />
+            <Route exact path='/add-influencer' component={AddInfluencer} />
             <Route exact path='/CongratulationPage' component={CongratulationPage} />
             <Route exact path='/ratancard' component={RatanCard} />
             <Route exact path='/travelticket' component={TravelTicket} />

@@ -17,16 +17,18 @@ const config = {
     secretAccessKey: "MqdgaaWlDccgDeXjeDiuw9mSfRdSkp47l2458261",
 };
 
-function AddHotel() {
+function AddTravelAgent() {
     const schema = yup.object().shape({
         name: yup.string().required("Name is required"),
         designation: yup.string().required("Designation is required"),
         phone: yup.string().required("Phone Number is required"),
         email: yup.string().required("Email is required"),
-        hotel_name: yup.string().required("Hotel Name is required"),
+        agency_name: yup.string().required("Agency Name is required"),
         address: yup.string().required("Address is required"),
         city: yup.string().required("City is required"),
-        gst_upload: yup.mixed().required("GST File is required"),
+        category: yup.string().required("Category is required"),
+        sub_category: yup.string().required("Sub Category is required"),
+        document: yup.mixed().required("Document File is required"),
         // .test("FILE_SIZE", "Uploaded file is too big.", 
         //     value => { console.log("val",value.size); return !value || (value && value.size <= 1000000)} )
         // .test("FILE_FORMAT", "Uploaded file has unsupported format.", 
@@ -70,16 +72,16 @@ function AddHotel() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ ...values, gst_upload: upload }),
+                body: JSON.stringify({ ...values, document: upload }),
             })
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log("Vendor Register successFully", res,{ ...values, gst_upload: upload });
+                    console.log("Vendor Register successFully", res,{ ...values, document: upload });
                     if (res.status === "CREATED") {
-                        setMessage(res.message)
+                        setMessage('added')
                     } else {
                         console.log("Error:::::::",res);
-                        setError(res.message)
+                        setError('Something Went Wrong')
                     }
                     setLoading(false);
                 })
@@ -103,7 +105,7 @@ function AddHotel() {
             {error ? <Message msg={error} type="error" /> : null}
             <div className="container" style={{ width: "70%" }}>
               <h4 className="block__title">
-                <span>Registration</span> Form For Hotel Owner
+                <span>Registration</span> Form For Travel Agent
               </h4>
                 <Formik
                     validationSchema={schema}
@@ -113,10 +115,12 @@ function AddHotel() {
                         designation: '',
                         phone: '',
                         email: '',
-                        hotel_name: '',
+                        agency_name: '',
                         address: '',
                         city: '',
-                        gst_upload: '',
+                        category: '',
+                        sub_category: '',
+                        document: '',
                     }}
                 >
                     {({
@@ -228,6 +232,7 @@ function AddHotel() {
                                         <Form.Control
                                             type="password"
                                             name="password"
+                                            title="Password"
                                             placeholder="Password"
                                             value={values.password}
                                             onChange={handleChange}
@@ -261,24 +266,25 @@ function AddHotel() {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
-                                <Col xs={12} md={6}>
+
+                                < Col xs={12} md={6}>
                                     <Form.Group
                                         md="4"
                                         controlId="validationFormik102"
                                         className="position-relative mb-3"
                                     >
-                                        <Form.Label>Hotel Name</Form.Label>
+                                        <Form.Label>Agency Name</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            name="hotel_name"
-                                            placeholder="Hotel Name"
-                                            value={values.hotel_name}
+                                            name="agency_name"
+                                            placeholder="Agency Name"
+                                            value={values.agency_name}
                                             onChange={handleChange}
-                                            isInvalid={!!errors.hotel_name}
+                                            isInvalid={!!errors.agency_name}
                                         />
 
                                         <Form.Control.Feedback type="invalid" tooltip>
-                                            {errors.hotel_name}
+                                            {errors.agency_name}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
@@ -289,7 +295,7 @@ function AddHotel() {
                                         controlId="validationFormik102"
                                         className="position-relative mb-3"
                                     >
-                                        <Form.Label>Hotel Address</Form.Label>
+                                        <Form.Label>Address</Form.Label>
                                         <Form.Control
                                             type="text"
                                             name="address"
@@ -305,7 +311,7 @@ function AddHotel() {
                                     </Form.Group>
                                 </Col>
 
-                                < Col xs={12} md={6}>
+                                <Col xs={12} md={6}>
                                     <Form.Group
                                         md="4"
                                         controlId="validationFormik102"
@@ -324,7 +330,57 @@ function AddHotel() {
                                             {errors.city}
                                         </Form.Control.Feedback>
                                     </Form.Group>
+                                </Col>
+                                
+                                <Col xs={12} md={6}>
+                                    <Form.Group
 
+                                        md="3"
+                                        controlId="validationFormik104"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>Category</Form.Label>
+                                        <Form.Select
+                                            placeholder="Category"
+                                            name="category"
+                                            value={values.category}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.category}
+                                        >
+                                            <option value="">Select</option>
+                                            <option value="leisure">Leisure</option>
+                                            <option value="adventure">Adventure</option>
+                                            <option value="religious">Religious</option>
+                                            <option value="culture">Culture</option>
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.category}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+
+                                <Col xs={12} md={6}>
+                                    <Form.Group
+                                        md="3"
+                                        controlId="validationFormik104"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>Sub Category</Form.Label>
+                                        <Form.Select
+                                            placeholder="Sub Category"
+                                            name="sub_category"
+                                            value={values.sub_category}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.sub_category}
+                                        >
+                                            <option value="">Select</option>
+                                            <option value="sightseeing">Sightseeing</option>
+                                            <option value="trekking">Trekking</option>
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.sub_category}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
                                 </Col>
                                 < Col xs={12} md={6}>
                                     <Form.Group
@@ -332,20 +388,19 @@ function AddHotel() {
                                         controlId="validationFormik105"
                                         className="position-relative mb-3"
                                     >
-                                        <Form.Label>Upload GST (PDF Format)</Form.Label>
+                                        <Form.Label>Upload Document</Form.Label>
                                         <Form.Control
                                             type="file"
-                                            placeholder="Please Upload GST"
-                                            name="gst_upload"
-                                            // value={values.gst_upload}
+                                            placeholder="Please Upload Document"
+                                            name="document"
+                                            // value={values.document}
                                             // onChange={handleChange}
                                             onChange={handleImageChange}
-                                            accept="application/pdf"
                                             onChange={(e) => { handleChange(e); handleImageChange(e) }}
-                                            isInvalid={!!errors.gst_upload}
+                                            isInvalid={!!errors.document}
                                         />
                                         <Form.Control.Feedback type="invalid" tooltip>
-                                            {errors.gst_upload}
+                                            {errors.document}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
@@ -363,4 +418,4 @@ function AddHotel() {
     );
 }
 
-export default AddHotel;
+export default AddTravelAgent;

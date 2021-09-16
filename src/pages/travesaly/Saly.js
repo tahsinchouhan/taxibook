@@ -24,6 +24,7 @@ import manWithMobileMob from "../../assets/img/Saly-14-mobile.png"
 import adventure from "../../assets/img/bg_12.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import { setPercentages, setQuestions, setQuizEnded, setQuizStarted } from "../../redux/actions";
+import HeritageWalkModal from "../../components/modal/HeritageWalkModal";
 
 function Saly() {
   const history = useHistory();
@@ -359,6 +360,7 @@ function Saly() {
   };
 
 
+  const [modalShow, setModalShow] = useState(false);
   return (
     <>
       <Container
@@ -653,7 +655,7 @@ function Saly() {
                     className="pt-4"
                   >
                     <div>
-                      <Link to="/explore/leisure">
+                      <Link to="/explore/leisure" style={{textDecoration:"none"}}>
                         <Image
                           draggable={false}
                           //  style={{ width: "250px", height: "150px" }}
@@ -670,7 +672,7 @@ function Saly() {
                       </Link>
                     </div>
                     <div>
-                      <Link to="/explore/adventure">
+                      <Link to="/explore/adventure" style={{textDecoration:"none"}}>
                         <Image
                           draggable={false}
                           //  style={{ width: "150px", height: "150px" }}
@@ -687,7 +689,7 @@ function Saly() {
                       </Link>
                     </div>
                     <div>
-                      <Link to="/explore/religious">
+                      <Link to="/explore/religious" style={{textDecoration:"none"}}>
                         <Image
                           draggable={false}
                           //  style={{ width: "150px", height: "150px" }}
@@ -704,7 +706,7 @@ function Saly() {
                       </Link>
                     </div>
                     <div>
-                      <Link to="/explore/culture">
+                      <Link to="/explore/culture" style={{textDecoration:"none"}}>
                         <Image
                           draggable={false}
                           //  style={{ width: "150px", height: "150px" }}
@@ -754,7 +756,8 @@ function Saly() {
               <div >
                 <div className="heritage_walk"  >
                   <Image src={heritage_walk} alt="men" />
-                  <span className="heritage_walk_text">Heritage Walk</span>
+                  <span className="heritage_walk_text">Heritage Walk <Button  onClick={()=>setModalShow(true)}  className="btn-primary-tb p-3 py-2" style={{fontSize:"24px"}}>Know More</Button></span>
+                  
                 </div>
               </div>
             </Col>
@@ -1389,7 +1392,7 @@ function Saly() {
                       className="pt-4"
                     >
                       <div>
-                        <Link to="/explore/leisure">
+                        <Link to="/explore/leisure" style={{textDecoration:"none"}}>
                           <Image
                             draggable={false}
                             //  style={{ width: "250px", height: "150px" }}
@@ -1406,7 +1409,7 @@ function Saly() {
                         </Link>
                       </div>
                       <div>
-                        <Link to="/explore/adventure">
+                        <Link to="/explore/adventure" style={{textDecoration:"none"}}>
                           <Image
                             draggable={false}
                             //  style={{ width: "150px", height: "150px" }}
@@ -1423,7 +1426,7 @@ function Saly() {
                         </Link>
                       </div>
                       <div>
-                        <Link to="/explore/religious">
+                        <Link to="/explore/religious" style={{textDecoration:"none"}}>
                           <Image
                             draggable={false}
                             //  style={{ width: "150px", height: "150px" }}
@@ -1440,7 +1443,7 @@ function Saly() {
                         </Link>
                       </div>
                       <div>
-                        <Link to="/explore/culture">
+                        <Link to="/explore/culture" style={{textDecoration:"none"}}>
                           <Image
                             draggable={false}
                             //  style={{ width: "150px", height: "150px" }}
@@ -1495,7 +1498,7 @@ function Saly() {
                 <div >
                   <div className="heritage_walk"  >
                     <Image src={heritage_walk} alt="men" style={{ borderRadius: "0", }} />
-                    <span className="heritage_walk_text" >Heritage Walk</span>
+                    <span className="heritage_walk_text" style={{fontSize:"34px",lineHeight:"40px"}}>Heritage Walk <Button onClick={()=>setModalShow(true)}  className="btn-primary-tb p-3 py-2" style={{fontSize:"20px"}}>Know More</Button></span>
                   </div>
                 </div>
               </Col>
@@ -1737,6 +1740,7 @@ function Saly() {
           pauseOnHover
         />
       </div >
+      <HeritageWalkModal  show={modalShow} handleClose={()=>setModalShow(false)} />
     </>
   );
 }

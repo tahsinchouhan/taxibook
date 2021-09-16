@@ -17,16 +17,22 @@ const config = {
     secretAccessKey: "MqdgaaWlDccgDeXjeDiuw9mSfRdSkp47l2458261",
 };
 
-function AddHotel() {
+function AddInfluencer() {
     const schema = yup.object().shape({
         name: yup.string().required("Name is required"),
         designation: yup.string().required("Designation is required"),
         phone: yup.string().required("Phone Number is required"),
         email: yup.string().required("Email is required"),
-        hotel_name: yup.string().required("Hotel Name is required"),
+        about_you: yup.string().required("Agency Name is required"),
         address: yup.string().required("Address is required"),
         city: yup.string().required("City is required"),
-        gst_upload: yup.mixed().required("GST File is required"),
+        about_you: yup.string(),
+        area_of_interest: yup.string(),
+        profile_url: yup.string(),
+        page_url: yup.string(),
+        channel: yup.string(),
+        no_of_followers: yup.string(),
+        // document: yup.mixed().required("Document File is required"),
         // .test("FILE_SIZE", "Uploaded file is too big.", 
         //     value => { console.log("val",value.size); return !value || (value && value.size <= 1000000)} )
         // .test("FILE_FORMAT", "Uploaded file has unsupported format.", 
@@ -51,7 +57,7 @@ function AddHotel() {
         let file = event.target.files[0];
         S3FileUpload.uploadFile(file, config)
             .then((data) => {
-                console.log("object",data)
+                console.log("object", data)
                 if (data.result.ok) {
                     setUpload(data.location);
                 }
@@ -70,16 +76,16 @@ function AddHotel() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ ...values, gst_upload: upload }),
+                body: JSON.stringify(values),
             })
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log("Vendor Register successFully", res,{ ...values, gst_upload: upload });
+                    console.log("Vendor Register successFully", res, { ...values});
                     if (res.status === "CREATED") {
-                        setMessage(res.message)
+                        setMessage('added')
                     } else {
-                        console.log("Error:::::::",res);
-                        setError(res.message)
+                        console.log("Error:::::::", res);
+                        setError('Something Went Wrong')
                     }
                     setLoading(false);
                 })
@@ -102,9 +108,9 @@ function AddHotel() {
             {message ? <Message msg={message} type="success" /> : null}
             {error ? <Message msg={error} type="error" /> : null}
             <div className="container" style={{ width: "70%" }}>
-              <h4 className="block__title">
-                <span>Registration</span> Form For Hotel Owner
-              </h4>
+                <h4 className="block__title">
+                    <span>Registration</span> Form For Influencer
+                </h4>
                 <Formik
                     validationSchema={schema}
                     onSubmit={(values) => onSubmit(values)}
@@ -113,10 +119,15 @@ function AddHotel() {
                         designation: '',
                         phone: '',
                         email: '',
-                        hotel_name: '',
+                        about_you: '',
                         address: '',
                         city: '',
-                        gst_upload: '',
+                        about_you: '',
+                        area_of_interest: '',
+                        profile_url: '',
+                        page_url: '',
+                        channel: '',
+                        no_of_followers: '',
                     }}
                 >
                     {({
@@ -228,6 +239,7 @@ function AddHotel() {
                                         <Form.Control
                                             type="password"
                                             name="password"
+                                            title="Password"
                                             placeholder="Password"
                                             value={values.password}
                                             onChange={handleChange}
@@ -261,27 +273,6 @@ function AddHotel() {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
-                                <Col xs={12} md={6}>
-                                    <Form.Group
-                                        md="4"
-                                        controlId="validationFormik102"
-                                        className="position-relative mb-3"
-                                    >
-                                        <Form.Label>Hotel Name</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            name="hotel_name"
-                                            placeholder="Hotel Name"
-                                            value={values.hotel_name}
-                                            onChange={handleChange}
-                                            isInvalid={!!errors.hotel_name}
-                                        />
-
-                                        <Form.Control.Feedback type="invalid" tooltip>
-                                            {errors.hotel_name}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-                                </Col>
 
                                 < Col xs={12} md={6}>
                                     <Form.Group
@@ -289,7 +280,7 @@ function AddHotel() {
                                         controlId="validationFormik102"
                                         className="position-relative mb-3"
                                     >
-                                        <Form.Label>Hotel Address</Form.Label>
+                                        <Form.Label>Address</Form.Label>
                                         <Form.Control
                                             type="text"
                                             name="address"
@@ -305,7 +296,7 @@ function AddHotel() {
                                     </Form.Group>
                                 </Col>
 
-                                < Col xs={12} md={6}>
+                                <Col xs={12} md={6}>
                                     <Form.Group
                                         md="4"
                                         controlId="validationFormik102"
@@ -324,31 +315,160 @@ function AddHotel() {
                                             {errors.city}
                                         </Form.Control.Feedback>
                                     </Form.Group>
-
                                 </Col>
+
+                                <Col xs={12} md={6}>
+                                    <Form.Group
+                                        md="4"
+                                        controlId="validationFormik102"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>About You</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="about_you"
+                                            placeholder="About You"
+                                            value={values.about_you}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.about_you}
+                                        />
+
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.about_you}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+
                                 < Col xs={12} md={6}>
+                                    <Form.Group
+                                        md="4"
+                                        controlId="validationFormik102"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>Area Of Interest</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="area_of_interest"
+                                            placeholder="Area Of Interest"
+                                            value={values.area_of_interest}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.area_of_interest}
+                                        />
+
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.area_of_interest}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+
+                                < Col xs={12} md={6}>
+                                    <Form.Group
+                                        md="4"
+                                        controlId="validationFormik102"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>Profile URL</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="profile_url"
+                                            placeholder="Profile URL"
+                                            value={values.profile_url}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.profile_url}
+                                        />
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.profile_url}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+
+                                < Col xs={12} md={6}>
+                                    <Form.Group
+                                        md="4"
+                                        controlId="validationFormik102"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>Page URL</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="page_url"
+                                            placeholder="Page URL"
+                                            value={values.page_url}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.page_url}
+                                        />
+
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.page_url}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+
+                                < Col xs={12} md={6}>
+                                    <Form.Group
+                                        md="4"
+                                        controlId="validationFormik102"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>Channel</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="channel"
+                                            placeholder="Channel"
+                                            value={values.channel}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.channel}
+                                        />
+
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.channel}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+
+                                < Col xs={12} md={6}>
+                                    <Form.Group
+                                        md="4"
+                                        controlId="validationFormik102"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>No of Followers</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="no_of_followers"
+                                            placeholder="No of Followers"
+                                            value={values.no_of_followers}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.no_of_followers}
+                                        />
+
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.no_of_followers}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+                                {/* < Col xs={12} md={6}>
                                     <Form.Group
                                         md="3"
                                         controlId="validationFormik105"
                                         className="position-relative mb-3"
                                     >
-                                        <Form.Label>Upload GST (PDF Format)</Form.Label>
+                                        <Form.Label>Upload Document</Form.Label>
                                         <Form.Control
                                             type="file"
-                                            placeholder="Please Upload GST"
-                                            name="gst_upload"
-                                            // value={values.gst_upload}
+                                            placeholder="Please Upload Document"
+                                            name="document"
+                                            // value={values.document}
                                             // onChange={handleChange}
                                             onChange={handleImageChange}
-                                            accept="application/pdf"
                                             onChange={(e) => { handleChange(e); handleImageChange(e) }}
-                                            isInvalid={!!errors.gst_upload}
+                                            isInvalid={!!errors.document}
                                         />
                                         <Form.Control.Feedback type="invalid" tooltip>
-                                            {errors.gst_upload}
+                                            {errors.document}
                                         </Form.Control.Feedback>
                                     </Form.Group>
-                                </Col>
+                                </Col> */}
                             </Row>
                             <div style={{ textAlign: "center" }}>
                                 <Button type="submit" className="vendor-btn mt-3 mb-5" >Submit</Button>
@@ -363,4 +483,4 @@ function AddHotel() {
     );
 }
 
-export default AddHotel;
+export default AddInfluencer;

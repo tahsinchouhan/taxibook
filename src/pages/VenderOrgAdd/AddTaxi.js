@@ -17,16 +17,19 @@ const config = {
     secretAccessKey: "MqdgaaWlDccgDeXjeDiuw9mSfRdSkp47l2458261",
 };
 
-function AddHotel() {
+function AddTaxi() {
     const schema = yup.object().shape({
         name: yup.string().required("Name is required"),
         designation: yup.string().required("Designation is required"),
         phone: yup.string().required("Phone Number is required"),
         email: yup.string().required("Email is required"),
-        hotel_name: yup.string().required("Hotel Name is required"),
-        address: yup.string().required("Address is required"),
+        driver_name: yup.string().required("Driver Name is required"),
+        driver_license_no: yup.string().required("Driver's License Number is required"),
+        address: yup.string("Address is required"),
         city: yup.string().required("City is required"),
-        gst_upload: yup.mixed().required("GST File is required"),
+        taxi_number: yup.string().required("Taxi Number is required"),
+        taxi_model: yup.string().required("Taxi Model is required"),
+        rc_book: yup.mixed().required(" RC Book is required"),
         // .test("FILE_SIZE", "Uploaded file is too big.", 
         //     value => { console.log("val",value.size); return !value || (value && value.size <= 1000000)} )
         // .test("FILE_FORMAT", "Uploaded file has unsupported format.", 
@@ -70,16 +73,16 @@ function AddHotel() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ ...values, gst_upload: upload }),
+                body: JSON.stringify({ ...values, rc_book: upload }),
             })
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log("Vendor Register successFully", res,{ ...values, gst_upload: upload });
+                    console.log("Vendor Register successFully", res,{ ...values, rc_book: upload });
                     if (res.status === "CREATED") {
-                        setMessage(res.message)
+                        setMessage('added')
                     } else {
                         console.log("Error:::::::",res);
-                        setError(res.message)
+                        setError('Something Went Wrong')
                     }
                     setLoading(false);
                 })
@@ -103,7 +106,7 @@ function AddHotel() {
             {error ? <Message msg={error} type="error" /> : null}
             <div className="container" style={{ width: "70%" }}>
               <h4 className="block__title">
-                <span>Registration</span> Form For Hotel Owner
+                <span>Registration</span> Form For Taxi Owner
               </h4>
                 <Formik
                     validationSchema={schema}
@@ -113,10 +116,13 @@ function AddHotel() {
                         designation: '',
                         phone: '',
                         email: '',
-                        hotel_name: '',
+                        driver_name: '',
+                        driver_license_no: '',
                         address: '',
                         city: '',
-                        gst_upload: '',
+                        taxi_number: '',
+                        taxi_model: '',
+                        rc_book: '',
                     }}
                 >
                     {({
@@ -261,27 +267,6 @@ function AddHotel() {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
-                                <Col xs={12} md={6}>
-                                    <Form.Group
-                                        md="4"
-                                        controlId="validationFormik102"
-                                        className="position-relative mb-3"
-                                    >
-                                        <Form.Label>Hotel Name</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            name="hotel_name"
-                                            placeholder="Hotel Name"
-                                            value={values.hotel_name}
-                                            onChange={handleChange}
-                                            isInvalid={!!errors.hotel_name}
-                                        />
-
-                                        <Form.Control.Feedback type="invalid" tooltip>
-                                            {errors.hotel_name}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-                                </Col>
 
                                 < Col xs={12} md={6}>
                                     <Form.Group
@@ -289,7 +274,7 @@ function AddHotel() {
                                         controlId="validationFormik102"
                                         className="position-relative mb-3"
                                     >
-                                        <Form.Label>Hotel Address</Form.Label>
+                                        <Form.Label>Address</Form.Label>
                                         <Form.Control
                                             type="text"
                                             name="address"
@@ -324,7 +309,96 @@ function AddHotel() {
                                             {errors.city}
                                         </Form.Control.Feedback>
                                     </Form.Group>
+                                </Col>
 
+                                <Col xs={12} md={6}>
+                                    <Form.Group
+                                        md="4"
+                                        controlId="validationFormik102"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>Driver Name</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="driver_name"
+                                            placeholder="Driver Name"
+                                            value={values.driver_name}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.driver_name}
+                                        />
+
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.driver_name}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+
+                                <Col xs={12} md={6}>
+                                    <Form.Group
+                                        md="4"
+                                        controlId="validationFormik102"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>Driver License No.</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="driver_license_no"
+                                            placeholder="Driver License No"
+                                            value={values.driver_license_no}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.driver_license_no}
+                                        />
+
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.driver_license_no}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+
+                                < Col xs={12} md={6}>
+                                    <Form.Group
+                                        md="4"
+                                        controlId="validationFormik101"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>Taxi Number</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            name="taxi_number"
+                                            value={values.taxi_number}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.taxi_number}
+                                            placeholder=" Taxi Number"
+                                        />
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.taxi_number}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
+                                </Col>
+
+                                < Col xs={12} md={6}>
+                                    <Form.Group
+
+                                        md="3"
+                                        controlId="validationFormik104"
+                                        className="position-relative mb-3"
+                                    >
+                                        <Form.Label>Taxi Model</Form.Label>
+                                        <Form.Select
+                                            placeholder="Taxi Model"
+                                            name="taxi_model"
+                                            value={values.taxi_model}
+                                            onChange={handleChange}
+                                            isInvalid={!!errors.taxi_model}
+                                        >
+                                            <option value="">Select</option>
+                                            <option value="SUV">SUV</option>
+                                            <option value="sedan">Sedan</option>
+                                        </Form.Select>
+                                        <Form.Control.Feedback type="invalid" tooltip>
+                                            {errors.taxi_model}
+                                        </Form.Control.Feedback>
+                                    </Form.Group>
                                 </Col>
                                 < Col xs={12} md={6}>
                                     <Form.Group
@@ -332,20 +406,20 @@ function AddHotel() {
                                         controlId="validationFormik105"
                                         className="position-relative mb-3"
                                     >
-                                        <Form.Label>Upload GST (PDF Format)</Form.Label>
+                                        <Form.Label>Upload RC Book</Form.Label>
                                         <Form.Control
                                             type="file"
-                                            placeholder="Please Upload GST"
-                                            name="gst_upload"
-                                            // value={values.gst_upload}
+                                            placeholder="Please Upload RC Book"
+                                            name="rc_book"
+                                            // value={values.rc_book}
                                             // onChange={handleChange}
                                             onChange={handleImageChange}
                                             accept="application/pdf"
                                             onChange={(e) => { handleChange(e); handleImageChange(e) }}
-                                            isInvalid={!!errors.gst_upload}
+                                            isInvalid={!!errors.rc_book}
                                         />
                                         <Form.Control.Feedback type="invalid" tooltip>
-                                            {errors.gst_upload}
+                                            {errors.rc_book}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
@@ -363,4 +437,4 @@ function AddHotel() {
     );
 }
 
-export default AddHotel;
+export default AddTaxi;
