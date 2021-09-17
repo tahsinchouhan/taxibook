@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col,Image } from "react-bootstrap";
 import loc from "../../assets/img/location.svg";
 import bg from "../../assets/img/bg_12.jpg";
 import GoogleMapReact from "google-map-react";
@@ -110,14 +110,14 @@ const PackagesDetails = (props) => {
   for (var i = 0; i < review.length; i++) {
     if (review[i].star_rating != current) {
       if (cnt > 0) {
-        console.log(current +" "+ cnt);
+        console.log(current + " " + cnt);
       }
       current = review[i].star_rating;
       cnt = 1;
-    // } else {
-    //   cnt++;
-    // }
-    console.log(cnt)
+      // } else {
+      //   cnt++;
+      // }
+      console.log(cnt)
     }
     // console.log(i)
   }
@@ -129,25 +129,39 @@ const PackagesDetails = (props) => {
     <>
       <div
         style={{
-          backgroundImage: `url("${packages.upload_images}")`,
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-          height: 650,
+          // backgroundImage: `url("${packages.upload_images}")`,
+          // backgroundSize: "cover",
+          // backgroundPosition: "center top",
+          // height: 650,
         }}
       >
         <Header />
-        <h1 className="header__title">
+        <div className="destination_bg_img">
+          <Image
+            draggable={false}
+            // className="img-fluid"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            src={packages?.upload_images}
+          />
+          <Container className="destination_header__title">
+            <h1 className="header__title">
+              <span>{packages?.title}</span>
+            </h1>
+          </Container>
+        </div>
+        {/* <h1 className="header__title pb-3">
           <Container>
             <span>{packages.title}</span>
           </Container>
-        </h1>
+        </h1> */}
       </div>
+
       <Container>
-        <div className="block pt-5">
+        <div className="block pt-3">
           <h4 className="block__title">
             <span>About</span> the Package
           </h4>
-          <p className="pt-3">{packages.description}</p>
+          <p className="pt-2">{packages.description}</p>
         </div>
       </Container>
 
@@ -274,13 +288,14 @@ const PackagesDetails = (props) => {
           ) : null}
         </div>
       </Container>
+
       <div fluid className="d-none d-md-block">
         <div className="packeges_title">
           {packages ? (
             <span
               className="packages_enquired"
               style={{ width: "200px", display: "inline-block" }}
-              // onClick={() => modalReviewHadler()}
+            // onClick={() => modalReviewHadler()}
             >
               <a
                 className="code"
@@ -314,6 +329,7 @@ const PackagesDetails = (props) => {
           >
             Enquire Now
           </span>
+
           <span className="packages_enquired">
             <a
               target="_blank"
@@ -328,6 +344,7 @@ const PackagesDetails = (props) => {
               TripAdvisor reviews
             </a>
           </span>
+
           <span
             className="packages_whatsapp"
             style={{ width: "200px", display: "inline-block" }}

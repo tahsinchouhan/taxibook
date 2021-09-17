@@ -1,13 +1,39 @@
-.destinationListContainer{
+.destinationListContainer {
     width: 300px;
     height: 200px;
     margin-right: 15px;
     margin-top: 71px;
 }
 
+.destination_bg_img {
+    height: 500px;
+    width: 100%;
+    position: relative;
+}
+
+.destination_header__title{
+    position: absolute;
+    bottom: 5%;
+    left: 7.5%;
+}
+.destination_header__title .header__title{
+    font-size: 58px;
+}
 
 @media screen and (max-width: 767px) {
-    .destinationListContainer{
+    .destinationListContainer {
         width: 100%;
+    }
+    .destination_bg_img {
+        width: 100%;
+        height: 200px;
+    }
+    .destination_header__title{
+        /* top: 32%; */
+        left: 0;
+    }
+    .destination_header__title .header__title{
+        font-size: 30px;
+        padding-bottom: 0;
     }
 }

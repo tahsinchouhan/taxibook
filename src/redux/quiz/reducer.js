@@ -22,7 +22,7 @@ const INIT_STATE = {
       is_current: false,
     },
     {
-      gif: "https://travelbastar.s3.amazonaws.com/package-images/Dholkal-Dr-Animesh-Ade-Trip-990x490.jpg",
+      gif: "https://travelbastar.s3.amazonaws.com/destination-images/Narayanpal Temple.jpg",
       question: "Would you like to pay a visit to Bastar's wonderful sites of cultural heritage and religious temples?",
       type: "religious",
       is_true: false,

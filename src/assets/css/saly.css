@@ -24,8 +24,9 @@
 }
 
 .on_quiz {
-  background-color: #F8F8F8;
+  /* background-color: #F8F8F8; */
   padding: 35px 29px 23px 53px;
+  text-align: center;
 }
 
 .quiz_title {
@@ -382,8 +383,9 @@
   top: 50%;
   transform: translate(-50%, -50%);
   font-weight: 900;
-  font-size: 58px;
-  line-height: 77px;
+  font-size: 40px;
+  line-height: 55px;
   text-transform: uppercase;
   color: #fff;
+  text-align: center;
 }

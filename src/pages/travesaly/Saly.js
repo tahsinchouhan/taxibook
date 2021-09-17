@@ -655,7 +655,7 @@ function Saly() {
                     className="pt-4"
                   >
                     <div>
-                      <Link to="/explore/leisure" style={{textDecoration:"none"}}>
+                      <Link to="/explore/leisure" style={{ textDecoration: "none" }}>
                         <Image
                           draggable={false}
                           //  style={{ width: "250px", height: "150px" }}
@@ -672,7 +672,7 @@ function Saly() {
                       </Link>
                     </div>
                     <div>
-                      <Link to="/explore/adventure" style={{textDecoration:"none"}}>
+                      <Link to="/explore/adventure" style={{ textDecoration: "none" }}>
                         <Image
                           draggable={false}
                           //  style={{ width: "150px", height: "150px" }}
@@ -689,7 +689,7 @@ function Saly() {
                       </Link>
                     </div>
                     <div>
-                      <Link to="/explore/religious" style={{textDecoration:"none"}}>
+                      <Link to="/explore/religious" style={{ textDecoration: "none" }}>
                         <Image
                           draggable={false}
                           //  style={{ width: "150px", height: "150px" }}
@@ -706,7 +706,7 @@ function Saly() {
                       </Link>
                     </div>
                     <div>
-                      <Link to="/explore/culture" style={{textDecoration:"none"}}>
+                      <Link to="/explore/culture" style={{ textDecoration: "none" }}>
                         <Image
                           draggable={false}
                           //  style={{ width: "150px", height: "150px" }}
@@ -756,8 +756,8 @@ function Saly() {
               <div >
                 <div className="heritage_walk"  >
                   <Image src={heritage_walk} alt="men" />
-                  <span className="heritage_walk_text">Heritage Walk <Button  onClick={()=>setModalShow(true)}  className="btn-primary-tb p-3 py-2" style={{fontSize:"24px"}}>Know More</Button></span>
-                  
+                  <span className="heritage_walk_text">Heritage Walk <Button onClick={() => setModalShow(true)} className="btn-primary-tb makebooking-btn" >Know More</Button></span>
+
                 </div>
               </div>
             </Col>
@@ -1130,28 +1130,32 @@ function Saly() {
                 <img src={Salyimg} alt="saly" style={{ width: "80%" }} />
               </div>
             </Col> */}
-            <Col xs={12} md={6}>
-              <div style={{ padding: "20px" }}>
-                {/* <div className="explore">
+            {
+              !quizEnded ? <Col xs={12} md={6}>
+                <div style={{ padding: "20px" }}>
+                  {/* <div className="explore">
                   <h2 className="explore_div">Explore Bastar</h2>
                   <p>Check out the best tourism destinations around Bastar</p>
                 </div> */}
-                <div style={{ width: "100%", height: "289.85px" }}>
-                  <iframe
-                    style={{ borderRadius: "10px" }}
-                    // className="search_view"
-                    width="100%"
-                    height="100%"
-                    src="https://www.youtube.com/embed/V_JZZ1glvkA"
-                    title="YouTube video player"
-                    frameBorder="0"
-                    // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
+                  <div style={{ width: "100%", height: "289.85px" }}>
+                    <iframe
+                      style={{ borderRadius: "10px" }}
+                      // className="search_view"
+                      width="100%"
+                      height="100%"
+                      src="https://www.youtube.com/embed/V_JZZ1glvkA"
+                      title="YouTube video player"
+                      frameBorder="0"
+                      // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
 
-              </div>
-            </Col>
+                </div>
+              </Col>
+              :
+              null
+            }
             {/*<Col xs={12} md={6} className="pt-0">
               <div style={{ padding: "20px" }}>
                 <Carousel
@@ -1392,7 +1396,7 @@ function Saly() {
                       className="pt-4"
                     >
                       <div>
-                        <Link to="/explore/leisure" style={{textDecoration:"none"}}>
+                        <Link to="/explore/leisure" style={{ textDecoration: "none" }}>
                           <Image
                             draggable={false}
                             //  style={{ width: "250px", height: "150px" }}
@@ -1409,7 +1413,7 @@ function Saly() {
                         </Link>
                       </div>
                       <div>
-                        <Link to="/explore/adventure" style={{textDecoration:"none"}}>
+                        <Link to="/explore/adventure" style={{ textDecoration: "none" }}>
                           <Image
                             draggable={false}
                             //  style={{ width: "150px", height: "150px" }}
@@ -1426,7 +1430,7 @@ function Saly() {
                         </Link>
                       </div>
                       <div>
-                        <Link to="/explore/religious" style={{textDecoration:"none"}}>
+                        <Link to="/explore/religious" style={{ textDecoration: "none" }}>
                           <Image
                             draggable={false}
                             //  style={{ width: "150px", height: "150px" }}
@@ -1443,7 +1447,7 @@ function Saly() {
                         </Link>
                       </div>
                       <div>
-                        <Link to="/explore/culture" style={{textDecoration:"none"}}>
+                        <Link to="/explore/culture" style={{ textDecoration: "none" }}>
                           <Image
                             draggable={false}
                             //  style={{ width: "150px", height: "150px" }}
@@ -1498,7 +1502,7 @@ function Saly() {
                 <div >
                   <div className="heritage_walk"  >
                     <Image src={heritage_walk} alt="men" style={{ borderRadius: "0", }} />
-                    <span className="heritage_walk_text" style={{fontSize:"34px",lineHeight:"40px"}}>Heritage Walk <Button onClick={()=>setModalShow(true)}  className="btn-primary-tb p-3 py-2" style={{fontSize:"20px"}}>Know More</Button></span>
+                    <span className="heritage_walk_text" style={{ fontSize: "34px", lineHeight: "40px" }}>Heritage Walk <Button onClick={() => setModalShow(true)} className="makebooking-btn ">Know More</Button></span>
                   </div>
                 </div>
               </Col>
@@ -1740,7 +1744,7 @@ function Saly() {
           pauseOnHover
         />
       </div >
-      <HeritageWalkModal  show={modalShow} handleClose={()=>setModalShow(false)} />
+      <HeritageWalkModal show={modalShow} handleClose={() => setModalShow(false)} />
     </>
   );
 }

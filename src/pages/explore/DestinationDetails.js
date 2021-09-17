@@ -77,25 +77,33 @@ const DestinationDetails = (props) => {
     <>
       <div
         style={{
-          backgroundImage: `url("${destinations?.upload_images}")`,
+          // backgroundImage: `url("${destinations?.upload_images}")`,
           backgroundSize: "cover",
           backgroundPosition: "center top",
-          height: 650,
+          // height: 650,
         }}
       >
         <Header />
-        <Container>
-          <h1 className="header__title">
-            <span>{destinations?.title}</span>
-          </h1>
-        </Container>
+        <div className="destination_bg_img">
+          <Image
+            draggable={false}
+            // className="img-fluid"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            src={destinations?.upload_images}
+          />
+          <Container className="destination_header__title">
+            <h1 className="header__title">
+              <span>{destinations?.title}</span>
+            </h1>
+          </Container>
+        </div>
       </div>
       <Container>
-        <div className="block pt-5">
+        <div className="block pt-3">
           <h4 className="block__title">
             <span>About</span> the Destination
           </h4>
-          <p className="pt-3">{destinations?.description}</p>
+          <p className="pt-2">{destinations?.description}</p>
         </div>
       </Container>
 
