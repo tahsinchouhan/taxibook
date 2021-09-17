@@ -30,7 +30,7 @@ function AddInfluencer() {
         area_of_interest: yup.string(),
         profile_url: yup.string(),
         page_url: yup.string(),
-        channel: yup.string(),
+        channel_name: yup.string(),
         no_of_followers: yup.string(),
         // document: yup.mixed().required("Document File is required"),
         // .test("FILE_SIZE", "Uploaded file is too big.", 
@@ -67,11 +67,11 @@ function AddInfluencer() {
             });
     };
 
-    const onSubmit = (values) => {
+    const onSubmit = (values,resetForm) => {
         console.log("submit vender", values, { ...values, upload });
         setLoading(true)
         if (values !== "") {
-            fetch(API_PATH + "/api/v2/hotelregistration/create", {
+            fetch(API_PATH + "/api/v2/influencer/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -82,10 +82,11 @@ function AddInfluencer() {
                 .then((res) => {
                     console.log("Vendor Register successFully", res, { ...values});
                     if (res.status === "CREATED") {
-                        setMessage('added')
+                        setMessage(res.message)
+                        resetForm()
                     } else {
                         console.log("Error:::::::", res);
-                        setError('Something Went Wrong')
+                        setError(res.message)
                     }
                     setLoading(false);
                 })
@@ -113,7 +114,7 @@ function AddInfluencer() {
                 </h4>
                 <Formik
                     validationSchema={schema}
-                    onSubmit={(values) => onSubmit(values)}
+                    onSubmit={(values, { resetForm }) =>{ onSubmit(values,resetForm);}}
                     initialValues={{
                         name: '',
                         designation: '',
@@ -126,7 +127,7 @@ function AddInfluencer() {
                         area_of_interest: '',
                         profile_url: '',
                         page_url: '',
-                        channel: '',
+                        channel_name: '',
                         no_of_followers: '',
                     }}
                 >
@@ -413,15 +414,15 @@ function AddInfluencer() {
                                         <Form.Label>Channel</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            name="channel"
+                                            name="channel_name"
                                             placeholder="Channel"
-                                            value={values.channel}
+                                            value={values.channel_name}
                                             onChange={handleChange}
-                                            isInvalid={!!errors.channel}
+                                            isInvalid={!!errors.channel_name}
                                         />
 
                                         <Form.Control.Feedback type="invalid" tooltip>
-                                            {errors.channel}
+                                            {errors.channel_name}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>

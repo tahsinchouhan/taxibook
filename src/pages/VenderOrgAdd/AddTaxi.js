@@ -24,12 +24,12 @@ function AddTaxi() {
         phone: yup.string().required("Phone Number is required"),
         email: yup.string().required("Email is required"),
         driver_name: yup.string().required("Driver Name is required"),
-        driver_license_no: yup.string().required("Driver's License Number is required"),
+        driver_license_number: yup.string().required("Driver's License Number is required"),
         address: yup.string("Address is required"),
         city: yup.string().required("City is required"),
-        taxi_number: yup.string().required("Taxi Number is required"),
-        taxi_model: yup.string().required("Taxi Model is required"),
-        rc_book: yup.mixed().required(" RC Book is required"),
+        car_number: yup.string().required("Taxi Number is required"),
+        car_model: yup.string().required("Taxi Model is required"),
+        rc_book_upload: yup.mixed().required(" RC Book is required"),
         // .test("FILE_SIZE", "Uploaded file is too big.", 
         //     value => { console.log("val",value.size); return !value || (value && value.size <= 1000000)} )
         // .test("FILE_FORMAT", "Uploaded file has unsupported format.", 
@@ -64,25 +64,26 @@ function AddTaxi() {
             });
     };
 
-    const onSubmit = (values) => {
+    const onSubmit = (values,resetForm) => {
         console.log("submit vender", values, { ...values, upload });
         setLoading(true)
         if (values !== "") {
-            fetch(API_PATH + "/api/v2/hotelregistration/create", {
+            fetch(API_PATH + "/api/v2/taxiregistration/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ ...values, rc_book: upload }),
+                body: JSON.stringify({ ...values, rc_book_upload: upload }),
             })
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log("Vendor Register successFully", res,{ ...values, rc_book: upload });
+                    console.log("Taxi Register successFully", res,{ ...values, rc_book_upload: upload });
                     if (res.status === "CREATED") {
-                        setMessage('added')
+                        setMessage(res.message)
+                        resetForm()
                     } else {
                         console.log("Error:::::::",res);
-                        setError('Something Went Wrong')
+                        setError(res.message)
                     }
                     setLoading(false);
                 })
@@ -110,19 +111,19 @@ function AddTaxi() {
               </h4>
                 <Formik
                     validationSchema={schema}
-                    onSubmit={(values) => onSubmit(values)}
+                    onSubmit={(values, { resetForm }) =>{ onSubmit(values,resetForm);}}
                     initialValues={{
                         name: '',
                         designation: '',
                         phone: '',
                         email: '',
                         driver_name: '',
-                        driver_license_no: '',
+                        driver_license_number: '',
                         address: '',
                         city: '',
-                        taxi_number: '',
-                        taxi_model: '',
-                        rc_book: '',
+                        car_number: '',
+                        car_model: '',
+                        rc_book_upload: '',
                     }}
                 >
                     {({
@@ -342,15 +343,15 @@ function AddTaxi() {
                                         <Form.Label>Driver License No.</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            name="driver_license_no"
+                                            name="driver_license_number"
                                             placeholder="Driver License No"
-                                            value={values.driver_license_no}
+                                            value={values.driver_license_number}
                                             onChange={handleChange}
-                                            isInvalid={!!errors.driver_license_no}
+                                            isInvalid={!!errors.driver_license_number}
                                         />
 
                                         <Form.Control.Feedback type="invalid" tooltip>
-                                            {errors.driver_license_no}
+                                            {errors.driver_license_number}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
@@ -364,14 +365,14 @@ function AddTaxi() {
                                         <Form.Label>Taxi Number</Form.Label>
                                         <Form.Control
                                             type="text"
-                                            name="taxi_number"
-                                            value={values.taxi_number}
+                                            name="car_number"
+                                            value={values.car_number}
                                             onChange={handleChange}
-                                            isInvalid={!!errors.taxi_number}
+                                            isInvalid={!!errors.car_number}
                                             placeholder=" Taxi Number"
                                         />
                                         <Form.Control.Feedback type="invalid" tooltip>
-                                            {errors.taxi_number}
+                                            {errors.car_number}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
@@ -386,17 +387,17 @@ function AddTaxi() {
                                         <Form.Label>Taxi Model</Form.Label>
                                         <Form.Select
                                             placeholder="Taxi Model"
-                                            name="taxi_model"
-                                            value={values.taxi_model}
+                                            name="car_model"
+                                            value={values.car_model}
                                             onChange={handleChange}
-                                            isInvalid={!!errors.taxi_model}
+                                            isInvalid={!!errors.car_model}
                                         >
                                             <option value="">Select</option>
                                             <option value="SUV">SUV</option>
                                             <option value="sedan">Sedan</option>
                                         </Form.Select>
                                         <Form.Control.Feedback type="invalid" tooltip>
-                                            {errors.taxi_model}
+                                            {errors.car_model}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>
@@ -410,16 +411,16 @@ function AddTaxi() {
                                         <Form.Control
                                             type="file"
                                             placeholder="Please Upload RC Book"
-                                            name="rc_book"
-                                            // value={values.rc_book}
+                                            name="rc_book_upload"
+                                            // value={values.rc_book_upload}
                                             // onChange={handleChange}
                                             onChange={handleImageChange}
                                             accept="application/pdf"
                                             onChange={(e) => { handleChange(e); handleImageChange(e) }}
-                                            isInvalid={!!errors.rc_book}
+                                            isInvalid={!!errors.rc_book_upload}
                                         />
                                         <Form.Control.Feedback type="invalid" tooltip>
-                                            {errors.rc_book}
+                                            {errors.rc_book_upload}
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Col>

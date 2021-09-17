@@ -61,7 +61,7 @@ function AddHotel() {
             });
     };
 
-    const onSubmit = (values) => {
+    const onSubmit = (values,resetForm) => {
         console.log("submit vender", values, { ...values, upload });
         setLoading(true)
         if (values !== "") {
@@ -77,6 +77,7 @@ function AddHotel() {
                     console.log("Vendor Register successFully", res,{ ...values, gst_upload: upload });
                     if (res.status === "CREATED") {
                         setMessage(res.message)
+                        resetForm()
                     } else {
                         console.log("Error:::::::",res);
                         setError(res.message)
@@ -107,7 +108,7 @@ function AddHotel() {
               </h4>
                 <Formik
                     validationSchema={schema}
-                    onSubmit={(values) => onSubmit(values)}
+                    onSubmit={(values, { resetForm }) =>{ onSubmit(values,resetForm);}}
                     initialValues={{
                         name: '',
                         designation: '',

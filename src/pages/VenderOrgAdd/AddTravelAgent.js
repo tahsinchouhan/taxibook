@@ -63,11 +63,11 @@ function AddTravelAgent() {
             });
     };
 
-    const onSubmit = (values) => {
+    const onSubmit = (values,resetForm) => {
         console.log("submit vender", values, { ...values, upload });
         setLoading(true)
         if (values !== "") {
-            fetch(API_PATH + "/api/v2/hotelregistration/create", {
+            fetch(API_PATH + "/api/v2/travelagent/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -76,12 +76,13 @@ function AddTravelAgent() {
             })
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log("Vendor Register successFully", res,{ ...values, document: upload });
+                    console.log("Travel Agent Register successFully", res,{ ...values, document: upload });
                     if (res.status === "CREATED") {
-                        setMessage('added')
+                        setMessage(res.message)
+                        resetForm()
                     } else {
                         console.log("Error:::::::",res);
-                        setError('Something Went Wrong')
+                        setError(res.message)
                     }
                     setLoading(false);
                 })
@@ -109,7 +110,7 @@ function AddTravelAgent() {
               </h4>
                 <Formik
                     validationSchema={schema}
-                    onSubmit={(values) => onSubmit(values)}
+                    onSubmit={(values, { resetForm }) =>{ onSubmit(values,resetForm);}}
                     initialValues={{
                         name: '',
                         designation: '',
