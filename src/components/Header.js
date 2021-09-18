@@ -57,7 +57,7 @@ function Header() {
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
           <div style={{ textAlign: "center" }}>
-            <Image className="image-fluid" src={logo} style={{ height: "100px", width: "88px" }} />
+            <Image className="image-fluid" src={logo} style={{ height: "100px", width: "88px" }} alt="Travel Bastar" />
             {/* <FaSistrix onClick={onSearchClick} className="searchIcon" /> */}
             <svg
               className="searchIcon"
@@ -130,7 +130,7 @@ function Header() {
         <Navbar expand="lg">
           <Navbar.Brand href="#">
             <div style={{ marginLeft: "44%", marginTop: "0%" }}>
-              <Image src={logo} style={{ height: "97px", width: "85px" }} />
+              <Image src={logo} style={{ height: "97px", width: "85px" }} alt="Travel Bastar" />
             </div>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" className="toggle-icon" />

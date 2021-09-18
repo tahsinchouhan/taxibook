@@ -517,6 +517,7 @@ function Saly() {
                                 className="homepage"
                                 draggable={false}
                                 src={item.upload_images}
+                                alt={item.title}
                               />
                               <div>
                                 <h6 className="packages__block-title_ mt-3 mb-0">
@@ -585,6 +586,7 @@ function Saly() {
                             draggable={false}
                             style={{ width: "100%", height: "100%" }}
                             src={item.upload_images}
+                            alt={item.title}
                           />
 
                           <div style={{ color: "" }} className="package__trip">
@@ -623,6 +625,7 @@ function Saly() {
                               draggable={false}
                               style={{ width: "192px", height: "186px" }}
                               src={item.upload_images}
+                              alt={item.title}
                             />
                             <div
                               style={{ color: "black" }}
@@ -660,6 +663,7 @@ function Saly() {
                           draggable={false}
                           //  style={{ width: "250px", height: "150px" }}
                           src="https://travelbastar.s3.amazonaws.com/package-images/Tritha.jpg"
+                          alt={"Leisure"}
                         />
                         <div
                           style={{ color: "black" }}
@@ -677,6 +681,7 @@ function Saly() {
                           draggable={false}
                           //  style={{ width: "150px", height: "150px" }}
                           src={adventure}
+                          alt={"Adventure"}
                         />
                         <div
                           style={{ color: "black" }}
@@ -694,6 +699,7 @@ function Saly() {
                           draggable={false}
                           //  style={{ width: "150px", height: "150px" }}
                           src="https://travelbastar.s3.amazonaws.com/destination-images/Danteshwari%20Temple,%20Jagdalpur.jpg"
+                          alt={"Religious"}
                         />
                         <div
                           style={{ color: "black" }}
@@ -711,6 +717,7 @@ function Saly() {
                           draggable={false}
                           //  style={{ width: "150px", height: "150px" }}
                           src="https://travelbastar.s3.amazonaws.com/destination-images/Bastar%20Shiv%20Temple.jpg"
+                          alt={"Culture"}
                         />
                         <div
                           style={{ color: "black" }}
@@ -755,14 +762,14 @@ function Saly() {
             <Col md={6} style={{ position: "relative" }} >
               <div >
                 <div className="heritage_walk"  >
-                  <Image src={heritage_walk} alt="men" />
+                  <Image src={heritage_walk} alt="Heritage Walk" />
                   <span className="heritage_walk_text">Heritage Walk <Button onClick={() => setModalShow(true)} className="btn-primary-tb makebooking-btn" >Know More</Button></span>
 
                 </div>
               </div>
             </Col>
-            <Col sm={6} style={{ backgroundColor: "#2c2c2c", color: "white", borderRadius: "10px" }} >
-              <div style={{ paddingTop: "85px", textAlign: "left", paddingLeft: "11%" }}>
+            <Col sm={6} style={{ backgroundColor: "#2c2c2c", color: "white", borderRadius: "10px",display:"flex",alignItems:"center" }} >
+              <div style={{ textAlign: "left", paddingLeft: "11%" }}>
                 <div className="bookings-div">
                   <h3>Bookings</h3>
                   <p>Book tickets for Bus,Location wise Tickets and Traveller Passes</p>
@@ -778,7 +785,6 @@ function Saly() {
                 >Step 1 - Book Travel Pass
                 </Button>
               </div>
-
             </Col>
           </Row>
         </Container>
@@ -933,6 +939,7 @@ function Saly() {
                                 className="homepage"
                                 draggable={false}
                                 src={item.upload_images}
+                                alt={item.title}
                               />
                               <div>
                                 <h6 className="packages__block-title_ mt-3 mb-0">
@@ -1001,6 +1008,7 @@ function Saly() {
                             draggable={false}
                             style={{ width: "100%", height: "100%" }}
                             src={item.upload_images}
+                            alt={item.title}
                           />
 
                           <div style={{ color: "" }} className="package__trip">
@@ -1132,12 +1140,12 @@ function Saly() {
             </Col> */}
             {
               !quizEnded ? <Col xs={12} md={6}>
-                <div style={{ padding: "20px" }}>
+                <div style={{ padding: "0px" }}>
                   {/* <div className="explore">
                   <h2 className="explore_div">Explore Bastar</h2>
                   <p>Check out the best tourism destinations around Bastar</p>
                 </div> */}
-                  <div style={{ width: "100%", height: "289.85px" }}>
+                  <div style={{ width: "100%", height: "209px" }}>
                     <iframe
                       style={{ borderRadius: "10px" }}
                       // className="search_view"
@@ -1258,6 +1266,7 @@ function Saly() {
                                   className="homepage"
                                   draggable={false}
                                   src={item.upload_images}
+                                  alt={item.title}
                                 />
                                 <div>
                                   <h6 className="packages__block-title_ mt-3 mb-0">
@@ -1326,6 +1335,7 @@ function Saly() {
                               draggable={false}
                               style={{ width: "100%", height: "100%" }}
                               src={item.upload_images}
+                              alt={item.title}
                             />
 
                             <div style={{ color: "" }} className="package__trip">
@@ -1364,6 +1374,7 @@ function Saly() {
                                 draggable={false}
                                 style={{ width: "192px", height: "186px" }}
                                 src={item.upload_images}
+                                alt={item.title}
                               />
                               <div
                                 style={{ color: "black" }}
@@ -1401,6 +1412,7 @@ function Saly() {
                             draggable={false}
                             //  style={{ width: "250px", height: "150px" }}
                             src="https://travelbastar.s3.amazonaws.com/package-images/Tritha.jpg"
+                            alt={"Leisure"}
                           />
                           <div
                             style={{ color: "black" }}
@@ -1418,6 +1430,7 @@ function Saly() {
                             draggable={false}
                             //  style={{ width: "150px", height: "150px" }}
                             src={adventure}
+                            alt={"Adventure"}
                           />
                           <div
                             style={{ color: "black" }}
@@ -1435,6 +1448,7 @@ function Saly() {
                             draggable={false}
                             //  style={{ width: "150px", height: "150px" }}
                             src="https://travelbastar.s3.amazonaws.com/destination-images/Danteshwari%20Temple,%20Jagdalpur.jpg"
+                            alt={"Religious"}
                           />
                           <div
                             style={{ color: "black" }}
@@ -1452,6 +1466,7 @@ function Saly() {
                             draggable={false}
                             //  style={{ width: "150px", height: "150px" }}
                             src="https://travelbastar.s3.amazonaws.com/destination-images/Bastar%20Shiv%20Temple.jpg"
+                            alt={"Culture"}
                           />
                           <div
                             style={{ color: "black" }}
@@ -1501,7 +1516,7 @@ function Saly() {
               <Col md={6} style={{ position: "relative" }} >
                 <div >
                   <div className="heritage_walk"  >
-                    <Image src={heritage_walk} alt="men" style={{ borderRadius: "0", }} />
+                    <Image src={heritage_walk} alt="Heritage Walk" style={{ borderRadius: "0", }} />
                     <span className="heritage_walk_text" style={{ fontSize: "34px", lineHeight: "40px" }}>Heritage Walk <Button onClick={() => setModalShow(true)} className="makebooking-btn ">Know More</Button></span>
                   </div>
                 </div>
@@ -1644,6 +1659,7 @@ function Saly() {
                                 draggable={false}
                                 style={{ width: "100%", height: "100%" }}
                                 src={item.upload_images}
+                                alt={item.title}
                               />
                               <div>
                                 <h6 className="packages__block-title_ mt-3 mb-0">
@@ -1711,6 +1727,7 @@ function Saly() {
                               draggable={false}
                               style={{ width: "100%", height: "100%" }}
                               src={item.upload_images}
+                              alt={item.title}
                             />
 
                             <div style={{ color: "" }} className="package__trip">

@@ -76,45 +76,67 @@ const Explores = () => {
   }, [location]);
 
   const getDestinations = () => {
-    fetch(API_PATH + "/api/v1/destinations/location", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        latitude: location.latitude,
-        longitude: location.longitude,
-      }),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        if (json.data !== undefined)
-          setDestinations(json.data);
+    if (id !== undefined) {
+      fetch(`${API_PATH}/api/v1/destinations/list?${id}=true`)
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.data !== undefined) {
+            setDestinations(json.data);
+          }
+        })
+        .catch((e) => console.log(e));
+    } else {
+      fetch(API_PATH + "/api/v1/destinations/location", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }),
       })
-      .catch((e) => console.log(e));
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.data !== undefined)
+            setDestinations(json.data);
+        })
+        .catch((e) => console.log(e));
+    }
   };
 
 
   const getPackages = () => {
     console.log("object", id)
-    fetch(API_PATH + "/api/v1/packages/location", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        latitude: location.latitude,
-        longitude: location.longitude,
-      }),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        if (json.data !== undefined) {
-          setPackages(json.data);
-        }
+    if (id !== undefined) {
+      fetch(`${API_PATH}/api/v1/packages/list?${id}=true`)
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.data !== undefined) {
+            setPackages(json.data);
+          }
+        })
+        .catch((e) => console.log(e));
+    } else {
+      fetch(`${API_PATH}/api/v1/packages/location`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }),
       })
-      .catch((e) => console.log(e));
-  };
+        .then((response) => response.json())
+        .then((json) => {
+          if (json.data !== undefined) {
+            setPackages(json.data);
+          }
+        })
+        .catch((e) => console.log(e));
+    };
+  }
 
   const onDestinations = (value) => {
     history.push({
