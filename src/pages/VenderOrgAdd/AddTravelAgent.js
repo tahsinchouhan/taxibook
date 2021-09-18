@@ -104,7 +104,7 @@ function AddTravelAgent() {
             {loading ? <Loader /> : null}
             {message ? <Message msg={message} type="success" /> : null}
             {error ? <Message msg={error} type="error" /> : null}
-            <div className="container" style={{ width: "70%" }}>
+            <div className="container" style={{ width: "80%" }}>
               <h4 className="block__title">
                 <span>Registration</span> Form For Travel Agent
               </h4>

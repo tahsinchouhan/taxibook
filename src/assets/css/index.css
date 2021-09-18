@@ -969,6 +969,7 @@ body {
 
 .react-multi-carousel-item>div>.homepage {
   max-width: 376px !important;
+  width: 376px;
   height: 237px !important;
   border-radius: 10px;
   cursor: pointer !important;
@@ -979,4 +980,11 @@ body {
   height: 500px !important;
   border-radius: 10px;
   cursor: pointer !important;
+}
+
+@media screen and (max-width: 767px) {
+  
+.react-multi-carousel-item>div>.homepage {
+  max-width: 290px !important;
+}
 }

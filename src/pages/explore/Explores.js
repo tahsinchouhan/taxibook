@@ -19,7 +19,7 @@ Geocode.setLocationType("ROOFTOP");
 Geocode.enableDebug();
 
 const Explores = () => {
-  const { id } = useParams();
+  let { id } = useParams();
   const history = useHistory();
   const [destinations, setDestinations] = useState([]);
   const [packages, setPackages] = useState([]);
@@ -77,6 +77,7 @@ const Explores = () => {
 
   const getDestinations = () => {
     if (id !== undefined) {
+      if(id == 'heritage') id = 'religious'
       fetch(`${API_PATH}/api/v1/destinations/list?${id}=true`)
         .then((response) => response.json())
         .then((json) => {
@@ -109,6 +110,7 @@ const Explores = () => {
   const getPackages = () => {
     console.log("object", id)
     if (id !== undefined) {
+      if(id == 'heritage') id = 'religious'
       fetch(`${API_PATH}/api/v1/packages/list?${id}=true`)
         .then((response) => response.json())
         .then((json) => {
@@ -161,7 +163,8 @@ const Explores = () => {
         <Header />
         <Container className="py-5">
           <div className="search my-5 py-5">
-            <h1 className="search__title pt-5">Near You</h1>
+            <h1 className="search__title pt-5">Explore Bastar's <span style={{textTransform:"capitalize"}} >{id}</span></h1>
+            {/* <h1 className="search__title pt-5">Near You</h1> */}
             <div className="search__inner">
               <div className="search__block">
                 <div className="block__location" onClick={goToSearch}>
@@ -186,7 +189,7 @@ const Explores = () => {
         {tripPackage.length > 0
           ? tripPackage.map((_item, index) => {
             return (
-              <div key={index} style={{ display: "inline-block", width: 348, height: 170, marginRight: "20px" }} className="mt-4">
+              <div key={index} style={{ display: "inline-block", width: "min(90vw,348px)", height: 170, marginRight: "20px" }} className="mt-4">
                 <Image
                   draggable={false}
                   className="img-fluid"

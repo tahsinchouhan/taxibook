@@ -452,9 +452,9 @@ function Saly() {
                     {item.percentages}%
                   </div>
                   <div className="type_type">
-                    {item.type}
+                    {`${(item.type == 'religious')?'heritage':item.type}`}
                   </div>
-                  <Link to={`/explore/${item.type}`} className="type_link">
+                  <Link to={`/explore/${(item.type == 'religious')?'heritage':item.type}`} className="type_link">
                     Explore &gt;
                   </Link >
                 </div>
@@ -694,19 +694,19 @@ function Saly() {
                       </Link>
                     </div>
                     <div>
-                      <Link to="/explore/religious" style={{ textDecoration: "none" }}>
+                      <Link to="/explore/heritage" style={{ textDecoration: "none" }}>
                         <Image
                           draggable={false}
                           //  style={{ width: "150px", height: "150px" }}
                           src="https://travelbastar.s3.amazonaws.com/destination-images/Danteshwari%20Temple,%20Jagdalpur.jpg"
-                          alt={"Religious"}
+                          alt={"Heritage"}
                         />
                         <div
                           style={{ color: "black" }}
                           className="package__trip"
                         >
                           <h6 className="packages__block-title mt-3 text-center">
-                            Religious
+                            Heritage
                           </h6>
                         </div>
                       </Link>
@@ -1118,9 +1118,9 @@ function Saly() {
                       {item.percentages}%
                     </div>
                     <div className="type_type">
-                      {item.type}
+                    {`${(item.type == 'religious')?'heritage':item.type}`}
                     </div>
-                    <Link to={`/explore/${item.type}`} className="type_link">
+                    <Link to={`/explore/${(item.type == 'religious')?'heritage':item.type}`} className="type_link">
                       Explore &gt;
                     </Link >
                   </div>
@@ -1221,7 +1221,7 @@ function Saly() {
               ?
               <>
                 {packagesByPersonality.length > 0 ? (
-                  <div style={{ backgroundColor: "black", color: "#fff", height: "521px", marginTop: "35px" }}>
+                  <div style={{ backgroundColor: "black", color: "#fff", height: "421px", marginTop: "35px" }}>
                     <Container style={{ paddingTop: "4%", marginBlockEnd: "1em" }}>
                       <div>
                         <div
@@ -1443,19 +1443,19 @@ function Saly() {
                         </Link>
                       </div>
                       <div>
-                        <Link to="/explore/religious" style={{ textDecoration: "none" }}>
+                        <Link to="/explore/heritage" style={{ textDecoration: "none" }}>
                           <Image
                             draggable={false}
                             //  style={{ width: "150px", height: "150px" }}
                             src="https://travelbastar.s3.amazonaws.com/destination-images/Danteshwari%20Temple,%20Jagdalpur.jpg"
-                            alt={"Religious"}
+                            alt={"Heritage"}
                           />
                           <div
                             style={{ color: "black" }}
                             className="package__trip"
                           >
                             <h6 className="packages__block-title mt-3 text-center">
-                              Religious
+                              Heritage
                             </h6>
                           </div>
                         </Link>

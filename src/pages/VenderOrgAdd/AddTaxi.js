@@ -54,7 +54,6 @@ function AddTaxi() {
         let file = event.target.files[0];
         S3FileUpload.uploadFile(file, config)
             .then((data) => {
-                console.log("object",data)
                 if (data.result.ok) {
                     setUpload(data.location);
                 }
@@ -77,7 +76,7 @@ function AddTaxi() {
             })
                 .then((res) => res.json())
                 .then((res) => {
-                    console.log("Taxi Register successFully", res,{ ...values, rc_book_upload: upload });
+                    // console.log("Taxi Register successFully", res,{ ...values, rc_book_upload: upload });
                     if (res.status === "CREATED") {
                         setMessage(res.message)
                         resetForm()
@@ -105,7 +104,7 @@ function AddTaxi() {
             {loading ? <Loader /> : null}
             {message ? <Message msg={message} type="success" /> : null}
             {error ? <Message msg={error} type="error" /> : null}
-            <div className="container" style={{ width: "70%" }}>
+            <div className="container" style={{ width: "80%" }}>
               <h4 className="block__title">
                 <span>Registration</span> Form For Taxi Owner
               </h4>

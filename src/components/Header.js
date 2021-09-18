@@ -51,13 +51,17 @@ function Header() {
     console.log("hellllooo");
   };
 
+  const goHome = () => {
+    history.push("/");
+  };
+
   return (
     <>
       <Container className="d-md-none header_div">
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
           <div style={{ textAlign: "center" }}>
-            <Image className="image-fluid" src={logo} style={{ height: "100px", width: "88px" }} alt="Travel Bastar" />
+            <Image onClick={goHome} className="image-fluid" src={logo} style={{ height: "100px", width: "88px" }} alt="Travel Bastar" />
             {/* <FaSistrix onClick={onSearchClick} className="searchIcon" /> */}
             <svg
               className="searchIcon"
@@ -128,11 +132,11 @@ function Header() {
 
       <Container fluid className="header_div d-none d-md-block">
         <Navbar expand="lg">
-          <Navbar.Brand href="#">
+          <NavLink to="/">
             <div style={{ marginLeft: "44%", marginTop: "0%" }}>
               <Image src={logo} style={{ height: "97px", width: "85px" }} alt="Travel Bastar" />
             </div>
-          </Navbar.Brand>
+          </NavLink>
           <Navbar.Toggle aria-controls="navbarScroll" className="toggle-icon" />
           <Navbar.Collapse id="navbarScroll">
             <Nav

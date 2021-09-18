@@ -195,7 +195,7 @@ function Tickets1({loading}) {
 
                         <AvField
                           name="Mobile Number"
-                          type="text"
+                          type="number"
                           className="location-userdatas form-control"
                           placeholder="Enter mobile number"
                           style={{ border: "none", fontSize: "12px", margin: "0px !important" }}
@@ -239,7 +239,7 @@ function Tickets1({loading}) {
 
                         <AvField
                           name="OTP"
-                          type="text"
+                          type="number"
                           className="location-userdatas form-control"
                           placeholder="Enter the 6 digit OTP"
                           style={{ border: "none", height: "50px", fontSize: "12px" }}
