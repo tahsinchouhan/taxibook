@@ -46,6 +46,7 @@ import BusTicketDetail from './pages/selectbooking/BusTicketDetail'
 import AddTaxi from './pages/VenderOrgAdd/AddTaxi';
 import AddTravelAgent from './pages/VenderOrgAdd/AddTravelAgent';
 import AddInfluencer from './pages/VenderOrgAdd/AddInfluencer';
+import Registration from './pages/VenderOrgAdd/Registration';
 
 function App() {
 
@@ -61,6 +62,7 @@ function App() {
             <Route path="/packages_details/:name" component={PackagesDetails} />
             <Route path="/covidresponse" component={CovidResponse} />
             <Route path="/registrationguide" component={RegistrationGuide} />
+            <Route path="/registration" component={Registration} />
             <Route exact path='/booking' component={BusPass} />
             <Route exact path='/populardestinations' component={Destination} />
             <Route exact path='/curatedexperiences' component={Packages} />

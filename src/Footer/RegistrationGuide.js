@@ -54,7 +54,8 @@ const Operators = () => {
               <div className="linkContainer">
 
               <Link
-                  to="/add-hotel"
+                  // to="/add-hotel"
+                  to="/registration"
                   // target="_blank"
                   className="linkBox"
                 >
@@ -62,7 +63,8 @@ const Operators = () => {
                   <div className="linkBox_bottom">Hotel Owner</div>
                 </Link>
                 <Link
-                  to="/add-taxi"
+                  // to="/add-taxi"
+                  to="/registration"
                   // target="_blank"
                   className="linkBox"
                 >
@@ -70,7 +72,8 @@ const Operators = () => {
                   <div className="linkBox_bottom">Taxi Owner</div>
                 </Link>
                 <Link
-                  to="/add-influencer"
+                  // to="/add-influencer"
+                  to="/registration"
                   // target="_blank"
                   className="linkBox"
                 >
@@ -78,7 +81,8 @@ const Operators = () => {
                   <div className="linkBox_bottom">Influencer</div>
                 </Link>
                 <Link
-                  to="/add-travel-agent"
+                  // to="/add-travel-agent"
+                  to="/registration"
                   // target="_blank"
                   className="linkBox"
                 >
