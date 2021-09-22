@@ -43,17 +43,17 @@ const Operators = () => {
                 will be provided from admin panel you can enter all your package
                 details along with photos
               </p>
-              <Link
+              {/* <Link
                 to="#"
-              // target="_blank"
-              // className="link"
-              onClick={()=>goToVendorReg()}
+                // target="_blank"
+                // className="link"
+                onClick={() => goToVendorReg()}
               >
                 <a style={{ textDecoration: "none" }} className="footer__item-title">Registration Link</a>
-              </Link>
+              </Link> */}
               <div className="linkContainer">
 
-              <Link
+                <Link
                   // to="/add-hotel"
                   to="/registration"
                   // target="_blank"
@@ -91,6 +91,15 @@ const Operators = () => {
                 </Link>
 
               </div>
+              <p className="operator__text mt-3 mb-1">For Counter Location Vendor(Parking, Boating, Nature Trekking) Registration </p>
+              <Link
+                to="#"
+                // target="_blank"
+                // className="link"
+                onClick={() => goToVendorReg()}
+              >
+                <a style={{ textDecoration: "none" }} className="footer__item-title">Registration Link</a>
+              </Link>
             </div>
           </Container>
           <br />
