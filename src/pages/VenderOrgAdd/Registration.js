@@ -382,10 +382,10 @@ function Registration() {
                                                 isInvalid={!!errors.userType}
                                             >
                                                 <option value="">Select</option>
-                                                <option value="hotel">Hotel</option>
-                                                <option value="taxi">Taxi</option>
-                                                <option value="travelagent">Travel Agent</option>
-                                                <option value="influencer">Influencer</option>
+                                                <option value="Hotel">Hotel</option>
+                                                <option value="Taxi">Taxi</option>
+                                                <option value="Travel">Travel Agent</option>
+                                                <option value="Influencer">Influencer</option>
                                             </Form.Select>
                                             <Form.Control.Feedback type="invalid" tooltip>
                                                 {errors.userType}
