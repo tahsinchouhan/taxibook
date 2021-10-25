@@ -10,6 +10,7 @@ import BusPass from './pages/selectbooking/BusPass';
 import './assets/css/app.css'
 import Search from './pages/travesaly/Search';
 import Explores from './pages/explore/Explores';
+import Interest from './pages/explore/Interest';
 import DestinationDetails from './pages/explore/DestinationDetails';
 import PackagesDetails from './pages/explore/PackagesDetails';
 import CovidResponse from './Footer/CovidResponse'
@@ -47,7 +48,6 @@ import AddTaxi from './pages/VenderOrgAdd/AddTaxi';
 import AddTravelAgent from './pages/VenderOrgAdd/AddTravelAgent';
 import AddInfluencer from './pages/VenderOrgAdd/AddInfluencer';
 import Registration from './pages/VenderOrgAdd/Registration';
-
 function App() {
 
   return (
@@ -100,6 +100,7 @@ function App() {
             <Route exact path='/steper_dmpass' component={SteperDmpass} />
             <Route exact path='/ ticket_checkout' component={TicketCheckOut} />
             <Route exact path='/payment' component={Payment} />
+            <Route exact path='/interest' component={Interest} />
           </Switch>
         </div>
       </Router>

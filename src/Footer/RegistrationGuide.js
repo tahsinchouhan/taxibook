@@ -98,7 +98,7 @@ const Operators = () => {
                 // className="link"
                 onClick={() => goToVendorReg()}
               >
-                <a style={{ textDecoration: "none" }} className="footer__item-title">Registration Link</a>
+                <a style={{ textDecoration: "none" }} href="" className="footer__item-title">Registration Link</a>
               </Link>
             </div>
           </Container>
@@ -156,7 +156,7 @@ const Operators = () => {
                 target="_blank"
                 className="link"
               >
-                <a style={{ textDecoration: "none" }} className="footer__item-title">Registration Link</a>
+                <a style={{ textDecoration: "none" }} href="" className="footer__item-title">Registration Link</a>
               </Link>
             </div>
           </Container>
