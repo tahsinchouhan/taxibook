@@ -64,9 +64,19 @@ export const SET_QUIZ_RESULT = "SET_QUIZ_RESULT";
 export const SET_QUIZ_STARTED = "SET_QUIZ_STARTED";
 export const SET_QUIZ_ENDED = "SET_QUIZ_ENDED";
 
+
+
+// Hotel Details
+export const SET_HOTEL_DATE_DATA='SET_HOTEL_DATE_DATA';
+export const SET_HOTEL_DATE_SUCCESS='SET_HOTEL_DATE_SUCCESS';
+export const SET_HOTEL_DATE_ERROR='SET_HOTEL_DATE_ERROR';
+export const SET_HOTEL_LIST_DATA='SET_HOTEL_LIST_DATA';
+
+
 export * from "./common/actions";
 export * from "./auth/actions";
 export * from "./bus/actions";
+export * from "./hotel/actions";
 export * from "./login/actions";
 export * from "./dmpass/actions";
 export * from "./explore/actions";

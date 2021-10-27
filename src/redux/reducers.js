@@ -6,11 +6,12 @@ import dmpassReducer from "./dmpass/reducer";
 import loginReducer from "./login/reducer";
 import exploreReducer from "./explore/reducer";
 import quizReducer from "./quiz/reducer";
-
+import hotelReducer from "./hotel/reducer";
 const reducers = combineReducers({
   commonReducer,
   authReducer,
   busReducer,
+  hotelReducer,
   loginReducer,
   dmpassReducer,
   exploreReducer,

@@ -103,23 +103,23 @@ function Header() {
               <NavLink to="/" className="sidebar__navlink">
                 HOME
               </NavLink>
-              {/* <NavLink className="sidebar__navlink" to="/explore">
+              <NavLink className="sidebar__navlink" to="/explore">
                 EXPLORE
-              </NavLink> */}
+              </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/select-booking"> */}
-              {/* <NavLink className="sidebar__navlink" to="/dmpass">
+              <NavLink className="sidebar__navlink" to="/dmpass">
                 TRAVEL PASS
               </NavLink>
               <NavLink className="sidebar__navlink" to="/select-booking">
                 BOOKING
-              </NavLink> */}
+              </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/tickets_sraech"> */}
-              {/* <NavLink className="sidebar__navlink" to="/tickets">
+              <NavLink className="sidebar__navlink" to="/tickets">
                 TICKETS
               </NavLink>
               <NavLink className="sidebar__navlink" to="/buspass">
                 BUS TICKETS
-              </NavLink> */}
+              </NavLink>
               {/* {user_data !== null ? (
                 <NavLink className="sidebar__navlink" to="/search#Tickets">
                   VIEW TICKETS
@@ -153,25 +153,25 @@ function Header() {
                 <NavLink className="sidebar_item" to="/">
                   HOME
                 </NavLink>
-                {/* <NavLink className="sidebar_item" to="/explore">
+                <NavLink className="sidebar_item" to="/explore">
                   EXPLORE
-                </NavLink> */}
+                </NavLink>
 
-                {/* <NavLink className="sidebar_item" to="/dmpass">
+                <NavLink className="sidebar_item" to="/dmpass">
                   TRAVEL PASS
-                </NavLink> */}
+                </NavLink>
                 {/* <NavLink className="sidebar_item" to="/select-booking"> */}
-                {/* <NavLink className="sidebar_item" to="/select-booking">
+                <NavLink className="sidebar_item" to="/select-booking">
                   BOOKING
-                </NavLink> */}
+                </NavLink>
                 {/* <NavLink className="sidebar_item" to="/tickets_sraech"> */}
-                {/* <NavLink className="sidebar_item" to="/tickets">
+                <NavLink className="sidebar_item" to="/tickets">
                   TICKETS
                 </NavLink>
                 <NavLink className="sidebar_item" to="/buspass">
                   BUS TICKETS
                 </NavLink>
-                {user_data !== null ? (
+                {/* {user_data !== null ? (
                   <NavLink className="sidebar_item" to="/search#Tickets">
                     VIEW TICKETS
                   </NavLink>

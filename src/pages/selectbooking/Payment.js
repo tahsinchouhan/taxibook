@@ -75,7 +75,8 @@ function Payment() {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
-    console.log("data", data.amount);
+    console.log("data", data);
+    // key: "",rzp_live_CpkoLmfTklzLb0
     var options = {
       key: "rzp_test_DuapYrmQwcWLGy",
       currency: "INR",
@@ -86,6 +87,7 @@ function Payment() {
       image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
 
       handler: function (response) {
+        console.log({response})
         if (response.razorpay_payment_id) {
           dispatch(
             createBusBooking({

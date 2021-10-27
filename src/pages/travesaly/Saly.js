@@ -24,7 +24,7 @@ import {
   setQuizStarted,
 } from "../../redux/actions";
 import HeritageWalkModal from "../../components/modal/HeritageWalkModal";
-import ImageDesk from "../Desktopimage";
+
 
 function Saly() {
   const history = useHistory();
@@ -366,79 +366,6 @@ function Saly() {
       })
       .catch((e) => console.log(e));
   };
-
-  const [adventure11, setAdventure] = useState(1);
-  const [culture11, setCulture] = useState(1);
-  const [heritage11, setHeritage] = useState(1);
-  const [leisure11, setLeisure] = useState(1);
-  const [imageCounter, setImageCounter] = useState([]);
-  const [getMAxValue, setGetMAxValue] = useState([]);
-  const selectImageCategory = async (category,key,classN) => {
-    let status;
-    if(await imageCounter.includes(key)){
-      let aaa = imageCounter;
-     let keyIndex= await aaa.findIndex((keyInd)=>keyInd == key);
-      status=false;
-      aaa.splice(keyIndex,0)
-      setImageCounter(aaa)
-
-    }else{
-      status=true;
-      await setImageCounter([...imageCounter,key])
-    }
-    switch (category) {
-      case "Adventure":
-        if(status===true)
-        setAdventure(adventure11+1);
-      
-        else 
-        setAdventure(adventure11-1);
-        break;
-      case "Culture":
-        if(status===true)
-        setCulture(culture11+1);
-        else 
-        setCulture(culture11-1);
-        break;
-      case "Heritage":
-        if(status===true)
-        setHeritage(heritage11+1);
-        else
-        setHeritage(heritage11-1);
-
-        break;
-      case "Leisure":
-        if(status===true)
-        setLeisure(leisure11+1);
-        else
-        setLeisure(leisure11-1);
-
-        break;
-      default:
-        break;
-    }
-    setGetMAxValue([adventure11,culture11,heritage11,leisure11])
-    if(status===true)
-    document.querySelector('.'+classN).style.border='3px solid'
-    else
-    document.querySelector('.'+classN).style.border='none';
-    console.log(getMAxValue)
-
-  };
-  const getmaxCategory=()=>{
-    console.log(getMAxValue)
-  let maxvalue= Math.max(...getMAxValue)
-  console.log(maxvalue)
-  let getIndex = getMAxValue.findIndex((keyInd)=>keyInd == maxvalue);
-    if(getIndex===0)
-  history.push('/interest')
-  else if(getIndex===1)
-  history.push('/interest')
-  else if(getIndex===2)
-  history.push('/interest')
-  else if(getIndex===3)
-  history.push('/interestsss')
-  }
   const [modalShow, setModalShow] = useState(false);
   return (
     <>
@@ -448,122 +375,8 @@ function Saly() {
         style={{ padding: 0, margin: 0 }}
       >
         {quizEnded ? null : (
-          <Row className="saly_div w-100  m-0 ">
-            <div
-              className="container"
-              style={{ paddingLeft: "10%", paddingRight: "10%" }}
-            >
-              <div className="homepage-top_title">
-                <h1 className="top_title123">Travel Bastar</h1>
-                <center>
-                  To create a curated experience for you on this site,pease
-                  seect our preference from the options below. You can select as
-                  few or as many options as you like.
-                </center>
-              </div>
-              <div className="row ">
-                {ImageDesk?.slice(0, 16).map((item, key) => {
-                  return (
-                    <div
-                      key={key}
-                      className="col-sm-3 container123"
-                      style={{ marginTop: "10px" }}
-                    >
-                      <Image
-                        className={`homepage borderImage${key}`}
-                        draggable={false}
-                        style={{ width: "100%", height: "100%" }}
-                        src={item.image}
-                        alt={item.title}
-                      />
-                      <div
-                        className="overlay"
-                        onClick={() => selectImageCategory(item.category,key,`borderImage${key}`)}
-                      >
-                        <div className="textHover">
-                          <b>{item.title}</b>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-              <div style={{ marginTop: "30px" }}>
-                <center>
-                  <Button
-                    style={{
-                      padding: "10px",
-                      paddingLeft: "60px",
-                      paddingRight: "60px",
-                    }}
-                    className="btn btn-block btn-success"
-                    onClick={()=>getmaxCategory()}
-                  >
-                    CONTINUE
-                  </Button>
-                </center>
-              </div>
-            </div>
-            {/* <Col xs={12} md={6}>
-                <div>
-                  {/* <div style={{ paddingTop: "8%" }}> *
-                  <div className="video_div">
-                    <iframe
-                      style={{ borderRadius: "10px" }}
-                      // className="search_view"
-                      width="100%"
-                      height="100%"
-                      src="https://www.youtube.com/embed/V_JZZ1glvkA"
-                      title="YouTube video player"
-                      frameBorder="0"
-                      // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </div>
-              </Col> */}
-            {/* <Col xs={12} md={6}>
-              <div className="rocket-image"
-                style={{
-                  position: "absolute",
-                  width: "689px",
-                  minHeight: "590px",
-                  top: "14%",
-                  left: "4%"
-                }}>
-                <img src={Salyimg} alt="saly" style={{ width: "100%" }} />
-              </div>
-            </Col> */}
-
-            {/* <Col xs={12} md={6} className="quiz_div">
-                {
-                  (quizStarted)
-                    ?
-                    questions.map((item, i) => {
-                      if (item.is_current) {
-                        return <div key={i} className="on_quiz" >
-                          <div className="quiz_gif">
-                            <img src={item.gif} />
-                          </div>
-                          <p className="quiz_question">{item.question}</p>
-                          <div className="quiz_answer">
-                            <button className="btn quiz_no_btn" onClick={() => onAnswer(i, false)}>No </button>
-                            <button className="btn quiz_yes_btn" onClick={() => onAnswer(i, true)}>Yes </button>
-                            <div className="quiz_skip_btn" onClick={() => dispatch(setQuizEnded(true))}>SKIP QUIZ &gt; </div>
-                          </div>
-                        </div>
-                      }
-                    })
-                    :
-                    <div className="start_quiz" >
-                      <div className="quiz_title">Welcome <span>Traveller,</span> </div>
-                      <p className="quiz_content_header">Want to know what kind of traveller you are?</p>
-                      <p >  Take the quiz to get your travel personality and have curated experiences suggested to you.</p>
-                      <div className="quiz_start_btn" onClick={() => dispatch(setQuizStarted(true))}>START THE QUIZ &gt; </div>
-                    </div>
-                }
-              </Col> */}
-          </Row>
+          <>
+          </>
         )}
 
         <div
@@ -778,7 +591,7 @@ function Saly() {
           </>
         ) : (
           <>
-            <div className={`destination_div ${quizEnded ? "show" : ""}`}>
+            {/* <div className={`destination_div ${quizEnded ? "show" : ""}`}>
               <div className="homepage-top_title">
                 <h1 className="top_title">Top Destinations for you</h1>
               </div>
@@ -925,11 +738,174 @@ function Saly() {
                   </Button>
                 </div>
               </Container>
-            </div>
+            </div> */}
           </>
         )}
 
-        <Container className="heritage_walk_div">
+       
+        {!quizStarted ? (
+          <>
+            <div
+              style={{
+                backgroundColor: "black",
+                color: "#fff",
+                height: "521px",
+              }}
+            >
+              <Container style={{ paddingTop: "4%", marginBlockEnd: "1em" }}>
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h2
+                      className="package__title"
+                      style={{ fontSize: "28px", fontFamily: "Inter" }}
+                    >
+                      <span>Curated</span> Experiences
+                    </h2>
+                    <h6
+                      style={{
+                        cursor: "pointer",
+                        fontWeight: "normal",
+                        marginRight: "3em",
+                        paddingBlockEnd: "1em",
+                      }}
+                      onClick={() => history.push("/curatedexperiences")}
+                      className="package__title pt-5"
+                    >
+                      View All
+                    </h6>
+                  </div>
+                </div>
+                {packages.length > 0 ? (
+                  <Carousel
+                    ssr
+                    partialVisible
+                    itemClass="image-item"
+                    responsive={responsiveTwo}
+                  >
+                    {packages.length > 0
+                      ? packages.map((item, key) => {
+                          return (
+                            <div
+                              // style={{width:"376px", height:"237px"}}
+                              key={key}
+                              onClick={() =>
+                                history.push({
+                                  pathname: `/packages_details/${item.title}`,
+                                  item: item._id,
+                                })
+                              }
+                            >
+                              <Image
+                                className="homepage"
+                                draggable={false}
+                                src={item.upload_images}
+                                alt={item.title}
+                              />
+                              <div>
+                                <h6 className="packages__block-title_ mt-3 mb-0">
+                                  {item.title}
+                                </h6>
+                                <div
+                                  style={{
+                                    paddingTop: 2,
+                                  }}
+                                >
+                                  <h6
+                                    style={{
+                                      // background: "#BEBEBE",
+                                      display: "inline",
+                                      padding: "3px",
+                                      borderRadius: "4px",
+                                      fontSize: "14px",
+                                    }}
+                                  >
+                                    {item.category.category_name}
+                                  </h6>
+                                </div>
+                                <div>
+                                  <small className="packages__block-subtitle">
+                                    ₹ {item.price}
+                                  </small>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })
+                      : null}
+                  </Carousel>
+                ) : null}
+              </Container>
+            </div>
+
+            <Container className="mb-4">
+              <div className="mb-4">
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <h2 className="package__title pt-5">
+                    <span>Nearest</span> to you
+                  </h2>
+                </div>
+              </div>
+
+              {destinationsByLocation?.length > 0 ? (
+                <Carousel
+                  ssr
+                  partialVisible
+                  itemClass="image-item"
+                  responsive={responsiveTwo}
+                >
+                  {destinationsByLocation?.map((item, key) => {
+                    return (
+                      <div key={key} onClick={() => viewDetails(item)}>
+                        <Image
+                          className="homepage"
+                          draggable={false}
+                          style={{ width: "100%", height: "100%" }}
+                          src={item.upload_images}
+                          alt={item.title}
+                        />
+
+                        <div style={{ color: "" }} className="package__trip">
+                          <h6 className="packages__block-title mt-3 mb-0">
+                            {item.title}
+                          </h6>
+                          <small className="packages__block-subtitle">
+                            {item.sub_title}
+                          </small>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </Carousel>
+              ) : null}
+            </Container>
+          </>
+        ) : null}
+        {/* </Container> */}
+
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+         <Container className="heritage_walk_div">
           <Row
             style={{
               flexDirection: "row",
@@ -1093,275 +1069,15 @@ function Saly() {
             </div>
           </div>
         </Container>
-        {!quizStarted ? (
-          <>
-            <div
-              style={{
-                backgroundColor: "black",
-                color: "#fff",
-                height: "521px",
-              }}
-            >
-              <Container style={{ paddingTop: "4%", marginBlockEnd: "1em" }}>
-                <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <h2
-                      className="package__title"
-                      style={{ fontSize: "28px", fontFamily: "Inter" }}
-                    >
-                      <span>Curated</span> Experiences
-                    </h2>
-                    <h6
-                      style={{
-                        cursor: "pointer",
-                        fontWeight: "normal",
-                        marginRight: "3em",
-                        paddingBlockEnd: "1em",
-                      }}
-                      onClick={() => history.push("/curatedexperiences")}
-                      className="package__title pt-5"
-                    >
-                      View All
-                    </h6>
-                  </div>
-                </div>
-                {packages.length > 0 ? (
-                  <Carousel
-                    ssr
-                    partialVisible
-                    itemClass="image-item"
-                    responsive={responsiveTwo}
-                  >
-                    {packages.length > 0
-                      ? packages.map((item, key) => {
-                          return (
-                            <div
-                              // style={{width:"376px", height:"237px"}}
-                              key={key}
-                              onClick={() =>
-                                history.push({
-                                  pathname: `/packages_details/${item.title}`,
-                                  item: item._id,
-                                })
-                              }
-                            >
-                              <Image
-                                className="homepage"
-                                draggable={false}
-                                src={item.upload_images}
-                                alt={item.title}
-                              />
-                              <div>
-                                <h6 className="packages__block-title_ mt-3 mb-0">
-                                  {item.title}
-                                </h6>
-                                <div
-                                  style={{
-                                    paddingTop: 2,
-                                  }}
-                                >
-                                  <h6
-                                    style={{
-                                      // background: "#BEBEBE",
-                                      display: "inline",
-                                      padding: "3px",
-                                      borderRadius: "4px",
-                                      fontSize: "14px",
-                                    }}
-                                  >
-                                    {item.category.category_name}
-                                  </h6>
-                                </div>
-                                <div>
-                                  <small className="packages__block-subtitle">
-                                    ₹ {item.price}
-                                  </small>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })
-                      : null}
-                  </Carousel>
-                ) : null}
-              </Container>
-            </div>
-
-            <Container className="mb-4">
-              <div className="mb-4">
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <h2 className="package__title pt-5">
-                    <span>Nearest</span> to you
-                  </h2>
-                </div>
-              </div>
-
-              {destinationsByLocation?.length > 0 ? (
-                <Carousel
-                  ssr
-                  partialVisible
-                  itemClass="image-item"
-                  responsive={responsiveTwo}
-                >
-                  {destinationsByLocation?.map((item, key) => {
-                    return (
-                      <div key={key} onClick={() => viewDetails(item)}>
-                        <Image
-                          className="homepage"
-                          draggable={false}
-                          style={{ width: "100%", height: "100%" }}
-                          src={item.upload_images}
-                          alt={item.title}
-                        />
-
-                        <div style={{ color: "" }} className="package__trip">
-                          <h6 className="packages__block-title mt-3 mb-0">
-                            {item.title}
-                          </h6>
-                          <small className="packages__block-subtitle">
-                            {item.sub_title}
-                          </small>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </Carousel>
-              ) : null}
-            </Container>
-          </>
-        ) : null}
-        {/* </Container> */}
-
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
       </Container>
+     
 
       {/*mobile-view*/}
       <div fluid="true" className="d-md-none">
         <div fluid="true" style={{ padding: 0, margin: 0 }}>
           {quizEnded ? null : (
-            <Row className="saly_div w-100  m-0 p-0 pt-5 ">
-              <div
-                className="container"
-                style={{ paddingLeft: "10%", paddingRight: "10%" }}
-              >
-                <div className="homepage-top_title">
-                  <h1 className="top_title">Travel Bastar</h1>
-                  <center>
-                    {" "}
-                    To create a curated experience for you on this site,pease
-                    seect our preference from the options below.
-                    <br />
-                    You can select as few or as many options as you like.
-                  </center>
-                </div>
-                <div className="row ">
-                  {ImageDesk?.slice(0, 16).map((item, key) => {
-                    return (
-                      <div
-                        key={key}
-                        className="col-sm-6 container123"
-                        style={{ marginTop: "10px" }}
-                      >
-                        <Image
-                          className="homepage"
-                          draggable={false}
-                          style={{ width: "100%", height: "100%" }}
-                          src={item.image}
-                          alt={item.title}
-                        />
-                        <div className="overlay">
-                          <div className="textHover">
-                            <b>{item.title}</b>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-                <div style={{ marginTop: "30px" }}>
-                  <center>
-                    <Button
-                      style={{
-                        padding: "10px",
-                        paddingLeft: "60px",
-                        paddingRight: "60px",
-                      }}
-                      className="btn btn-block btn-success"
-                    >
-                      CONTINUE
-                    </Button>
-                  </center>
-                </div>
-              </div>
-              {/* <Col xs={12} md={6}>
-                <div>
-                  <div className="video_div">
-                    <iframe
-                      style={{ borderRadius: "10px" }}
-                      // className="search_view"
-                      width="100%"
-                      height="100%"
-                      src="https://www.youtube.com/embed/V_JZZ1glvkA"
-                      title="YouTube video player"
-                      frameBorder="0"
-                      // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  </div>
-                </div>
-              </Col> */}
-
-              {/* <Col xs={12} md={6} className="quiz_div">
-                  {
-                    (quizStarted)
-                      ?
-                      questions.map((item, i) => {
-                        if (item.is_current) {
-                          return <div key={i} className="on_quiz  p-3 py-4" >
-                            <div className="quiz_gif">
-                              <img style={{ height: "175px" }} src={item.gif} />
-                            </div>
-                            <p className="quiz_question">{item.question}</p>
-                            <div className="quiz_answer">
-                              <button className="btn quiz_no_btn" onClick={() => onAnswer(i, false)}>No </button>
-                              <button className="btn quiz_yes_btn" onClick={() => onAnswer(i, true)}>Yes </button>
-                            </div>
-                            <div className="quiz_skip_btn" style={{ position: "relative", float: "initial", right: "initial", textAlign: "center", marginTop: "5%" }} onClick={() => dispatch(setQuizEnded(true))}>SKIP QUIZ &gt; </div>
-                          </div>
-                        }
-                      })
-                      :
-                      <div className="start_quiz" >
-                        <div className="quiz_title">Welcome <span>Traveller,</span> </div>
-                        <p className="quiz_content_header" style={{ paddingInlineEnd: "22vw" }}>Want to know what kind of traveller you are?</p>
-                        <p >  Take the quiz to get your travel personality and have curated experiences suggested to you.</p>
-                        <div className="quiz_start_btn" onClick={() => dispatch(setQuizStarted(true))}>START THE QUIZ &gt; </div>
-                      </div>
-                  }
-                </Col> */}
-            </Row>
+            <>
+            </>
           )}
           <div
             style={{ paddingTop: "4%" }}
@@ -1660,7 +1376,7 @@ function Saly() {
             </>
           ) : (
             <>
-              <div
+              {/* <div
                 className={`destination_div px-0 ${quizEnded ? "show" : ""}`}
               >
                 <div className="homepage-top_title">
@@ -1821,143 +1537,11 @@ function Saly() {
                     </Button>
                   </div>
                 </Container>
-              </div>
+              </div> */}
             </>
           )}
 
-          <div
-            style={{
-              // backgroundColor: "black",
-              color: "white",
-              // height: "500px",
-            }}
-          >
-            <div style={{ flexDirection: "row" }}>
-              <Col md={6} style={{ position: "relative" }}>
-                <div>
-                  <div className="heritage_walk">
-                    <Image
-                      src={heritage_walk}
-                      alt="Heritage Walk"
-                      style={{ borderRadius: "0" }}
-                    />
-                    <span
-                      className="heritage_walk_text"
-                      style={{ fontSize: "34px", lineHeight: "40px" }}
-                    >
-                      Heritage Walk{" "}
-                      <Button
-                        onClick={() => setModalShow(true)}
-                        className="makebooking-btn "
-                      >
-                        Know More
-                      </Button>
-                    </span>
-                  </div>
-                </div>
-              </Col>
-              <Col className="p-3">
-                <div
-                  style={{
-                    paddingBlock: "34px",
-                    backgroundColor: "#2c2c2c",
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  <div className="bookings-div px-3">
-                    <svg
-                      width="75"
-                      height="50"
-                      viewBox="0 0 75 50"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M16.6667 22.5C16.6667 16.9772 21.1438 12.5 26.6667 12.5H48.3333C53.8562 12.5 58.3333 16.9772 58.3333 22.5V27.5C58.3333 33.0228 53.8562 37.5 48.3333 37.5H26.6667C21.1438 37.5 16.6667 33.0228 16.6667 27.5V22.5ZM68.75 25C68.75 30.4223 75 35.6456 75 41.0679V43.75C75 47.2018 72.2018 50 68.75 50H6.25C2.79818 50 0 47.2018 0 43.75V41.0679C0 35.6456 6.25 30.4223 6.25 25C6.25 19.5777 0 14.3544 0 8.93212V6.25C0 2.79818 2.79818 0 6.25 0H68.75C72.2018 0 75 2.79818 75 6.25V8.93212C75 14.3544 68.75 19.5777 68.75 25ZM62.5 11.4583C62.5 9.73242 61.1009 8.33333 59.375 8.33333H15.625C13.8991 8.33333 12.5 9.73242 12.5 11.4583V38.5417C12.5 40.2676 13.8991 41.6667 15.625 41.6667H59.375C61.1009 41.6667 62.5 40.2676 62.5 38.5417V11.4583Z"
-                        fill="#0FA453"
-                      />
-                    </svg>
-                    <h3 className="pt-3">Bookings</h3>
-                    <p>
-                      Book tickets for Bus,Location wise Tickets and Traveller
-                      Passes
-                    </p>
-                  </div>
-                  <Button
-                    className="makebooking-btn btn-primary-tb"
-                    // style={{ backgroundColor: "#0FA453", color: "white" }}
-                    onClick={onButtonclick}
-                  >
-                    Step 1 - Book Travel Pass
-                  </Button>
-                  {/* <div style={{ width: "266px", height: "487px", marginLeft: "42px", marginBlockStart: "8px" }}>
-                    <Image className="img-fluid" src={manWithMobileMob} />
-                  </div> */}
-                </div>
-              </Col>
-              <Col></Col>
-            </div>
-          </div>
-
-          {/*Tictets*/}
-          <Container>
-            <div className="ticket-div py-5">
-              <Row>
-                <Col sm={12} md={12}>
-                  <div>
-                    <h3 className="ml-5">
-                      <b>Book Tickets</b>
-                    </h3>
-                    <p>Click on the ticket type you wish to book</p>
-                  </div>
-                </Col>
-
-                {/* <Col sm={6} md={6}>
-                  <div className="viewbtn">
-                    <Button
-                      // variant="danger"                      
-                      style={{
-                        cursor: "pointer",
-                        marginTop: "32px",
-                        backgroundColor: "#FF814A",
-                        borderRadius: "10px",
-                        border: "none",
-                        width: "186px",
-                        height: "53.63px"
-                      }}
-                      onClick={gotoTickets_sraech}
-                    >
-                      View your Tickets
-                    </Button>
-                  </div>
-                </Col> */}
-              </Row>
-              <div className="pt-4">
-                <Container>
-                  <h4>{/* <b>Recent Tickets</b> */}</h4>
-                  <TravellerTicketMobile />
-                </Container>
-              </div>
-              {/* <div className="viewbtn">
-                <Button
-                  // variant="danger"                      
-                  style={{
-                    cursor: "pointer",
-                    marginTop: "32px",
-                    backgroundColor: "#FF814A",
-                    borderRadius: "10px",
-                    border: "none",
-                    width: "186px",
-                    height: "53.63px"
-                  }}
-                  onClick={gotoTickets_sraech}
-                >
-                  Book Now
-                </Button>
-              </div> */}
-            </div>
-          </Container>
+         
 
           {/* Popular PAckages */}
 
@@ -2091,6 +1675,140 @@ function Saly() {
                   </Carousel>
                 ) : null}
               </Container>
+
+              <div
+            style={{
+              // backgroundColor: "black",
+              color: "white",
+              // height: "500px",
+            }}
+          >
+            <div style={{ flexDirection: "row" }}>
+              <Col md={6} style={{ position: "relative" }}>
+                <div>
+                  <div className="heritage_walk">
+                    <Image
+                      src={heritage_walk}
+                      alt="Heritage Walk"
+                      style={{ borderRadius: "0" }}
+                    />
+                    <span
+                      className="heritage_walk_text"
+                      style={{ fontSize: "34px", lineHeight: "40px" }}
+                    >
+                      Heritage Walk{" "}
+                      <Button
+                        onClick={() => setModalShow(true)}
+                        className="makebooking-btn "
+                      >
+                        Know More
+                      </Button>
+                    </span>
+                  </div>
+                </div>
+              </Col>
+              <Col className="p-3">
+                <div
+                  style={{
+                    paddingBlock: "34px",
+                    backgroundColor: "#2c2c2c",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                  }}
+                >
+                  <div className="bookings-div px-3">
+                    <svg
+                      width="75"
+                      height="50"
+                      viewBox="0 0 75 50"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M16.6667 22.5C16.6667 16.9772 21.1438 12.5 26.6667 12.5H48.3333C53.8562 12.5 58.3333 16.9772 58.3333 22.5V27.5C58.3333 33.0228 53.8562 37.5 48.3333 37.5H26.6667C21.1438 37.5 16.6667 33.0228 16.6667 27.5V22.5ZM68.75 25C68.75 30.4223 75 35.6456 75 41.0679V43.75C75 47.2018 72.2018 50 68.75 50H6.25C2.79818 50 0 47.2018 0 43.75V41.0679C0 35.6456 6.25 30.4223 6.25 25C6.25 19.5777 0 14.3544 0 8.93212V6.25C0 2.79818 2.79818 0 6.25 0H68.75C72.2018 0 75 2.79818 75 6.25V8.93212C75 14.3544 68.75 19.5777 68.75 25ZM62.5 11.4583C62.5 9.73242 61.1009 8.33333 59.375 8.33333H15.625C13.8991 8.33333 12.5 9.73242 12.5 11.4583V38.5417C12.5 40.2676 13.8991 41.6667 15.625 41.6667H59.375C61.1009 41.6667 62.5 40.2676 62.5 38.5417V11.4583Z"
+                        fill="#0FA453"
+                      />
+                    </svg>
+                    <h3 className="pt-3">Bookings</h3>
+                    <p>
+                      Book tickets for Bus,Location wise Tickets and Traveller
+                      Passes
+                    </p>
+                  </div>
+                  <Button
+                    className="makebooking-btn btn-primary-tb"
+                    // style={{ backgroundColor: "#0FA453", color: "white" }}
+                    onClick={onButtonclick}
+                  >
+                    Step 1 - Book Travel Pass
+                  </Button>
+                  {/* <div style={{ width: "266px", height: "487px", marginLeft: "42px", marginBlockStart: "8px" }}>
+                    <Image className="img-fluid" src={manWithMobileMob} />
+                  </div> */}
+                </div>
+              </Col>
+              <Col></Col>
+            </div>
+          </div>
+
+          {/*Tictets*/}
+          <Container>
+            <div className="ticket-div py-5">
+              <Row>
+                <Col sm={12} md={12}>
+                  <div>
+                    <h3 className="ml-5">
+                      <b>Book Tickets</b>
+                    </h3>
+                    <p>Click on the ticket type you wish to book</p>
+                  </div>
+                </Col>
+
+                {/* <Col sm={6} md={6}>
+                  <div className="viewbtn">
+                    <Button
+                      // variant="danger"                      
+                      style={{
+                        cursor: "pointer",
+                        marginTop: "32px",
+                        backgroundColor: "#FF814A",
+                        borderRadius: "10px",
+                        border: "none",
+                        width: "186px",
+                        height: "53.63px"
+                      }}
+                      onClick={gotoTickets_sraech}
+                    >
+                      View your Tickets
+                    </Button>
+                  </div>
+                </Col> */}
+              </Row>
+              <div className="pt-4">
+                <Container>
+                  <h4>{/* <b>Recent Tickets</b> */}</h4>
+                  <TravellerTicketMobile />
+                </Container>
+              </div>
+              {/* <div className="viewbtn">
+                <Button
+                  // variant="danger"                      
+                  style={{
+                    cursor: "pointer",
+                    marginTop: "32px",
+                    backgroundColor: "#FF814A",
+                    borderRadius: "10px",
+                    border: "none",
+                    width: "186px",
+                    height: "53.63px"
+                  }}
+                  onClick={gotoTickets_sraech}
+                >
+                  Book Now
+                </Button>
+              </div> */}
+            </div>
+          </Container>
             </>
           ) : null}
         </div>

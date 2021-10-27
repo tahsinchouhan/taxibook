@@ -2,6 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom';
 import Home from './pages/Home';
+import PreHome from './pages/PreHome';
 import Packages from './pages/Packages';
 import Destination from './pages/Destination';
 import SelectBooking from './pages/selectbooking/SelectBooking'
@@ -48,6 +49,11 @@ import AddTaxi from './pages/VenderOrgAdd/AddTaxi';
 import AddTravelAgent from './pages/VenderOrgAdd/AddTravelAgent';
 import AddInfluencer from './pages/VenderOrgAdd/AddInfluencer';
 import Registration from './pages/VenderOrgAdd/Registration';
+
+/// imports Hotel Details
+import HotelDetails from './pages/hotelBooking/HotelDetails';
+import HotelList from './pages/hotelBooking/HotelList';
+import HotelSingleDetails from './pages/hotelBooking/HotelSingleDetails';
 function App() {
 
   return (
@@ -55,7 +61,8 @@ function App() {
       <Router>
         <div>
           <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={PreHome} />
+            <Route exact path='/home' component={Home} />
             <Route exact path='/explore' component={Explores} />
             <Route exact path='/explore/:id' component={Explores} />
             <Route path="/destination_details/:name" component={DestinationDetails} />
@@ -101,6 +108,12 @@ function App() {
             <Route exact path='/ ticket_checkout' component={TicketCheckOut} />
             <Route exact path='/payment' component={Payment} />
             <Route exact path='/interest' component={Interest} />
+
+            {/* For Hotel Details */}
+            <Route exact path='/hotelDetails' component={HotelDetails} />
+            <Route exact path='/hotelList' component={HotelList} />
+            <Route exact path='/hotelSingleDetails/:name' component={HotelSingleDetails} />
+
           </Switch>
         </div>
       </Router>
