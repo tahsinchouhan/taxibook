@@ -51,11 +51,13 @@ import AddInfluencer from './pages/VenderOrgAdd/AddInfluencer';
 import Registration from './pages/VenderOrgAdd/Registration';
 
 /// imports Hotel Details
-import HotelDetails from './pages/hotelBooking/HotelDetails';
-import HotelList from './pages/hotelBooking/HotelList';
 import HotelSingleDetails from './pages/hotelBooking/HotelSingleDetails';
-function App() {
+import HotelDetails from './pages/Hotel/HotelDetails';
+import HotelSearch from "./pages/Hotel/HotelSearch";
+import HotelList from "./pages/Hotel/HotelList";
+import HotelConfirmation from "./pages/selectbooking/HotelConfirmation";
 
+function App() {
   return (
     <>
       <Router>
@@ -110,9 +112,15 @@ function App() {
             <Route exact path='/interest' component={Interest} />
 
             {/* For Hotel Details */}
-            <Route exact path='/hotelDetails' component={HotelDetails} />
+            <Route exact path="/hotelsearch" component={HotelSearch} />
+            <Route exact path='/hotelDetails/:name' component={HotelDetails} />
             <Route exact path='/hotelList' component={HotelList} />
             <Route exact path='/hotelSingleDetails/:name' component={HotelSingleDetails} />
+            <Route
+              exact
+              path="/hotelconfirmation"
+              component={HotelConfirmation}
+            />
 
           </Switch>
         </div>
@@ -121,5 +129,4 @@ function App() {
   );
 
 }
-
 export default App;

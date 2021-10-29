@@ -24,7 +24,6 @@ const getEnquireAsync = async (payload) =>
         .catch(error => error);
 
 function* getEnquire({ payload }) {
-  console.log("DATADATDTA::::",payload)
   try {
     const apiEnquire = yield call(getEnquireAsync, payload);
       yield put (showMessage(apiEnquire.message));

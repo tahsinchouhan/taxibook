@@ -13,7 +13,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_PATH } from "../../Path/Path";
 import { useDispatch } from "react-redux";
-import { getTripByRouteId, setBookinStartDate, setRouteData, setRouteId } from "../../redux/actions";
+import {
+  getTripByRouteId,
+  setBookinStartDate,
+  setRouteData,
+  setRouteId,
+} from "../../redux/actions";
 import Footer from "../travesaly/Footer";
 
 function BusPass() {
@@ -21,14 +26,19 @@ function BusPass() {
   const [routes, setRoutes] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [selected, setSelected] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
-      style={{ border: "none", background: "transparent", fontSize: "25px", color: "#a5a5a5" }}
+      style={{
+        border: "none",
+        background: "transparent",
+        fontSize: "25px",
+        color: "#a5a5a5",
+      }}
       onClick={onClick}
       ref={ref}
     >
@@ -51,18 +61,22 @@ function BusPass() {
 
   const onSubmit = () => {
     if (selected !== "") {
-      dispatch(setRouteId(selected,startDate))
-      dispatch(setRouteData({ ...routes[routes.findIndex(x => x._id == selected)], startDate }))
-      history.push('/busmonsoon')
+      dispatch(setRouteId(selected, startDate));
+      dispatch(
+        setRouteData({
+          ...routes[routes.findIndex((x) => x._id == selected)],
+          startDate,
+        })
+      );
+      history.push("/busmonsoon");
     }
-
   };
 
   return (
     <div>
       <ToastContainer />
       <Header />
-      <div className="d-none d-md-block" >
+      <div className="d-none d-md-block">
         <Container className="d-none d-md-block">
           <div style={{ textAlign: "center", margin: "50px" }}>
             <div style={{ margin: "10px" }}>
@@ -86,7 +100,6 @@ function BusPass() {
                       fontSize: "12px",
                       color: "black",
                     }}
-
                   >
                     Select Route
                   </Form.Label>
@@ -99,7 +112,9 @@ function BusPass() {
                     isInvalid={!selected}
                     isValid={selected}
                   >
-                    <option value="" hidden>Choose your preferred route</option>
+                    <option value="" hidden>
+                      Choose your preferred route
+                    </option>
                     {routes.map((item) => (
                       <option key={item._id} value={item._id}>
                         {item.routename}
@@ -204,7 +219,6 @@ function BusPass() {
                     </option>
                   ))}
                 </Form.Select>
-
               </Form.Group>
             </Col>
             <Col xs={12} md={4} className="">
@@ -247,7 +261,7 @@ function BusPass() {
         <Button className="locationpass-btn" onClick={onSubmit}>
           Continue
         </Button>
-        <div className="" style={{ paddingBottom: "85px" }} >
+        <div className="" style={{ paddingBottom: "85px" }}>
           {/* <Footer /> */}
         </div>
       </div>

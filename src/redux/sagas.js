@@ -4,6 +4,8 @@ import busSaga from './bus/saga';
 import loginSaga from './login/saga';
 import dmpassSaga from './dmpass/saga';
 import exploreSaga from './explore/saga';
+import hotelSaga from './hotel/saga';
+ 
 
 export default function* rootSaga(getState){
     yield all([
@@ -11,6 +13,7 @@ export default function* rootSaga(getState){
         busSaga(),
         loginSaga(),
         dmpassSaga(),
-        exploreSaga()
+        exploreSaga(),
+        hotelSaga()
       ]);
 }

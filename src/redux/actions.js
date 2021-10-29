@@ -65,13 +65,10 @@ export const SET_QUIZ_STARTED = "SET_QUIZ_STARTED";
 export const SET_QUIZ_ENDED = "SET_QUIZ_ENDED";
 
 
-
+export const GET_BOOK_HOTEL='GET_BOOK_HOTEL';
+export const GET_BOOK_HOTEL_SUCCESS='GET_BOOK_HOTEL_SUCCESS';
+export const GET_BOOK_HOTEL_ERROR='GET_BOOK_HOTEL_ERROR';
 // Hotel Details
-export const SET_HOTEL_DATE_DATA='SET_HOTEL_DATE_DATA';
-export const SET_HOTEL_DATE_SUCCESS='SET_HOTEL_DATE_SUCCESS';
-export const SET_HOTEL_DATE_ERROR='SET_HOTEL_DATE_ERROR';
-export const SET_HOTEL_LIST_DATA='SET_HOTEL_LIST_DATA';
-
 
 export * from "./common/actions";
 export * from "./auth/actions";

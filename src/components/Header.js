@@ -16,7 +16,6 @@ import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginModal from "../components/modal/LoginModal";
 import { logout } from "../redux/actions";
-
 function Header() {
   const [modalShow, setModalShow] = useState(false);
 

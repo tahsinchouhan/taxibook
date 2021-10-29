@@ -8,6 +8,8 @@ import ImageDesk from "./Desktopimage";
 import "./../assets/css/saly.css";
 import Header from "../components/Header";
 import { Link, useHistory } from "react-router-dom";
+import checkimage from "../assets/TravelBastar-desktop/checkimage.png";
+
 const PreHome = () => {
   const history = useHistory();
   const [adventure11, setAdventure] = useState(1);
@@ -53,16 +55,16 @@ const PreHome = () => {
     }
     setGetMAxValue([adventure11, culture11, heritage11, leisure11]);
     console.log({ classN });
-    let x, i,overlay3;
+    let x, i, overlay3;
     x = document.querySelectorAll("." + classN);
-    overlay3 =  document.querySelectorAll(".overlay3"+key);
+    overlay3 = document.querySelectorAll(".overlay3" + key);
     for (i = 0; i < x.length; i++) {
       if (status === true) {
         x[i].style.border = "3px solid green";
         overlay3[i].style.display = "block";
       } else {
         x[i].style.border = "none";
-        overlay3[i].style.display = "none";
+        overlay3[i].style.display = "none !important";
       }
     }
   };
@@ -129,7 +131,8 @@ const PreHome = () => {
                         <b>{item.title}</b>
                       </div>
                     </div>
-                    <div style={{display:"none"}}
+                    <div
+                      style={{ display: "none" }}
                       className={`overlay3 overlay3${key}`}
                       chek="DeskView"
                       onClick={(e) =>
@@ -141,6 +144,7 @@ const PreHome = () => {
                         )
                       }
                     >
+                      <Image src={checkimage} className="checkimage" />
                       <div className="textHover">
                         <b>{item.title}</b>
                       </div>
@@ -213,7 +217,8 @@ const PreHome = () => {
                         selectImageCategory(
                           item.category,
                           key,
-                          `borderImage${key}`,e
+                          `borderImage${key}`,
+                          e
                         )
                       }
                     >
@@ -222,17 +227,20 @@ const PreHome = () => {
                       </div>
                     </div>
                     <div
-                    style={{display:"none"}}
+                      style={{ display: "none" }}
                       className={`overlay3 overlay3${key}`}
                       chek="mobileView"
                       onClick={(e) =>
                         selectImageCategory(
                           item.category,
                           key,
-                          `borderImage${key}`,e
+                          `borderImage${key}`,
+                          e
                         )
                       }
                     >
+                      {" "}
+                      <Image src={checkimage} className="checkimage" />
                       <div className="textHover">
                         <b>{item.title}</b>
                       </div>
