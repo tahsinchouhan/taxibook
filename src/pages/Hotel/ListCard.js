@@ -259,13 +259,16 @@ function ListCard(props) {
         <div fluid className="d-md-none">
           <div></div>
           <div>
-            <>
+            
+            {hotels.map((item, index) => {
+        return (
+         <>
               <div>
                 <Container style={{ paddingTop: "40px" }}>
                   <Row>
                     <Col style={{ display: "flex", justifyContent: "center" }}>
                       <img
-                        src={bus1}
+                        src={hotel}
                         alt="room img"
                         style={{
                           width: "300px",
@@ -297,7 +300,8 @@ function ListCard(props) {
                                 fontFamily: "sans-serif",
                               }}
                             >
-                              Spot Mahadev Lodge
+                             {item.hotel_name}
+
                             </span>
                             <br />
                             <span
@@ -307,7 +311,7 @@ function ListCard(props) {
                                 fontFamily: "sans-serif",
                               }}
                             >
-                              Shankar Nagar, Jagdalpur C.G
+                          {item.full_address.street}, {item.full_address.city} C.G
                             </span>
                           </div>
                         </div>
@@ -410,7 +414,7 @@ function ListCard(props) {
                                   fontFamily: "sans-serif",
                                 }}
                               >
-                                ₹ 1500
+                                ₹ {item.room_data.price.actual_price}
                               </span>
                             </div>
                           </Col>
@@ -459,18 +463,13 @@ function ListCard(props) {
                   </Row>
                 </Container>
               </div>
-              {/* <Button
-                className="locationpass-btn"
-                //   onClick={() => onClickTrain(item._id)}
-              >
-                Continue
-              </Button> */}
-            </>
+              </>
+        )
+            })
+          }
           </div>
-
-          {/* <Footer /> */}
-        </div>
-      </div>
+          </div>
+          </div>
     </>
   );
 }

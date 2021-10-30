@@ -20,6 +20,7 @@ const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
 };
 const PackagesDetails = (props) => {
+  console.log({props})
   const [enquireModal, setEnquireModal] = useState();
   const [modalReviewShow, setModalReviewShow] = useState(false);
   const [packages, setPackages] = useState("");

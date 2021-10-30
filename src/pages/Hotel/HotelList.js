@@ -11,27 +11,74 @@ import ListCard from "./ListCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getBookHotel} from '../../redux/actions'
 import { API_PATH } from "../../Path/Path";
+import axios from "axios";
+import TextField from "@material-ui/core/TextField";
+import { Autocomplete } from "@material-ui/lab";
+import { FaSearchLocation } from "react-icons/fa";
+
 
 function HotelList() {
   const history = useHistory();
   const dispatch = useDispatch()
+  const [myOptions, setMyOptions] = useState([]);
+
   const { getHotelList: hotels} = useSelector(state => state.hotelReducer)
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [location, setLocation] = useState([]);
   const [sendlocation, setSendlocation] = useState();
   const [geolocation, setGeolocation] = useState([]);
-  const onDmTicketShow = () => {
-    dispatch(getBookHotel({sendlocation,startDate,endDate}))
-    history.push("/hotellist");
-  };
-  const getLocation = () => {
-    fetch(API_PATH + `/api/v2/room/set?address=korba&check_in=2021-12-15&check_out=2021-12-17`)
-      .then((response) => response.json())
+
+  const getDataFromAPI = (name) => {
+    setMyOptions([]);
+    fetch(`${API_PATH}/api/v2/hotelregistration/search?address=${name}`)
+      .then((response) => {
+        return response.json();
+      })
       .then((res) => {
-        setLocation(res.data);
+        console.log(res.data);
+        for (var i = 0; i < res.data.length; i++) {
+          let str = `${res.data[i].hotel_name},${res.data[i].full_address.city}`;
+          myOptions.push(str);
+        }
+        setMyOptions(myOptions);
+      });
+  };
+
+  const getLocation = () => {
+    axios
+      .post(API_PATH + `/api/v2/hotelregistration`, geolocation)
+      .then((res) => {
+        setLocation(res.data.data);
       })
       .catch((e) => console.log(e));
+  };
+  const getCurrentLocation = async () => {
+    await window.navigator.geolocation.getCurrentPosition((pos) => {
+      console.log(pos);
+      setGeolocation(pos.coords);
+      const { latitude, longitude } = pos.coords;
+      axios
+        .post(API_PATH + `/api/v2/hotelregistration`, {
+          lat: latitude,
+          long: longitude,
+        })
+        .then((res) => {
+          console.log("response", res.data.data);
+          for (var i = 0; i < res.data.data.length; i++) {
+            let str = `${res.data.data[i].hotel_name},${res.data.data[i].full_address.city}`;
+            myOptions.push(str);
+          }
+          setMyOptions(myOptions);
+          setLocation(res.data.data);
+        })
+        .catch((e) => console.log(e));
+    });
+  };
+  const onDmTicketShow = () => {
+    console.log({ sendlocation });
+    dispatch(getBookHotel({ sendlocation, startDate, endDate }));
+    history.push("/hotellist");
   };
   useEffect(() => {
     getLocation();
@@ -74,25 +121,32 @@ function HotelList() {
                       <Form.Label className="dm-ticket">
                         Select Your Location
                       </Form.Label>
-                      <select
-                        id="inputState"
-                        className="form-control pass_input"
-                        placeholder="Choose Your Area"
-                        style={{
-                          height: "47px",
-                          backgroundColor: "#f5f5f5",
-                          border: 0,
-                          padding: "10px",
+                      <Autocomplete
+                        style={{ width: 200 }}
+                        freeSolo
+                        autoComplete
+                        autoHighlight
+                        onChange={(e) => {
+                          setSendlocation(e.target.innerHTML.split(",")[1]);
                         }}
-                        onChange={(e)=>setSendlocation(e.target.value)}
-                      >
-                        <option selected>Choose Your Area</option>
-                        {location.map((curElem,index)=>{
-                         let location_city = curElem.full_address.city;
-                        return <option value={location_city} key={location_city}>{location_city}</option>
-                        }
+                        options={myOptions}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            value={sendlocation?sendlocation:''}
+                            onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                            variant="outlined"
+                            label="Search Area"
+                          />
                         )}
-                      </select>
+                      />
+                      <span
+                        className="FaSearchLocation"
+                        title="Near Me "
+                        onClick={getCurrentLocation}
+                      >
+                        <FaSearchLocation />
+                      </span>
                     </Form.Group>
                   </Col>
 

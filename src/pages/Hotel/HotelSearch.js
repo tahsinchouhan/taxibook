@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Row, Col, Form, Container } from "react-bootstrap";
 import calendar from "../../assets/img/calendar.png";
 import DatePicker from "react-datepicker";
@@ -8,28 +8,72 @@ import ticket from "../../assets/ticketpage.svg";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { useDispatch } from "react-redux";
-import { getBookHotel} from '../../redux/actions'
+import { getBookHotel } from "../../redux/actions";
 import { API_PATH } from "../../Path/Path";
 import hotel from "../../assets/img/hotel.png";
+import { FaSearchLocation } from "react-icons/fa";
+import axios from "axios";
+import TextField from "@material-ui/core/TextField";
+import { Autocomplete } from "@material-ui/lab";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function HotelSearch() {
   const history = useHistory();
+  const [myOptions, setMyOptions] = useState([]);
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [location, setLocation] = useState([]);
   const [sendlocation, setSendlocation] = useState();
   const [geolocation, setGeolocation] = useState([]);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const getDataFromAPI = (name) => {
+    setMyOptions([]);
+    fetch(`${API_PATH}/api/v2/hotelregistration/search?address=${name}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
+        console.log(res.data);
+        for (var i = 0; i < res.data.length; i++) {
+          let str = `${res.data[i].hotel_name},${res.data[i].full_address.city}`;
+          myOptions.push(str);
+        }
+        setMyOptions(myOptions);
+      });
+  };
+
   const getCurrentLocation = async () => {
     await window.navigator.geolocation.getCurrentPosition((pos) => {
       console.log(pos);
       setGeolocation(pos.coords);
+      const { latitude, longitude } = pos.coords;
+      axios
+        .post(API_PATH + `/api/v2/hotelregistration`, {
+          lat: latitude,
+          long: longitude,
+        })
+        .then((res) => {
+          console.log("response", res.data.data);
+          for (var i = 0; i < res.data.data.length; i++) {
+            let str = `${res.data.data[i].hotel_name},${res.data.data[i].full_address.city}`;
+            myOptions.push(str);
+          }
+          setMyOptions(myOptions);
+          setLocation(res.data.data);
+        })
+        .catch((e) => console.log(e));
     });
   };
   const onDmTicketShow = () => {
-    dispatch(getBookHotel({sendlocation,startDate,endDate}))
-    history.push("/hotellist");
+    if (sendlocation !== "") {
+      dispatch(getBookHotel({ sendlocation, startDate, endDate }));
+      history.push("/hotellist");
+    } else {
+      toast.error("Please Select Location");
+    }
   };
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
@@ -48,17 +92,17 @@ function HotelSearch() {
   ));
 
   const getLocation = () => {
-    fetch(API_PATH + `/api/v2/room/set?address=korba&check_in=2021-12-15&check_out=2021-12-17`)
-      .then((response) => response.json())
+    axios
+      .post(API_PATH + `/api/v2/hotelregistration`, geolocation)
       .then((res) => {
-        setLocation(res.data);
+        setLocation(res.data.data);
       })
       .catch((e) => console.log(e));
   };
+
   useEffect(() => {
     getLocation();
-    
-  }, [])
+  }, []);
   return (
     <>
       <div>
@@ -72,8 +116,8 @@ function HotelSearch() {
               <div className="row p-3" style={{ textAlign: "center" }}>
                 <div className="col-xs-12  col-sm-12 col-md-12">
                   <div className="booking-div">
-                    <div style={{ marginBottom: "15px"}}>
-                      <img src={hotel} alt="logo"  style={{width:"60px"}}/>
+                    <div style={{ marginBottom: "15px" }}>
+                      <img src={hotel} alt="logo" style={{ width: "60px" }} />
                     </div>
                     <span
                       style={{
@@ -107,24 +151,32 @@ function HotelSearch() {
                       <Form.Label className="dm-ticket">
                         Select Your Location
                       </Form.Label>
-                      <select
-                        id="inputState"
-                        className="form-control pass_input"
-                        placeholder="Choose Your Area"
-                        style={{
-                          backgroundColor: "#f5f5f5",
-                          border: 0,
-                          padding: "10px",
+                      <Autocomplete
+                        style={{ width: 200 }}
+                        freeSolo
+                        autoComplete
+                        autoHighlight
+                        onChange={(e) => {
+                          setSendlocation(e.target.innerHTML.split(",")[1]);
                         }}
-                        onChange={(e)=>setSendlocation(e.target.value)}
-                      >
-                        <option selected>Choose Your Area</option>
-                        {location.map((curElem,index)=>{
-                         let location_city = curElem.full_address.city;
-                        return <option value={location_city} key={location_city}>{location_city}</option>
-                        }
+                        options={myOptions}
+                        renderInput={(params) => (
+                          <TextField
+                            required="required"
+                            {...params}
+                            onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                            variant="outlined"
+                            label="Search Area"
+                          />
                         )}
-                      </select>
+                      />
+                      <span
+                        className="FaSearchLocation"
+                        title="Near Me "
+                        onClick={getCurrentLocation}
+                      >
+                        <FaSearchLocation />
+                      </span>
                     </Form.Group>
                   </Col>
 
@@ -172,9 +224,7 @@ function HotelSearch() {
                       controlId="exampleForm.ControlInput1"
                     >
                       <div>
-                        <Form.Label className="dm-ticket">
-                          End Date
-                        </Form.Label>
+                        <Form.Label className="dm-ticket">End Date</Form.Label>
                         <br />
                         <Col xs={12} md={6}>
                           <div
@@ -299,21 +349,31 @@ function HotelSearch() {
                   <Form.Label className="dm-ticket">
                     Select Your Location
                   </Form.Label>
-                  <select
-                    id="inputState"
-                    className="form-control pass_input"
-                    placeholder="Choose Your Area"
-                    style={{
-                      backgroundColor: "#f5f5f5",
-                      border: 0,
-                      paddingLeft: "20px",
+                  <Autocomplete
+                    style={{ width: 200 }}
+                    freeSolo
+                    autoComplete
+                    autoHighlight
+                    onChange={(e) => {
+                      setSendlocation(e.target.innerHTML.split(",")[1]);
                     }}
+                    options={myOptions}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                        variant="outlined"
+                        label="Search Area"
+                      />
+                    )}
+                  />
+                  <span
+                    className="FaSearchLocation"
+                    title="Near Me "
+                    onClick={getCurrentLocation}
                   >
-                    <option selected>Choose your area</option>
-                    {location.map((curElem,index)=>(
-                        <option value={index} key={index}>{index}</option>
-                        ))}
-                  </select>
+                    <FaSearchLocation />
+                  </span>
                 </Form.Group>
               </Col>
 
@@ -369,9 +429,7 @@ function HotelSearch() {
                           marginRight: "10px",
                         }}
                       >
-                        <Form.Label className="dm-ticket">
-                          End Date
-                        </Form.Label>
+                        <Form.Label className="dm-ticket">End Date</Form.Label>
                         <br />
                         <img
                           alt="logo"

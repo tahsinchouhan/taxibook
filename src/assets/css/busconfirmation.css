@@ -1,25 +1,117 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
-.traveller_div{
-    margin-top: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
+.traveller_div {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
 }
 
-.traveller__card{
-    width: 480px;
-    padding: 2rem;
-    font-size: 12px;
-    flex-basis: calc(50% - 0.5rem);
+.traveller__card {
+  width: 450px;
+  padding: 1.5rem;
+  font-size: 12px;
+  flex-basis: calc(40% - 0.5rem);
 }
 
-.traveller__card_title{
-    font-weight: 700;
+.traveller__card_title {
+  font-weight: 700;
 }
 
-.pass_input{
-    background-color: #F8F8F8;
-    border-color: #F8F8F8;
+.pass_input {
+  background-color: #f8f8f8;
+  border-color: #f8f8f8;
+}
+.hotel-confirm-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.hotel-confirm-1 {
+  width: "60%";
+}
+.hotel-confirm-2 {
+  width: 40%;
+  border: 1px solid gray;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 8px;
+}
+.form-div {
+  display: flex;
+  flex-direction: row;
+}
+.form-input {
+  border: 1px solid gray;
+  padding: 5px 20px;
+  border-radius: 3px;
+  width: 180px;
+}
+.details-div {
+  border: 1px solid gray;
+  margin: 15px;
+  border-radius: 5px;
+  overflow: hidden;
+  padding-bottom: 25px;
+}
+.form-input-div {
+  margin-top: 10px;
+}
+.container-div {
+  width: 85%;
+  margin: auto;
+  padding: 20px;
+}
+.saving-div {
+  color: #e6b560;
+  font-weight: 500;
+  font-size: 18px;
+}
+.saving-div-container {
+  background-color: #fff6e7;
+  border: 2px solid #f9e2bb;
+  border-radius: 5px;
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+@media (max-width: 500px) {
+  .hotel-confirm-div {
+    flex-direction: column;
+  }
+  .hotel-confirm-1 {
+    width: 100%;
+  }
+  .hotel-confirm-2 {
+    width: 100%;
+  }
+  .form-div {
+    flex-direction: column;
+  }
+  .form-input {
+    width: 250px;
+  }
+  .form-input-div {
+    margin-top: 10px;
+  }
+  .details-div {
+    width: 100%;
+    margin: 0;
+  }
+  .container-div {
+    width: 90%;
+    padding: 0;
+  }
+  .saving-div {
+    width: 100%;
+    font-size: 17px;
+    text-align: center;
+  }
+  .saving-div-container {
+    margin: 0;
+    margin-bottom: 15px;
+  }
 }
