@@ -145,7 +145,7 @@ function BusPass() {
                       display: "flex",
                       flexDirection: "row",
                       overflow: "hidden",
-                    }}
+                      }}
                   >
                     <img
                       className="location-userdatas-calendar"
@@ -253,6 +253,8 @@ function BusPass() {
                     onChange={(date) => setStartDate(date)}
                     customInput={<ExampleCustomInput />}
                     dateFormat="dd MMM"
+                    minDate={new Date()}
+
                   />
                 </div>
               </Form.Group>
