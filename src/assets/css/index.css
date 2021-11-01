@@ -990,6 +990,9 @@ body {
 }
 
 
+.fontweight {
+  font-weight: 900 !important;
+}
 .FaSearchLocation{
   position: absolute;
   margin-left: 135px;

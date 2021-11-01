@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
 .traveller_div {
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -13,6 +13,7 @@
   padding: 1.5rem;
   font-size: 12px;
   flex-basis: calc(40% - 0.5rem);
+  border: 2px solid;
 }
 
 .traveller__card_title {
@@ -78,6 +79,39 @@
   align-items: center;
   padding: 10px;
 }
+.amenities-div {
+  display: flex;
+  width: 150px;
+  height: 60px;
+  align-items: center;
+}
+.amenities-logo {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+}
+.hotel-details-1 {
+  width: 65%;
+}
+.amenities-name {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.hotel-details-2 {
+  width: 35%;
+}
+.room-mobile {
+  width: 180px;
+  height: 130px;
+}
+.choose-room-div {
+  width: 95%;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  overflow: hidden;
+}
 @media (max-width: 500px) {
   .hotel-confirm-div {
     flex-direction: column;
@@ -87,6 +121,7 @@
   }
   .hotel-confirm-2 {
     width: 100%;
+    border-radius: 8px;
   }
   .form-div {
     flex-direction: column;
@@ -113,5 +148,31 @@
   .saving-div-container {
     margin: 0;
     margin-bottom: 15px;
+  }
+  .hotel-details-1 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .amenities-div {
+    width: 100px;
+    height: 50px;
+  }
+  .amenities-name {
+    font-size: 15px;
+  }
+  .amenities-logo {
+    width: 22px;
+    height: 22px;
+  }
+  .hotel-details-2 {
+    width: 100%;
+  }
+  .room-mobile {
+    width: 90px;
+    height: 70px;
+    border-radius: 5px;
+  }
+  .choose-room-div {
+    width: 100%;
   }
 }

@@ -5,6 +5,7 @@ import hotel from "../../assets/img/hotel.png";
 import city1 from "../../assets/img/city.png";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Room from "../../assets/img/hotelRoom.jpeg";
 
 function ListCard(props) {
   console.log({props})
@@ -76,7 +77,7 @@ function ListCard(props) {
                   <Row>
                     <Col md={3}>
                       <img
-                        src={item.room_data.image!==''?hotel:hotel}
+                        src={item.room_data.image!==''?Room:Room}
                         alt="room img"
                         style={{
                           width: "190px",

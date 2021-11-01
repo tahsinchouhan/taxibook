@@ -290,20 +290,20 @@ function BusConfirmation() {
                     <Paper key={i} className="traveller__card" >
                       <div className="traveller__card_body" className="py-0">
                         <div>
-                          <h5 className="traveller__card_title" style={{ fontSize: "12px", float: "left" }}>Travellers {i + 1}</h5>
+                          <h5 className="traveller__card_title" style={{ fontSize: "20px", marginBottom: "15px", float: "left", fontWeight: "bold" }}>Travellers {i + 1}</h5>
 
                           <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
                         </div>
 
                         <p className="traveller__card_text" style={{ clear: "both" }}>
                           <div className="form-group mt-0">
-                            <label className="mb-1" for={`name${i}`}>Name</label>
+                            <label className="mb-1" for={`name${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Name</h3></label>
                             <AvField
                               type="text"
                               className="form-control pass_input"
                               id={`name${i}`}
                               placeholder="Enter Traveller Name"
-                              style={{ fontSize: "11px", marginLeft: "-5px" }}
+                              style={{ fontSize: "11px", marginLeft: "-5px", fontWeight: "bold" }}
                               name='name'
                               onChange={(e) =>
                                 handleTraveller(
@@ -326,13 +326,14 @@ function BusConfirmation() {
 
                           <div className="form-row genderform pt-3 d-flex ">
                             <div className="col m-2 w-50">
-                              <label className="mb-1" for={`gender${i}`}>Gender</label>
+                              <label className="mb-1" for={`gender${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Gender</h3></label>
                               <div className="d-flex pt-2">
                                 <ButtonComponent
                                   style={{
                                     width: "50%",
                                     fontSize: "11px",
-                                    whiteSpace: "nowrap",
+                                    whiteSpace: "nowrap"
+                                    , fontWeight: "bold"
                                   }}
                                   data={button_Data}
                                   // activeButton={activeButton}
@@ -343,7 +344,7 @@ function BusConfirmation() {
                               </div>
                             </div>
                             <div className="form-group col m-2 w-50">
-                              <label className="mb-1" for={`age${i}`}>Age</label>
+                              <label className="mb-1" for={`age${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Age</h3></label>
 
                               <AvField
                                 type="text"
@@ -356,6 +357,8 @@ function BusConfirmation() {
                                   fontSize: "12px",
                                   whiteSpace: "nowrap",
                                   height: "33px",
+                                  fontWeight: "bold" ,
+
                                 }}
                                 name='age'
                                 onChange={(e) =>
@@ -379,14 +382,14 @@ function BusConfirmation() {
 
                           <div className="form-group mt-1 pt-2">
                             <label className="mb-1" for={`aadhaar${i}`}>
-                              Adhaar Card Number
+                            <h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}> Adhaar Card Number{" "}</h3>
                             </label>
                             <AvField
                               type="text"
                               className="form-control pass_input"
                               id={`adhaar${i}`}
                               placeholder="Enter 12 digit Adhaar Card Number"
-                              style={{ fontSize: "11px", marginLeft: "-5px" }}
+                              style={{ fontSize: "11px", marginLeft: "-5px", fontWeight: "bold" }}
                               name='adhaar'
                               onChange={(e) =>
                                 handleTraveller(
@@ -547,7 +550,7 @@ function BusConfirmation() {
           </div>
 
           <Container
-            style={{ width: "90%", paddingTop: "40px", marginBottom: "70px" }}
+            style={{ width: "90%", paddingTop: "25px" }}
           >
             <h3
               style={{
@@ -560,7 +563,7 @@ function BusConfirmation() {
             </h3>
 
             <Row>
-              <Col xs={12}>
+              <Col xs={6}>
                 <div style={{ width: "89%" }}>
                   <span
                     style={{
@@ -590,7 +593,7 @@ function BusConfirmation() {
                       </div>
                     ))}
 
-                    <span
+                    {/* <span
                       style={{
                         marginTop: "10px",
                         marginRight: "10px",
@@ -600,7 +603,7 @@ function BusConfirmation() {
                       }}
                     >
                       {tripData?.departure_time}
-                    </span>
+                    </span> */}
                   </Form>
                   <div className="d-flex">
                     <span
@@ -610,6 +613,7 @@ function BusConfirmation() {
                         fontSize: "12px",
                         fontWeight: "bolder",
                         fontFamily: "sans-serif",
+                        textAlign:"justify"
                       }}
                     >
                       {tripData?.route?.start?.name}
@@ -617,7 +621,7 @@ function BusConfirmation() {
                   </div>
                 </div>
               </Col>
-              <Col xs={12}>
+              <Col xs={6}>
                 <div style={{ width: "89%" }}>
                   <span
                     style={{
@@ -647,17 +651,17 @@ function BusConfirmation() {
                       </div>
                     ))}
 
-                    <span
+                    {/* <span
                       style={{
-                        marginTop: "10px",
-                        marginRight: "10px",
-                        color: "black",
-                        fontWeight: "bolder",
-                        fontFamily: "sans-serif",
+                        // marginTop: "10px",
+                        // marginRight: "0px",
+                        // color: "black",
+                        // fontWeight: "bolder",
+                        // fontFamily: "sans-serif",
                       }}
                     >
                       {tripData?.estimated_time_of_arrival}
-                    </span>
+                    </span> */}
                   </Form>
                   <div className="d-flex">
                     <span
@@ -684,18 +688,18 @@ function BusConfirmation() {
                 <Paper key={i} className="traveller__card" style={{ marginBottom: "15px" }}>
                   <div className="traveller__card_body" className="py-0">
                     <div>
-                      <h5 className="traveller__card_title" style={{ fontSize: "12px", marginBottom: "15px", float: "left" }}>Travellers {i + 1}</h5>
+                      <h5 className="traveller__card_title" style={{ fontSize: "20px", marginBottom: "15px", float: "left", fontWeight: "bold" }}>Travellers {i + 1}</h5>
                       <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
                     </div>
                     <p className="traveller__card_text" style={{ clear: "both" }}>
                       <div className="form-group mt-0">
-                        <label className="mb-1" for={`name${i}`}>Name</label>
+                        <label className="mb-1" for={`name${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Name</h3>  </label>
                         <AvField
                           type="text"
                           className="form-control pass_input"
                           id={`name${i}`}
                           placeholder="Enter Traveller Name"
-                          style={{ fontSize: "11px", marginLeft: "-5px" }}
+                          style={{ fontSize: "11px", marginLeft: "-5px", fontWeight: "bold" }}
                           name="name"
                           onChange={(e) =>
                             handleTraveller(
@@ -718,13 +722,13 @@ function BusConfirmation() {
 
                       <div className="form-row genderform pt-3 d-flex ">
                         <div className="col m-2 w-50">
-                          <label className="mb-1" for={`gender${i}`}>Gender</label>
+                          <label className="mb-1" for={`gender${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Gender</h3></label>
                           <div className="d-flex pt-2">
                             <ButtonComponent
                               style={{
                                 width: "50%",
                                 fontSize: "11px",
-                                whiteSpace: "nowrap",
+                                whiteSpace: "nowrap", fontWeight: "bold" 
                               }}
                               data={button_Data}
                               // activeButton={activeButton}
@@ -733,7 +737,7 @@ function BusConfirmation() {
                           </div>
                         </div>
                         <div className="form-group col m-2 w-50">
-                          <label className="mb-1" for={`age${i}`}>Age</label>
+                          <label className="mb-1" for={`age${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Age</h3></label>
                           <AvField
                             type="text"
                             className="form-control pass_input w-70 pt-2"
@@ -745,6 +749,7 @@ function BusConfirmation() {
                               fontSize: "12px",
                               whiteSpace: "nowrap",
                               height: "33px",
+                              fontWeight: "bold" ,
                             }}
                             name="age"
                             onChange={(e) =>
@@ -768,14 +773,14 @@ function BusConfirmation() {
 
                       <div className="form-group mt-1 pt-2">
                         <label className="mb-1" for={`aadhaar${i}`}>
-                          Adhaar Card Number{" "}
+                        <h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}> Adhaar Card Number{" "}</h3>
                         </label>
                         <AvField
                           type="text"
                           className="form-control pass_input"
                           id={`adhaar${i}`}
                           placeholder="Enter 12 digit Adhaar Card Number"
-                          style={{ fontSize: "11px", marginLeft: "-5px", marginTop: "7px" }}
+                          style={{ fontSize: "11px", marginLeft: "-5px", marginTop: "7px" , fontWeight: "bold"}}
                           name="adhaar"
                           onChange={(e) =>
                             handleTraveller(
@@ -806,6 +811,7 @@ function BusConfirmation() {
               ))
             }
           </div>
+          
           <div style={{ textAlign: "center", paddingBottom: "200px" }}>
             <Button
               type="button"
