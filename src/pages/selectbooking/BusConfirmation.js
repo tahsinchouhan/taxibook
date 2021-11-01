@@ -290,7 +290,7 @@ function BusConfirmation() {
                     <Paper key={i} className="traveller__card" >
                       <div className="traveller__card_body" className="py-0">
                         <div>
-                          <h5 className="traveller__card_title" style={{ fontSize: "20px", marginBottom: "15px", float: "left", fontWeight: "bold" }}>Travellers {i + 1}</h5>
+                          <h5 className="traveller__card_title" style={{ fontSize: "20px", marginBottom: "15px", float: "left", fontWeight: "bold" }}>Enter Travellers {i + 1}</h5>
 
                           <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
                         </div>
@@ -382,13 +382,13 @@ function BusConfirmation() {
 
                           <div className="form-group mt-1 pt-2">
                             <label className="mb-1" for={`aadhaar${i}`}>
-                            <h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}> Adhaar Card Number{" "}</h3>
+                            <h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}> Aadhar /Any Govt ID Number{" "}</h3>
                             </label>
                             <AvField
                               type="text"
                               className="form-control pass_input"
                               id={`adhaar${i}`}
-                              placeholder="Enter 12 digit Adhaar Card Number"
+                              placeholder="Enter Aadhar /Any Govt ID Number"
                               style={{ fontSize: "11px", marginLeft: "-5px", fontWeight: "bold" }}
                               name='adhaar'
                               onChange={(e) =>
@@ -403,12 +403,12 @@ function BusConfirmation() {
                               validate={{
                                 required: {
                                   value: true,
-                                  errorMessage: "Your Adhar Card Number Required",
+                                  errorMessage: "Your Aadhar /Any Govt ID Number Required",
                                 },
-                                pattern: {
-                                  value: "(?=.{12})",
-                                  errorMessage: "Enter 12 digit Adhaar Card Number"
-                                },
+                                // pattern: {
+                                //   value: "(?=.{12})",
+                                //   errorMessage: "Enter Aadhar /Any Govt ID Number"
+                                // },
                                 
                               }}
                             />
@@ -688,7 +688,7 @@ function BusConfirmation() {
                 <Paper key={i} className="traveller__card" style={{ marginBottom: "15px" }}>
                   <div className="traveller__card_body" className="py-0">
                     <div>
-                      <h5 className="traveller__card_title" style={{ fontSize: "20px", marginBottom: "15px", float: "left", fontWeight: "bold" }}>Travellers {i + 1}</h5>
+                      <h5 className="traveller__card_title" style={{ fontSize: "20px", marginBottom: "15px", float: "left", fontWeight: "bold" }}>Enter Travellers {i + 1}</h5>
                       <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
                     </div>
                     <p className="traveller__card_text" style={{ clear: "both" }}>
@@ -773,13 +773,13 @@ function BusConfirmation() {
 
                       <div className="form-group mt-1 pt-2">
                         <label className="mb-1" for={`aadhaar${i}`}>
-                        <h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}> Adhaar Card Number{" "}</h3>
+                        <h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}> Aadhar /Any Govt ID Number{" "}</h3>
                         </label>
                         <AvField
                           type="text"
                           className="form-control pass_input"
                           id={`adhaar${i}`}
-                          placeholder="Enter 12 digit Adhaar Card Number"
+                          placeholder="Enter 12 digit Aadhar /Any Govt ID Number"
                           style={{ fontSize: "11px", marginLeft: "-5px", marginTop: "7px" , fontWeight: "bold"}}
                           name="adhaar"
                           onChange={(e) =>
@@ -794,12 +794,12 @@ function BusConfirmation() {
                           validate={{
                             required: {
                               value: true,
-                              errorMessage: "Your Adhar Card Number Required",
+                              errorMessage: "Your Aadhar /Any Govt ID Number Required",
                             },
-                            pattern: {
-                              value: "(?=.{12})",
-                              errorMessage: "Enter 12 digit Adhaar Card Number"
-                            },
+                            // pattern: {
+                            //   value: "(?=.{12})",
+                            //   errorMessage: "Enter 12 digit Adhaar Card Number"
+                            // },
                             
                           }}
                         />
