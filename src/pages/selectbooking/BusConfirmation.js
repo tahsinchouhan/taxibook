@@ -41,7 +41,7 @@ function BusConfirmation() {
 
   const dispatch = useDispatch()
   const { tripData, data: apiData,  routeData } = useSelector(state => state.busReducer)
-
+console.log( tripData, apiData,  routeData )
   const onSideBtnClick = (e) => {
     const name = e.target.name;
     setActiveButton(name);

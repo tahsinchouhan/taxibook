@@ -1,15 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import "../../assets/css/busconfirmation.css";
 import { IoIosArrowBack } from "react-icons/io";
 import Room from "../../assets/img/hotelRoom.jpeg";
 import calendar from "../../assets/img/calendar.png";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { API_PATH } from "../../Path/Path";
+import moment from "moment";
+import { fetchStart, getOtp, setMobile, verifyOtp } from "../../redux/actions";
+import { setApiData } from "../../redux/actions";
 
-function HotelConfirmation() {
+function HotelConfirmation(props) {
   const history = useHistory();
+  const [singleData, setSingleData] = useState([]);
+  const [number, setNumber] = useState("");
+  const [otp, setOtp] = useState("");
+  const [showOTP, setShowOTP] = useState(false);
 
+  const dispatch = useDispatch();
+  const { getStartData } = useSelector((state) => state.hotelReducer);
+  const { user_data } = useSelector((state) => state.loginReducer);
+  let check_in = moment(getStartData.startDate).format("DD-MMM");
+  let address1 = getStartData.sendlocation;
+  let check_out = moment(getStartData.endDate).format("DD-MMM");
+  const hotelUniqid = props.match.params.id;
+  const getHotelSingleData = () => {
+    axios
+      .get(`${API_PATH}/api/v2/hotelregistration/${hotelUniqid}`)
+      .then((response) => {
+        console.log(response.data.data);
+        setSingleData(response.data.data);
+      });
+  };
+
+  // const onCheckout = () => {
+  //   console.log("object");
+  //   dispatch(setApiData({ ...values, basic_details: travellers }))
+  //   history.push("/checkoutpage");
+  // };
+  const fetchOtp = () => {
+    // console.log("OTP:::::",mobile)
+    if (number !== "") {
+      dispatch(getOtp(`91${number}`));
+      setShowOTP(true);
+    }
+  };
+  useEffect(() => {
+    if (getStartData.startDate === undefined) {
+      history.push("/hotelsearch");
+    }
+    getHotelSingleData();
+  }, [getStartData]);
   const onCheckout = () => {
     history.push("/checkoutpage");
   };
@@ -17,11 +61,35 @@ function HotelConfirmation() {
   const onClickBack = () => {
     history.push("/hotellist");
   };
+  const onClickMonsoon = () => {
+    console.log("object", `91${number}`, otp);
+    if (otp.length === 6) {
+      dispatch(fetchStart());
+      dispatch(verifyOtp(`91${number}`, otp));
+    }
+  };
 
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+    console.log(e.target, "val", values);
+  };
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    hotel_name: "",
+    no_of_guest: "",
+    startDate: "",
+    endDate: "",
+    per_night_charge: "",
+    total_amount: "",
+  });
   return (
     <>
       <div className="">
         <Header />
+        {/* {user_data === null ? <Redirect to="/hotelsearch" /> : null} */}
+
         <div className="container-div">
           <div onClick={onClickBack}>
             <h4
@@ -76,6 +144,10 @@ function HotelConfirmation() {
                           type="text"
                           placeholder="Your Name"
                           className="form-input"
+                          onChange={
+                            ((e) => setValues(e.target.value),
+                            (e) => handleChange(e))
+                          }
                         />
                       </div>
                       <div className="form-input-div">
@@ -86,6 +158,10 @@ function HotelConfirmation() {
                           type="email"
                           placeholder="example@gmail.com"
                           className="form-input"
+                          onChange={
+                            ((e) => setValues(e.target.value),
+                            (e) => handleChange(e))
+                          }
                         />
                       </div>
                     </div>
@@ -101,25 +177,63 @@ function HotelConfirmation() {
                           type="number"
                           className="form-input"
                           placeholder="Your Mobile Number"
+                          onChange={
+                            ((e) => setNumber(e.target.value),
+                            (e) => handleChange(e))
+                          }
                         />
                       </div>
-                      <div className="mt-3" style={{ marginRight: "20px" }}>
-                        <button
-                          style={{
-                            backgroundColor: "#0fa453",
-                            height: "37px",
-                            width: "180px",
-                            marginTop: "20px",
-                            borderRadius: "5px",
-                            border: "0px solid gray",
-                            color: "white",
-                            fontWeight: "bold",
-                            fontSize: "16px",
-                          }}
+                      {user_data === null ? (
+                        <div className="mt-3" style={{ marginRight: "20px" }}>
+                          <button
+                            type="button"
+                            onClick={fetchOtp}
+                            style={{
+                              backgroundColor: "#0fa453",
+                              height: "37px",
+                              width: "180px",
+                              marginTop: "20px",
+                              borderRadius: "5px",
+                              border: "0px solid gray",
+                              color: "white",
+                              fontWeight: "bold",
+                              fontSize: "16px",
+                            }}
+                          >
+                            Send Passcode
+                          </button>
+                        </div>
+                      ) : null}
+                    </div>
+                    <div className=" form-div mt-3">
+                      {showOTP ? (
+                        <div
+                          className=" form-input-div"
+                          style={{ marginRight: "20px" }}
                         >
-                          Send Passcode
-                        </button>
-                      </div>
+                          <h3 style={{ fontSize: "16px", fontWeight: "bold" }}>
+                            Enter OTP
+                          </h3>
+                          <input
+                            type="number"
+                            className="form-input"
+                            value={otp}
+                            onChange={(e) => setOtp(e.target.value)}
+                            placeholder="Enter OTP Number"
+                          />
+                        </div>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    <div className="form-div">
+                      <button
+                        className="locationpass-btn"
+                        type="submit"
+                        onClick={onClickMonsoon}
+                      >
+                        Continue
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -131,7 +245,7 @@ function HotelConfirmation() {
                   className="mt-2"
                   style={{ fontSize: "16px", fontWeight: "bold" }}
                 >
-                  Hotel FlagShip Bastar
+                  {singleData.hotel_name}
                 </h2>
                 <img
                   src={Room}
@@ -157,7 +271,7 @@ function HotelConfirmation() {
                     marginRight: "10px",
                   }}
                 />
-                <p>Sat, 30 Oct-Sun, 31 Oct </p> &nbsp; | &nbsp;
+                <p>{`${check_in}-${check_out}`}</p> &nbsp; | &nbsp;
                 <p> 1 Room, 2 Guests</p>
               </div>
               <hr />

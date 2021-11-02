@@ -15,9 +15,9 @@ function ListCard(props) {
     console.log("hiii");
     history.push(`/hotelDetails/${HotelId}`);
   };
-  const bookNow = () => {
+  const bookNow = (HotelId) => {
     console.log("hiii");
-    history.push("/hotelconfirmation");
+    history.push(`/hotelconfirmation/${HotelId}`);
   };
   console.log({hotels})
   return (
@@ -214,7 +214,7 @@ function ListCard(props) {
                         >
                           <span
                             className="train-seats  d-flex justify-content-center "
-                            onClick={bookNow}
+                            onClick={()=>bookNow(item._id)}
                             style={{
                               fontSize: "15px",
                               fontWeight: 700,
@@ -227,7 +227,7 @@ function ListCard(props) {
                             Book Now
                           </span>
                           <span
-                            onClick={()=>(viewDetails(item._id))}
+                            onClick={()=>viewDetails(item._id)}
                             className=" d-flex justify-content-center"
                             style={{
                               fontSize: "15px",
@@ -430,7 +430,7 @@ function ListCard(props) {
                           >
                             <span
                               className="train-seats  d-flex justify-content-center "
-                              onClick={bookNow}
+                              onClick={()=>bookNow(item._id)}
                               style={{
                                 fontSize: "15px",
                                 fontWeight: 700,
@@ -443,7 +443,7 @@ function ListCard(props) {
                             </span>
                             <span
                               className=" d-flex justify-content-center"
-                              onClick={viewDetails}
+                              onClick={()=>viewDetails(item._id)}
                               style={{
                                 fontSize: "15px",
                                 fontWeight: 700,

@@ -118,7 +118,7 @@ function App() {
             <Route exact path='/hotelSingleDetails/:name' component={HotelSingleDetails} />
             <Route
               exact
-              path="/hotelconfirmation"
+              path="/hotelconfirmation/:id"
               component={HotelConfirmation}
             />
 
