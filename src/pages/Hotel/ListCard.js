@@ -214,7 +214,7 @@ function ListCard(props) {
                         >
                           <span
                             className="train-seats  d-flex justify-content-center "
-                            onClick={()=>bookNow(item._id)}
+                            onClick={()=>bookNow(item.room_data._id)}
                             style={{
                               fontSize: "15px",
                               fontWeight: 700,
@@ -227,7 +227,7 @@ function ListCard(props) {
                             Book Now
                           </span>
                           <span
-                            onClick={()=>viewDetails(item._id)}
+                            onClick={()=>viewDetails(item.room_data._id)}
                             className=" d-flex justify-content-center"
                             style={{
                               fontSize: "15px",
@@ -430,7 +430,7 @@ function ListCard(props) {
                           >
                             <span
                               className="train-seats  d-flex justify-content-center "
-                              onClick={()=>bookNow(item._id)}
+                              onClick={()=>bookNow(item.room_data._id)}
                               style={{
                                 fontSize: "15px",
                                 fontWeight: 700,
@@ -443,7 +443,7 @@ function ListCard(props) {
                             </span>
                             <span
                               className=" d-flex justify-content-center"
-                              onClick={()=>viewDetails(item._id)}
+                              onClick={()=>viewDetails(item.room_data._id)}
                               style={{
                                 fontSize: "15px",
                                 fontWeight: 700,

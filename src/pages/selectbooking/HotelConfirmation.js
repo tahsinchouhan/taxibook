@@ -11,7 +11,7 @@ import axios from "axios";
 import { API_PATH } from "../../Path/Path";
 import moment from "moment";
 import { fetchStart, getOtp, setMobile, verifyOtp } from "../../redux/actions";
-import { setApiData } from "../../redux/actions";
+import { setBookHotel } from "../../redux/actions";
 
 function HotelConfirmation(props) {
   const history = useHistory();
@@ -23,26 +23,28 @@ function HotelConfirmation(props) {
   const dispatch = useDispatch();
   const { getStartData } = useSelector((state) => state.hotelReducer);
   const { user_data } = useSelector((state) => state.loginReducer);
-  let check_in = moment(getStartData.startDate).format("DD-MMM");
-  let address1 = getStartData.sendlocation;
-  let check_out = moment(getStartData.endDate).format("DD-MMM");
+  const check_in = moment(getStartData.startDate).format("DD-MMM");
+  const address1 = getStartData.sendlocation;
+  const check_out = moment(getStartData.endDate).format("DD-MMM");
   const hotelUniqid = props.match.params.id;
-  const getHotelSingleData = () => {
-    axios
-      .get(`${API_PATH}/api/v2/hotelregistration/${hotelUniqid}`)
+  const getHotelSingleData = async() => {
+  await  axios
+      .get(`${API_PATH}/api/v2/room/${hotelUniqid}`)
       .then((response) => {
         console.log(response.data.data);
         setSingleData(response.data.data);
+        setTotalValue();
       });
   };
 
-  // const onCheckout = () => {
-  //   console.log("object");
-  //   dispatch(setApiData({ ...values, basic_details: travellers }))
-  //   history.push("/checkoutpage");
-  // };
+  const onCheckout = () => {
+    console.log("object");
+    dispatch(setBookHotel({ ...values, basic_details: singleData }))
+    history.push("/hcheckoutpage");
+    return false;
+  };
   const fetchOtp = () => {
-    // console.log("OTP:::::",mobile)
+     console.log("OTP:::::",number)
     if (number !== "") {
       dispatch(getOtp(`91${number}`));
       setShowOTP(true);
@@ -52,11 +54,14 @@ function HotelConfirmation(props) {
     if (getStartData.startDate === undefined) {
       history.push("/hotelsearch");
     }
-    getHotelSingleData();
   }, [getStartData]);
-  const onCheckout = () => {
-    history.push("/checkoutpage");
-  };
+useEffect(() => {
+  getHotelSingleData();
+}, [])
+
+  // const onCheckout = () => {
+  //   history.push("/checkoutpage");
+  // };
 
   const onClickBack = () => {
     history.push("/hotellist");
@@ -67,11 +72,13 @@ function HotelConfirmation(props) {
       dispatch(fetchStart());
       dispatch(verifyOtp(`91${number}`, otp));
     }
+    onCheckout();
+    return false;
   };
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    console.log(e.target, "val", values);
+    // console.log(e.target, "val", values);
   };
   const [values, setValues] = useState({
     name: "",
@@ -79,13 +86,26 @@ function HotelConfirmation(props) {
     mobile: "",
     hotel_name: "",
     no_of_guest: "",
+    no_of_room: "",
     startDate: "",
     endDate: "",
     per_night_charge: "",
     total_amount: "",
   });
+  const setTotalValue=()=>{
+    setValues({ ...values, ['startDate']: getStartData.startDate });
+    setValues({ ...values, ['endDate']: getStartData.endDate });
+    setValues({ ...values, ['total_amount']: 1000 });
+    setValues({ ...values, ['hotel_name']: singleData.hotel_?.hotel_name });
+    setValues({ ...values, ['per_night_charge']: 0 });
+    setValues({ ...values, ['no_of_guest']: 2 });
+    setValues({ ...values, ['no_of_room']: 2 });
+
+  }
+
   return (
     <>
+      {singleData.price?
       <div className="">
         <Header />
         {/* {user_data === null ? <Redirect to="/hotelsearch" /> : null} */}
@@ -109,7 +129,7 @@ function HotelConfirmation(props) {
             <div className="hotel-confirm-1">
               <div className="saving-div-container">
                 <h4 className="saving-div">
-                  🎉 Yay!! you just saved ₹ 457 on this booking
+                  🎉 Yay!! you just saved ₹ {(singleData?.price?.actual_price- singleData?.price?.final_price)+(singleData?.price?.actual_price- singleData?.price?.final_price)*0.25} on this booking
                 </h4>
               </div>
               <div className="details-div">
@@ -142,11 +162,13 @@ function HotelConfirmation(props) {
                         </h3>
                         <input
                           type="text"
+                          name="name"
                           placeholder="Your Name"
                           className="form-input"
                           onChange={
-                            ((e) => setValues(e.target.value),
-                            (e) => handleChange(e))
+                            (e) => {setValues(e.target.value);
+                            handleChange(e);
+                            }
                           }
                         />
                       </div>
@@ -156,11 +178,13 @@ function HotelConfirmation(props) {
                         </h3>
                         <input
                           type="email"
+                          name="email"
                           placeholder="example@gmail.com"
                           className="form-input"
                           onChange={
-                            ((e) => setValues(e.target.value),
-                            (e) => handleChange(e))
+                            (e) => {setValues(e.target.value);
+                           handleChange(e)
+                            }
                           }
                         />
                       </div>
@@ -175,12 +199,16 @@ function HotelConfirmation(props) {
                         </h3>
                         <input
                           type="number"
+                          name="mobile"
                           className="form-input"
                           placeholder="Your Mobile Number"
-                          onChange={
-                            ((e) => setNumber(e.target.value),
-                            (e) => handleChange(e))
-                          }
+                            onChange={
+                              (e) => {setNumber(e.target.value);
+                            handleChange(e)
+                              }
+                            }
+                           
+  
                         />
                       </div>
                       {user_data === null ? (
@@ -245,7 +273,7 @@ function HotelConfirmation(props) {
                   className="mt-2"
                   style={{ fontSize: "16px", fontWeight: "bold" }}
                 >
-                  {singleData.hotel_name}
+                  {singleData?.hotel_id?.hotel_name}
                 </h2>
                 <img
                   src={Room}
@@ -278,7 +306,7 @@ function HotelConfirmation(props) {
 
               <div className="">
                 <div style={{ fontWeight: "bold", margin: "10px 0" }}>
-                  Classic (2x)
+                  Classic ({singleData.category})
                 </div>
                 <div
                   className="mt-1"
@@ -287,21 +315,21 @@ function HotelConfirmation(props) {
                   <span style={{ color: "darkgrey" }}>
                     Room price for 1 Night X 2 guest
                   </span>
-                  <span style={{ fontWeight: "bold" }}>₹ 2000</span>
+                  <span style={{ fontWeight: "bold" }}>₹ {singleData.price.actual_price}</span>
                 </div>
                 <div
                   className="mt-1"
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <span style={{ color: "darkgrey" }}>Price Drop</span>
-                  <span style={{ fontWeight: "bold" }}>-₹ 782</span>
+                  <span style={{ fontWeight: "bold" }}>-₹  {singleData.price.actual_price- singleData.price.final_price}</span>
                 </div>
                 <div
                   className="mt-1"
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <span style={{ color: "darkgrey" }}>25% discount coupon</span>
-                  <span style={{ fontWeight: "bold" }}>-₹ 457</span>
+                  <span style={{ fontWeight: "bold" }}>-₹ {(singleData.price.actual_price- singleData.price.final_price)*0.25}</span>
                 </div>
               </div>
               <hr />
@@ -319,7 +347,7 @@ function HotelConfirmation(props) {
                       Inclusive of all taxes
                     </span>
                   </div>
-                  <span style={{ fontWeight: "bold" }}>₹ 1370</span>
+                  <span style={{ fontWeight: "bold" }}>₹ {singleData.price.actual_price-(singleData.price.actual_price- singleData.price.final_price)-(singleData.price.actual_price- singleData.price.final_price)*0.25}</span>
                 </div>
                 <div
                   style={{
@@ -345,6 +373,8 @@ function HotelConfirmation(props) {
           <Footer />
         </div>
       </div>
+      :''
+      }
     </>
   );
 }

@@ -2,6 +2,9 @@ import {
   GET_BOOK_HOTEL,
   GET_BOOK_HOTEL_SUCCESS,
   GET_BOOK_HOTEL_ERROR,
+  SET_BOOK_HOTEL,
+  SET_BOOK_HOTEL_SUCCESS,
+  SET_BOOK_HOTEL_ERROR,
 } from "../actions";
 
 const INIT_STATE = {
@@ -23,6 +26,16 @@ const hotelReducer = (state = INIT_STATE, action) => {
     case GET_BOOK_HOTEL_ERROR:
       return { ...state, error: action.payload };
 
+
+      case SET_BOOK_HOTEL:{
+        const actionData = action.payload;
+        console.log(actionData)
+        return { ...state, Setdata: action.payload };
+      }
+      case SET_BOOK_HOTEL_SUCCESS:
+        return { ...state, savedata: action.payload };
+      case SET_BOOK_HOTEL_ERROR:
+        return { ...state, error: action.payload };
     default:
         return { ...state}
   }

@@ -25,6 +25,7 @@ import BusDropoff from './pages/selectbooking/BusDropoff';
 import BusConfirmation from './pages/selectbooking/BusConfirmation';
 import BusCard from './pages/selectbooking/BusCard';
 import CheckoutPage from './pages/selectbooking/CheckoutPage';
+import HCheckoutPage from './pages/selectbooking/hotelcheckout';
 import CongratulationPage from './pages/selectbooking/CongratulationPage';
 import AddForm from './pages/VenderOrgAdd/AddForm';
 import AddHotel from './pages/VenderOrgAdd/AddHotel';
@@ -56,7 +57,6 @@ import HotelDetails from './pages/Hotel/HotelDetails';
 import HotelSearch from "./pages/Hotel/HotelSearch";
 import HotelList from "./pages/Hotel/HotelList";
 import HotelConfirmation from "./pages/selectbooking/HotelConfirmation";
-
 function App() {
   return (
     <>
@@ -92,6 +92,7 @@ function App() {
             <Route exact path='/busconfirmation' component={BusConfirmation} />
             <Route exact path='/ buscard' component={BusCard} />
             <Route exact path='/checkoutpage' component={CheckoutPage} />
+            <Route exact path='/hcheckoutpage' component={HCheckoutPage} />
             <Route exact path='/congratulation-page' component={CongratulationPage} />
             <Route exact path='/add-form' component={AddForm} />
             <Route exact path='/add-hotel' component={AddHotel} />

@@ -20,8 +20,8 @@ const HotelDetails = (props) => {
 
   useEffect(() => {
     axios
-      .get(`${API_PATH}/api/v2/hotelregistration/${hotelUniqid}`)
-      .then((response) => {
+    .get(`${API_PATH}/api/v2/room/${hotelUniqid}`)
+          .then((response) => {
         console.log(response.data.data);
         setDetailsP(response.data.data);
       });
@@ -33,8 +33,10 @@ const HotelDetails = (props) => {
     return current && current < moment().endOf("day");
   }
   const { RangePicker } = DatePicker;
+  console.log(detailsP)
   return (
-    <div>
+
+      <div>
       <Header />
 
       <div className="d-none d-md-block" style={{ marginTop: "0" }}>
@@ -45,7 +47,7 @@ const HotelDetails = (props) => {
         
         </Container>
         <div>
-          <Details />
+          <Details  detailsP={detailsP} hotelUniqid={hotelUniqid}/>
         </div>
         <Footer />
       </div>
@@ -204,6 +206,7 @@ const HotelDetails = (props) => {
         </div>
       </div>
     </div>
+   
   );
 };
 

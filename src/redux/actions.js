@@ -68,6 +68,10 @@ export const SET_QUIZ_ENDED = "SET_QUIZ_ENDED";
 export const GET_BOOK_HOTEL='GET_BOOK_HOTEL';
 export const GET_BOOK_HOTEL_SUCCESS='GET_BOOK_HOTEL_SUCCESS';
 export const GET_BOOK_HOTEL_ERROR='GET_BOOK_HOTEL_ERROR';
+
+export const SET_BOOK_HOTEL='SET_BOOK_HOTEL';
+export const SET_BOOK_HOTEL_SUCCESS='SET_BOOK_HOTEL_SUCCESS';
+export const SET_BOOK_HOTEL_ERROR='SET_BOOK_HOTEL_ERROR';
 // Hotel Details
 
 export * from "./common/actions";

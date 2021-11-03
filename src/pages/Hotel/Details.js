@@ -4,6 +4,9 @@ import calendar from "../../assets/img/calendar.png";
 import { useHistory } from "react-router-dom";
 import { API_PATH } from "../../Path/Path";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+
 
 const Details = ({ hotelUniqid,detailsP }) => {
   console.log({detailsP})
@@ -11,11 +14,14 @@ const Details = ({ hotelUniqid,detailsP }) => {
   const bookingPage = () => {
     history.push(`/hotelconfirmation/${hotelUniqid}`);
   };
- 
+  const { getStartData } = useSelector((state) => state.hotelReducer);
+  const check_in = moment(getStartData.startDate).format("DD-MMM");
+  const address1 = getStartData.sendlocation;
+  const check_out = moment(getStartData.endDate).format("DD-MMM");
   console.log(detailsP, typeof detailsP);
   return (
     <>
-      {detailsP!==undefined? (
+      {detailsP._id? (
         <div
           className="hotel-confirm-div"
           style={{ width: "90%", margin: "0 auto" }}
@@ -29,7 +35,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
               }}
             >
               <h4 style={{ fontWeight: "bold", marginBottom: 0 }}>
-                {detailsP?.hotel_name}
+              {detailsP?.hotel_id?.hotel_name}
                 {"dd "}
               </h4>
               <p
@@ -40,7 +46,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                   padding: 0,
                 }}
               >
-                {`${detailsP.full_address.city},${detailsP.full_address.city}`}
+                {/* {`${detailsP.full_address.city},${detailsP.full_address.city}`} */}
               </p>
             </div>
             <div>
@@ -48,26 +54,31 @@ const Details = ({ hotelUniqid,detailsP }) => {
                 Amenities
               </h2>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
-                <div className="amenities-div">
+                {detailsP?.amenities?.includes('AC')?<div className="amenities-div">
                   <img src={calendar} alt="" className="amenities-logo" />
                   <h1 className="amenities-name">AC</h1>
-                </div>
-                <div className="amenities-div">
+                </div>:''
+                }
+                {detailsP?.amenities?.includes('Freeze')?<div className="amenities-div">
                   <img src={calendar} alt="" className="amenities-logo" />
                   <h1 className="amenities-name">Freeze</h1>
-                </div>
-                <div className="amenities-div">
+                </div>:''
+                }
+                {detailsP?.amenities?.includes('Wifi')?<div className="amenities-div">
                   <img src={calendar} alt="" className="amenities-logo" />
                   <h1 className="amenities-name">Wifi</h1>
-                </div>
-                <div className="amenities-div">
+                </div>:''
+                }
+                {detailsP?.amenities?.includes('Geezer')?<div className="amenities-div">
                   <img src={calendar} alt="" className="amenities-logo" />
                   <h1 className="amenities-name">Geezer</h1>
-                </div>
-                <div className="amenities-div">
+                </div>:''
+                }
+                {detailsP?.amenities?.includes('CCTV')?<div className="amenities-div">
                   <img src={calendar} alt="" className="amenities-logo" />
                   <h1 className="amenities-name">CCTV</h1>
-                </div>
+                </div>:''
+                }
                 <div className="amenities-div">
                   <h1
                     style={{
@@ -109,7 +120,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                   >
                     <div style={{}}>
                       <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>
-                        Classic (2X)
+                        Classic ({detailsP?.category})
                       </h1>
                       <p>Room Size : 1200 sqft</p>
                       <div style={{ display: "flex" }}>
@@ -181,7 +192,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     }}
                   >
                     <div style={{ fontSize: "20px" }}>
-                      <span style={{ fontWeight: "bold" }}> ₹ 1370</span>{" "}
+                      <span style={{ fontWeight: "bold" }}> ₹ {detailsP?.price.final_price}</span>{" "}
                       <span
                         style={{
                           fontSize: "16px",
@@ -189,7 +200,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                         }}
                       >
                         {" "}
-                        ₹ 2690
+                        ₹ {detailsP?.price.actual_price}
                       </span>
                     </div>
                     <div
@@ -260,7 +271,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     paddingRight: "10px",
                   }}
                 >
-                  ₹ 1370
+                  ₹  {detailsP?.price.final_price}
                 </h1>
                 <h2
                   style={{
@@ -272,7 +283,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     textDecoration: "line-through",
                   }}
                 >
-                  ₹ 2350
+                  ₹  {detailsP?.price.actual_price}
                 </h2>
                 <h3
                   style={{
@@ -283,7 +294,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                   }}
                 >
                   {" "}
-                  50% 0ff
+                  {Math.round((detailsP?.price.actual_price-detailsP?.price.final_price)*100/detailsP?.price.actual_price)}% 0ff
                 </h3>
               </div>
               <span
@@ -307,7 +318,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                 }}
               >
                 <p style={{ margin: "0", padding: "0 4px" }}>
-                  Sat, 30 Oct-Sun, 31 Oct{" "}
+                 {`${check_in}-${check_out}`}{" "}
                 </p>{" "}
                 &nbsp; | &nbsp;
                 <p style={{ margin: "0", padding: "0" }}> 1 Room, 2 Guests</p>
@@ -330,7 +341,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     fontSize: "12px",
                   }}
                 >
-                  Classic (2x)
+                  Classic ({detailsP?.category})
                 </div>
               </div>
 
@@ -339,7 +350,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
                 <span style={{}}>Your Saving</span>
-                <span style={{ fontWeight: "bold" }}>₹ 2000</span>
+                <span style={{ fontWeight: "bold" }}>₹ {detailsP?.price?.actual_price-detailsP?.price?.final_price}</span>
               </div>
               <div
                 className="mt-1"
@@ -352,7 +363,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     (inclusive of all taxes)
                   </span>
                 </span>
-                <span style={{ fontWeight: "bold" }}>-₹ 782</span>
+                <span style={{ fontWeight: "bold" }}>₹ {detailsP?.price?.final_price}</span>
               </div>
 
               <div>
