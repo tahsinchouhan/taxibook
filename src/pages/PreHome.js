@@ -19,18 +19,33 @@ const PreHome = () => {
   const [imageCounter, setImageCounter] = useState([]);
   const [getMAxValue, setGetMAxValue] = useState([]);
   const selectImageCategory = async (category, key, classN, e) => {
-    console.log(e.target);
-    let status;
-    if (await imageCounter.includes(key)) {
-      let aaa = imageCounter;
-      let keyIndex = await aaa.findIndex((keyInd) => keyInd == key);
-      status = false;
-      aaa.splice(keyIndex, 0);
-      setImageCounter(aaa);
-    } else {
-      status = true;
-      await setImageCounter([...imageCounter, key]);
+    let status=true ;
+    key = parseInt(key);
+    console.log(imageCounter.length,key)
+    if(imageCounter.length>0){
+      if (await imageCounter.includes(key)) {
+        let aaa = imageCounter;
+        let keyIndex = await aaa.findIndex((keyInd) => keyInd === key);
+        console.log('keyIndex',keyIndex)
+        status = false;
+        aaa= await  aaa.splice(keyIndex, 1);
+       await setImageCounter(aaa);
+      } else {
+        console.log('false part')
+        status = true;
+        let arr = imageCounter;
+        arr.push(key)
+       await   setImageCounter(arr);
+      }
+    }else{
+      let arr = imageCounter;
+      arr.push(key)
+     await   setImageCounter(arr);
+       console.log('imageCounter',imageCounter)
     }
+   
+    console.log(imageCounter);
+
     switch (category) {
       case "Adventure":
         if (status === true) setAdventure(adventure11 + 1);
@@ -59,7 +74,6 @@ const PreHome = () => {
     x = document.querySelectorAll("." + classN);
     overlay3 = document.querySelectorAll(".overlay3" + key);
     for (i = 0; i < x.length; i++) {
-      console.log(status,overlay3)
       if (status === true) {
         x[i].style.border = "3px solid green";
         overlay3[i].style.display = "block";
