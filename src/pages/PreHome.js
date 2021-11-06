@@ -41,11 +41,7 @@ const PreHome = () => {
       let arr = imageCounter;
       arr.push(key)
      await   setImageCounter(arr);
-       console.log('imageCounter',imageCounter)
     }
-   
-    console.log(imageCounter);
-
     switch (category) {
       case "Adventure":
         if (status === true) setAdventure(adventure11 + 1);
@@ -79,7 +75,7 @@ const PreHome = () => {
         overlay3[i].style.display = "block";
       } else {
         x[i].style.border = "none";
-        overlay3[i].style.display = "none";
+        overlay3[i].style.display ="none";
       }
     }
   };
@@ -218,6 +214,8 @@ const PreHome = () => {
                     className="container123"
                     style={{ width: "50%", height: "75%" }}
                   >
+                     <div className="mainImgContainer">
+                    
                     <Image
                       className={`homepage1 borderImage${key} container1234 `}
                       draggable={false}
@@ -264,7 +262,8 @@ const PreHome = () => {
                         <b>{item.title}</b>
                       </div>
                     </div>
-                  </div>
+                    </div>
+                    </div>
                 );
               })}
             </div>
