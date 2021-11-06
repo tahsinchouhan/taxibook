@@ -112,9 +112,9 @@ function Header() {
               <NavLink className="sidebar__navlink" to="/select-booking">
                 BOOKING
               </NavLink>
-              <NavLink className="sidebar__navlink" to="/hotelsearch">
+              {/* <NavLink className="sidebar__navlink" to="/hotelsearch">
                HOTEL BOOKING
-              </NavLink>
+              </NavLink> */}
               {/* <NavLink className="sidebar__navlink" to="/tickets_sraech"> */}
               <NavLink className="sidebar__navlink" to="/tickets">
                 TICKETS
@@ -166,9 +166,9 @@ function Header() {
                 <NavLink className="sidebar_item" to="/select-booking">
                   BOOKING
                 </NavLink>
-                <NavLink className="sidebar_item" to="/hotelsearch">
+                {/* <NavLink className="sidebar_item" to="/hotelsearch">
                HOTEL BOOKING
-              </NavLink>
+              </NavLink> */}
                 {/* <NavLink className="sidebar_item" to="/tickets_sraech"> */}
                 <NavLink className="sidebar_item" to="/tickets">
                   TICKETS
