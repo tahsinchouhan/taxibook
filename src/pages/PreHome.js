@@ -21,17 +21,14 @@ const PreHome = () => {
   const selectImageCategory = async (category, key, classN, e) => {
     let status=true ;
     key = parseInt(key);
-    console.log(imageCounter.length,key)
     if(imageCounter.length>0){
       if (await imageCounter.includes(key)) {
         let aaa = imageCounter;
         let keyIndex = await aaa.findIndex((keyInd) => keyInd === key);
-        console.log('keyIndex',keyIndex)
         status = false;
         aaa= await  aaa.splice(keyIndex, 1);
        await setImageCounter(aaa);
       } else {
-        console.log('false part')
         status = true;
         let arr = imageCounter;
         arr.push(key)
@@ -65,7 +62,6 @@ const PreHome = () => {
         break;
     }
     setGetMAxValue([adventure11, culture11, heritage11, leisure11]);
-    console.log({ classN });
     let x, i, overlay3;
     x = document.querySelectorAll("." + classN);
     overlay3 = document.querySelectorAll(".overlay3" + key);
