@@ -59,12 +59,13 @@ const PreHome = () => {
     x = document.querySelectorAll("." + classN);
     overlay3 = document.querySelectorAll(".overlay3" + key);
     for (i = 0; i < x.length; i++) {
+      console.log(status,overlay3)
       if (status === true) {
         x[i].style.border = "3px solid green";
         overlay3[i].style.display = "block";
       } else {
         x[i].style.border = "none";
-        overlay3[i].style.display = "none !important";
+        overlay3[i].style.display = "none";
       }
     }
   };
@@ -108,14 +109,15 @@ const PreHome = () => {
                     className="col-sm-3 container123"
                     style={{ marginTop: "10px" }}
                   >
+                    <div className="mainImgContainer">
                     <Image
-                      className={`homepage borderImage${key}`}
+                      className={`homepage borderImage${key} container1234`}
                       draggable={false}
                       style={{ width: "100%", height: "100%" }}
                       src={item.image}
                       alt={item.title}
                     />
-                    <div
+                      <div
                       className="overlay"
                       chek="DeskView"
                       onClick={(e) =>
@@ -149,6 +151,9 @@ const PreHome = () => {
                         <b>{item.title}</b>
                       </div>
                     </div>
+                      </div>
+                   
+                  
                   </div>
                 );
               })}
@@ -200,7 +205,7 @@ const PreHome = () => {
                     style={{ width: "50%", height: "75%" }}
                   >
                     <Image
-                      className={`homepage1 borderImage${key}`}
+                      className={`homepage1 borderImage${key} container1234 `}
                       draggable={false}
                       style={{
                         width: "100%",
