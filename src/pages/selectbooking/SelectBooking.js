@@ -82,9 +82,11 @@ function SelectBooking() {
                     </span>
                     <br />
                     <span>
-                      Find buses that will take you to your
-                      <br />
-                      favourite destinations
+                    Book bus ticket for route 
+           <br />
+           Tamda Ghumar- Mendri 
+           <br /> 
+           Ghumar- Chitrakoot etc 
                     </span>
                   </div>
                 </div>
@@ -175,9 +177,11 @@ function SelectBooking() {
                       </span>
                       <br />
                       <span>
-                        Find buses that will take you to your
-                        <br />
-                        favourite destinations
+                      Book bus ticket for route 
+           <br />
+           Tamda Ghumar- Mendri 
+           <br /> 
+           Ghumar- Chitrakoot etc 
                       </span>
                     </div>
                   </div>

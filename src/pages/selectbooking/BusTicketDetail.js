@@ -119,7 +119,7 @@ function BusBookingDetail() {
                           padding: "10px",
                         }}
                       >
-                        Find buses that will take you to <br />
+                         that will take you to <br />
                         your favourite destinations
                       </span>
                     </div>

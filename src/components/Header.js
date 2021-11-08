@@ -293,6 +293,8 @@ function Header() {
         </Navbar>
       </Container>
       <LoginModal show={modalShow} handleClose={handleLoginClose} />
+      {/* <marquee width="100%" direction="right" height="1%" style={{background:'black',color:'white'}}>
+      ✨ Book Bus       </marquee> */}
     </>
   );
 }

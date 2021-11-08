@@ -7,6 +7,7 @@ import ImageDesk from "./Desktopimage";
 // import doodle1 from "../../assets/img/doodle.png";
 import "./../assets/css/saly.css";
 import Header from "../components/Header";
+import MarqueeComponent from './marquee'
 import { Link, useHistory } from "react-router-dom";
 import checkimage from "../assets/TravelBastar-desktop/checkimage.png";
 
@@ -94,6 +95,7 @@ const PreHome = () => {
         style={{ padding: 0, margin: 0 }}
       >
         <Header />
+        <MarqueeComponent/>
         <Row className="saly_div w-100  m-0 ">
           <div
             className="container"
