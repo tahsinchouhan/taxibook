@@ -122,6 +122,9 @@ function Header() {
               <NavLink className="sidebar__navlink" to="/buspass">
                 BUS TICKETS
               </NavLink>
+              <>
+                 <a className="sidebar_item" style={{color:"white"}} href="http://booking.travelbastar.com/signin">VENDOR LOGIN</a>
+                </>
               {/* {user_data !== null ? (
                 <NavLink className="sidebar__navlink" to="/search#Tickets">
                   VIEW TICKETS
@@ -176,6 +179,7 @@ function Header() {
                 <NavLink className="sidebar_item" to="/buspass">
                   BUS TICKETS
                 </NavLink>
+               
                 {/* {user_data !== null ? (
                   <NavLink className="sidebar_item" to="/search#Tickets">
                     VIEW TICKETS
