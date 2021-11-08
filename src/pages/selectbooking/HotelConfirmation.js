@@ -27,18 +27,20 @@ function HotelConfirmation(props) {
   const address1 = getStartData.sendlocation;
   const check_out = moment(getStartData.endDate).format("DD-MMM");
   const hotelUniqid = props.match.params.id;
+  console.log(getStartData)
   const getHotelSingleData = async() => {
   await  axios
       .get(`${API_PATH}/api/v2/room/${hotelUniqid}`)
-      .then((response) => {
-        console.log(response.data.data);
-        setSingleData(response.data.data);
+      .then(async (response) => {
+        // console.log(response.data.data);
+      await  setSingleData(response.data.data);
         setTotalValue();
+        console.log(values)
       });
   };
 
   const onCheckout = () => {
-    console.log("object");
+    console.log("object",values);
     dispatch(setBookHotel({ ...values, basic_details: singleData }))
     history.push("/hcheckoutpage");
     return false;
@@ -58,10 +60,6 @@ function HotelConfirmation(props) {
 useEffect(() => {
   getHotelSingleData();
 }, [])
-
-  // const onCheckout = () => {
-  //   history.push("/checkoutpage");
-  // };
 
   const onClickBack = () => {
     history.push("/hotellist");
@@ -84,19 +82,16 @@ useEffect(() => {
     name: "",
     email: "",
     mobile: "",
-    hotel_name: "",
+    hotel_name: singleData.hotel_id?.hotel_name,
     no_of_guest: "",
     no_of_room: "",
-    startDate: "",
-    endDate: "",
+    startDate: getStartData.startDate,
+    endDate: getStartData.endDate,
     per_night_charge: "",
     total_amount: "",
   });
   const setTotalValue=()=>{
-    setValues({ ...values, ['startDate']: getStartData.startDate });
-    setValues({ ...values, ['endDate']: getStartData.endDate });
     setValues({ ...values, ['total_amount']: 1000 });
-    setValues({ ...values, ['hotel_name']: singleData.hotel_?.hotel_name });
     setValues({ ...values, ['per_night_charge']: 0 });
     setValues({ ...values, ['no_of_guest']: 2 });
     setValues({ ...values, ['no_of_room']: 2 });

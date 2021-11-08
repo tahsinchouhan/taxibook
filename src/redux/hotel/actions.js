@@ -24,6 +24,7 @@ export const getBookHotelError =(values)=>({
 })
 
 export const setBookHotel =(values)=>{
+    console.log(values)
     return{ type:SET_BOOK_HOTEL,
      payload:values
  }

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBusBooking } from "../../redux/actions";
 import { FaArrowLeft } from "react-icons/fa";
 import Typography from "@material-ui/core/Typography";
-
+import hotel from "../../assets/img/hotel.png";
 function CheckoutPage() {
   const history = useHistory();
 
@@ -23,19 +23,18 @@ function CheckoutPage() {
   const  {getStartData,Setdata}  = useSelector((state) => state.hotelReducer);
   console.log(Setdata)
   const { name, age, gender, adhaar, basic_details, price, surcharge } = apiData;
-
   const onCongratsClick = () => {
     history.push("/payment");
   };
 
   useEffect(() => {
-    if(routeData.startDate === undefined){
-    //   history.push('/busdetail')
+    if(Setdata.startDate === undefined){
+      history.push('/hotelsearch')
     }
-  }, [routeData]);
+  }, [Setdata]);
 
   const onClickBack = () => {
-    // history.push("/busconfirmation");
+    history.push("/hotelsearch");
   };
   return (
     <>
@@ -75,7 +74,7 @@ function CheckoutPage() {
                       }}
                     >
                       {/* Chitrakote, Bastar */}
-                      {tripData?.route?.end?.name}
+                      {Setdata?.basic_details?.hotel_id?.hotel_name}
                     </span>
                     <br />
                     <span
@@ -87,9 +86,9 @@ function CheckoutPage() {
                     >
                       {/* 31 July, 2021 */}
                       {/* {tripData?.route?.end?.name} */}
-                      {`${routeData?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
-                      {`${routeData?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
-                      {`${routeData?.startDate?.toLocaleDateString("en-US", { year: 'numeric' })} `}
+                      {`${Setdata?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+                      {`${Setdata?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
+                      {`${Setdata?.startDate?.toLocaleDateString("en-US", { year: 'numeric' })} `}
                     </span>
                   </div>
                   <div className="p-2">
@@ -110,7 +109,7 @@ function CheckoutPage() {
                         color: "#FF4A68",
                       }}
                     >
-                      ₹ {price + surcharge}
+                      ₹ {Setdata.total_amount}
                     </span>
                     <br />
                     <span
@@ -134,7 +133,7 @@ function CheckoutPage() {
                       fontWeight: "bold",
                     }}
                   >
-                    Travel Details
+                    Hotel  Details
                   </span>
                   <div>
                     <div
@@ -151,7 +150,7 @@ function CheckoutPage() {
                             fontFamily: "sans-serif",
                           }}
                         >
-                          {" "} {tripData?.trip_name}
+                          {" "} {Setdata?.basic_details?.hotel_id?.full_address?.street} {" ,"} {Setdata?.basic_details?.hotel_id?.full_address?.city}
                         </span>
                         <br />
                         <span
@@ -161,8 +160,8 @@ function CheckoutPage() {
                             fontSize: "13px",
                           }}
                         >
-                          {tripData?.departure_time} -{" "}
-                          {tripData?.estimated_time_of_arrival}
+                          {/* {tripData?.departure_time} -{" "}
+                          {tripData?.estimated_time_of_arrival} */}
                         </span>
                         <br />
                         <div style={{ marginLeft: "-8px" }}>
@@ -174,13 +173,13 @@ function CheckoutPage() {
                               fontFamily: "sans-serif",
                             }}
                           >
-                            {tripData?.duration_of_travel}
+                            {/* {tripData?.duration_of_travel} */}
                           </span>
                         </div>
                       </div>
                       <div className="d-flex p-1">
                         <img
-                          src={bus1}
+                          src={hotel}
                           alt="bus"
                           style={{ height: "20px", paddingRight: "10px" }}
                         />
@@ -202,7 +201,7 @@ function CheckoutPage() {
                           fontSize: "13px",
                         }}
                       >
-                        Bus 30 Seater
+                      
                       </span>
                     </div>
                   </div>
@@ -223,9 +222,9 @@ function CheckoutPage() {
               >
                 Passenger Details
               </span>
-              {basic_details?.length > 0 ? (
+              {Setdata ? (
                 <Row>
-                  {basic_details?.map((item, i) => (
+                  {
                     <Col md={6}>
                       <div
                         className="check-passenger"
@@ -240,21 +239,20 @@ function CheckoutPage() {
                               color: "black",
                             }}
                           >
-                            {item.name}
+                            {Setdata.name}{"kkk"}
                           </span>
                           <br />
                           <span>
-                            {item.gender}, {item.age}
+                            {Setdata.mobile}, {Setdata.email}
                           </span>
                           <br />
-                          <span> Adhaar: {item.adhaar}</span>
                           <div className="p-3">
                             <Button className="checout-btn" onClick={onClickBack} >EDIT</Button>
                           </div>
                         </div>
                       </div>
                     </Col>
-                  ))}
+                  }
                 </Row>
               ) : null}
             </Row>
@@ -362,15 +360,15 @@ function CheckoutPage() {
             >
               Passenger Details
             </span>
-            {basic_details?.length > 0 ? (
+            {Setdata?.basic_details?.length > 0 ? (
               <Row>
                 {/* <h3
                     style={{
                       fontSize: "19px",
                       color: "#0FA453",
                       fontWeight: "bolder",
-                    }}>Passengers ({`${basic_details?.length}`})</h3> */}
-                {basic_details?.map((item, i) => (
+                    }}>Passengers ({`${Setdata?.basic_details?.length}`})</h3> */}
+                {Setdata?.basic_details?.map((item, i) => (
                   <Col xs={6} md={6}>
                     <div
                       className="check-passenger"
