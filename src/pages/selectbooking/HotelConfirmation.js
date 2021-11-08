@@ -19,7 +19,7 @@ function HotelConfirmation(props) {
   const [number, setNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [showOTP, setShowOTP] = useState(false);
-
+  const [total_amount1, settotal_amount1] = useState(0)
   const dispatch = useDispatch();
   const { getStartData } = useSelector((state) => state.hotelReducer);
   const { user_data } = useSelector((state) => state.loginReducer);
@@ -28,20 +28,23 @@ function HotelConfirmation(props) {
   const check_out = moment(getStartData.endDate).format("DD-MMM");
   const hotelUniqid = props.match.params.id;
   console.log(getStartData)
+  const [hotelDetails, setHotelDetails] = useState([])
   const getHotelSingleData = async() => {
   await  axios
       .get(`${API_PATH}/api/v2/room/${hotelUniqid}`)
       .then(async (response) => {
-        // console.log(response.data.data);
+        console.log('eee',response.data.data);
       await  setSingleData(response.data.data);
+      console.log(response.data.data.hotel_id.hotel_name)
+      setHotelDetails(response.data.data.hotel_id)
         setTotalValue();
-        console.log(values)
+
       });
   };
 
   const onCheckout = () => {
     console.log("object",values);
-    dispatch(setBookHotel({ ...values, basic_details: singleData }))
+    dispatch(setBookHotel({ ...values, basic_details: singleData ,total_amount:total_amount1}))
     history.push("/hcheckoutpage");
     return false;
   };
@@ -64,15 +67,6 @@ useEffect(() => {
   const onClickBack = () => {
     history.push("/hotellist");
   };
-  const onClickMonsoon = () => {
-    console.log("object", `91${number}`, otp);
-    if (otp.length === 6) {
-      dispatch(fetchStart());
-      dispatch(verifyOtp(`91${number}`, otp));
-    }
-    onCheckout();
-    return false;
-  };
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -82,22 +76,37 @@ useEffect(() => {
     name: "",
     email: "",
     mobile: "",
-    hotel_name: singleData.hotel_id?.hotel_name,
+    hotel_name:hotelDetails && hotelDetails?.hotel_name ,
     no_of_guest: "",
     no_of_room: "",
     startDate: getStartData.startDate,
     endDate: getStartData.endDate,
     per_night_charge: "",
-    total_amount: "",
+  
   });
+
   const setTotalValue=()=>{
-    setValues({ ...values, ['total_amount']: 1000 });
     setValues({ ...values, ['per_night_charge']: 0 });
     setValues({ ...values, ['no_of_guest']: 2 });
     setValues({ ...values, ['no_of_room']: 2 });
 
   }
-
+ const setTotalAmt =()=>{
+  // setValues({ ...values, ['total_amount']: total_amount1 });
+  }
+    
+  const onClickMonsoon = () => {
+    console.log("object", `91${number}`, otp);
+    setTotalValue();
+    setTotalAmt();
+    if (otp.length === 6) {
+      dispatch(fetchStart());
+      dispatch(verifyOtp(`91${number}`, otp));
+    }
+    onCheckout();
+    return false;
+  };
+console.log(values)
   return (
     <>
       {singleData.price?
@@ -199,7 +208,9 @@ useEffect(() => {
                           placeholder="Your Mobile Number"
                             onChange={
                               (e) => {setNumber(e.target.value);
-                            handleChange(e)
+                            handleChange(e);
+                            settotal_amount1(singleData.price.actual_price-(singleData.price.actual_price- singleData.price.final_price)-(singleData.price.actual_price- singleData.price.final_price)*0.25);
+
                               }
                             }
                            
@@ -342,6 +353,7 @@ useEffect(() => {
                       Inclusive of all taxes
                     </span>
                   </div>
+                  
                   <span style={{ fontWeight: "bold" }}>₹ {singleData.price.actual_price-(singleData.price.actual_price- singleData.price.final_price)-(singleData.price.actual_price- singleData.price.final_price)*0.25}</span>
                 </div>
                 <div

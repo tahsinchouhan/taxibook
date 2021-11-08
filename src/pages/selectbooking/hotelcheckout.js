@@ -10,21 +10,18 @@ import { createBusBooking } from "../../redux/actions";
 import { FaArrowLeft } from "react-icons/fa";
 import Typography from "@material-ui/core/Typography";
 import hotel from "../../assets/img/hotel.png";
+import { setBookHotelSuccess } from "../../redux/actions";
+
 function CheckoutPage() {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const {
-    data: apiData,
-    tripData,
-    mobile,
-    routeData
-  } = useSelector((state) => state.busReducer);
-  const  {getStartData,Setdata}  = useSelector((state) => state.hotelReducer);
+ 
+  const  {getStartData,Setdata,checkoutData}  = useSelector((state) => state.hotelReducer);
   console.log(Setdata)
-  const { name, age, gender, adhaar, basic_details, price, surcharge } = apiData;
   const onCongratsClick = () => {
-    history.push("/payment");
+    dispatch(setBookHotelSuccess(Setdata))
+    // history.push("/payment");
   };
 
   useEffect(() => {
@@ -191,7 +188,6 @@ function CheckoutPage() {
                             fontFamily: "sans-serif",
                           }}
                         >
-                          {tripData?.route?.vehical?.registration_number}
                         </span>
                       </div>
                       <span
@@ -239,7 +235,7 @@ function CheckoutPage() {
                               color: "black",
                             }}
                           >
-                            {Setdata.name}{"kkk"}
+                            {Setdata.name}
                           </span>
                           <br />
                           <span>
@@ -247,7 +243,7 @@ function CheckoutPage() {
                           </span>
                           <br />
                           <div className="p-3">
-                            <Button className="checout-btn" onClick={onClickBack} >EDIT</Button>
+                            {/* <Button className="checout-btn" onClick={onClickBack} >EDIT</Button> */}
                           </div>
                         </div>
                       </div>
@@ -331,16 +327,16 @@ function CheckoutPage() {
             <span>Destination</span>
             <h3 style={{ fontWeight: "700" }}>
               {/* Chitrakote, Bastar */}
-              {tripData?.route?.end?.name}</h3>
+              {Setdata?.hotel_id?.hotel_name}</h3>
             <span>
               {/* 31 July, 2021 */}
-              {`${routeData?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
-              {`${routeData?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
-              {`${routeData?.startDate?.toLocaleDateString("en-US", { year: 'numeric' })} `}
+              {`${Setdata?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+              {`${Setdata?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
+              {`${Setdata?.startDate?.toLocaleDateString("en-US", { year: 'numeric' })} `}
             </span>
             <br />
             <span>Total Amount</span> <br />
-            <span style={{ fontWeight: "700", fontSize: "22px", color: "#FF4A68" }}>  ₹ {price + surcharge} </span> <br />
+            <span style={{ fontWeight: "700", fontSize: "22px", color: "#FF4A68" }}>  ₹ {Setdata?.total_amount} </span> <br />
             <span>*Excluding taxes</span>
           </div>
         </Container>

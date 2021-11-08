@@ -10,7 +10,8 @@ import {
 const INIT_STATE = {
   data: [],
   getHotelList: [],
-  getStartData:{}
+  getStartData:{},
+  checkoutData:{}
 };
 
 const hotelReducer = (state = INIT_STATE, action) => {
@@ -33,7 +34,7 @@ const hotelReducer = (state = INIT_STATE, action) => {
         return { ...state, Setdata: action.payload };
       }
       case SET_BOOK_HOTEL_SUCCESS:
-        return { ...state, savedata: action.payload };
+        return { ...state, checkoutData: action.payload };
       case SET_BOOK_HOTEL_ERROR:
         return { ...state, error: action.payload };
     default:

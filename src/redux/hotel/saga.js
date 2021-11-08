@@ -39,21 +39,21 @@ function* getListofHotel() {
 }
 
 const sethotelbookingAsync = async (payload) => {
-  const user =  JSON.parse(localStorage.getItem('user'));
-  const token = user[token]
+  const user = JSON.parse(localStorage.getItem('user'));
+  const token = user.token
   return  axios.post(`${API_PATH}/api/v2/booking/create`,  {
-    customer_id:payload.basic_details.user_id._id,
-    hotel_id:payload.basic_details.hotel_id._id,
-    room_id:payload.basic_details._id,
-    check_in:payload.startDate,
-    check_out:payload.enddate,
-    amount:payload.basic_details.price.actual_price,
-    number_of_guests:payload.no_of_guest,
-    number_of_rooms:payload.no_of_room,
-    amount_with_gst:payload.total_amount,
-    mobile: payload.mobile,
-    email: payload.email,
-    full_name: payload.name,
+    customer_id:payload?.basic_details?.user_id?._id,
+    hotel_id:payload?.basic_details?.hotel_id?._id,
+    room_id:payload?.basic_details?._id,
+    check_in:payload?.startDate,
+    check_out:payload?.enddate,
+    amount:payload?.basic_details?.price?.actual_price,
+    number_of_guests:payload?.no_of_guest,
+    number_of_rooms:payload?.no_of_room,
+    amount_with_gst:payload?.total_amount,
+    mobile: payload?.mobile,
+    email: payload?.email,
+    full_name: payload?.name,
   },
   {headers: { Authorization: `Bearer ${token}` }}
 
@@ -66,13 +66,13 @@ function* sethotelBookingSaga({ payload }) {
   try {
     const apiSetHotel = yield call(sethotelbookingAsync, payload);
     yield put(setBookHotelSuccess(apiSetHotel.payload));
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err.message);
   }
 }
 
 function* setHotel() {
-  yield takeEvery(SET_BOOK_HOTEL, sethotelBookingSaga);
+  yield takeEvery(SET_BOOK_HOTEL_SUCCESS, sethotelBookingSaga);
 }
 export default function* rootSaga() {
   yield all([fork(getListofHotel)]);
