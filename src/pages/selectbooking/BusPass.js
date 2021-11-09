@@ -64,8 +64,9 @@ function BusDetail({loading}) {
             <h5 style={{ margin: "10px", color: "#FF4A68" }}>Bus</h5>
           </div>
           <span>
-            Find buses that will take you to <br />
-            your favourite destinations
+          Book bus ticket for route 
+<br />
+Tamda Ghumar- Mendri Ghumar- Chitrakoot etc 
           </span>
         </div>
         <Container style={{ width: "70%" }}>
@@ -185,8 +186,11 @@ function BusDetail({loading}) {
             <h5 style={{ margin: "10px", color: "#FF4A68" }}>Bus</h5>
           </div>
           <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-            Find buses that will take you to <br />
-            your favourite destinations
+          Book bus ticket for route 
+           <br />
+           Tamda Ghumar- Mendri 
+           <br /> 
+           Ghumar- Chitrakoot etc 
           </span>
         </div>
         <Container>

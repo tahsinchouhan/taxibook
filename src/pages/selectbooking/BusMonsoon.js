@@ -37,8 +37,9 @@ function BusMonsoon() {
     history.push("/busconfirmation");
   };
 
-  const onClickChange = () => {
+  const onClickChange = (item) => {
     history.push("/busdetail");
+    console.log("item.trip_name",item.trip_name)
   };
   return (
     <>
@@ -276,7 +277,7 @@ function BusMonsoon() {
                                 </div>
                               </Col>
                               <Col xs={12} >
-                                <div className="train-seatsmobile  d-flex justify-content-center flex-column">
+                                <div className="train-seatsmobile  d-flex justify-content-center flex-column" onClick={() => onClickTrain(item._id)} >
                                   <span
                                     style={{ fontSize: "22px", fontWeight: "bolder" }}
                                   >

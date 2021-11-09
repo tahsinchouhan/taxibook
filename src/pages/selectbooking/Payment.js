@@ -119,6 +119,7 @@ function Payment() {
       },
     };
     const paymentOpject = new window.Razorpay(options);
+    console.log("paymentOpject",paymentOpject)
     paymentOpject.open();
   };
   return (
