@@ -176,3 +176,16 @@ padding-left: 15px;
 .mainImgContainer{
   position: relative;
 }
+.guestModel{
+  position: absolute;
+  margin-top: 30%;
+  margin-left: 67%;
+}
+@media screen and (max-width: 600px) {
+  .guestModel{
+    position: absolute;
+     margin-top: 70%;
+    margin-left: 0%; 
+    width: 300px !important;
+  }
+}

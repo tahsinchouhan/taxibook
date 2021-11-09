@@ -10,18 +10,14 @@ import { createBusBooking } from "../../redux/actions";
 import { FaArrowLeft } from "react-icons/fa";
 import Typography from "@material-ui/core/Typography";
 import hotel from "../../assets/img/hotel.png";
-import { setBookHotelSuccess } from "../../redux/actions";
 
 function CheckoutPage() {
   const history = useHistory();
-
   const dispatch = useDispatch();
- 
   const  {getStartData,Setdata,checkoutData}  = useSelector((state) => state.hotelReducer);
   console.log(Setdata)
   const onCongratsClick = () => {
-    dispatch(setBookHotelSuccess(Setdata))
-    // history.push("/payment");
+     history.push("/hpayment");
   };
 
   useEffect(() => {
@@ -356,7 +352,7 @@ function CheckoutPage() {
             >
               Passenger Details
             </span>
-            {Setdata?.basic_details?.length > 0 ? (
+            {Setdata? (
               <Row>
                 {/* <h3
                     style={{
@@ -364,7 +360,7 @@ function CheckoutPage() {
                       color: "#0FA453",
                       fontWeight: "bolder",
                     }}>Passengers ({`${Setdata?.basic_details?.length}`})</h3> */}
-                {Setdata?.basic_details?.map((item, i) => (
+                
                   <Col xs={6} md={6}>
                     <div
                       className="check-passenger"
@@ -379,7 +375,7 @@ function CheckoutPage() {
                             color: "black",
                           }}
                         >
-                          {item.name}
+                          {Setdata?.name}
                         </span>
                         <br />
                         <span style={{
@@ -388,7 +384,7 @@ function CheckoutPage() {
                           fontSize: "11px",
                           color: "black",
                         }}>
-                          {item.gender}, {item.age}
+                          {Setdata?.mobile}, {Setdata.email}
                         </span>
                         <br />
                         <span style={{
@@ -396,14 +392,14 @@ function CheckoutPage() {
                           fontFamily: "sans-serif",
                           fontSize: "11px",
                           color: "black",
-                        }}> Adhaar: {item.adhaar}</span>
+                        }}> </span>
                         <div className="">
-                          <Button className="checout-btn" onClick={onClickBack} >EDIT</Button>
+                          {/* <Button className="checout-btn" onClick={onClickBack} >EDIT</Button> */}
                         </div>
                       </div>
                     </div>
                   </Col>
-                ))}
+
               </Row>
             ) : null}
           </Row>

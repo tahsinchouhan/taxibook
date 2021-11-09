@@ -39,14 +39,14 @@ function* getListofHotel() {
 }
 
 const sethotelbookingAsync = async (payload) => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user_data'));
   const token = user.token
-  return  axios.post(`${API_PATH}/api/v2/booking/create`,  {
+    axios.post(`${API_PATH}/api/v2/booking/create`,  {
     customer_id:payload?.basic_details?.user_id?._id,
     hotel_id:payload?.basic_details?.hotel_id?._id,
     room_id:payload?.basic_details?._id,
     check_in:payload?.startDate,
-    check_out:payload?.enddate,
+    check_out:payload?.endDate,
     amount:payload?.basic_details?.price?.actual_price,
     number_of_guests:payload?.no_of_guest,
     number_of_rooms:payload?.no_of_room,
@@ -58,7 +58,8 @@ const sethotelbookingAsync = async (payload) => {
   {headers: { Authorization: `Bearer ${token}` }}
 
   ).then((res) => {
-    console.log(res);
+    console.log(res.data.data);
+    return res;
   });
 };
 

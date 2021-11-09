@@ -41,6 +41,8 @@ import TicketCheckOut from './pages/booking/tickets/TicketCheckOut';
 import './assets/css/mediaQuery.css'
 
 import Payment from './pages/selectbooking/Payment';
+
+import hPayment from './pages/selectbooking/hPayment';
 import TravellerCard from './pages/travesaly/TravellerCard';
 import TravellerTicket from './pages/travesaly/TravellerTicket';
 // import DmTicket from './pages/dm pass/dmtickets/DmTicket';
@@ -57,6 +59,8 @@ import HotelDetails from './pages/Hotel/HotelDetails';
 import HotelSearch from "./pages/Hotel/HotelSearch";
 import HotelList from "./pages/Hotel/HotelList";
 import HotelConfirmation from "./pages/selectbooking/HotelConfirmation";
+import Hcongratulations from './pages/selectbooking/hCongratulations'
+import HotelTicketDetail from'./pages/selectbooking/HotelTicketDetail'
 function App() {
   return (
     <>
@@ -110,6 +114,7 @@ function App() {
             <Route exact path='/steper_dmpass' component={SteperDmpass} />
             <Route exact path='/ ticket_checkout' component={TicketCheckOut} />
             <Route exact path='/payment' component={Payment} />
+            <Route exact path='/hpayment' component={hPayment} />
             <Route exact path='/interest' component={Interest} />
 
             {/* For Hotel Details */}
@@ -117,6 +122,9 @@ function App() {
             <Route exact path='/hotelDetails/:name' component={HotelDetails} />
             <Route exact path='/hotelList' component={HotelList} />
             <Route exact path='/hotelSingleDetails/:name' component={HotelSingleDetails} />
+            <Route exact path='/Hcongratulation-page' component={Hcongratulations} />
+            <Route exact path='/hotel-details-book/:id' component={HotelTicketDetail} />
+
             <Route
               exact
               path="/hotelconfirmation/:id"

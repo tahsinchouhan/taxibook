@@ -27,15 +27,15 @@ function HotelConfirmation(props) {
   const address1 = getStartData.sendlocation;
   const check_out = moment(getStartData.endDate).format("DD-MMM");
   const hotelUniqid = props.match.params.id;
-  console.log(getStartData)
+  // console.log(getStartData)
   const [hotelDetails, setHotelDetails] = useState([])
   const getHotelSingleData = async() => {
   await  axios
       .get(`${API_PATH}/api/v2/room/${hotelUniqid}`)
       .then(async (response) => {
-        console.log('eee',response.data.data);
+        // console.log('eee',response.data.data);
       await  setSingleData(response.data.data);
-      console.log(response.data.data.hotel_id.hotel_name)
+      // console.log(response.data.data.hotel_id.hotel_name)
       setHotelDetails(response.data.data.hotel_id)
         setTotalValue();
 
@@ -43,13 +43,13 @@ function HotelConfirmation(props) {
   };
 
   const onCheckout = () => {
-    console.log("object",values);
+    // console.log("object",values);
     dispatch(setBookHotel({ ...values, basic_details: singleData ,total_amount:total_amount1}))
     history.push("/hcheckoutpage");
     return false;
   };
   const fetchOtp = () => {
-     console.log("OTP:::::",number)
+    //  console.log("OTP:::::",number)
     if (number !== "") {
       dispatch(getOtp(`91${number}`));
       setShowOTP(true);
@@ -77,8 +77,8 @@ useEffect(() => {
     email: "",
     mobile: "",
     hotel_name:hotelDetails && hotelDetails?.hotel_name ,
-    no_of_guest: "",
-    no_of_room: "",
+    no_of_guest: getStartData.noOfGuest,
+    no_of_room:  getStartData.noOfRoom,
     startDate: getStartData.startDate,
     endDate: getStartData.endDate,
     per_night_charge: "",
@@ -96,7 +96,7 @@ useEffect(() => {
   }
     
   const onClickMonsoon = () => {
-    console.log("object", `91${number}`, otp);
+    // console.log("object", `91${number}`, otp);
     setTotalValue();
     setTotalAmt();
     if (otp.length === 6) {
@@ -106,7 +106,6 @@ useEffect(() => {
     onCheckout();
     return false;
   };
-console.log(values)
   return (
     <>
       {singleData.price?
@@ -306,7 +305,7 @@ console.log(values)
                   }}
                 />
                 <p>{`${check_in}-${check_out}`}</p> &nbsp; | &nbsp;
-                <p> 1 Room, 2 Guests</p>
+                <p> {getStartData.noOfRoom} Room, {getStartData.noOfGuest} Guests</p>
               </div>
               <hr />
 
