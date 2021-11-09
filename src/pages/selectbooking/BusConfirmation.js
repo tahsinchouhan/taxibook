@@ -141,6 +141,8 @@ console.log( tripData, apiData,  routeData )
   useEffect(() => {
     setValues({ ...values, price: (basePrice * travellers.length) })
     // console.log(tripData,price,"enosdkl",travellers);
+    console.log('travellers',travellers)
+    console.log('values',values)
   }, [travellers])
 
   useEffect(() => {
@@ -313,6 +315,8 @@ console.log( tripData, apiData,  routeData )
                                 )
                               }
                               value={travellers[i].name}
+                              // value={travellers[i].name[i]}
+                              // value={`${travellers[i]}.name${i}`}
                               validate={{
                                 required: {
                                   value: true,
@@ -321,7 +325,6 @@ console.log( tripData, apiData,  routeData )
 
                               }}
                             />
-
                           </div>
 
                           <div className="form-row genderform pt-3 d-flex ">
@@ -433,10 +436,10 @@ console.log( tripData, apiData,  routeData )
                     borderRadius: "15px",
                   }}
                   onClick={() => setTravellers([...travellers, {
-                    name: '',
-                    gender: '',
-                    age: '',
-                    adhaar: '',
+                    name: null,
+                    gender: null,
+                    age: null,
+                    adhaar: null,
                   }])}
                 >
                   Add Traveller
