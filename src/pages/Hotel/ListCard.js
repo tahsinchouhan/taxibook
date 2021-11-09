@@ -8,18 +8,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Room from "../../assets/img/hotelRoom.jpeg";
 
 function ListCard(props) {
-  console.log({props})
+  // console.log({props})
   const history = useHistory();
-  const { getHotelList: hotels } = useSelector((state) => state.hotelReducer);
+  const { getHotelList: hotels,getStartData } = useSelector((state) => state.hotelReducer);
   const viewDetails = (HotelId) => {
-    console.log("hiii");
     history.push(`/hotelDetails/${HotelId}`);
   };
   const bookNow = (HotelId) => {
-    console.log("hiii");
     history.push(`/hotelconfirmation/${HotelId}`);
   };
-  console.log({hotels})
   return (
     <>
       {hotels.map((item, index) => {
@@ -94,7 +91,7 @@ function ListCard(props) {
                         <div className="d-flex p-1">
                           <img
                             src={hotel}
-                            alt="bus"
+                            alt="hotel"
                             style={{ height: "20px", paddingRight: "10px" }}
                           />
                           <span
@@ -269,7 +266,7 @@ function ListCard(props) {
                   <Row>
                     <Col style={{ display: "flex", justifyContent: "center" }}>
                       <img
-                        src={hotel}
+                        src={Room}
                         alt="room img"
                         style={{
                           width: "300px",
@@ -288,9 +285,9 @@ function ListCard(props) {
                         <div style={{ display: "flex" }}>
                           <div>
                             <img
-                              src={bus1}
+                              src={hotel}
                               alt="hotel"
-                              style={{ paddingRight: "10px" }}
+                              style={{ paddingRight: "10px",height: "20px" }}
                             />
                           </div>
                           <div>

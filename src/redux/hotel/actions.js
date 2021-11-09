@@ -3,7 +3,8 @@ import { GET_BOOK_HOTEL,
     GET_BOOK_HOTEL_ERROR,
     SET_BOOK_HOTEL,
     SET_BOOK_HOTEL_SUCCESS,
-    SET_BOOK_HOTEL_ERROR
+    SET_BOOK_HOTEL_ERROR,
+    SET_API_DATA
 } from '../actions';
 
 export const getBookHotel =(values)=>{
@@ -40,3 +41,7 @@ export const setBookHotel =(values)=>{
      type:SET_BOOK_HOTEL_ERROR,
      payload:values
  })
+ export const setHApiData = (value) => ({
+    type: SET_API_DATA,
+    payload: value,
+});

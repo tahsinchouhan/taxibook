@@ -55,7 +55,7 @@ const HotelDetails = (props) => {
       {/* Mobile */}
       <div className="d-md-none">
         <div>
-          <Container>
+          {/* <Container>
             <div className="select_div">
               <Container
                 style={{
@@ -196,7 +196,7 @@ const HotelDetails = (props) => {
               </Container>
               <hr />
             </div>
-          </Container>
+          </Container> */}
         </div>
         <div>
           <Details hotelUniqid={hotelUniqid} detailsP={detailsP}/>

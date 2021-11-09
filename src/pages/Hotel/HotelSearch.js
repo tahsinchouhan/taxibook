@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Row, Col, Form, Container } from "react-bootstrap";
+import { Button, Row, Col, Form, Container, Modal } from "react-bootstrap";
 import calendar from "../../assets/img/calendar.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -11,12 +11,13 @@ import { useDispatch } from "react-redux";
 import { getBookHotel } from "../../redux/actions";
 import { API_PATH } from "../../Path/Path";
 import hotel from "../../assets/img/hotel.png";
-import { FaSearchLocation } from "react-icons/fa";
+import { FaSearchLocation, FaTrash, FaPlusCircle } from "react-icons/fa";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import { Autocomplete } from "@material-ui/lab";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AvField from "availity-reactstrap-validation/lib/AvField";
 
 function HotelSearch() {
   const history = useHistory();
@@ -27,8 +28,28 @@ function HotelSearch() {
   const [location, setLocation] = useState([]);
   const [sendlocation, setSendlocation] = useState();
   const [geolocation, setGeolocation] = useState([]);
-  const dispatch = useDispatch();
+  const [noOfGuest, setNoOfGuest] = useState(2);
+  const [noOfRoom, setNoOfRoom] = useState(1);
+  const [show, setShow] = useState(false);
 
+  const dispatch = useDispatch();
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const guestRoom = (act) => {
+    console.log({act})
+    if (act === "mainAdd"  && noOfGuest>0 &&noOfRoom>0) {
+      setNoOfRoom(noOfRoom +1);
+      setNoOfGuest(noOfGuest + 2);
+    } else if (act === "delete" && noOfGuest>0 &&noOfRoom>0) {
+      setNoOfRoom(noOfRoom -1);
+      setNoOfGuest(noOfGuest - 2);
+    } else if (act === "+") {
+      setNoOfRoom(noOfGuest + 1);
+    } else if (act === "-" ) {
+      setNoOfRoom(noOfGuest - 1);
+    }
+    console.log(noOfRoom,noOfGuest)
+  };
   const getDataFromAPI = (name) => {
     setMyOptions([]);
     fetch(`${API_PATH}/api/v2/hotelregistration/search?address=${name}`)
@@ -69,7 +90,7 @@ function HotelSearch() {
   };
   const onDmTicketShow = () => {
     if (sendlocation !== "") {
-      dispatch(getBookHotel({ sendlocation, startDate, endDate }));
+      dispatch(getBookHotel({ sendlocation, startDate, endDate,noOfRoom,noOfGuest }));
       history.push("/hotellist");
     } else {
       toast.error("Please Select Location");
@@ -261,7 +282,7 @@ function HotelSearch() {
                       <Form.Label className="dm-ticket">
                         Number Of Guests
                       </Form.Label>
-                      <select
+                      {/* <select
                         id="inputState"
                         className="form-control pass_input"
                         placeholder="Choose Your Area"
@@ -272,13 +293,71 @@ function HotelSearch() {
                         }}
                       >
                         <option selected>1 Room 2, Guests </option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
+                        <option value="1">1 Room 2, Guests</option>
+                        <option value="2">2 Room 2, Guests</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                         <option value="6">6</option>
-                      </select>
+                      </select> */}
+                      <div
+                        style={{
+                          width: 180,
+                          backgroundColor: "#f5f5f5",
+                          padding: "5px",
+                          paddingLeft: "20px",
+                        }}
+                      >
+                        <input // onChange={(e) => setEmail(e.target.value)}
+                          // value={email}
+                          name="guestRoom"
+                          type="text"
+                          className="position-relative"
+                          placeholder={`${noOfRoom} Room ,${noOfGuest} guest`}
+                          onClick={handleShow}
+                          style={{
+                            border: "none",
+                            outline: "none",
+                            width: 155,
+                            backgroundColor: "#f5f5f5",
+                            padding: "5px",
+                            paddingLeft: "20px",
+                          }}
+                          readOnly
+                        />{" "}
+                        <Modal
+                          show={show}
+                          onHide={handleClose}
+                          className="guestModel"
+                          style={{
+                            width: "200px",
+                          }}
+                        >
+                          <Modal.Header>
+                            <b> Room Guest </b>
+                          </Modal.Header>
+                          <Modal.Body>
+                            {" "}
+                            Room {noOfRoom}{" "}
+                            <button onClick={() => guestRoom("-")}>
+                              -
+                            </button>{" "}{noOfGuest}{" "}
+                            <button onClick={() => guestRoom("+")}>+</button>{" "}
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <FaTrash
+                              title=" Delete Room "
+                              style={{ float: "left", marginRight: "120px" }}
+                              onClick={() => guestRoom("delete")}
+                            />
+                            <FaPlusCircle
+                              title="Add Room "
+                              style={{ float: "right" }}
+                              onClick={() => guestRoom("mainAdd")}
+                            />
+                          </Modal.Footer>
+                        </Modal>
+                      </div>
                     </Form.Group>
                   </Col>
                 </Row>
@@ -457,7 +536,7 @@ function HotelSearch() {
               >
                 <Form.Group className="" controlId="exampleForm.ControlInput1">
                   <Form.Label className="dm-ticket">No. of Guests</Form.Label>
-                  <select
+                  {/* <select
                     id="inputState"
                     className="form-control pass_input"
                     placeholder="Choose Your Area"
@@ -474,7 +553,24 @@ function HotelSearch() {
                     <option value="4">4</option>
                     <option value="5">5</option>
                     <option value="6">6</option>
-                  </select>
+                  </select> */}
+                   <input // onChange={(e) => setEmail(e.target.value)}
+                          // value={email}
+                          name="guestRoom"
+                          type="text"
+                          className="position-relative"
+                          placeholder={`${noOfRoom} Room ,${noOfGuest} guest`}
+                          onClick={handleShow}
+                          style={{
+                            border: "none",
+                            outline: "none",
+                            width: 155,
+                            backgroundColor: "#f5f5f5",
+                            padding: "5px",
+                            paddingLeft: "20px",
+                          }}
+                          readOnly
+                        />{" "}
                 </Form.Group>
               </Col>
             </Row>
