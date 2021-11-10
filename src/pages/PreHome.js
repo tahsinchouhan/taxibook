@@ -188,6 +188,7 @@ const PreHome = () => {
       {/* Mobile View */}
       <div fluid="true" className="d-md-none">
         <Header />
+        <MarqueeComponent/>
 
         <div fluid="true" style={{ padding: 0, margin: 0 }}></div>
         <Row className="saly_div w-100  m-0 p-0 pt-5 ">
