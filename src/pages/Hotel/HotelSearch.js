@@ -24,7 +24,9 @@ function HotelSearch() {
   const [myOptions, setMyOptions] = useState([]);
 
   const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  var nextDay = new Date();
+  nextDay.setDate(new Date().getDate() + 1);
+  const [endDate, setEndDate] = useState(nextDay);
   const [location, setLocation] = useState([]);
   const [sendlocation, setSendlocation] = useState();
   const [geolocation, setGeolocation] = useState([]);

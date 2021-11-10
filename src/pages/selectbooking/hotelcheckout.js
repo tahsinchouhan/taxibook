@@ -102,7 +102,7 @@ function CheckoutPage() {
                         color: "#FF4A68",
                       }}
                     >
-                      ₹ {Setdata.total_amount}
+                      ₹ {Setdata?.total_amount}
                     </span>
                     <br />
                     <span

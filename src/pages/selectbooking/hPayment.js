@@ -46,7 +46,15 @@ console.log(Setdata)
   const [number, setNumber] = useState("");
 
   useEffect(() => {
-    console.log(Setdata.total_amount)
+    if(Setdata.startDate === undefined){
+      history.push('/hotelsearch')
+    }
+  }, [Setdata]);
+  useEffect(() => {
+    if(Setdata.startDate === undefined){
+      history.push('/hotelsearch')
+    }
+    console.log(Setdata?.total_amount)
     const user = JSON.parse(localStorage.getItem('user_data'));
     const token = user.token
     axios

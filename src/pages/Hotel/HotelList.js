@@ -25,12 +25,14 @@ function HotelList() {
   const { getHotelList: hotels,getStartData} = useSelector(state => state.hotelReducer)
  
   const [startDate, setStartDate] = useState(getStartData.startDate?getStartData.startDate:new Date());
-  const [endDate, setEndDate] = useState(getStartData.endDate);
+  var nextDay = new Date();
+  nextDay.setDate(new Date().getDate() + 1);
+  const [endDate, setEndDate] = useState(getStartData.endDate?getStartData.endDate:nextDay);
   const [location, setLocation] = useState([]);
   const [sendlocation, setSendlocation] = useState(getStartData.sendlocation);
   const [geolocation, setGeolocation] = useState([]);
-  const [noOfGuest, setNoOfGuest] = useState(getStartData.noOfGuest);
-  const [noOfRoom, setNoOfRoom] = useState(getStartData.noOfRoom);
+  const [noOfGuest, setNoOfGuest] = useState(getStartData.noOfGuest?getStartData.noOfGuest:2);
+  const [noOfRoom, setNoOfRoom] = useState(getStartData.noOfRoom?getStartData.noOfRoom:1);
 
   const [show, setShow] = useState(false);
 
@@ -99,7 +101,7 @@ function HotelList() {
   };
   const onDmTicketShow = () => {
     console.log({ sendlocation });
-    dispatch(getBookHotel({ sendlocation, startDate, endDate  }));
+    dispatch(getBookHotel({ sendlocation, startDate, endDate ,noOfRoom,noOfGuest }));
     history.push("/hotellist");
   };
   useEffect(() => {
@@ -256,7 +258,14 @@ function HotelList() {
                       <Form.Label className="dm-ticket">
                         Number Of Guests
                       </Form.Label>
-                     
+                      <div
+                        style={{
+                          width: 180,
+                          backgroundColor: "#f5f5f5",
+                          padding: "5px",
+                          paddingLeft: "20px",
+                        }}
+                      >
                        <input // onChange={(e) => setEmail(e.target.value)}
                           // value={email}
                           name="guestRoom"
@@ -306,6 +315,7 @@ function HotelList() {
                             />
                           </Modal.Footer>
                         </Modal>
+                        </div>
                     </Form.Group>
                   </Col>
                   <Col

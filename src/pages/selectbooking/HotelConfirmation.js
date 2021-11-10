@@ -29,6 +29,16 @@ function HotelConfirmation(props) {
   const hotelUniqid = props.match.params.id;
   // console.log(getStartData)
   const [hotelDetails, setHotelDetails] = useState([])
+
+  const date1 = new Date(getStartData.startDate);
+ const  date2 = new Date(getStartData.endDate);
+  //calculate time difference
+  const time_difference = date2.getTime() - date1.getTime();
+  //calculate days difference by dividing total milliseconds in a day
+  const days_difference = time_difference / (1000 * 60 * 60 * 24);
+const [dayDifference, setdayDifference] = useState(days_difference)
+
+
   const getHotelSingleData = async() => {
   await  axios
       .get(`${API_PATH}/api/v2/room/${hotelUniqid}`)
@@ -103,6 +113,7 @@ useEffect(() => {
       dispatch(fetchStart());
       dispatch(verifyOtp(`91${number}`, otp));
     }
+    
     onCheckout();
     return false;
   };
@@ -318,7 +329,7 @@ useEffect(() => {
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <span style={{ color: "darkgrey" }}>
-                    Room price for 1 Night X 2 guest
+                    Room price for {dayDifference} Night X {getStartData.noOfGuest} guest
                   </span>
                   <span style={{ fontWeight: "bold" }}>₹ {singleData.price.actual_price}</span>
                 </div>
