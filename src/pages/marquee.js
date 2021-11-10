@@ -9,8 +9,9 @@ function MarqueeComponent() {
     return (
         <>
         <div className="pt-3">
-        <marquee width="100%" direction="right" height="1%" style={{background:'black',color:'white',cursor:'pointer'}} onClick={marqueeHandler}>
-  ✨ Book Bus      
+        <marquee width="100%" direction="right" height="1%" style={{color:'black', cursor:'pointer'}} onClick={marqueeHandler}>
+        Book Bus Tickets 	&#11088;
+      
    </marquee>
         </div>
         </>
