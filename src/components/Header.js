@@ -53,7 +53,11 @@ function Header() {
   const goHome = () => {
     history.push("/");
   };
-
+  const mainLogout = () => {
+    dispatch(logout())
+    goHome();
+  };
+  
   return (
     <>
       <Container className="d-md-none header_div">
@@ -88,7 +92,8 @@ function Header() {
           <Offcanvas.Header style={{ flexDirection: "row-reverse" }}>
             <HiMenu onClick={handleClose} className="sidebar__toggler" />
             {user_data !== null ? (
-              <Offcanvas.Title onClick={() => dispatch(logout())}>
+              <Offcanvas.Title onClick={() => mainLogout()
+              }>
                 LOGOUT
               </Offcanvas.Title>
             ) : (
@@ -247,7 +252,7 @@ function Header() {
                         marginRight: "40px",
                         cursor: "pointer",
                       }}
-                      onClick={() => dispatch(logout())}
+                      onClick={() => mainLogout()}
                     >
                       LOGOUT
                     </h4>
