@@ -54,6 +54,7 @@ function BusDetail({loading}) {
     <>
       <Header />
       {/* {loading ? <Loader /> : null} */}
+      
       {message ? <Message msg={message} type="success" /> : null}
       {error ? <Message msg={error} type="error" /> : null}
       {user_data !== null ? <Redirect to="/busdetail" /> : null}
@@ -103,6 +104,10 @@ Tamda Ghumar- Mendri Ghumar- Chitrakoot etc
                         value: "^[0-9]",
                         errorMessage:
                           "Your Number only be 10 numbers"
+                      },
+                      minLength: {
+                        value: 10,
+                        errorMessage: "Only 10 digit number"
                       },
                       maxLength: {
                         value: 10,

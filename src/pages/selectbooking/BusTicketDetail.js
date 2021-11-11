@@ -422,8 +422,9 @@ function BusBookingDetail() {
                 : null}
             </Col>
             <Col className="dm__title mobile" xs={12}>
-              TRIP DETAILS
+              TRIP packages_details
             </Col>
+
             <Col className="dm__entry_div mobile" xs={12}>
               {/* {apiData?.length > 0
                 ? apiData[0]?.ep_id?.locations?.map((item, i) => (

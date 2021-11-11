@@ -306,7 +306,7 @@ console.log( tripData, apiData,  routeData )
                               id={`name${i}`}
                               placeholder="Enter Traveller Name"
                               style={{ fontSize: "11px", marginLeft: "-5px", fontWeight: "bold" }}
-                              name='name'
+                              name={`name${i}`}
                               onChange={(e) =>
                                 handleTraveller(
                                   e.target.value,
@@ -363,7 +363,7 @@ console.log( tripData, apiData,  routeData )
                                   fontWeight: "bold" ,
 
                                 }}
-                                name='age'
+                                name={`age${i}`}
                                 onChange={(e) =>
                                   handleTraveller(
                                     e.target.value,
@@ -393,7 +393,7 @@ console.log( tripData, apiData,  routeData )
                               id={`adhaar${i}`}
                               placeholder="Enter Aadhar /Any Govt ID Number"
                               style={{ fontSize: "11px", marginLeft: "-5px", fontWeight: "bold" }}
-                              name='adhaar'
+                              name={`adhaar${i}`}
                               onChange={(e) =>
                                 handleTraveller(
                                   e.target.value,

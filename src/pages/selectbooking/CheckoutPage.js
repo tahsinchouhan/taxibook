@@ -23,6 +23,7 @@ function CheckoutPage() {
 
   console.log("object",routeData)
   const { name, age, gender, adhaar, basic_details, price, surcharge } = apiData;
+  console.log('basic_details',basic_details)
 
   const onCongratsClick = () => {
     history.push("/payment");
@@ -48,11 +49,130 @@ function CheckoutPage() {
                 fontSize: "19px",
                 color: "#0FA453",
                 fontWeight: "bolder",
-                marginLeft: "25px",
+                // marginLeft: "25px",
               }}
             >
               Checkout
             </h5>
+              <br/>
+            <Row>
+              <Col xs={12} md={6}>
+                <div style={{ width: "100%" }}>
+                  <span
+                    style={{
+                      color: "black",
+                      fontFamily: "sans-serif",
+                      marginLeft:'27px'
+
+                    }}
+                  >
+                    Boarding from
+                  </span>
+                </div>
+
+                <div
+                  className=" select-train mt-2 d-flex align-items-center"
+                  style={{ width: "100%" }}
+                >
+                  <Form className="d-flex">
+                    {["radio"].map((type) => (
+                      <div
+                        key={`inline-${type}`}
+                        className="mb-3"
+                        style={{ margin: "10px", marginLeft: "10px" }}
+                      >
+                      </div>
+                    ))}
+
+                    <span
+                      style={{
+                        // marginTop: "10px",
+                        marginRight: "10px",
+                        color: "black",
+                        fontWeight: "bolder",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {/* 19:45 */}
+                      {tripData?.departure_time}
+                    </span>
+                  </Form>
+                  <div className="d-flex">
+                    <span
+                      style={{
+                        margin: "10px",
+                        whiteSpace: "nowrap",
+                        fontSize: "12px",
+                        fontWeight: "bolder",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {tripData?.route?.start?.name}
+                    </span>
+                  </div>
+                </div>
+              </Col>
+              <Col>
+                <div style={{ width: "100%" }}>
+                  <span
+                    style={{
+                      color: "black",
+                      fontFamily: "sans-serif",
+                      marginLeft:'27px'
+                    }}
+                  >
+                    Dropoff At
+                  </span>
+                </div>
+
+                <div
+                  className=" select-train mt-2 d-flex align-items-center"
+                  style={{ width: "100%" }}
+                >
+                  <Form className="d-flex">
+                    {["radio"].map((type) => (
+                      <div
+                        key={`inline-${type}`}
+                        className="mb-3"
+                        style={{ margin: "10px", marginLeft: "10px" }}
+                      >
+                      </div>
+                    ))}
+
+                    <span
+                      style={{
+                        // marginTop: "10px",
+                        marginRight: "10px",
+                        color: "black",
+                        fontWeight: "bolder",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {tripData?.estimated_time_of_arrival}
+                    </span>
+                  </Form>
+                  <div className="d-flex">
+                    <span
+                      style={{
+                        margin: "10px",
+                        whiteSpace: "nowrap",
+                        fontSize: "12px",
+                        fontWeight: "bolder",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {/* Raj Ratan Travels, Borivali East,
+                    <br />
+                    Devipada Subway */}
+
+                      {tripData?.route?.end?.name}
+                    </span>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+
+            <br/>
             <Row>
               <Col>
                 <div style={{ marginLeft: "25px" }}>
@@ -225,8 +345,10 @@ function CheckoutPage() {
               </span>
               {basic_details?.length > 0 ? (
                 <Row>
-                  {basic_details?.map((item, i) => (
-                    <Col md={6}>
+                  {basic_details?.map((item, i) => {
+                    console.log("i",i)
+                    return(
+                      <Col md={6}>
                       <div
                         className="check-passenger"
                         style={{ marginLeft: "25px" }}
@@ -240,21 +362,23 @@ function CheckoutPage() {
                               color: "black",
                             }}
                           >
-                            {item.name}
+                            {item['name'+i]}
                           </span>
                           <br />
                           <span>
-                            {item.gender}, {item.age}
+                            {item.gender}, {item['age'+i]}
                           </span>
                           <br />
-                          <span> Adhaar: {item.adhaar}</span>
+                          <span> Adhaar: {item['adhaar'+i]}</span>
                           <div className="p-3">
                             <Button className="checout-btn" onClick={onClickBack} >EDIT</Button>
                           </div>
                         </div>
                       </div>
                     </Col>
-                  ))}
+                    )
+                    
+                  })}
                 </Row>
               ) : null}
             </Row>
@@ -328,6 +452,128 @@ function CheckoutPage() {
             </h5>
           </div>
         </div>
+        <Row>
+              <Col xs={6}>
+                <div style={{ width: "89%" }}>
+                  <span
+                    style={{
+                      color: "black",
+                      fontFamily: "sans-serif",
+                      marginLeft:'27px'
+                    }}
+                  >
+                    Boarding from
+                  </span>
+
+                </div>
+                <div className=" select-train mt-2 d-flex">
+                  <Form className="d-flex">
+                    {["radio"].map((type) => (
+                      <div
+                        key={`inline-${type}`}
+                        className="mb-3"
+                        style={{ margin: "10px", marginLeft: "10px" }}
+                      >
+                        {/* <Form.Check
+                        inline
+                        label=""
+                        name="group1"
+                        type={type}
+                        id={`inline-${type}-1`}
+                      /> */}
+                      </div>
+                    ))}
+
+                    {/* <span
+                      style={{
+                        marginTop: "10px",
+                        marginRight: "10px",
+                        color: "black",
+                        fontWeight: "bolder",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {tripData?.departure_time}
+                    </span> */}
+                  </Form>
+                  <div className="d-flex">
+                    <span
+                      style={{
+                        margin: "10px",
+                        whiteSpace: "nowrap",
+                        fontSize: "12px",
+                        fontWeight: "bolder",
+                        fontFamily: "sans-serif",
+                        textAlign:"justify"
+                      }}
+                    >
+                      {tripData?.route?.start?.name}
+                    </span>
+                  </div>
+                </div>
+              </Col>
+              <Col xs={6}>
+                <div style={{ width: "89%" }}>
+                  <span
+                    style={{
+                      color: "black",
+                      fontFamily: "sans-serif",
+                      marginLeft:'27px'
+                    }}
+                  >
+                    Dropoff At
+                  </span>
+
+                </div>
+                <div className=" select-train mt-2 d-flex">
+                  <Form className="d-flex">
+                    {["radio"].map((type) => (
+                      <div
+                        key={`inline-${type}`}
+                        className="mb-3"
+                        style={{ margin: "10px", marginLeft: "10px" }}
+                      >
+                        {/* <Form.Check
+                        inline
+                        label=""
+                        name="group1"
+                        type={type}
+                        id={`inline-${type}-1`}
+                      /> */}
+                      </div>
+                    ))}
+
+                    {/* <span
+                      style={{
+                        // marginTop: "10px",
+                        // marginRight: "0px",
+                        // color: "black",
+                        // fontWeight: "bolder",
+                        // fontFamily: "sans-serif",
+                      }}
+                    >
+                      {tripData?.estimated_time_of_arrival}
+                    </span> */}
+                  </Form>
+                  <div className="d-flex">
+                    <span
+                      style={{
+                        margin: "10px",
+                        whiteSpace: "nowrap",
+                        fontSize: "12px",
+                        fontWeight: "bolder",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+
+                      {tripData?.route?.end?.name}
+                    </span>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+
+        
         <Container>
           <div style={{ textAlign: "center", marginTop: "20px" }}>
             <span>Destination</span>
@@ -385,7 +631,7 @@ function CheckoutPage() {
                             color: "black",
                           }}
                         >
-                          {item.name}
+                          {item['name'+i]}
                         </span>
                         <br />
                         <span style={{
@@ -394,7 +640,7 @@ function CheckoutPage() {
                           fontSize: "11px",
                           color: "black",
                         }}>
-                          {item.gender}, {item.age}
+                          {item.gender}, {item['age'+i]}
                         </span>
                         <br />
                         <span style={{
@@ -402,7 +648,7 @@ function CheckoutPage() {
                           fontFamily: "sans-serif",
                           fontSize: "11px",
                           color: "black",
-                        }}> Adhaar: {item.adhaar}</span>
+                        }}> Adhaar: {item['adhaar'+i]}</span>
                         <div className="">
                           <Button className="checout-btn" onClick={onClickBack} >EDIT</Button>
                         </div>

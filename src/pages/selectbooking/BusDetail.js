@@ -23,6 +23,7 @@ import Footer from "../travesaly/Footer";
 
 function BusPass() {
   const history = useHistory();
+  const history2 = useHistory();
   const [routes, setRoutes] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [selected, setSelected] = useState("");
@@ -72,10 +73,18 @@ function BusPass() {
     }
   };
 
+  const ViewTicketHandler = ()=>{
+    history.push('/viewticket')
+  }
+
   return (
     <div>
       <ToastContainer />
       <Header />
+      
+      <div className=" col-md-11 d-flex justify-content-end">
+                        <button classname="btn btn-success" onClick={ViewTicketHandler}>View tickets</button>
+                      </div>
       <div className="d-none d-md-block">
         <Container className="d-none d-md-block">
           <div style={{ textAlign: "center", margin: "50px" }}>

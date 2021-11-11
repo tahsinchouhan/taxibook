@@ -38,6 +38,7 @@ import TicketsSraech from './pages/booking/tickets/TicketsSreach';
 import Tickets1 from './pages/booking/tickets/Tickets1';
 import SteperDmpass from './pages/booking/tickets/SteperDmpass';
 import TicketCheckOut from './pages/booking/tickets/TicketCheckOut';
+import viewticket from './pages/selectbooking/ViewTicket'
 import './assets/css/mediaQuery.css'
 
 import Payment from './pages/selectbooking/Payment';
@@ -92,6 +93,7 @@ function App() {
             <Route exact path='/busdetail' component={BusDetail} />
             <Route exact path='/busmonsoon' component={BusMonsoon} />
             <Route exact path='/boarding' component={Boarding} />
+            <Route exact path='/viewticket' component={viewticket} />
             <Route exact path='/busdropoff' component={BusDropoff} />
             <Route exact path='/busconfirmation' component={BusConfirmation} />
             <Route exact path='/ buscard' component={BusCard} />
