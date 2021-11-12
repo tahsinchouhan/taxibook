@@ -266,13 +266,14 @@ const Interest = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
+                color:"white"
               }}
             >
               <div>
-                <h2 className="package__title">
+                <h2 className="package__title" style={{color:"white"}}>
                   <span>Popular</span> Destinations
                 </h2>
-                <h6>
+                <h6 style={{color:"white"}}>
                   The best tourist locations across Bastar, rated and curated by
                   travellers.
                 </h6>
@@ -304,10 +305,10 @@ const Interest = () => {
                     />
 
                     <div style={{ color: "white" }} className="package__trip">
-                      <h6 className="packages__block-title mt-3 mb-0">
+                      <h6  style={{ color: "white" }} className="packages__block-title mt-3 mb-0">
                         {item.title}
                       </h6>
-                      <small className="packages__block-subtitle">
+                      <small style={{ color: "white" }} className="packages__block-subtitle">
                         {item.sub_title}
                       </small>
                     </div>

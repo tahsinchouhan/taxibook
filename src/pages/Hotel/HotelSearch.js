@@ -239,6 +239,7 @@ function HotelSearch() {
                         freeSolo
                         autoComplete
                         autoHighlight
+                        disableCloseOnSelect
                         onChange={(e) => {
                           setSendlocation(e.target.innerHTML.split(",")[1]);
                         }}
