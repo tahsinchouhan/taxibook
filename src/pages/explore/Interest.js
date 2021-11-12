@@ -14,6 +14,8 @@ import Geocode from "react-geocode";
 import heritage_walk from "../../assets/img/heritage_walk.png";
 import TravellerTicket from "../travesaly/TravellerTicket";
 import TravellerTicketMobile from "../travesaly/TravellerTicketMobile";
+import { useSelector } from "react-redux";
+import hotelReducer from "../../redux/hotel/reducer";
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -23,7 +25,7 @@ Geocode.enableDebug();
 
 const Interest = () => {
   const [modalShow, setModalShow] = useState(false);
-
+  const {getPrehomeInterest,getPrehomeDestination} = useSelector((state) => state.hotelReducer);
   let { id } = useParams();
   const history = useHistory();
   const [destinations, setDestinations] = useState([]);
@@ -149,7 +151,7 @@ const Interest = () => {
         .catch((e) => console.log(e));
     }
   };
-
+ 
   const onDestinations = (value) => {
     history.push({
       pathname: `/destination_details/${value.title}`,
@@ -161,6 +163,15 @@ const Interest = () => {
     history.push("/search");
   };
 
+  useEffect(() => {
+    if(getPrehomeInterest?.length>0){
+      setPackages(getPrehomeInterest)
+    }
+    if(getPrehomeDestination?.length>0){
+      setDestinations(getPrehomeDestination)
+    }
+    
+  }, [getPrehomeInterest,getPrehomeDestination])
   return (
     <>
       <Container>

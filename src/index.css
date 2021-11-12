@@ -189,3 +189,7 @@ padding-left: 15px;
     width: 300px !important;
   }
 }
+.MuiAutocomplete-inputRoot[class*="MuiOutlinedInput-root"] {
+  padding: 0px !important;
+  border: none !important;
+}

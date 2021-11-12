@@ -24,6 +24,7 @@ function HotelTicketDetail() {
     (state) => state.busReducer
   );
 
+  
   const dispatch = useDispatch();
 
   useEffect(() => {

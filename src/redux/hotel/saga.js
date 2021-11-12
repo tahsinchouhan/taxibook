@@ -7,11 +7,14 @@ import {
   GET_BOOK_HOTEL_SUCCESS,
   SET_BOOK_HOTEL,
   SET_BOOK_HOTEL_SUCCESS,
+  SET_INTEREST_PREHOME,
 } from "../actions";
 import {
   getBookHotel,
   getBookHotelSuccess,
   setBookHotelSuccess,
+  setinterestprehomeSuccess,
+  setDestinationprehomeSuccess,
 } from "./actions";
 
 const getBookHotellistAsync = async (payload) => {
@@ -58,7 +61,6 @@ const sethotelbookingAsync = async (payload) => {
   {headers: { Authorization: `Bearer ${token}` }}
 
   ).then((res) => {
-    console.log(res.data.data);
     return res;
   });
 };
@@ -72,10 +74,39 @@ function* sethotelBookingSaga({ payload }) {
   }
 }
 
+
+const setPrehomeInterestSagaAsync = async (payload) => 
+    axios.post(`${API_PATH}/api/v1/packages/sort`, 
+   payload
+  ).then((res) =>res.data.data)
+  .catch(err=>err)
+
+  const setPrehomeDestinationSagaAsync = async (payload) => 
+  axios.post(`${API_PATH}/api/v1/destinations/sort`, 
+ payload
+).then((res) =>res.data.data)
+.catch(err=>err)
+
+function* setPrehomeInterestSaga({ payload }) {
+  try {
+    const apiSetHotel = yield call(setPrehomeInterestSagaAsync, payload);
+    const apiSetDest = yield call(setPrehomeDestinationSagaAsync, payload);
+    console.log({apiSetHotel})
+    yield put(setinterestprehomeSuccess(apiSetHotel));
+    yield put(setDestinationprehomeSuccess(apiSetDest));
+  } catch (err) {
+    console.log(err.message);
+  }
+}
+
 function* setHotel() {
   yield takeEvery(SET_BOOK_HOTEL_SUCCESS, sethotelBookingSaga);
+}
+function* setPrehome() {
+  yield takeEvery(SET_INTEREST_PREHOME, setPrehomeInterestSaga);
 }
 export default function* rootSaga() {
   yield all([fork(getListofHotel)]);
   yield all([fork(setHotel)]);
+  yield all([fork(setPrehome)]);
 }

@@ -10,35 +10,39 @@ import Header from "../components/Header";
 import MarqueeComponent from './marquee'
 import { Link, useHistory } from "react-router-dom";
 import checkimage from "../assets/TravelBastar-desktop/checkimage.png";
+import { useDispatch } from "react-redux";
+import {setinterestprehome} from '../redux/actions'
 
 const PreHome = () => {
   const history = useHistory();
+  const dispatch = useDispatch()
   const [adventure11, setAdventure] = useState(1);
   const [culture11, setCulture] = useState(1);
   const [heritage11, setHeritage] = useState(1);
   const [leisure11, setLeisure] = useState(1);
   const [imageCounter, setImageCounter] = useState([]);
   const [getMAxValue, setGetMAxValue] = useState([]);
+  const [status, setStatus] = useState(false);
   const selectImageCategory = async (category, key, classN, e) => {
-    let status=true ;
+    console.log({category})
     key = parseInt(key);
     if(imageCounter.length>0){
-      if (await imageCounter.includes(key)) {
+      if (imageCounter.includes(key)) {
+        setStatus(false)
         let aaa = imageCounter;
-        let keyIndex = await aaa.findIndex((keyInd) => keyInd === key);
-        status = false;
-        aaa= await  aaa.splice(keyIndex, 1);
-       await setImageCounter(aaa);
+        let newarry = aaa.filter(elem=>elem!==key)
+       await setImageCounter([...newarry]);
       } else {
-        status = true;
+        setStatus(true)
         let arr = imageCounter;
         arr.push(key)
-       await   setImageCounter(arr);
+       await setImageCounter(arr);
       }
     }else{
+      setStatus(true)
       let arr = imageCounter;
       arr.push(key)
-     await   setImageCounter(arr);
+     await  setImageCounter(arr);
     }
     switch (category) {
       case "Adventure":
@@ -48,6 +52,7 @@ const PreHome = () => {
       case "Culture":
         if (status === true) setCulture(culture11 + 1);
         else setCulture(culture11 - 1);
+
         break;
       case "Heritage":
         if (status === true) setHeritage(heritage11 + 1);
@@ -62,7 +67,6 @@ const PreHome = () => {
       default:
         break;
     }
-    setGetMAxValue([adventure11, culture11, heritage11, leisure11]);
     let x, i, overlay3;
     x = document.querySelectorAll("." + classN);
     overlay3 = document.querySelectorAll(".overlay3" + key);
@@ -76,15 +80,16 @@ const PreHome = () => {
       }
     }
   };
-  const getmaxCategory = () => {
-    console.log(getMAxValue);
-    let maxvalue = Math.max(...getMAxValue);
-    console.log(maxvalue);
-    let getIndex = getMAxValue.findIndex((keyInd) => keyInd == maxvalue);
-    if (getIndex === 0) history.push("/interest");
-    else if (getIndex === 1) history.push("/interest");
-    else if (getIndex === 2) history.push("/interest");
-    else if (getIndex === 3) history.push("/interest");
+  
+  const getmaxCategory = async() => {
+      dispatch(setinterestprehome({
+      adventure:adventure11*25 ,
+      culture: culture11*25,
+      heritage: heritage11*25,
+      religious: leisure11*25,
+    }))
+    history.push('/interest')
+
   };
 
   return (

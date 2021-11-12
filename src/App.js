@@ -9,6 +9,8 @@ import SelectBooking from './pages/selectbooking/SelectBooking'
 import Pass from './pages/selectbooking/Pass'
 import BusPass from './pages/selectbooking/BusPass';
 import './assets/css/app.css'
+import "antd/dist/antd.css";
+
 import Search from './pages/travesaly/Search';
 import Explores from './pages/explore/Explores';
 import Interest from './pages/explore/Interest';

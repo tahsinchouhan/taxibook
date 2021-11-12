@@ -75,6 +75,9 @@ export const SET_BOOK_HOTEL_SUCCESS='SET_BOOK_HOTEL_SUCCESS';
 export const SET_BOOK_HOTEL_ERROR='SET_BOOK_HOTEL_ERROR';
 // Hotel Details
 
+export const SET_INTEREST_PREHOME = 'SET_INTEREST_PREHOME';
+export const SET_INTEREST_PREHOME_SUCCESS = 'SET_INTEREST_PREHOME_SUCCESS';
+export const SET_DESTINATION_PREHOME_SUCCESS ='SET_DESTINATION_PREHOME_SUCCESS'
 export * from "./common/actions";
 export * from "./auth/actions";
 export * from "./bus/actions";

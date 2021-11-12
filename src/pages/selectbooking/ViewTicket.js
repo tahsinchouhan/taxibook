@@ -18,7 +18,7 @@ function ViewTicket() {
     const [style, setStyle] = useState("cont");
 
 
-
+    const bgColor = `style={{backgroundColor:"red"}}`
     // bus ticket api
     useEffect(() => {
         console.log('mobile',mobile)
@@ -60,9 +60,9 @@ function ViewTicket() {
               <Header/>
               <div className="container">
               <div className="row">
-              <button className="text-center text-success mt-5 col-md-4 border py-3 button" onClick={hotelHandler}>Hotel Tickets</button>
-              <button className="text-center text-success mt-5 col-md-4 border py-3 button" onClick={busHandler}>Bus Tickets</button>
-        <button className="text-center text-success mt-5 col-md-4 border py-3 button">Cab Tickets</button>
+              <button className="text-center text-success mt-5 col-md-4 border py-3 button" onClick={hotelHandler}  >Hotel Tickets</button>
+              <button className="text-center text-success mt-5 col-md-4 border py-3 button" onClick={busHandler}  >Bus Tickets</button>
+              <button className="text-center text-success mt-5 col-md-4 border py-3 button">Cab Tickets</button>
         </div>
         </div>
         <div className="container mt-5">

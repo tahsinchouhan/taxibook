@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Row, Col, Form, Container, Modal } from "react-bootstrap";
 import calendar from "../../assets/img/calendar.png";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useHistory } from "react-router-dom";
 import ticket from "../../assets/ticketpage.svg";
@@ -18,6 +18,8 @@ import { Autocomplete } from "@material-ui/lab";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AvField from "availity-reactstrap-validation/lib/AvField";
+import moment from "moment";
+import { DatePicker } from "antd";
 
 function HotelSearch() {
   const history = useHistory();
@@ -33,24 +35,30 @@ function HotelSearch() {
   const [noOfGuest, setNoOfGuest] = useState(2);
   const [noOfRoom, setNoOfRoom] = useState(1);
   const [show, setShow] = useState(false);
+  const { RangePicker } = DatePicker;
 
+  function disabledDate(current) {
+    return current && current < moment().endOf("day");
+  }
   const dispatch = useDispatch();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const dateFormat = 'YYYY-MM-DD';
+
   const guestRoom = (act) => {
-    console.log({act})
-    if (act === "mainAdd"  && noOfGuest>0 &&noOfRoom>0) {
-      setNoOfRoom(noOfRoom +1);
+    console.log({ act });
+    if (act === "mainAdd" && noOfGuest > 0 && noOfRoom > 0) {
+      setNoOfRoom(noOfRoom + 1);
       setNoOfGuest(noOfGuest + 2);
-    } else if (act === "delete" && noOfGuest>0 &&noOfRoom>0) {
-      setNoOfRoom(noOfRoom -1);
+    } else if (act === "delete" && noOfGuest > 0 && noOfRoom > 0) {
+      setNoOfRoom(noOfRoom - 1);
       setNoOfGuest(noOfGuest - 2);
     } else if (act === "+") {
       setNoOfRoom(noOfGuest + 1);
-    } else if (act === "-" ) {
+    } else if (act === "-") {
       setNoOfRoom(noOfGuest - 1);
     }
-    console.log(noOfRoom,noOfGuest)
+    console.log(noOfRoom, noOfGuest);
   };
   const getDataFromAPI = (name) => {
     setMyOptions([]);
@@ -91,8 +99,11 @@ function HotelSearch() {
     });
   };
   const onDmTicketShow = () => {
+    console.log( sendlocation, startDate, endDate, noOfRoom, noOfGuest)
     if (sendlocation !== "") {
-      dispatch(getBookHotel({ sendlocation, startDate, endDate,noOfRoom,noOfGuest }));
+      dispatch(
+        getBookHotel({ sendlocation, startDate, endDate, noOfRoom, noOfGuest })
+      );
       history.push("/hotellist");
     } else {
       toast.error("Please Select Location");
@@ -126,6 +137,11 @@ function HotelSearch() {
   useEffect(() => {
     getLocation();
   }, []);
+  const chnageDate = (datee) => {
+    console.log({datee})
+    setStartDate(datee[0]._d);
+    setEndDate(datee[1]._d);
+  };
   return (
     <>
       <div>
@@ -166,7 +182,7 @@ function HotelSearch() {
                 }}
               >
                 <Row style={{ display: "flex", justifyContent: "center" }}>
-                  <Col xs={12} md={3} className="mt-2">
+                  {/* <Col xs={12} md={3} className="mt-2">
                     <Form.Group
                       className=""
                       controlId="exampleForm.ControlInput1"
@@ -175,7 +191,11 @@ function HotelSearch() {
                         Select Your Location
                       </Form.Label>
                       <Autocomplete
-                        style={{ width: 200 }}
+                       style={{
+                        backgroundColor: "#f5f5f5",
+                        border: 0,
+                        padding: "10px",
+                      }}
                         freeSolo
                         autoComplete
                         autoHighlight
@@ -201,9 +221,87 @@ function HotelSearch() {
                         <FaSearchLocation />
                       </span>
                     </Form.Group>
+                  </Col> */}
+                  <Col xs={12} md={4} className="mt-2">
+                    <Form.Group
+                      className=""
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label className="dm-ticket">
+                        Select Your Location
+                      </Form.Label>
+                      <Autocomplete
+                        style={{
+                          backgroundColor: "#f5f5f5",
+                          border: 0,
+                          padding: "0px",
+                        }}
+                        freeSolo
+                        autoComplete
+                        autoHighlight
+                        onChange={(e) => {
+                          setSendlocation(e.target.innerHTML.split(",")[1]);
+                        }}
+                        options={myOptions}
+                        renderInput={(params) => (
+                          <TextField
+                            variant="standard"
+                            required="required"
+                            {...params}
+                            onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                            variant="outlined"
+                            label="Search Area"
+                          />
+                        )}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col xs={12} md={4} className="mt-2">
+                    <Form.Group
+                      className=""
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <div>
+                        <Form.Label className="dm-ticket">
+                          Booking Date
+                        </Form.Label>
+                        <br />
+                        <div>
+                          <div
+                            style={{
+                              backgroundColor: "#f5f5f5",
+                              padding: "5px",
+                              paddingLeft: "20px",
+                              display: "flex",
+                            }}
+                          >
+                            <img
+                              alt="logo"
+                              className="location-userdatas-calendar"
+                              src={calendar}
+                              style={{
+                                width: 25,
+                                height: 25,
+                                marginRight: "10px",
+                              }}
+                            />
+                            <RangePicker
+                              disabledDate={disabledDate}
+                              onChange={(date) => chnageDate(date)}
+                              minDate={new Date()}
+                              defaultValue={[moment(startDate, dateFormat), moment(endDate, dateFormat)]}
+                              style={{
+                                backgroundColor: "transparent",
+                                border: "0",
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </Form.Group>
                   </Col>
 
-                  <Col xs={12} md={3} className="mt-2">
+                  {/* <Col xs={12} md={3} className="mt-2">
                     <Form.Group
                       className=""
                       controlId="exampleForm.ControlInput1"
@@ -239,9 +337,9 @@ function HotelSearch() {
                         </Col>
                       </div>
                     </Form.Group>
-                  </Col>
+                  </Col> */}
 
-                  <Col xs={12} md={3} className="mt-2">
+                  {/* <Col xs={12} md={3} className="mt-2">
                     <Form.Group
                       className=""
                       controlId="exampleForm.ControlInput1"
@@ -267,15 +365,15 @@ function HotelSearch() {
                             <DatePicker
                               selected={endDate}
                               onChange={(date) => setEndDate(date)}
-                              customInput={<ExampleCustomInput />}
                               minDate={new Date()}
+                              customInput={<ExampleCustomInput />}
                               dateFormat="dd MMM"
                             />
                           </div>
                         </Col>
                       </div>
                     </Form.Group>
-                  </Col>
+                  </Col> */}
                   <Col xs={12} md={3} className="mt-2">
                     <Form.Group
                       className=""
@@ -284,24 +382,7 @@ function HotelSearch() {
                       <Form.Label className="dm-ticket">
                         Number Of Guests
                       </Form.Label>
-                      {/* <select
-                        id="inputState"
-                        className="form-control pass_input"
-                        placeholder="Choose Your Area"
-                        style={{
-                          backgroundColor: "#f5f5f5",
-                          border: 0,
-                          padding: "10px",
-                        }}
-                      >
-                        <option selected>1 Room 2, Guests </option>
-                        <option value="1">1 Room 2, Guests</option>
-                        <option value="2">2 Room 2, Guests</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                      </select> */}
+                     
                       <div
                         style={{
                           width: 180,
@@ -341,9 +422,8 @@ function HotelSearch() {
                           <Modal.Body>
                             {" "}
                             Room {noOfRoom}{" "}
-                            <button onClick={() => guestRoom("-")}>
-                              -
-                            </button>{" "}{noOfGuest}{" "}
+                            <button onClick={() => guestRoom("-")}>-</button>{" "}
+                            {noOfGuest}{" "}
                             <button onClick={() => guestRoom("+")}>+</button>{" "}
                           </Modal.Body>
                           <Modal.Footer>
@@ -431,30 +511,36 @@ function HotelSearch() {
                     Select Your Location
                   </Form.Label>
                   <Autocomplete
-                    style={{ width: 200 }}
-                    freeSolo
-                    autoComplete
-                    autoHighlight
-                    onChange={(e) => {
-                      setSendlocation(e.target.innerHTML.split(",")[1]);
-                    }}
-                    options={myOptions}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        onKeyPress={(e) => getDataFromAPI(e.target.value)}
-                        variant="outlined"
-                        label="Search Area"
+                        style={{
+                          backgroundColor: "#f5f5f5",
+                          border: 0,
+                          padding: "0px",
+                        }}
+                        freeSolo
+                        autoComplete
+                        autoHighlight
+                        onChange={(e) => {
+                          setSendlocation(e.target.innerHTML.split(",")[1]);
+                        }}
+                        options={myOptions}
+                        renderInput={(params) => (
+                          <TextField
+                            variant="standard"
+                            required="required"
+                            {...params}
+                            onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                            variant="outlined"
+                            label="Search Area"
+                          />
+                        )}
                       />
-                    )}
-                  />
-                  <span
+                  {/* <span
                     className="FaSearchLocation"
                     title="Near Me "
                     onClick={getCurrentLocation}
                   >
                     <FaSearchLocation />
-                  </span>
+                  </span> */}
                 </Form.Group>
               </Col>
 
@@ -462,119 +548,74 @@ function HotelSearch() {
                 <Form.Group className="" controlId="exampleForm.ControlInput1">
                   <Row style={{ display: "flex", justifyContent: "center" }}>
                     <Col md={4}>
-                      <div
-                        style={{
-                          backgroundColor: "#f5f5f5",
-                          border: 0,
-                          paddingLeft: "20px",
-                          paddingTop: "5px",
-                          paddingBottom: "5px",
-                          borderRadius: "5px",
-                          marginRight: "10px",
-                        }}
-                      >
+                      <div>
                         <Form.Label className="dm-ticket">
-                          Journey Date
+                          Booking Date
                         </Form.Label>
                         <br />
-                        <img
-                          alt="logo"
-                          className="location-userdatas-calendar"
-                          src={calendar}
-                          style={{ width: 25, height: 30, marginTop: -10 }}
-                        />
-                        <DatePicker
-                          selected={startDate}
-                          onChange={(date) => setStartDate(date)}
-                          customInput={<ExampleCustomInput />}
-                          dateFormat="dd MMM"
-                          minDate={new Date()}
-                        />
+                        <div>
+                          <div
+                            style={{
+                              backgroundColor: "#f5f5f5",
+                              padding: "5px",
+                              paddingLeft: "20px",
+                              display: "flex",
+                            }}
+                          >
+                            <img
+                              alt="logo"
+                              className="location-userdatas-calendar"
+                              src={calendar}
+                              style={{
+                                width: 25,
+                                height: 25,
+                                marginRight: "10px",
+                              }}
+                            />
+                            <RangePicker
+                              disabledDate={disabledDate}
+                              onChange={(date) => chnageDate(date)}
+                              minDate={new Date()}
+                              defaultValue={[moment(startDate, dateFormat), moment(endDate, dateFormat)]}
+                              style={{
+                                backgroundColor: "transparent",
+                                border: "0",
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </Col>
                   </Row>
                 </Form.Group>
               </Col>
-              <Col xs={12} md={4} className="mt-2">
-                <Form.Group className="" controlId="exampleForm.ControlInput1">
-                  <Row style={{ display: "flex", justifyContent: "center" }}>
-                    <Col md={4}>
-                      <div
+
+             
+               <Col xs={12} md={4} className="mt-2">
+                    <Form.Group
+                      className=""
+                      controlId="exampleForm.ControlInput1"
+                    >
+                      <Form.Label className="dm-ticket">
+                        Number Of Guests
+                      </Form.Label>
+                      <input
+                        id="inputState"
+                        className="form-control pass_input"
+                        placeholder="Choose Your Area"
+                        name="guestRoom"
+                        type="text"
+                        placeholder={`${noOfRoom} Room ,${noOfGuest} guest`}
+                    onClick={handleShow}
                         style={{
                           backgroundColor: "#f5f5f5",
                           border: 0,
-                          paddingLeft: "20px",
-                          paddingTop: "5px",
-                          paddingBottom: "5px",
-                          borderRadius: "5px",
-                          marginRight: "10px",
+                          padding: "10px",
                         }}
-                      >
-                        <Form.Label className="dm-ticket">End Date</Form.Label>
-                        <br />
-                        <img
-                          alt="logo"
-                          className="location-userdatas-calendar"
-                          src={calendar}
-                          style={{ width: 25, height: 30, marginTop: -10 }}
-                        />
-                        <DatePicker
-                          selected={endDate}
-                          onChange={(date) => setEndDate(date)}
-                          customInput={<ExampleCustomInput />}
-                          dateFormat="dd MMM"
-                          minDate={new Date()}
-                        />
-                      </div>
-                    </Col>
-                  </Row>
-                </Form.Group>
-              </Col>
-              <Col
-                xs={12}
-                md={4}
-                className="mt-2"
-                style={{ marginBottom: "10px" }}
-              >
-                <Form.Group className="" controlId="exampleForm.ControlInput1">
-                  <Form.Label className="dm-ticket">No. of Guests</Form.Label>
-                  {/* <select
-                    id="inputState"
-                    className="form-control pass_input"
-                    placeholder="Choose Your Area"
-                    style={{
-                      backgroundColor: "#f5f5f5",
-                      border: 0,
-                      paddingLeft: "20px",
-                    }}
-                  >
-                    <option selected>1 room, 2 Guests</option>
-                    <option>1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select> */}
-                   <input // onChange={(e) => setEmail(e.target.value)}
-                          // value={email}
-                          name="guestRoom"
-                          type="text"
-                          className="position-relative"
-                          placeholder={`${noOfRoom} Room ,${noOfGuest} guest`}
-                          onClick={handleShow}
-                          style={{
-                            border: "none",
-                            outline: "none",
-                            width: 155,
-                            backgroundColor: "#f5f5f5",
-                            padding: "5px",
-                            paddingLeft: "20px",
-                          }}
-                          readOnly
-                        />{" "}
-                </Form.Group>
-              </Col>
+                     />
+                       
+                    </Form.Group>
+                  </Col>
             </Row>
             <div
               className="dmticket-btn"
