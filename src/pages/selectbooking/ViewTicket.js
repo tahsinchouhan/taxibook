@@ -13,7 +13,9 @@ function ViewTicket() {
     const [tickets, setTickets] = useState()
     useEffect(() => {
         console.log('mobile',mobile)
-        axios.post(API_PATH + `/api/v1/busticket/search`,{mobile})
+        axios.post(API_PATH + `/api/v1/busticket/search`,{
+            mobile,
+        })
         .then((res) => {
             console.log('data this',res.data)
             setTickets(res.data.data)
@@ -45,7 +47,7 @@ function ViewTicket() {
     <tr>
       <td className="text-center">{moment(item.date).format('DD-MM-YYYY')}</td>
       <td className="text-center">{item.booking_Id}</td>
-      <td className="text-center">{item.name}</td>
+      <td className="text-center">{item.trips_id.trip_name}</td>
       <td className="text-center">{item.amount}</td>
       <td className="text-center">
         <a href={`http://15.206.92.158/bus-detail/${item.booking_Id}`}>View Ticket</a>

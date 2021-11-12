@@ -83,7 +83,7 @@ function BusPass() {
       <Header />
       
       <div className=" col-md-11 d-flex justify-content-end">
-                        <button classname="btn btn-success" onClick={ViewTicketHandler}>View tickets</button>
+                        <button style={{background:'#0fa453',borderColor:'#0fa453',color:'white',borderRadius:'11px'}} onClick={ViewTicketHandler}>View tickets</button>
                       </div>
       <div className="d-none d-md-block">
         <Container className="d-none d-md-block">

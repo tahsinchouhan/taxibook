@@ -169,6 +169,80 @@ function BusBookingDetail() {
               <Col className="dm__title" xs={12}>
                 TRIP DETAILS
               </Col>
+              {/* <Col>
+              <Row>
+              <Col xs={12} md={6}>
+                <div style={{ width: "100%" }}>
+                  <span
+                    style={{
+                      color: "black",
+                      fontFamily: "sans-serif",
+                      marginLeft:'27px'
+
+                    }}
+                  >
+                    Boarding from
+                  </span>
+                </div>
+
+                <div
+                  className=" select-train mt-2 d-flex align-items-center"
+                  style={{ width: "100%" }}
+                >
+                  <div className="d-flex">
+                    <span
+                      style={{
+                        margin: "10px",
+                        whiteSpace: "nowrap",
+                        fontSize: "12px",
+                        fontWeight: "bolder",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {apiData[0]?.trips_id?.route?.start?.name}
+                    </span>
+                  </div>
+                </div>
+              </Col>
+              <Col>
+                <div style={{ width: "100%" }}>
+                  <span
+                    style={{
+                      color: "black",
+                      fontFamily: "sans-serif",
+                      marginLeft:'27px'
+                    }}
+                  >
+                    Dropoff At
+                  </span>
+                </div>
+
+                <div
+                  className=" select-train mt-2 d-flex align-items-center"
+                  style={{ width: "100%" }}
+                >
+                  <div className="d-flex">
+                    <span
+                      style={{
+                        margin: "10px",
+                        whiteSpace: "nowrap",
+                        fontSize: "12px",
+                        fontWeight: "bolder",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      Raj Ratan Travels, Borivali East,
+                    <br />
+                    Devipada Subway
+
+                    {apiData[0]?.trips_id?.route?.end?.name}
+                    </span>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+
+              </Col> */}
               <Col className="dm__entry_div" xs={12}>
                 <div className="dm__entry_card" style={{ marginLeft: "25px" }}>
                   <div className="p-2">
