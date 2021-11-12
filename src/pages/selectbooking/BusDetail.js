@@ -82,9 +82,9 @@ function BusPass() {
       <ToastContainer />
       <Header />
       
-      <div className=" col-md-11 d-flex justify-content-end">
+      {/* <div className=" col-md-11 d-flex justify-content-end">
                         <button style={{background:'#0fa453',borderColor:'#0fa453',color:'white',borderRadius:'11px'}} onClick={ViewTicketHandler}>View tickets</button>
-                      </div>
+                      </div> */}
       <div className="d-none d-md-block">
         <Container className="d-none d-md-block">
           <div style={{ textAlign: "center", margin: "50px" }}>

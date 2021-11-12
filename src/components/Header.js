@@ -8,6 +8,7 @@ import {
   InputGroup,
   FormControl,
   Image,
+  Dropdown,
 } from "react-bootstrap";
 import { HiMenu } from "react-icons/hi";
 // import logo from "../assets/img/logo1.png";
@@ -57,7 +58,11 @@ function Header() {
     dispatch(logout())
     goHome();
   };
+  const mobile = JSON.parse(localStorage.getItem('mobile'));
   
+  const ViewTicketHandler = ()=>{
+    history.push('/viewticket')
+  }
   return (
     <>
       <Container className="d-md-none header_div">
@@ -92,9 +97,23 @@ function Header() {
           <Offcanvas.Header style={{ flexDirection: "row-reverse" }}>
             <HiMenu onClick={handleClose} className="sidebar__toggler" />
             {user_data !== null ? (
-              <Offcanvas.Title onClick={() => mainLogout()
-              }>
-                LOGOUT
+              <Offcanvas.Title>
+                                   <Dropdown
+                      style={{
+                        backgroundColor:'transparent',
+                        borderColor:'transparent'
+                      }}
+                    >
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    SETTINGS
+  </Dropdown.Toggle>
+  <Dropdown.Menu>
+    <Dropdown.Item>{mobile}</Dropdown.Item>
+    <Dropdown.Item onClick={() => mainLogout()}>Logout</Dropdown.Item>
+    <Dropdown.Item onClick={ViewTicketHandler}>View Tickets</Dropdown.Item>
+  </Dropdown.Menu>
+    
+                    </Dropdown>
               </Offcanvas.Title>
             ) : (
               <Offcanvas.Title onClick={() => modalHadler()}>
@@ -243,7 +262,7 @@ function Header() {
                   </svg>
 
                   {user_data !== null ? (
-                    <h4
+                    <Dropdown
                       style={{
                         fontSize: "16px",
                         fontWeight: "700",
@@ -252,10 +271,19 @@ function Header() {
                         marginRight: "40px",
                         cursor: "pointer",
                       }}
-                      onClick={() => mainLogout()}
                     >
-                      LOGOUT
-                    </h4>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    SETTINGS
+  </Dropdown.Toggle>
+  <Dropdown.Menu>
+    <Dropdown.Item>{mobile}</Dropdown.Item>
+    <Dropdown.Item onClick={ViewTicketHandler}>View Tickets</Dropdown.Item>
+    <Dropdown.Item onClick={() => mainLogout()}>Logout</Dropdown.Item>
+
+  </Dropdown.Menu>
+    
+                    </Dropdown>
+                    
                   ) : (
                     <h4
                       style={{
