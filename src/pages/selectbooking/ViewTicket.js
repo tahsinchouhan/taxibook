@@ -60,8 +60,8 @@ function ViewTicket() {
               <Header/>
               <div className="container">
               <div className="row">
-              <button className="text-center text-success mt-5 col-md-4 border py-3 button" onClick={hotelHandler}  >Hotel Tickets</button>
-              <button className="text-center text-success mt-5 col-md-4 border py-3 button" onClick={busHandler}  >Bus Tickets</button>
+              <button className={ hotelShow?`text-center text-white mt-5 col-md-4 border py-3 bg-primary`:`text-center text-success mt-5 col-md-4 border py-3 button`} onClick={hotelHandler}  >Hotel Tickets</button>
+              <button className={ busShow?`text-center text-white mt-5 col-md-4 border py-3 btn-primary`:`text-center text-success mt-5 col-md-4 border py-3 button`} onClick={busHandler}  >Bus Tickets</button>
               <button className="text-center text-success mt-5 col-md-4 border py-3 button">Cab Tickets</button>
         </div>
         </div>
