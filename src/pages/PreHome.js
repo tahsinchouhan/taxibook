@@ -216,7 +216,7 @@ const PreHome = () => {
                 return (
                   <div
                     className="container123"
-                    style={{ width: "50%", height: "75%" }}
+                    style={{ width: "50%", height: "50%" }}
                   >
                      <div className="mainImgContainer">
                     
@@ -225,7 +225,7 @@ const PreHome = () => {
                       draggable={false}
                       style={{
                         width: "100%",
-                        height: "100%",
+                        height: "120%",
                         marginTop: "10px",
                       }}
                       src={item.image}
@@ -233,6 +233,7 @@ const PreHome = () => {
                     />
                     <div
                       className="overlay2"
+                      style={{ width: "100%", height: "89%",marginTop:"10px" }}
                       chek="mobileView"
                       onClick={(e) =>
                         selectImageCategory(
@@ -248,7 +249,7 @@ const PreHome = () => {
                       </div>
                     </div>
                     <div
-                      style={{ display: "none" }}
+                      style={{ display: "none",width: "100%", height: "89%",marginTop:"10px",marginBottom:"10px" }}
                       className={`overlay3 overlay3${key}`}
                       chek="mobileView"
                       onClick={(e) =>
