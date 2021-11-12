@@ -280,7 +280,7 @@ const Interest = () => {
               </div>
 
               <h6
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer",color:"white" }}
                 onClick={() => history.push("/populardestinations")}
                 className="package__title pt-5"
               >
