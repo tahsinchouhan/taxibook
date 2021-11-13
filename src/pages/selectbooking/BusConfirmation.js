@@ -165,19 +165,21 @@ console.log( tripData, apiData,  routeData )
                 fontSize: "19px",
                 color: "#0FA453",
                 fontWeight: "bolder",
+                marginLeft:'88px'
               }}
             >
               Confirmation
             </h3>
 
-            <Row>
+            <Row style={{marginLeft:'55px'}}>
               <Col xs={12} md={6}>
                 <div style={{ width: "100%" }}>
                   <span
                     style={{
                       color: "black",
                       fontFamily: "sans-serif",
-                    }}
+                      marginLeft: '25px'
+                                          }}
                   >
                     Boarding from
                   </span>
@@ -225,7 +227,7 @@ console.log( tripData, apiData,  routeData )
                   </div>
                 </div>
               </Col>
-              <Col>
+              <Col style={{marginLeft:'-36px'}}>
                 <div style={{ width: "100%" }}>
                   <span
                     style={{
@@ -239,7 +241,7 @@ console.log( tripData, apiData,  routeData )
 
                 <div
                   className=" select-train mt-2 d-flex align-items-center"
-                  style={{ width: "100%" }}
+                  style={{ width: "100%",marginLeft:'-23px'}}
                 >
                   <Form className="d-flex">
                     {["radio"].map((type) => (
@@ -373,6 +375,7 @@ console.log( tripData, apiData,  routeData )
                                 }
                                 value={travellers[i].age}
                                 validate={{
+                                  pattern: {value: '[0-9]'},
                                   required: {
                                     value: true,
                                     errorMessage: "Enter Age",
@@ -616,7 +619,8 @@ console.log( tripData, apiData,  routeData )
                         fontSize: "12px",
                         fontWeight: "bolder",
                         fontFamily: "sans-serif",
-                        textAlign:"justify"
+                        textAlign:"justify",
+                        marginLeft:'-19px'
                       }}
                     >
                       {tripData?.route?.start?.name}
@@ -674,6 +678,7 @@ console.log( tripData, apiData,  routeData )
                         fontSize: "12px",
                         fontWeight: "bolder",
                         fontFamily: "sans-serif",
+                        marginLeft:'-19px'
                       }}
                     >
 
@@ -742,7 +747,7 @@ console.log( tripData, apiData,  routeData )
                         <div className="form-group col m-2 w-50">
                           <label className="mb-1" for={`age${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Age</h3></label>
                           <AvField
-                            type="text"
+                            type="number"
                             className="form-control pass_input w-70 pt-2"
                             placeholder="Enter Age"
                             id={`age${i}`}
@@ -764,6 +769,7 @@ console.log( tripData, apiData,  routeData )
                             }
                             value={travellers[i].age}
                             validate={{
+                              pattern: {value: '[0-9]'},
                               required: {
                                 value: true,
                                 errorMessage: "Enter Age",
