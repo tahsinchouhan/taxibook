@@ -201,3 +201,7 @@ padding-left: 15px;
 .ant-collapse-arrow {
   display: none !important;
 }
+.MuiInput-underline:before,
+.MuiInput-underline:after{
+  border: none !important;
+}
