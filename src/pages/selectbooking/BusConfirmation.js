@@ -171,15 +171,16 @@ console.log( tripData, apiData,  routeData )
               Confirmation
             </h3>
 
-            <Row style={{marginLeft:'55px'}}>
-              <Col xs={12} md={6}>
+            <Row className="mb-2">
+              <Col className="ml-1" xs={12} md={5}>
                 <div style={{ width: "100%" }}>
                   <span
                     style={{
                       color: "black",
                       fontFamily: "sans-serif",
-                      marginLeft: '25px'
-                                          }}
+                      marginLeft:'80px'
+
+                    }}
                   >
                     Boarding from
                   </span>
@@ -187,7 +188,7 @@ console.log( tripData, apiData,  routeData )
 
                 <div
                   className=" select-train mt-2 d-flex align-items-center"
-                  style={{ width: "100%" }}
+                  style={{ width: "100%" ,marginLeft:'77px'}}
                 >
                   <Form className="d-flex">
                     {["radio"].map((type) => (
@@ -227,12 +228,13 @@ console.log( tripData, apiData,  routeData )
                   </div>
                 </div>
               </Col>
-              <Col style={{marginLeft:'-36px'}}>
+              <Col xs={12} md={5}>
                 <div style={{ width: "100%" }}>
                   <span
                     style={{
                       color: "black",
                       fontFamily: "sans-serif",
+                      marginLeft:'77px'
                     }}
                   >
                     Dropoff At
@@ -241,7 +243,7 @@ console.log( tripData, apiData,  routeData )
 
                 <div
                   className=" select-train mt-2 d-flex align-items-center"
-                  style={{ width: "100%",marginLeft:'-23px'}}
+                  style={{ width: "100%" ,marginLeft:'77px'}}
                 >
                   <Form className="d-flex">
                     {["radio"].map((type) => (
@@ -344,8 +346,7 @@ console.log( tripData, apiData,  routeData )
                                   // activeButton={activeButton}
                                   // trigerOnClickEmpSideBtn={onSideBtnClick}
                                   trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender}
-
-                                />
+                                  />
                               </div>
                             </div>
                             <div className="form-group col m-2 w-50">

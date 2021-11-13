@@ -1,35 +1,3 @@
-// import React, { useEffect, useState } from 'react'
-// import '../../../assets/css/ReuseableComponents.css'
-
-// function ButtonComponent(props)
-// {
-//     const [flag, setFlag] = useState(false);
-//     const trigerOnClickEmpSideBtn = () =>
-//     {
-//         setFlag(true);
-//     }
-//     return (
-//         <div className="btn-group d-flex justify-content-center">
-
-//             <button
-
-//                 className={`${ flag === true
-//                     ? "btn btn-danger"
-//                     : "btn btn-success"
-//                     }`}
-//                 onClick={trigerOnClickEmpSideBtn}
-//             >
-//                 {props.name}
-//             </button>
-
-//         </div>
-
-
-
-//     )
-// }
-
-// export default ButtonComponent
 import React from 'react'
 // import '../../../assets/css/ReuseableComponents.css'
 
