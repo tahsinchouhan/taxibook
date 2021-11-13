@@ -16,20 +16,20 @@ import TextField from "@material-ui/core/TextField";
 import { Autocomplete } from "@material-ui/lab";
 import { FaSearchLocation, FaTrash, FaPlusCircle } from "react-icons/fa";
 import moment from "moment";
-import { DatePicker } from "antd";
+import { DatePicker, Menu, Dropdown as ANTDropdown } from "antd";
 
 function HotelList() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { RangePicker } = DatePicker;
-  const dateFormat = 'YYYY-MM-DD';
+  const dateFormat = "YYYY-MM-DD";
 
   const [myOptions, setMyOptions] = useState([]);
 
   const { getHotelList: hotels, getStartData } = useSelector(
     (state) => state.hotelReducer
   );
-
+  console.log({ getStartData });
   const [startDate, setStartDate] = useState(
     getStartData.startDate ? getStartData.startDate : new Date()
   );
@@ -41,32 +41,86 @@ function HotelList() {
   const [location, setLocation] = useState([]);
   const [sendlocation, setSendlocation] = useState(getStartData?.sendlocation);
   const [geolocation, setGeolocation] = useState([]);
-  const [noOfGuest, setNoOfGuest] = useState(
-    getStartData.noOfGuest ? getStartData.noOfGuest : 2
-  );
-  const [noOfRoom, setNoOfRoom] = useState(
-    getStartData.noOfRoom ? getStartData.noOfRoom : 1
-  );
+  const [noOfGuest, setNoOfGuest] = useState(2);
+  const [noOfRoom, setNoOfRoom] = useState(getStartData.noOfRoom);
+
+  useEffect(() => {
+    console.log(`getStartData`, getStartData)
+    if(getStartData){
+      setNoOfRoom(getStartData.noOfRoom)
+      setNoOfGuest(getStartData.noOfGuest)
+    }
+  }, [getStartData])
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const guestRoom = (act) => {
+  const [roomState, setRoomState] = useState([
+    {
+      room: noOfRoom > 0 ? noOfRoom : 1,
+      guest: noOfGuest > 0 ? noOfGuest : 2,
+    },
+  ]);
+
+  const addMenu = () => {
+    let noofg = 0;
+    let noofr;
+    roomState.map((curElem, index) => (noofg += curElem.guest));
+    setNoOfRoom(roomState.length);
+    setNoOfGuest(noofg);
+  };
+  const guestRoom = (act, room_id) => {
+    let guestRoomObj = roomState;
     console.log({ act });
+    console.log({ room_id });
     if (act === "mainAdd" && noOfGuest > 0 && noOfRoom > 0) {
-      setNoOfRoom(noOfRoom + 1);
-      setNoOfGuest(noOfGuest + 2);
+      guestRoomObj.push({ room: room_id, guest: 2 });
     } else if (act === "delete" && noOfGuest > 0 && noOfRoom > 0) {
-      setNoOfRoom(noOfRoom - 1);
-      setNoOfGuest(noOfGuest - 2);
+      let guestRoomObj1 = guestRoomObj.filter((elem, ind) => ind !== room_id);
+      guestRoomObj = guestRoomObj1;
     } else if (act === "+") {
-      setNoOfRoom(noOfGuest + 1);
+      guestRoomObj[room_id].guest = guestRoomObj[room_id].guest + 1;
     } else if (act === "-") {
-      setNoOfRoom(noOfGuest - 1);
+      guestRoomObj[room_id].guest = guestRoomObj[room_id].guest - 1;
     }
+    addMenu();
+    setRoomState(guestRoomObj);
     console.log(noOfRoom, noOfGuest);
   };
+  useEffect(() => {
+    setRoomState(roomState);
+    addMenu();
+  }, [roomState]);
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <b>Room</b> <b>Guest</b>
+      </Menu.Item>
+      <div className="addMenu">
+        {roomState.map((curElem, index) => (
+          <Menu.Item key={index}>
+            Room {curElem.room}{" "}
+            <button onClick={() => guestRoom("-", index)}>-</button>{" "}
+            {curElem.guest}{" "}
+            <button onClick={() => guestRoom("+", index)}>+</button>{" "}
+          </Menu.Item>
+        ))}
+      </div>
+      <Menu.Item>
+        <FaTrash
+          title=" Delete Room "
+          style={{ float: "left", marginRight: "120px" }}
+          onClick={() => guestRoom("delete", roomState.length - 1)}
+        />
+        <FaPlusCircle
+          title="Add Room "
+          style={{ float: "right" }}
+          onClick={() => guestRoom("mainAdd", roomState.length + 1)}
+        />
+      </Menu.Item>
+    </Menu>
+  );
   const getDataFromAPI = (name) => {
     setMyOptions([]);
     fetch(`${API_PATH}/api/v2/hotelregistration/search?address=${name}`)
@@ -150,44 +204,48 @@ function HotelList() {
     <>
       <div>
         <Header />
-        <Row style={{ display: "flex", justifyContent: "center" }}>
+        <Row
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginLeft: "10px",
+            marginRight: "20px",
+          }}
+        >
           <Col xs={12} md={4} xl={2} className="mt-2">
-                    <Form.Group
-                      className=""
-                      controlId="exampleForm.ControlInput1"
-                    >
-                      <Form.Label className="dm-ticket">
-                        Select Your Location
-                      </Form.Label>
-                      <Autocomplete
-                      underlineStyle={{display:"none"}}
-                        style={{
-                          backgroundColor: "#f5f5f5",
-                          border: 0,
-                          padding: "0px",
-                        }}
-                        freeSolo
-                        autoComplete
-                        autoHighlight
-                        onChange={(e) => {
-                          setSendlocation(e.target.innerHTML.split(",")[1]);
-                        }}
-                        options={myOptions}
-                        renderInput={(params) => (
-                          <TextField
-                            variant="standard"
-                            required="required"
-                            {...params}
-                            onKeyPress={(e) => getDataFromAPI(e.target.value)}
-                            variant="outlined"
-                            label="Search Area"
-                          />
-                        )}
-                      />
-                        
-                    </Form.Group>
-                  </Col>
-            {/* <Form.Group className="" controlId="exampleForm.ControlInput1">
+            <Form.Group className="" controlId="exampleForm.ControlInput1">
+              <Form.Label className="dm-ticket">
+                Select Your Location
+              </Form.Label>
+              <Autocomplete
+                underlineStyle={{ display: "none" }}
+                style={{
+                  backgroundColor: "#f5f5f5",
+                  border: 0,
+                  padding: "0px",
+                }}
+                freeSolo
+                autoComplete
+                autoHighlight
+                onChange={(e) => {
+                  setSendlocation(e.target.innerHTML.split(",")[1]);
+                }}
+                options={myOptions}
+                renderInput={(params) => (
+                  <TextField
+                  variant="standard"
+                  required="required"
+                  style={{padding:"5px"}}
+                  {...params}
+                  onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                  placeholder="Search Area"
+                  InputProps={{ disableUnderline: true }}
+                />
+                )}
+              />
+            </Form.Group>
+          </Col>
+          {/* <Form.Group className="" controlId="exampleForm.ControlInput1">
               <Form.Label className="dm-ticket">
                 Select Your Location
               </Form.Label>
@@ -240,8 +298,10 @@ function HotelList() {
                       disabledDate={disabledDate}
                       onChange={(date) => chnageDate(date)}
                       minDate={new Date()}
-                      defaultValue={[moment(startDate, dateFormat), moment(endDate, dateFormat)]}
-
+                      defaultValue={[
+                        moment(startDate, dateFormat),
+                        moment(endDate, dateFormat),
+                      ]}
                       style={{
                         backgroundColor: "transparent",
                         border: "0",
@@ -255,7 +315,8 @@ function HotelList() {
           <Col xs={12} md={3} className="mt-2">
             <Form.Group className="" controlId="exampleForm.ControlInput1">
               <Form.Label className="dm-ticket">Number Of Guests</Form.Label>
-
+            </Form.Group>
+            <ANTDropdown overlay={menu}>
               <input // onChange={(e) => setEmail(e.target.value)}
                 // value={email}
                 name="guestRoom"
@@ -272,37 +333,7 @@ function HotelList() {
                 }}
                 readOnly
               />
-            </Form.Group>
-            <Modal
-              show={show}
-              onHide={handleClose}
-              className="guestModel"
-              style={{
-                width: "200px",
-              }}
-            >
-              <Modal.Header>
-                <b> Room Guest </b>
-              </Modal.Header>
-              <Modal.Body>
-                {" "}
-                Room {noOfRoom}{" "}
-                <button onClick={() => guestRoom("-")}>-</button> {noOfGuest}{" "}
-                <button onClick={() => guestRoom("+")}>+</button>{" "}
-              </Modal.Body>
-              <Modal.Footer>
-                <FaTrash
-                  title=" Delete Room "
-                  style={{ float: "left", marginRight: "120px" }}
-                  onClick={() => guestRoom("delete")}
-                />
-                <FaPlusCircle
-                  title="Add Room "
-                  style={{ float: "right" }}
-                  onClick={() => guestRoom("mainAdd")}
-                />
-              </Modal.Footer>
-            </Modal>
+            </ANTDropdown>
           </Col>
           <Col
             md={2}
@@ -335,6 +366,9 @@ function HotelList() {
             </div>
           </Col>
         </Row>
+        <br />
+        <hr />
+        <br />
 
         <div className="d-none d-md-block">
           <div style={{ marginBottom: "200px" }}>
