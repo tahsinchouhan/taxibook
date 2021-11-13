@@ -18,8 +18,10 @@ const TripByRouteIdAsync = async (payload) =>
     .then((response) => response.json())
     .then((json) => json);
 
-const createBusBookingRequest = async (payload) =>
-  await axios
+const createBusBookingRequest = async (payload) =>{
+  const user = JSON.parse(localStorage.getItem('user_data'));
+  const token = user.token
+  return  await axios
     .post(`${API_PATH}/api/v1/busticket/create`, {
       name: payload.name,
       email: payload.email,
@@ -39,9 +41,15 @@ const createBusBookingRequest = async (payload) =>
       ticketprice: payload.price,
       surcharge: payload.surcharge,
       createdby: JSON.parse(localStorage.getItem("user_data"))?.user?._id,
-    })
+      where:"Website",
+    },
+    {headers: { Authorization: `Bearer ${token}` }}
+
+    )
     .then((busticket) => busticket.data)
     .catch((error) => error);
+}
+  
 
 function* TripByRouteId({ payload }) {
   console.log("DATADTADT:::::", payload);
