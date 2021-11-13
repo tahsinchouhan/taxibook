@@ -10,6 +10,7 @@ import { createBusBooking } from "../../redux/actions";
 import { FaArrowLeft } from "react-icons/fa";
 import Typography from "@material-ui/core/Typography";
 import hotel from "../../assets/img/hotel.png";
+import Room from "../../assets/img/hotelRoom.jpeg";
 
 function CheckoutPage() {
   const history = useHistory();
@@ -126,9 +127,24 @@ function CheckoutPage() {
                       fontWeight: "bold",
                     }}
                   >
-                    Hotel  Details
+                    Hotel Details
                   </span>
                   <div>
+                  <div
+                  style={{ display: "cover", justifyContent: "space-between" }}
+                >
+                
+                  <img
+                    src={Room}
+                    alt="room"
+                    style={{
+                      width: "100px",
+                      height: "60px",
+                      borderRadius: "5px",
+                      marginTop:"15px"
+                    }}
+                  />
+                </div>
                     <div
                       className="rajratan-train p-2"
                       style={{ float: "", backgroundColor: "#F8F8F8" }}

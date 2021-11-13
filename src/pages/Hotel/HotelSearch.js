@@ -48,6 +48,12 @@ function HotelSearch() {
   const handleShow = () => setShow(true);
   const dateFormat = "YYYY-MM-DD";
 
+  const [roomState, setRoomState] = useState([
+    {
+      room: 1,
+      guest: 2,
+    },
+  ]);
   const getDataFromAPI = (name) => {
     setMyOptions([]);
     fetch(`${API_PATH}/api/v2/hotelregistration/search?address=${name}`)
@@ -90,7 +96,7 @@ function HotelSearch() {
     console.log(sendlocation, startDate, endDate, noOfRoom, noOfGuest);
     if (sendlocation !== "") {
       dispatch(
-        getBookHotel({ sendlocation, startDate, endDate, noOfRoom, noOfGuest })
+        getBookHotel({ sendlocation, startDate, endDate, noOfRoom, noOfGuest ,roomStateData:roomState})
       );
       history.push("/hotellist");
     } else {
@@ -131,12 +137,7 @@ function HotelSearch() {
     setEndDate(datee[1]._d);
   };
 
-  const [roomState, setRoomState] = useState([
-    {
-      room: 1,
-      guest: 2,
-    },
-  ]);
+ 
 
   const addMenu = () => {
     let noofg = 0;

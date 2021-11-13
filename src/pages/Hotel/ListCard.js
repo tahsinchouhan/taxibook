@@ -74,7 +74,7 @@ function ListCard(props) {
                   <Row>
                     <Col md={3}>
                       <img
-                        src={item.room_data.image!==''?Room:Room}
+                        src={item?.room_data?.image!==''?Room:Room}
                         alt="room img"
                         style={{
                           width: "190px",
@@ -200,7 +200,7 @@ function ListCard(props) {
                               fontSize: "20px",
                             }}
                           >
-                            ₹ {item.room_data.price.actual_price}
+                            ₹ {item?.room_data?.price?.actual_price}
                           </span>
                         </div>
                         <div
@@ -412,7 +412,7 @@ function ListCard(props) {
                                   fontFamily: "sans-serif",
                                 }}
                               >
-                                ₹ {item.room_data.price.actual_price}
+                                ₹ {item?.room_data?.price?.actual_price}
                               </span>
                             </div>
                           </Col>

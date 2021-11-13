@@ -42,32 +42,29 @@ function HotelList() {
   const [sendlocation, setSendlocation] = useState(getStartData?.sendlocation);
   const [geolocation, setGeolocation] = useState([]);
   const [noOfGuest, setNoOfGuest] = useState(2);
-  const [noOfRoom, setNoOfRoom] = useState(getStartData.noOfRoom);
+  const [noOfRoom, setNoOfRoom] = useState(1);
 
   useEffect(() => {
     console.log(`getStartData`, getStartData)
-    if(getStartData){
+    if(getStartData.length>0){
       setNoOfRoom(getStartData.noOfRoom)
       setNoOfGuest(getStartData.noOfGuest)
     }
   }, [getStartData])
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [roomState, setRoomState] = useState([
-    {
-      room: noOfRoom > 0 ? noOfRoom : 1,
-      guest: noOfGuest > 0 ? noOfGuest : 2,
-    },
-  ]);
+  const [roomState, setRoomState] = useState(getStartData?getStartData.roomStateData:{
+    room:1,
+    guest:2
+  });
 
   const addMenu = () => {
     let noofg = 0;
     let noofr;
-    roomState.map((curElem, index) => (noofg += curElem.guest));
-    setNoOfRoom(roomState.length);
+    roomState?.map((curElem, index) => (noofg += curElem.guest));
+    setNoOfRoom(roomState?.length);
     setNoOfGuest(noofg);
   };
   const guestRoom = (act, room_id) => {
@@ -98,7 +95,7 @@ function HotelList() {
         <b>Room</b> <b>Guest</b>
       </Menu.Item>
       <div className="addMenu">
-        {roomState.map((curElem, index) => (
+        {roomState?.map((curElem, index) => (
           <Menu.Item key={index}>
             Room {curElem.room}{" "}
             <button onClick={() => guestRoom("-", index)}>-</button>{" "}
@@ -170,12 +167,13 @@ function HotelList() {
   const onDmTicketShow = () => {
     console.log({ sendlocation });
     dispatch(
-      getBookHotel({ sendlocation, startDate, endDate, noOfRoom, noOfGuest })
+      getBookHotel({ sendlocation, startDate, endDate, noOfRoom, noOfGuest ,roomStateData:roomState})
     );
     history.push("/hotellist");
   };
   useEffect(() => {
     getLocation();
+    setNoOfRoom(getStartData?.noOfRoom)
   }, []);
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
