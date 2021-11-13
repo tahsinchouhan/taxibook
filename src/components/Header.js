@@ -243,7 +243,7 @@ function Header() {
                 </NavLink>
                 {/* <NavLink className="sidebar_item" to="/select-booking"> */}
                 <ANTDropdown overlay={menu} className="sidebar_item">
-                  <NavLink className="sidebar_item" to="/dmpass">
+                  <NavLink className="sidebar_item" to="#">
                     BOOKING <DownOutlined />
                   </NavLink>
                 </ANTDropdown>
