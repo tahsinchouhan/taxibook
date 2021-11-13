@@ -1,7 +1,10 @@
-import React from "react";
+import React,{useEffect,useState}from "react";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { useHistory } from "react-router-dom";
+import { API_PATH } from "../../Path/Path";
+import axios from "axios";
+
 import "../../assets/css/busconfirmation.css";
 import { IoIosArrowBack } from "react-icons/io";
 import Car from "../../assets/img/car.jpeg";
@@ -10,8 +13,104 @@ import Cab from "../../assets/img/cab.png";
 function CabConfirmation() {
   const history = useHistory();
 
-  const onClickBack = () => {
-    history.push("/hotellist");
+  const [data, setData] = useState();
+  const [name, setName] = useState("");
+  const [email, setEamil] = useState("");
+  const [mobile, setMobile] = useState("");
+
+  async function loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  useEffect(() => {
+    const values = {
+      amount: 10
+    }
+    fetch(API_PATH + '/api/v1/busticket/pay',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+      })
+      .then(res => res.json())
+      .then(res => {
+        console.log("res::", res);
+        setData(res.data)
+      })
+      .catch(error => {
+        console.log("error::", error);
+        
+      });
+  }, []);
+
+  // const onClickBack = () => {
+  //   history.push("/hotellist");
+  // };
+
+  const cafeBooking =()=> {
+    const values = {
+      name:name,
+      email:email,
+      mobile:mobile
+    }
+    fetch(`https://www.anshuagrawal.in/api/v2/taxi-booking/create`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values)
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log("res::", res);
+      setData(res.data)
+    })
+    .catch(error => {
+      console.log("error::", error);
+      
+    });
+
+
+    axios
+      .post(`https://www.anshuagrawal.in/api/v2/taxi-booking/create`, {
+        amount: 10
+      })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log("result", result);
+        // setData(result.data);
+        alert('Booking Confirm')
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+  const displayRazorpaysss =  (values) => {
+    cafeBooking();
+    console.log("drgbhebfb")
+    // const res = await loadScript(
+    //   "https://checkout.razorpay.com/v1/checkout.js"
+    // );
+
+    // if (!res) {
+    //   alert("Razorpay SDK failed to load. Are you online?");
+    //   return;
+    // }
+    // console.log("data", data);
+
   };
 
   return (
@@ -19,7 +118,9 @@ function CabConfirmation() {
       <div className="">
         <Header />
         <div className="container-div">
-          <div onClick={onClickBack}>
+          <div
+          //  onClick={onClickBack}
+           >
             <h4
               style={{
                 width: "100%",
@@ -78,6 +179,8 @@ function CabConfirmation() {
                           type="text"
                           placeholder="Your Name"
                           className="form-input"
+                          value={name}
+                          onChange={(e)=>setName(e.target.value)}
                         />
                       </div>
                       <div className="form-input-div">
@@ -88,6 +191,8 @@ function CabConfirmation() {
                           type="email"
                           placeholder="example@gmail.com"
                           className="form-input"
+                          value={email}
+                          onChange={(e)=>setEamil(e.target.value)}
                         />
                       </div>
                     </div>
@@ -103,10 +208,12 @@ function CabConfirmation() {
                           type="number"
                           className="form-input"
                           placeholder="Your Mobile Number"
+                          value={mobile}
+                          onChange={(e)=>setMobile(e.target.value)}
                         />
                       </div>
                       <div className="mt-3" style={{ marginRight: "20px" }}>
-                        <button
+                        <button type="submit"
                           style={{
                             backgroundColor: "#864BD7",
                             height: "37px",
@@ -118,6 +225,7 @@ function CabConfirmation() {
                             fontWeight: "bold",
                             fontSize: "16px",
                           }}
+                          onClick={()=>displayRazorpaysss()}
                         >
                           Send Passcode
                         </button>
