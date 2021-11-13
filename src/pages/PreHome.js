@@ -16,30 +16,33 @@ import {setinterestprehome} from '../redux/actions'
 const PreHome = () => {
   const history = useHistory();
   const dispatch = useDispatch()
-  const [adventure11, setAdventure] = useState(1);
-  const [culture11, setCulture] = useState(1);
-  const [heritage11, setHeritage] = useState(1);
-  const [leisure11, setLeisure] = useState(1);
+  const [adventure11, setAdventure] = useState(0);
+  const [culture11, setCulture] = useState(0);
+  const [heritage11, setHeritage] = useState(0);
+  const [leisure11, setLeisure] = useState(0);
   const [imageCounter, setImageCounter] = useState([]);
   const [getMAxValue, setGetMAxValue] = useState([]);
-  const [status, setStatus] = useState(false);
+  // const [status, setStatus] = useState(false);
   const selectImageCategory = async (category, key, classN, e) => {
     console.log({category})
     key = parseInt(key);
+    let status = false
     if(imageCounter.length>0){
       if (imageCounter.includes(key)) {
-        setStatus(false)
+        // setStatus(false)
         let aaa = imageCounter;
         let newarry = aaa.filter(elem=>elem!==key)
        await setImageCounter([...newarry]);
       } else {
-        setStatus(true)
+        // setStatus(true)
+        status = true
         let arr = imageCounter;
         arr.push(key)
        await setImageCounter(arr);
       }
     }else{
-      setStatus(true)
+      // setStatus(true)
+      status = true
       let arr = imageCounter;
       arr.push(key)
      await  setImageCounter(arr);
@@ -60,13 +63,14 @@ const PreHome = () => {
 
         break;
       case "Leisure":
-        if (status === true) setLeisure(leisure11 + 1);
+        if(status === true) setLeisure(leisure11 + 1);
         else setLeisure(leisure11 - 1);
 
         break;
       default:
         break;
     }
+    console.log(adventure11,culture11,heritage11,leisure11)
     let x, i, overlay3;
     x = document.querySelectorAll("." + classN);
     overlay3 = document.querySelectorAll(".overlay3" + key);
@@ -85,8 +89,8 @@ const PreHome = () => {
       dispatch(setinterestprehome({
       adventure:adventure11*25 ,
       culture: culture11*25,
-      heritage: heritage11*25,
-      religious: leisure11*25,
+      religious: heritage11*25,
+      leisure: leisure11*25,
     }))
     history.push('/interest')
 

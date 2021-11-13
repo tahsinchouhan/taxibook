@@ -78,6 +78,11 @@ function Header() {
           HOTEL BOOKING
         </NavLink>
       </Menu.Item>
+      <Menu.Item>
+        <NavLink className="sidebar_item" to="/cab">
+          CAB BOOKING
+        </NavLink>
+      </Menu.Item>
     </Menu>
   );
   return (
@@ -172,6 +177,9 @@ function Header() {
               </NavLink>
               <NavLink className="sidebar__navlink" to="/hotelsearch">
                 HOTEL BOOKING
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/cab">
+                CAB BOOKING
               </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/tickets_sraech"> */}
               <NavLink className="sidebar__navlink" to="/tickets">

@@ -64,6 +64,12 @@ import HotelList from "./pages/Hotel/HotelList";
 import HotelConfirmation from "./pages/selectbooking/HotelConfirmation";
 import Hcongratulations from './pages/selectbooking/hCongratulations'
 import HotelTicketDetail from'./pages/selectbooking/HotelTicketDetail'
+
+
+import CabConfirmation from "./pages/Cab/CabConfirmation";
+import Cab from "./pages/Cab/CabSearch";
+import CabList from "./pages/Cab/CabList";
+
 function App() {
   return (
     <>
@@ -134,6 +140,12 @@ function App() {
               path="/hotelconfirmation/:id"
               component={HotelConfirmation}
             />
+
+    <Route exact path="/cabconfirmation" component={CabConfirmation} />
+            <Route exact path="/checkoutpage" component={CheckoutPage} />
+            <Route exact path="/cab" component={Cab} />
+            <Route exact path="/cablist" component={CabList} />
+
 
           </Switch>
         </div>

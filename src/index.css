@@ -188,3 +188,16 @@ padding-left: 15px;
   padding: 0px !important;
   border: none !important;
 }
+
+.ant-tabs-tab + .ant-tabs-tab {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+.ant-tabs-tab {
+  padding: 0px !important;
+}
+
+.ant-collapse-arrow {
+  display: none !important;
+}
