@@ -305,16 +305,16 @@ const Explores = () => {
               }}
             >
               <div>
-                <h2 className="package__title">
+                <h2 className="package__title" style={{color:"white"}}>
                   <span>Popular</span> Destinations
                 </h2>
-                <h6>
+                <h6 style={{ color: "white" }}>
                   The best tourist locations across Bastar, rated and curated by travellers.
                 </h6>
               </div>
 
               <h6
-                style={{ cursor: "pointer" }}
+                style={{ cursor: "pointer",color:"white" }}
                 onClick={() => history.push("/populardestinations")}
                 className="package__title pt-5"
               >
@@ -339,10 +339,10 @@ const Explores = () => {
                     />
 
                     <div style={{ color: "white" }} className="package__trip">
-                      <h6 className="packages__block-title mt-3 mb-0">
+                      <h6 className="packages__block-title mt-3 mb-0" style={{ color: "white" }}>
                         {item.title}
                       </h6>
-                      <small className="packages__block-subtitle">
+                      <small className="packages__block-subtitle" style={{ color: "white" }}>
                         {item.sub_title}
                       </small>
                     </div>
