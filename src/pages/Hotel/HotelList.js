@@ -239,7 +239,7 @@ function HotelList() {
                   {...params}
                   onKeyPress={(e) => getDataFromAPI(e.target.value)}
                   placeholder="Search Area"
-                  InputProps={{ disableUnderline: true }}
+                  // InputProps={{ disableUnderline: true }}
                 />
                 )}
               />
