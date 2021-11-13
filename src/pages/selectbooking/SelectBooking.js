@@ -175,11 +175,9 @@ function SelectBooking() {
                       </span>
                       <br />
                       <span>
-                      Book bus ticket for route 
+                      Book bus ticket for your 
            <br />
-           Tamda Ghumar- Mendri 
-           <br /> 
-           Ghumar- Chitrakoot etc 
+           favourite spots
                       </span>
                     </div>
                   </div>
