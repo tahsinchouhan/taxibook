@@ -11,10 +11,12 @@ import { useHistory } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import Modal from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
+import Carousel from "react-multi-carousel";
 import ReactPlayer from "react-player";
 import RettingModal from "../../components/modal/RettingModal";
 import EnquireModal from "../../components/modal/EnquireModal";
 import { FaStar } from "react-icons/fa";
+import '../../assets/css/ratings.css'
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
@@ -50,20 +52,19 @@ const PackagesDetails = (props) => {
   var id;
   useEffect(() => {
     if (props.location.item) {
+      console.log("props.location.item",props.location.item)
       localStorage.setItem("id", props.location.item);
       id = localStorage.getItem("id");
     } else {
       id = localStorage.getItem("id");
     }
-  }, []);
-
-  useEffect(() => {
     getPackages();
     getReview();
     getEnquiry();
-    // window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo(0, 0);
+  }, [props]);
 
+ 
   const getPackages = () => {
     fetch(API_PATH + `/api/v1/packages/${id}`)
       .then((response) => response.json())
@@ -76,11 +77,21 @@ const PackagesDetails = (props) => {
   };
 
   const getReview = () => {
-    fetch(API_PATH + `/api/v1/review/list`)
+    fetch(API_PATH + "/api/v1/packages/location", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify({
+      //   latitude: location.latitude,
+      //   longitude: location.longitude,
+      // }),
+    })
       .then((response) => response.json())
       .then((res) => {
+        console.log("imagd res",res)
         setReview(res.data);
-        console.log(res.data);
+        console.log('res.data',res.data);
       })
       .catch((e) => console.log(e));
   };
@@ -125,7 +136,37 @@ const PackagesDetails = (props) => {
   // if (cnt > 0) {
   //   console.log(current + " comes --> " + cnt + " times");
   // }
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4.5,
+      slidesToSlide: 4, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3.5,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1.2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
 
+  const onPackages =(data)=>{
+    console.log("id in packages", data)
+    history.push({
+      pathname: `/packages_details/${data.title}`,
+      id: data._id,
+    })
+    localStorage.setItem("id", data._id);
+
+  }
+
+  const bookHandler = () =>{
+    history.push('/bookpass')
+  }
   return (
     <>
       <div
@@ -300,10 +341,10 @@ const PackagesDetails = (props) => {
             >
               <a
                 className="code"
-                href={`tel:${packages.tour_operator_account.mobile}`}
                 style={{ color: "#7868E6" }}
+                onClick={bookHandler}
               >
-                Call Now
+                Book Now
               </a>
             </span>
           ) : null}
@@ -397,11 +438,9 @@ const PackagesDetails = (props) => {
                 style={{ width: "200px", display: "inline-block" }}
               >
                 <a
-                  className="code"
-                  href={`tel:${packages.tour_operator_account.mobile}`}
-                  style={{ color: "#7868E6" }}
+                  onClick={bookHandler}
                 >
-                  Call Now
+                  Book Now
                 </a>
               </span>
             ) : null}
@@ -439,6 +478,7 @@ const PackagesDetails = (props) => {
         </div>
       </div>
 
+
       <Container className="mb-5 pb-5">
         <h4 className="block__title mt-5">
           <span>Review</span>
@@ -475,7 +515,7 @@ const PackagesDetails = (props) => {
             {review.length} reviews
           </span>
         </h5>
-        <p>
+        {/* <p>
           <span
             style={{
               margin: 3,
@@ -554,15 +594,119 @@ const PackagesDetails = (props) => {
           >
             Terrible {review.filter((data) => data.star_rating === "").length}
           </span>
-        </p>
-        <div>
-          {review
-            .filter((data) => data.star_rating === "4.5")
-            .map((data) => {
+        </p> */}
+
+
+<div class="row">
+  <div class="side">
+    <div>5 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-5"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>150</div>
+  </div>
+  <div class="side">
+    <div>4 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-4"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>63</div>
+  </div>
+  <div class="side">
+    <div>3 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-3"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>15</div>
+  </div>
+  <div class="side">
+    <div>2 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-2"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>6</div>
+  </div>
+  <div class="side">
+    <div>1 star</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar-1"></div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>20</div>
+  </div>
+</div>
+        <div className="mt-5">
+        <Carousel
+            ssr
+            partialVisible
+            itemClass="image-item"
+            responsive={responsive}
+          >
+              {review.map((data, key) => {
+                return (
+                  <>
+                  <div
+                  key={key}
+                    onClick={() =>
+                     onPackages(data)
+                    }
+                  >
+                    <Image
+                      draggable={false}
+                      style={{ width: "100%", height: "100%" }}
+                      src={data?.upload_images}
+                    />
+                  </div>
+                  <div>
+                      <h6 className="packages__block-title_ mt-3 mb-0">
+                        {data.title}
+                      </h6>
+                      <div
+                        style={{
+                          paddingTop: 2,
+                        }}
+                      >
+                      </div>
+                      <div>
+                        <small className="packages__block-subtitle">
+                          ₹ {data.price}
+                        </small>
+                      </div>
+                    </div>
+                    </>
+                );
+              })}
+          </Carousel>
+          {/* {review
+            .filter((data) => data.star_rating >= "0")
+            .map((data,key) => {
+              console.log('data',data)
               return (
-                <img src={data.image[0]} alt="hell" width="200" height="200" />
+                <>
+                
+                <img src={data?.image[0]} alt="image" width="200" height="200" key={key} />
+                </>
               );
-            })}
+            })} */}
         </div>
       </Container>
 

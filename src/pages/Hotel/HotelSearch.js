@@ -63,7 +63,7 @@ function HotelSearch() {
       .then((res) => {
         console.log(res.data);
         for (var i = 0; i < res.data.length; i++) {
-          let str = `${res.data[i].hotel_name},${res.data[i].full_address.city}`;
+          let str = `${res.data[i].hotel_name},${res.data[i]?.full_address?.city}`;
           myOptions.push(str);
         }
         setMyOptions(myOptions);
@@ -306,7 +306,7 @@ function HotelSearch() {
                         renderInput={(params) => (
                           <TextField
                             variant="standard"
-                            required="required"
+                            // required="required"
                             style={{padding:"5px"}}
                             {...params}
                             onKeyPress={(e) => getDataFromAPI(e.target.value)}

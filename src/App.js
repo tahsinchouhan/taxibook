@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, } from 'react-router-dom';
 import Home from './pages/Home';
@@ -16,6 +15,9 @@ import Explores from './pages/explore/Explores';
 import Interest from './pages/explore/Interest';
 import DestinationDetails from './pages/explore/DestinationDetails';
 import PackagesDetails from './pages/explore/PackagesDetails';
+import BookPass from './pages/explore/BookPass';
+import BookingDetails from './pages/explore/BookingDetails';
+import BookingConformation from './pages/explore/BookingConfirmation'
 import CovidResponse from './Footer/CovidResponse'
 import RegistrationGuide from './Footer/RegistrationGuide'
 import DmPass from './pages/dm pass/DmPass';
@@ -81,6 +83,9 @@ function App() {
             <Route exact path='/explore' component={Explores} />
             <Route exact path='/explore/:id' component={Explores} />
             <Route path="/destination_details/:name" component={DestinationDetails} />
+            <Route path="/bookpass" component={BookPass} />
+            <Route path="/bookingdetail" component={BookingDetails} />
+            <Route path="/bookingconfirmation" component={BookingConformation} />
             <Route path="/packages_details/:name" component={PackagesDetails} />
             <Route path="/covidresponse" component={CovidResponse} />
             <Route path="/registrationguide" component={RegistrationGuide} />

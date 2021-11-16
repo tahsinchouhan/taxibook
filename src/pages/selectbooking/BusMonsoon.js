@@ -41,6 +41,9 @@ function BusMonsoon() {
     history.push("/busdetail");
     console.log("item.trip_name",item.trip_name)
   };
+  const onClickBack = () => {
+    history.push("/busdetail");
+  }
   return (
     <>
       <div className="d-none d-md-block">
@@ -145,6 +148,8 @@ function BusMonsoon() {
                       height: '75px'
                     }}
                   >
+                                  <FaArrowLeft style={{marginLeft:'-75px'}} onClick={onClickBack} />
+
                     {routeData?.start?.name}
                     <br />
                     {` to ${routeData?.end?.name} `}

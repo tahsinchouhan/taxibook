@@ -365,7 +365,7 @@ function Registration() {
                             isValid,
                             errors,
                         }) => (
-                            <Form noValidate onSubmit={handleSubmit}>
+                            <Form onSubmit={handleSubmit}>
                                 <Row>
                                     <Col xs={12} md={6}>
                                         <Form.Group
@@ -406,7 +406,8 @@ function Registration() {
                                                 placeholder="Name"
                                                 value={values.name}
                                                 onChange={handleChange}
-                                                isInvalid={!!errors.name}
+                                                required
+                                                // isInvalid={!!errors.name}
                                             />
                                             <Form.Control.Feedback type="invalid" tooltip>
                                                 {errors.name}
@@ -427,7 +428,8 @@ function Registration() {
                                                 name="phone"
                                                 value={values.phone}
                                                 onChange={handleChange}
-                                                isInvalid={!!errors.phone}
+                                                required
+                                                // isInvalid={!!errors.phone}
                                             />
                                             <Form.Control.Feedback type="invalid" tooltip>
                                                 {errors.phone}
@@ -448,7 +450,8 @@ function Registration() {
                                                 name="email"
                                                 value={values.email}
                                                 onChange={handleChange}
-                                                isInvalid={!!errors.email}
+                                                required
+                                                // isInvalid={!!errors.email}
                                             />
                                             <Form.Control.Feedback type="invalid" tooltip>
                                                 {errors.email}
@@ -469,7 +472,8 @@ function Registration() {
                                                 placeholder="Password"
                                                 value={values.password}
                                                 onChange={handleChange}
-                                                isInvalid={!!errors.password}
+                                                required
+                                                // isInvalid={!!errors.password}
                                             />
                                             <Form.Control.Feedback type="invalid" tooltip>
                                                 {errors.password}
@@ -490,7 +494,8 @@ function Registration() {
                                                 placeholder="Confirm Password"
                                                 value={values.passwordConfirmation}
                                                 onChange={handleChange}
-                                                isInvalid={!!errors.passwordConfirmation}
+                                                required
+                                                // isInvalid={!!errors.passwordConfirmation}
                                             />
 
                                             <Form.Control.Feedback type="invalid" tooltip>
@@ -529,7 +534,7 @@ function Registration() {
                                     isValid,
                                     errors,
                                 }) => (
-                                    <Form noValidate onSubmit={handleSubmit}>
+                                    <Form onSubmit={handleSubmit}>
                                         <div>
                                             <Row>
                                                 <Col xs={12} md={6}>
@@ -569,7 +574,8 @@ function Registration() {
                                                             placeholder="Hotel Name"
                                                             value={values.hotel_name}
                                                             onChange={handleChange}
-                                                            isInvalid={!!errors.hotel_name}
+                                                            required
+                                                            // isInvalid={!!errors.hotel_name}
                                                         />
 
                                                         <Form.Control.Feedback type="invalid" tooltip>
@@ -591,7 +597,8 @@ function Registration() {
                                                             placeholder="Address"
                                                             value={values.address}
                                                             onChange={handleChange}
-                                                            isInvalid={!!errors.address}
+                                                            required
+                                                            // isInvalid={!!errors.address}
                                                         />
 
                                                         <Form.Control.Feedback type="invalid" tooltip>
@@ -613,7 +620,8 @@ function Registration() {
                                                             placeholder="City"
                                                             value={values.city}
                                                             onChange={handleChange}
-                                                            isInvalid={!!errors.city}
+                                                            required
+                                                            // isInvalid={!!errors.city}
                                                         />
                                                         <Form.Control.Feedback type="invalid" tooltip>
                                                             {errors.city}
@@ -638,7 +646,8 @@ function Registration() {
                                                             onChange={handleImageChange}
                                                             accept="application/pdf"
                                                             onChange={(e) => { handleChange(e); handleImageChange(e) }}
-                                                            isInvalid={!!errors.gst_upload}
+                                                            required
+                                                            // isInvalid={!!errors.gst_upload}
                                                         />
                                                         <Form.Control.Feedback type="invalid" tooltip>
                                                             {errors.gst_upload}
@@ -679,7 +688,7 @@ function Registration() {
                                         isValid,
                                         errors,
                                     }) => (
-                                        <Form noValidate onSubmit={handleSubmit}>
+                                        <Form onSubmit={handleSubmit}>
                                             <div>
                                                 <Row>
                                                     <Col xs={12} md={6}>
@@ -719,7 +728,8 @@ function Registration() {
                                                                 placeholder="Address"
                                                                 value={values.address}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.address}
+                                                                // isInvalid={!!errors.address}
+                                                                required
                                                             />
 
                                                             <Form.Control.Feedback type="invalid" tooltip>
@@ -741,7 +751,8 @@ function Registration() {
                                                                 placeholder="City"
                                                                 value={values.city}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.city}
+                                                                required
+                                                                // isInvalid={!!errors.city}
                                                             />
                                                             <Form.Control.Feedback type="invalid" tooltip>
                                                                 {errors.city}
@@ -762,7 +773,8 @@ function Registration() {
                                                                 placeholder="Driver Name"
                                                                 value={values.driver_name}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.driver_name}
+                                                                required
+                                                                // isInvalid={!!errors.driver_name}
                                                             />
 
                                                             <Form.Control.Feedback type="invalid" tooltip>
@@ -784,7 +796,8 @@ function Registration() {
                                                                 placeholder="Driver License No"
                                                                 value={values.driver_license_number}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.driver_license_number}
+                                                                required
+                                                                // isInvalid={!!errors.driver_license_number}
                                                             />
 
                                                             <Form.Control.Feedback type="invalid" tooltip>
@@ -805,7 +818,8 @@ function Registration() {
                                                                 name="car_number"
                                                                 value={values.car_number}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.car_number}
+                                                                // isInvalid={!!errors.car_number}
+                                                                required
                                                                 placeholder=" Taxi Number"
                                                             />
                                                             <Form.Control.Feedback type="invalid" tooltip>
@@ -826,7 +840,8 @@ function Registration() {
                                                                 name="car_model"
                                                                 value={values.car_model}
                                                                 onChange={handleChange}
-                                                                isInvalid={!!errors.car_model}
+                                                                required
+                                                                // isInvalid={!!errors.car_model}
                                                             >
                                                                 <option value="">Select</option>
                                                                 <option value="SUV">SUV</option>
@@ -854,7 +869,8 @@ function Registration() {
                                                                 onChange={handleImageChange}
                                                                 accept="application/pdf"
                                                                 onChange={(e) => { handleChange(e); handleImageChange(e) }}
-                                                                isInvalid={!!errors.rc_book_upload}
+                                                                // isInvalid={!!errors.rc_book_upload}
+                                                                required
                                                             />
                                                             <Form.Control.Feedback type="invalid" tooltip>
                                                                 {errors.rc_book_upload}
@@ -894,7 +910,7 @@ function Registration() {
                                             isValid,
                                             errors,
                                         }) => (
-                                            <Form noValidate onSubmit={handleSubmit}>
+                                            <Form onSubmit={handleSubmit}>
                                                 <div>
                                                     <Row>
                                                         <Col xs={12} md={6}>
@@ -934,7 +950,8 @@ function Registration() {
                                                                     placeholder="Agency Name"
                                                                     value={values.agency_name}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.agency_name}
+                                                                    required
+                                                                    // isInvalid={!!errors.agency_name}
                                                                 />
 
                                                                 <Form.Control.Feedback type="invalid" tooltip>
@@ -956,7 +973,8 @@ function Registration() {
                                                                     placeholder="Address"
                                                                     value={values.address}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.address}
+                                                                    required
+                                                                    // isInvalid={!!errors.address}
                                                                 />
 
                                                                 <Form.Control.Feedback type="invalid" tooltip>
@@ -978,7 +996,8 @@ function Registration() {
                                                                     placeholder="City"
                                                                     value={values.city}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.city}
+                                                                    required
+                                                                    // isInvalid={!!errors.city}
                                                                 />
                                                                 <Form.Control.Feedback type="invalid" tooltip>
                                                                     {errors.city}
@@ -1000,7 +1019,8 @@ function Registration() {
                                                                     value={values.category}
                                                                     // onChange={handleChange}
                                                                     onChange={(e) => { handleChange(e); handleCategoryChange(e) }}
-                                                                    isInvalid={!!errors.category}
+                                                                    required
+                                                                    // isInvalid={!!errors.category}
                                                                 >
                                                                     <option value="">Select</option>
                                                                     <option value="leisure">Leisure</option>
@@ -1026,7 +1046,8 @@ function Registration() {
                                                                     name="sub_category"
                                                                     value={values.sub_category}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.sub_category}
+                                                                    required
+                                                                    // isInvalid={!!errors.sub_category}
                                                                 >
                                                                     <option value="">Select</option>
                                                                     {/* <option value="sightseeing">Sightseeing</option>
@@ -1059,7 +1080,8 @@ function Registration() {
                                                                     // onChange={handleChange}
                                                                     onChange={handleImageChange}
                                                                     onChange={(e) => { handleChange(e); handleImageChange(e) }}
-                                                                    isInvalid={!!errors.document}
+                                                                    required
+                                                                    // isInvalid={!!errors.document}
                                                                 />
                                                                 <Form.Control.Feedback type="invalid" tooltip>
                                                                     {errors.document}
@@ -1101,7 +1123,7 @@ function Registration() {
                                             isValid,
                                             errors,
                                         }) => (
-                                            <Form noValidate onSubmit={handleSubmit}>
+                                            <Form onSubmit={handleSubmit}>
                                                 <div>
                                                     <Row>
                                                         <Col xs={12} md={6}>
@@ -1141,7 +1163,8 @@ function Registration() {
                                                                     placeholder="Address"
                                                                     value={values.address}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.address}
+                                                                    required
+                                                                    // isInvalid={!!errors.address}
                                                                 />
 
                                                                 <Form.Control.Feedback type="invalid" tooltip>
@@ -1163,7 +1186,8 @@ function Registration() {
                                                                     placeholder="City"
                                                                     value={values.city}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.city}
+                                                                    required
+                                                                    // isInvalid={!!errors.city}
                                                                 />
                                                                 <Form.Control.Feedback type="invalid" tooltip>
                                                                     {errors.city}
@@ -1184,7 +1208,8 @@ function Registration() {
                                                                     placeholder="About You"
                                                                     value={values.about_you}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.about_you}
+                                                                    required
+                                                                    // isInvalid={!!errors.about_you}
                                                                 />
 
                                                                 <Form.Control.Feedback type="invalid" tooltip>
@@ -1206,7 +1231,8 @@ function Registration() {
                                                                     placeholder="Area Of Interest"
                                                                     value={values.area_of_interest}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.area_of_interest}
+                                                                    required
+                                                                    // isInvalid={!!errors.area_of_interest}
                                                                 />
 
                                                                 <Form.Control.Feedback type="invalid" tooltip>
@@ -1228,7 +1254,8 @@ function Registration() {
                                                                     placeholder="Profile URL"
                                                                     value={values.profile_url}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.profile_url}
+                                                                    required
+                                                                    // isInvalid={!!errors.profile_url}
                                                                 />
                                                                 <Form.Control.Feedback type="invalid" tooltip>
                                                                     {errors.profile_url}
@@ -1249,7 +1276,8 @@ function Registration() {
                                                                     placeholder="Page URL"
                                                                     value={values.page_url}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.page_url}
+                                                                    required
+                                                                    // isInvalid={!!errors.page_url}
                                                                 />
 
                                                                 <Form.Control.Feedback type="invalid" tooltip>
@@ -1271,7 +1299,8 @@ function Registration() {
                                                                     placeholder="Channel"
                                                                     value={values.channel_name}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.channel_name}
+                                                                    required
+                                                                    // isInvalid={!!errors.channel_name}
                                                                 />
 
                                                                 <Form.Control.Feedback type="invalid" tooltip>
@@ -1293,7 +1322,8 @@ function Registration() {
                                                                     placeholder="No of Followers"
                                                                     value={values.no_of_followers}
                                                                     onChange={handleChange}
-                                                                    isInvalid={!!errors.no_of_followers}
+                                                                    required
+                                                                    // isInvalid={!!errors.no_of_followers}
                                                                 />
 
                                                                 <Form.Control.Feedback type="invalid" tooltip>

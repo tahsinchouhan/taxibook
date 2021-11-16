@@ -27,30 +27,55 @@ const DestinationDetails = (props) => {
     if (props.location.id) {
       localStorage.setItem("id", props.location.id);
       id = localStorage.getItem("id");
+      console.log('1')
+
     } else {
       id = localStorage.getItem("id");
+      console.log('2')
+
     }
+    console.log('abcd')
   }, []);
 
   useEffect(() => {
+    if (props.location.id) {
+      console.log("props.location.id",props.location.id)
+      localStorage.setItem("id", props.location.id);
+      id = localStorage.getItem("id");
+      console.log('1')
+
+    } else {
+      id = localStorage.getItem("id");
+      console.log('2')
+
+    }
     getPackages();
     getPackagesid();
     window.scrollTo(0, 0);
-  }, []);
+    console.log('avcs')
+  }, [props]);
 
   const getPackages = () => {
     fetch(API_PATH + `/api/v1/destinations/${id}`)
       .then((response) => response.json())
       .then((res) => {
         setDestinations(res.data);
+        console.log('destinations',destinations)
+
       })
       .catch((e) => console.log(e));
   };
   const getPackagesid = () => {
-    fetch(`${API_PATH}/api/v1/packages/list?destinations=${id}`)
+    fetch(API_PATH + "/api/v1/destinations/location", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((response) => response.json())
       .then((res) => {
         getPackagesdata(res.data);
+        console.log('getPackagesdata',getPackagesdata)
       })
       .catch((e) => console.log(e));
   };
@@ -71,6 +96,13 @@ const DestinationDetails = (props) => {
       items: 1,
       slidesToSlide: 1,
     },
+  };
+
+  const onDestinations = (value) => {
+    history.push({
+      pathname: `/destination_details/${value.title}`,
+      id: value._id,
+    });
   };
 
   return (
@@ -191,11 +223,11 @@ const DestinationDetails = (props) => {
               }}
             >
               <div>
-                <h2 className="package__title">
-                  <span>Related</span> Packages
+                <h2 className="package__title" style={{color:'white'}}>
+                  <span>Related</span> Destination
                 </h2>
-                <h6>
-                  Choose Your Best Packages
+                <h6 style={{color:'white'}}>
+                  Choose Your Best Destination
                 </h6>
               </div>
             </div>
@@ -209,22 +241,10 @@ const DestinationDetails = (props) => {
             responsive={responsive}
           >
             {packagesdata.length ? (
-              packagesdata.map((item) => {
+              packagesdata.map((item,key) => {
                 return (
                   <div
-                    onClick={() =>
-                      history.push({
-                        pathname: `/packages_details/${item.title}`,
-                        item: item._id,
-                      })
-                    }
-                    style={{
-                      width: 300,
-                      height: 200,
-                      marginRight: 15,
-                      marginTop: 10,
-                      marginBottom: 80
-                    }}
+                    key={key} onClick={() => onDestinations(item)}
                   >
                     <Image
                       draggable={false}
@@ -246,7 +266,7 @@ const DestinationDetails = (props) => {
                       >
                         <h6
                           style={{
-                            background: "#BEBEBE",
+                            color: "white",
                             display: "inline",
                             padding: "3px",
                             borderRadius: "4px",
@@ -255,11 +275,6 @@ const DestinationDetails = (props) => {
                         >
                           {item.sub_title}
                         </h6>
-                      </div>
-                      <div>
-                        <small className="packages__block-subtitle">
-                          ₹ {item.price}
-                        </small>
                       </div>
                     </div>
                   </div>
