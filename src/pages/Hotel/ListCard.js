@@ -41,7 +41,7 @@ function ListCard(props) {
                       fontWeight: 900,
                     }}
                   >
-                    {item.full_address.street}, {item.full_address.city} C.G
+                    {item?.full_address?.street}, {item?.full_address?.city} C.G
                   </h3>
                   <span
                     style={{
@@ -49,6 +49,7 @@ function ListCard(props) {
                       fontWeight: 900,
                       fontSize: "17px",
                     }}
+                    onClick={()=>{history.push('/hotelsearch')}}
                   >
                     Change
                   </span>
@@ -100,11 +101,11 @@ function ListCard(props) {
                               fontFamily: "sans-serif",
                             }}
                           >
-                           {item.hotel_name}
+                           {item?.hotel_name}
                           </span>
                         </div>
                         <span className="train-sleeper">
-                          {item.full_address.street}, {item.full_address.city} C.G
+                          {item?.full_address?.street}, {item?.full_address?.city} C.G
                         </span>
                         <div style={{ display: "flex" }}>
                           <span
@@ -309,7 +310,7 @@ function ListCard(props) {
                                 fontFamily: "sans-serif",
                               }}
                             >
-                          {item.full_address.street}, {item.full_address.city} C.G
+                          {item?.full_address?.street}, {item?.full_address?.city} C.G
                             </span>
                           </div>
                         </div>

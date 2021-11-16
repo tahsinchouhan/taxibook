@@ -29,6 +29,7 @@ const getBookHotellistAsync = async (payload) => {
 };
 
 function* getBookHotelSaga({ payload }) {
+  console.log({ payload })
   try {
     const apigetHotelList = yield call(getBookHotellistAsync, payload);
     yield put(getBookHotelSuccess(apigetHotelList.data));

@@ -16,7 +16,6 @@ import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import { Autocomplete } from "@material-ui/lab";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import AvField from "availity-reactstrap-validation/lib/AvField";
 import moment from "moment";
 import { DatePicker, Menu, Dropdown as ANTDropdown } from "antd";
@@ -92,15 +91,41 @@ function HotelSearch() {
         .catch((e) => console.log(e));
     });
   };
+  const [showLocationError, setshowLocationError] = useState(false);
   const onDmTicketShow = () => {
+    // toast("Wow so easy!");
     console.log(sendlocation, startDate, endDate, noOfRoom, noOfGuest);
-    if (sendlocation !== "") {
-      dispatch(
-        getBookHotel({ sendlocation, startDate, endDate, noOfRoom, noOfGuest ,roomStateData:roomState})
-      );
-      history.push("/hotellist");
+    if (
+      sendlocation === undefined ||
+      sendlocation === "" ||
+      sendlocation === " "
+    ) {
+      setshowLocationError(true);
     } else {
-      toast.error("Please Select Location");
+      if (sendlocation !== "") {
+        console.log({ sendlocation });
+        let city = sendlocation?.split(",")[1];
+        console.log({ city });
+        if (city === undefined) {
+          city = sendlocation;
+        }
+        console.log({ city });
+
+        setshowLocationError(false);
+        dispatch(
+          getBookHotel({
+            sendlocation:city,
+            startDate,
+            endDate,
+            noOfRoom,
+            noOfGuest,
+            roomStateData: roomState,
+          })
+        );
+        history.push("/hotellist");
+      } else {
+        setshowLocationError(true);
+      }
     }
   };
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
@@ -136,8 +161,6 @@ function HotelSearch() {
     setStartDate(datee[0]._d);
     setEndDate(datee[1]._d);
   };
-
- 
 
   const addMenu = () => {
     let noofg = 0;
@@ -300,14 +323,14 @@ function HotelSearch() {
                         autoHighlight
                         disableCloseOnSelect
                         onChange={(e) => {
-                          setSendlocation(e.target.innerHTML.split(",")[1]);
+                          setSendlocation(e.target.innerHTML);
                         }}
                         options={myOptions}
                         renderInput={(params) => (
                           <TextField
                             variant="standard"
-                            // required="required"
-                            style={{padding:"5px"}}
+                            required="required"
+                            style={{ padding: "5px" }}
                             {...params}
                             onKeyPress={(e) => getDataFromAPI(e.target.value)}
                             placeholder="Search Area"
@@ -315,6 +338,15 @@ function HotelSearch() {
                           />
                         )}
                       />
+                      {showLocationError ? (
+                        <p>
+                          <small style={{ color: "red" }}>
+                            Please select a destination from the list
+                          </small>
+                        </p>
+                      ) : (
+                        ""
+                      )}
                     </Form.Group>
                   </Col>
                   <Col xs={12} md={4} className="mt-2">
@@ -556,17 +588,17 @@ function HotelSearch() {
                     autoComplete
                     autoHighlight
                     onChange={(e) => {
-                      setSendlocation(e.target.innerHTML.split(",")[1]);
+                      setSendlocation(e.target.innerHTML);
                     }}
                     options={myOptions}
                     renderInput={(params) => (
                       <TextField
-                      variant="standard"
-                      required="required"
-                      style={{padding:"5px"}}
-                      {...params}
-                      onKeyPress={(e) => getDataFromAPI(e.target.value)}
-                      placeholder="Search Area"
+                        variant="standard"
+                        required="required"
+                        style={{ padding: "5px" }}
+                        {...params}
+                        onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                        placeholder="Search Area"
                       />
                     )}
                   />
@@ -577,6 +609,15 @@ function HotelSearch() {
                   >
                     <FaSearchLocation />
                   </span> */}
+                  {showLocationError ? (
+                    <p>
+                      <small style={{ color: "red" }}>
+                        Please select a destination from the list
+                      </small>
+                    </p>
+                  ) : (
+                    ""
+                  )}
                 </Form.Group>
               </Col>
 
