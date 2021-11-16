@@ -18,6 +18,8 @@ import PackagesDetails from './pages/explore/PackagesDetails';
 import BookPass from './pages/explore/BookPass';
 import BookingDetails from './pages/explore/BookingDetails';
 import BookingConformation from './pages/explore/BookingConfirmation'
+import CheckOutBook from './pages/explore/checkoutBooking'
+import BookingPayment from './pages/explore/BookingPayement'
 import CovidResponse from './Footer/CovidResponse'
 import RegistrationGuide from './Footer/RegistrationGuide'
 import DmPass from './pages/dm pass/DmPass';
@@ -86,6 +88,8 @@ function App() {
             <Route path="/bookpass" component={BookPass} />
             <Route path="/bookingdetail" component={BookingDetails} />
             <Route path="/bookingconfirmation" component={BookingConformation} />
+            <Route path="/checkoutbooking" component={CheckOutBook} />
+            <Route path="/bookpayement" component={BookingPayment} />
             <Route path="/packages_details/:name" component={PackagesDetails} />
             <Route path="/covidresponse" component={CovidResponse} />
             <Route path="/registrationguide" component={RegistrationGuide} />

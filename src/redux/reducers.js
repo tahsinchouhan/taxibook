@@ -7,6 +7,8 @@ import loginReducer from "./login/reducer";
 import exploreReducer from "./explore/reducer";
 import quizReducer from "./quiz/reducer";
 import hotelReducer from "./hotel/reducer";
+import packageReducer from "./packages/reducer";
+
 const reducers = combineReducers({
   commonReducer,
   authReducer,
@@ -16,5 +18,6 @@ const reducers = combineReducers({
   dmpassReducer,
   exploreReducer,
   quizReducer,
+  packageReducer,
 });
 export default reducers;

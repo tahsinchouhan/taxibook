@@ -5,6 +5,7 @@ import {
   GET_ENQUIRE,
   GET_ENQUIRE_ERROR,
   GET_ENQUIRE_SUCCESS,
+  EXPORTED_ID
 } from "../actions";
 
 export const getReview = (value) => ({
@@ -37,3 +38,10 @@ export const getEnquireSuccess = (value) => ({
   type: GET_ENQUIRE_SUCCESS,
   payload: value,
 });
+
+export const exportid = (value) => {
+  console.log('valueid',value)
+  return{
+  type: EXPORTED_ID,
+  payload: value,}
+};

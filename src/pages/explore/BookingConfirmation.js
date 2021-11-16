@@ -73,11 +73,11 @@ console.log( tripData, apiData,  routeData )
   const onCheckout = () => {
     console.log("object");
     dispatch(setApiData({ ...values, basic_details: travellers }))
-    history.push("/checkoutpage");
+    history.push("/checkoutbooking");
   };
 
   const onClickBack = () => {
-    history.push("/busmonsoon");
+    history.push("/bookingdetail");
   }
 
   const [values, setValues] = useState({
@@ -94,11 +94,10 @@ console.log( tripData, apiData,  routeData )
     adhaar: '',
     age: '',
     price: '',
-    surcharge: tripData?.surcharge,
     gender: '',
     basic_details: apiData?.basic_details || [],
   })
-  const [basePrice, setBasePrice] = useState(tripData?.ticket_price || 0)
+  const [basePrice, setBasePrice] = useState("")
 
   const [travellers, setTravellers] = useState(apiData?.basic_details || [{
     name: '',
@@ -107,7 +106,7 @@ console.log( tripData, apiData,  routeData )
     adhaar: '',
   }])
 
-  const { name, age, gender, adhaar, basic_details, price, surcharge } = values;
+  const { name, age, gender, adhaar, basic_details, price } = values;
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value, gender: activeButton })
@@ -139,6 +138,7 @@ console.log( tripData, apiData,  routeData )
   };
 
   useEffect(() => {
+    setBasePrice(localStorage.getItem("Booking_Price"))
     setValues({ ...values, price: (basePrice * travellers.length) })
     // console.log(tripData,price,"enosdkl",travellers);
     console.log('travellers',travellers)
@@ -363,7 +363,7 @@ console.log( tripData, apiData,  routeData )
                       }}
                     >
 
-                      ₹  {price + surcharge}
+                      ₹  {price}
                     </span>
                   </div>
                 </div>
@@ -611,7 +611,7 @@ console.log( tripData, apiData,  routeData )
                         fontSize: " 24px",
                       }}
                     >
-                      ₹  {price + surcharge}
+                      ₹  {price}
                     </span>
                   </div>
                 </div>

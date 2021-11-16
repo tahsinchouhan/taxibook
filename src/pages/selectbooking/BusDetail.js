@@ -23,7 +23,6 @@ import Footer from "../travesaly/Footer";
 
 function BusPass() {
   const history = useHistory();
-  const history2 = useHistory();
   const [routes, setRoutes] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [selected, setSelected] = useState("");

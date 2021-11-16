@@ -165,7 +165,13 @@ const PackagesDetails = (props) => {
   }
 
   const bookHandler = () =>{
-    history.push('/bookpass')
+    history.push({
+      pathname: '/bookpass',
+      title:'packages.title'
+    })
+    localStorage.setItem('Booking_Price',packages.price)
+    localStorage.setItem('Package_Name',packages.title)
+
   }
   return (
     <>
