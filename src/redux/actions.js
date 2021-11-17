@@ -54,6 +54,7 @@ export const GET_REVIEW = "GET_REVIEW";
 export const GET_REVIEW_ERROR = "GET_REVIEW_ERROR";
 export const GET_REVIEW_SUCCESS = "GET_REVIEW_SUCCESS";
 
+export const EXPORTED_ID = "EXPORTED_ID"
 
 export const GET_ENQUIRE = "GET_ENQUIRE";
 export const GET_ENQUIRE_ERROR = "GET_ENQUIRE_ERROR";
@@ -78,6 +79,13 @@ export const SET_BOOK_HOTEL_ERROR='SET_BOOK_HOTEL_ERROR';
 export const SET_INTEREST_PREHOME = 'SET_INTEREST_PREHOME';
 export const SET_INTEREST_PREHOME_SUCCESS = 'SET_INTEREST_PREHOME_SUCCESS';
 export const SET_DESTINATION_PREHOME_SUCCESS ='SET_DESTINATION_PREHOME_SUCCESS'
+
+// packages payment
+
+export const PACKAGES_BOOKING = 'PACKAGES_BOOKING';
+export const PACKAGES_BOOKING_SUCCESS = 'PACKAGE_BOOKING_SUCCESS';
+export const PACKAGES_BOOKING_ERROR = 'PACKAGE_BOOKING_ERROR'
+
 export * from "./common/actions";
 export * from "./auth/actions";
 export * from "./bus/actions";

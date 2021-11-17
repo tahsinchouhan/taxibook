@@ -16,16 +16,16 @@ import { toast } from "react-toastify";
 import Message from "../../components/Message";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 
-function BusDetail({loading}) {
+function BusDetail({ loading }) {
   const history = useHistory();
   const [otp, setOtp] = useState("");
-  const { error, message } = useSelector(
-    (state) => state.commonReducer
-  );
+  const { error, message } = useSelector((state) => state.commonReducer);
   const { user_data } = useSelector((state) => state.loginReducer);
   const { mobile } = useSelector((state) => state.busReducer);
-  const [number, setNumber] = useState("")
+  const [number, setNumber] = useState("");
   const dispatch = useDispatch();
+
+  console.log("user_data", user_data)
 
   // const handleMobile = (e) => {
   //   console.log("object", e.target.value);
@@ -48,13 +48,12 @@ function BusDetail({loading}) {
       dispatch(fetchStart());
       dispatch(verifyOtp(`91${number}`, otp));
     }
-
   };
   return (
     <>
       <Header />
       {/* {loading ? <Loader /> : null} */}
-      
+
       {message ? <Message msg={message} type="success" /> : null}
       {error ? <Message msg={error} type="error" /> : null}
       {user_data !== null ? <Redirect to="/bookingdetail" /> : null}
@@ -65,13 +64,13 @@ function BusDetail({loading}) {
             <h5 style={{ margin: "10px", color: "#FF4A68" }}>Book Tickets</h5>
           </div>
           <span>
-          Book packages for your 
-<br />
-favorite destination
+            Book packages for your
+            <br />
+            favorite destination
           </span>
         </div>
         <Container style={{ width: "70%" }}>
-          <AvForm >
+          <AvForm>
             <Row className="row justify-content-center">
               <Col xs={12} md={4} className="">
                 <Form.Group as={Col} controlId="formGridState">
@@ -102,34 +101,39 @@ favorite destination
                       },
                       pattern: {
                         value: "^[0-9]",
-                        errorMessage:
-                          "Your Number only be 10 numbers"
+                        errorMessage: "Your Number only be 10 numbers",
                       },
                       minLength: {
                         value: 10,
-                        errorMessage: "Only 10 digit number"
+                        errorMessage: "Only 10 digit number",
                       },
                       maxLength: {
                         value: 10,
-                        errorMessage: "Only 10 digit number"
-                      }
+                        errorMessage: "Only 10 digit number",
+                      },
                     }}
                   />
-
                 </Form.Group>
                 <Button
-                      onClick={fetchOtp}
-                        style={{
-                          backgroundColor: "transparent",
-                          border: "none",
-                          color: "#FF4A68",
-                          float: "right",
-                          fontSize: "12px",
-                        }}
-                        disabled={loading}
-                      >
-                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Send OTP</>} 
-                      </Button>
+                  onClick={fetchOtp}
+                  style={{
+                    backgroundColor: "transparent",
+                    border: "none",
+                    color: "#FF4A68",
+                    float: "right",
+                    fontSize: "12px",
+                  }}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <FaSpinner style={{ marginRight: "5px" }} />
+                      Sending...
+                    </>
+                  ) : (
+                    <>Send OTP</>
+                  )}
+                </Button>
               </Col>
               <Col xs={12} md={4} className="">
                 <Form.Group as={Col} controlId="formGridState">
@@ -160,20 +164,23 @@ favorite destination
                       },
                       pattern: {
                         value: "^[0-6]",
-                        errorMessage:
-                          "Your OTP only be 6 numbers"
+                        errorMessage: "Your OTP only be 6 numbers",
                       },
                       maxLength: {
                         value: 6,
-                        errorMessage: "Only 6 digit OTP"
-                      }
+                        errorMessage: "Only 6 digit OTP",
+                      },
                     }}
                   />
                 </Form.Group>
               </Col>
             </Row>
             <div className="location-btn my-5">
-              <Button className="locationpass-btn" type="submit" onClick={onClickMonsoon}>
+              <Button
+                className="locationpass-btn"
+                type="submit"
+                onClick={onClickMonsoon}
+              >
                 Continue
               </Button>
             </div>
@@ -191,13 +198,13 @@ favorite destination
             <h5 style={{ margin: "10px", color: "#FF4A68" }}>Book Tickets</h5>
           </div>
           <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-          Book packages for your
-           <br />
-         favorite destination
+            Book packages for your
+            <br />
+            favorite destination
           </span>
         </div>
         <Container>
-          <AvForm >
+          <AvForm>
             <Row className="row justify-content-center">
               <Col xs={12} md={4} className="" style={{ width: "100%" }}>
                 <Form.Group
@@ -233,13 +240,12 @@ favorite destination
                       },
                       pattern: {
                         value: "^[0-9]",
-                        errorMessage:
-                          "Your Number only be 10 numbers"
+                        errorMessage: "Your Number only be 10 numbers",
                       },
                       maxLength: {
                         value: 10,
-                        errorMessage: "Only 10 digit number"
-                      }
+                        errorMessage: "Only 10 digit number",
+                      },
                     }}
                   />
                   {/* <Form.Control
@@ -264,18 +270,25 @@ favorite destination
                     Sent OTP
                   </Button> */}
                   <Button
-                        onClick={fetchOtp}
-                        style={{
-                          backgroundColor: "transparent",
-                          border: "none",
-                          color: "#FF4A68",
-                          float: "right",
-                          fontSize: "12px",
-                        }}
-                        disabled={loading}
-                      >
-                      {loading ? <><FaSpinner style={{ marginRight: "5px" }} />Sending...</> : <>Send OTP</>} 
-                      </Button>
+                    onClick={fetchOtp}
+                    style={{
+                      backgroundColor: "transparent",
+                      border: "none",
+                      color: "#FF4A68",
+                      float: "right",
+                      fontSize: "12px",
+                    }}
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>
+                        <FaSpinner style={{ marginRight: "5px" }} />
+                        Sending...
+                      </>
+                    ) : (
+                      <>Send OTP</>
+                    )}
+                  </Button>
                 </Form.Group>
               </Col>
               <Col xs={12} md={4} className="" style={{ width: "100%" }}>
@@ -311,21 +324,18 @@ favorite destination
                       },
                       pattern: {
                         value: "^[0-6]",
-                        errorMessage:
-                          "Your OTP only be 6 numbers"
+                        errorMessage: "Your OTP only be 6 numbers",
                       },
                       maxLength: {
                         value: 6,
-                        errorMessage: "Only 6 digit OTP"
-                      }
+                        errorMessage: "Only 6 digit OTP",
+                      },
                     }}
                   />
-
-
                 </Form.Group>
               </Col>
             </Row>
-            <div >
+            <div>
               <Button
                 style={{
                   width: "100%",
@@ -335,7 +345,7 @@ favorite destination
                   backgroundColor: "#0fa453",
                   border: "none",
                   fontWeight: "600",
-                  marginTop: 20
+                  marginTop: 20,
                 }}
                 onClick={onClickMonsoon}
               >
@@ -344,7 +354,6 @@ favorite destination
             </div>
           </AvForm>
         </Container>
-
       </div>
     </>
   );
@@ -354,6 +363,4 @@ const mapStateToProps = ({ loginReducer }) => {
   const { loading } = loginReducer;
   return { loading };
 };
-export default connect(
-  mapStateToProps,
-)(BusDetail);
+export default connect(mapStateToProps)(BusDetail);

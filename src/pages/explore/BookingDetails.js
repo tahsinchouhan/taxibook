@@ -23,13 +23,19 @@ import Footer from "../travesaly/Footer";
 
 function BusPass() {
   const history = useHistory();
-  const history2 = useHistory();
   const [routes, setRoutes] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
   const [selected, setSelected] = useState("");
+  const [packageName, setPackageName] = useState("");
+
   const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+   setPackageName(localStorage.getItem("Package_Name"))
+    getRoutes();
   }, []);
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
@@ -46,10 +52,7 @@ function BusPass() {
       {value}
     </button>
   ));
-
-  useEffect(() => {
-    getRoutes();
-  }, []);
+ 
 
   const getRoutes = () => {
     fetch(API_PATH + `/api/v1/routes/list`)
@@ -61,7 +64,6 @@ function BusPass() {
   };
 
   const onSubmit = () => {
-    if (selected !== "") {
       dispatch(setRouteId(selected, startDate));
       dispatch(
         setRouteData({
@@ -70,7 +72,6 @@ function BusPass() {
         })
       );
       history.push("/bookingconfirmation");
-    }
   };
 
   const ViewTicketHandler = ()=>{
@@ -100,6 +101,8 @@ function BusPass() {
           </div>
           <Container style={{ width: "70%" }}>
             <Row className="row justify-content-center">
+            {/* {JSON.stringify(packageName)} */}
+
               <Col xs={12} md={4} className="">
                 <Form.Group as={Col} controlId="formGridState">
                   <Form.Label
@@ -113,24 +116,19 @@ function BusPass() {
                   >
                     Your Selected Package
                   </Form.Label>
-                  <Form.Select
+                  <Form.Text
                     className="location-userdatas"
                     style={{ border: "none", fontSize: "12px" }}
                     defaultValue="Choose..."
-                    value={selected}
-                    onChange={(e) => setSelected(e.target.value)}
-                    isInvalid={!selected}
-                    isValid={selected}
                   >
-                    <option value="" hidden>
-                      Choose your preferred route
-                    </option>
-                    {routes.map((item) => (
-                      <option key={item._id} value={item._id}>
+                    {/* {routes.map((item) => (
+                      <div key={item._id} value={item._id}>
                         {item.routename}
-                      </option>
-                    ))}
-                  </Form.Select>
+                      </div>
+
+             ))} */}
+             <div style={{marginLeft:'21px'}}>{packageName}</div>
+                  </Form.Text>
                 </Form.Group>
               </Col>
               <Col xs={12} md={4} className="">
@@ -214,23 +212,19 @@ function BusPass() {
                 >
                   Your Selected Package
                 </Form.Label>
-                <Form.Select
-                  className="location-userdatas"
-                  style={{ border: "none", fontSize: "12px" }}
-                  defaultValue="Choose..."
-                  value={selected}
-                  onChange={(e) => setSelected(e.target.value)}
-                  isInvalid={!selected}
-                  isValid={selected}
-                >
-                  Please choose a username.
-                  <option>Choose your preferred route</option>
-                  {routes.map((item) => (
-                    <option key={item._id} value={item._id}>
-                      {item.routename}
-                    </option>
-                  ))}
-                </Form.Select>
+                <Form.Text
+                    className="location-userdatas"
+                    style={{ border: "none", fontSize: "12px" }}
+                    defaultValue="Choose..."
+                  >
+                    {/* {routes.map((item) => (
+                      <div key={item._id} value={item._id}>
+                        {item.routename}
+                      </div>
+
+             ))} */}
+             <div className="ml-5">{packageName}</div>
+                  </Form.Text>
               </Form.Group>
             </Col>
             <Col xs={12} md={4} className="">

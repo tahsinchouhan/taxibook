@@ -11,6 +11,8 @@ import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Geocode from "react-geocode";
+import { useDispatch } from "react-redux";
+import {exportid} from '../../redux/actions'
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -24,6 +26,7 @@ const Explores = () => {
   const [destinations, setDestinations] = useState([]);
   const [packages, setPackages] = useState([]);
   const [location, setLoation] = useState([]);
+  const dispatch = useDispatch()
 
   const getCurrentLocation = async () => {
     await window.navigator.geolocation.getCurrentPosition((pos) => {
@@ -76,6 +79,7 @@ const Explores = () => {
   }, [location]);
 
   const getDestinations = () => {
+    dispatch(exportid(id))
     if (id !== undefined) {
       if(id == 'heritage') id = 'religious'
       fetch(`${API_PATH}/api/v1/destinations/list?${id}=true`)
@@ -108,7 +112,7 @@ const Explores = () => {
 
 
   const getPackages = () => {
-    console.log("object", id)
+    console.log("objectabc", id)
     if (id !== undefined) {
       if(id == 'heritage') id = 'religious'
       fetch(`${API_PATH}/api/v1/packages/list?${id}=true`)

@@ -5,11 +5,13 @@ import {
   GET_ENQUIRE,
   GET_ENQUIRE_ERROR,
   GET_ENQUIRE_SUCCESS,
+  EXPORTED_ID
 } from "../actions";
 
 const INIT_STATE = {
   apiData: [],
-  apiEnquireData: []
+  apiEnquireData: [],
+  exportid : ''
 };
 
 const exploreReducer = (state = INIT_STATE, action) => {
@@ -31,6 +33,9 @@ const exploreReducer = (state = INIT_STATE, action) => {
 
     case GET_ENQUIRE_ERROR:
       return { ...state, apiEnquireData: action.payload };
+
+      case EXPORTED_ID:
+        return { ...state, exportid: action.payload};    
 
     default:
       return {

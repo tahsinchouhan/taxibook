@@ -5,6 +5,8 @@ import loginSaga from './login/saga';
 import dmpassSaga from './dmpass/saga';
 import exploreSaga from './explore/saga';
 import hotelSaga from './hotel/saga';
+import packagesSaga from './packages/saga';
+
  
 
 export default function* rootSaga(getState){
@@ -14,6 +16,7 @@ export default function* rootSaga(getState){
         loginSaga(),
         dmpassSaga(),
         exploreSaga(),
-        hotelSaga()
+        hotelSaga(),
+        packagesSaga()
       ]);
 }
