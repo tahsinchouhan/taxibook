@@ -32,7 +32,7 @@ function HotelSearch() {
 
   const [endDate, setEndDate] = useState(nextDay2);
   const [location, setLocation] = useState([]);
-  const [sendlocation, setSendlocation] = useState();
+  const [sendlocation, setSendlocation] = useState('Jagdalpur');
   const [geolocation, setGeolocation] = useState([]);
   const [noOfGuest, setNoOfGuest] = useState(2);
   const [noOfRoom, setNoOfRoom] = useState(1);
@@ -94,39 +94,41 @@ function HotelSearch() {
   const [showLocationError, setshowLocationError] = useState(false);
   const onDmTicketShow = () => {
     // toast("Wow so easy!");
+    console.log({sendlocation})
+    let city='';
     console.log(sendlocation, startDate, endDate, noOfRoom, noOfGuest);
-    if (
-      sendlocation === undefined ||
+    if (sendlocation === undefined ||
       sendlocation === "" ||
-      sendlocation === " "
-    ) {
-      setshowLocationError(true);
+      sendlocation === " ") {
+      console.log({ sendlocation });
+      city = 'Jagdalpur';
+      console.log({ city });
+     
     } else {
-      if (sendlocation !== "") {
-        console.log({ sendlocation });
-        let city = sendlocation?.split(",")[1];
-        console.log({ city });
-        if (city === undefined) {
-          city = sendlocation;
-        }
-        console.log({ city });
-
-        setshowLocationError(false);
-        dispatch(
-          getBookHotel({
-            sendlocation:city,
-            startDate,
-            endDate,
-            noOfRoom,
-            noOfGuest,
-            roomStateData: roomState,
-          })
-        );
-        history.push("/hotellist");
-      } else {
-        setshowLocationError(true);
-      }
+     city = sendlocation?.split(",")[1];
+      // setshowLocationError(true);
     }
+    setshowLocationError(false);
+    dispatch(
+      getBookHotel({
+        sendlocation:city,
+        startDate,
+        endDate,
+        noOfRoom,
+        noOfGuest,
+        roomStateData: roomState,
+      })
+    );
+    history.push("/hotellist");
+    // if (
+      // sendlocation === undefined ||
+      // sendlocation === "" ||
+      // sendlocation === " "
+    // ) {
+    //   setshowLocationError(true);
+    // } else {
+     
+    // }
   };
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
@@ -318,6 +320,7 @@ function HotelSearch() {
                           border: 0,
                           padding: "0px",
                         }}
+                        value={sendlocation}
                         freeSolo
                         autoComplete
                         autoHighlight
@@ -588,8 +591,11 @@ function HotelSearch() {
                     autoComplete
                     autoHighlight
                     onChange={(e) => {
+                      console.log(e.target.innerHTML)
                       setSendlocation(e.target.innerHTML);
                     }}
+                   
+                    value={sendlocation}
                     options={myOptions}
                     renderInput={(params) => (
                       <TextField
@@ -599,6 +605,8 @@ function HotelSearch() {
                         {...params}
                         onKeyPress={(e) => getDataFromAPI(e.target.value)}
                         placeholder="Search Area"
+                        value="jagdalpur"
+                        // blurOnSelect="touch"
                       />
                     )}
                   />
