@@ -39,32 +39,47 @@ function HotelList() {
     getStartData.endDate ? getStartData.endDate : nextDay
   );
   const [location, setLocation] = useState([]);
-  const [sendlocation, setSendlocation] = useState(getStartData?.sendlocation);
+  const [sendlocation, setSendlocation] = useState(
+    getStartData?.length > 0 ? getStartData?.sendlocation : "Jagdalpur"
+  );
   const [geolocation, setGeolocation] = useState([]);
   const [noOfGuest, setNoOfGuest] = useState(2);
   const [noOfRoom, setNoOfRoom] = useState(1);
 
   useEffect(() => {
-    console.log(`getStartData`, getStartData)
-    if(getStartData.length>0){
-      setNoOfRoom(getStartData.noOfRoom)
-      setNoOfGuest(getStartData.noOfGuest)
+    console.log(`getStartData`, getStartData);
+    if (
+      getStartData.length > 0 &&
+      getStartData?.noOfRoom > 0 &&
+      getStartData?.noOfGuest > 0
+    ) {
+      setNoOfRoom(getStartData.noOfRoom);
+      setNoOfGuest(getStartData.noOfGuest);
     }
-  }, [getStartData])
+  }, [getStartData]);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [roomState, setRoomState] = useState(getStartData?getStartData.roomStateData:{
-    room:1,
-    guest:2
-  });
+  const [roomState, setRoomState] = useState(
+    getStartData?.roomStateData?.length > 0
+      ? getStartData?.roomStateData
+      : [
+          {
+            room: 1,
+            guest: 2,
+          },
+        ]
+  );
 
   const addMenu = () => {
     let noofg = 0;
     let noofr;
-    roomState?.map((curElem, index) => (noofg += curElem.guest));
+    console.log(roomState?.length);
     setNoOfRoom(roomState?.length);
+
+    roomState?.map((curElem, index) => (noofg += curElem.guest));
+    // setNoOfRoom(roomState?.length);
     setNoOfGuest(noofg);
   };
   const guestRoom = (act, room_id) => {
@@ -120,6 +135,9 @@ function HotelList() {
   );
   const getDataFromAPI = (name) => {
     setMyOptions([]);
+    if(name===undefined){
+      name='Jagdalpur'
+    }
     fetch(`${API_PATH}/api/v2/hotelregistration/search?address=${name}`)
       .then((response) => {
         return response.json();
@@ -166,14 +184,24 @@ function HotelList() {
   };
   const onDmTicketShow = () => {
     console.log({ sendlocation });
+    let city =sendlocation;
+    if(city===undefined){
+      city='Jagdalpur'
+    }
     dispatch(
-      getBookHotel({ sendlocation, startDate, endDate, noOfRoom, noOfGuest ,roomStateData:roomState})
+      getBookHotel({
+        sendlocation:city,
+        startDate,
+        endDate,
+        noOfRoom,
+        noOfGuest,
+        roomStateData: roomState,
+      })
     );
     history.push("/hotellist");
   };
   useEffect(() => {
     getLocation();
-    setNoOfRoom(getStartData?.noOfRoom)
   }, []);
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
@@ -223,6 +251,7 @@ function HotelList() {
                   padding: "0px",
                 }}
                 freeSolo
+                value={sendlocation}
                 autoComplete
                 autoHighlight
                 onChange={(e) => {
@@ -231,14 +260,14 @@ function HotelList() {
                 options={myOptions}
                 renderInput={(params) => (
                   <TextField
-                  variant="standard"
-                  required="required"
-                  style={{padding:"5px"}}
-                  {...params}
-                  onKeyPress={(e) => getDataFromAPI(e.target.value)}
-                  placeholder="Search Area"
-                  // InputProps={{ disableUnderline: true }}
-                />
+                    variant="standard"
+                    required="required"
+                    style={{ padding: "5px" }}
+                    {...params}
+                    onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                    placeholder="Search Area"
+                    // InputProps={{ disableUnderline: true }}
+                  />
                 )}
               />
             </Form.Group>
