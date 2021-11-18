@@ -69,7 +69,7 @@ function Header() {
   const menu = (
     <Menu>
       <Menu.Item>
-        <NavLink className="sidebar_item" to="/select-booking">
+        <NavLink className="sidebar_item" to="/buspass">
           BUS BOOKING
         </NavLink>
       </Menu.Item>
@@ -242,7 +242,7 @@ function Header() {
                   TRAVEL PASS
                 </NavLink>
                 {/* <NavLink className="sidebar_item" to="/select-booking"> */}
-                <ANTDropdown overlay={menu} className="sidebar_item">
+                <ANTDropdown overlay={menu} trigger={['click']} className="sidebar_item">
                   <NavLink className="sidebar_item" to="#">
                     BOOKING <DownOutlined />
                   </NavLink>
