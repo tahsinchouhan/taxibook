@@ -6,6 +6,7 @@ import { API_PATH } from "../../Path/Path";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import {FaCheckCircle} from 'react-icons/fa'
 
 
 const Details = ({ hotelUniqid,detailsP }) => {
@@ -36,7 +37,6 @@ const Details = ({ hotelUniqid,detailsP }) => {
             >
               <h4 style={{ fontWeight: "bold", marginBottom: 0 }}>
               {detailsP?.hotel_id?.hotel_name}
-                {"dd "}
               </h4>
               <p
                 style={{
@@ -192,7 +192,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     }}
                   >
                     <div style={{ fontSize: "20px" }}>
-                      <span style={{ fontWeight: "bold" }}> ₹ {detailsP?.price.final_price}</span>{" "}
+                      <span style={{ fontWeight: "bold" }}> ₹ {detailsP?.price.actual_price}</span>{" "}
                       <span
                         style={{
                           fontSize: "16px",
@@ -216,7 +216,8 @@ const Details = ({ hotelUniqid,detailsP }) => {
                         borderRadius: "5px",
                       }}
                     >
-                      Select
+                      <FaCheckCircle />
+                      Selected
                     </div>
                   </div>
                 </div>
@@ -271,7 +272,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     paddingRight: "10px",
                   }}
                 >
-                  ₹  {detailsP?.price.final_price}
+                  ₹  {detailsP?.price.actual_price}
                 </h1>
                 <h2
                   style={{
@@ -294,7 +295,8 @@ const Details = ({ hotelUniqid,detailsP }) => {
                   }}
                 >
                   {" "}
-                  {Math.round((detailsP?.price.actual_price-detailsP?.price.final_price)*100/detailsP?.price.actual_price)}% 0ff
+                  {/* {Math.round((detailsP?.price.actual_price-detailsP?.price.final_price)*100/detailsP?.price.actual_price)}% 0ff */}
+                  {Math.round((detailsP?.price.actual_price-detailsP?.price.actual_price)*100/detailsP?.price.actual_price)}% 0ff
                 </h3>
               </div>
               <span
@@ -350,7 +352,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
                 <span style={{}}>Your Saving</span>
-                <span style={{ fontWeight: "bold" }}>₹ {detailsP?.price?.actual_price-detailsP?.price?.final_price}</span>
+                <span style={{ fontWeight: "bold" }}>₹ {detailsP?.price?.actual_price-detailsP?.price?.actual_price}</span>
               </div>
               <div
                 className="mt-1"
@@ -363,7 +365,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     (inclusive of all taxes)
                   </span>
                 </span>
-                <span style={{ fontWeight: "bold" }}>₹ {detailsP?.price?.final_price}</span>
+                <span style={{ fontWeight: "bold" }}>₹ {detailsP?.price?.actual_price}</span>
               </div>
 
               <div>

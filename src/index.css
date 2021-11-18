@@ -205,3 +205,16 @@ padding-left: 15px;
 .MuiInput-underline:after{
   border: none !important;
 }
+/* @media (max-width: 480px) {
+  .ant-picker-range {
+      width: 320px;
+  }
+  .ant-picker-range-part {
+      width: 100%;
+  }
+} */
+@media(max-width: 576px) { 
+  .ant-picker-panels { 
+    flex-direction: column;
+  } 
+}

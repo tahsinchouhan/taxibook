@@ -18,6 +18,7 @@ const INIT_STATE = {
   prehomeInterest: {},
   getPrehomeInterest: {},
   getPrehomeDestination: {},
+  isLoading:true
 };
 
 const hotelReducer = (state = INIT_STATE, action) => {
@@ -29,10 +30,11 @@ const hotelReducer = (state = INIT_STATE, action) => {
         ...state,
         HotelBookingStartdate: action.payload,
         getStartData: action.payload,
+        isLoading:true,
       };
     }
     case GET_BOOK_HOTEL_SUCCESS:
-      return { ...state, getHotelList: action.payload };
+      return { ...state, getHotelList: action.payload ,isLoading:false};
     case GET_BOOK_HOTEL_ERROR:
       return { ...state, error: action.payload };
 

@@ -32,11 +32,12 @@ function HotelSearch() {
 
   const [endDate, setEndDate] = useState(nextDay2);
   const [location, setLocation] = useState([]);
-  const [sendlocation, setSendlocation] = useState('Jagdalpur');
+  const [sendlocation, setSendlocation] = useState("Jagdalpur");
   const [geolocation, setGeolocation] = useState([]);
   const [noOfGuest, setNoOfGuest] = useState(2);
   const [noOfRoom, setNoOfRoom] = useState(1);
   const [show, setShow] = useState(false);
+  const [enterlocation, setEnterlocation] = useState('');
   const { RangePicker } = DatePicker;
 
   function disabledDate(current) {
@@ -54,6 +55,7 @@ function HotelSearch() {
     },
   ]);
   const getDataFromAPI = (name) => {
+    setEnterlocation(name)
     setMyOptions([]);
     fetch(`${API_PATH}/api/v2/hotelregistration/search?address=${name}`)
       .then((response) => {
@@ -63,6 +65,7 @@ function HotelSearch() {
         console.log(res.data);
         for (var i = 0; i < res.data.length; i++) {
           let str = `${res.data[i].hotel_name},${res.data[i]?.full_address?.city}`;
+          console.log({str})
           myOptions.push(str);
         }
         setMyOptions(myOptions);
@@ -94,24 +97,29 @@ function HotelSearch() {
   const [showLocationError, setshowLocationError] = useState(false);
   const onDmTicketShow = () => {
     // toast("Wow so easy!");
-    console.log({sendlocation})
-    let city='';
+    console.log({ sendlocation });
+    let city = "";
     console.log(sendlocation, startDate, endDate, noOfRoom, noOfGuest);
-    if (sendlocation === undefined ||
+    if (
+      sendlocation === undefined ||
       sendlocation === "" ||
-      sendlocation === " ") {
-      console.log({ sendlocation });
-      city = 'Jagdalpur';
+      sendlocation === " "
+    ) {
+      if(enterlocation==''|| enterlocation===undefined){
+        city = "Jagdalpur";
+      }else{
+        city=enterlocation;
+      }
+      
       console.log({ city });
-     
     } else {
-     city = sendlocation?.split(",")[1];
+      city = sendlocation?.split(",")[1];
       // setshowLocationError(true);
     }
     setshowLocationError(false);
     dispatch(
       getBookHotel({
-        sendlocation:city,
+        sendlocation: city,
         startDate,
         endDate,
         noOfRoom,
@@ -121,13 +129,13 @@ function HotelSearch() {
     );
     history.push("/hotellist");
     // if (
-      // sendlocation === undefined ||
-      // sendlocation === "" ||
-      // sendlocation === " "
+    // sendlocation === undefined ||
+    // sendlocation === "" ||
+    // sendlocation === " "
     // ) {
     //   setshowLocationError(true);
     // } else {
-     
+
     // }
   };
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
@@ -182,7 +190,7 @@ function HotelSearch() {
       guestRoomObj = guestRoomObj1;
     } else if (act === "+" && guestRoomObj[room_id].guest < 4) {
       guestRoomObj[room_id].guest = guestRoomObj[room_id].guest + 1;
-    } else if (act === "-") {
+    } else if (act === "-" && guestRoomObj[room_id].guest > 1) {
       guestRoomObj[room_id].guest = guestRoomObj[room_id].guest - 1;
     }
     addMenu();
@@ -195,13 +203,14 @@ function HotelSearch() {
   }, [roomState]);
   const menu = (
     <Menu>
-      <Menu.Item>
-        <b>Room</b> <b>Guest</b>
+      <Menu.Item disabled>
+        <b>Room</b> <b style={{float:"right"}}>Guest</b>
       </Menu.Item>
       <div className="addMenu">
         {roomState.map((curElem, index) => (
           <Menu.Item key={index}>
             Room {curElem.room}{" "}
+            <span style={{float:"right"}}>
             <button onClick={() => guestRoom("-", index)}>-</button>{" "}
             {curElem.guest}{" "}
             {curElem.guest === 3 ? (
@@ -209,6 +218,7 @@ function HotelSearch() {
             ) : (
               <button onClick={() => guestRoom("+", index)}>+</button>
             )}
+             </span>
           </Menu.Item>
         ))}
       </div>
@@ -218,11 +228,12 @@ function HotelSearch() {
           style={{ float: "left", marginRight: "120px" }}
           onClick={() => guestRoom("delete", roomState.length - 1)}
         />
+        <span   title="Add Room "
+          style={{ float: "right" }} onClick={() => guestRoom("mainAdd", roomState.length + 1)}>
         <FaPlusCircle
-          title="Add Room "
-          style={{ float: "right" }}
-          onClick={() => guestRoom("mainAdd", roomState.length + 1)}
-        />
+        />Add Room
+          </span>
+
       </Menu.Item>
     </Menu>
   );
@@ -335,7 +346,7 @@ function HotelSearch() {
                             required="required"
                             style={{ padding: "5px" }}
                             {...params}
-                            onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                            onKeyPress={(e) => {getDataFromAPI(e.target.value)}}
                             placeholder="Search Area"
                             // InputProps={{ disableUnderline: true }}
                           />
@@ -591,10 +602,9 @@ function HotelSearch() {
                     autoComplete
                     autoHighlight
                     onChange={(e) => {
-                      console.log(e.target.innerHTML)
+                      console.log(e.target.innerHTML);
                       setSendlocation(e.target.innerHTML);
                     }}
-                   
                     value={sendlocation}
                     options={myOptions}
                     renderInput={(params) => (

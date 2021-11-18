@@ -26,9 +26,11 @@ function HotelList() {
 
   const [myOptions, setMyOptions] = useState([]);
 
-  const { getHotelList: hotels, getStartData } = useSelector(
-    (state) => state.hotelReducer
-  );
+  const {
+    getHotelList: hotels,
+    getStartData,
+    isLoading,
+  } = useSelector((state) => state.hotelReducer);
   console.log({ getStartData });
   const [startDate, setStartDate] = useState(
     getStartData.startDate ? getStartData.startDate : new Date()
@@ -40,11 +42,12 @@ function HotelList() {
   );
   const [location, setLocation] = useState([]);
   const [sendlocation, setSendlocation] = useState(
-    getStartData?.length > 0 ? getStartData?.sendlocation : "Jagdalpur"
+    getStartData?.sendlocation ? getStartData.sendlocation : "Jagdalpur"
   );
   const [geolocation, setGeolocation] = useState([]);
   const [noOfGuest, setNoOfGuest] = useState(2);
   const [noOfRoom, setNoOfRoom] = useState(1);
+  const [enterlocation, setEnterlocation] = useState("");
 
   useEffect(() => {
     console.log(`getStartData`, getStartData);
@@ -107,15 +110,21 @@ function HotelList() {
   const menu = (
     <Menu>
       <Menu.Item>
-        <b>Room</b> <b>Guest</b>
+        <b>Room</b> <b style={{ float: "right" }}>Guest</b>
       </Menu.Item>
       <div className="addMenu">
         {roomState?.map((curElem, index) => (
           <Menu.Item key={index}>
             Room {curElem.room}{" "}
-            <button onClick={() => guestRoom("-", index)}>-</button>{" "}
-            {curElem.guest}{" "}
-            <button onClick={() => guestRoom("+", index)}>+</button>{" "}
+            <span style={{ float: "right" }}>
+              <button onClick={() => guestRoom("-", index)}>-</button>{" "}
+              {curElem.guest}{" "}
+              {curElem.guest === 3 ? (
+                <button disabled>+</button>
+              ) : (
+                <button onClick={() => guestRoom("+", index)}>+</button>
+              )}
+            </span>
           </Menu.Item>
         ))}
       </div>
@@ -125,18 +134,22 @@ function HotelList() {
           style={{ float: "left", marginRight: "120px" }}
           onClick={() => guestRoom("delete", roomState.length - 1)}
         />
-        <FaPlusCircle
+        <span
           title="Add Room "
           style={{ float: "right" }}
           onClick={() => guestRoom("mainAdd", roomState.length + 1)}
-        />
+        >
+          <FaPlusCircle />
+          Add Room
+        </span>
       </Menu.Item>
     </Menu>
   );
   const getDataFromAPI = (name) => {
+    setEnterlocation(name);
     setMyOptions([]);
-    if(name===undefined){
-      name='Jagdalpur'
+    if (name === undefined) {
+      name = "Jagdalpur";
     }
     fetch(`${API_PATH}/api/v2/hotelregistration/search?address=${name}`)
       .then((response) => {
@@ -145,7 +158,7 @@ function HotelList() {
       .then((res) => {
         console.log(res.data);
         for (var i = 0; i < res.data.length; i++) {
-          let str = `${res.data[i].hotel_name},${res.data[i].full_address.city}`;
+          let str = `${res.data[i]?.hotel_name},${res.data[i]?.full_address?.city}`;
           myOptions.push(str);
         }
         setMyOptions(myOptions);
@@ -173,7 +186,7 @@ function HotelList() {
         .then((res) => {
           console.log("response", res.data.data);
           for (var i = 0; i < res.data.data.length; i++) {
-            let str = `${res.data.data[i].hotel_name},${res.data.data[i].full_address.city}`;
+            let str = `${res.data?.data[i]?.hotel_name},${res.data?.data[i]?.full_address?.city}`;
             myOptions.push(str);
           }
           setMyOptions(myOptions);
@@ -184,13 +197,19 @@ function HotelList() {
   };
   const onDmTicketShow = () => {
     console.log({ sendlocation });
-    let city =sendlocation;
-    if(city===undefined){
-      city='Jagdalpur'
+    let city = sendlocation;
+    if (city === undefined) {
+      if (enterlocation === "" || enterlocation === undefined) {
+        city = "Jagdalpur";
+      } else {
+        city = enterlocation;
+      }
     }
+    setSendlocation(city);
+
     dispatch(
       getBookHotel({
-        sendlocation:city,
+        sendlocation: city,
         startDate,
         endDate,
         noOfRoom,
@@ -398,6 +417,9 @@ function HotelList() {
         <br />
 
         <div className="d-none d-md-block">
+          <h5 style={{ marginLeft: "10px" }}>
+            Search Results - Hotels in {sendlocation}{" "}
+          </h5>
           <div style={{ marginBottom: "200px" }}>
             <ListCard />
             {/* <ListCard /> */}
@@ -405,6 +427,10 @@ function HotelList() {
           <Footer />
         </div>
         <div className="d-md-none">
+          <h5 style={{ marginLeft: "10px" }}>
+            Search Results - Hotels in {sendlocation}{" "}
+          </h5>
+
           <ListCard
             sendlocation={sendlocation}
             startDate={startDate}
