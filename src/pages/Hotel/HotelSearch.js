@@ -224,11 +224,11 @@ function HotelSearch() {
         ))}
       </div>
       <Menu.Item>
-        <FaTrash
+        {roomState.length>1?<FaTrash
           title=" Delete Room "
           style={{ float: "left", marginRight: "120px" }}
           onClick={() => guestRoom("delete", roomState.length - 1)}
-        />
+        />:''}
         <span   title="Add Room "
           style={{ float: "right" }} onClick={() => guestRoom("mainAdd", roomState.length + 1)}>
         <FaPlusCircle
@@ -711,6 +711,7 @@ function HotelSearch() {
                         border: 0,
                         padding: "10px",
                       }}
+                      readOnly
                     />
                   </ANTDropdown>
                 </Form.Group>
