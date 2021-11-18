@@ -676,7 +676,8 @@ function HotelSearch() {
                                 moment(startDate, dateFormat),
                                 moment(endDate, dateFormat),
                               ]}
-                              readOnly
+                              inputReadOnly
+                              type="button"
                               style={{
                                 backgroundColor: "transparent",
                                 border: "0",
