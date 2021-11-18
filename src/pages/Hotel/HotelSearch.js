@@ -19,6 +19,7 @@ import { ToastContainer, toast } from "react-toastify";
 import AvField from "availity-reactstrap-validation/lib/AvField";
 import moment from "moment";
 import { DatePicker, Menu, Dropdown as ANTDropdown } from "antd";
+import Searchbar from "./Searchbar";
 
 function HotelSearch() {
   const history = useHistory();
@@ -382,7 +383,7 @@ function HotelSearch() {
                               display: "flex",
                             }}
                           >
-                            <img
+                            {/* <img
                               alt="logo"
                               className="location-userdatas-calendar"
                               src={calendar}
@@ -391,7 +392,7 @@ function HotelSearch() {
                                 height: 25,
                                 marginRight: "10px",
                               }}
-                            />
+                            /> */}
 
                             <RangePicker
                               disabledDate={disabledDate}
@@ -657,7 +658,7 @@ function HotelSearch() {
                               display: "flex",
                             }}
                           >
-                            <img
+                            {/* <img
                               alt="logo"
                               className="location-userdatas-calendar"
                               src={calendar}
@@ -666,7 +667,7 @@ function HotelSearch() {
                                 height: 25,
                                 marginRight: "10px",
                               }}
-                            />
+                            /> */}
                             <RangePicker
                               disabledDate={disabledDate}
                               onChange={(date) => chnageDate(date)}
@@ -675,6 +676,7 @@ function HotelSearch() {
                                 moment(startDate, dateFormat),
                                 moment(endDate, dateFormat),
                               ]}
+                              readOnly
                               style={{
                                 backgroundColor: "transparent",
                                 border: "0",
