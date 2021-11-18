@@ -711,7 +711,6 @@ function HotelSearch() {
                         border: 0,
                         padding: "10px",
                       }}
-                      readOnly
                     />
                   </ANTDropdown>
                 </Form.Group>
