@@ -346,7 +346,7 @@ function HotelSearch() {
                             required="required"
                             style={{ padding: "5px" }}
                             {...params}
-                            onKeyPress={(e) => {getDataFromAPI(e.target.value)}}
+                            onKeyUp={(e) => {getDataFromAPI(e.target.value)}}
                             placeholder="Search Area"
                             // InputProps={{ disableUnderline: true }}
                           />
@@ -613,7 +613,7 @@ function HotelSearch() {
                         required="required"
                         style={{ padding: "5px" }}
                         {...params}
-                        onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                        onKeyUp={(e) => getDataFromAPI(e.target.value)}
                         placeholder="Search Area"
                         value="jagdalpur"
                         // blurOnSelect="touch"
