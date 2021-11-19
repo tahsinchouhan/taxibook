@@ -6,11 +6,13 @@ import { API_PATH } from "../../Path/Path";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import {FaCheckCircle} from 'react-icons/fa'
+import { FaCheckCircle } from "react-icons/fa";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import hotelotherimage from "../../assets/img/hotelotherimage.jpg";
 
-
-const Details = ({ hotelUniqid,detailsP }) => {
-  console.log({detailsP})
+const Details = ({ hotelUniqid, detailsP }) => {
+  console.log({ detailsP });
   const history = useHistory();
   const bookingPage = () => {
     history.push(`/hotelconfirmation/${hotelUniqid}`);
@@ -20,9 +22,58 @@ const Details = ({ hotelUniqid,detailsP }) => {
   const address1 = getStartData.sendlocation;
   const check_out = moment(getStartData.endDate).format("DD-MMM");
   console.log(detailsP, typeof detailsP);
+
+  const [index, setIndex] = useState(0);
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2,
+      slidesToSlide: 1, // optional, default to 1.
+    },
+  };
+
   return (
     <>
-      {detailsP._id? (
+      {/* ===================== */}
+      <div>
+        <Carousel
+          activeIndex={index}
+          onSelect={handleSelect}
+          partialVisible
+          // itemClass="image-item"
+          responsive={responsive}
+        >
+          <div className="Carousel-a">
+            <img className="caraselImage" src={Room} alt="First slide" />{" "}
+          </div>
+          <div className="Carousel-a">
+            <img className="caraselImage" src={hotelotherimage} alt="Second slide" />
+          </div>
+          <div className="Carousel-a">
+            <img className="caraselImage" src={Room} alt="Second slide" />
+          </div>
+          <div className="Carousel-a">
+            <img className="caraselImage" src={hotelotherimage} alt="Second slide" />
+          </div>
+        </Carousel>
+      </div>
+
+      {/* =============== */}
+      {detailsP._id ? (
         <div
           className="hotel-confirm-div"
           style={{ width: "90%", margin: "0 auto" }}
@@ -36,17 +87,17 @@ const Details = ({ hotelUniqid,detailsP }) => {
               }}
             >
               <h4 style={{ fontWeight: "bold", marginBottom: 0 }}>
-              {detailsP?.hotel_id?.hotel_name}
+                {detailsP?.hotel_id?.hotel_name}
               </h4>
               <p
                 style={{
-                  color: "lightgray",
+                  // color: "lightgray",
                   fontSize: "14px",
                   margin: 0,
                   padding: 0,
                 }}
               >
-                {/* {`${detailsP.full_address.city},${detailsP.full_address.city}`} */}
+                {`${detailsP?.hotel_id?.full_address?.street},${detailsP?.hotel_id?.full_address?.city}`}
               </p>
             </div>
             <div>
@@ -54,31 +105,46 @@ const Details = ({ hotelUniqid,detailsP }) => {
                 Amenities
               </h2>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
-                {detailsP?.amenities?.includes('AC')?<div className="amenities-div">
-                  <img src={calendar} alt="" className="amenities-logo" />
-                  <h1 className="amenities-name">AC</h1>
-                </div>:''
-                }
-                {detailsP?.amenities?.includes('Freeze')?<div className="amenities-div">
-                  <img src={calendar} alt="" className="amenities-logo" />
-                  <h1 className="amenities-name">Freeze</h1>
-                </div>:''
-                }
-                {detailsP?.amenities?.includes('Wifi')?<div className="amenities-div">
-                  <img src={calendar} alt="" className="amenities-logo" />
-                  <h1 className="amenities-name">Wifi</h1>
-                </div>:''
-                }
-                {detailsP?.amenities?.includes('Geezer')?<div className="amenities-div">
-                  <img src={calendar} alt="" className="amenities-logo" />
-                  <h1 className="amenities-name">Geezer</h1>
-                </div>:''
-                }
-                {detailsP?.amenities?.includes('CCTV')?<div className="amenities-div">
-                  <img src={calendar} alt="" className="amenities-logo" />
-                  <h1 className="amenities-name">CCTV</h1>
-                </div>:''
-                }
+                {detailsP?.amenities?.includes("AC") ? (
+                  <div className="amenities-div">
+                    <img src={calendar} alt="" className="amenities-logo" />
+                    <h1 className="amenities-name">AC</h1>
+                  </div>
+                ) : (
+                  ""
+                )}
+                {detailsP?.amenities?.includes("Freeze") ? (
+                  <div className="amenities-div">
+                    <img src={calendar} alt="" className="amenities-logo" />
+                    <h1 className="amenities-name">Freeze</h1>
+                  </div>
+                ) : (
+                  ""
+                )}
+                {detailsP?.amenities?.includes("Wifi") ? (
+                  <div className="amenities-div">
+                    <img src={calendar} alt="" className="amenities-logo" />
+                    <h1 className="amenities-name">Wifi</h1>
+                  </div>
+                ) : (
+                  ""
+                )}
+                {detailsP?.amenities?.includes("Geezer") ? (
+                  <div className="amenities-div">
+                    <img src={calendar} alt="" className="amenities-logo" />
+                    <h1 className="amenities-name">Geezer</h1>
+                  </div>
+                ) : (
+                  ""
+                )}
+                {detailsP?.amenities?.includes("CCTV") ? (
+                  <div className="amenities-div">
+                    <img src={calendar} alt="" className="amenities-logo" />
+                    <h1 className="amenities-name">CCTV</h1>
+                  </div>
+                ) : (
+                  ""
+                )}
                 <div className="amenities-div">
                   <h1
                     style={{
@@ -192,7 +258,10 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     }}
                   >
                     <div style={{ fontSize: "20px" }}>
-                      <span style={{ fontWeight: "bold" }}> ₹ {detailsP?.price.actual_price}</span>{" "}
+                      <span style={{ fontWeight: "bold" }}>
+                        {" "}
+                        ₹ {detailsP?.price.actual_price}
+                      </span>{" "}
                       <span
                         style={{
                           fontSize: "16px",
@@ -272,7 +341,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     paddingRight: "10px",
                   }}
                 >
-                  ₹  {detailsP?.price.actual_price}
+                  ₹ {detailsP?.price.actual_price}
                 </h1>
                 <h2
                   style={{
@@ -284,7 +353,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     textDecoration: "line-through",
                   }}
                 >
-                  ₹  {detailsP?.price.actual_price}
+                  ₹ {detailsP?.price.actual_price}
                 </h2>
                 <h3
                   style={{
@@ -296,7 +365,13 @@ const Details = ({ hotelUniqid,detailsP }) => {
                 >
                   {" "}
                   {/* {Math.round((detailsP?.price.actual_price-detailsP?.price.final_price)*100/detailsP?.price.actual_price)}% 0ff */}
-                  {Math.round((detailsP?.price.actual_price-detailsP?.price.actual_price)*100/detailsP?.price.actual_price)}% 0ff
+                  {Math.round(
+                    ((detailsP?.price.actual_price -
+                      detailsP?.price.actual_price) *
+                      100) /
+                      detailsP?.price.actual_price
+                  )}
+                  % 0ff
                 </h3>
               </div>
               <span
@@ -320,7 +395,7 @@ const Details = ({ hotelUniqid,detailsP }) => {
                 }}
               >
                 <p style={{ margin: "0", padding: "0 4px" }}>
-                 {`${check_in}-${check_out}`}{" "}
+                  {`${check_in}-${check_out}`}{" "}
                 </p>{" "}
                 &nbsp; | &nbsp;
                 <p style={{ margin: "0", padding: "0" }}> 1 Room, 2 Guests</p>
@@ -352,7 +427,11 @@ const Details = ({ hotelUniqid,detailsP }) => {
                 style={{ display: "flex", justifyContent: "space-between" }}
               >
                 <span style={{}}>Your Saving</span>
-                <span style={{ fontWeight: "bold" }}>₹ {detailsP?.price?.actual_price-detailsP?.price?.actual_price}</span>
+                <span style={{ fontWeight: "bold" }}>
+                  ₹{" "}
+                  {detailsP?.price?.actual_price -
+                    detailsP?.price?.actual_price}
+                </span>
               </div>
               <div
                 className="mt-1"
@@ -365,7 +444,9 @@ const Details = ({ hotelUniqid,detailsP }) => {
                     (inclusive of all taxes)
                   </span>
                 </span>
-                <span style={{ fontWeight: "bold" }}>₹ {detailsP?.price?.actual_price}</span>
+                <span style={{ fontWeight: "bold" }}>
+                  ₹ {detailsP?.price?.actual_price}
+                </span>
               </div>
 
               <div>
