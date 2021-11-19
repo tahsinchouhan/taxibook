@@ -203,11 +203,11 @@ function ListCard(props) {
                                 fontSize: "85",
                               }}
                             >
-                              <img
+                              {/* <img
                                 src={hotel}
                                 alt="hotel"
                                 style={{ height: "20px", paddingRight: "10px" }}
-                              />
+                              /> */}
                               {item?.hotel_name}
                             </h3>
                           </div>
@@ -295,9 +295,9 @@ function ListCard(props) {
                                 fontSize: "20px",
                               }}
                             >
-                              ₹ {item?.room_data?.price?.final_price}
+                              ₹ {item?.room_data?.price?.actual_price}
                             </span>
-                            <span
+                            {/* <span
                               style={{ fontFamily: "poppins", fontSize: "85" }}
                             >
                               <strike>
@@ -311,7 +311,7 @@ function ListCard(props) {
                                   100}
                                 %off
                               </p>
-                            </span>
+                            </span> */}
 
                             <span
                               style={{
@@ -406,14 +406,14 @@ function ListCard(props) {
                           >
                             <div style={{ display: "flex" }}>
                               <div>
-                                <img
+                                {/* <img
                                   src={hotel}
                                   alt="hotel"
                                   style={{
                                     paddingRight: "10px",
                                     height: "20px",
                                   }}
-                                />
+                                /> */}
                               </div>
                               <div>
                                 <span
