@@ -29,13 +29,21 @@ function ListCard(props) {
   };
   return (
     <>
-      
       <div> {`${isLoading ? "Loading....." : ""}`}</div>
       {hotels?.length > 0 ? (
         <div>
           {" "}
-          <h5 style={{ marginLeft: "10px",fontFamily:"poppins",fontWeight:"bolder" }}>
-            {hotels?.length} Hotels in {getStartData.sendlocation}{" "}
+          <h5
+            style={{
+              marginLeft: "12px",
+              fontFamily: "poppins",
+              fontWeight: "bolder",
+            }}
+          >
+            {hotels?.length} Hotels in{" "}
+            {getStartData?.sendlocation === undefined
+              ? "Jagdalpur"
+              : getStartData?.sendlocation}{" "}
           </h5>
         </div>
       ) : (
@@ -45,10 +53,14 @@ function ListCard(props) {
           </label>
         </center>
       )}
-     
+
       {hotels?.map((item, index) => {
         return (
-          <div className="d-none d-md-block" key={index}>
+          <div
+            className="d-none d-md-block p-0"
+            style={{ float: "left" }}
+            key={index}
+          >
             <div
               style={{
                 backgroundColor: "white",
@@ -57,8 +69,8 @@ function ListCard(props) {
                 // margin: "40px auto",
               }}
             >
-              <Container className="mansoon-div">
-                <Row style={{ paddingBottom: "20px" }}>
+              <div className="p-0">
+                {/* <Row style={{ paddingBottom: "20px" }}>
                   <Col md={12}>
                     {/* <h3
                       className="fontweight"
@@ -71,7 +83,7 @@ function ListCard(props) {
                       {item?.full_address?.street}, {item?.full_address?.city}{" "}
                       C.G
                     </h3> */}
-                    {/* <span
+                {/* <span
                       style={{
                         color: "black",
                         fontWeight: 900,
@@ -83,7 +95,7 @@ function ListCard(props) {
                     >
                       Change
                     </span> */}
-                  </Col>
+                {/* </Col>
                   <Col>
                     <Form.Label
                       className=""
@@ -97,19 +109,19 @@ function ListCard(props) {
                       }}
                     ></Form.Label>
                   </Col>
-                </Row>
+                </Row> */}
 
                 <React.Fragment>
                   <Container style={{ cursor: "pointer" }}>
                     <Row>
-                      <Col md={5}>
+                      <div md={4} className="col-sm-4 m-0 p-0">
                         <Carousel autoplay>
                           <div>
                             <img
                               src={item?.room_data?.image !== "" ? Room : Room}
                               alt="room img"
                               style={{
-                                width: "450px",
+                                width: "500px",
                                 height: "250px",
                                 marginTop: "10px",
                                 // marginRight: "25px",
@@ -125,7 +137,7 @@ function ListCard(props) {
                               }
                               alt="room img"
                               style={{
-                                width: "450px",
+                                width: "500px",
                                 height: "250px",
                                 marginTop: "10px",
                                 // marginRight: "25px",
@@ -133,8 +145,11 @@ function ListCard(props) {
                             />
                           </div>
                         </Carousel>
-                      </Col>
-                      <Col sm={1}>
+                      </div>
+                      <div
+                        className="col-sm-1 p-0"
+                        style={{ marginLeft: "2px", marginRight: "0px" }}
+                      >
                         <img
                           src={item?.room_data?.image !== "" ? Room : Room}
                           alt="room img"
@@ -192,8 +207,12 @@ function ListCard(props) {
                             marginTop: "1px",
                           }}
                         />
-                      </Col>
-                      <Col md={5}>
+                      </div>
+                      <div
+                        md={5}
+                        className="col-sm-6 p-0 m-0"
+                        style={{ marginRight: "0px" }}
+                      >
                         <div className="rajratan-train" style={{}}>
                           <div className="d-flex p-1">
                             <h3
@@ -209,68 +228,85 @@ function ListCard(props) {
                                 style={{ height: "20px", paddingRight: "10px" }}
                               /> */}
                               {item?.hotel_name}
+                              {""} 00601
                             </h3>
                           </div>
                           <span
-                            className="train-sleeper"
+                            className="d-flex"
                             style={{ fontFamily: "poppins", fontSize: "85" }}
                           >
                             <HiOutlineLocationMarker
                               style={{ color: "red", fontSize: "20px" }}
                             />
-                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;
                             {item?.full_address?.street},{" "}
                             {item?.full_address?.city} C.G
                           </span>
                           <div style={{ display: "flex" }}>
-                            <span
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                color: "grey",
-                                padding: "10px",
-                                fontSize: "12px",
-                                fontFamily: "sans-serif",
-                              }}
-                            >
-                              <FiWifi style={{ fontSize: "20px" }} />
-                              Free Wifi
-                            </span>
-                            <span
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                color: "grey",
-                                padding: "10px",
-                                fontSize: "12px",
-                                fontFamily: "sans-serif",
-                              }}
-                            >
-                              <BiCheckCircle style={{ fontSize: "20px" }} />
-                              AC
-                            </span>
-                            <span
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                color: "grey",
-                                padding: "10px",
-                                fontSize: "12px",
-                                fontFamily: "sans-serif",
-                              }}
-                            >
-                              <FaTv style={{ fontSize: "20px" }} />
-                              TV
-                            </span>
+                            {item?.room_data?.amenities?.includes("wifi") ? (
+                              <span
+                                style={{
+                                  display: "flex",
+                                  // alignItems: "center",
+                                  color: "grey",
+                                  paddingTop: "10px",
+                                  fontSize: "12px",
+                                  fontFamily: "sans-serif",
+                                }}
+                              >
+                                <FiWifi style={{ fontSize: "20px" }} />
+                                Free Wifi
+                              </span>
+                            ) : (
+                              ""
+                            )}
+
+                            {item?.room_data?.amenities?.includes("AC") ? (
+                              <span
+                                style={{
+                                  display: "flex",
+                                  // alignItems: "center",
+                                  color: "grey",
+                                  paddingTop: "10px",
+                                  fontSize: "12px",
+                                  fontFamily: "sans-serif",
+                                }}
+                              >
+                                <BiCheckCircle style={{ fontSize: "20px" }} />
+                                AC
+                              </span>
+                            ) : (
+                              ""
+                            )}
+
+                            {item?.room_data?.amenities?.includes("TV") ? (
+                              <span
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  color: "grey",
+                                  paddingTop: "10px",
+                                  fontSize: "12px",
+                                  fontFamily: "sans-serif",
+                                }}
+                              >
+                                <FaTv style={{ fontSize: "20px" }} />
+                                TV
+                              </span>
+                            ) : (
+                              ""
+                            )}
+
                             <span
                               style={{
                                 display: "flex",
                                 alignItems: "center",
                                 color: "#0FA453",
-                                padding: "10px",
+                                padding: "13px",
                                 fontSize: "10px",
                                 fontFamily: "sans-serif",
                               }}
+                              onClick={() => viewDetails(item.room_data._id)}
                             >
                               View More
                             </span>
@@ -278,55 +314,72 @@ function ListCard(props) {
                         </div>
                         <br />
                         <br />
-                        <div className="d-flex" style={{ marginTop: "20px" }}>
-                          <div
-                            className="pt-2"
-                            style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              justifyContent: "end",
-                              paddingRight: "30px",
-                            }}
-                          >
-                            <span
+                        <div className="row" style={{ marginTop: "20px" }}>
+                          <div className=" col-sm-4 pt-2">
+                            <div
                               style={{
-                                fontWeight: "bolder",
-                                fontFamily: "sans-serif",
-                                fontSize: "20px",
+                                display: "flex",
+                                flexDirection: "row",
+                                lineHeight: "10px",
+                                // justifyContent: "end",
+                                paddingRight: "30px",
                               }}
                             >
-                              ₹ {item?.room_data?.price?.actual_price}
-                            </span>
-                            {/* <span
-                              style={{ fontFamily: "poppins", fontSize: "85" }}
-                            >
-                              <strike>
-                                {" "}
-                                ₹ {item?.room_data?.price?.actual_price}
-                              </strike>{" "}
-                              <p style={{ color: "red" }}>
+                              <span
+                                style={{
+                                  fontWeight: "bolder",
+                                  fontFamily: "sans-serif",
+                                  fontSize: "20px",
+                                }}
+                              >
+                                ₹ {item?.room_data?.price?.final_price}
+                              </span>
+                              <span
+                                style={{
+                                  fontFamily: "poppins",
+                                  fontSize: "85",
+                                  marginLeft: "10px",
+                                }}
+                              >
+                                <strike>
+                                  {" "}
+                                  ₹ {item?.room_data?.price?.actual_price}
+                                </strike>{" "}
+                              </span>
+                              <span
+                                style={{
+                                  fontFamily: "poppins",
+                                  color: "red",
+                                  marginLeft: "10px",
+                                }}
+                              >
                                 {((item?.room_data?.price?.actual_price -
                                   item?.room_data?.price?.final_price) /
                                   item?.room_data?.price?.actual_price) *
                                   100}
                                 %off
-                              </p>
-                            </span> */}
-
-                            <span
-                              style={{
-                                color: "grey",
-                                fontFamily: "sans-serif",
-                                fontSize: "15px",
-                              }}
-                            >
-                              *per Room per night
-                            </span>
+                              </span>
+                              <br />
+                              <br />
+                            </div>
+                            <div className="col-sm-12">
+                              <span
+                                style={{
+                                  color: "grey",
+                                  fontFamily: "sans-serif",
+                                  fontSize: "15px",
+                                }}
+                              >
+                                *per room per night
+                              </span>
+                            </div>
                           </div>
                           <div
-                            className=" d-flex justify-content-center flex-row"
+                            className="col-sm-6 d-flex justify-content-center flex-row"
                             style={{
-                              lineHeight: "12px",
+                              // lineHeight: "12px",
+                              float: "right",
+                              // marginTop: "36px",
                             }}
                           >
                             <div
@@ -336,10 +389,10 @@ function ListCard(props) {
                                 fontSize: "15px",
                                 fontWeight: 700,
                                 width: "118px",
-                                height: "34px",
+                                height: "40px",
                                 alignItems: "center",
                                 border: "1px solid #0FA453",
-                                borderRadius: "4px",
+                                // borderRadius: "4px",
                                 color: "#0FA453",
                                 marginRight: "20px",
                               }}
@@ -353,21 +406,23 @@ function ListCard(props) {
                                 fontSize: "15px",
                                 fontWeight: 700,
                                 width: "118px",
-                                height: "34px",
+                                height: "40px",
                                 alignItems: "center",
                                 marginBottom: "10px",
+                                backgroundColor: "#0FA453",
+                                color: "white",
                               }}
                             >
                               Book Now
                             </div>
                           </div>
                         </div>
-                      </Col>
+                      </div>
                     </Row>
                   </Container>
                   <hr />
                 </React.Fragment>
-              </Container>
+              </div>
             </div>
           </div>
         );
@@ -382,7 +437,7 @@ function ListCard(props) {
               return (
                 <>
                   <div>
-                    <Container style={{ paddingTop: "40px" }}>
+                    <Container>
                       <Row>
                         <Col
                           style={{ display: "flex", justifyContent: "center" }}
@@ -391,7 +446,7 @@ function ListCard(props) {
                             src={Room}
                             alt="room img"
                             style={{
-                              width: "300px",
+                              width: "330px",
                               height: "180px",
                               margin: "10px 0",
                             }}
@@ -399,9 +454,10 @@ function ListCard(props) {
                         </Col>
                       </Row>
                       <Row>
-                        <div>
-                          <div
-                            className="rajratan-train"
+                        <Row className="row d-flex">
+                          <Col
+                            xs={6}
+                            // className="rajratan-train col-xs-6"
                             // style={{ border: "2px solid black" }}
                           >
                             <div style={{ display: "flex" }}>
@@ -429,164 +485,197 @@ function ListCard(props) {
                                 <span
                                   style={{
                                     color: "grey",
-
                                     fontFamily: "sans-serif",
                                   }}
                                 >
+                                  <HiOutlineLocationMarker
+                                    style={{ color: "red", fontSize: "20px" }}
+                                  />
                                   {item?.full_address?.street},{" "}
                                   {item?.full_address?.city} C.G
                                 </span>
                               </div>
                             </div>
+
                             <div style={{ display: "flex" }}>
-                              <span
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  color: "grey",
-                                  padding: "20px",
-                                  fontSize: "16px",
-                                  fontFamily: "sans-serif",
-                                }}
-                              >
-                                <FiWifi />
-                                Free Wifi
-                              </span>
-                              <span
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  color: "grey",
-                                  padding: "20px",
-                                  fontSize: "16px",
-                                  fontFamily: "sans-serif",
-                                }}
-                              >
-                                <BiCheckCircle style={{ fontSize: "20px" }} />
-                                AC
-                              </span>
-                              <span
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  color: "grey",
-                                  padding: "20px",
-                                  fontSize: "16px",
-                                  fontFamily: "sans-serif",
-                                }}
-                              >
-                                <FaTv style={{ fontSize: "20px" }} />
-                                TV
-                              </span>
-                            </div>
-                            <div>
-                              <span
+                              {item?.room_data?.amenities?.includes("wifi") ? (
+                                <span
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    color: "grey",
+                                    // padding: "20px",
+                                    fontSize: "16px",
+                                    fontFamily: "sans-serif",
+                                  }}
+                                >
+                                  <FiWifi />
+                                  Free Wifi
+                                </span>
+                              ) : (
+                                ""
+                              )}
+
+                              {item?.room_data?.amenities?.includes("AC") ? (
+                                <span
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    color: "grey",
+                                    // padding: "20px",
+                                    fontSize: "16px",
+                                    fontFamily: "sans-serif",
+                                  }}
+                                >
+                                  <BiCheckCircle style={{ fontSize: "20px" }} />
+                                  AC
+                                </span>
+                              ) : (
+                                ""
+                              )}
+                              {item?.room_data?.amenities?.includes("TV") ? (
+                                <span
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    color: "grey",
+                                    // padding: "20px",
+                                    fontSize: "16px",
+                                    fontFamily: "sans-serif",
+                                  }}
+                                >
+                                  <FaTv style={{ fontSize: "20px" }} />
+                                  TV
+                                </span>
+                              ) : (
+                                ""
+                              )}
+                              <small
                                 style={{
                                   display: "flex",
                                   alignItems: "center",
                                   color: "#0FA453",
                                   padding: "10px",
-                                  fontSize: "16px",
+                                  // fontSize: "16px",
                                 }}
+                                onClick={() => viewDetails(item.room_data._id)}
                               >
                                 View More
-                              </span>
+                              </small>
                             </div>
-                          </div>
-                        </div>
-                        <Col style={{}}>
-                          <Row style={{}}>
-                            <div
-                              className=" ml-4"
-                              style={{ float: "right", padding: "10px" }}
-                            >
-                              <Col xs={12}>
+                          </Col>
+
+                          <Col
+                            xs={6}
+                            // className="m-0 p-0 col-xs-6"
+                            // style={{ float: "right", padding: "10px" }}
+                          >
+                            <Row xs={12}>
+                              <div>
                                 <div
                                   style={{
                                     display: "flex",
-                                    alignItems: "flex-end",
+                                    // alignItems: "flex-end",
                                     flexDirection: "column",
+                                    float: "right",
                                   }}
                                 >
-                                  {/* <span>
-                                    <strike>
+                                  <span
+                                    style={{
+                                      color: "red",
+                                      float: "right",
+                                      marginLeft: "auto",
+                                    }}
+                                  >
+                                    {((item?.room_data?.price?.actual_price -
+                                      item?.room_data?.price?.final_price) /
+                                      item?.room_data?.price?.actual_price) *
+                                      100}
+                                    %off
+                                  </span>
+                                  <span>
+                                    <strike
+                                      style={{
+                                        fontSize: "25px",
+                                        // fontWeight: "bolder",
+                                        color: "grey",
+                                        fontFamily: "sans-serif",
+                                        marginLeft: "10px",
+                                        float: "right",
+                                      }}
+                                    >
                                       {" "}
                                       ₹ {item?.room_data?.price?.actual_price}
                                     </strike>{" "}
-                                    <p style={{ color: "red" }}>
-                                      {((item?.room_data?.price?.actual_price -
-                                        item?.room_data?.price?.final_price) /
-                                        item?.room_data?.price?.actual_price) *
-                                        100}
-                                      %off
-                                    </p>
-                                  </span> */}
-                                  <span
-                                    style={{
-                                      fontSize: "12px",
-                                      color: "grey",
-                                      fontFamily: "sans-serif",
-                                    }}
-                                  >
-                                    *per room per Night
                                   </span>
-
                                   <span
                                     style={{
                                       fontSize: "25px",
                                       fontWeight: "bolder",
                                       fontFamily: "sans-serif",
+                                      float: "right",
+                                      marginLeft: "auto",
                                     }}
                                   >
-                                    ₹ {item?.room_data?.price?.actual_price}
+                                    ₹ {item?.room_data?.price?.final_price}
+                                  </span>
+                                  <span
+                                    style={{
+                                      fontSize: "12px",
+                                      color: "grey",
+                                      fontFamily: "sans-serif",
+                                      float: "right",
+                                      display: "flex",
+                                    }}
+                                  >
+                                    *per room per night
                                   </span>
                                 </div>
-                              </Col>
-
-                              <div
-                                className=" d-flex "
-                                style={{
-                                  lineHeight: "12px",
-                                  marginTop: "20px",
-                                  justifyContent: "space-evenly",
-                                }}
-                              >
-                                <span
-                                  className="train-seats  d-flex justify-content-center "
-                                  onClick={() => bookNow(item.room_data._id)}
-                                  style={{
-                                    fontSize: "15px",
-                                    fontWeight: 700,
-                                    width: "150px",
-                                    height: "49px",
-                                    alignItems: "center",
-                                  }}
-                                >
-                                  Book Now
-                                </span>
-                                <span
-                                  className=" d-flex justify-content-center"
-                                  onClick={() =>
-                                    viewDetails(item.room_data._id)
-                                  }
-                                  style={{
-                                    fontSize: "15px",
-                                    fontWeight: 700,
-                                    width: "150px",
-                                    height: "50px",
-                                    alignItems: "center",
-                                    border: "1px solid #0FA453",
-                                    borderRadius: "4px",
-                                    color: "#0FA453",
-                                  }}
-                                >
-                                  View Details
-                                </span>
                               </div>
-                            </div>
-                          </Row>
-                          <hr />
-                        </Col>
+                            </Row>
+                          </Col>
+                        </Row>
+
+                        <div
+                          className=" d-flex "
+                          style={{
+                            lineHeight: "12px",
+                            marginTop: "20px",
+                            justifyContent: "space-evenly",
+                          }}
+                        >
+                          <span
+                            className="train-seats  d-flex justify-content-center "
+                            onClick={() => bookNow(item.room_data._id)}
+                            style={{
+                              fontSize: "15px",
+                              fontWeight: 700,
+                              width: "150px",
+                              height: "49px",
+                              alignItems: "center",
+                            }}
+                          >
+                            Book Now
+                          </span>
+                          <span
+                            className=" d-flex justify-content-center"
+                            onClick={() => viewDetails(item.room_data._id)}
+                            style={{
+                              fontSize: "15px",
+                              fontWeight: 700,
+                              width: "150px",
+                              height: "50px",
+                              alignItems: "center",
+                              border: "1px solid #0FA453",
+                              borderRadius: "4px",
+                              color: "#0FA453",
+                            }}
+                          >
+                            View Details
+                          </span>
+                        </div>
+                        <br />
+                        <hr />
                       </Row>
                     </Container>
                   </div>

@@ -15,10 +15,17 @@ import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import { Autocomplete } from "@material-ui/lab";
 import { FaSearchLocation, FaTrash, FaPlusCircle } from "react-icons/fa";
+import { GiSettingsKnobs } from "react-icons/gi";
 import moment from "moment";
-import { DatePicker, Menu, Dropdown as ANTDropdown } from "antd";
+import {
+  DatePicker,
+  Menu,
+  Dropdown as ANTDropdown,
+  Slider,
+  Checkbox,
+} from "antd";
 import Searchbar from "./Searchbar";
-import { Slider, Checkbox } from "antd";
+import { DownOutlined } from "@ant-design/icons";
 
 function HotelList() {
   const history = useHistory();
@@ -253,6 +260,26 @@ function HotelList() {
     setStartDate(datee[0]._d);
     setEndDate(datee[1]._d);
   };
+
+  // const Pricemenu = (
+  //   <Menu>
+  //     <Menu.Item>
+
+  //         1st menu item
+
+  //     </Menu.Item>
+  //   </Menu>
+  // );
+  // const Aminitiesmenu = (
+  //   <Menu>
+  //     <Menu.Item>
+
+  //         1st menu item
+
+  //     </Menu.Item>
+  //   </Menu>
+  // );
+
   return (
     <>
       <div>
@@ -427,7 +454,6 @@ function HotelList() {
           </Row>
           <br />
           <hr />
-          
 
           <div style={{ marginBottom: "200px" }} className="row">
             <div
@@ -435,22 +461,27 @@ function HotelList() {
               style={{
                 borderRight: "1px solid",
                 // textAlign: "center",
-               
               }}
             >
-              <h4 style={{ marginLeft:"20px"}}>
-                <b>Filters</b>
-                <small style={{color:"red",float:"right"}}>Clear All</small>
-              </h4>
+              <div style={{ marginLeft: "20px", flexDirection: "row" }}>
+                <b className="h4" style={{ fontWeight: "bold" }}>
+                  Filters
+                </b>
+                <small style={{ color: "red", float: "right" }}>
+                  Clear All
+                </small>
+              </div>
+              <hr />
               <h6 style={{ marginLeft: "20px" }}>
-                  <b>Price</b>
-                </h6>
-              <div style={{ textAlign: "center" , marginLeft: "15px"}}>
-               
+                <b>Price</b>
+              </h6>
+              <div style={{ textAlign: "center", marginLeft: "15px" }}>
                 <Slider
                   range={{ draggableTrack: true }}
                   defaultValue={[20, 50]}
-                  onChange={(e)=>{console.log(e.target)}}
+                  onChange={(e) => {
+                    console.log(e.target);
+                  }}
                 />
                 <hr />
               </div>
@@ -468,11 +499,10 @@ function HotelList() {
                   <Checkbox style={{ float: "left" }}>TV</Checkbox>
                   <br />
                 </div>
-               
               </div>
-              <br/>
-              <br/>
-              <br/>
+              <br />
+              <br />
+              <br />
               <hr />
             </div>
             <div className="col-sm-10">
@@ -484,11 +514,33 @@ function HotelList() {
         </div>
         <div className="d-md-none">
           <Searchbar getStartData={getStartData} />
-          <br />
-          <hr />
-          <br />
-          
-
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              fontFamily: "poppins",
+              marginBottom:"-40px"
+            }}
+          >
+            <p style={{ marginLeft: "10px",color:"#0FA453"}}>
+             <b style={{borderRight: "2px solid #0FA453",paddingRight:"5px"}}> <GiSettingsKnobs /> Filters</b>
+            </p>
+            <p style={{ marginLeft: "10px" }}>
+              <ANTDropdown overlay={menu}>
+                <p style={{ boxShadow: "0px 0px 5px -2px",padding:"3px",borderRadius:"4px" }}>
+                  Prices <DownOutlined style={{ color: "#0FA453" }} />
+                </p>
+              </ANTDropdown>
+            </p>
+            <p style={{ marginLeft: "10px" }}>
+              <ANTDropdown overlay={menu}>
+                <p style={{ boxShadow: "0px 0px 5px -2px",padding:"3px",borderRadius:"4px" }}>
+                  Aminities <DownOutlined style={{ color: "#0FA453" }} />
+                </p>
+              </ANTDropdown>
+            </p>
+          </div>
+          <hr />{" "}
           <ListCard
             sendlocation={sendlocation}
             startDate={startDate}

@@ -10,6 +10,7 @@ import { FaCheckCircle } from "react-icons/fa";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import hotelotherimage from "../../assets/img/hotelotherimage.jpg";
+import { BiCheckCircle } from "react-icons/bi";
 
 const Details = ({ hotelUniqid, detailsP }) => {
   console.log({ detailsP });
@@ -41,7 +42,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 2,
+      items: 1,
       slidesToSlide: 1, // optional, default to 1.
     },
   };
@@ -50,6 +51,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
     <>
       {/* ===================== */}
       <div>
+        <br />
         <Carousel
           activeIndex={index}
           onSelect={handleSelect}
@@ -61,13 +63,21 @@ const Details = ({ hotelUniqid, detailsP }) => {
             <img className="caraselImage" src={Room} alt="First slide" />{" "}
           </div>
           <div className="Carousel-a">
-            <img className="caraselImage" src={hotelotherimage} alt="Second slide" />
+            <img
+              className="caraselImage"
+              src={hotelotherimage}
+              alt="Second slide"
+            />
           </div>
           <div className="Carousel-a">
             <img className="caraselImage" src={Room} alt="Second slide" />
           </div>
           <div className="Carousel-a">
-            <img className="caraselImage" src={hotelotherimage} alt="Second slide" />
+            <img
+              className="caraselImage"
+              src={hotelotherimage}
+              alt="Second slide"
+            />
           </div>
         </Carousel>
       </div>
@@ -101,13 +111,13 @@ const Details = ({ hotelUniqid, detailsP }) => {
               </p>
             </div>
             <div>
-              <h2 style={{ fontWeight: "bold", fontSize: "20px" }}>
+              <h5 style={{ fontWeight: "bold", fontSize: "13px" }}>
                 Amenities
-              </h2>
+              </h5>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
                 {detailsP?.amenities?.includes("AC") ? (
                   <div className="amenities-div">
-                    <img src={calendar} alt="" className="amenities-logo" />
+                    <BiCheckCircle style={{ fontSize: "20px" }} />{" "}
                     <h1 className="amenities-name">AC</h1>
                   </div>
                 ) : (
@@ -190,60 +200,92 @@ const Details = ({ hotelUniqid, detailsP }) => {
                       </h1>
                       <p>Room Size : 1200 sqft</p>
                       <div style={{ display: "flex" }}>
-                        <div
-                          style={{
-                            display: "flex",
-                            width: 100,
-                            height: 50,
-                          }}
-                        >
-                          <img
-                            src={calendar}
-                            alt=""
+                        {detailsP?.amenities?.includes("Geezer") ? (
+                          <div
                             style={{
-                              margin: "0 10px",
-                              width: "20px",
-                              height: "20px",
-                            }}
-                          />
-                          <h1
-                            style={{
-                              fontSize: "16px",
                               display: "flex",
-                              justifyContent: "center",
-                              marginBottom: 0,
+                              width: 100,
+                              height: 50,
                             }}
                           >
-                            Geezer
-                          </h1>
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            width: 100,
-                            height: 50,
-                          }}
-                        >
-                          <img
-                            src={calendar}
-                            alt=""
+                            <img
+                              src={calendar}
+                              alt=""
+                              style={{
+                                margin: "0 10px",
+                                width: "20px",
+                                height: "20px",
+                              }}
+                            />
+                            <h1
+                              style={{
+                                fontSize: "16px",
+                                display: "flex",
+                                justifyContent: "center",
+                                marginBottom: 0,
+                              }}
+                            >
+                              Geezer
+                            </h1>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                        {detailsP?.amenities?.includes("AC") ? (
+                          <div
                             style={{
-                              margin: "0 10px",
-                              width: "20px",
-                              height: "20px",
-                            }}
-                          />
-                          <h1
-                            style={{
-                              fontSize: "16px",
                               display: "flex",
-                              justifyContent: "center",
-                              marginBottom: 0,
+                              width: 100,
+                              height: 50,
                             }}
                           >
-                            CCTV
-                          </h1>
-                        </div>
+                            <BiCheckCircle style={{ fontSize: "20px" }} />
+                            <h1
+                              style={{
+                                fontSize: "16px",
+                                display: "flex",
+                                justifyContent: "center",
+                                marginBottom: 0,
+                              }}
+                            >
+                              AC
+                            </h1>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+
+                        {detailsP?.amenities?.includes("CCTV") ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              width: 100,
+                              height: 50,
+                            }}
+                          >
+                            <img
+                              src={calendar}
+                              alt=""
+                              style={{
+                                margin: "0 10px",
+                                width: "20px",
+                                height: "20px",
+                              }}
+                            />
+                            <h1
+                              style={{
+                                fontSize: "16px",
+                                display: "flex",
+                                justifyContent: "center",
+                                marginBottom: 0,
+                              }}
+                            >
+                              CCTV
+                            </h1>
+                          </div>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
                     <div>
