@@ -18,6 +18,7 @@ import { FaSearchLocation, FaTrash, FaPlusCircle } from "react-icons/fa";
 import moment from "moment";
 import { DatePicker, Menu, Dropdown as ANTDropdown } from "antd";
 import Searchbar from "./Searchbar";
+import { Slider, Checkbox } from "antd";
 
 function HotelList() {
   const history = useHistory();
@@ -109,9 +110,10 @@ function HotelList() {
     addMenu();
   }, [roomState]);
   const menu = (
-    <Menu>
+    <Menu className="menuSearch">
       <Menu.Item>
         <b>Room</b> <b style={{ float: "right" }}>Guest</b>
+        <hr />
       </Menu.Item>
       <div className="addMenu">
         {roomState?.map((curElem, index) => (
@@ -126,15 +128,20 @@ function HotelList() {
                 <button onClick={() => guestRoom("+", index)}>+</button>
               )}
             </span>
+            <hr />
           </Menu.Item>
         ))}
       </div>
       <Menu.Item>
-        <FaTrash
-          title=" Delete Room "
-          style={{ float: "left", marginRight: "120px" }}
-          onClick={() => guestRoom("delete", roomState.length - 1)}
-        />
+        {roomState.length > 1 ? (
+          <FaTrash
+            title=" Delete Room "
+            style={{ float: "left", marginRight: "120px" }}
+            onClick={() => guestRoom("delete", roomState.length - 1)}
+          />
+        ) : (
+          ""
+        )}
         <span
           title="Add Room "
           style={{ float: "right" }}
@@ -250,25 +257,237 @@ function HotelList() {
     <>
       <div>
         <Header />
-        <Searchbar getStartData={getStartData} />
-        <br />
-        <hr />
-        <br />
-
         <div className="d-none d-md-block">
-          <h5 style={{ marginLeft: "10px" }}>
-            Search Results - Hotels in {sendlocation}{" "}
-          </h5>
-          <div style={{ marginBottom: "200px" }}>
-            <ListCard />
+          <Row
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginLeft: "10px",
+              marginRight: "20px",
+            }}
+          >
+            <Col xs={12} md={4} xl={2} className="mt-2">
+              <Form.Group className="" controlId="exampleForm.ControlInput1">
+                <Form.Label className="dm-ticket">
+                  Select Your Location
+                </Form.Label>
+                <Autocomplete
+                  underlineStyle={{ display: "none" }}
+                  style={{
+                    backgroundColor: "#f5f5f5",
+                    border: 0,
+                    padding: "0px",
+                  }}
+                  freeSolo
+                  value={sendlocation}
+                  autoComplete
+                  autoHighlight
+                  onChange={(e) => {
+                    setSendlocation(e.target.innerHTML.split(",")[1]);
+                  }}
+                  options={myOptions}
+                  renderInput={(params) => (
+                    <TextField
+                      variant="standard"
+                      required="required"
+                      style={{ padding: "5px" }}
+                      {...params}
+                      onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                      placeholder="Search Area"
+                      // InputProps={{ disableUnderline: true }}
+                    />
+                  )}
+                />
+              </Form.Group>
+            </Col>
+            {/* <Form.Group className="" controlId="exampleForm.ControlInput1">
+              <Form.Label className="dm-ticket">
+                Select Your Location
+              </Form.Label>
+              <Autocomplete
+                style={{ width: 200 }}
+                freeSolo
+                autoComplete
+                autoHighlight
+                onChange={(e) => {
+                  setSendlocation(e.target.innerHTML.split(",")[1]);
+                }}
+                options={myOptions}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    value={sendlocation ? sendlocation : "ddd"}
+                    onKeyPress={(e) => getDataFromAPI(e.target.value)}
+                    variant="outlined"
+                    label="Search Area"
+                  />
+                )}
+              />
+            </Form.Group> */}
+
+            <Col xs={12} md={3} className="mt-2">
+              <Form.Group className="" controlId="exampleForm.ControlInput1">
+                <div>
+                  <Form.Label className="dm-ticket">Booking Date</Form.Label>
+                  <br />
+                  <div>
+                    <div
+                      style={{
+                        backgroundColor: "#f5f5f5",
+                        padding: "5px",
+                        paddingLeft: "20px",
+                        display: "flex",
+                      }}
+                    >
+                      <img
+                        alt="logo"
+                        className="location-userdatas-calendar"
+                        src={calendar}
+                        style={{
+                          width: 25,
+                          height: 25,
+                          marginRight: "10px",
+                        }}
+                      />
+                      <RangePicker
+                        disabledDate={disabledDate}
+                        onChange={(date) => chnageDate(date)}
+                        minDate={new Date()}
+                        defaultValue={[
+                          moment(startDate, dateFormat),
+                          moment(endDate, dateFormat),
+                        ]}
+                        style={{
+                          backgroundColor: "transparent",
+                          border: "0",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </Form.Group>
+            </Col>
+            <Col xs={12} md={3} className="mt-2">
+              <Form.Group className="" controlId="exampleForm.ControlInput1">
+                <Form.Label className="dm-ticket">Number Of Guests</Form.Label>
+              </Form.Group>
+              <ANTDropdown
+                overlay={menu}
+                trigger={["click"]}
+                style={{ width: "100px" }}
+              >
+                <input // onChange={(e) => setEmail(e.target.value)}
+                  // value={email}
+                  name="guestRoom"
+                  type="text"
+                  id="inputState"
+                  className="form-control pass_input"
+                  placeholder={`${noOfRoom} Room ,${noOfGuest} guest`}
+                  onClick={handleShow}
+                  style={{
+                    backgroundColor: "#f5f5f5",
+                    border: 0,
+                    height: "47px",
+                    padding: "10px",
+                  }}
+                  readOnly
+                />
+              </ANTDropdown>
+            </Col>
+            <Col
+              md={2}
+              className="mt-2"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "flex-end",
+              }}
+            >
+              <div
+                className="dmticket-btn"
+                //   style={{ textAlign: "center" }}
+              >
+                <Button
+                  type="submit"
+                  // class="btn btn-success"
+                  style={{
+                    width: "138px",
+                    textAlign: "center",
+                    height: "47px",
+                    borderRadius: "5px",
+                    backgroundColor: "#0fa453",
+                    border: "none",
+                  }}
+                  onClick={onDmTicketShow}
+                >
+                  Search Now
+                </Button>
+              </div>
+            </Col>
+          </Row>
+          <br />
+          <hr />
+          
+
+          <div style={{ marginBottom: "200px" }} className="row">
+            <div
+              className="col-sm-2"
+              style={{
+                borderRight: "1px solid",
+                // textAlign: "center",
+               
+              }}
+            >
+              <h4 style={{ marginLeft:"20px"}}>
+                <b>Filters</b>
+                <small style={{color:"red",float:"right"}}>Clear All</small>
+              </h4>
+              <h6 style={{ marginLeft: "20px" }}>
+                  <b>Price</b>
+                </h6>
+              <div style={{ textAlign: "center" , marginLeft: "15px"}}>
+               
+                <Slider
+                  range={{ draggableTrack: true }}
+                  defaultValue={[20, 50]}
+                  onChange={(e)=>{console.log(e.target)}}
+                />
+                <hr />
+              </div>
+              <div style={{ marginLeft: "40px" }}>
+                <h6 style={{ float: "left" }}>
+                  <b>Aminities</b>
+                </h6>
+                <br />
+                <br />
+                <div style={{ float: "left" }}>
+                  <Checkbox style={{ float: "left" }}>AC</Checkbox>
+                  <br />
+                  <Checkbox style={{ float: "left" }}>Free Wifi</Checkbox>
+                  <br />
+                  <Checkbox style={{ float: "left" }}>TV</Checkbox>
+                  <br />
+                </div>
+               
+              </div>
+              <br/>
+              <br/>
+              <br/>
+              <hr />
+            </div>
+            <div className="col-sm-10">
+              <ListCard />
+            </div>
             {/* <ListCard /> */}
           </div>
           <Footer />
         </div>
         <div className="d-md-none">
-          <h5 style={{ marginLeft: "10px" }}>
-            Search Results - Hotels in {sendlocation}{" "}
-          </h5>
+          <Searchbar getStartData={getStartData} />
+          <br />
+          <hr />
+          <br />
+          
 
           <ListCard
             sendlocation={sendlocation}

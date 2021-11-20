@@ -204,22 +204,24 @@ function HotelSearch() {
   }, [roomState]);
   const menu = (
     <Menu>
-      <Menu.Item disabled>
-        <b>Room</b> <b style={{float:"right"}}>Guest</b>
+      <Menu.Item>
+      <b>Room</b> <b style={{ float: "right" }}>Guest</b>
+        <hr />
       </Menu.Item>
       <div className="addMenu">
         {roomState.map((curElem, index) => (
           <Menu.Item key={index}>
             Room {curElem.room}{" "}
             <span style={{float:"right"}}>
-            <button onClick={() => guestRoom("-", index)}>-</button>{" "}
+            <button className="minus" onClick={() => guestRoom("-", index)}>-</button>{" "}
             {curElem.guest}{" "}
             {curElem.guest === 3 ? (
-              <button disabled>+</button>
+              <button className="btn btn-xs plus" disabled>+</button>
             ) : (
-              <button onClick={() => guestRoom("+", index)}>+</button>
+              <button className="plus" onClick={() => guestRoom("+", index)}>+</button>
             )}
              </span>
+             <hr />
           </Menu.Item>
         ))}
       </div>
@@ -497,13 +499,13 @@ function HotelSearch() {
 
                       <div
                         style={{
-                          width: 180,
+                          width: 275,
                           backgroundColor: "#f5f5f5",
                           padding: "5px",
                           paddingLeft: "20px",
                         }}
                       >
-                        <ANTDropdown overlay={menu}>
+                        <ANTDropdown overlay={menu} style={{width:"400px"}}>
                           <input // onChange={(e) => setEmail(e.target.value)}
                             // value={email}
                             name="guestRoom"
@@ -514,7 +516,7 @@ function HotelSearch() {
                             style={{
                               border: "none",
                               outline: "none",
-                              width: 155,
+                              width: 255,
                               backgroundColor: "#f5f5f5",
                               padding: "5px",
                               paddingLeft: "20px",

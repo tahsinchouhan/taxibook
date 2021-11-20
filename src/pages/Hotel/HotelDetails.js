@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { Button, Row, Col, Form, Container } from "react-bootstrap";
 import calendar from "../../assets/img/calendar.png";
@@ -11,20 +11,18 @@ import Footer from "../travesaly/Footer";
 import moment from "moment";
 import { DatePicker } from "antd";
 import Details from "./Details";
-
+import {Carousel} from 'react-bootstrap'
 const HotelDetails = (props) => {
-  console.log(props.match.params.name)
-  const hotelUniqid= props.match.params.name
+  console.log(props.match.params.name);
+  const hotelUniqid = props.match.params.name;
   const history = useHistory();
   const [detailsP, setDetailsP] = useState([]);
 
   useEffect(() => {
-    axios
-    .get(`${API_PATH}/api/v2/room/${hotelUniqid}`)
-          .then((response) => {
-        console.log(response.data.data);
-        setDetailsP(response.data.data);
-      });
+    axios.get(`${API_PATH}/api/v2/room/${hotelUniqid}`).then((response) => {
+      console.log(response.data.data);
+      setDetailsP(response.data.data);
+    });
   }, []);
   const onDmTicketShow = () => {
     history.push("/hotellist");
@@ -33,21 +31,24 @@ const HotelDetails = (props) => {
     return current && current < moment().endOf("day");
   }
   const { RangePicker } = DatePicker;
-  console.log(detailsP)
-  return (
+  console.log(detailsP);
+  const [index, setIndex] = useState(0);
 
-      <div>
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
+  return (
+    <div>
       <Header />
 
       <div className="d-none d-md-block" style={{ marginTop: "0" }}>
+       
         <Container
           className="d-none d-md-block "
           style={{ marginTop: "0", backgroundColor: "white" }}
-        >
-        
-        </Container>
+        ></Container>
         <div>
-          <Details  detailsP={detailsP} hotelUniqid={hotelUniqid}/>
+          <Details detailsP={detailsP} hotelUniqid={hotelUniqid} />
         </div>
         <Footer />
       </div>
@@ -199,14 +200,13 @@ const HotelDetails = (props) => {
           </Container> */}
         </div>
         <div>
-          <Details hotelUniqid={hotelUniqid} detailsP={detailsP}/>
+          <Details hotelUniqid={hotelUniqid} detailsP={detailsP} />
         </div>
         <div>
           <Footer />
         </div>
       </div>
     </div>
-   
   );
 };
 

@@ -998,3 +998,10 @@ body {
   margin-left: 135px;
   margin-top: -35px;
 }
+.react-multi-carousel-item>div>img.caraselImage,
+.Carousel-a>img {
+  max-width: 900px !important;
+  height: 50% !important;
+  border-radius: 10px;
+  cursor: pointer !important;
+}

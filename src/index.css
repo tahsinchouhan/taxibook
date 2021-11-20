@@ -2,7 +2,7 @@
 * {
   font-family: "Inter", sans-serif;
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 body {
   margin: 0;
   padding: 0;
@@ -31,7 +31,7 @@ body {
   flex-direction: row;
   justify-content: center;
 }
-.tab-icons{
+.tab-icons {
   padding: 0 20px;
 }
 .userDate {
@@ -69,20 +69,20 @@ body {
   margin: 0px;
   font-size: 12px;
 }
-.userdatas{
+.userdatas {
   /* color: grey; */
   display: flex;
   flex-direction: row;
   font-size: 12px;
   background-color: #9b98981c;
   margin: 0 0 20px 0;
-  padding:10px 20px;
+  padding: 10px 20px;
   border-radius: 10px;
   cursor: pointer;
 }
 .userdatas {
   /* color: grey; */
-  font-size:12px;
+  font-size: 12px;
   background-color: #9b98981c;
   /* margin:;
   padding:10px 20px; */
@@ -91,12 +91,12 @@ body {
 .airoIcon {
   margin-right: 20px;
 }
-.booking_icon{
+.booking_icon {
   font-size: 15px;
   font-weight: 600;
 }
-.bus_secation{
-padding-left: 15px;
+.bus_secation {
+  padding-left: 15px;
 }
 
 .textHover {
@@ -118,7 +118,7 @@ padding-left: 15px;
   right: 0;
   height: 100%;
   opacity: 0;
-  transition: .5s ease;
+  transition: 0.5s ease;
   background-color: #161a12;
 }
 .overlay2 {
@@ -129,7 +129,7 @@ padding-left: 15px;
   right: 0;
   height: 100%;
   opacity: 0;
-  transition: .5s ease;
+  transition: 0.5s ease;
   background-color: #161a12;
 }
 .overlay3 {
@@ -140,47 +140,47 @@ padding-left: 15px;
   right: 0;
   height: 100%;
   opacity: 0;
-  transition: .5s ease;
+  transition: 0.5s ease;
   background-color: #161a12;
   opacity: 0.6;
-  color:black
+  color: black;
 }
-.homepage1{
+.homepage1 {
   position: relative;
 }
 .mainImgContainer:hover .overlay {
   opacity: 0.6;
-  color:black
+  color: black;
 }
 .mainImgContainer:hover .overlay2 {
   opacity: 0.6;
-  color:black
+  color: black;
 }
- 
-.top_title123{
+
+.top_title123 {
   font-weight: bold;
-    font-size: 53px  !important;
-    line-height: 28px;
-    text-align: center;
+  font-size: 53px !important;
+  line-height: 28px;
+  text-align: center;
 }
-.checkimage{
-  width:20px ;
-   height:20px;
-   float: right;
+.checkimage {
+  width: 20px;
+  height: 20px;
+  float: right;
 }
-.mainImgContainer{
+.mainImgContainer {
   position: relative;
 }
-.guestModel{
+.guestModel {
   position: absolute;
   margin-top: 30%;
   margin-left: 67%;
 }
 @media screen and (max-width: 600px) {
-  .guestModel{
+  .guestModel {
     position: absolute;
-     margin-top: 70%;
-    margin-left: 0%; 
+    margin-top: 70%;
+    margin-left: 0%;
     width: 300px !important;
   }
 }
@@ -202,7 +202,7 @@ padding-left: 15px;
   display: none !important;
 }
 .MuiInput-underline:before,
-.MuiInput-underline:after{
+.MuiInput-underline:after {
   border: none !important;
 }
 /* @media (max-width: 480px) {
@@ -213,11 +213,48 @@ padding-left: 15px;
       width: 100%;
   }
 } */
-@media(max-width: 576px) { 
-  .ant-picker-panels { 
+@media (max-width: 576px) {
+  .ant-picker-panels {
     flex-direction: column;
-  } 
+  }
 }
-.ant-picker-suffix,.ant-picker-clear{
+.ant-picker-suffix,
+.ant-picker-clear {
   display: none !important;
 }
+
+.ant-dropdown-hidden,
+.ant-dropdown-menu-hidden,
+.ant-dropdown-menu-submenu-hidden {
+  min-width: 206 px !important;
+  left: 616 px !important;
+  top: 418 px !important;
+}
+.menuSearch {
+  min-width: 206 px !important;
+  left: 616 px !important;
+  top: 418 px !important;
+}
+.plus,
+.minus {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 20px;
+  min-width: 10 px;
+  padding: 2 px 8 px 4 px !important;
+  text-align: center;
+  width: 40 px;
+  height: 30 px;
+  border-radius: 6 px;
+}
+.Carousel-a>img{
+  /* width:100px; */
+  width:100%
+ 
+}
+.Carousel-a{
+padding: 0px !important;
+
+
+}
+
