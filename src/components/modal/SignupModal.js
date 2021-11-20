@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
@@ -8,14 +9,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOtp, verifyOtp } from "../../redux/actions";
 import Loader from "../Loader";
 import Message from "../Message";
+import '../../assets/css/signupModal.css'
 
 
 function SignupModal({ show, handleClose }) {
   const [modalShow, setModalShow] = useState(false);
-  
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-
   const [mobile, setMobile] = useState("");
   const [OTP, setOTP] = useState("");
   const [showDiv, setShowDiv] = useState(false);
@@ -64,35 +62,33 @@ function SignupModal({ show, handleClose }) {
                   <div>
                     <Form>
                       <h1
-                        style={{ paddingTop: "20px", marginBottom: "20px", fontWeight: "bolder" }}
+                        style={{ paddingTop: "10px", marginBottom: "10px", fontWeight: "bolder" }}
                       >
-                        Sign up
+                        Sign Up
                       </h1>
+
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label
                           style={{ fontWeight: "bolder" }}
                         >
-                         Name
                         </Form.Label>
-                        <Form.Control type="text" placeholder="Enter Name" value={name} onChange={(e) => setName(e.target.value)} />
+                        <Form.Control type="number" placeholder="Name" value={mobile} onChange={(e) => setMobile(e.target.value)} />
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label
                           style={{ fontWeight: "bolder" }}
                         >
-                         Email
                         </Form.Label>
-                        <Form.Control type="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <Form.Control type="number" placeholder="Email" value={mobile} onChange={(e) => setMobile(e.target.value)} />
                       </Form.Group>
 
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label
                           style={{ fontWeight: "bolder" }}
                         >
-                          Enter mobile number
                         </Form.Label>
-                        <Form.Control type="number" placeholder="Phone Number" value={mobile} onChange={(e) => setMobile(e.target.value)} />
+                        <Form.Control type="number" placeholder="Mobile" value={mobile} onChange={(e) => setMobile(e.target.value)} />
                       </Form.Group>
 
                       <Button className="login-button" variant="dark" onClick={fetchOtp} style={{ fontWeight: "bolder", width: "95px", marginBottom: "50px" }}>
