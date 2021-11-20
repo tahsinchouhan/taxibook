@@ -17,11 +17,14 @@ import logo from "../assets/img/logo.png";
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginModal from "../components/modal/LoginModal";
+import SignupModal from "../components/modal/SignupModal";
 import { logout } from "../redux/actions";
 import { Menu, Dropdown as ANTDropdown } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 function Header() {
   const [modalShow, setModalShow] = useState(false);
+  const [signup, setSignup] = useState(false);
+
 
   const modalHadler = () => {
     setModalShow(true);
@@ -66,6 +69,13 @@ function Header() {
   const ViewTicketHandler = () => {
     history.push("/viewticket");
   };
+  const signupHadler =()=>{
+    setSignup(true)
+  }
+  const handleSignupClose = ()=>{
+    setSignup(false)
+
+  }
   const menu = (
     <Menu>
       <Menu.Item>
@@ -155,9 +165,14 @@ function Header() {
                 </Dropdown>
               </Offcanvas.Title>
             ) : (
+              <>
               <Offcanvas.Title onClick={() => modalHadler()}>
                 LOGIN
               </Offcanvas.Title>
+              <Offcanvas.Title onClick={()=>signupHadler()} style={{marginLeft:'64px'}}>
+              SIGNUP
+              </Offcanvas.Title>
+              </>             
             )}
           </Offcanvas.Header>
           <Offcanvas.Body>
@@ -362,6 +377,7 @@ function Header() {
                       </Dropdown.Menu>
                     </Dropdown>
                   ) : (
+                    <>
                     <h4
                       style={{
                         fontSize: "16px",
@@ -375,6 +391,20 @@ function Header() {
                     >
                       LOGIN
                     </h4>
+                                        <h4
+                                        style={{
+                                          fontSize: "16px",
+                                          fontWeight: "700",
+                                          color: "#864BD8",
+                                          margin: "0",
+                                          marginRight: "40px",
+                                          cursor: "pointer",
+                                        }}
+                                        onClick={() => signupHadler()}
+                                      >
+                                        SIGNUP
+                                      </h4>
+                                      </>
                   )}
                 </div>
 
@@ -411,6 +441,8 @@ function Header() {
         </Navbar>
       </Container>
       <LoginModal show={modalShow} handleClose={handleLoginClose} />
+      <SignupModal show={signup} handleClose={handleSignupClose} />
+
     </>
   );
 }
