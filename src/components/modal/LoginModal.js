@@ -8,6 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOtp, verifyOtp } from "../../redux/actions";
 import Loader from "../Loader";
 import Message from "../Message";
+import '../../assets/css/loginModal.css'
+import { FiLogIn } from "react-icons/fi";
+
 
 
 function LoginModal({ show, handleClose }) {
@@ -57,25 +60,31 @@ function LoginModal({ show, handleClose }) {
                   </div>
                 </Col>
                 <Col>
+                <div className="vl"></div>
                   <div>
                     <Form>
+                      <div className='d-flex justify-content-center '>
+                      {/* <FiLogIn  className='text-success'/> */}
                       <h1
                         style={{ paddingTop: "20px", marginBottom: "20px", fontWeight: "bolder" }}
                       >
                         Login
                       </h1>
+                      </div>
                       <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label
                           style={{ fontWeight: "bolder" }}
                         >
                           Enter mobile number
                         </Form.Label>
-                        <Form.Control type="number" placeholder="Phone Number" value={mobile} onChange={(e) => setMobile(e.target.value)} />
+                        <Form.Control type="number" placeholder="10 digit number" value={mobile} onChange={(e) => setMobile(e.target.value)}
+                          />
                       </Form.Group>
 
-                      <Button className="login-button" variant="dark" onClick={fetchOtp} style={{ fontWeight: "bolder", width: "95px", marginBottom: "50px" }}>
-                        Get OTP
+                      <Button className=" bg-success btn-lg" variant="dark" onClick={fetchOtp} >
+                      Send OTP
                       </Button>
+                      <p> Don't have a account? <span className='text-success'>sign up</span></p>
 
                       <div className="modal__block" style={{ display: `${showDiv ? "block" : "none"}` }} >
                         <h5 className="modal__title mt-2 mb-4" style={{ fontWeight: "bolder" }}>Enter Verification Code</h5>
