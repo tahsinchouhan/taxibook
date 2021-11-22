@@ -12,6 +12,7 @@ import { API_PATH } from "../../Path/Path";
 import moment from "moment";
 import { fetchStart, getOtp, setMobile, verifyOtp } from "../../redux/actions";
 import { setBookHotel } from "../../redux/actions";
+import { toast, ToastContainer } from "react-toastify";
 
 function HotelConfirmation(props) {
   const history = useHistory();
@@ -32,7 +33,7 @@ function HotelConfirmation(props) {
 
   const date1 = new Date(getStartData.startDate);
   const date2 = new Date(getStartData.endDate);
-  const no_of_room =getStartData.noOfRoom
+  const no_of_room = getStartData.noOfRoom;
   //calculate time difference
   const time_difference = date2.getTime() - date1.getTime();
   //calculate days difference by dividing total milliseconds in a day
@@ -53,6 +54,7 @@ function HotelConfirmation(props) {
 
   const onCheckout = () => {
     // console.log("object",values);
+
     dispatch(
       setBookHotel({
         ...values,
@@ -107,32 +109,44 @@ function HotelConfirmation(props) {
   const setTotalAmt = () => {
     // setValues({ ...values, ['total_amount']: total_amount1 });
   };
+  const [checkLogin, setCheckLogin] = useState(false);
+  useEffect(() => {}, []);
 
   const onClickMonsoon = () => {
     // console.log("object", `91${number}`, otp);
+
     setTotalValue();
     setTotalAmt();
-    if (otp.length === 6) {
+    if (localStorage.getItem("mobile")) {
+      JSON.parse(localStorage.getItem("mobile"));
+      setCheckLogin(true);
+      onCheckout();
+    } else if (otp.length === 6) {
       dispatch(fetchStart());
       dispatch(verifyOtp(`91${number}`, otp));
+      onCheckout();
+    } else {
+      toast.error("Please Login!!");
+      return false;
     }
 
-    onCheckout();
     return false;
   };
   const [payableAmt, setPayableAmt] = useState(0);
   const calculatePrice = () => {
-    console.log({no_of_room})
-    let payAmt = getStartData.noOfRoom*dayDifference*singleData?.price?.actual_price;
+    console.log({ no_of_room });
+    let payAmt =
+      getStartData.noOfRoom * dayDifference * singleData?.price?.actual_price;
     setPayableAmt(payAmt);
   };
   useEffect(() => {
-    console.log(singleData)
-      calculatePrice()
-  }, [singleData,dayDifference,getStartData])
+    console.log(singleData);
+    calculatePrice();
+  }, [singleData, dayDifference, getStartData]);
 
   return (
     <>
+      <ToastContainer />
       {singleData.price ? (
         <div className="">
           <Header />
@@ -197,6 +211,7 @@ function HotelConfirmation(props) {
                           <input
                             type="text"
                             name="name"
+                            required
                             placeholder="Your Name"
                             className="form-input"
                             onChange={(e) => {
@@ -212,6 +227,7 @@ function HotelConfirmation(props) {
                           <input
                             type="email"
                             name="email"
+                            required
                             placeholder="example@gmail.com"
                             className="form-input"
                             onChange={(e) => {
@@ -232,6 +248,7 @@ function HotelConfirmation(props) {
                           <input
                             type="number"
                             name="mobile"
+                            required
                             className="form-input"
                             placeholder="Your Mobile Number"
                             onChange={(e) => {
@@ -242,7 +259,13 @@ function HotelConfirmation(props) {
                           />
                         </div>
                         {user_data === null ? (
-                          <div className="mt-3" style={{ marginRight: "20px" }}>
+                          <div
+                            className="mt-3 "
+                            style={{
+                              marginRight: "20px",
+                             
+                            }}
+                          >
                             <button
                               type="button"
                               onClick={fetchOtp}
@@ -267,7 +290,7 @@ function HotelConfirmation(props) {
                         {showOTP ? (
                           <div
                             className=" form-input-div"
-                            style={{ marginRight: "20px" }}
+                            style={{ marginRight: "20px", marginBottom: "20px", }}
                           >
                             <h3
                               style={{ fontSize: "16px", fontWeight: "bold" }}
@@ -286,10 +309,10 @@ function HotelConfirmation(props) {
                           ""
                         )}
                       </div>
-                      <div className="form-div">
+                      <div className="form-div d-flex">
                         <button
                           className="locationpass-btn"
-                          type="submit"
+                          type="button"
                           onClick={onClickMonsoon}
                         >
                           Continue
@@ -358,9 +381,7 @@ function HotelConfirmation(props) {
                       Room price for {dayDifference} Night X{" "}
                       {getStartData.noOfGuest} guest
                     </span>
-                    <span style={{ fontWeight: "bold" }}>
-                      ₹ {payableAmt}
-                    </span>
+                    <span style={{ fontWeight: "bold" }}>₹ {payableAmt}</span>
                   </div>
                   {/* <div
                   className="mt-1"
@@ -393,9 +414,7 @@ function HotelConfirmation(props) {
                       </span>
                     </div>
 
-                    <span style={{ fontWeight: "bold" }}>
-                      ₹ {payableAmt}
-                    </span>
+                    <span style={{ fontWeight: "bold" }}>₹ {payableAmt}</span>
                   </div>
                   <div
                     style={{

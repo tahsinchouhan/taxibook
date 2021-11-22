@@ -111,7 +111,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
               </p>
             </div>
             <div>
-              <h5 style={{ fontWeight: "bold", fontSize: "13px" }}>
+              {/* <h5 style={{ fontWeight: "bold", fontSize: "13px" }}>
                 Amenities
               </h5>
               <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -166,10 +166,10 @@ const Details = ({ hotelUniqid, detailsP }) => {
                       fontWeight: "bold",
                     }}
                   >
-                    {/* Show More */}
+                   
                   </h1>
                 </div>
-              </div>
+              </div> */}
               <div>
                 <h2 style={{ fontWeight: "bold", fontSize: "20px" }}>
                   Choose Your Room

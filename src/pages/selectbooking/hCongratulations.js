@@ -13,8 +13,8 @@ import { useDispatch, useSelector } from "react-redux";
 function CongratulationPage() {
   const history = useHistory();
   const { data: apiData, tripData, booking_id } = useSelector(state => state.busReducer)
-//   const {checkoutdata} = useSelector(state => state.hotelReducer)
-  const checkoutdata ={"booking_id":"jkh0u","hotel_id":"617fd50e4d94d423cc2eb7b5","room_id":"617fd5504d94d423cc2eb7b7","check_in":"2021-11-09T10:15:15.137Z","check_out":"2021-11-09T10:15:15.137Z","amount":5,"number_of_guests":2,"number_of_rooms":2,"amount_with_gst":3.75,"mobile":"8120424325","email":"chhayadewangan21591@gmail.com","full_name":"Chhaya Dewangan"}
+  const {checkoutdata} = useSelector(state => state.hotelReducer)
+  // const checkoutdata ={"booking_id":"jkh0u","hotel_id":"617fd50e4d94d423cc2eb7b5","room_id":"617fd5504d94d423cc2eb7b7","check_in":"2021-11-09T10:15:15.137Z","check_out":"2021-11-09T10:15:15.137Z","amount":5,"number_of_guests":2,"number_of_rooms":2,"amount_with_gst":3.75,"mobile":"8120424325","email":"chhayadewangan21591@gmail.com","full_name":"Chhaya Dewangan"}
   console.log({checkoutdata})
   const goHome = () => {
     history.push("/");

@@ -65,7 +65,7 @@ function HotelSearch() {
       .then((res) => {
         console.log(res.data);
         for (var i = 0; i < res.data.length; i++) {
-          let str = `${res.data[i].hotel_name},${res.data[i]?.full_address?.city}`;
+          let str = `${res.data[i].hotel_name},${res.data[i]?.city}`;
           console.log({str})
           myOptions.push(str);
         }
@@ -86,7 +86,7 @@ function HotelSearch() {
         .then((res) => {
           console.log("response", res.data.data);
           for (var i = 0; i < res.data.data.length; i++) {
-            let str = `${res.data.data[i].hotel_name},${res.data.data[i].full_address.city}`;
+            let str = `${res.data.data[i].hotel_name},${res.data.data[i]?.city}`;
             myOptions.push(str);
           }
           setMyOptions(myOptions);

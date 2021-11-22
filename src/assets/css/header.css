@@ -114,7 +114,7 @@
     margin: 0px;
     height: 80px;
     border: 1px solid #0FA453;
-    position:fixed; 
+    /* position:fixed;  */
     bottom:0;
 }
 .vendor-btn {

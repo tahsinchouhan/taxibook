@@ -322,7 +322,7 @@ function ListCard(props) {
                                 flexDirection: "row",
                                 lineHeight: "10px",
                                 // justifyContent: "end",
-                                paddingRight: "30px",
+                                // paddingRight: "30px",
                               }}
                             >
                               <span

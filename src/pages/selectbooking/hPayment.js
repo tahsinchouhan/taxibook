@@ -250,7 +250,7 @@ console.log(Setdata)
                   />
 
                   <Form.Label className="dm-ticket">
-                    Enter WhatsApp Number
+                    Enter Mobile Number
                   </Form.Label>
 
                   <AvField
@@ -260,7 +260,7 @@ console.log(Setdata)
                     type="number"
                     className="position-relative"
                     errorMessage="Invalid Number"
-                    placeholder="Enter WhatsApp Number"
+                    placeholder="Enter Mobile Number"
                     validate={{
                       required: {
                         value: true,
