@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { BsShopWindow } from "react-icons/bs";
 import bus1 from "../../assets/img/bus.png";
 import hotel from "../../assets/img/hotel.png";
 import city1 from "../../assets/img/city.png";
@@ -115,14 +116,16 @@ function ListCard(props) {
                   <Container style={{ cursor: "pointer" }}>
                     <Row>
                       <div md={4} className="col-sm-4 m-0 p-0">
-                        <Carousel autoplay>
+                        <Carousel
+                        // autoplay
+                        >
                           <div>
                             <img
                               src={item?.room_data?.image !== "" ? Room : Room}
                               alt="room img"
                               style={{
                                 width: "500px",
-                                height: "250px",
+                                height: "253px",
                                 marginTop: "10px",
                                 // marginRight: "25px",
                               }}
@@ -148,7 +151,7 @@ function ListCard(props) {
                       </div>
                       <div
                         className="col-sm-1 p-0"
-                        style={{ marginLeft: "2px", marginRight: "0px" }}
+                        style={{ marginLeft: "2px", marginRight: "-20px" }}
                       >
                         <img
                           src={item?.room_data?.image !== "" ? Room : Room}
@@ -208,10 +211,9 @@ function ListCard(props) {
                           }}
                         />
                       </div>
-                      <div
+                      <div 
                         md={5}
                         className="col-sm-6 p-0 m-0"
-                        style={{ marginRight: "0px" }}
                       >
                         <div className="rajratan-train" style={{}}>
                           <div className="d-flex p-1">
@@ -219,7 +221,8 @@ function ListCard(props) {
                               style={{
                                 fontWeight: "bolder",
                                 fontFamily: "poppins",
-                                fontSize: "85",
+                                fontSize: "24px",
+                                marginTop: "3px"
                               }}
                             >
                               {/* <img
@@ -228,22 +231,21 @@ function ListCard(props) {
                                 style={{ height: "20px", paddingRight: "10px" }}
                               /> */}
                               {item?.hotel_name}
-                              {""} 00601
+                              {/* {""} 00601 */}
                             </h3>
                           </div>
-                          <span
-                            className="d-flex"
-                            style={{ fontFamily: "poppins", fontSize: "85" }}
-                          >
-                            <HiOutlineLocationMarker
-                              style={{ color: "red", fontSize: "20px" }}
-                            />
-                            &nbsp;&nbsp;
-                            {item?.full_address?.street},{" "}
-                            {item?.full_address?.city} C.G
+                          <span style={{ fontFamily: "poppins", fontSize: "85" }}>
+                            {console.log("object", item)}
+                            <span style={{ fontSize: "14px" }}>&nbsp;{item.address}</span>  <br />
+
+                            <span>
+                              <HiOutlineLocationMarker
+                                style={{ color: "red", fontSize: "20px" }}
+                              /><b>{item.city}</b>
+                            </span>
                           </span>
                           <div style={{ display: "flex" }}>
-                            {item?.room_data?.amenities?.includes("wifi") ? (
+                            {item?.room_data?.amenities?.includes("WiFi") ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -254,8 +256,25 @@ function ListCard(props) {
                                   fontFamily: "sans-serif",
                                 }}
                               >
-                                <FiWifi style={{ fontSize: "20px" }} />
-                                Free Wifi
+                              &nbsp;&nbsp;  <FiWifi style={{ fontSize: "20px" }} />
+                                &nbsp;    Free Wifi
+                              </span>
+                            ) : (
+                              ""
+                            )}
+                            {item?.room_data?.amenities?.includes("Window") ? (
+                              <span
+                                style={{
+                                  display: "flex",
+                                  // alignItems: "center",
+                                  color: "grey",
+                                  paddingTop: "10px",
+                                  fontSize: "12px",
+                                  fontFamily: "sans-serif",
+                                }}
+                              >
+                             &nbsp; &nbsp;  <BsShopWindow style={{ fontSize: "20px" }} />
+                             &nbsp;  Window
                               </span>
                             ) : (
                               ""
@@ -272,13 +291,13 @@ function ListCard(props) {
                                   fontFamily: "sans-serif",
                                 }}
                               >
-                                <BiCheckCircle style={{ fontSize: "20px" }} />
-                                AC
+                              &nbsp;&nbsp;  <BiCheckCircle style={{ fontSize: "20px" }} />
+                                &nbsp;  AC
                               </span>
                             ) : (
                               ""
                             )}
-
+{/* {console.log("item?.room_data?.amenities",item?.room_data?.amenities)} */}
                             {item?.room_data?.amenities?.includes("TV") ? (
                               <span
                                 style={{
@@ -290,8 +309,8 @@ function ListCard(props) {
                                   fontFamily: "sans-serif",
                                 }}
                               >
-                                <FaTv style={{ fontSize: "20px" }} />
-                                TV
+                              &nbsp;&nbsp;  <FaTv style={{ fontSize: "20px" }} />
+                                &nbsp;    TV
                               </span>
                             ) : (
                               ""
@@ -327,30 +346,35 @@ function ListCard(props) {
                             >
                               <span
                                 style={{
-                                  fontWeight: "bolder",
-                                  fontFamily: "sans-serif",
-                                  fontSize: "20px",
+                                  fontWeight: "700",
+                                  color:"red",
+                                  fontSize: "24px",
                                 }}
                               >
-                                ₹ {item?.room_data?.price?.final_price}
+                                ₹{item?.room_data?.price?.final_price}
                               </span>
                               <span
                                 style={{
-                                  fontFamily: "poppins",
-                                  fontSize: "85",
+                                  fontWeight: "500",
+                                  textDecoration: "line-through",
+                                  fontSize: "16px",
                                   marginLeft: "10px",
+                                  color:"#6d787d"
                                 }}
                               >
                                 <strike>
                                   {" "}
-                                  ₹ {item?.room_data?.price?.actual_price}
+                                  {/* {console.log("object",item.room_data.price.actual_price)} */}
+                                  ₹{item?.room_data?.price?.actual_price}
                                 </strike>{" "}
                               </span>
                               <span
                                 style={{
-                                  fontFamily: "poppins",
-                                  color: "red",
+                                  fontWeight: "600",
+                                  fontSize:"14px",
+                                  color: "#F5A623",
                                   marginLeft: "10px",
+                                  // lineHeight:"25px"
                                 }}
                               >
                                 {((item?.room_data?.price?.actual_price -
@@ -370,7 +394,7 @@ function ListCard(props) {
                                   fontSize: "15px",
                                 }}
                               >
-                                *per room per night
+                                per room per night
                               </span>
                             </div>
                           </div>
@@ -439,9 +463,7 @@ function ListCard(props) {
                   <div>
                     <Container>
                       <Row>
-                        <Col
-                          style={{ display: "flex", justifyContent: "center" }}
-                        >
+                        <Col>
                           <img
                             src={Room}
                             alt="room img"
@@ -457,8 +479,8 @@ function ListCard(props) {
                         <Row className="row d-flex">
                           <Col
                             xs={6}
-                            // className="rajratan-train col-xs-6"
-                            // style={{ border: "2px solid black" }}
+                          // className="rajratan-train col-xs-6"
+                          // style={{ border: "2px solid black" }}
                           >
                             <div style={{ display: "flex" }}>
                               <div>
@@ -475,7 +497,7 @@ function ListCard(props) {
                                 <span
                                   style={{
                                     fontWeight: "bolder",
-                                    fontSize: "20px",
+                                    fontSize: "15px",
                                     fontFamily: "sans-serif",
                                   }}
                                 >
@@ -485,32 +507,33 @@ function ListCard(props) {
                                 <span
                                   style={{
                                     color: "grey",
-                                    fontFamily: "sans-serif",
+                                    fontSize: "12px",
                                   }}
                                 >
-                                  <HiOutlineLocationMarker
-                                    style={{ color: "red", fontSize: "20px" }}
-                                  />
-                                  {item?.full_address?.street},{" "}
-                                  {item?.full_address?.city} C.G
+                                  
+                                  &nbsp;{item.address}
+                                  {/* {item?.full_address?.street},{" "}
+                                  {item?.full_address?.city} C.G */}<br/>
                                 </span>
+                                 <HiOutlineLocationMarker
+                                    style={{ color: "red"}}
+                                  /><b style={{fontSize:"12px"}}>{item.city}</b>
                               </div>
                             </div>
 
                             <div style={{ display: "flex" }}>
-                              {item?.room_data?.amenities?.includes("wifi") ? (
+                              {item?.room_data?.amenities?.includes("reeWifi") ? (
                                 <span
                                   style={{
                                     display: "flex",
                                     alignItems: "center",
                                     color: "grey",
                                     // padding: "20px",
-                                    fontSize: "16px",
-                                    fontFamily: "sans-serif",
+                                    fontSize: "10px",
+                                    // fontFamily: "sans-serif",
                                   }}
                                 >
-                                  <FiWifi />
-                                  Free Wifi
+                                  <FiWifi/>Free Wifi
                                 </span>
                               ) : (
                                 ""
@@ -523,11 +546,11 @@ function ListCard(props) {
                                     alignItems: "center",
                                     color: "grey",
                                     // padding: "20px",
-                                    fontSize: "16px",
+                                    fontSize: "12px",
                                     fontFamily: "sans-serif",
                                   }}
                                 >
-                                  <BiCheckCircle style={{ fontSize: "20px" }} />
+                                  <BiCheckCircle style={{ fontSize: "15px" }} />
                                   AC
                                 </span>
                               ) : (
@@ -567,8 +590,8 @@ function ListCard(props) {
 
                           <Col
                             xs={6}
-                            // className="m-0 p-0 col-xs-6"
-                            // style={{ float: "right", padding: "10px" }}
+                          // className="m-0 p-0 col-xs-6"
+                          // style={{ float: "right", padding: "10px" }}
                           >
                             <Row xs={12}>
                               <div>
@@ -582,8 +605,9 @@ function ListCard(props) {
                                 >
                                   <span
                                     style={{
-                                      color: "red",
-                                      float: "right",
+                                      fontWeight: "600",
+                                      fontSize:"10px",
+                                      color: "#F5A623",
                                       marginLeft: "auto",
                                     }}
                                   >
@@ -596,23 +620,24 @@ function ListCard(props) {
                                   <span>
                                     <strike
                                       style={{
-                                        fontSize: "25px",
-                                        // fontWeight: "bolder",
+                                        float: "right",
                                         color: "grey",
                                         fontFamily: "sans-serif",
-                                        marginLeft: "10px",
-                                        float: "right",
+                                        fontSize: "14px"
                                       }}
                                     >
-                                      {" "}
-                                      ₹ {item?.room_data?.price?.actual_price}
+                                    
+                                      ₹{item?.room_data?.price?.actual_price}
                                     </strike>{" "}
                                   </span>
                                   <span
                                     style={{
-                                      fontSize: "25px",
-                                      fontWeight: "bolder",
-                                      fontFamily: "sans-serif",
+                                      fontWeight: "700",
+                                      color:"red",
+                                      fontSize: "16px",
+                                      // fontSize: "18px",
+                                      // fontWeight: "bolder",
+                                      // fontFamily: "sans-serif",
                                       float: "right",
                                       marginLeft: "auto",
                                     }}
@@ -640,7 +665,8 @@ function ListCard(props) {
                           className=" d-flex "
                           style={{
                             lineHeight: "12px",
-                            marginTop: "20px",
+                            marginTop: "12px",
+                            marginBottom: "12px",
                             justifyContent: "space-evenly",
                           }}
                         >
@@ -651,7 +677,7 @@ function ListCard(props) {
                               fontSize: "15px",
                               fontWeight: 700,
                               width: "150px",
-                              height: "49px",
+                              height: "40px",
                               alignItems: "center",
                             }}
                           >
@@ -664,7 +690,7 @@ function ListCard(props) {
                               fontSize: "15px",
                               fontWeight: 700,
                               width: "150px",
-                              height: "50px",
+                              height: "40px",
                               alignItems: "center",
                               border: "1px solid #0FA453",
                               borderRadius: "4px",

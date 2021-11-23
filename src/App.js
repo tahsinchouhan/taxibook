@@ -69,7 +69,7 @@ import HotelList from "./pages/Hotel/HotelList";
 import HotelConfirmation from "./pages/selectbooking/HotelConfirmation";
 import Hcongratulations from './pages/selectbooking/hCongratulations'
 import HotelTicketDetail from'./pages/selectbooking/HotelTicketDetail'
-
+import './assets/css/hotellist.css'
 
 import CabConfirmation from "./pages/Cab/CabConfirmation";
 import Cab from "./pages/Cab/CabSearch";

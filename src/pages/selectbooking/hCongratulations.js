@@ -24,7 +24,7 @@ function CongratulationPage() {
     console.log("object")
   }
 
-  console.log("booking_id", checkoutdata.booking_id);
+  // console.log("booking_id", checkoutdata.booking_id);
   return (
     <>
       <div className="d-none d-md-block">
@@ -43,7 +43,7 @@ function CongratulationPage() {
                   <span style={{ color: "black" }}>Your booking has been confirmed</span>
 
                   <h3 style={{ fontWeight: "bolder" }}>Order ID</h3>
-                  <span style={{ color: "black", marginBottom: "50px" }}>{checkoutdata.booking_id}</span>
+                  <span style={{ color: "black", marginBottom: "50px" }}>{checkoutdata?.booking_id}</span>
                   {/* <span style={{color:"black", marginBottom:"50px"}}>{apiData?.order_id}</span> */}
                 </div>
                 <div>
@@ -61,7 +61,7 @@ function CongratulationPage() {
                       }}
                     >
 
-                      <a href={`https://wa.me?text=http://15.206.92.158/hotel-details-book/${checkoutdata.booking_id}`}
+                      <a href={`https://wa.me?text=http://15.206.92.158/hotel-details-book/${checkoutdata?.booking_id}`}
                         style={{ textDecoration: "none", color: "#fff" }}
                         target="_blank"
                       >
@@ -82,7 +82,7 @@ function CongratulationPage() {
                       }}
                     >
                       <Link
-                        to={`/hotel-details-book/${checkoutdata.booking_id}`}
+                        to={`/hotel-details-book/${checkoutdata?.booking_id}`}
                         style={{ textDecoration: "none", color: "#fff" }}
                       >
                         Download E-ticket
@@ -160,7 +160,7 @@ function CongratulationPage() {
         </div>
         <div style={{ textAlign: "center" }}>
           <h3 style={{ fontWeight: "bolder", marginBottom: "20px" }}>Order ID</h3>
-          <span style={{ color: "black", marginBottom: "50px" }}>{checkoutdata.booking_id}</span>
+          <span style={{ color: "black", marginBottom: "50px" }}>{checkoutdata?.booking_id}</span>
         </div>
         <div style={{ textAlign: "center" }}>
           <div >
@@ -176,7 +176,7 @@ function CongratulationPage() {
                 marginBottom: "20px"
               }}
             >
-              <a href={`https://wa.me?text=http://15.206.92.158/hotel-details-book/${checkoutdata.booking_id}`}
+              <a href={`https://wa.me?text=http://15.206.92.158/hotel-details-book/${checkoutdata?.booking_id}`}
                 style={{ textDecoration: "none", color: "#fff" }}
                 target="_blank"
               >
@@ -195,7 +195,7 @@ function CongratulationPage() {
               marginBottom: "20px"
             }}
             ><Link
-              to={`/hotel-details-book/${checkoutdata.booking_id}`}
+              to={`/hotel-details-book/${checkoutdata?.booking_id}`}
               style={{ textDecoration: "none", color: "#fff" }}
             >
                 Download E-ticket

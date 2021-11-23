@@ -66,7 +66,7 @@ function HotelSearch() {
         console.log(res.data);
         for (var i = 0; i < res.data.length; i++) {
           let str = `${res.data[i].hotel_name},${res.data[i]?.city}`;
-          console.log({str})
+          console.log({ str })
           myOptions.push(str);
         }
         setMyOptions(myOptions);
@@ -106,12 +106,12 @@ function HotelSearch() {
       sendlocation === "" ||
       sendlocation === " "
     ) {
-      if(enterlocation==''|| enterlocation===undefined){
+      if (enterlocation == '' || enterlocation === undefined) {
         city = "Jagdalpur";
-      }else{
-        city=enterlocation;
+      } else {
+        city = enterlocation;
       }
-      
+
       console.log({ city });
     } else {
       city = sendlocation?.split(",")[1];
@@ -205,37 +205,37 @@ function HotelSearch() {
   const menu = (
     <Menu>
       <Menu.Item>
-      <b>Room</b> <b style={{ float: "right" }}>Guest</b>
+        <b>Room</b> <b style={{ float: "right" }}>Guest</b>
         <hr />
       </Menu.Item>
       <div className="addMenu">
         {roomState.map((curElem, index) => (
           <Menu.Item key={index}>
             Room {curElem.room}{" "}
-            <span style={{float:"right"}}>
-            <button className="minus" onClick={() => guestRoom("-", index)}>-</button>{" "}
-            {curElem.guest}{" "}
-            {curElem.guest === 3 ? (
-              <button className="btn btn-xs plus" disabled>+</button>
-            ) : (
-              <button className="plus" onClick={() => guestRoom("+", index)}>+</button>
-            )}
-             </span>
-             <hr />
+            <span style={{ float: "right" }}>
+              <button className="minus" onClick={() => guestRoom("-", index)}>-</button>{" "}
+              {curElem.guest}{" "}
+              {curElem.guest === 3 ? (
+                <button className="btn btn-xs plus" disabled>+</button>
+              ) : (
+                <button className="plus" onClick={() => guestRoom("+", index)}>+</button>
+              )}
+            </span>
+            <hr />
           </Menu.Item>
         ))}
       </div>
       <Menu.Item>
-        {roomState.length>1?<FaTrash
+        {roomState.length > 1 ? <FaTrash
           title=" Delete Room "
           style={{ float: "left", marginRight: "120px" }}
           onClick={() => guestRoom("delete", roomState.length - 1)}
-        />:''}
-        <span   title="Add Room "
+        /> : ''}
+        <span title="Add Room "
           style={{ float: "right" }} onClick={() => guestRoom("mainAdd", roomState.length + 1)}>
-        <FaPlusCircle
-        />Add Room
-          </span>
+          <FaPlusCircle
+          />Add Room
+        </span>
 
       </Menu.Item>
     </Menu>
@@ -349,9 +349,9 @@ function HotelSearch() {
                             required="required"
                             style={{ padding: "5px" }}
                             {...params}
-                            onKeyUp={(e) => {getDataFromAPI(e.target.value)}}
+                            onKeyUp={(e) => { getDataFromAPI(e.target.value) }}
                             placeholder="Search Area"
-                            // InputProps={{ disableUnderline: true }}
+                          // InputProps={{ disableUnderline: true }}
                           />
                         )}
                       />
@@ -505,7 +505,7 @@ function HotelSearch() {
                           paddingLeft: "20px",
                         }}
                       >
-                        <ANTDropdown overlay={menu} style={{width:"400px"}}>
+                        <ANTDropdown overlay={menu} style={{ width: "400px" }}>
                           <input // onChange={(e) => setEmail(e.target.value)}
                             // value={email}
                             name="guestRoom"
@@ -619,7 +619,7 @@ function HotelSearch() {
                         onKeyUp={(e) => getDataFromAPI(e.target.value)}
                         placeholder="Search Area"
                         value="jagdalpur"
-                        // blurOnSelect="touch"
+                      // blurOnSelect="touch"
                       />
                     )}
                   />
@@ -718,32 +718,35 @@ function HotelSearch() {
                   </ANTDropdown>
                 </Form.Group>
               </Col>
+
             </Row>
-            <div
-              className="dmticket-btn"
-              style={{ textAlign: "center", marginTop: "70px" }}
-            >
-              <Button
-                type="submit"
-                class="btn btn-success"
-                style={{
-                  width: "100%",
-                  textAlign: "center",
-                  borderRadius: "0px",
-                  backgroundColor: "#0fa453",
-                  border: "none",
-                  height: "86px",
-                  position: "fixed",
-                  bottom: "0",
-                  left: "0",
-                }}
-                onClick={onDmTicketShow}
-              >
-                Search Now
-              </Button>
-            </div>
+        
           </Container>
+          
         </div>
+        <div
+            className="dmticket-btn"
+            // style={{ textAlign: "center" }}
+          >
+            <Button
+              type="submit"
+              class="btn btn-success"
+              style={{
+                width: "100%",
+                textAlign: "center",
+                borderRadius: "0px",
+                backgroundColor: "#0fa453",
+                border: "none",
+                height: "52px",
+                // position: "fixed",
+                // bottom: "0",
+                // left: "0",
+              }}
+              onClick={onDmTicketShow}
+            >
+              Search Now
+            </Button>
+          </div>
       </div>
     </>
   );

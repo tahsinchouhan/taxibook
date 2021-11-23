@@ -14,7 +14,7 @@ import { API_PATH } from "../../Path/Path";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import { Autocomplete } from "@material-ui/lab";
-import { FaSearchLocation, FaTrash, FaPlusCircle } from "react-icons/fa";
+import { FaSearchLocation, FaTrash, FaPlusCircle, FaUserAlt } from "react-icons/fa";
 import { GiSettingsKnobs } from "react-icons/gi";
 import moment from "moment";
 import {
@@ -26,6 +26,7 @@ import {
 } from "antd";
 import Searchbar from "./Searchbar";
 import { DownOutlined } from "@ant-design/icons";
+import { MenuItem } from "@material-ui/core";
 
 function HotelList() {
   const history = useHistory();
@@ -34,6 +35,7 @@ function HotelList() {
   const dateFormat = "YYYY-MM-DD";
 
   const [myOptions, setMyOptions] = useState([]);
+  // const dispatch = useDispatch();
 
   const {
     getHotelList: hotels,
@@ -57,8 +59,20 @@ function HotelList() {
   const [noOfGuest, setNoOfGuest] = useState(2);
   const [noOfRoom, setNoOfRoom] = useState(1);
   const [enterlocation, setEnterlocation] = useState("");
+  const [rangeValue, setRangeValue] = useState([1500, 2500])
+
 
   useEffect(() => {
+    // dispatch(
+    //   getBookHotel({
+    //     sendlocation: city,
+    //     startDate,
+    //     endDate,
+    //     noOfRoom,
+    //     noOfGuest,
+    //     roomStateData: roomState,
+    //   })
+    // );
     console.log(`getStartData`, getStartData);
     if (
       getStartData.length > 0 &&
@@ -77,11 +91,12 @@ function HotelList() {
     getStartData?.roomStateData?.length > 0
       ? getStartData?.roomStateData
       : [
-          {
-            room: 1,
-            guest: 2,
-          },
-        ]
+        {
+          room: 1,
+          guest: 2,
+        },
+      ]
+
   );
 
   const addMenu = () => {
@@ -127,12 +142,16 @@ function HotelList() {
           <Menu.Item key={index}>
             Room {curElem.room}{" "}
             <span style={{ float: "right" }}>
-              <button onClick={() => guestRoom("-", index)}>-</button>{" "}
+              <button
+              // onClick={() => guestRoom("-", index)}
+              >-</button>{" "}
               {curElem.guest}{" "}
               {curElem.guest === 3 ? (
                 <button disabled>+</button>
               ) : (
-                <button onClick={() => guestRoom("+", index)}>+</button>
+                <button
+                //  onClick={() => guestRoom("+", index)}
+                >+</button>
               )}
             </span>
             <hr />
@@ -144,7 +163,7 @@ function HotelList() {
           <FaTrash
             title=" Delete Room "
             style={{ float: "left", marginRight: "120px" }}
-            onClick={() => guestRoom("delete", roomState.length - 1)}
+          // onClick={() => guestRoom("delete", roomState.length - 1)}
           />
         ) : (
           ""
@@ -152,7 +171,7 @@ function HotelList() {
         <span
           title="Add Room "
           style={{ float: "right" }}
-          onClick={() => guestRoom("mainAdd", roomState.length + 1)}
+        // onClick={() => guestRoom("mainAdd", roomState.length + 1)}
         >
           <FaPlusCircle />
           Add Room
@@ -160,6 +179,47 @@ function HotelList() {
       </Menu.Item>
     </Menu>
   );
+  const price = (
+    <Menu className="priceMenu">
+
+      <div>
+        <Slider
+          range={{ draggableTrack: false }}
+          defaultValue={[1500, 2500]}
+          tooltip={false}
+          min={500}
+          max={4500}
+          onChange={(e) => {
+            setRangeValue(e)
+            console.log(e);
+          }}
+        />
+        <span>
+          ₹<b>{rangeValue?.[0]}</b>&nbsp;&nbsp;-&nbsp;&nbsp;
+          ₹<b>{rangeValue?.[1]}</b>
+        </span>
+      </div>
+
+    </Menu>
+  )
+  const Aminities = (
+    <Menu className="aminitiesMenu">
+      <div style={{ marginLeft: "20px" }}>
+        <Checkbox style={{ marginTop: "10px" }}>
+          <span className="p-2">AC</span>
+        </Checkbox>
+        <br />
+        <Checkbox style={{ marginTop: "10px" }}>
+          <span className="p-2">Free Wifi</span>
+        </Checkbox>
+        <br />
+        <Checkbox style={{ marginTop: "10px" }}>
+          <span className="p-2">TV</span>
+        </Checkbox>
+        <br />
+      </div>
+    </Menu >
+  )
   const getDataFromAPI = (name) => {
     setEnterlocation(name);
     setMyOptions([]);
@@ -236,6 +296,7 @@ function HotelList() {
   };
   useEffect(() => {
     getLocation();
+
   }, []);
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
@@ -260,7 +321,18 @@ function HotelList() {
     setStartDate(datee[0]._d);
     setEndDate(datee[1]._d);
   };
-
+  useEffect(() => {
+    dispatch(
+      getBookHotel({
+        sendlocation: sendlocation,
+        startDate,
+        endDate,
+        noOfRoom,
+        noOfGuest,
+        roomStateData: roomState,
+      })
+    );
+  }, [])
   // const Pricemenu = (
   //   <Menu>
   //     <Menu.Item>
@@ -321,7 +393,7 @@ function HotelList() {
                       {...params}
                       onKeyPress={(e) => getDataFromAPI(e.target.value)}
                       placeholder="Search Area"
-                      // InputProps={{ disableUnderline: true }}
+                    // InputProps={{ disableUnderline: true }}
                     />
                   )}
                 />
@@ -396,43 +468,48 @@ function HotelList() {
             </Col>
             <Col xs={12} md={3} className="mt-2">
               <Form.Group className="" controlId="exampleForm.ControlInput1">
-                <Form.Label className="dm-ticket">Number Of Guests</Form.Label>
+                <div>
+                  <Form.Label className="dm-ticket">Number Of Guests22</Form.Label>
+                  <ANTDropdown
+                    overlay={menu}
+                  // trigger={["click"]}
+                  // style={{ width: "100px" }}
+                  >
+                    <input // onChange={(e) => setEmail(e.target.value)}
+                      // value={email}
+                      name="guestRoom"
+                      type="text"
+                      id="inputState"
+                      className="form-control pass_input"
+                      placeholder={`${noOfRoom} Room ,${noOfGuest} guest`}
+                      // onClick={handleShow}
+                      style={{
+                        backgroundColor: "#f5f5f5",
+                        borderRadius: 0,
+                        height: "40px",
+                        // padding: "10px",
+                        // position:"absolute"
+                      }}
+                    // readOnly
+                    />
+                  </ANTDropdown>
+                </div>
               </Form.Group>
-              <ANTDropdown
-                overlay={menu}
-                trigger={["click"]}
-                style={{ width: "100px" }}
-              >
-                <input // onChange={(e) => setEmail(e.target.value)}
-                  // value={email}
-                  name="guestRoom"
-                  type="text"
-                  id="inputState"
-                  className="form-control pass_input"
-                  placeholder={`${noOfRoom} Room ,${noOfGuest} guest`}
-                  onClick={handleShow}
-                  style={{
-                    backgroundColor: "#f5f5f5",
-                    border: 0,
-                    height: "47px",
-                    padding: "10px",
-                  }}
-                  readOnly
-                />
-              </ANTDropdown>
+
             </Col>
             <Col
               md={2}
-              className="mt-2"
+              // className=""
               style={{
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "flex-end",
+                // alignItems: "flex-end",
+                marginTop: "45px"
               }}
             >
               <div
                 className="dmticket-btn"
-                //   style={{ textAlign: "center" }}
+              //   style={{ textAlign: "center" }}
               >
                 <Button
                   type="submit"
@@ -440,7 +517,7 @@ function HotelList() {
                   style={{
                     width: "138px",
                     textAlign: "center",
-                    height: "47px",
+                    height: "40px",
                     borderRadius: "5px",
                     backgroundColor: "#0fa453",
                     border: "none",
@@ -466,43 +543,62 @@ function HotelList() {
               <div style={{ marginLeft: "20px", flexDirection: "row" }}>
                 <b className="h4" style={{ fontWeight: "bold" }}>
                   Filters
+
                 </b>
-                <small style={{ color: "red", float: "right" }}>
+                <span style={{
+                  color: "red",
+                  float: "right",
+                  fontSize: "14px",
+                  fontWeight: "700",
+                  marginTop: "5px"
+                }}>
                   Clear All
-                </small>
+                </span>
               </div>
-              <hr />
-              <h6 style={{ marginLeft: "20px" }}>
+
+              <span style={{ marginLeft: "20px", marginTop: "10px", fontSize: "14px" }}>
                 <b>Price</b>
-              </h6>
+              </span>
               <div style={{ textAlign: "center", marginLeft: "15px" }}>
                 <Slider
-                  range={{ draggableTrack: true }}
-                  defaultValue={[20, 50]}
+                  range={{ draggableTrack: false }}
+                  defaultValue={[1500, 2500]}
+                  tooltip={false}
+                  min={500}
+                  max={4500}
                   onChange={(e) => {
-                    console.log(e.target);
+                    setRangeValue(e)
+                    console.log(e);
                   }}
                 />
+                <span>
+                  ₹<b>{rangeValue?.[0]}</b>&nbsp;&nbsp;-&nbsp;&nbsp;
+                  ₹<b>{rangeValue?.[1]}</b>
+
+                </span>
                 <hr />
               </div>
-              <div style={{ marginLeft: "40px" }}>
-                <h6 style={{ float: "left" }}>
+              <div style={{ marginLeft: "20px" }}>
+                <h6>
                   <b>Aminities</b>
                 </h6>
-                <br />
-                <br />
-                <div style={{ float: "left" }}>
-                  <Checkbox style={{ float: "left" }}>AC</Checkbox>
+                <div style={{ marginLeft: "20px" }}>
+                  <Checkbox style={{ marginTop: "10px" }}>
+                    <span className="p-2">AC</span>
+                  </Checkbox>
                   <br />
-                  <Checkbox style={{ float: "left" }}>Free Wifi</Checkbox>
+                  <Checkbox style={{ marginTop: "10px" }}>
+                    <span className="p-2">Free Wifi</span>
+                  </Checkbox>
                   <br />
-                  <Checkbox style={{ float: "left" }}>TV</Checkbox>
+                  <Checkbox style={{ marginTop: "10px" }}>
+                    <span className="p-2">TV</span>
+                  </Checkbox>
                   <br />
                 </div>
+                {/* <span style={{clear:"both"}}></span> */}
               </div>
-              <br />
-              <br />
-              <br />
+
               <hr />
             </div>
             <div className="col-sm-10">
@@ -512,6 +608,13 @@ function HotelList() {
           </div>
           <Footer />
         </div>
+
+
+
+        {/* Mobile View */}
+
+
+
         <div className="d-md-none">
           <Searchbar getStartData={getStartData} />
           <div
@@ -519,22 +622,22 @@ function HotelList() {
               display: "flex",
               flexDirection: "row",
               fontFamily: "poppins",
-              marginBottom:"-40px"
+              marginBottom: "-40px"
             }}
           >
-            <p style={{ marginLeft: "10px",color:"#0FA453"}}>
-             <b style={{borderRight: "2px solid #0FA453",paddingRight:"5px"}}> <GiSettingsKnobs /> Filters</b>
+            <p style={{ marginLeft: "10px", color: "#0FA453" }}>
+              <b style={{ borderRight: "2px solid #0FA453", paddingRight: "5px" }}> <GiSettingsKnobs /> Filters</b>
             </p>
             <p style={{ marginLeft: "10px" }}>
-              <ANTDropdown overlay={menu}>
-                <p style={{ boxShadow: "0px 0px 5px -2px",padding:"3px",borderRadius:"4px" }}>
+              <ANTDropdown overlay={price}>
+                <p style={{ boxShadow: "0px 0px 5px -2px", padding: "3px 0px 3px 10px", borderRadius: "4px", height: "30px", width: "75px" }}>
                   Prices <DownOutlined style={{ color: "#0FA453" }} />
                 </p>
               </ANTDropdown>
             </p>
             <p style={{ marginLeft: "10px" }}>
-              <ANTDropdown overlay={menu}>
-                <p style={{ boxShadow: "0px 0px 5px -2px",padding:"3px",borderRadius:"4px" }}>
+              <ANTDropdown overlay={Aminities}>
+                <p style={{ boxShadow: "0px 0px 5px -2px", padding: "3px 0px 3px 10px", borderRadius: "4px", height: "30px", width: "90px" }}>
                   Aminities <DownOutlined style={{ color: "#0FA453" }} />
                 </p>
               </ANTDropdown>
