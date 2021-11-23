@@ -644,23 +644,24 @@ function HotelSearch() {
 
               <Col xs={12} md={4} className="mt-2">
                 <Form.Group className="" controlId="exampleForm.ControlInput1">
-                  <Row style={{ display: "flex", justifyContent: "center" }}>
-                    <Col md={4}>
-                      <div>
-                        <Form.Label className="dm-ticket">
-                          Booking Date
-                        </Form.Label>
-                        <br />
+                  <Container fluid>
+                    <Row>
+                      <Col md={4}>
                         <div>
-                          <div
-                            style={{
-                              backgroundColor: "#f5f5f5",
-                              padding: "5px",
-                              paddingLeft: "20px",
-                              display: "flex",
-                            }}
-                          >
-                            {/* <img
+                          <Form.Label className="dm-ticket">
+                            Booking Date
+                          </Form.Label>
+                          <br />
+                          <div>
+                            <div
+                              style={{
+                                backgroundColor: "#f5f5f5",
+                                padding: "5px",
+                                paddingLeft: "20px",
+                                display: "flex",
+                              }}
+                            >
+                              {/* <img
                               alt="logo"
                               className="location-userdatas-calendar"
                               src={calendar}
@@ -670,26 +671,27 @@ function HotelSearch() {
                                 marginRight: "10px",
                               }}
                             /> */}
-                            <RangePicker
-                              disabledDate={disabledDate}
-                              onChange={(date) => chnageDate(date)}
-                              minDate={new Date()}
-                              defaultValue={[
-                                moment(startDate, dateFormat),
-                                moment(endDate, dateFormat),
-                              ]}
-                              inputReadOnly
-                              type="button"
-                              style={{
-                                backgroundColor: "transparent",
-                                border: "0",
-                              }}
-                            />
+                              <RangePicker
+                                disabledDate={disabledDate}
+                                onChange={(date) => chnageDate(date)}
+                                minDate={new Date()}
+                                defaultValue={[
+                                  moment(startDate, dateFormat),
+                                  moment(endDate, dateFormat),
+                                ]}
+                                inputReadOnly
+                                type="button"
+                                style={{
+                                  backgroundColor: "transparent",
+                                  border: "0",
+                                }}
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </Col>
-                  </Row>
+                      </Col>
+                    </Row>
+                  </Container>
                 </Form.Group>
               </Col>
 
@@ -720,33 +722,33 @@ function HotelSearch() {
               </Col>
 
             </Row>
-        
+
           </Container>
-          
+
         </div>
         <div
-            className="dmticket-btn"
-            // style={{ textAlign: "center" }}
+          className="dmticket-btn"
+        // style={{ textAlign: "center" }}
+        >
+          <Button
+            type="submit"
+            class="btn btn-success"
+            style={{
+              width: "100%",
+              textAlign: "center",
+              borderRadius: "0px",
+              backgroundColor: "#0fa453",
+              border: "none",
+              height: "52px",
+              // position: "fixed",
+              // bottom: "0",
+              // left: "0",
+            }}
+            onClick={onDmTicketShow}
           >
-            <Button
-              type="submit"
-              class="btn btn-success"
-              style={{
-                width: "100%",
-                textAlign: "center",
-                borderRadius: "0px",
-                backgroundColor: "#0fa453",
-                border: "none",
-                height: "52px",
-                // position: "fixed",
-                // bottom: "0",
-                // left: "0",
-              }}
-              onClick={onDmTicketShow}
-            >
-              Search Now
-            </Button>
-          </div>
+            Search Now
+          </Button>
+        </div>
       </div>
     </>
   );

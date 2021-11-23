@@ -211,7 +211,7 @@ function ListCard(props) {
                           }}
                         />
                       </div>
-                      <div 
+                      <div
                         md={5}
                         className="col-sm-6 p-0 m-0"
                       >
@@ -245,7 +245,7 @@ function ListCard(props) {
                             </span>
                           </span>
                           <div style={{ display: "flex" }}>
-                            {item?.room_data?.amenities?.includes("WiFi") ? (
+                            {item?.room_data?.amenities?.includes("FreeWiFi") ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -256,7 +256,7 @@ function ListCard(props) {
                                   fontFamily: "sans-serif",
                                 }}
                               >
-                              &nbsp;&nbsp;  <FiWifi style={{ fontSize: "20px" }} />
+                                &nbsp;&nbsp;  <FiWifi style={{ fontSize: "20px" }} />
                                 &nbsp;    Free Wifi
                               </span>
                             ) : (
@@ -273,8 +273,8 @@ function ListCard(props) {
                                   fontFamily: "sans-serif",
                                 }}
                               >
-                             &nbsp; &nbsp;  <BsShopWindow style={{ fontSize: "20px" }} />
-                             &nbsp;  Window
+                                &nbsp; &nbsp;  <BsShopWindow style={{ fontSize: "20px" }} />
+                                &nbsp;  Window
                               </span>
                             ) : (
                               ""
@@ -291,13 +291,13 @@ function ListCard(props) {
                                   fontFamily: "sans-serif",
                                 }}
                               >
-                              &nbsp;&nbsp;  <BiCheckCircle style={{ fontSize: "20px" }} />
+                                &nbsp;&nbsp;  <BiCheckCircle style={{ fontSize: "20px" }} />
                                 &nbsp;  AC
                               </span>
                             ) : (
                               ""
                             )}
-{/* {console.log("item?.room_data?.amenities",item?.room_data?.amenities)} */}
+                            {/* {console.log("item?.room_data?.amenities",item?.room_data?.amenities)} */}
                             {item?.room_data?.amenities?.includes("TV") ? (
                               <span
                                 style={{
@@ -309,7 +309,7 @@ function ListCard(props) {
                                   fontFamily: "sans-serif",
                                 }}
                               >
-                              &nbsp;&nbsp;  <FaTv style={{ fontSize: "20px" }} />
+                                &nbsp;&nbsp;  <FaTv style={{ fontSize: "20px" }} />
                                 &nbsp;    TV
                               </span>
                             ) : (
@@ -347,7 +347,7 @@ function ListCard(props) {
                               <span
                                 style={{
                                   fontWeight: "700",
-                                  color:"red",
+                                  color: "red",
                                   fontSize: "24px",
                                 }}
                               >
@@ -359,28 +359,28 @@ function ListCard(props) {
                                   textDecoration: "line-through",
                                   fontSize: "16px",
                                   marginLeft: "10px",
-                                  color:"#6d787d"
+                                  color: "#6d787d"
                                 }}
                               >
                                 <strike>
                                   {" "}
                                   {/* {console.log("object",item.room_data.price.actual_price)} */}
-                                  ₹{item?.room_data?.price?.actual_price}
+                                  ₹{item?.room_data?.price?.base_price}
                                 </strike>{" "}
                               </span>
                               <span
                                 style={{
                                   fontWeight: "600",
-                                  fontSize:"14px",
+                                  fontSize: "14px",
                                   color: "#F5A623",
                                   marginLeft: "10px",
                                   // lineHeight:"25px"
                                 }}
                               >
-                                {((item?.room_data?.price?.actual_price -
+                                {parseInt(((item?.room_data?.price?.base_price -
                                   item?.room_data?.price?.final_price) /
-                                  item?.room_data?.price?.actual_price) *
-                                  100}
+                                  item?.room_data?.price?.base_price) *
+                                  100)}
                                 %off
                               </span>
                               <br />
@@ -461,7 +461,7 @@ function ListCard(props) {
               return (
                 <>
                   <div>
-                    <Container>
+                    <Container >
                       <Row>
                         <Col>
                           <img
@@ -510,14 +510,14 @@ function ListCard(props) {
                                     fontSize: "12px",
                                   }}
                                 >
-                                  
+
                                   &nbsp;{item.address}
                                   {/* {item?.full_address?.street},{" "}
-                                  {item?.full_address?.city} C.G */}<br/>
+                                  {item?.full_address?.city} C.G */}<br />
                                 </span>
-                                 <HiOutlineLocationMarker
-                                    style={{ color: "red"}}
-                                  /><b style={{fontSize:"12px"}}>{item.city}</b>
+                                <HiOutlineLocationMarker
+                                  style={{ color: "red" }}
+                                /><b style={{ fontSize: "12px" }}>{item.city}</b>
                               </div>
                             </div>
 
@@ -533,7 +533,7 @@ function ListCard(props) {
                                     // fontFamily: "sans-serif",
                                   }}
                                 >
-                                  <FiWifi/>Free Wifi
+                                  <FiWifi />Free Wifi
                                 </span>
                               ) : (
                                 ""
@@ -593,7 +593,8 @@ function ListCard(props) {
                           // className="m-0 p-0 col-xs-6"
                           // style={{ float: "right", padding: "10px" }}
                           >
-                            <Row xs={12}>
+                          {/* <Container> */}
+                              <Row >
                               <div>
                                 <div
                                   style={{
@@ -606,16 +607,18 @@ function ListCard(props) {
                                   <span
                                     style={{
                                       fontWeight: "600",
-                                      fontSize:"10px",
+                                      fontSize: "10px",
                                       color: "#F5A623",
                                       marginLeft: "auto",
                                     }}
                                   >
-                                    {((item?.room_data?.price?.actual_price -
+                                    {parseInt(((item?.room_data?.price?.base_price -
                                       item?.room_data?.price?.final_price) /
-                                      item?.room_data?.price?.actual_price) *
-                                      100}
+                                      item?.room_data?.price?.base_price) *
+                                      100)}
                                     %off
+
+
                                   </span>
                                   <span>
                                     <strike
@@ -626,14 +629,14 @@ function ListCard(props) {
                                         fontSize: "14px"
                                       }}
                                     >
-                                    
-                                      ₹{item?.room_data?.price?.actual_price}
+
+                                      ₹{item?.room_data?.price?.base_price}
                                     </strike>{" "}
                                   </span>
                                   <span
                                     style={{
                                       fontWeight: "700",
-                                      color:"red",
+                                      color: "red",
                                       fontSize: "16px",
                                       // fontSize: "18px",
                                       // fontWeight: "bolder",
@@ -653,7 +656,7 @@ function ListCard(props) {
                                       display: "flex",
                                     }}
                                   >
-                                    *per room per night
+                                    per room per night
                                   </span>
                                 </div>
                               </div>
@@ -670,19 +673,7 @@ function ListCard(props) {
                             justifyContent: "space-evenly",
                           }}
                         >
-                          <span
-                            className="train-seats  d-flex justify-content-center "
-                            onClick={() => bookNow(item.room_data._id)}
-                            style={{
-                              fontSize: "15px",
-                              fontWeight: 700,
-                              width: "150px",
-                              height: "40px",
-                              alignItems: "center",
-                            }}
-                          >
-                            Book Now
-                          </span>
+
                           <span
                             className=" d-flex justify-content-center"
                             onClick={() => viewDetails(item.room_data._id)}
@@ -699,9 +690,23 @@ function ListCard(props) {
                           >
                             View Details
                           </span>
+                          <span
+                            className="train-seats  d-flex justify-content-center "
+                            onClick={() => bookNow(item.room_data._id)}
+                            style={{
+                              fontSize: "15px",
+                              fontWeight: 700,
+                              width: "150px",
+                              height: "40px",
+                              alignItems: "center",
+                            }}
+                          >
+                            Book Now
+                          </span>
                         </div>
-                        <br />
-                        <hr />
+                        {/* <br />
+                        <hr /> */}
+                        
                       </Row>
                     </Container>
                   </div>

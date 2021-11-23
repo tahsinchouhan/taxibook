@@ -246,6 +246,9 @@ background-color: #EE2E24 !important;
 .ant-slider-track:hover{
   background-color: #EE2E24 !important;
   }
+  .ant-slider-handle.ant-tooptip-open{
+     display: none !important;
+  }
   .ant-slider-handle{
     border: solid 2px #EE2E24 !important;
     width: 15px;
