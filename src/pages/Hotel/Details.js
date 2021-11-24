@@ -302,7 +302,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                     <div style={{ fontSize: "20px" }}>
                       <span style={{ fontWeight: "bold" }}>
                         {" "}
-                        ₹ {detailsP?.price.actual_price}
+                        ₹ {detailsP?.price.base_price}
                       </span>{" "}
                       <span
                         style={{
@@ -311,7 +311,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                         }}
                       >
                         {" "}
-                        ₹ {detailsP?.price.actual_price}
+                        ₹ {detailsP?.price.base_price}
                       </span>
                     </div>
                     <div
@@ -383,7 +383,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                     paddingRight: "10px",
                   }}
                 >
-                  ₹ {detailsP?.price.actual_price}
+                  ₹ {detailsP?.price.base_price}
                 </h1>
                 <h2
                   style={{
@@ -395,7 +395,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                     textDecoration: "line-through",
                   }}
                 >
-                  ₹ {detailsP?.price.actual_price}
+                  ₹ {detailsP?.price.base_price}
                 </h2>
                 <h3
                   style={{
@@ -406,12 +406,12 @@ const Details = ({ hotelUniqid, detailsP }) => {
                   }}
                 >
                   {" "}
-                  {/* {Math.round((detailsP?.price.actual_price-detailsP?.price.final_price)*100/detailsP?.price.actual_price)}% 0ff */}
+                  {/* {Math.round((detailsP?.price.base_price-detailsP?.price.final_price)*100/detailsP?.price.base_price)}% 0ff */}
                   {Math.round(
-                    ((detailsP?.price.actual_price -
-                      detailsP?.price.actual_price) *
+                    ((detailsP?.price.base_price -
+                      detailsP?.price.base_price) *
                       100) /
-                      detailsP?.price.actual_price
+                      detailsP?.price.base_price
                   )}
                   % 0ff
                 </h3>
@@ -471,8 +471,8 @@ const Details = ({ hotelUniqid, detailsP }) => {
                 <span style={{}}>Your Saving</span>
                 <span style={{ fontWeight: "bold" }}>
                   ₹{" "}
-                  {detailsP?.price?.actual_price -
-                    detailsP?.price?.actual_price}
+                  {detailsP?.price?.base_price -
+                    detailsP?.price?.base_price}
                 </span>
               </div>
               <div
@@ -487,7 +487,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                   </span>
                 </span>
                 <span style={{ fontWeight: "bold" }}>
-                  ₹ {detailsP?.price?.actual_price}
+                  ₹ {detailsP?.price?.base_price}
                 </span>
               </div>
 

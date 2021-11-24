@@ -51,7 +51,7 @@ const sethotelbookingAsync = async (payload) => {
     room_id:payload?.basic_details?._id,
     check_in:payload?.startDate,
     check_out:payload?.endDate,
-    amount:payload?.basic_details?.price?.actual_price,
+    amount:payload?.basic_details?.price?.base_price,
     number_of_guests:payload?.no_of_guest,
     number_of_rooms:payload?.no_of_room,
     amount:payload?.total_amount,
