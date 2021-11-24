@@ -54,7 +54,7 @@ const sethotelbookingAsync = async (payload) => {
     amount:payload?.basic_details?.price?.actual_price,
     number_of_guests:payload?.no_of_guest,
     number_of_rooms:payload?.no_of_room,
-    amount_with_gst:payload?.total_amount,
+    amount:payload?.total_amount,
     mobile: payload?.mobile,
     email: payload?.email,
     full_name: payload?.name,

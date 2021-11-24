@@ -6,11 +6,7 @@
     align-items: flex-end;
 }
 
-.dm__card {
-    background-color: #f8f8f8;
-    padding: 2rem;
-    padding-inline-end: 3.5rem;
-}
+
 
 .dm__card_title {
     display: flex;
@@ -71,6 +67,13 @@
     width: 210px;
     border-radius: 5px;
 }
+.dm__card {
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 2rem;
+    width: 300px;
+    padding-inline-end: 3.5rem;
+}
 
 .dm__trav_card_title {
     display: flex;
@@ -93,6 +96,12 @@
     padding: 1rem;
     padding-inline-end: 2rem;
     width: 320px;
+}
+.dm__entry_card_two{
+    background-color: #f8f8f8;
+    padding: 1rem;
+    padding-inline-end: 2rem;
+    width: 640px;
 }
 
 .dm__entry_card_title {

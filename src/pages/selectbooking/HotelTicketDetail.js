@@ -3,16 +3,20 @@ import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import Header from "../../components/Header";
 import bus1 from "../../assets/img/bus.png";
 import city1 from "../../assets/img/city.png";
-import ticket from "../../assets/img/ticket.png";
+import hotel from "../../assets/img/hotel.png";
 import Footer from "../travesaly/Footer";
 import { useHistory, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import { setBookHotel } from "../../redux/actions";
 import "../../assets/css/dmdetail.css";
+
 
 import { API_PATH } from "../../Path/Path";
 
 function HotelTicketDetail() {
+  const  {getStartData,Setdata,checkoutData}  = useSelector((state) => state.hotelReducer);
+  console.log("Setdata",Setdata)
   const { id } = useParams();
 
   const history = useHistory();
@@ -28,32 +32,10 @@ function HotelTicketDetail() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getTrips();
   }, []);
 
   const goHome = () => {
     history.push("/");
-  };
-
-  const getTrips = () => {
-    fetch(`${API_PATH}/api/v1/busticket/list?booking_Id=${id}`)
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res.data);
-        if (res.data !== undefined) {
-          setApiData(res.data);
-          localStorage.setItem("data", res.data[0]._id);
-          setNotFound(false);
-          setLoading(false);
-        } else {
-          setLoading(false);
-          setNotFound(true);
-        }
-      })
-      .catch((e) => {
-        setLoading(false);
-        setNotFound(true);
-      });
   };
 
   let apiId = localStorage.getItem("data");
@@ -74,7 +56,7 @@ function HotelTicketDetail() {
       });
   }
 
-  const printPdf = () => {
+  const handlePrint = () => {
     window.print();
   };
 
@@ -82,100 +64,117 @@ function HotelTicketDetail() {
     <>
       <div className="">
         <Header />
-        <div style={{margin:"30px"}}>
-          <p >
-            {" "}
-            Do give us a chance to host you again. For your next booking,use the
-            Travel Bastar App,the website ,or call on the guest line at
-            +91797979797
-          </p>
-          <table className="table">
-            <tr style={{ backgroundColor: "#4e4d4d", color: "white", width: 600 }}>
-              <th style={{ padding: "10px" }}>Here are your booking Details</th>
-            </tr>
-            <tr>
-                 <hr style={{color:"black"}} />
-             
-            </tr>
-            <tr>
-              <td>
-                <b>SPOT ON 46488 HOTEL ABCD</b>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <b>CHECK-IN:</b> 15 sep 2018{" "}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <b>CHECK-OUT:</b> 15 sep 2018
-              </td>
-            </tr>
-          </table>
-          <table className="table">
-            <tr style={{ backgroundColor: "#4e4d4d", color: "white", width: 600 }} >
-              <th colspan="2" style={{ padding: "10px" }}>Here are your Payment Details</th>
-            </tr>
+          <div>
+            <div className="text-center mb-3">
             
-            <tr>
-            <hr /><hr />
+                    <div style={{ marginBottom: "15px" }}>
+                      <img src={hotel} alt="logo" style={{ width: "120px" }} />
+                    </div>
+                    <div
+                                            style={{
+                        fontWeight: "bolder",
+                        color: "#FF4A68",
+                        paddingTop: "10px",
+                      }}
+                    >
+                      HOTEL
+                    </div>
+                    <br />
+                    <span
+                      style={{
+                        fontWeight: "bolder",
+                        paddingTop: "10px",
+                      }}
+                    >
+                    Hotel Ticket<br/>
+                    Hope You have a Wonderful Stay
+                    </span>
+            </div>
+            <Col className="dm__entry_div" xs={12}>
              
-            </tr>
-            <tr>
-              <td>
-                Room Tariff: 15 sep 2018{" "}
-              </td>
-              <td>
-               Rs. 510.00{" "}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Meal Price: 15 sep 2018{" "}
-              </td>
-              <td>
-               Rs. 00.00{" "}
-              </td>
-            </tr>
-            <tr>
-                 <hr />
-             
-            </tr>
-            <tr>
-              <td>
-               Total{" "}
-              </td>
-              <td>
-               Rs. 510.00{" "}
-              </td>
-            </tr>
-          </table>
-          <table className="table">
-            <tr style={{ backgroundColor: "#4e4d4d", color: "white", width: 600 }}>
-              <th style={{ padding: "10px" }}>Here are your Top deals</th>
-            </tr>
-            <tr>
-             <hr />
-            </tr>
+             <div className="dm__entry_card_two">
+                 <div className="row mb-1"> <div className="col-md-4" style={{color:"red",fontWeight:'bolder'}}>Pass Detail</div> <div className="col-md-6" style={{paddingLeft:'10px',color:"red",fontWeight:'bolder'}}>Pass ID</div></div>
+                 <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Booking Id </div> <div className="col-md-9" style={{paddingLeft:'10px'}}></div></div>
+                   </div>
+     </Col>
+          <Row>
+            <Col className="dm__title" xs={12}>
+              TRAVELLER DETAILS
+            </Col>
+            <Col className="dm__traveller_div" xs={12}>
+                  <div className="dm__entry_card_two">
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Name : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{Setdata.name}</div></div>
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Age : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>Age   will be here</div></div>
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Gender : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>Gender will be here</div></div>
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Aadhar : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>Aadhar will be here</div></div> 
  
-          </table>
-          <table className="table">
-            
-            <tr>
-            <td>Cheers,</td>
-            </tr>
-            <tr>
-            <td>Travel Baster,</td>
-            </tr>
-            <tr style={{ backgroundColor: "#4e4d4d", color: "white", width: 600 }}>
-              <th style={{ padding: "10px" }}>Here is a quick snapshot of all things Travel Baster:</th>
-            </tr>
-          </table>
+                            </div>
+            </Col>
+          </Row>
+          <Row>
+          <Col className="dm__title" xs={12}>
+              ENTRY TICKET DETAILS
+            </Col>
+            <Col className="dm__entry_div" xs={12}>
+             
+                      <div className="dm__entry_card_two">
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Hotel Name : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{Setdata.basic_details.hotel_id.hotel_name}</div></div>
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Location : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{Setdata.basic_details.hotel_id.address}</div></div>
+                              <div className="row mb-1">
+                              <div className="col-md-4" style={{fontWeight:'bolder'}}>
+                               Check-In-Date:
+                               </div>          
+                                 <div className="col-md-8" style={{paddingLeft:'10px'}}>
+              {/* 31 July, 2021 */}
+              {`${Setdata?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+              {`${Setdata?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
+              {`${Setdata?.startDate?.toLocaleDateString("en-US", { year: 'numeric' })} `}
+            </div>
+                              </div>
+                              <div className="row mb-1">
+                              <div className="col-md-4" style={{fontWeight:'bolder'}}>
+                               Check-Out-Date: 
+                               </div>         
+                                 <div className="col-md-8" style={{paddingLeft:'10px'}}>
+              {/* 31 July, 2021 */}
+              {`${Setdata?.endDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
+              {`${Setdata?.endDate?.toLocaleDateString("en-US", { month: 'short' })} `}
+              {`${Setdata?.endDate?.toLocaleDateString("en-US", { year: 'numeric' })} `}
+            </div>
+                              </div>
+                            </div>
+              </Col>
+          </Row>
+          <Row>
+          <Col className="dm__title" xs={12}>
+          AMOUNT PAID
+          </Col>
+          <Col className="dm__entry_div" xs={12}>
+          <div className="dm__entry_card row">
+          <div className="col-md-6 dm__title">
+          Total Amount :
+          </div>
+          <div className="col-md-4 ">
+          ₹ {Setdata?.total_amount} 
+          <hr style={{color:'black'}}/>
+          ₹ {Setdata?.total_amount} 
+
+          </div>
+          </div>
+            </Col>
+          </Row>
+          <Row>
+          <Col className="dm__footer_div" xs={12}>
+          <div className="d-flex justify-content-center align-items-center">
+                <Button className="dm__footer_card_body" style={{ fontSize: "18px" }} onClick={handlePrint}>PRINT TICKET</Button>
+              </div>
+          </Col>
+          </Row>
+          </div>
+          
         </div>
 
         <Footer />
-      </div>
     </>
   );
 }
