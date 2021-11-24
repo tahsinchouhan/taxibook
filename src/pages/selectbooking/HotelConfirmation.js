@@ -136,7 +136,7 @@ function HotelConfirmation(props) {
   const calculatePrice = () => {
     console.log({ no_of_room });
     let payAmt =
-      getStartData.noOfRoom * dayDifference * singleData?.price?.actual_price;
+      getStartData.noOfRoom * dayDifference * singleData?.price?.base_price;
     setPayableAmt(payAmt);
   };
   useEffect(() => {
