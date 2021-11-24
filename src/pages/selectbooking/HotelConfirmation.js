@@ -172,9 +172,9 @@ function HotelConfirmation(props) {
                 {/* <div className="saving-div-container">
                   <h4 className="saving-div">
                     🎉 Yay!! you just saved ₹{" "}
-                    {singleData?.price?.actual_price -
+                    {singleData?.price?.base_price -
                       singleData?.price?.final_price +
-                      (singleData?.price?.actual_price -
+                      (singleData?.price?.base_price -
                         singleData?.price?.final_price) *
                         0.25}{" "}
                     on this booking
@@ -388,14 +388,14 @@ function HotelConfirmation(props) {
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <span style={{ color: "darkgrey" }}>Price Drop</span>
-                  <span style={{ fontWeight: "bold" }}>-₹  {singleData.price.actual_price- singleData.price.final_price}</span>
+                  <span style={{ fontWeight: "bold" }}>-₹  {singleData.price.base_price- singleData.price.final_price}</span>
                 </div> */}
                   {/* <div
                   className="mt-1"
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <span style={{ color: "darkgrey" }}>25% discount coupon</span>
-                  <span style={{ fontWeight: "bold" }}>-₹ {(singleData.price.actual_price- singleData.price.final_price)*0.25}</span>
+                  <span style={{ fontWeight: "bold" }}>-₹ {(singleData.price.base_price- singleData.price.final_price)*0.25}</span>
                 </div> */}
                 </div>
                 <hr />

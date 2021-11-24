@@ -364,7 +364,7 @@ function ListCard(props) {
                               >
                                 <strike>
                                   {" "}
-                                  {/* {console.log("object",item.room_data.price.actual_price)} */}
+                                  {/* {console.log("object",item.room_data.price.base_price)} */}
                                   ₹{item?.room_data?.price?.base_price}
                                 </strike>{" "}
                               </span>
