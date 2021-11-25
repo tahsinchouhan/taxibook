@@ -59,7 +59,7 @@ console.log(Setdata)
     const token = user.token
     axios
       .post(`${API_PATH}/api/v2/booking/pay`, {
-        amount:Setdata?.total_amount,
+        amount:Setdata?.total_amount.toFixed(),
       },
       {headers: { Authorization: `Bearer ${token}` }}
       )
@@ -94,7 +94,7 @@ console.log(Setdata)
       // key: "rzp_live_CpkoLmfTklzLb0",
       key: 'rzp_test_DuapYrmQwcWLGy',
       currency: "INR",
-      amount: data.amount.toString(),
+      amount: data.amount.toFixed().toString(),
       order_id: data.id,
       name: "Aamcho Bastar",
       description: "Thank You For Booking.",

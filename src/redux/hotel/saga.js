@@ -45,7 +45,7 @@ function* getListofHotel() {
 const sethotelbookingAsync = async (payload) => {
   const user = JSON.parse(localStorage.getItem('user_data'));
   const token = user.token
-    axios.post(`${API_PATH}/api/v2/booking/create`,  {
+   return axios.post(`${API_PATH}/api/v2/booking/create`,  {
     customer_id:payload?.basic_details?.user_id?._id,
     hotel_id:payload?.basic_details?.hotel_id?._id,
     room_id:payload?.basic_details?._id,
@@ -54,7 +54,7 @@ const sethotelbookingAsync = async (payload) => {
     amount:payload?.basic_details?.price?.base_price,
     number_of_guests:payload?.no_of_guest,
     number_of_rooms:payload?.no_of_room,
-    amount:payload?.total_amount,
+    amount:payload?.total_amount*100,
     mobile: payload?.mobile,
     email: payload?.email,
     full_name: payload?.name,
@@ -62,13 +62,19 @@ const sethotelbookingAsync = async (payload) => {
   {headers: { Authorization: `Bearer ${token}` }}
 
   ).then((res) => {
-    return res;
-  });
+    console.log("resres",res)
+    return res.data.data;
+  }
+  ).catch((err) => 
+  {
+    console.log(err)
+  return err})
 };
 
 function* sethotelBookingSaga({ payload }) {
   try {
     const apiSetHotel = yield call(sethotelbookingAsync, payload);
+    console.log("apiSetHotel",apiSetHotel)
     yield put(setBookHotelSuccess(apiSetHotel.payload));
   } catch (err) {
     console.log(err.message);
