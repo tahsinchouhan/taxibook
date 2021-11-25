@@ -259,6 +259,11 @@ background-color: #EE2E24 !important;
     text-align: center;
     
   }
+ 
+  .anticon{
+    margin-left: -10px;
+
+  }
 .priceMenu{
   left: 25px;
   width: 300px; 

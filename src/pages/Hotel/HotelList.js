@@ -14,7 +14,8 @@ import { API_PATH } from "../../Path/Path";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import { Autocomplete } from "@material-ui/lab";
-import { FaSearchLocation, FaTrash, FaPlusCircle, FaUserAlt } from "react-icons/fa";
+import { FaTrash, FaPlusCircle } from "react-icons/fa";
+import { BsPlusSquare, BsDashSquare } from "react-icons/bs";
 import { GiSettingsKnobs } from "react-icons/gi";
 import moment from "moment";
 import {
@@ -23,7 +24,7 @@ import {
   Dropdown as ANTDropdown,
   Slider,
   Checkbox,
-} from "antd";
+} from "antd";  
 import Searchbar from "./Searchbar";
 import { DownOutlined } from "@ant-design/icons";
 import { MenuItem } from "@material-ui/core";
@@ -110,23 +111,40 @@ function HotelList() {
     setNoOfGuest(noofg);
   };
   const guestRoom = (act, room_id) => {
-    let guestRoomObj = roomState;
-    console.log({ act });
-    console.log({ room_id });
-    if (act === "mainAdd" && noOfGuest > 0 && noOfRoom > 0) {
-      guestRoomObj.push({ room: room_id, guest: 2 });
-    } else if (act === "delete" && noOfGuest > 0 && noOfRoom > 0) {
-      let guestRoomObj1 = guestRoomObj.filter((elem, ind) => ind !== room_id);
-      guestRoomObj = guestRoomObj1;
-    } else if (act === "+") {
-      guestRoomObj[room_id].guest = guestRoomObj[room_id].guest + 1;
-    } else if (act === "-") {
-      guestRoomObj[room_id].guest = guestRoomObj[room_id].guest - 1;
-    }
-    addMenu();
-    setRoomState(guestRoomObj);
-    console.log(noOfRoom, noOfGuest);
-  };
+  //   let guestRoomObj = roomState;
+  //   console.log({ act });
+  //   console.log({ room_id });
+  //   if (act === "mainAdd" && noOfGuest > 0 && noOfRoom > 0) {
+  //     guestRoomObj.push({ room: room_id, guest: 2 });
+  //   } else if (act === "delete" && noOfGuest > 0 && noOfRoom > 0) {
+  //     let guestRoomObj1 = guestRoomObj.filter((elem, ind) => ind !== room_id);
+  //     guestRoomObj = guestRoomObj1;
+  //   } else if (act === "+") {
+  //     guestRoomObj[room_id].guest = guestRoomObj[room_id].guest + 1;
+  //   } else if (act === "-") {
+  //     guestRoomObj[room_id].guest = guestRoomObj[room_id].guest - 1;
+  //   }
+  //   addMenu();
+  //   setRoomState(guestRoomObj);
+  //   console.log(noOfRoom, noOfGuest);
+  // };
+  let guestRoomObj = roomState;
+  console.log({ act });
+  console.log({ room_id });
+  if (act === "mainAdd" && noOfGuest > 0 && noOfRoom > 0) {
+    guestRoomObj.push({ room: room_id, guest: 2 });
+  } else if (act === "delete" && noOfGuest > 0 && noOfRoom > 0) {
+    let guestRoomObj1 = guestRoomObj.filter((elem, ind) => ind !== room_id);
+    guestRoomObj = guestRoomObj1;
+  } else if (act === "+" && guestRoomObj[room_id].guest < 4) {
+    guestRoomObj[room_id].guest = guestRoomObj[room_id].guest + 1;
+  } else if (act === "-" && guestRoomObj[room_id].guest > 1) {
+    guestRoomObj[room_id].guest = guestRoomObj[room_id].guest - 1;
+  }
+  addMenu();
+  setRoomState(guestRoomObj);
+  console.log(noOfRoom, noOfGuest);
+};
   useEffect(() => {
     setRoomState(roomState);
     addMenu();
@@ -142,16 +160,20 @@ function HotelList() {
           <Menu.Item key={index}>
             Room {curElem.room}{" "}
             <span style={{ float: "right" }}>
-              <button
-              // onClick={() => guestRoom("-", index)}
-              >-</button>{" "}
-              {curElem.guest}{" "}
+              <span style={{ padding: "5px" }} >  <BsDashSquare size={20} onClick={() => guestRoom("-", index)} /></span>
+              {" "}
+              <span style={{fontWeight:"700"}}>{curElem.guest}</span>{" "}
               {curElem.guest === 3 ? (
-                <button disabled>+</button>
+                // <button disabled>+</button>
+                <span style={{ padding: "5px"}} >
+                  <BsPlusSquare size={20} color={"#737272"} />
+                </span>
               ) : (
-                <button
+                <span style={{ padding: "5px" }} > <BsPlusSquare size={20} onClick={() => guestRoom("+", index)} style={{ height: "20px" }} />
+                </span>
+                // <button
                 //  onClick={() => guestRoom("+", index)}
-                >+</button>
+                // >+</button>
               )}
             </span>
             <hr />
@@ -160,10 +182,10 @@ function HotelList() {
       </div>
       <Menu.Item>
         {roomState.length > 1 ? (
-          <FaTrash
-            title=" Delete Room "
-            style={{ float: "left", marginRight: "120px" }}
-          // onClick={() => guestRoom("delete", roomState.length - 1)}
+          <FaTrash size={15}
+            title="Delete Room "
+            style={{ float: "left",marginLeft:"20px"}}
+            onClick={() => guestRoom("delete", roomState.length - 1)}
           />
         ) : (
           ""
@@ -171,10 +193,10 @@ function HotelList() {
         <span
           title="Add Room "
           style={{ float: "right" }}
-        // onClick={() => guestRoom("mainAdd", roomState.length + 1)}
+        onClick={() => guestRoom("mainAdd", roomState.length + 1)}
         >
-          <FaPlusCircle />
-          Add Room
+          <FaPlusCircle size={15}/>
+       &nbsp;   Add Room
         </span>
       </Menu.Item>
     </Menu>
@@ -472,7 +494,7 @@ function HotelList() {
                   <Form.Label className="dm-ticket">Number Of Guests</Form.Label>
                   <ANTDropdown
                     overlay={menu}
-                  // trigger={["click"]}
+                  trigger={["click"]}
                   // style={{ width: "100px" }}
                   >
                     <input // onChange={(e) => setEmail(e.target.value)}

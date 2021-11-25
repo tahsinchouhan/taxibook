@@ -11,6 +11,8 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import hotelotherimage from "../../assets/img/hotelotherimage.jpg";
 import { BiCheckCircle } from "react-icons/bi";
+// import { AiOutlineCamera } from "react-icons/Ai";
+
 
 const Details = ({ hotelUniqid, detailsP }) => {
   console.log({ detailsP });
@@ -96,6 +98,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                 margin: "15px 15px 15px 0",
               }}
             >
+              {console.log("object", detailsP)}
               <h4 style={{ fontWeight: "bold", marginBottom: 0 }}>
                 {detailsP?.hotel_id?.hotel_name}
               </h4>
@@ -255,7 +258,40 @@ const Details = ({ hotelUniqid, detailsP }) => {
                           ""
                         )}
 
-                        {detailsP?.amenities?.includes("CCTV") ? (
+                        {detailsP?.amenities?.includes("CCTVCameras") ? (
+                          <div
+                            style={{
+                              display: "flex",
+                              width: 100,
+                              height: 50,
+                            }}
+                          >
+                            <img
+                              src={calendar}
+                              alt=""
+                              style={{
+                                margin: "0 10px",
+                                width: "20px",
+                                height: "20px",
+                              }}
+                            />
+                            {/* <AiOutlineCamera/> */}
+                            <h1
+                              style={{
+                                fontSize: "16px",
+                                display: "flex",
+                                justifyContent: "center",
+                                marginBottom: 0,
+                              }}
+                            >
+                              CCTV
+                            </h1>
+                          </div>
+                        ) : (
+                          ""
+                        )}
+
+                        {detailsP?.amenities?.includes("FreeWifi") ? (
                           <div
                             style={{
                               display: "flex",
@@ -280,7 +316,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                                 marginBottom: 0,
                               }}
                             >
-                              CCTV
+                              Free Wifi
                             </h1>
                           </div>
                         ) : (
@@ -328,7 +364,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                       }}
                     >
                       <FaCheckCircle />
-                     &nbsp; Selected
+                      &nbsp; Selected
                     </div>
                   </div>
                 </div>
@@ -411,7 +447,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                     ((detailsP?.price.base_price -
                       detailsP?.price.base_price) *
                       100) /
-                      detailsP?.price.base_price
+                    detailsP?.price.base_price
                   )}
                   % 0ff
                 </h3>

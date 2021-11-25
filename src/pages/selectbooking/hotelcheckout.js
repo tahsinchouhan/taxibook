@@ -15,14 +15,14 @@ import Room from "../../assets/img/hotelRoom.jpeg";
 function CheckoutPage() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const  {getStartData,Setdata,checkoutData}  = useSelector((state) => state.hotelReducer);
+  const { getStartData, Setdata, checkoutData } = useSelector((state) => state.hotelReducer);
   console.log(Setdata)
   const onCongratsClick = () => {
-     history.push("/hpayment");
+    history.push("/hpayment");
   };
 
   useEffect(() => {
-    if(Setdata.startDate === undefined){
+    if (Setdata.startDate === undefined) {
       history.push('/hotelsearch')
     }
   }, [Setdata]);
@@ -130,21 +130,21 @@ function CheckoutPage() {
                     Hotel Details
                   </span>
                   <div>
-                  <div
-                  style={{ display: "cover", justifyContent: "space-between" }}
-                >
-                
-                  <img
-                    src={Room}
-                    alt="room"
-                    style={{
-                      width: "100px",
-                      height: "60px",
-                      borderRadius: "5px",
-                      marginTop:"15px"
-                    }}
-                  />
-                </div>
+                    <div
+                      style={{ display: "cover", justifyContent: "space-between" }}
+                    >
+
+                      <img
+                        src={Room}
+                        alt="room"
+                        style={{
+                          width: "100px",
+                          height: "60px",
+                          borderRadius: "5px",
+                          marginTop: "15px"
+                        }}
+                      />
+                    </div>
                     <div
                       className="rajratan-train p-2"
                       style={{ float: "", backgroundColor: "#F8F8F8" }}
@@ -159,6 +159,7 @@ function CheckoutPage() {
                             fontFamily: "sans-serif",
                           }}
                         >
+                          {console.log("object",Setdata)}
                           {" "} {Setdata?.basic_details?.hotel_id?.full_address?.street} {" ,"} {Setdata?.basic_details?.hotel_id?.full_address?.city}
                         </span>
                         <br />
@@ -209,7 +210,7 @@ function CheckoutPage() {
                           fontSize: "13px",
                         }}
                       >
-                      
+
                       </span>
                     </div>
                   </div>
@@ -246,12 +247,12 @@ function CheckoutPage() {
                               fontSize: "13px",
                               color: "black",
                             }}
-                          >
-                            {Setdata.name}
-                          </span>
+                          >Name - {Setdata.name}</span>
                           <br />
                           <span>
-                            {Setdata.mobile}, {Setdata.email}
+                            Gender - {Setdata.gender} </span> <br />
+                          <span>Age - {Setdata.age}</span><br />
+                          <span> Adhar No. - {Setdata.adhar}
                           </span>
                           <br />
                           <div className="p-3">
@@ -264,7 +265,7 @@ function CheckoutPage() {
                 </Row>
               ) : null}
             </Row>
-            <div style={{margin:"10% 35%"}}>
+            <div style={{ margin: "10% 35%" }}>
               <Button className="locationpass-btn " onClick={onCongratsClick}>
                 NEXT
               </Button>
@@ -368,7 +369,7 @@ function CheckoutPage() {
             >
               Passenger Details
             </span>
-            {Setdata? (
+            {Setdata ? (
               <Row>
                 {/* <h3
                     style={{
@@ -376,45 +377,45 @@ function CheckoutPage() {
                       color: "#0FA453",
                       fontWeight: "bolder",
                     }}>Passengers ({`${Setdata?.basic_details?.length}`})</h3> */}
-                
-                  <Col xs={6} md={6}>
-                    <div
-                      className="check-passenger"
-                      style={{ marginLeft: "25px" }}
-                    >
-                      <div style={{ textAlign: "center", padding: "5px", marginTop: "10px" }}>
-                        <span
-                          style={{
-                            fontWeight: "bolder",
-                            fontFamily: "sans-serif",
-                            fontSize: "13px",
-                            color: "black",
-                          }}
-                        >
-                          {Setdata?.name}
-                        </span>
-                        <br />
-                        <span style={{
-                          fontWeight: "bold",
+
+                <Col xs={6} md={6}>
+                  <div
+                    className="check-passenger"
+                    style={{ marginLeft: "25px" }}
+                  >
+                    <div style={{ textAlign: "center", padding: "5px", marginTop: "10px" }}>
+                      <span
+                        style={{
+                          fontWeight: "bolder",
                           fontFamily: "sans-serif",
-                          fontSize: "11px",
+                          fontSize: "13px",
                           color: "black",
-                        }}>
-                          {Setdata?.mobile}, {Setdata.email}
-                        </span>
-                        <br />
-                        <span style={{
-                          fontWeight: "bold",
-                          fontFamily: "sans-serif",
-                          fontSize: "11px",
-                          color: "black",
-                        }}> </span>
-                        <div className="">
-                          {/* <Button className="checout-btn" onClick={onClickBack} >EDIT</Button> */}
-                        </div>
+                        }}
+                      >
+                        {Setdata?.name}
+                      </span>
+                      <br />
+                      <span style={{
+                        fontWeight: "bold",
+                        fontFamily: "sans-serif",
+                        fontSize: "11px",
+                        color: "black",
+                      }}>
+                        {Setdata?.mobile}, {Setdata.email}
+                      </span>
+                      <br />
+                      <span style={{
+                        fontWeight: "bold",
+                        fontFamily: "sans-serif",
+                        fontSize: "11px",
+                        color: "black",
+                      }}> </span>
+                      <div className="">
+                        {/* <Button className="checout-btn" onClick={onClickBack} >EDIT</Button> */}
                       </div>
                     </div>
-                  </Col>
+                  </div>
+                </Col>
 
               </Row>
             ) : null}

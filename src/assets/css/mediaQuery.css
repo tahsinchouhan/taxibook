@@ -152,10 +152,6 @@
   } */
 
   
-  .search__bt::before {
-    /* background-image: url('../assets/search_new.png'); */
-  }
-  
 
 
 /* .search {}
@@ -245,10 +241,6 @@
 
  */
 
- .navbar-toggler-icon {
-   /* background-image: url(../assets/hamburger.svg) !important; */
-
-  } 
 
   .navbar-collapse {
     padding-bottom: 20px;

@@ -20,6 +20,8 @@ function HotelConfirmation(props) {
   const [singleData, setSingleData] = useState([]);
   const [number, setNumber] = useState("");
   const [otp, setOtp] = useState("");
+  const [adhar, setAdhar] = useState("");
+  const [gender, setGender] = useState("");
   const [showOTP, setShowOTP] = useState(false);
   const [total_amount1, settotal_amount1] = useState(0);
   const dispatch = useDispatch();
@@ -59,6 +61,8 @@ function HotelConfirmation(props) {
     dispatch(
       setBookHotel({
         ...values,
+        ...gender,
+        ...adhar,
         basic_details: singleData,
         total_amount: total_amount1,
       })
@@ -228,13 +232,13 @@ function HotelConfirmation(props) {
                           </h3>
                         
                           <input
-                            type="email"
-                            name="text"
+                            type="text"
+                            name="gender"
                             required
                             placeholder="Male/Female"
                             className="form-input"
                             onChange={(e) => {
-                              setValues(e.target.value);
+                              setGender(e.target.value);
                               handleChange(e);
                             }}
                           />
@@ -250,7 +254,7 @@ function HotelConfirmation(props) {
                           </h3>
                           <input
                             type="number"
-                            name="mobile"
+                            name="age"
                             required
                             className="form-input"
                             placeholder="Your Age"
@@ -261,7 +265,27 @@ function HotelConfirmation(props) {
                             }}
                           />
                         </div>
-                        {user_data === null ? (
+                        <div
+                          className=" form-input-div"
+                          style={{ marginRight: "20px" }}
+                        >
+                          <h3 style={{ fontSize: "16px", fontWeight: "bold" }}>
+                           Adhar Number
+                          </h3>
+                          <input
+                            type="number"
+                            name="adhar"
+                            required
+                            className="form-input"
+                            placeholder="Enter Adhar no"
+                            onChange={(e) => {
+                              setAdhar(e.target.value);
+                              handleChange(e);
+                            //   settotal_amount1(payableAmt);
+                            }}
+                          />
+                        </div>
+                        {/* {user_data === null ? (
                           <div
                             className="mt-3 "
                             style={{
@@ -287,7 +311,7 @@ function HotelConfirmation(props) {
                               Send Passcode
                             </button>
                           </div>
-                        ) : null}
+                        ) : null} */}
                       </div>
                       <div className=" form-div mt-3">
                         {showOTP ? (

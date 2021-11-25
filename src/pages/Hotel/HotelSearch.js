@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Row, Col, Form, Container, Modal } from "react-bootstrap";
 import calendar from "../../assets/img/calendar.png";
 // import DatePicker from "react-datepicker";
+import { BsPlusSquare, BsDashSquare } from "react-icons/bs";
 import "react-datepicker/dist/react-datepicker.css";
 import { useHistory } from "react-router-dom";
 import ticket from "../../assets/ticketpage.svg";
@@ -38,6 +39,7 @@ function HotelSearch() {
   const [noOfGuest, setNoOfGuest] = useState(2);
   const [noOfRoom, setNoOfRoom] = useState(1);
   const [show, setShow] = useState(false);
+  const [seleteRoom, setSeleteRoom] = useState(false);
   const [enterlocation, setEnterlocation] = useState('');
   const { RangePicker } = DatePicker;
 
@@ -213,12 +215,18 @@ function HotelSearch() {
           <Menu.Item key={index}>
             Room {curElem.room}{" "}
             <span style={{ float: "right" }}>
-              <button className="minus" onClick={() => guestRoom("-", index)}>-</button>{" "}
+              {/* <button className="minus" onClick={() => guestRoom("-", index)}>-</button>{" "} */}
+              <span style={{ padding: "5px" }} >  <BsDashSquare size={20} onClick={() => guestRoom("-", index)} /></span>
               {curElem.guest}{" "}
               {curElem.guest === 3 ? (
-                <button className="btn btn-xs plus" disabled>+</button>
+                // <button className="btn btn-xs plus" disabled>+</button>
+                <span style={{ padding: "5px"}} >
+                  <BsPlusSquare size={20} color={"#737272"} />
+                </span>
               ) : (
-                <button className="plus" onClick={() => guestRoom("+", index)}>+</button>
+                // <button className="plus" onClick={() => guestRoom("+", index)}>+</button>
+                <span style={{ padding: "5px" }} > <BsPlusSquare size={20} onClick={() => guestRoom("+", index)} style={{ height: "20px" }} />
+                </span>
               )}
             </span>
             <hr />
@@ -233,8 +241,8 @@ function HotelSearch() {
         /> : ''}
         <span title="Add Room "
           style={{ float: "right" }} onClick={() => guestRoom("mainAdd", roomState.length + 1)}>
-          <FaPlusCircle
-          />Add Room
+          <FaPlusCircle size={15}
+          /> &nbsp;Add Room
         </span>
 
       </Menu.Item>
@@ -381,20 +389,21 @@ function HotelSearch() {
                             style={{
                               backgroundColor: "#f5f5f5",
                               padding: "5px",
-                              paddingLeft: "20px",
+                              // paddingLeft: "20px",
                               display: "flex",
+                              height:"43px",
                             }}
                           >
-                            {/* <img
+                             <img
                               alt="logo"
                               className="location-userdatas-calendar"
                               src={calendar}
                               style={{
                                 width: 25,
                                 height: 25,
-                                marginRight: "10px",
+                                margin: "5px",
                               }}
-                            /> */}
+                            /> 
 
                             <RangePicker
                               disabledDate={disabledDate}
@@ -505,14 +514,14 @@ function HotelSearch() {
                           paddingLeft: "20px",
                         }}
                       >
-                        <ANTDropdown overlay={menu} style={{ width: "400px" }}>
+                        <ANTDropdown trigger={['click']} overlay={menu} style={{ width: "400px" }}>
                           <input // onChange={(e) => setEmail(e.target.value)}
                             // value={email}
                             name="guestRoom"
                             type="text"
                             className="position-relative"
                             placeholder={`${noOfRoom} Room ,${noOfGuest} guest`}
-                            onClick={handleShow}
+                            // onClick={handleShow}
                             style={{
                               border: "none",
                               outline: "none",
@@ -523,6 +532,7 @@ function HotelSearch() {
                             }}
                             readOnly
                           />
+                         {/* { seleteRoom == true ?<ANTDropdown overlay={menu}></ANTDropdown>:""} */}
                         </ANTDropdown>{" "}
                       </div>
                     </Form.Group>
@@ -623,13 +633,7 @@ function HotelSearch() {
                       />
                     )}
                   />
-                  {/* <span
-                    className="FaSearchLocation"
-                    title="Near Me "
-                    onClick={getCurrentLocation}
-                  >
-                    <FaSearchLocation />
-                  </span> */}
+                 
                   {showLocationError ? (
                     <p>
                       <small style={{ color: "red" }}>
@@ -649,28 +653,31 @@ function HotelSearch() {
                       <Col md={4}>
                         <div>
                           <Form.Label className="dm-ticket">
-                            Booking Date
+                           <span  style={{marginLeft:"-24px"}} > Booking Date</span>
                           </Form.Label>
                           <br />
-                          <div>
+                        
                             <div
                               style={{
                                 backgroundColor: "#f5f5f5",
                                 padding: "5px",
-                                paddingLeft: "20px",
+                                width: "263px",
+                                height:"43px",
+                                marginLeft:"-24px",
                                 display: "flex",
+                                borderRadius:"2px"
                               }}
                             >
-                              {/* <img
+                               <img
                               alt="logo"
                               className="location-userdatas-calendar"
                               src={calendar}
                               style={{
                                 width: 25,
                                 height: 25,
-                                marginRight: "10px",
+                                margin: "5px",
                               }}
-                            /> */}
+                            /> 
                               <RangePicker
                                 disabledDate={disabledDate}
                                 onChange={(date) => chnageDate(date)}
@@ -684,10 +691,13 @@ function HotelSearch() {
                                 style={{
                                   backgroundColor: "transparent",
                                   border: "0",
+                                  // width:"200px"
+                      padding: "5px",
+
                                 }}
                               />
                             </div>
-                          </div>
+                      
                         </div>
                       </Col>
                     </Row>
@@ -701,7 +711,7 @@ function HotelSearch() {
                     Number Of Guests
                   </Form.Label>
 
-                  <ANTDropdown overlay={menu}>
+                  <ANTDropdown trigger={['click']} overlay={menu}>
                     <input
                       id="inputState"
                       className="form-control pass_input"
@@ -709,7 +719,7 @@ function HotelSearch() {
                       name="guestRoom"
                       type="text"
                       placeholder={`${noOfRoom} Room ,${noOfGuest} guest`}
-                      onClick={handleShow}
+                      // onClick={handleShow}
                       style={{
                         backgroundColor: "#f5f5f5",
                         border: 0,

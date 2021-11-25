@@ -29,6 +29,7 @@ function ListCard(props) {
   const bookNow = (HotelId) => {
     history.push(`/hotelconfirmation/${HotelId}`);
   };
+  const [view, setView] = useState(false)
   return (
     <>
       {isLoading ?
@@ -469,13 +470,13 @@ function ListCard(props) {
                   <div>
                     {console.log("hotels", item.room_data.image[0])}
                     {console.log("hotels", item.room_data)}
-
+                    {console.log("IMG", item.gst_upload)}
                     <Container >
                       <Row>
                         <Col>
                           <img
-                            // src={item.gst_upload}
-                            src={item.room_data.image[0]}
+                            // src={item.room_data?.image[0]}
+                            src={Room}
                             alt="room img"
                             style={{
                               width: "330px",
@@ -526,7 +527,9 @@ function ListCard(props) {
                                   }}
                                 >
 
-                                  &nbsp;{item.address}
+                                  {/* &nbsp;... */}
+                                  {!view ?<> {item.address.substring(0, 30)}... <span onClick={() => setView(!view)} style={{ color: "red" }}>View more</span></>
+                                    : <>{item.address} <span onClick={() => setView(!view)} style={{ color: "red" }}>View Less</span> </>}
                                 </span>
 
                               </div>
