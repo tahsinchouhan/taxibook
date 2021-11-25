@@ -107,7 +107,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                   padding: 0,
                 }}
               >
-                {`${detailsP?.hotel_id?.full_address?.street},${detailsP?.hotel_id?.full_address?.city}`}
+                {`${detailsP?.hotel_id?.street}, ${detailsP?.hotel_id?.city}`}
               </p>
             </div>
             <div>
@@ -323,12 +323,12 @@ const Details = ({ hotelUniqid, detailsP }) => {
                         justifyContent: "center",
                         alignItems: "center",
                         fontWeight: "bold",
-                        fontSize: "20px",
+                        fontSize: "18px",
                         borderRadius: "5px",
                       }}
                     >
                       <FaCheckCircle />
-                      Selected
+                     &nbsp; Selected
                     </div>
                   </div>
                 </div>

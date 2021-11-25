@@ -469,7 +469,7 @@ function HotelList() {
             <Col xs={12} md={3} className="mt-2">
               <Form.Group className="" controlId="exampleForm.ControlInput1">
                 <div>
-                  <Form.Label className="dm-ticket">Number Of Guests22</Form.Label>
+                  <Form.Label className="dm-ticket">Number Of Guests</Form.Label>
                   <ANTDropdown
                     overlay={menu}
                   // trigger={["click"]}

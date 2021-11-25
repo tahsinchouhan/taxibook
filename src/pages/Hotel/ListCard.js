@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import loadingGif from '../../assets/img/balls_loading.gif'
 import { BsShopWindow } from "react-icons/bs";
 import bus1 from "../../assets/img/bus.png";
 import hotel from "../../assets/img/hotel.png";
@@ -30,7 +31,12 @@ function ListCard(props) {
   };
   return (
     <>
-      <div> {`${isLoading ? "Loading....." : ""}`}</div>
+      {isLoading ?
+        <div className="loader">
+          <img src={loadingGif} alt="Loading..." height="150px" />
+        </div>
+        : <></>}
+
       {hotels?.length > 0 ? (
         <div>
           {" "}
@@ -455,17 +461,21 @@ function ListCard(props) {
       {/*mobile View*/}
       <div>
         <div fluid className="d-md-none">
-          <div></div>
+
           <div>
             {hotels.map((item, index) => {
               return (
                 <>
                   <div>
+                    {console.log("hotels", item.room_data.image[0])}
+                    {console.log("hotels", item.room_data)}
+
                     <Container >
                       <Row>
                         <Col>
                           <img
-                            src={Room}
+                            // src={item.gst_upload}
+                            src={item.room_data.image[0]}
                             alt="room img"
                             style={{
                               width: "330px",
@@ -504,6 +514,11 @@ function ListCard(props) {
                                   {item.hotel_name}
                                 </span>
                                 <br />
+                                <span style={{ marginLeft: "-2px" }}>
+                                  <HiOutlineLocationMarker
+                                    style={{ color: "red" }}
+                                  /><b style={{ fontSize: "12px" }}> {item.city}</b><br />
+                                </span>
                                 <span
                                   style={{
                                     color: "grey",
@@ -512,17 +527,13 @@ function ListCard(props) {
                                 >
 
                                   &nbsp;{item.address}
-                                  {/* {item?.full_address?.street},{" "}
-                                  {item?.full_address?.city} C.G */}<br />
                                 </span>
-                                <HiOutlineLocationMarker
-                                  style={{ color: "red" }}
-                                /><b style={{ fontSize: "12px" }}>{item.city}</b>
+
                               </div>
                             </div>
 
                             <div style={{ display: "flex" }}>
-                              {item?.room_data?.amenities?.includes("reeWifi") ? (
+                              {item?.room_data?.amenities?.includes("FreeWifi") ? (
                                 <span
                                   style={{
                                     display: "flex",
@@ -533,7 +544,7 @@ function ListCard(props) {
                                     // fontFamily: "sans-serif",
                                   }}
                                 >
-                                  <FiWifi />Free Wifi
+                                  <FiWifi /> &nbsp;Free Wifi
                                 </span>
                               ) : (
                                 ""
@@ -551,7 +562,7 @@ function ListCard(props) {
                                   }}
                                 >
                                   <BiCheckCircle style={{ fontSize: "15px" }} />
-                                  AC
+                                  &nbsp;AC
                                 </span>
                               ) : (
                                 ""
@@ -568,12 +579,12 @@ function ListCard(props) {
                                   }}
                                 >
                                   <FaTv style={{ fontSize: "20px" }} />
-                                  TV
+                                  &nbsp;TV
                                 </span>
                               ) : (
                                 ""
                               )}
-                              <small
+                              {/* <small
                                 style={{
                                   display: "flex",
                                   alignItems: "center",
@@ -584,7 +595,7 @@ function ListCard(props) {
                                 onClick={() => viewDetails(item.room_data._id)}
                               >
                                 View More
-                              </small>
+                              </small> */}
                             </div>
                           </Col>
 
@@ -593,8 +604,8 @@ function ListCard(props) {
                           // className="m-0 p-0 col-xs-6"
                           // style={{ float: "right", padding: "10px" }}
                           >
-                          {/* <Container> */}
-                              <Row >
+                            {/* <Container> */}
+                            <Row >
                               <div>
                                 <div
                                   style={{
@@ -706,7 +717,7 @@ function ListCard(props) {
                         </div>
                         {/* <br />
                         <hr /> */}
-                        
+
                       </Row>
                     </Container>
                   </div>

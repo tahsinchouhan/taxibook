@@ -13,6 +13,7 @@ import moment from "moment";
 import { fetchStart, getOtp, setMobile, verifyOtp } from "../../redux/actions";
 import { setBookHotel } from "../../redux/actions";
 import { toast, ToastContainer } from "react-toastify";
+import ButtonComponent from "../../containers/Button";
 
 function HotelConfirmation(props) {
   const history = useHistory();
@@ -110,7 +111,7 @@ function HotelConfirmation(props) {
     // setValues({ ...values, ['total_amount']: total_amount1 });
   };
   const [checkLogin, setCheckLogin] = useState(false);
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const onClickMonsoon = () => {
     // console.log("object", `91${number}`, otp);
@@ -143,6 +144,7 @@ function HotelConfirmation(props) {
     console.log(singleData);
     calculatePrice();
   }, [singleData, dayDifference, getStartData]);
+  // const className = props.activeButton === item.name ? "btn-success" : "btn-light";
 
   return (
     <>
@@ -192,7 +194,7 @@ function HotelConfirmation(props) {
                       padding: "15px",
                     }}
                   >
-                    1️) Enter Your Details
+                    Enter Travellers Details
                   </h4>
                   <div style={{ padding: "10px 20px", marginBottom: "40px" }}>
                     <p>
@@ -222,13 +224,14 @@ function HotelConfirmation(props) {
                         </div>
                         <div className="form-input-div">
                           <h3 style={{ fontSize: "16px", fontWeight: "bold" }}>
-                            Email Address
+                            Gender
                           </h3>
+                        
                           <input
                             type="email"
-                            name="email"
+                            name="text"
                             required
-                            placeholder="example@gmail.com"
+                            placeholder="Male/Female"
                             className="form-input"
                             onChange={(e) => {
                               setValues(e.target.value);
@@ -243,14 +246,14 @@ function HotelConfirmation(props) {
                           style={{ marginRight: "20px" }}
                         >
                           <h3 style={{ fontSize: "16px", fontWeight: "bold" }}>
-                            Mobile Number
+                           Age
                           </h3>
                           <input
                             type="number"
                             name="mobile"
                             required
                             className="form-input"
-                            placeholder="Your Mobile Number"
+                            placeholder="Your Age"
                             onChange={(e) => {
                               setNumber(e.target.value);
                               handleChange(e);
@@ -263,7 +266,7 @@ function HotelConfirmation(props) {
                             className="mt-3 "
                             style={{
                               marginRight: "20px",
-                             
+
                             }}
                           >
                             <button

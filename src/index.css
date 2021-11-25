@@ -254,6 +254,11 @@ background-color: #EE2E24 !important;
     width: 15px;
     height: 15px
   }
+  .loader{
+    display: flex;
+    text-align: center;
+    
+  }
 .priceMenu{
   left: 25px;
   width: 300px; 
