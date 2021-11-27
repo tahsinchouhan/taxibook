@@ -139,7 +139,7 @@ function App() {
 
             {/* For Hotel Details */}
             <Route exact path="/hotelsearch" component={HotelSearch} />
-            <Route exact path='/hotelDetails/:name' component={HotelDetails} />
+            <Route exact path='/hotelDetails/:name/:startDate/:endDate' component={HotelDetails} />
             <Route exact path='/hotelList' component={HotelList} />
             <Route exact path='/hotelSingleDetails/:name' component={HotelSingleDetails} />
             <Route exact path='/Hcongratulation-page' component={Hcongratulations} />
@@ -148,6 +148,7 @@ function App() {
             <Route
               exact
               path="/hotelconfirmation/:id"
+              
               component={HotelConfirmation}
             />
 

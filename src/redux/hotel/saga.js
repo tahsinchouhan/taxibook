@@ -21,6 +21,7 @@ const getBookHotellistAsync = async (payload) => {
   let check_in = moment(payload.startDate).format("YYYY-MM-DD");
   let address = payload.sendlocation===undefined?'Jagdalpur':payload.sendlocation;
   let check_out = moment(payload.endDate).format("YYYY-MM-DD");
+
   return await fetch(
     `${API_PATH}/api/v2/room/set?address=${address}&check_in=${check_in}&check_out=${check_out}`
   )
@@ -75,7 +76,7 @@ function* sethotelBookingSaga({ payload }) {
   try {
     const apiSetHotel = yield call(sethotelbookingAsync, payload);
     console.log("apiSetHotel",apiSetHotel)
-    yield put(setBookHotelSuccess(apiSetHotel.payload));
+    yield put(setBookHotelSuccess(apiSetHotel));
   } catch (err) {
     console.log(err.message);
   }

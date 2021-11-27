@@ -24,7 +24,7 @@ import {
   Dropdown as ANTDropdown,
   Slider,
   Checkbox,
-} from "antd";  
+} from "antd";
 import Searchbar from "./Searchbar";
 import { DownOutlined } from "@ant-design/icons";
 import { MenuItem } from "@material-ui/core";
@@ -38,11 +38,9 @@ function HotelList() {
   const [myOptions, setMyOptions] = useState([]);
   // const dispatch = useDispatch();
 
-  const {
-    getHotelList: hotels,
-    getStartData,
-    isLoading,
-  } = useSelector((state) => state.hotelReducer);
+  const { getHotelList: hotels, getStartData, isLoading } = useSelector(
+    (state) => state.hotelReducer
+  );
   console.log({ getStartData });
   const [startDate, setStartDate] = useState(
     getStartData.startDate ? getStartData.startDate : new Date()
@@ -60,8 +58,7 @@ function HotelList() {
   const [noOfGuest, setNoOfGuest] = useState(2);
   const [noOfRoom, setNoOfRoom] = useState(1);
   const [enterlocation, setEnterlocation] = useState("");
-  const [rangeValue, setRangeValue] = useState([1500, 2500])
-
+  const [rangeValue, setRangeValue] = useState([1500, 2500]);
 
   useEffect(() => {
     // dispatch(
@@ -74,7 +71,7 @@ function HotelList() {
     //     roomStateData: roomState,
     //   })
     // );
-    console.log(`getStartData`, getStartData);
+    // console.log(`getStartData`, getStartData);
     if (
       getStartData.length > 0 &&
       getStartData?.noOfRoom > 0 &&
@@ -92,18 +89,17 @@ function HotelList() {
     getStartData?.roomStateData?.length > 0
       ? getStartData?.roomStateData
       : [
-        {
-          room: 1,
-          guest: 2,
-        },
-      ]
-
+          {
+            room: 1,
+            guest: 2,
+          },
+        ]
   );
 
   const addMenu = () => {
     let noofg = 0;
     let noofr;
-    console.log(roomState?.length);
+    // console.log(roomState?.length);
     setNoOfRoom(roomState?.length);
 
     roomState?.map((curElem, index) => (noofg += curElem.guest));
@@ -111,40 +107,39 @@ function HotelList() {
     setNoOfGuest(noofg);
   };
   const guestRoom = (act, room_id) => {
-  //   let guestRoomObj = roomState;
-  //   console.log({ act });
-  //   console.log({ room_id });
-  //   if (act === "mainAdd" && noOfGuest > 0 && noOfRoom > 0) {
-  //     guestRoomObj.push({ room: room_id, guest: 2 });
-  //   } else if (act === "delete" && noOfGuest > 0 && noOfRoom > 0) {
-  //     let guestRoomObj1 = guestRoomObj.filter((elem, ind) => ind !== room_id);
-  //     guestRoomObj = guestRoomObj1;
-  //   } else if (act === "+") {
-  //     guestRoomObj[room_id].guest = guestRoomObj[room_id].guest + 1;
-  //   } else if (act === "-") {
-  //     guestRoomObj[room_id].guest = guestRoomObj[room_id].guest - 1;
-  //   }
-  //   addMenu();
-  //   setRoomState(guestRoomObj);
-  //   console.log(noOfRoom, noOfGuest);
-  // };
-  let guestRoomObj = roomState;
-  console.log({ act });
-  console.log({ room_id });
-  if (act === "mainAdd" && noOfGuest > 0 && noOfRoom > 0) {
-    guestRoomObj.push({ room: room_id, guest: 2 });
-  } else if (act === "delete" && noOfGuest > 0 && noOfRoom > 0) {
-    let guestRoomObj1 = guestRoomObj.filter((elem, ind) => ind !== room_id);
-    guestRoomObj = guestRoomObj1;
-  } else if (act === "+" && guestRoomObj[room_id].guest < 4) {
-    guestRoomObj[room_id].guest = guestRoomObj[room_id].guest + 1;
-  } else if (act === "-" && guestRoomObj[room_id].guest > 1) {
-    guestRoomObj[room_id].guest = guestRoomObj[room_id].guest - 1;
-  }
-  addMenu();
-  setRoomState(guestRoomObj);
-  console.log(noOfRoom, noOfGuest);
-};
+    //   let guestRoomObj = roomState;
+    //   console.log({ act });
+    //   console.log({ room_id });
+    //   if (act === "mainAdd" && noOfGuest > 0 && noOfRoom > 0) {
+    //     guestRoomObj.push({ room: room_id, guest: 2 });
+    //   } else if (act === "delete" && noOfGuest > 0 && noOfRoom > 0) {
+    //     let guestRoomObj1 = guestRoomObj.filter((elem, ind) => ind !== room_id);
+    //     guestRoomObj = guestRoomObj1;
+    //   } else if (act === "+") {
+    //     guestRoomObj[room_id].guest = guestRoomObj[room_id].guest + 1;
+    //   } else if (act === "-") {
+    //     guestRoomObj[room_id].guest = guestRoomObj[room_id].guest - 1;
+    //   }
+    //   addMenu();
+    //   setRoomState(guestRoomObj);
+    //   console.log(noOfRoom, noOfGuest);
+    // };
+    let guestRoomObj = roomState;
+    // console.log({ act });
+    // console.log({ room_id });
+    if (act === "mainAdd" && noOfGuest > 0 && noOfRoom > 0) {
+      guestRoomObj.push({ room: room_id, guest: 2 });
+    } else if (act === "delete" && noOfGuest > 0 && noOfRoom > 0) {
+      let guestRoomObj1 = guestRoomObj.filter((elem, ind) => ind !== room_id);
+      guestRoomObj = guestRoomObj1;
+    } else if (act === "+" && guestRoomObj[room_id].guest < 4) {
+      guestRoomObj[room_id].guest = guestRoomObj[room_id].guest + 1;
+    } else if (act === "-" && guestRoomObj[room_id].guest > 1) {
+      guestRoomObj[room_id].guest = guestRoomObj[room_id].guest - 1;
+    }
+    addMenu();
+    setRoomState(guestRoomObj);
+  };
   useEffect(() => {
     setRoomState(roomState);
     addMenu();
@@ -160,16 +155,24 @@ function HotelList() {
           <Menu.Item key={index}>
             Room {curElem.room}{" "}
             <span style={{ float: "right" }}>
-              <span style={{ padding: "5px" }} >  <BsDashSquare size={20} onClick={() => guestRoom("-", index)} /></span>
-              {" "}
-              <span style={{fontWeight:"700"}}>{curElem.guest}</span>{" "}
+              <span style={{ padding: "5px" }}>
+                {" "}
+                <BsDashSquare size={20} onClick={() => guestRoom("-", index)} />
+              </span>{" "}
+              <span style={{ fontWeight: "700" }}>{curElem.guest}</span>{" "}
               {curElem.guest === 3 ? (
                 // <button disabled>+</button>
-                <span style={{ padding: "5px"}} >
+                <span style={{ padding: "5px" }}>
                   <BsPlusSquare size={20} color={"#737272"} />
                 </span>
               ) : (
-                <span style={{ padding: "5px" }} > <BsPlusSquare size={20} onClick={() => guestRoom("+", index)} style={{ height: "20px" }} />
+                <span style={{ padding: "5px" }}>
+                  {" "}
+                  <BsPlusSquare
+                    size={20}
+                    onClick={() => guestRoom("+", index)}
+                    style={{ height: "20px" }}
+                  />
                 </span>
                 // <button
                 //  onClick={() => guestRoom("+", index)}
@@ -182,9 +185,10 @@ function HotelList() {
       </div>
       <Menu.Item>
         {roomState.length > 1 ? (
-          <FaTrash size={15}
+          <FaTrash
+            size={15}
             title="Delete Room "
-            style={{ float: "left",marginLeft:"20px"}}
+            style={{ float: "left", marginLeft: "20px" }}
             onClick={() => guestRoom("delete", roomState.length - 1)}
           />
         ) : (
@@ -193,17 +197,16 @@ function HotelList() {
         <span
           title="Add Room "
           style={{ float: "right" }}
-        onClick={() => guestRoom("mainAdd", roomState.length + 1)}
+          onClick={() => guestRoom("mainAdd", roomState.length + 1)}
         >
-          <FaPlusCircle size={15}/>
-       &nbsp;   Add Room
+          <FaPlusCircle size={15} />
+          &nbsp; Add Room
         </span>
       </Menu.Item>
     </Menu>
   );
   const price = (
     <Menu className="priceMenu">
-
       <div>
         <Slider
           range={{ draggableTrack: false }}
@@ -212,18 +215,16 @@ function HotelList() {
           min={500}
           max={4500}
           onChange={(e) => {
-            setRangeValue(e)
-            console.log(e);
+            setRangeValue(e);
           }}
         />
         <span>
-          ₹<b>{rangeValue?.[0]}</b>&nbsp;&nbsp;-&nbsp;&nbsp;
-          ₹<b>{rangeValue?.[1]}</b>
+          ₹<b>{rangeValue?.[0]}</b>&nbsp;&nbsp;-&nbsp;&nbsp; ₹
+          <b>{rangeValue?.[1]}</b>
         </span>
       </div>
-
     </Menu>
-  )
+  );
   const Aminities = (
     <Menu className="aminitiesMenu">
       <div style={{ marginLeft: "20px" }}>
@@ -240,8 +241,8 @@ function HotelList() {
         </Checkbox>
         <br />
       </div>
-    </Menu >
-  )
+    </Menu>
+  );
   const getDataFromAPI = (name) => {
     setEnterlocation(name);
     setMyOptions([]);
@@ -253,7 +254,6 @@ function HotelList() {
         return response.json();
       })
       .then((res) => {
-        console.log(res.data);
         for (var i = 0; i < res.data.length; i++) {
           let str = `${res.data[i]?.hotel_name},${res.data[i]?.city}`;
           myOptions.push(str);
@@ -281,7 +281,6 @@ function HotelList() {
           long: longitude,
         })
         .then((res) => {
-          console.log("response", res.data.data);
           for (var i = 0; i < res.data.data.length; i++) {
             let str = `${res.data?.data[i]?.hotel_name},${res.data?.data[i]?.city}`;
             myOptions.push(str);
@@ -293,7 +292,7 @@ function HotelList() {
     });
   };
   const onDmTicketShow = () => {
-    console.log({ sendlocation });
+    // console.log({ sendlocation });
     let city = sendlocation;
     if (city === undefined) {
       if (enterlocation === "" || enterlocation === undefined) {
@@ -304,21 +303,20 @@ function HotelList() {
     }
     setSendlocation(city);
 
-    dispatch(
-      getBookHotel({
-        sendlocation: city,
-        startDate,
-        endDate,
-        noOfRoom,
-        noOfGuest,
-        roomStateData: roomState,
-      })
-    );
+    // dispatch(
+    //   getBookHotel({
+    //     sendlocation: city,
+    //     startDate,
+    //     endDate,
+    //     noOfRoom,
+    //     noOfGuest,
+    //     roomStateData: roomState,
+    //   })
+    // );
     history.push("/hotellist");
   };
   useEffect(() => {
     getLocation();
-
   }, []);
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
@@ -354,7 +352,7 @@ function HotelList() {
         roomStateData: roomState,
       })
     );
-  }, [])
+  }, []);
   // const Pricemenu = (
   //   <Menu>
   //     <Menu.Item>
@@ -415,7 +413,7 @@ function HotelList() {
                       {...params}
                       onKeyPress={(e) => getDataFromAPI(e.target.value)}
                       placeholder="Search Area"
-                    // InputProps={{ disableUnderline: true }}
+                      // InputProps={{ disableUnderline: true }}
                     />
                   )}
                 />
@@ -491,11 +489,13 @@ function HotelList() {
             <Col xs={12} md={3} className="mt-2">
               <Form.Group className="" controlId="exampleForm.ControlInput1">
                 <div>
-                  <Form.Label className="dm-ticket">Number Of Guests</Form.Label>
+                  <Form.Label className="dm-ticket">
+                    Number Of Guests
+                  </Form.Label>
                   <ANTDropdown
                     overlay={menu}
-                  trigger={["click"]}
-                  // style={{ width: "100px" }}
+                    trigger={["click"]}
+                    // style={{ width: "100px" }}
                   >
                     <input // onChange={(e) => setEmail(e.target.value)}
                       // value={email}
@@ -512,12 +512,11 @@ function HotelList() {
                         // padding: "10px",
                         // position:"absolute"
                       }}
-                    // readOnly
+                      // readOnly
                     />
                   </ANTDropdown>
                 </div>
               </Form.Group>
-
             </Col>
             <Col
               md={2}
@@ -526,12 +525,12 @@ function HotelList() {
                 display: "flex",
                 justifyContent: "center",
                 // alignItems: "flex-end",
-                marginTop: "45px"
+                marginTop: "45px",
               }}
             >
               <div
                 className="dmticket-btn"
-              //   style={{ textAlign: "center" }}
+                //   style={{ textAlign: "center" }}
               >
                 <Button
                   type="submit"
@@ -565,20 +564,27 @@ function HotelList() {
               <div style={{ marginLeft: "20px", flexDirection: "row" }}>
                 <b className="h4" style={{ fontWeight: "bold" }}>
                   Filters
-
                 </b>
-                <span style={{
-                  color: "red",
-                  float: "right",
-                  fontSize: "14px",
-                  fontWeight: "700",
-                  marginTop: "5px"
-                }}>
+                <span
+                  style={{
+                    color: "red",
+                    float: "right",
+                    fontSize: "14px",
+                    fontWeight: "700",
+                    marginTop: "5px",
+                  }}
+                >
                   Clear All
                 </span>
               </div>
 
-              <span style={{ marginLeft: "20px", marginTop: "10px", fontSize: "14px" }}>
+              <span
+                style={{
+                  marginLeft: "20px",
+                  marginTop: "10px",
+                  fontSize: "14px",
+                }}
+              >
                 <b>Price</b>
               </span>
               <div style={{ textAlign: "center", marginLeft: "15px" }}>
@@ -589,14 +595,13 @@ function HotelList() {
                   min={500}
                   max={4500}
                   onChange={(e) => {
-                    setRangeValue(e)
+                    setRangeValue(e);
                     console.log(e);
                   }}
                 />
                 <span>
-                  ₹<b>{rangeValue?.[0]}</b>&nbsp;&nbsp;-&nbsp;&nbsp;
-                  ₹<b>{rangeValue?.[1]}</b>
-
+                  ₹<b>{rangeValue?.[0]}</b>&nbsp;&nbsp;-&nbsp;&nbsp; ₹
+                  <b>{rangeValue?.[1]}</b>
                 </span>
                 <hr />
               </div>
@@ -624,18 +629,13 @@ function HotelList() {
               <hr />
             </div>
             <div className="col-sm-10">
-              <ListCard />
+              <ListCard startDate={startDate} endDate={endDate} />
             </div>
-            {/* <ListCard /> */}
           </div>
           <Footer />
         </div>
 
-
-
         {/* Mobile View */}
-
-
 
         <div className="d-md-none">
           <Searchbar getStartData={getStartData} />
@@ -644,22 +644,46 @@ function HotelList() {
               display: "flex",
               flexDirection: "row",
               fontFamily: "poppins",
-              marginBottom: "-40px"
+              marginBottom: "-40px",
             }}
           >
             <p style={{ marginLeft: "10px", color: "#0FA453" }}>
-              <b style={{ borderRight: "2px solid #0FA453", paddingRight: "5px" }}> <GiSettingsKnobs /> Filters</b>
+              <b
+                style={{
+                  borderRight: "2px solid #0FA453",
+                  paddingRight: "5px",
+                }}
+              >
+                {" "}
+                <GiSettingsKnobs /> Filters
+              </b>
             </p>
             <p style={{ marginLeft: "10px" }}>
               <ANTDropdown overlay={price}>
-                <p style={{ boxShadow: "0px 0px 5px -2px", padding: "3px 0px 3px 10px", borderRadius: "4px", height: "30px", width: "75px" }}>
+                <p
+                  style={{
+                    boxShadow: "0px 0px 5px -2px",
+                    padding: "3px 0px 3px 10px",
+                    borderRadius: "4px",
+                    height: "30px",
+                    width: "75px",
+                  }}
+                >
                   Prices <DownOutlined style={{ color: "#0FA453" }} />
                 </p>
               </ANTDropdown>
             </p>
             <p style={{ marginLeft: "10px" }}>
               <ANTDropdown overlay={Aminities}>
-                <p style={{ boxShadow: "0px 0px 5px -2px", padding: "3px 0px 3px 10px", borderRadius: "4px", height: "30px", width: "90px" }}>
+                <p
+                  style={{
+                    boxShadow: "0px 0px 5px -2px",
+                    padding: "3px 0px 3px 10px",
+                    borderRadius: "4px",
+                    height: "30px",
+                    width: "90px",
+                  }}
+                >
                   Aminities <DownOutlined style={{ color: "#0FA453" }} />
                 </p>
               </ANTDropdown>

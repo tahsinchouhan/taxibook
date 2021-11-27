@@ -18,23 +18,25 @@ const INIT_STATE = {
   prehomeInterest: {},
   getPrehomeInterest: {},
   getPrehomeDestination: {},
-  isLoading:true
+  isLoading: true,
 };
 
 const hotelReducer = (state = INIT_STATE, action) => {
+  console.log("data action",action)
   switch (action.type) {
     case GET_BOOK_HOTEL: {
       const actionData = action.payload;
-      console.log(actionData);
       return {
         ...state,
         HotelBookingStartdate: action.payload,
         getStartData: action.payload,
-        isLoading:true,
+        isLoading: true,
       };
     }
     case GET_BOOK_HOTEL_SUCCESS:
-      return { ...state, getHotelList: action.payload ,isLoading:false};
+      return { ...state, getHotelList: action.payload, isLoading: false,data:action.payload.data };
+
+      
     case GET_BOOK_HOTEL_ERROR:
       return { ...state, error: action.payload };
 
@@ -45,6 +47,7 @@ const hotelReducer = (state = INIT_STATE, action) => {
     }
     case SET_BOOK_HOTEL_SUCCESS:
       return { ...state, checkoutData: action.payload };
+      
     case SET_BOOK_HOTEL_ERROR:
       return { ...state, error: action.payload };
 

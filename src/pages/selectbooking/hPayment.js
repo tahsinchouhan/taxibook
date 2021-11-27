@@ -32,40 +32,43 @@ function HPayment() {
   const [data, setData1] = useState();
 
   const dispatch = useDispatch();
-  const {
-    data: apiData,
-    tripData,
-    mobile,
-    routeData,
-  } = useSelector((state) => state.busReducer);
+  const { data: apiData, tripData, mobile, routeData } = useSelector(
+    (state) => state.busReducer
+  );
   const { age, gender, adhaar, basic_details, price, surcharge } = apiData;
-  const  {getStartData,Setdata,checkoutData}  = useSelector((state) => state.hotelReducer);
-console.log(Setdata)
+  const { getStartData, Setdata, checkoutData } = useSelector(
+    (state) => state.hotelReducer
+  );
+  console.log("Setdata", Setdata);
+  console.log("data", data);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
 
   useEffect(() => {
-    if(Setdata.startDate === undefined){
-      history.push('/hotelsearch')
+    if (Setdata.startDate === undefined) {
+      history.push("/hotelsearch");
     }
   }, [Setdata]);
   useEffect(() => {
-    if(Setdata.startDate === undefined){
-      history.push('/hotelsearch')
+    if (Setdata.startDate === undefined) {
+      history.push("/hotelsearch");
     }
-    console.log(Setdata?.total_amount)
-    const user = JSON.parse(localStorage.getItem('user_data'));
-    const token = user.token
+    console.log(Setdata?.total_amount);
+    const user = JSON.parse(localStorage.getItem("user_data"));
+    const token = user.token;
     axios
-      .post(`${API_PATH}/api/v2/booking/pay`, {
-        amount:Setdata?.total_amount.toFixed(),
-      },
-      {headers: { Authorization: `Bearer ${token}` }}
+      .post(
+        `${API_PATH}/api/v2/booking/pay`,
+        {
+          amount: Setdata?.total_amount.toFixed(),
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
       )
       // .then((res) => res.json())
       .then((result) => {
-        console.log('result',result);
+        console.log("result", result);
         setData1(result.data);
       })
       .catch((e) => {
@@ -74,8 +77,8 @@ console.log(Setdata)
   }, []);
 
   useEffect(() => {
-    if(Setdata.startDate === undefined){
-     history.push('/hotelsearch')
+    if (Setdata.startDate === undefined) {
+      history.push("/hotelsearch");
     }
   }, [Setdata]);
 
@@ -92,7 +95,7 @@ console.log(Setdata)
     // key: "rzp_test_DuapYrmQwcWLGy",
     var options = {
       // key: "rzp_live_CpkoLmfTklzLb0",
-      key: 'rzp_test_DuapYrmQwcWLGy',
+      key: "rzp_test_DuapYrmQwcWLGy",
       currency: "INR",
       amount: data.amount.toFixed().toString(),
       order_id: data.id,
@@ -101,13 +104,13 @@ console.log(Setdata)
       image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
 
       handler: function (response) {
-        console.log({response})
+        console.log({ response });
         if (response.razorpay_payment_id) {
-            dispatch(setBookHotelSuccess(Setdata))
+          dispatch(setBookHotelSuccess(Setdata));
           dispatch(
             setHApiData({ ...Setdata, order_id: response.razorpay_order_id })
           );
-          history.push("/Hcongratulation-page");
+          // history.push("/hotel-details-book");
         }
       },
 
@@ -128,7 +131,7 @@ console.log(Setdata)
         <Container style={{ width: "75%", marginTop: "50px" }}>
           <div>
             <AvForm>
-              <Row style={{justifyContent: 'center',}}>
+              <Row style={{ justifyContent: "center" }}>
                 <Col xs={12} md={6} className="mt-2">
                   <Form.Label className="dm-ticket">Enter Your Name</Form.Label>
                   <AvField
@@ -174,7 +177,9 @@ console.log(Setdata)
                     }}
                   />
 
-                  <Form.Label className="dm-ticket">Enter Email Address</Form.Label>
+                  <Form.Label className="dm-ticket">
+                    Enter Email Address
+                  </Form.Label>
 
                   <AvField
                     onChange={(e) => setEmail(e.target.value)}
@@ -191,7 +196,7 @@ console.log(Setdata)
                       pattern: {
                         value:
                           "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/",
-                          errorMessage:"Please Enter Your Vailid Email",
+                        errorMessage: "Please Enter Your Vailid Email",
                       },
                     }}
                   />
@@ -219,7 +224,7 @@ console.log(Setdata)
                 </Button>
               </div>
             </AvForm>
-            </div>
+          </div>
         </Container>
         <Footer />
       </div>
@@ -230,8 +235,8 @@ console.log(Setdata)
         <Header />
         <Container style={{ width: "80%", marginTop: "50px" }}>
           <div>
-          <AvForm>
-              <Row style={{justifyContent: 'center',}}>
+            <AvForm>
+              <Row style={{ justifyContent: "center" }}>
                 <Col xs={12} md={6} className="mt-2">
                   <Form.Label className="dm-ticket">Enter Your Name</Form.Label>
                   <AvField
@@ -277,7 +282,9 @@ console.log(Setdata)
                     }}
                   />
 
-                  <Form.Label className="dm-ticket">Enter Email Address</Form.Label>
+                  <Form.Label className="dm-ticket">
+                    Enter Email Address
+                  </Form.Label>
 
                   <AvField
                     onChange={(e) => setEmail(e.target.value)}
@@ -294,7 +301,7 @@ console.log(Setdata)
                       pattern: {
                         value:
                           "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/",
-                          errorMessage:"Please Enter Your Vailid Email",
+                        errorMessage: "Please Enter Your Vailid Email",
                       },
                     }}
                   />

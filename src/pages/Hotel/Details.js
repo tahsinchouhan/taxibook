@@ -13,23 +13,27 @@ import hotelotherimage from "../../assets/img/hotelotherimage.jpg";
 import { BiCheckCircle } from "react-icons/bi";
 // import { AiOutlineCamera } from "react-icons/Ai";
 
-
 const Details = ({ hotelUniqid, detailsP }) => {
-  console.log({ detailsP });
   const history = useHistory();
-  const bookingPage = () => {
-    history.push(`/hotelconfirmation/${hotelUniqid}`);
-  };
+
+  console.log("hotelUniqid",hotelUniqid)
+
+ 
   const { getStartData } = useSelector((state) => state.hotelReducer);
   const check_in = moment(getStartData.startDate).format("DD-MMM");
   const address1 = getStartData.sendlocation;
   const check_out = moment(getStartData.endDate).format("DD-MMM");
-  console.log(detailsP, typeof detailsP);
+  // console.log(detailsP, typeof detailsP);
 
   const [index, setIndex] = useState(0);
+  const [detail, setDetail] = useState([]);
+
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
+
+  useEffect(() => {
+  }, [detailsP]);
 
   const responsive = {
     desktop: {
@@ -47,6 +51,16 @@ const Details = ({ hotelUniqid, detailsP }) => {
       items: 1,
       slidesToSlide: 1, // optional, default to 1.
     },
+  };
+
+
+  const updatePrice =(item)=>{
+    setDetail(item);
+  }
+
+  const bookingPage = (_id) => {
+    history.push(`/hotelconfirmation/${_id}`);
+
   };
 
   return (
@@ -85,7 +99,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
       </div>
 
       {/* =============== */}
-      {detailsP._id ? (
+      {detailsP ? (
         <div
           className="hotel-confirm-div"
           style={{ width: "90%", margin: "0 auto" }}
@@ -98,276 +112,219 @@ const Details = ({ hotelUniqid, detailsP }) => {
                 margin: "15px 15px 15px 0",
               }}
             >
-              {console.log("object", detailsP)}
               <h4 style={{ fontWeight: "bold", marginBottom: 0 }}>
-                {detailsP?.hotel_id?.hotel_name}
+                {detailsP[0]?.hotel_name}
               </h4>
               <p
                 style={{
-                  // color: "lightgray",
                   fontSize: "14px",
                   margin: 0,
                   padding: 0,
                 }}
               >
-                {`${detailsP?.hotel_id?.street}, ${detailsP?.hotel_id?.city}`}
+                {`${detailsP[0]?.street}, ${detailsP[0]?.city}`}
               </p>
             </div>
             <div>
-              {/* <h5 style={{ fontWeight: "bold", fontSize: "13px" }}>
-                Amenities
-              </h5>
-              <div style={{ display: "flex", flexWrap: "wrap" }}>
-                {detailsP?.amenities?.includes("AC") ? (
-                  <div className="amenities-div">
-                    <BiCheckCircle style={{ fontSize: "20px" }} />{" "}
-                    <h1 className="amenities-name">AC</h1>
-                  </div>
-                ) : (
-                  ""
-                )}
-                {detailsP?.amenities?.includes("Freeze") ? (
-                  <div className="amenities-div">
-                    <img src={calendar} alt="" className="amenities-logo" />
-                    <h1 className="amenities-name">Freeze</h1>
-                  </div>
-                ) : (
-                  ""
-                )}
-                {detailsP?.amenities?.includes("Wifi") ? (
-                  <div className="amenities-div">
-                    <img src={calendar} alt="" className="amenities-logo" />
-                    <h1 className="amenities-name">Wifi</h1>
-                  </div>
-                ) : (
-                  ""
-                )}
-                {detailsP?.amenities?.includes("Geezer") ? (
-                  <div className="amenities-div">
-                    <img src={calendar} alt="" className="amenities-logo" />
-                    <h1 className="amenities-name">Geezer</h1>
-                  </div>
-                ) : (
-                  ""
-                )}
-                {detailsP?.amenities?.includes("CCTV") ? (
-                  <div className="amenities-div">
-                    <img src={calendar} alt="" className="amenities-logo" />
-                    <h1 className="amenities-name">CCTV</h1>
-                  </div>
-                ) : (
-                  ""
-                )}
-                <div className="amenities-div">
-                  <h1
-                    style={{
-                      fontSize: "16px",
-                      display: "flex",
-                      justifyContent: "center",
-                      marginBottom: 0,
-                      color: "green",
-                      fontWeight: "bold",
-                    }}
-                  >
-                   
-                  </h1>
-                </div>
-              </div> */}
               <div>
                 <h2 style={{ fontWeight: "bold", fontSize: "20px" }}>
                   Choose Your Room
                 </h2>
-                <div className="choose-room-div">
-                  <div
-                    style={{
-                      backgroundColor: "#F5F5F5",
-                      height: "30px",
-                      display: "flex",
-                      alignItems: "center",
-                      padding: "0 15px",
-                    }}
-                  >
-                    ⭐️ Selected Category
-                  </div>
-                  <div
-                    style={{
-                      padding: "15px",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      borderBottom: "1px solid lightgray",
-                    }}
-                  >
-                    <div style={{}}>
-                      <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>
-                        Classic ({detailsP?.category})
-                      </h1>
-                      <p>Room Size : 1200 sqft</p>
-                      <div style={{ display: "flex" }}>
-                        {detailsP?.amenities?.includes("Geezer") ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              width: 100,
-                              height: 50,
-                            }}
-                          >
-                            <img
-                              src={calendar}
-                              alt=""
-                              style={{
-                                margin: "0 10px",
-                                width: "20px",
-                                height: "20px",
-                              }}
-                            />
-                            <h1
-                              style={{
-                                fontSize: "16px",
-                                display: "flex",
-                                justifyContent: "center",
-                                marginBottom: 0,
-                              }}
-                            >
-                              Geezer
-                            </h1>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                        {detailsP?.amenities?.includes("AC") ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              width: 100,
-                              height: 50,
-                            }}
-                          >
-                            <BiCheckCircle style={{ fontSize: "20px" }} />
-                            <h1
-                              style={{
-                                fontSize: "16px",
-                                display: "flex",
-                                justifyContent: "center",
-                                marginBottom: 0,
-                              }}
-                            >
-                              AC
-                            </h1>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-
-                        {detailsP?.amenities?.includes("CCTVCameras") ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              width: 100,
-                              height: 50,
-                            }}
-                          >
-                            <img
-                              src={calendar}
-                              alt=""
-                              style={{
-                                margin: "0 10px",
-                                width: "20px",
-                                height: "20px",
-                              }}
-                            />
-                            {/* <AiOutlineCamera/> */}
-                            <h1
-                              style={{
-                                fontSize: "16px",
-                                display: "flex",
-                                justifyContent: "center",
-                                marginBottom: 0,
-                              }}
-                            >
-                              CCTV
-                            </h1>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-
-                        {detailsP?.amenities?.includes("FreeWifi") ? (
-                          <div
-                            style={{
-                              display: "flex",
-                              width: 100,
-                              height: 50,
-                            }}
-                          >
-                            <img
-                              src={calendar}
-                              alt=""
-                              style={{
-                                margin: "0 10px",
-                                width: "20px",
-                                height: "20px",
-                              }}
-                            />
-                            <h1
-                              style={{
-                                fontSize: "16px",
-                                display: "flex",
-                                justifyContent: "center",
-                                marginBottom: 0,
-                              }}
-                            >
-                              Free Wifi
-                            </h1>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                      </div>
-                    </div>
-                    <div>
-                      <img src={Room} alt="Room" className="room-mobile" />
-                    </div>
-                  </div>
-                  <div
-                    style={{
-                      padding: 20,
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <div style={{ fontSize: "20px" }}>
-                      <span style={{ fontWeight: "bold" }}>
-                        {" "}
-                        ₹ {detailsP?.price.base_price}
-                      </span>{" "}
-                      <span
+                {detailsP[0]?.room_list?.map((item, index) => {
+                  return (
+                    <div className="choose-room-div" style={{ marginBottom:"32px"}}>
+                      <div
                         style={{
-                          fontSize: "16px",
-                          textDecoration: "line-through",
+                          backgroundColor: "#F5F5F5",
+                          height: "30px",
+                          display: "flex",
+                          alignItems: "center",
+                          padding: "0 15px",
+                         
+
                         }}
                       >
-                        {" "}
-                        ₹ {detailsP?.price.base_price}
-                      </span>
+                        ⭐️ Selected Category
+                      </div>
+                      <div
+                        style={{
+                          padding: "15px",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          borderBottom: "1px solid lightgray",
+                        }}
+                      >
+                        <div>
+                          <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>
+                            Classic ({item?.category})
+                          </h1>
+                          <div style={{ display: "flex" }}>
+                            {item?.amenities?.includes("Geezer") ? (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  width: 100,
+                                  height: 50,
+                                }}
+                              >
+                                <img
+                                  src={calendar}
+                                  alt=""
+                                  style={{
+                                    margin: "0 10px",
+                                    width: "20px",
+                                    height: "20px",
+                                  }}
+                                />
+                                <h1
+                                  style={{
+                                    fontSize: "16px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    marginBottom: 0,
+                                  }}
+                                >
+                                  Geezer
+                                </h1>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                            {item?.amenities?.includes("AC") ? (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  width: 100,
+                                  height: 50,
+                                }}
+                              >
+                                <BiCheckCircle style={{ fontSize: "20px" }} />
+                                <h1
+                                  style={{
+                                    fontSize: "16px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    marginBottom: 0,
+                                  }}
+                                >
+                                  AC
+                                </h1>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+
+                            {item?.amenities?.includes("CCTVCameras") ? (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  width: 100,
+                                  height: 50,
+                                }}
+                              >
+                                <img
+                                  src={calendar}
+                                  alt=""
+                                  style={{
+                                    margin: "0 10px",
+                                    width: "20px",
+                                    height: "20px",
+                                  }}
+                                />
+                                <h1
+                                  style={{
+                                    fontSize: "16px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    marginBottom: 0,
+                                  }}
+                                >
+                                  CCTV
+                                </h1>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+
+                            {item?.amenities?.includes("FreeWifi") ? (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  width: 100,
+                                  height: 50,
+                                }}
+                              >
+                                <img
+                                  src={calendar}
+                                  alt=""
+                                  style={{
+                                    margin: "0 10px",
+                                    width: "20px",
+                                    height: "20px",
+                                  }}
+                                />
+                                <h1
+                                  style={{
+                                    fontSize: "16px",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    marginBottom: 0,
+                                  }}
+                                >
+                                  Free Wifi
+                                </h1>
+                              </div>
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        </div>
+                        <div>
+                          <img src={Room} alt="Room" className="room-mobile" />
+                        </div>
+                      </div>
+                      <div
+                        style={{
+                          padding: 20,
+                          display: "flex",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <div style={{ fontSize: "20px" }}>
+                          <span style={{ fontWeight: "bold" }}>
+                            ₹ {item?.price.base_price}
+                          </span>{" "}
+                          <span
+                            style={{
+                              fontSize: "16px",
+                              textDecoration: "line-through",
+                            }}
+                          >
+                            ₹ {item?.price.base_price}
+                          </span>
+                        </div>
+                        <div
+                          style={{
+                            border: "1px solid lightgray",
+                            height: "50px",
+                            width: "200px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            fontWeight: "bold",
+                            fontSize: "18px",
+                            borderRadius: "5px",
+                          }}
+                          onClick={()=>updatePrice(item)}
+                        >
+                          <FaCheckCircle />
+                          &nbsp; Selected
+                        </div>
+                      </div>
                     </div>
-                    <div
-                      style={{
-                        border: "1px solid lightgray",
-                        height: "50px",
-                        width: "200px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        fontWeight: "bold",
-                        fontSize: "18px",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      <FaCheckCircle />
-                      &nbsp; Selected
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
+
               </div>
             </div>
             <div style={{ padding: "15px 0 " }}>
@@ -419,7 +376,11 @@ const Details = ({ hotelUniqid, detailsP }) => {
                     paddingRight: "10px",
                   }}
                 >
-                  ₹ {detailsP?.price.base_price}
+                  
+                 {/* ₹ {detailsP[0]?.room_list[0]?.price?.base_price ? detail?.price?.base_price : ""  } */}
+                  
+                  {/* ₹ {detailsP[0]?.room_list[0]?.price?.base_price}  */}
+                  ₹ {detail?.price?.base_price}
                 </h1>
                 <h2
                   style={{
@@ -431,7 +392,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                     textDecoration: "line-through",
                   }}
                 >
-                  ₹ {detailsP?.price.base_price}
+                  ₹ {detail?.price?.base_price}
                 </h2>
                 <h3
                   style={{
@@ -442,12 +403,11 @@ const Details = ({ hotelUniqid, detailsP }) => {
                   }}
                 >
                   {" "}
-                  {/* {Math.round((detailsP?.price.base_price-detailsP?.price.final_price)*100/detailsP?.price.base_price)}% 0ff */}
                   {Math.round(
-                    ((detailsP?.price.base_price -
-                      detailsP?.price.base_price) *
+                    ((detail?.price?.base_price -
+                      detail?.price?.base_price) *
                       100) /
-                    detailsP?.price.base_price
+                      detail?.price?.base_price
                   )}
                   % 0ff
                 </h3>
@@ -496,7 +456,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                     fontSize: "12px",
                   }}
                 >
-                  Classic ({detailsP?.category})
+                  Classic ({detail?.category})
                 </div>
               </div>
 
@@ -506,9 +466,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
               >
                 <span style={{}}>Your Saving</span>
                 <span style={{ fontWeight: "bold" }}>
-                  ₹{" "}
-                  {detailsP?.price?.base_price -
-                    detailsP?.price?.base_price}
+                  ₹ {detail?.price?.base_price - detail?.price?.base_price}
                 </span>
               </div>
               <div
@@ -523,13 +481,13 @@ const Details = ({ hotelUniqid, detailsP }) => {
                   </span>
                 </span>
                 <span style={{ fontWeight: "bold" }}>
-                  ₹ {detailsP?.price?.base_price}
+                  ₹ {detail?.price?.base_price}
                 </span>
               </div>
 
               <div>
                 <div
-                  onClick={bookingPage}
+                  onClick={()=>bookingPage(detail?._id)}
                   style={{
                     fontWeight: "bold",
                     color: "#fff",

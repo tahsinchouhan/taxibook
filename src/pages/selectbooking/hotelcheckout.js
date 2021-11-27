@@ -16,7 +16,8 @@ function CheckoutPage() {
   const history = useHistory();
   const dispatch = useDispatch();
   const { getStartData, Setdata, checkoutData } = useSelector((state) => state.hotelReducer);
-  console.log(Setdata)
+  console.log("Setdata",Setdata)
+  
   const onCongratsClick = () => {
     history.push("/hpayment");
   };
@@ -78,8 +79,7 @@ function CheckoutPage() {
                         fontWeight: "bold",
                       }}
                     >
-                      {/* 31 July, 2021 */}
-                      {/* {tripData?.route?.end?.name} */}
+                      
                       {`${Setdata?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
                       {`${Setdata?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
                       {`${Setdata?.startDate?.toLocaleDateString("en-US", { year: 'numeric' })} `}
@@ -159,8 +159,7 @@ function CheckoutPage() {
                             fontFamily: "sans-serif",
                           }}
                         >
-                          {console.log("object",Setdata)}
-                          {" "} {Setdata?.basic_details?.hotel_id?.full_address?.street} {" ,"} {Setdata?.basic_details?.hotel_id?.full_address?.city}
+                          {Setdata?.basic_details?.hotel_id?.street} {" ,"} {Setdata?.basic_details?.hotel_id?.city}
                         </span>
                         <br />
                         <span

@@ -7,29 +7,43 @@ import { useHistory } from "react-router-dom";
 import { API_PATH } from "../../Path/Path";
 import axios from "axios";
 import Footer from "../travesaly/Footer";
-
 import moment from "moment";
 import { DatePicker } from "antd";
 import Details from "./Details";
-import {Carousel} from 'react-bootstrap'
+import { Carousel } from "react-bootstrap";
+
+
 const HotelDetails = (props) => {
-  console.log(props.match.params.name);
-  const hotelUniqid = props.match.params.name;
   const history = useHistory();
+
+  const hotelUniqid = props.match.params.name;
+  const startDate = props.match.params.startDate;
+  const endDate = props.match.params.endDate;
+
   const [detailsP, setDetailsP] = useState([]);
+  const [hotelDetail, setHotelDetail] = useState([]);
 
   useEffect(() => {
-    axios.get(`${API_PATH}/api/v2/room/${hotelUniqid}`).then((response) => {
+    setHotelDetail(props.location.state.detail);
+    initLoad(props.location.state.detail)
+  }, [props.location.state.detail]);
+
+
+  const initLoad=(value)=>{
+    console.log("value",value)
+    axios
+    .get(API_PATH + 
+      `/api/v2/room/set?address=${value.city}&check_in=2021-11-28&check_out=2021-11-29&hotel_id=${value.room_data.hotel_id}`
+    )
+    .then((response) => {
+      console.log("response",response.data.data)
       console.log(response.data.data);
       setDetailsP(response.data.data);
     });
-  }, []);
-  const onDmTicketShow = () => {
-    history.push("/hotellist");
-  };
-  function disabledDate(current) {
-    return current && current < moment().endOf("day");
   }
+  
+
+
   const { RangePicker } = DatePicker;
   console.log(detailsP);
   const [index, setIndex] = useState(0);
@@ -42,7 +56,6 @@ const HotelDetails = (props) => {
       <Header />
 
       <div className="d-none d-md-block" style={{ marginTop: "0" }}>
-       
         <Container
           className="d-none d-md-block "
           style={{ marginTop: "0", backgroundColor: "white" }}

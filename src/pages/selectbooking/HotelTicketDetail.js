@@ -44,7 +44,7 @@ function HotelTicketDetail() {
     console.log("sadh", apiId);
   } else {
     console.log("saddgdgdgdh", apiId);
-    fetch(`${API_PATH}/api/v1/dmpass/qrcode/${apiId}`)
+    fetch(`${API_PATH}/api/v2/booking/qrcode/619f5dae9e706607aca196b8`)
       .then((response) => response.json())
       .then((res) => {
         console.log(res.data);
