@@ -135,8 +135,14 @@ function BusMonsoon() {
         <div fluid className="d-md-none">
           <div>
             <Col xs={12} className="p-0">
-              <div className="">
+              {/* <div className="">
                 <div >
+                <FaArrowLeft style={{
+                marginRight: "62px",
+                paddingTop: " 20px",
+                fontSize: " 24px",
+                marginLeft: "20px",
+              }} onClick={onClickBack} />
                   <h5
                     style={{
                       padding: "15px",
@@ -148,14 +154,49 @@ function BusMonsoon() {
                       height: '75px'
                     }}
                   >
-                                  <FaArrowLeft style={{marginLeft:'-75px'}} onClick={onClickBack} />
+                                  
 
                     {routeData?.start?.name}
                     <br />
                     {` to ${routeData?.end?.name} `}
                   </h5>
                 </div>
-              </div>
+              </div> */}
+              <div
+            className="tatibandh d-flex"
+            style={{
+              height: "85px",
+              backgroundColor: "#0FA453",
+              color: "white",
+            }}
+          >
+            <div
+              style={{
+                marginRight: "62px",
+                paddingTop: " 20px",
+                fontSize: " 24px",
+                marginLeft: "20px",
+              }}
+            >
+              <FaArrowLeft onClick={onClickBack} />
+            </div>
+            <div>
+              <h5
+                style={{
+                  paddingTop: "29px",
+                  fontSize: "17px",
+                  backgroundColor: "#0FA453",
+                  fontWeight: "bolder",
+                  color: "white",
+                  textAlign: "center",
+                }}
+              >
+               {routeData?.start?.name}
+                    <br />
+                    {` to ${routeData?.end?.name} `}
+              </h5>
+            </div>
+          </div>
             </Col>
             <Col xs={12}>
               <div style={{ textAlign: "center", paddingTop: "10px" }}>
@@ -282,7 +323,9 @@ function BusMonsoon() {
                                 </div>
                               </Col>
                               <Col xs={12} >
-                                <div className="train-seatsmobile  d-flex justify-content-center flex-column" onClick={() => onClickTrain(item._id)} >
+                                <div className="train-seatsmobile  d-flex justify-content-center flex-column" 
+                                // onClick={() => onClickTrain(item._id)} 
+                                >
                                   <span
                                     style={{ fontSize: "22px", fontWeight: "bolder" }}
                                   >

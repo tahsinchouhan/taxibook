@@ -1,8 +1,26 @@
 .vl {
-  border-left: 1px solid green;
+  border-left: 1px solid grey;
   height: 100%;
   position: absolute;
   left: 50%;
-  margin-left: -3px;
-  top: 0;
+  margin-left: -8px;
+  top: -14px;
+}
+@media only screen and (max-width: 600px) {
+  .vl {
+    display: none;
+  }
+}
+
+.icons {
+  position: absolute;
+  margin-top:0px;
+  color: green;
+  width: 1px;
+}
+.register {
+  background-color: #07bf07;
+  border: none;
+  width: 40%;
+  border-radius: 5px;
 }

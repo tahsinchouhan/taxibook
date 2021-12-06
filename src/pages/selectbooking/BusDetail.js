@@ -275,7 +275,7 @@ function BusPass() {
             </Col>
           </Row>
         </Container>
-        <Button className="locationpass-btn" onClick={onSubmit}>
+        <Button className="locationpass-btn" onClick={onSubmit} style={{position:'fixed',bottom:'0px'}}>
           Continue
         </Button>
         <div className="" style={{ paddingBottom: "85px" }}>

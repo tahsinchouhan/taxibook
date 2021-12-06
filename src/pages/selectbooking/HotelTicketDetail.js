@@ -15,7 +15,7 @@ import "../../assets/css/dmdetail.css";
 import { API_PATH } from "../../Path/Path";
 
 function HotelTicketDetail() {
-  const  {getStartData,Setdata,checkoutData}  = useSelector((state) => state.hotelReducer);
+  const  {Setdata}  = useSelector((state) => state.hotelReducer);
   console.log("Setdata",Setdata)
   const { id } = useParams();
 
@@ -59,6 +59,7 @@ function HotelTicketDetail() {
   const handlePrint = () => {
     window.print();
   };
+  
 
   return (
     <>
@@ -108,8 +109,8 @@ function HotelTicketDetail() {
             </Col>
             <Col className="dm__traveller_div" xs={12}>
                   <div className="dm__entry_card_two">
-                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Name : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{Setdata.name}</div></div>
-                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Age : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{Setdata.mobile}</div></div>
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Name : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{Setdata?.name}</div></div>
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Age : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{Setdata?.mobile}</div></div>
                           <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Gender : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>Gender will be here</div></div>
                           <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Aadhar : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>Aadhar will be here</div></div> 
  
@@ -123,14 +124,13 @@ function HotelTicketDetail() {
             <Col className="dm__entry_div" xs={12}>
              
                       <div className="dm__entry_card_two">
-                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Hotel Name : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{Setdata.basic_details.hotel_id.hotel_name}</div></div>
-                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Location : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{Setdata.basic_details.hotel_id.address}</div></div>
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Hotel Name : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{Setdata?.basic_details?.hotel_id?.hotel_name}</div></div>
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Location : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{Setdata?.basic_details?.hotel_id?.address}</div></div>
                               <div className="row mb-1">
                               <div className="col-md-4" style={{fontWeight:'bolder'}}>
                                Check-In-Date:
                                </div>          
                                  <div className="col-md-8" style={{paddingLeft:'10px'}}>
-              {/* 31 July, 2021 */}
               {`${Setdata?.startDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
               {`${Setdata?.startDate?.toLocaleDateString("en-US", { month: 'short' })} `}
               {`${Setdata?.startDate?.toLocaleDateString("en-US", { year: 'numeric' })} `}
@@ -141,7 +141,6 @@ function HotelTicketDetail() {
                                Check-Out-Date: 
                                </div>         
                                  <div className="col-md-8" style={{paddingLeft:'10px'}}>
-              {/* 31 July, 2021 */}
               {`${Setdata?.endDate?.toLocaleDateString("en-US", { day: 'numeric' })} `}
               {`${Setdata?.endDate?.toLocaleDateString("en-US", { month: 'short' })} `}
               {`${Setdata?.endDate?.toLocaleDateString("en-US", { year: 'numeric' })} `}
@@ -176,11 +175,10 @@ function HotelTicketDetail() {
           </Col>
           </Row>
           </div>
-          </div> 
+          </div>             
           </div>
         </div>
 
-        <Footer />
     </>
   );
 }

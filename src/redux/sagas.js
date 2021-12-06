@@ -6,8 +6,7 @@ import dmpassSaga from './dmpass/saga';
 import exploreSaga from './explore/saga';
 import hotelSaga from './hotel/saga';
 import packagesSaga from './packages/saga';
-
- 
+import signUpSaga from './signup/saga'; 
 
 export default function* rootSaga(getState){
     yield all([
@@ -17,6 +16,7 @@ export default function* rootSaga(getState){
         dmpassSaga(),
         exploreSaga(),
         hotelSaga(),
-        packagesSaga()
+        packagesSaga(),
+        signUpSaga()
       ]);
 }

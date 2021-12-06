@@ -9,10 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { createBusBooking } from "../../redux/actions";
 import { FaArrowLeft } from "react-icons/fa";
 import Typography from "@material-ui/core/Typography";
-
+import { useLocation } from 'react-router-dom';
 function CheckoutPage() {
   const history = useHistory();
-
+  const location = useLocation();
   const dispatch = useDispatch();
   const {
     data: apiData,
@@ -38,6 +38,12 @@ function CheckoutPage() {
   const onClickBack = () => {
     history.push("/busconfirmation");
   };
+  const value = location.state.update
+  console.log("value",value)
+  useEffect(() => {
+    // console.log("basic_detailsbasic_detailsbasic_detailsbasic_details",basic_details)
+    console.log("basic_detailsbasic_detailsbasic_detailsbasic_details",location.state.update)
+  }, [])
   return (
     <>
       <div className="d-none d-md-block">
@@ -343,9 +349,9 @@ function CheckoutPage() {
               >
                 Passenger Details
               </span>
-              {basic_details?.length > 0 ? (
+              {value?.length > 0 ? (
                 <Row>
-                  {basic_details?.map((item, i) => {
+                  {value?.map((item, i) => {
                     console.log("i",i)
                     return(
                       <Col md={6}>
@@ -362,14 +368,14 @@ function CheckoutPage() {
                               color: "black",
                             }}
                           >
-                            {item['name'+i]}
+                            {item.name}
                           </span>
                           <br />
                           <span>
-                            {item.gender}, {item['age'+i]}
+                            {item.gender}, {item.age}
                           </span>
                           <br />
-                          <span> Adhaar: {item['adhaar'+i]}</span>
+                          <span> Adhaar: {item.adhaar}</span>
                           <div className="p-3">
                             <Button className="checout-btn" onClick={onClickBack} >EDIT</Button>
                           </div>
@@ -608,56 +614,44 @@ function CheckoutPage() {
             >
               Passenger Details
             </span>
-            {basic_details?.length > 0 ? (
-              <Row>
-                {/* <h3
-                    style={{
-                      fontSize: "19px",
-                      color: "#0FA453",
-                      fontWeight: "bolder",
-                    }}>Passengers ({`${basic_details?.length}`})</h3> */}
-                {basic_details?.map((item, i) => (
-                  <Col xs={6} md={6}>
-                    <div
-                      className="check-passenger"
-                      style={{ marginLeft: "25px" }}
-                    >
-                      <div style={{ textAlign: "center", padding: "5px", marginTop: "10px" }}>
-                        <span
-                          style={{
-                            fontWeight: "bolder",
-                            fontFamily: "sans-serif",
-                            fontSize: "13px",
-                            color: "black",
-                          }}
-                        >
-                          {item['name'+i]}
-                        </span>
-                        <br />
-                        <span style={{
-                          fontWeight: "bold",
-                          fontFamily: "sans-serif",
-                          fontSize: "11px",
-                          color: "black",
-                        }}>
-                          {item.gender}, {item['age'+i]}
-                        </span>
-                        <br />
-                        <span style={{
-                          fontWeight: "bold",
-                          fontFamily: "sans-serif",
-                          fontSize: "11px",
-                          color: "black",
-                        }}> Adhaar: {item['adhaar'+i]}</span>
-                        <div className="">
-                          <Button className="checout-btn" onClick={onClickBack} >EDIT</Button>
+            {value?.length > 0 ? (
+                <Row>
+                  {value?.map((item, i) => {
+                    console.log("i",i)
+                    return(
+                      <Col md={6}>
+                      <div
+                        className="check-passenger"
+                        style={{ marginLeft: "25px" }}
+                      >
+                        <div style={{ textAlign: "center", padding: "10px" }}>
+                          <span
+                            style={{
+                              fontWeight: "bolder",
+                              fontFamily: "sans-serif",
+                              fontSize: "13px",
+                              color: "black",
+                            }}
+                          >
+                            {item.name}
+                          </span>
+                          <br />
+                          <span>
+                            {item.gender}, {item.age}
+                          </span>
+                          <br />
+                          <span> Adhaar: {item.adhaar}</span>
+                          <div className="p-3">
+                            <Button className="checout-btn" onClick={onClickBack} >EDIT</Button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Col>
-                ))}
-              </Row>
-            ) : null}
+                    </Col>
+                    )
+                    
+                  })}
+                </Row>
+              ) : null}
           </Row>
         </Container>
         {/* <div

@@ -69,11 +69,15 @@ import HotelList from "./pages/Hotel/HotelList";
 import HotelConfirmation from "./pages/selectbooking/HotelConfirmation";
 import Hcongratulations from './pages/selectbooking/hCongratulations'
 import HotelTicketDetail from'./pages/selectbooking/HotelTicketDetail'
+import HotelTicketPay from "./pages/selectbooking/AtHotelPay"
 import './assets/css/hotellist.css'
 
 import CabConfirmation from "./pages/Cab/CabConfirmation";
 import Cab from "./pages/Cab/CabSearch";
 import CabList from "./pages/Cab/CabList";
+import Profile from "./pages/profile/profile"
+import BookProfile from "./pages/profile/BookingProfile"
+
 
 function App() {
   return (
@@ -83,6 +87,9 @@ function App() {
           <Switch>
             <Route exact path='/' component={PreHome} />
             <Route exact path='/home' component={Home} />
+            <Route exact path='/profile' component={Profile} />
+            <Route exact path='/bookingprofile' component={BookProfile} />
+
             <Route exact path='/explore' component={Explores} />
             <Route exact path='/explore/:id' component={Explores} />
             <Route path="/destination_details/:name" component={DestinationDetails} />
@@ -144,6 +151,8 @@ function App() {
             <Route exact path='/hotelSingleDetails/:name' component={HotelSingleDetails} />
             <Route exact path='/Hcongratulation-page' component={Hcongratulations} />
             <Route exact path='/hotel-details-book/:id' component={HotelTicketDetail} />
+            <Route exact path='/hotel-details-pay/:id' component={HotelTicketPay} />
+
 
             <Route
               exact

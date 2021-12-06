@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { API_PATH } from "../../Path/Path";
 import moment from "moment";
-import { fetchStart, getOtp, setMobile, verifyOtp } from "../../redux/actions";
+import { fetchStart, getOtp, setMobile, verifyOtp,hotelpay } from "../../redux/actions";
 import { setBookHotel } from "../../redux/actions";
 import { toast, ToastContainer } from "react-toastify";
 import ButtonComponent from "../../containers/Button";
@@ -26,6 +26,8 @@ function HotelConfirmation(props) {
   const [total_amount1, settotal_amount1] = useState(0);
   const dispatch = useDispatch();
   const { getStartData } = useSelector((state) => state.hotelReducer);
+  const {hotelpayData} = useSelector((state) => state.hotelReducer)
+  // console.log("hotelpayData",hotelpayData)
   const { user_data } = useSelector((state) => state.loginReducer);
   const check_in = moment(getStartData.startDate).format("DD-MMM");
   const address1 = getStartData.sendlocation;
@@ -42,7 +44,7 @@ function HotelConfirmation(props) {
   //calculate days difference by dividing total milliseconds in a day
   const days_difference = time_difference / (1000 * 60 * 60 * 24);
   const [dayDifference, setdayDifference] = useState(days_difference);
-
+  const [hotelPayDetails, setHotelPayDetails] = useState({})
   const getHotelSingleData = async () => {
     await axios
       .get(`${API_PATH}/api/v2/room/${hotelUniqid}`)
@@ -51,6 +53,7 @@ function HotelConfirmation(props) {
         await setSingleData(response.data.data);
         // console.log(response.data.data.hotel_id.hotel_name)
         setHotelDetails(response.data.data.hotel_id);
+        setHotelPayDetails(response.data.data)
         setTotalValue();
       });
   };
@@ -137,6 +140,7 @@ function HotelConfirmation(props) {
 
     return false;
   };
+  
   const [payableAmt, setPayableAmt] = useState(0);
   const calculatePrice = () => {
     console.log({ no_of_room });
@@ -144,12 +148,31 @@ function HotelConfirmation(props) {
       getStartData.noOfRoom * dayDifference * singleData?.price?.base_price;
     setPayableAmt(payAmt);
   };
-  useEffect(() => {
+  useEffect((email) => {
     console.log(singleData);
     calculatePrice();
   }, [singleData, dayDifference, getStartData]);
   // const className = props.activeButton === item.name ? "btn-success" : "btn-light";
 
+  useEffect(() => {
+    if(hotelpayData?.data?.booking_id === undefined){
+
+    }else{
+      history.push({
+        pathname: `/hotel-details-pay/${hotelpayData?.data?.booking_id}`,
+        state: { fullname: values.name,
+                  gender: gender,
+                  age: number,
+                  adhar : adhar
+        } 
+      })
+    }
+  }, [hotelpayData])
+
+  const onHotelPay = () =>{
+    dispatch(hotelpay({hotelPayDetails,getStartData}))
+  }
+  console.log("hotelDetails",hotelDetails)
   return (
     <>
       <ToastContainer />
@@ -200,7 +223,7 @@ function HotelConfirmation(props) {
                   >
                     Enter Travellers Details
                   </h4>
-                  <div style={{ padding: "10px 20px", marginBottom: "40px" }}>
+                  <div style={{ padding: "24px 20px", marginBottom: "40px" }}>
                     <p>
                       We will use this detail to share your booking information{" "}
                     </p>
@@ -217,13 +240,13 @@ function HotelConfirmation(props) {
                           <input
                             type="text"
                             name="name"
-                            required
                             placeholder="Your Name"
                             className="form-input"
                             onChange={(e) => {
                               setValues(e.target.value);
                               handleChange(e);
                             }}
+                            required
                           />
                         </div>
                         <div className="form-input-div">
@@ -342,7 +365,7 @@ function HotelConfirmation(props) {
                           type="button"
                           onClick={onClickMonsoon}
                         >
-                          Continue
+                          Pay Now
                         </button>
                       </div>
                     </form>
@@ -443,6 +466,13 @@ function HotelConfirmation(props) {
 
                     <span style={{ fontWeight: "bold" }}>₹ {payableAmt}</span>
                   </div>
+                  <button
+                          className="locationpass-btn mb-2 offset-md-5"
+                          type="button"
+                          onClick={onHotelPay}
+                        >
+                          Pay at Hotel
+                        </button>
                   <div
                     style={{
                       fontWeight: "bold",

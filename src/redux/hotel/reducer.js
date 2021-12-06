@@ -8,6 +8,9 @@ import {
   SET_INTEREST_PREHOME,
   SET_INTEREST_PREHOME_SUCCESS,
   SET_DESTINATION_PREHOME_SUCCESS,
+  HOTEL_PAY,
+  HOTEL_PAY_SUCCESS,
+  HOTEL_PAY_ERROR
 } from "../actions";
 
 const INIT_STATE = {
@@ -19,6 +22,7 @@ const INIT_STATE = {
   getPrehomeInterest: {},
   getPrehomeDestination: {},
   isLoading: true,
+  hotelpayData: {}
 };
 
 const hotelReducer = (state = INIT_STATE, action) => {
@@ -58,6 +62,10 @@ const hotelReducer = (state = INIT_STATE, action) => {
       return { ...state, getPrehomeInterest: action.payload };
     case SET_DESTINATION_PREHOME_SUCCESS:
       return { ...state, getPrehomeDestination: action.payload };
+    case HOTEL_PAY:
+      return{...state,isLoading: true,}
+      case HOTEL_PAY_SUCCESS:
+        return{...state, hotelpayData: action.payload,isLoading: false,}
 
     default:
       return { ...state };

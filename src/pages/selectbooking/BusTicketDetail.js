@@ -23,7 +23,15 @@ function BusBookingDetail() {
   const { tripList: trips, route_id } = useSelector(
     (state) => state.busReducer
   );
-
+  const {
+    data: detailsData,
+    createbusData,
+    booking_id
+  } = useSelector((state) => state.busReducer);
+  const { basic_details } = detailsData;
+  console.log("detailsData",detailsData)
+  console.log("basic_detailsbasic_details",basic_details)
+  console.log("booking_idbooking_id",booking_id)
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,14 +63,17 @@ function BusBookingDetail() {
       });
   };
 
-  let apiId = localStorage.getItem("data");
+  // let apiId = localStorage.getItem("data");
+  const BookingId = localStorage.getItem("busticketData")
 
-  if (apiId == []) {
-    console.log("sadh", apiId)
+  if (BookingId == []) {
+    // console.log("sadh", apiId)
+    console.log("BookingId",BookingId)
+
   }
   else {
-    console.log("saddgdgdgdh", apiId)
-    fetch(`${API_PATH}/api/v1/dmpass/qrcode/${apiId}`)
+    console.log("BookingIdBookingId",BookingId)
+    fetch(`${API_PATH}/api/v1/busticket/qrcode/${BookingId}`)
       .then((response) => response.json())
       .then((res) => {
         console.log(res.data);
@@ -88,7 +99,7 @@ function BusBookingDetail() {
             <Row className="p-3">
               <Col xs={5} sm={5} className="p-0 dm__barcode">
                 <div className="booking-div">
-                  {/* <img src={qrImage} alt="" width={250} /> */}
+                  <img src={qrImage} alt="" width={250} />
                 </div>
               </Col>
               <Col xs={5} sm={5}>
@@ -124,41 +135,30 @@ function BusBookingDetail() {
                       </span>
                     </div>
                   </Col>
-                  <Col
-                    className="dm__card"
-                    xs={9}
-                    sm={9}
-                    style={{ marginLeft: "-10%" }}
-                  >
-                    <div className="dm__card_title">
-                      <div className="left">BOOKING DETAIL</div>
-                      <div className="right">PASS ID</div>
-                    </div>
-                    <div className="dm__card_body">
-                      <div className="left">BUS BOOKING ID</div>
-                      <div className="right">
-                        {apiData.length > 0 ? apiData[0]?.booking_Id : null}
-                      </div>
-                    </div>
-                  </Col>
                 </Row>
               </Col>
             </Row>
-
+            <Col className="dm__entry_div" xs={12}>
+             
+             <div className="dm__entry_card">
+                 <div className="row mb-1"> <div className="col-md-6" style={{color:"red",fontWeight:'bolder'}}>Pass Detail</div> <div className="col-md-6" style={{paddingLeft:'10px',color:"red",fontWeight:'bolder'}}>Pass ID</div></div>
+                 <div className="row mb-1"> <div className="col-md-6" style={{fontWeight:'bolder'}}>BUS BOOKING ID</div> <div className="col-md-6" style={{paddingLeft:'10px'}}>{apiData.length > 0 ? apiData[0]?.booking_Id : null}</div></div>
+                   </div>
+     </Col>
             <Row>
               <Col className="dm__title" xs={12}>
                 TRAVELLER DETAILS
               </Col>
               <Col className="dm__traveller_div" xs={12}>
-                {apiData?.length > 0
-                  ? apiData[0]?.basic_details?.map((item, i) => (
+                {basic_details?.length > 0
+                  ? basic_details?.map((item, i) => (
                     <div key={i} className="dm__trav_card">
-                      <div className="dm__trav_card_title">{item?.name}</div>
+                      <div className="dm__trav_card_title">{item.name}</div>
                       <div className="dm__trav_card_body">
                         <div className="top">
-                          {item?.gender}, {item?.age}
+                          {item.gender}, {item.age}
                         </div>
-                        <div className="bottom">Adhaar: {item?.adhaar}</div>
+                        <div className="bottom">Adhaar: {item.adhaar}</div>
                       </div>
                     </div>
                   ))
@@ -454,46 +454,43 @@ function BusBookingDetail() {
         </Row>
         {loading == false && notFound == false ? (
           <Row className="mt-5 pt-5">
-            {/* <Col xs={12}>
+            <Col xs={12}>
               <div className="text-center mt-2">
                 <img src={qrImage} alt="" width={130} />
               </div>
-            </Col> */}
+            </Col>
             <Col
               className="px-4 d-flex justify-content-center mt-3 "
               xs={12}
               sm={12}
             >
               <div className="dm__card mobile">
-                <div className="dm__card_title">
-                  <div className="left">BOOKING DETAIL</div>
-                  <div className="right">PASS ID</div>
-                </div>
-                <div className="dm__card_body">
-                  <div className="left">BUS BOOKING ID</div>
-                  <div className="right">
-                    {apiData.length > 0 ? apiData[0]?.booking_Id : null}
-                  </div>
-                </div>
+              <div className="dm__entry_card">
+                 <div className="row mb-1"> <div className="col-md-6" style={{color:"red",fontWeight:'bolder'}}>Pass Detail</div> <div className="col-md-6" style={{paddingLeft:'10px',color:"red",fontWeight:'bolder'}}>Pass ID</div></div>
+                 <div className="row mb-1"> <div className="col-md-6" style={{fontWeight:'bolder'}}>BUS BOOKING ID</div> <div className="col-md-6" style={{paddingLeft:'10px'}}>{apiData.length > 0 ? apiData[0]?.booking_Id : null}</div></div>
+                   </div>
               </div>
             </Col>
             <Col className="dm__title mobile" xs={12}>
               TRAVELLER DETAILS
             </Col>
             <Col className="dm__traveller_div mobile" xs={12}>
-              {apiData?.length > 0
-                ? apiData[0]?.basic_details?.map((item, i) => (
-                  <div key={i} className="dm__trav_card mobile">
-                    <div className="dm__trav_card_title">{item?.name}</div>
-                    <div className="dm__trav_card_body">
-                      <div className="top">
-                        {item?.gender}, {item?.age}
+
+              <Col className="dm__traveller_div" xs={12}>
+                {basic_details?.length > 0
+                  ? basic_details?.map((item, i) => (
+                    <div key={i} className="dm__trav_card">
+                      <div className="dm__trav_card_title">{item.name}</div>
+                      <div className="dm__trav_card_body">
+                        <div className="top">
+                          {item.gender}, {item.age}
+                        </div>
+                        <div className="bottom">Adhaar: {item.adhaar}</div>
                       </div>
-                      <div className="bottom">Adhaar: {item?.adhaar}</div>
                     </div>
-                  </div>
-                ))
-                : null}
+                  ))
+                  : null}
+              </Col>
             </Col>
             <Col className="dm__title mobile" xs={12}>
               TRIP packages_details

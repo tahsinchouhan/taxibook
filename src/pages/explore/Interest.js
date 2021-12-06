@@ -39,13 +39,13 @@ const Interest = () => {
     });
   };
   
-  const bookTickets = () => {
-    history.push("/select-booking");
-  };
-  const onButtonclick = () => {
-    console.log("object");
-    history.push("/select-booking");
-  };
+  // const bookTickets = () => {
+  //   history.push("/select-booking");
+  // };
+  // const onButtonclick = () => {
+  //   console.log("object");
+  //   history.push("/select-booking");
+  // };
   useEffect(() => {
     getCurrentLocation();
   }, []);
@@ -382,7 +382,7 @@ const Interest = () => {
 
                 <Button
                   className="makebooking-btn mx-3 btn-primary-tb"
-                  onClick={onButtonclick}
+                  // onClick={onButtonclick}
                 >
                   Step 1 - Book Travel Pass
                 </Button>
@@ -443,7 +443,7 @@ const Interest = () => {
                         width: "186px",
                         height: "53.63px",
                       }}
-                      onClick={bookTickets}
+                      // onClick={bookTickets}
                     >
                       Book Tickets
                     </Button>
@@ -559,7 +559,7 @@ const Interest = () => {
               <Button
                 className="makebooking-btn btn-primary-tb"
                 // style={{ backgroundColor: "#0FA453", color: "white" }}
-                onClick={onButtonclick}
+                // onClick={onButtonclick}
               >
                 Step 1 - Book Travel Pass
               </Button>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {
   Container,
   Offcanvas,
@@ -9,7 +9,11 @@ import {
   FormControl,
   Image,
   Dropdown,
+  Button
 } from "react-bootstrap";
+import axios from "axios"
+import { API_PATH } from "../Path/Path";
+
 import { HiMenu } from "react-icons/hi";
 import {FiSettings} from "react-icons/fi";
 // import logo from "../assets/img/logo1.png";
@@ -24,7 +28,7 @@ import { DownOutlined } from "@ant-design/icons";
 function Header() {
   const [modalShow, setModalShow] = useState(false);
   const [signup, setSignup] = useState(false);
-
+  const [profile,setProfile] = useState([])
 
   const modalHadler = () => {
     setModalShow(true);
@@ -47,6 +51,17 @@ function Header() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  useEffect(() => {
+    const customerID = JSON.parse(localStorage.getItem("customer_id"))
+    console.log("customerID",customerID)
+    axios.get(API_PATH + `/api/v1/customer/${customerID}`)
+    .then(response => {
+      setProfile(response.data)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }, [])
   const history = useHistory();
 
   const onSearchClick = () => {
@@ -67,34 +82,35 @@ function Header() {
   const mobile = JSON.parse(localStorage.getItem("mobile"));
 
   const ViewTicketHandler = () => {
-    history.push("/viewticket");
+    history.push("/bookingprofile");
   };
-  const signupHadler =()=>{
-    setSignup(true)
-  }
+
   const handleSignupClose = ()=>{
     setSignup(false)
 
   }
-  const menu = (
-    <Menu>
-      <Menu.Item>
-        <NavLink className="sidebar_item" to="/buspass">
-          BUS BOOKING
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item>
-        <NavLink className="sidebar_item" to="/hotelsearch">
-          HOTEL BOOKING
-        </NavLink>
-      </Menu.Item>
-      <Menu.Item>
-        <NavLink className="sidebar_item" to="/cab">
-          CAB BOOKING
-        </NavLink>
-      </Menu.Item>
-    </Menu>
-  );
+  const vendorHandler = () =>{
+    history.push("/profile");
+  }
+  // const menu = (
+  //   <Menu>
+  //     <Menu.Item>
+  //       <NavLink className="sidebar_item" to="/buspass">
+  //         BUS BOOKING
+  //       </NavLink>
+  //     </Menu.Item>
+  //     <Menu.Item>
+  //       <NavLink className="sidebar_item" to="/hotelsearch">
+  //         HOTEL BOOKING
+  //       </NavLink>
+  //     </Menu.Item>
+  //     <Menu.Item>
+  //       <NavLink className="sidebar_item" to="/cab">
+  //         CAB BOOKING
+  //       </NavLink>
+  //     </Menu.Item>
+  //   </Menu>
+  // );
   return (
     <>
       <Container className="d-md-none header_div">
@@ -151,16 +167,20 @@ function Header() {
                   }}
                 >
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    <FiSettings />
+                  <Button className="btn btn-success" style={{padding:'2px 10px'}}>
+                      Hi,<span>{profile?.data?.name}</span>
+                      </Button>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
+                  <Dropdown.Item onClick={vendorHandler}>Profile</Dropdown.Item>
+                  <Dropdown.Item onClick={ViewTicketHandler}>
+                      Bookings
+                    </Dropdown.Item>
                     <Dropdown.Item>{mobile}</Dropdown.Item>
                     <Dropdown.Item onClick={() => mainLogout()}>
                       Logout
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={ViewTicketHandler}>
-                      View Tickets
-                    </Dropdown.Item>
+                    
                   </Dropdown.Menu>
                 </Dropdown>
               </Offcanvas.Title>
@@ -168,9 +188,6 @@ function Header() {
               <>
               <Offcanvas.Title onClick={() => modalHadler()}>
                 LOGIN
-              </Offcanvas.Title>
-              <Offcanvas.Title onClick={()=>signupHadler()} style={{marginLeft:'64px'}}>
-              SIGNUP
               </Offcanvas.Title>
               </>             
             )}
@@ -184,33 +201,33 @@ function Header() {
                 EXPLORE
               </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/select-booking"> */}
-              <NavLink className="sidebar__navlink" to="/dmpass">
+              {/* <NavLink className="sidebar__navlink" to="/dmpass">
                 TRAVEL PASS
+              </NavLink> */}
+              <NavLink className="sidebar__navlink" to="/buspass">
+               BUS BOOKING
               </NavLink>
-              <NavLink className="sidebar__navlink" to="/select-booking">
-                BOOKING
-              </NavLink>
-              <NavLink className="sidebar__navlink" to="/hotelsearch">
+              {/* <NavLink className="sidebar__navlink" to="/hotelsearch">
                 HOTEL BOOKING
               </NavLink>
               <NavLink className="sidebar__navlink" to="/cab">
                 CAB BOOKING
-              </NavLink>
+              </NavLink> */}
               {/* <NavLink className="sidebar__navlink" to="/tickets_sraech"> */}
-              <NavLink className="sidebar__navlink" to="/tickets">
+              {/* <NavLink className="sidebar__navlink" to="/tickets">
                 TICKETS
-              </NavLink>
-              <NavLink className="sidebar__navlink" to="/buspass">
+              </NavLink> */}
+              {/* <NavLink className="sidebar__navlink" to="/buspass">
                 BUS TICKETS
-              </NavLink>
+              </NavLink> */}
               <>
-                <a
+                {/* <a
                   className="sidebar_item"
                   style={{ color: "white" }}
                   href="http://booking.travelbastar.com/signin"
                 >
                   VENDOR LOGIN
-                </a>
+                </a> */}
               </>
               {/* {user_data !== null ? (
                 <NavLink className="sidebar__navlink" to="/search#Tickets">
@@ -253,23 +270,21 @@ function Header() {
                   EXPLORE
                 </NavLink>
 
-                <NavLink className="sidebar_item" to="/dmpass">
+                {/* <NavLink className="sidebar_item" to="/dmpass">
                   TRAVEL PASS
-                </NavLink>
+                </NavLink> */}
                 {/* <NavLink className="sidebar_item" to="/select-booking"> */}
-                <ANTDropdown overlay={menu} trigger={['click']} className="sidebar_item">
-                  <NavLink className="sidebar_item" to="#">
-                    BOOKING <DownOutlined />
+                  <NavLink className="sidebar_item" to="/buspass">
+                    BUS BOOKING 
                   </NavLink>
-                </ANTDropdown>
                 
                 {/* <NavLink className="sidebar_item" to="/tickets_sraech"> */}
-                <NavLink className="sidebar_item" to="/tickets">
+                {/* <NavLink className="sidebar_item" to="/tickets">
                   TICKETS
-                </NavLink>
-                <NavLink className="sidebar_item" to="/buspass">
+                </NavLink> */}
+                {/* <NavLink className="sidebar_item" to="/buspass">
                   BUS TICKETS
-                </NavLink>
+                </NavLink> */}
 
                 {/* {user_data !== null ? (
                   <NavLink className="sidebar_item" to="/search#Tickets">
@@ -294,7 +309,7 @@ function Header() {
                       marginRight: "10px",
                     }}
                   /> */}
-                  <a
+                  {/* <a
                     href="http://booking.travelbastar.com/signin"
                     title="Vendor Login "
                   >
@@ -326,7 +341,7 @@ function Header() {
                     >
                       {" "}
                     </h4>
-                  </a>
+                  </a> */}
                 </div>
                 <div className="header_info d-flex align-items-center">
                   {/* <FaUser
@@ -363,14 +378,17 @@ function Header() {
                         cursor: "pointer",
                       }}
                     >
-                      <Dropdown.Toggle variant="" style={{ color: "#864BD8",}} id="dropdown-basic">
-                      <FiSettings/>  
+                      <Dropdown.Toggle variant="" style={{}} id="dropdown-basic">
+                      <Button className="btn btn-success" style={{padding:'2px 10px'}}>
+                      Hi,<span>{profile?.data?.name}</span>
+                      </Button>
                        </Dropdown.Toggle>
                       <Dropdown.Menu>
-                        <Dropdown.Item>{mobile}</Dropdown.Item>
-                        <Dropdown.Item onClick={ViewTicketHandler}>
-                          View Tickets
+                      <Dropdown.Item onClick={vendorHandler}>Profile</Dropdown.Item>
+                      <Dropdown.Item onClick={ViewTicketHandler}>
+                          Bookings
                         </Dropdown.Item>
+                        <Dropdown.Item>{mobile}</Dropdown.Item>
                         <Dropdown.Item onClick={() => mainLogout()}>
                           Logout
                         </Dropdown.Item>
@@ -391,19 +409,6 @@ function Header() {
                     >
                       LOGIN
                     </h4>
-                                        <h4
-                                        style={{
-                                          fontSize: "16px",
-                                          fontWeight: "700",
-                                          color: "#864BD8",
-                                          margin: "0",
-                                          marginRight: "40px",
-                                          cursor: "pointer",
-                                        }}
-                                        onClick={() => signupHadler()}
-                                      >
-                                        SIGNUP
-                                      </h4>
                                       </>
                   )}
                 </div>

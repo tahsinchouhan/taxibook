@@ -46,7 +46,9 @@ const createBusBookingRequest = async (payload) =>{
     {headers: { Authorization: `Bearer ${token}` }}
 
     )
-    .then((busticket) => busticket.data)
+    .then((busticket) => {
+      console.log("busticketDatabusticketData",busticket.data._id)
+      return busticket.data})
     .catch((error) => error);
 }
   
@@ -55,7 +57,8 @@ function* TripByRouteId({ payload }) {
   console.log("DATADTADT:::::", payload);
   try {
     const apiTripByRouteId = yield call(TripByRouteIdAsync, payload);
-    yield put(getTripByRouteIdSuccess(apiTripByRouteId.data));
+    yield put(getTripByRouteIdSuccess(apiTripByRouteId.data))
+    console.log("");
   } catch (error) {
     console.log(error);
   }
@@ -70,7 +73,9 @@ function* createBusBooking({ payload }) {
       mobile: phone,
     });
     yield put(setBookingId(busticket.data.booking_Id));
-    console.log("bus", busticket);
+    console.log("busbus", busticket);
+    localStorage.setItem("busticketData",busticket.data._id)
+
   } catch (error) {
     yield put(getRoutesError(error));
   }

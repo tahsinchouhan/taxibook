@@ -39,6 +39,7 @@ function Payment() {
     routeData,
   } = useSelector((state) => state.busReducer);
   const { age, gender, adhaar, basic_details, price, surcharge } = apiData;
+  console.log("apiDataapiData",apiData)
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -78,8 +79,8 @@ function Payment() {
     console.log("data", data);
     // key: "rzp_test_DuapYrmQwcWLGy",
     var options = {
-      // key: "rzp_live_CpkoLmfTklzLb0",
-      key: 'rzp_test_DuapYrmQwcWLGy',
+      key: "rzp_live_CpkoLmfTklzLb0",
+      // key: 'rzp_test_DuapYrmQwcWLGy',
       currency: "INR",
       amount: data.amount.toString(),
       order_id: data.id,

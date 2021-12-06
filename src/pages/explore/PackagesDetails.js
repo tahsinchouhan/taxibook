@@ -17,6 +17,7 @@ import RettingModal from "../../components/modal/RettingModal";
 import EnquireModal from "../../components/modal/EnquireModal";
 import { FaStar } from "react-icons/fa";
 import '../../assets/css/ratings.css'
+import { teal } from "@material-ui/core/colors";
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
@@ -164,15 +165,15 @@ const PackagesDetails = (props) => {
 
   }
 
-  const bookHandler = () =>{
-    history.push({
-      pathname: '/bookpass',
-      title:'packages.title'
-    })
-    localStorage.setItem('Booking_Price',packages.price)
-    localStorage.setItem('Package_Name',packages.title)
+  // const bookHandler = () =>{
+  //   history.push({
+  //     pathname: '/bookpass',
+  //     title:'packages.title'
+  //   })
+  //   localStorage.setItem('Booking_Price',packages.price)
+  //   localStorage.setItem('Package_Name',packages.title)
 
-  }
+  // }
   return (
     <>
       <div
@@ -348,9 +349,8 @@ const PackagesDetails = (props) => {
               <a
                 className="code"
                 style={{ color: "#7868E6" }}
-                onClick={bookHandler}
-              >
-                Book Now
+                href={`tel:${packages.tour_operator_account.mobile}`}              >
+                Call Now
               </a>
             </span>
           ) : null}
@@ -444,9 +444,9 @@ const PackagesDetails = (props) => {
                 style={{ width: "200px", display: "inline-block" }}
               >
                 <a
-                  onClick={bookHandler}
+                  href={`tel:${packages.tour_operator_account.mobile}`}              
                 >
-                  Book Now
+                  Call Now
                 </a>
               </span>
             ) : null}

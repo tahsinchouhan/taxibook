@@ -15,9 +15,12 @@ import Loader from "../../components/Loader";
 import { toast } from "react-toastify";
 import Message from "../../components/Message";
 import { AvForm, AvField } from "availity-reactstrap-validation";
+import LoginModal from "../../components/modal/LoginModal";
 
 function BusDetail({loading}) {
   const history = useHistory();
+  const [modalShow, setModalShow] = useState(false);
+
   const [otp, setOtp] = useState("");
   const { error, message } = useSelector(
     (state) => state.commonReducer
@@ -39,16 +42,22 @@ function BusDetail({loading}) {
 
   const fetchOtp = (mobile) => {
     // console.log("OTP:::::",mobile)
-    dispatch(getOtp(`91${number}`));
+    dispatch(getOtp(number));
   };
 
   const onClickMonsoon = () => {
     console.log("object", `91${mobile}`, otp);
     if (otp.length === 6) {
       dispatch(fetchStart());
-      dispatch(verifyOtp(`91${number}`, otp));
+      dispatch(verifyOtp(number, otp));
     }
 
+  };
+  const modalHadler = () => {
+    setModalShow(true);
+  };
+  const handleLoginClose = () => {
+    setModalShow(false);
   };
   return (
     <>
@@ -199,6 +208,25 @@ Tamda Ghumar- Mendri Ghumar- Chitrakoot etc
           </span>
         </div>
         <Container>
+        <div style={{textAlign:'center'}}>First Time User? Signup here </div>
+        <div style={{textAlign:'center'}}>
+        <Button className="offset-md-2" 
+                        onClick={() => modalHadler()}
+        
+        style={{
+                  width: "40%",
+                  textAlign: "center",
+                  height: "50px",
+                  borderRadius: "0px",
+                  backgroundColor: "#0fa453",
+                  border: "none",
+                  fontWeight: "600",
+                  marginTop: 20
+                }}>
+          Sign Up Here
+        </Button>
+</div>
+        <p className="pt-2"  style={{textAlign:'center'}}>Or Login Here</p>
           <AvForm >
             <Row className="row justify-content-center">
               <Col xs={12} md={4} className="" style={{ width: "100%" }}>
@@ -348,6 +376,8 @@ Tamda Ghumar- Mendri Ghumar- Chitrakoot etc
         </Container>
 
       </div>
+      <LoginModal show={modalShow} handleClose={handleLoginClose} />
+
     </>
   );
 }

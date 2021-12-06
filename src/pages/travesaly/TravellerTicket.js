@@ -36,7 +36,7 @@ function TravellerTicket() {
       img: "https://img.icons8.com/ios/452/passenger-with-baggage.png",
       name: "Travel Pass",
       alt: "Travel Pass",
-      path: "/dmpass",
+      // path: "/dmpass",
       style:{
         width:63,
       },
@@ -45,7 +45,7 @@ function TravellerTicket() {
       img: "https://cdn3.iconfinder.com/data/icons/transport-icons-2/512/BT_c3side-512.png",
       name: "Vehicle Pass",
       alt: "Vehicle Pass",
-      path: "/dmpass",
+      // path: "/dmpass",
       width:74,
       style:{
         width:74,
@@ -55,7 +55,7 @@ function TravellerTicket() {
       img: "https://static.thenounproject.com/png/61798-200.png",
       name: "Bus Ticket",
       alt: "Bus Ticket",
-      path: "/buspass",
+      // path: "/buspass",
       style:{
         width:74,
       },
@@ -65,7 +65,7 @@ function TravellerTicket() {
       img: "https://www.iconpacks.net/icons/2/free-parking-sign-icon-1641-thumb.png",
       name: "Parking",
       alt: "Parking",
-      path: "/tickets",
+      // path: "/tickets",
       style:{
         width:74,
         marginLeft:"20px",
@@ -76,7 +76,7 @@ function TravellerTicket() {
       img: "https://cdn3.iconfinder.com/data/icons/common-sports/4096/oarsmanship-512.png",
       name: "Boating",
       alt: "Boating",
-      path: "/tickets",
+      // path: "/tickets",
       style:{
         width:74,
       },
@@ -85,7 +85,7 @@ function TravellerTicket() {
       img: "https://cdn4.iconfinder.com/data/icons/nature-solid-icons-vol-3/72/108-512.png",
       name: "Nature Trekking",
       alt: "Nature Trekking",
-      path: "/tickets",
+      // path: "/tickets",
       style:{
         width:63,
       },

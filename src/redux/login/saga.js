@@ -1,8 +1,8 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { GET_OTP, LOGOUT, VERIFY_OTP } from "../actions";
+import { GET_OTP, LOGOUT, VERIFY_OTP , LOGIN_EMAIL} from "../actions";
 import { API_PATH } from "../../Path/Path";
 import {
-  getOtpSuccess, setUser
+  getOtpSuccess, setUser , loginEmailSuccess,getOtpError
 } from "./actions";
 import axios from 'axios'
 import { fetchError, hideMessage } from "../common/actions";
@@ -12,7 +12,6 @@ const OtpAsync = (mobile) =>
     mobile
   })
     .then((response) => response)
-    .then((json) => json)
     .catch(error => error);
     
     const fetchVerifyOtpAsync = async (payload) =>
@@ -29,17 +28,41 @@ const OtpAsync = (mobile) =>
     .catch(error => {
       return error
     });
+
+    const loginEmailAsync = async (payload) =>
+    await axios.post(API_PATH + "/api/v1/customer/login-with-email",{
+      email : payload.email,
+      password : payload.password
+    })
+    .then((response) => {
+      return response
+    })
+    .then((json) => {
+      return json
+    })
+    .catch(error => {
+      return error
+    })
+
+    function* Email({payload}) {
+      try {
+       const apiEmail = yield call(loginEmailAsync,payload)
+       yield put(loginEmailSuccess(apiEmail.data));
+      } catch (error) {
+        console.log(error)
+      }
+    }
     
 
 function* Otp({ payload }) {
   try {
     const apiOtp = yield call(OtpAsync, payload);
+    console.log("error123",apiOtp.response)
     yield put(getOtpSuccess(apiOtp.data));
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
-
 function* fetchVerifyOtp({ payload }) {
   try {
     const user_data = yield call(fetchVerifyOtpAsync, payload);
@@ -49,11 +72,9 @@ function* fetchVerifyOtp({ payload }) {
       localStorage.setItem('customer_id', JSON.stringify(user_data.data.data.user._id));
       localStorage.setItem('mobile', user_data.data.data.user.mobile);
       yield put(hideMessage())
-    } else {
-      yield put(fetchError("Invalid OTP"))
     }
   } catch (error) {
-    yield put(fetchError("Invalid OTP"))
+    console.log(error)
   }
 }
 
@@ -70,6 +91,7 @@ function* fetchLogout({ payload }) {
 
 function* watchGetPlaceholder() {
   yield takeEvery(GET_OTP, Otp);
+  yield takeEvery(LOGIN_EMAIL, Email)
 }
 
 function* verifyOtp() {

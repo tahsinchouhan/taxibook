@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setApiData } from "../../redux/actions";
 import '../../assets/css/busconfirmation.css'
 import { AvField, AvForm } from "availity-reactstrap-validation";
-
+import {AiOutlinePlus} from "react-icons/ai"
 
 const button_Data = [
   {
@@ -51,6 +51,7 @@ console.log( tripData, apiData,  routeData )
     if(routeData.startDate === undefined){
       history.push('/busdetail')
     }
+    // setTravellers([])
   }, [routeData]);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -72,13 +73,23 @@ console.log( tripData, apiData,  routeData )
 
   const onCheckout = () => {
     console.log("object");
-    dispatch(setApiData({ ...values, basic_details: travellers }))
-    history.push("/checkoutpage");
+    let basic_details = []
+    travellers.forEach((tv, ind) => {
+      basic_details.push({name:tv['name'+ind], adhaar:tv['adhaar'+ind], gender:tv['gender'], age: tv['age'+ind]});
+    });
+    dispatch(setApiData({ ...values, basic_details: basic_details }))
+    console.log("travellers",travellers)
+    console.log("basic_details",basic_details)
+    // history.push("/checkoutpage");
+    history.push({
+      pathname: "/checkoutpage",
+      state: { 
+        update: basic_details, 
+      },
+    }); 
   };
 
-  const onClickBack = () => {
-    history.push("/busmonsoon");
-  }
+
 
   const [values, setValues] = useState({
     mobile: '',
@@ -106,6 +117,11 @@ console.log( tripData, apiData,  routeData )
     age: '',
     adhaar: '',
   }])
+
+  const onClickBack = () => {
+    history.push("/busmonsoon");
+    setTravellers([])
+  }
 
   const { name, age, gender, adhaar, basic_details, price, surcharge } = values;
 
@@ -148,9 +164,11 @@ console.log( tripData, apiData,  routeData )
   useEffect(() => {
     // setValues({ ...values, price: (BASE_PRICE * basic_details.length)  })
     setValues({ ...values, price: (basePrice * basic_details.length) })
-    // console.log("enosdkl");
   }, [basic_details])
-
+  // useEffect(()=>{
+  // setTravellers([])
+  // },[travellers])
+  // console.log("travellerstravellerstravellers",travellers)
 
   return (
     <>
@@ -297,8 +315,9 @@ console.log( tripData, apiData,  routeData )
                       <div className="traveller__card_body" className="py-0">
                         <div>
                           <h5 className="traveller__card_title" style={{ fontSize: "20px", marginBottom: "15px", float: "left", fontWeight: "bold" }}>Enter Travellers {i + 1}</h5>
-
-                          <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
+                          {i !== 0 ? 
+                            <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
+                      :null}
                         </div>
 
                         <p className="traveller__card_text" style={{ clear: "both" }}>
@@ -428,27 +447,30 @@ console.log( tripData, apiData,  routeData )
                 }
               </div>
 
-              <div style={{ textAlign: "center", margin: "55px" }}>
-                <Button
-                  type="button"
-                  style={{
-                    backgroundColor: "#0FA453",
-                    color: "white",
-                    width: "29%",
-                    height: "51px",
-                    border: "none",
-                    borderRadius: "15px",
-                  }}
-                  onClick={() => setTravellers([...travellers, {
-                    name: null,
-                    gender: null,
-                    age: null,
-                    adhaar: null,
-                  }])}
-                >
-                  Add Traveller
-                </Button>
-              </div>
+              <div style={{ textAlign: "center", paddingBottom: "200px" }}>
+            {/* <Button
+              type="button"
+              style={{
+                backgroundColor: "#0FA453",
+                color: "white",
+                width: "50%",
+                height: "51px",
+                border: "none",
+                borderRadius: "15px",
+                border: "none",
+                marginTop: '40px'
+              }}
+              
+            >
+              <AiOutlinePlus size={35}/>
+            </Button> */}
+            <div style={{fontWeight:'9000',cursor:'pointer'}} onClick={() => setTravellers([...travellers, {
+                // name: "",
+                // gender: "",
+                // age:"",
+                // adhaar: "",
+              }])} style={{fontSize:'17px'}}> <AiOutlinePlus />Add Traveller</div>
+          </div>
 
               {/* <Popper
                     open={open}
@@ -698,7 +720,9 @@ console.log( tripData, apiData,  routeData )
                   <div className="traveller__card_body" className="py-0">
                     <div>
                       <h5 className="traveller__card_title" style={{ fontSize: "20px", marginBottom: "15px", float: "left", fontWeight: "bold" }}>Enter Travellers {i + 1}</h5>
-                      <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
+                      {i !== 0 ? 
+                        <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
+                      :null}
                     </div>
                     <p className="traveller__card_text" style={{ clear: "both" }}>
                       <div className="form-group mt-0">
@@ -709,7 +733,7 @@ console.log( tripData, apiData,  routeData )
                           id={`name${i}`}
                           placeholder="Enter Traveller Name"
                           style={{ fontSize: "11px", marginLeft: "-5px", fontWeight: "bold" }}
-                          name="name"
+                          name={`name${i}`}
                           onChange={(e) =>
                             handleTraveller(
                               e.target.value,
@@ -760,7 +784,7 @@ console.log( tripData, apiData,  routeData )
                               height: "33px",
                               fontWeight: "bold" ,
                             }}
-                            name="age"
+                            name={`age${i}`}
                             onChange={(e) =>
                               handleTraveller(
                                 e.target.value,
@@ -791,7 +815,7 @@ console.log( tripData, apiData,  routeData )
                           id={`adhaar${i}`}
                           placeholder="Enter 12 digit Aadhar /Any Govt ID Number"
                           style={{ fontSize: "11px", marginLeft: "-5px", marginTop: "7px" , fontWeight: "bold"}}
-                          name="adhaar"
+                          name={`adhaar${i}`}
                           onChange={(e) =>
                             handleTraveller(
                               e.target.value,
@@ -823,7 +847,7 @@ console.log( tripData, apiData,  routeData )
           </div>
           
           <div style={{ textAlign: "center", paddingBottom: "200px" }}>
-            <Button
+            {/* <Button
               type="button"
               style={{
                 backgroundColor: "#0FA453",
@@ -832,17 +856,19 @@ console.log( tripData, apiData,  routeData )
                 height: "51px",
                 border: "none",
                 borderRadius: "15px",
+                border: "none",
                 marginTop: '40px'
               }}
-              onClick={() => setTravellers([...travellers, {
-                name: '',
-                gender: '',
-                age: '',
-                adhaar: '',
-              }])}
+              
             >
-              Add Traveller
-            </Button>
+              <AiOutlinePlus size={35}/>
+            </Button> */}
+            <div style={{fontWeight:'9000',cursor:'pointer'}} onClick={() => setTravellers([...travellers, {
+                // name: "",
+                // gender: "",
+                // age: "",
+                // adhaar: ,
+              }])} style={{fontSize:'17px'}}> <AiOutlinePlus />Add Traveller</div>
           </div>
 
           <div>

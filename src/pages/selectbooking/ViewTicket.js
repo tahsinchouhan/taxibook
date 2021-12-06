@@ -6,6 +6,7 @@ import moment from 'moment'
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import '../.././assets/css/viewTicket.css'
+import { array } from 'yup';
 
 function ViewTicket() {
 
@@ -17,9 +18,10 @@ function ViewTicket() {
     const [hotelShow,setHotelShow] = useState(false)
     const [style, setStyle] = useState("cont");
 
-
     const bgColor = `style={{backgroundColor:"red"}}`
     // bus ticket api
+    
+
     useEffect(() => {
         console.log('mobile',mobile)
         axios.post(API_PATH + `/api/v1/busticket/search`,{
@@ -28,23 +30,42 @@ function ViewTicket() {
         .then((res) => {
             console.log('data this',res.data)
             setBusTickets(res.data.data)
+            common(res.data.data,hotelTickets)
         })
-        .catch((e) => console.log(e));
+        .catch((e) => console.log(e));        
+      
     }, [])
+    
      // hotel ticket api
 
     useEffect(() => {
       axios.get(API_PATH + `/api/v2/booking/search?mobile=${mobile}`)
       .then((res) => {
           console.log('data hotel',res.data)
+          res.data.data.forEach((element,index) => {
+            res.data.data[index].date = element.check_in;
+            res.data.data[index].name = "Hotel Name";
+          });
+          console.log("res.data.data",res.data.data)
           setHotelTickets(res.data.data)
+          common(busTickets,res.data.data)
       })
       .catch((e) => console.log(e));
+      
   }, [])
+  const common = (busTickets,hotelTickets) =>{
+    console.log("string",busTickets,hotelTickets)
+    if(busTickets && busTickets.length && hotelTickets && hotelTickets.length){
+      busTickets = busTickets.concat(hotelTickets);
+      busTickets.sort((a, b) => b.date - a.date);
+      // console.log("busTicketts",busTickets)
+    }
+  }
 
     console.log('bustickets',busTickets)
     console.log('hotelTickets',hotelTickets)
 
+    
     const hotelHandler =()=>{
       setHotelShow(!hotelShow)
       setBusShow(false)

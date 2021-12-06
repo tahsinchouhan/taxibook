@@ -5,12 +5,17 @@ import {
     VERIFY_OTP,
     SET_USER,
     LOGOUT,
+    LOGIN_EMAIL,
+    LOGIN_EMAIL_SUCCESS,
+    LOGIN_EMAIL_ERROR,
 } from "../actions";
 
-export const getOtp = (value) => ({
+export const getOtp = (value) => {
+    console.log("error",value)
+    return {
     type: GET_OTP,
     payload: value,
-});
+}};
 
 export const verifyOtp = (mobile,otp) => ({
     type: VERIFY_OTP,
@@ -34,5 +39,25 @@ export const setUser = (value) => ({
 
 export const logout = (value) => ({
     type: LOGOUT,
+    payload: value,
+});
+
+export const loginEmail = (value) => {
+    console.log("valueEmail1",value)
+    return {
+    type: LOGIN_EMAIL,
+    payload: value,
+}};
+
+export const loginEmailSuccess = (value) =>{
+    console.log("valueEmail2",value)
+
+    return {
+    type: LOGIN_EMAIL_SUCCESS,
+    payload: value,
+}};
+
+export const loginEmailError = (value) => ({
+    type: LOGIN_EMAIL_ERROR,
     payload: value,
 });

@@ -42,6 +42,8 @@ function HPayment() {
   console.log("Setdata", Setdata);
   console.log("data", data);
 
+  console.log("apiData",apiData)
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");

@@ -9,6 +9,9 @@ import {
   SET_INTEREST_PREHOME,
   SET_INTEREST_PREHOME_SUCCESS,
   SET_DESTINATION_PREHOME_SUCCESS,
+  HOTEL_PAY,
+  HOTEL_PAY_SUCCESS,
+  HOTEL_PAY_ERROR
 } from "../actions";
 
 export const getBookHotel = (values) => {
@@ -38,7 +41,7 @@ export const getBookHotelError = (values) => ({
 });
 
 export const setBookHotel = (values) => {
-  console.log(values);
+  console.log("valuesvalues",values);
   return { type: SET_BOOK_HOTEL, payload: values };
 };
 
@@ -56,3 +59,22 @@ export const setHApiData = (value) => ({
   type: SET_API_DATA,
   payload: value,
 });
+
+export const hotelpay = (value) =>({
+  type: HOTEL_PAY,
+  payload:value
+})
+
+
+export const hotelpaySuccess = (value) =>{
+  console.log("payloadpayload",value)
+  return {
+  type: HOTEL_PAY_SUCCESS,
+  payload:value
+}
+}
+
+export const hotelpayError = (value) =>({
+  type: HOTEL_PAY_ERROR,
+  payload:value
+})

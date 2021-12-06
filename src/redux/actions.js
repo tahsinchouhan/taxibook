@@ -37,6 +37,10 @@ export const GET_OTP_ERROR = "GET_OTP_ERROR";
 export const VERIFY_OTP = "VERIFY_OTP";
 export const SET_USER = "SET_USER";
 export const LOGOUT = "LOGOUT";
+export const LOGIN_EMAIL = "LOGIN_EMAIL"
+export const LOGIN_EMAIL_SUCCESS = "LOGIN_EMAIL_SUCCESS"
+export const LOGIN_EMAIL_ERROR = "LOGIN_EMAIL_ERROR"
+
 
 //dmpass
 export const SET_DM_DATA = "SET_DM_DATA";
@@ -79,12 +83,27 @@ export const SET_BOOK_HOTEL_ERROR='SET_BOOK_HOTEL_ERROR';
 export const SET_INTEREST_PREHOME = 'SET_INTEREST_PREHOME';
 export const SET_INTEREST_PREHOME_SUCCESS = 'SET_INTEREST_PREHOME_SUCCESS';
 export const SET_DESTINATION_PREHOME_SUCCESS ='SET_DESTINATION_PREHOME_SUCCESS'
+export const HOTEL_PAY ='HOTEL_PAY'
+export const HOTEL_PAY_SUCCESS ='HOTEL_PAY_SUCCESS'
+export const HOTEL_PAY_ERROR ='HOTEL_PAY_ERROR'
 
 // packages payment
 
 export const PACKAGES_BOOKING = 'PACKAGES_BOOKING';
 export const PACKAGES_BOOKING_SUCCESS = 'PACKAGE_BOOKING_SUCCESS';
 export const PACKAGES_BOOKING_ERROR = 'PACKAGE_BOOKING_ERROR'
+
+// sign-up
+export const SIGNUP_OTP = "SIGNUP_OTP";
+export const SIGNUP_OTP_SUCCESS = "SIGNUP_OTP_SUCCESS";
+export const SIGNUP_OTP_ERROR = "SIGNUP_OTP_ERROR";
+export const SIGN_UP = "SIGN_UP";
+export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
+export const SIGN_UP_ERROR = "SIGN_UP_ERROR";
+export const SIGN_UP_VERIFY = "SIGN_UP_VERIFY";
+export const SIGN_UP_VERIFY_SUCCESS = "SIGN_UP_VERIFY_SUCCESS";
+export const SIGN_UP_VERIFY_ERROR = "SIGN_UP_VERIFY_ERROR";
+
 
 export * from "./common/actions";
 export * from "./auth/actions";
@@ -94,3 +113,5 @@ export * from "./login/actions";
 export * from "./dmpass/actions";
 export * from "./explore/actions";
 export * from "./quiz/actions";
+export * from "./signup/actions";
+

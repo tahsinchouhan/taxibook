@@ -745,7 +745,7 @@ function ListCard(dates,props) {
                         >
                           <span
                             className=" d-flex justify-content-center"
-                            onClick={() => viewDetails(item.room_data._id)}
+                            onClick={() => viewDetails(item)}
                             style={{
                               fontSize: "15px",
                               fontWeight: 700,

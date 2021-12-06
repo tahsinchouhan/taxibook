@@ -19,8 +19,9 @@ const INIT_STATE = {
     tripData: '',
     routeData: {},
     basic_details: [],
-    booking_id:'',
+    booking_id:[],
     mobile:'',
+    createbusData:[]
 };
 
 const busReducer = (state = INIT_STATE, action) => {
@@ -36,7 +37,7 @@ const busReducer = (state = INIT_STATE, action) => {
             return { ...state, data: action.payload }
         
         case CREATE_BUS_BOOKING:
-            return { ...state}
+            return { ...state, createbusData: action.payload }
 
         case SET_BOOKING_ID:
             return { ...state, booking_id: action.payload }

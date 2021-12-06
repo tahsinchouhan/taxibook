@@ -65,7 +65,7 @@ function CabConfirmation() {
       email:email,
       mobile:mobile
     }
-    fetch(`https://www.anshuagrawal.in/api/v2/taxi-booking/create`,
+    fetch(`http://15.206.92.158/api/v2/taxi-booking/create`,
     {
       method: 'POST',
       headers: {
@@ -85,7 +85,7 @@ function CabConfirmation() {
 
 
     axios
-      .post(`https://www.anshuagrawal.in/api/v2/taxi-booking/create`, {
+      .post(`http://15.206.92.158/api/v2/taxi-booking/create`, {
         amount: 10
       })
       .then((res) => res.json())
