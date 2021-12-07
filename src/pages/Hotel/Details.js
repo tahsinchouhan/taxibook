@@ -59,6 +59,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
   }
 
   const bookingPage = (_id) => {
+    alert(_id)
     history.push(`/hotelconfirmation/${_id}`);
 
   };
@@ -156,8 +157,18 @@ const Details = ({ hotelUniqid, detailsP }) => {
                       >
                         <div>
                           <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>
-                            Classic ({item?.category})
+                            Classic ({item?.room_category_id.name})
                           </h1>
+
+                        <div className="row">
+                          <div clasName="col-sm-12"><h5><b>Amenities</b></h5></div>
+                          {item?.amenities.map((value)=>(
+                          <div className="col-sm-3">
+                            <b>{value.name}</b>
+                            </div>
+                          ))}
+                        </div>
+
                           <div style={{ display: "flex" }}>
                             {item?.amenities?.includes("Geezer") ? (
                               <div
@@ -279,9 +290,11 @@ const Details = ({ hotelUniqid, detailsP }) => {
                             )}
                           </div>
                         </div>
+                        {item?.image.map((value)=>(
                         <div>
-                          <img src={Room} alt="Room" className="room-mobile" />
+                          <img src={value} alt="Room" className="room-mobile" />
                         </div>
+                        ))}
                       </div>
                       <div
                         style={{
@@ -456,7 +469,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                     fontSize: "12px",
                   }}
                 >
-                  Classic ({detail?.category})
+                  Classic ({detail?.room_category_id})
                 </div>
               </div>
 
