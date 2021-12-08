@@ -12,7 +12,6 @@ import { DatePicker } from "antd";
 import Details from "./Details";
 import { Carousel } from "react-bootstrap";
 
-
 const HotelDetails = (props) => {
   const history = useHistory();
 
@@ -25,24 +24,22 @@ const HotelDetails = (props) => {
 
   useEffect(() => {
     setHotelDetail(props.location.state.detail);
-    initLoad(props.location.state.detail)
+    initLoad(props.location.state.detail);
   }, [props.location.state.detail]);
 
-
-  const initLoad=(value)=>{
-    console.log("value",value)
+  const initLoad = (value) => {
+    console.log("value", value);
     axios
-    .get(API_PATH + 
-      `/api/v2/room/set?address=${value.city}&check_in=2021-11-28&check_out=2021-11-29&hotel_id=${value.room_data.hotel_id}`
-    )
-    .then((response) => {
-      console.log("response",response.data.data)
-      console.log(response.data.data);
-      setDetailsP(response.data.data);
-    });
-  }
-  
-
+      .get(
+        API_PATH +
+          `/api/v2/room/set?address=${value.city}&check_in=2021-12-28&check_out=2021-12-29&hotel_id=${value.room_data.hotel_id}`
+      )
+      .then((response) => {
+        console.log("response", response.data.data);
+        console.log(response.data.data);
+        setDetailsP(response.data.data);
+      });
+  };
 
   const { RangePicker } = DatePicker;
   console.log(detailsP);

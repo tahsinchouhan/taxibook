@@ -27,7 +27,6 @@ import {
 } from "antd";
 import Searchbar from "./Searchbar";
 import { DownOutlined } from "@ant-design/icons";
-import { MenuItem } from "@material-ui/core";
 
 function HotelList() {
   const history = useHistory();
@@ -38,9 +37,11 @@ function HotelList() {
   const [myOptions, setMyOptions] = useState([]);
   // const dispatch = useDispatch();
 
-  const { getHotelList: hotels, getStartData, isLoading } = useSelector(
-    (state) => state.hotelReducer
-  );
+  const {
+    getHotelList: hotels,
+    getStartData,
+    isLoading,
+  } = useSelector((state) => state.hotelReducer);
   console.log({ getStartData });
   const [startDate, setStartDate] = useState(
     getStartData.startDate ? getStartData.startDate : new Date()
@@ -52,7 +53,7 @@ function HotelList() {
   );
   const [location, setLocation] = useState([]);
   const [sendlocation, setSendlocation] = useState(
-    getStartData?.sendlocation ? getStartData.sendlocation : "Jagdalpur"
+    getStartData?.sendlocation ? getStartData.sendlocation : "jagdalpur"
   );
   const [geolocation, setGeolocation] = useState([]);
   const [noOfGuest, setNoOfGuest] = useState(2);
@@ -81,10 +82,6 @@ function HotelList() {
       setNoOfGuest(getStartData.noOfGuest);
     }
   }, [getStartData]);
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const [roomState, setRoomState] = useState(
     getStartData?.roomStateData?.length > 0
       ? getStartData?.roomStateData
@@ -98,8 +95,6 @@ function HotelList() {
 
   const addMenu = () => {
     let noofg = 0;
-    let noofr;
-    // console.log(roomState?.length);
     setNoOfRoom(roomState?.length);
 
     roomState?.map((curElem, index) => (noofg += curElem.guest));
@@ -247,7 +242,7 @@ function HotelList() {
     setEnterlocation(name);
     setMyOptions([]);
     if (name === undefined) {
-      name = "Jagdalpur";
+      name = "jagdalpur";
     }
     fetch(`${API_PATH}/api/v2/hotelregistration/search?address=${name}`)
       .then((response) => {
@@ -296,7 +291,7 @@ function HotelList() {
     let city = sendlocation;
     if (city === undefined) {
       if (enterlocation === "" || enterlocation === undefined) {
-        city = "Jagdalpur";
+        city = "jagdalpur";
       } else {
         city = enterlocation;
       }

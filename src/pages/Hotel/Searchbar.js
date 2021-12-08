@@ -23,9 +23,9 @@ import moment from "moment";
 import { DatePicker, Menu, Dropdown as ANTDropdown } from "antd";
 import { FiEdit2 } from "react-icons/fi";
 
-const Searchbar = ({getStartData}) => {
+const Searchbar = ({ getStartData }) => {
   const history = useHistory();
-  
+
   console.log({ getStartData });
 
   const check_in = moment(getStartData.startDate).format("DD-MMM");
@@ -61,10 +61,16 @@ const Searchbar = ({getStartData}) => {
                     }}
                   >
                     {" "}
-                    <BiLeftArrowAlt /> {getStartData?.sendlocation===undefined?'Jagdalpur':getStartData?.sendlocation}
-                    <FiEdit2 style={{float:"right",margin:"20px",color:"blue"}}   onClick={() => {
-                      history.push("/hotelsearch");
-                    }}/>
+                    <BiLeftArrowAlt />{" "}
+                    {getStartData?.sendlocation === undefined
+                      ? "jagdalpur"
+                      : getStartData?.sendlocation}
+                    <FiEdit2
+                      style={{ float: "right", margin: "20px", color: "blue" }}
+                      onClick={() => {
+                        history.push("/hotelsearch");
+                      }}
+                    />
                   </h4>
                 </b>
                 <p
@@ -79,9 +85,7 @@ const Searchbar = ({getStartData}) => {
                   {`${check_in}-${check_out}`}&nbsp;&nbsp;&nbsp;
                   {getStartData.noOfRoom} Room, {getStartData.noOfGuest} Guests
                 </p>
-                <p>
-                  
-                </p>
+                <p></p>
               </div>
             </Form.Group>
           </Col>
