@@ -2,7 +2,7 @@
 * {
   font-family: "Inter", sans-serif;
 }
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 body {
   margin: 0;
   padding: 0;
@@ -222,7 +222,7 @@ body {
 .ant-picker-clear {
   display: none !important;
 }
-.ant-dropdown-menu{
+.ant-dropdown-menu {
   background-color: #f9f9f9;
 }
 .ant-dropdown-hidden,
@@ -232,7 +232,7 @@ body {
   left: 616 px !important;
   top: 418 px !important;
 }
-.ant-dropdown-menu-item:hover{
+.ant-dropdown-menu-item:hover {
   background-color: white !important;
 }
 .menuSearch {
@@ -240,41 +240,39 @@ body {
   left: 616 px !important;
   top: 418 px !important;
 }
-.ant-slider-track{
-background-color: #EE2E24 !important;
+.ant-slider-track {
+  background-color: #ee2e24 !important;
 }
-.ant-slider-track:hover{
-  background-color: #EE2E24 !important;
-  }
-  .ant-slider-handle.ant-tooptip-open{
-     display: none !important;
-  }
-  .ant-slider-handle{
-    border: solid 2px #EE2E24 !important;
-    width: 15px;
-    height: 15px
-  }
-  .loader{
-    display: flex;
-    text-align: center;
-    
-  }
- 
-  .anticon{
-    margin-left: -10px;
+.ant-slider-track:hover {
+  background-color: #ee2e24 !important;
+}
+.ant-slider-handle.ant-tooptip-open {
+  display: none !important;
+}
+.ant-slider-handle {
+  border: solid 2px #ee2e24 !important;
+  width: 15px;
+  height: 15px;
+}
+.loader {
+  display: flex;
+  text-align: center;
+}
 
-  }
-.priceMenu{
+.anticon {
+  margin-left: -10px;
+}
+.priceMenu {
   left: 25px;
-  width: 300px; 
+  width: 300px;
   padding: 15px !important;
   /* height: 50px; */
 }
-.aminitiesMenu{
+.aminitiesMenu {
   min-width: 206 px !important;
   left: 600 px !important;
   top: 418 px !important;
-  width: 140px; 
+  width: 140px;
   height: 130px;
   border-radius: 2px;
 }
@@ -290,25 +288,28 @@ background-color: #EE2E24 !important;
   height: 30 px;
   border-radius: 6 px;
 }
-.Carousel-a>img{
+.Carousel-a > img {
   /* width:100px; */
-  width:100%
- 
+  width: 100%;
 }
-.Carousel-a{
-padding: 0px !important;
-
-
+.Carousel-a {
+  padding: 0px !important;
 }
 .ant-checkbox-checked .ant-checkbox-inner {
-  background-color: #1AB64F !important;
-  border-color: #1AB64F !important;
+  background-color: #1ab64f !important;
+  border-color: #1ab64f !important;
 }
 .ant-checkbox-checked:hover .ant-checkbox-inner:hover {
   cursor: pointer !important;
   padding: 10px !important;
-  border-color:#1AB64F !important ;
+  border-color: #1ab64f !important ;
 }
-.ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner{
-  border-color:#1AB64F !important ;
+.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+.ant-checkbox:hover .ant-checkbox-inner {
+  border-color: #1ab64f !important ;
+}
+
+.carousel.carousel-slider .control-arrow {
+  padding: 10 !important;
+  opacity: 1 !important;
 }

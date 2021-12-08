@@ -6,39 +6,49 @@ import bus1 from "../../assets/img/bus.png";
 import hotel from "../../assets/img/hotel.png";
 import city1 from "../../assets/img/city.png";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Room from "../../assets/img/hotelRoom.jpeg";
-import { Carousel } from "antd";
-import hotelotherimage from "../../assets/img/hotelotherimage.jpg";
+// import { Carousel } from "antd";
+import { useDispatch } from "react-redux";
+
+import axios from "axios";
+import { API_PATH } from "../../Path/Path";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
 import { FiWifi } from "react-icons/fi";
 import { BiCheckCircle } from "react-icons/bi";
 import { FaTv } from "react-icons/fa";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 
-function ListCard(dates,props) {
+function ListCard(dates, props) {
   // console.log({props})
   // console.log("startDate",{dates})
 
-
   const history = useHistory();
-  const { getHotelList: hotels, getStartData, isLoading } = useSelector(
-    (state) => state.hotelReducer
-  );
+  const {
+    getHotelList: hotels,
+    getStartData,
+    isLoading,
+  } = useSelector((state) => state.hotelReducer);
   const viewDetails = (item) => {
-    console.log("View Details",item)
+    console.log("View Details", item);
     // history.push(`/hotelDetails/${item?.room_data?.hotel_id}`);
 
     history.push({
       pathname: `/hotelDetails/${item?.room_data?.hotel_id}/${dates.startDate}/${dates.endDate}`,
-      state: { detail: item }      
+      state: { detail: item },
     });
-
   };
-  
+
   const bookNow = (HotelId) => {
     history.push(`/hotelconfirmation/${HotelId}`);
   };
   const [view, setView] = useState(false);
+  const animities = hotels?.map((item, index) => {
+    console.log("item", item);
+  });
+  console.log("item is", animities.value);
+
   return (
     <>
       {isLoading ? (
@@ -61,7 +71,7 @@ function ListCard(dates,props) {
           >
             {hotels?.length} Hotels in{" "}
             {getStartData?.sendlocation === undefined
-              ? "Jagdalpur"
+              ? "jagdalpur"
               : getStartData?.sendlocation}{" "}
           </h5>
         </div>
@@ -134,7 +144,11 @@ function ListCard(dates,props) {
                   <Container style={{ cursor: "pointer" }}>
                     <Row>
                       <div md={4} className="col-sm-4 m-0 p-0">
-                        <Carousel>
+                        <Carousel
+                          showThumbs={false}
+                          autoPlay={true}
+                          infiniteLoop={true}
+                        >
                           <div>
                             <img
                               src={
@@ -188,11 +202,11 @@ function ListCard(dates,props) {
                         />
                         <br />
                         <img
-                         src={
-                          item?.room_data?.image !== ""
-                            ? item?.room_data?.image[0]
-                            : item?.room_data?.image[0]
-                        }
+                          src={
+                            item?.room_data?.image !== ""
+                              ? item?.room_data?.image[0]
+                              : item?.room_data?.image[0]
+                          }
                           alt="room img"
                           style={{
                             width: "70px",
@@ -230,11 +244,11 @@ function ListCard(dates,props) {
                         />
                         <br />
                         <img
-                         src={
-                          item?.room_data?.image !== ""
-                            ? item?.room_data?.image[3]
-                            : item?.room_data?.image[3]
-                        }
+                          src={
+                            item?.room_data?.image !== ""
+                              ? item?.room_data?.image[3]
+                              : item?.room_data?.image[3]
+                          }
                           alt="room img"
                           style={{
                             width: "70px",
@@ -263,10 +277,11 @@ function ListCard(dates,props) {
                               {/* {""} 00601 */}
                             </h3>
                           </div>
+
                           <span
                             style={{ fontFamily: "poppins", fontSize: "85" }}
                           >
-                            {console.log("object", item)}
+                            {console.log("object is", item)}
                             <span style={{ fontSize: "14px" }}>
                               &nbsp;{item.address}
                             </span>{" "}
@@ -279,8 +294,8 @@ function ListCard(dates,props) {
                             </span>
                           </span>
                           <div style={{ display: "flex" }}>
-                            {item?.room_data?.amenities?.includes(
-                              "FreeWifi"
+                            {item?.room_data?.amenities?.find(
+                              (ame) => ame.name === "FreeWifi"
                             ) ? (
                               <span
                                 style={{
@@ -299,7 +314,9 @@ function ListCard(dates,props) {
                             ) : (
                               ""
                             )}
-                            {item?.room_data?.amenities?.includes("Window") ? (
+                            {item?.room_data?.amenities?.find(
+                              (ame) => ame.name === "Window"
+                            ) ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -317,8 +334,30 @@ function ListCard(dates,props) {
                             ) : (
                               ""
                             )}
+                            {item?.room_data?.amenities?.find(
+                              (ame) => ame.name === "Cooler"
+                            ) ? (
+                              <span
+                                style={{
+                                  display: "flex",
+                                  // alignItems: "center",
+                                  color: "grey",
+                                  paddingTop: "10px",
+                                  fontSize: "12px",
+                                  fontFamily: "sans-serif",
+                                }}
+                              >
+                                &nbsp; &nbsp;{" "}
+                                <BsShopWindow style={{ fontSize: "20px" }} />
+                                &nbsp; Cooler
+                              </span>
+                            ) : (
+                              ""
+                            )}
 
-                            {item?.room_data?.amenities?.includes("AC") ? (
+                            {item?.room_data?.amenities?.find(
+                              (ame) => ame.name === "AC"
+                            ) ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -336,8 +375,30 @@ function ListCard(dates,props) {
                             ) : (
                               ""
                             )}
+                            {item?.room_data?.amenities?.find(
+                              (ame) => ame.name === "Kitchen"
+                            ) ? (
+                              <span
+                                style={{
+                                  display: "flex",
+                                  // alignItems: "center",
+                                  color: "grey",
+                                  paddingTop: "10px",
+                                  fontSize: "12px",
+                                  fontFamily: "sans-serif",
+                                }}
+                              >
+                                &nbsp;&nbsp;{" "}
+                                <BiCheckCircle style={{ fontSize: "20px" }} />
+                                &nbsp; Kitchen
+                              </span>
+                            ) : (
+                              ""
+                            )}
                             {/* {console.log("item?.room_data?.amenities",item?.room_data?.amenities)} */}
-                            {item?.room_data?.amenities?.includes("TV") ? (
+                            {item?.room_data?.amenities?.find(
+                              (ame) => ame.name === "TV"
+                            ) ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -502,7 +563,6 @@ function ListCard(dates,props) {
               return (
                 <>
                   <div>
-              
                     <Container>
                       <Row>
                         <Col>

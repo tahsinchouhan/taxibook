@@ -40,15 +40,13 @@ function HotelSearch() {
   const [noOfRoom, setNoOfRoom] = useState(1);
   const [show, setShow] = useState(false);
   const [seleteRoom, setSeleteRoom] = useState(false);
-  const [enterlocation, setEnterlocation] = useState('');
+  const [enterlocation, setEnterlocation] = useState("");
   const { RangePicker } = DatePicker;
 
   function disabledDate(current) {
     return current && current <= moment().endOf("day");
   }
   const dispatch = useDispatch();
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const dateFormat = "YYYY-MM-DD";
 
   const [roomState, setRoomState] = useState([
@@ -58,7 +56,7 @@ function HotelSearch() {
     },
   ]);
   const getDataFromAPI = (name) => {
-    setEnterlocation(name)
+    setEnterlocation(name);
     setMyOptions([]);
     fetch(`${API_PATH}/api/v2/hotelregistration/search?address=${name}`)
       .then((response) => {
@@ -68,7 +66,7 @@ function HotelSearch() {
         console.log(res.data);
         for (var i = 0; i < res.data.length; i++) {
           let str = `${res.data[i].hotel_name},${res.data[i]?.city}`;
-          console.log({ str })
+          console.log({ str });
           myOptions.push(str);
         }
         setMyOptions(myOptions);
@@ -108,7 +106,7 @@ function HotelSearch() {
       sendlocation === "" ||
       sendlocation === " "
     ) {
-      if (enterlocation == '' || enterlocation === undefined) {
+      if (enterlocation == "" || enterlocation === undefined) {
         city = "Jagdalpur";
       } else {
         city = enterlocation;
@@ -216,16 +214,25 @@ function HotelSearch() {
             Room {curElem.room}{" "}
             <span style={{ float: "right" }}>
               {/* <button className="minus" onClick={() => guestRoom("-", index)}>-</button>{" "} */}
-              <span style={{ padding: "5px" }} >  <BsDashSquare size={20} onClick={() => guestRoom("-", index)} /></span>
+              <span style={{ padding: "5px" }}>
+                {" "}
+                <BsDashSquare size={20} onClick={() => guestRoom("-", index)} />
+              </span>
               {curElem.guest}{" "}
               {curElem.guest === 3 ? (
                 // <button className="btn btn-xs plus" disabled>+</button>
-                <span style={{ padding: "5px"}} >
+                <span style={{ padding: "5px" }}>
                   <BsPlusSquare size={20} color={"#737272"} />
                 </span>
               ) : (
                 // <button className="plus" onClick={() => guestRoom("+", index)}>+</button>
-                <span style={{ padding: "5px" }} > <BsPlusSquare size={20} onClick={() => guestRoom("+", index)} style={{ height: "20px" }} />
+                <span style={{ padding: "5px" }}>
+                  {" "}
+                  <BsPlusSquare
+                    size={20}
+                    onClick={() => guestRoom("+", index)}
+                    style={{ height: "20px" }}
+                  />
                 </span>
               )}
             </span>
@@ -234,17 +241,22 @@ function HotelSearch() {
         ))}
       </div>
       <Menu.Item>
-        {roomState.length > 1 ? <FaTrash
-          title=" Delete Room "
-          style={{ float: "left", marginRight: "120px" }}
-          onClick={() => guestRoom("delete", roomState.length - 1)}
-        /> : ''}
-        <span title="Add Room "
-          style={{ float: "right" }} onClick={() => guestRoom("mainAdd", roomState.length + 1)}>
-          <FaPlusCircle size={15}
-          /> &nbsp;Add Room
+        {roomState.length > 1 ? (
+          <FaTrash
+            title=" Delete Room "
+            style={{ float: "left", marginRight: "120px" }}
+            onClick={() => guestRoom("delete", roomState.length - 1)}
+          />
+        ) : (
+          ""
+        )}
+        <span
+          title="Add Room "
+          style={{ float: "right" }}
+          onClick={() => guestRoom("mainAdd", roomState.length + 1)}
+        >
+          <FaPlusCircle size={15} /> &nbsp;Add Room
         </span>
-
       </Menu.Item>
     </Menu>
   );
@@ -357,9 +369,11 @@ function HotelSearch() {
                             required="required"
                             style={{ padding: "5px" }}
                             {...params}
-                            onKeyUp={(e) => { getDataFromAPI(e.target.value) }}
+                            onKeyUp={(e) => {
+                              getDataFromAPI(e.target.value);
+                            }}
                             placeholder="Search Area"
-                          // InputProps={{ disableUnderline: true }}
+                            // InputProps={{ disableUnderline: true }}
                           />
                         )}
                       />
@@ -391,10 +405,10 @@ function HotelSearch() {
                               padding: "5px",
                               // paddingLeft: "20px",
                               display: "flex",
-                              height:"43px",
+                              height: "43px",
                             }}
                           >
-                             <img
+                            <img
                               alt="logo"
                               className="location-userdatas-calendar"
                               src={calendar}
@@ -403,7 +417,7 @@ function HotelSearch() {
                                 height: 25,
                                 margin: "5px",
                               }}
-                            /> 
+                            />
 
                             <RangePicker
                               disabledDate={disabledDate}
@@ -514,7 +528,11 @@ function HotelSearch() {
                           paddingLeft: "20px",
                         }}
                       >
-                        <ANTDropdown trigger={['click']} overlay={menu} style={{ width: "400px" }}>
+                        <ANTDropdown
+                          trigger={["click"]}
+                          overlay={menu}
+                          style={{ width: "400px" }}
+                        >
                           <input // onChange={(e) => setEmail(e.target.value)}
                             // value={email}
                             name="guestRoom"
@@ -532,7 +550,7 @@ function HotelSearch() {
                             }}
                             readOnly
                           />
-                         {/* { seleteRoom == true ?<ANTDropdown overlay={menu}></ANTDropdown>:""} */}
+                          {/* { seleteRoom == true ?<ANTDropdown overlay={menu}></ANTDropdown>:""} */}
                         </ANTDropdown>{" "}
                       </div>
                     </Form.Group>
@@ -629,11 +647,11 @@ function HotelSearch() {
                         onKeyUp={(e) => getDataFromAPI(e.target.value)}
                         placeholder="Search Area"
                         value="jagdalpur"
-                      // blurOnSelect="touch"
+                        // blurOnSelect="touch"
                       />
                     )}
                   />
-                 
+
                   {showLocationError ? (
                     <p>
                       <small style={{ color: "red" }}>
@@ -653,22 +671,25 @@ function HotelSearch() {
                       <Col md={4}>
                         <div>
                           <Form.Label className="dm-ticket">
-                           <span  style={{marginLeft:"-24px"}} > Booking Date</span>
+                            <span style={{ marginLeft: "-24px" }}>
+                              {" "}
+                              Booking Date
+                            </span>
                           </Form.Label>
                           <br />
-                        
-                            <div
-                              style={{
-                                backgroundColor: "#f5f5f5",
-                                padding: "5px",
-                                width: "263px",
-                                height:"43px",
-                                marginLeft:"-24px",
-                                display: "flex",
-                                borderRadius:"2px"
-                              }}
-                            >
-                               <img
+
+                          <div
+                            style={{
+                              backgroundColor: "#f5f5f5",
+                              padding: "5px",
+                              width: "263px",
+                              height: "43px",
+                              marginLeft: "-24px",
+                              display: "flex",
+                              borderRadius: "2px",
+                            }}
+                          >
+                            <img
                               alt="logo"
                               className="location-userdatas-calendar"
                               src={calendar}
@@ -677,27 +698,25 @@ function HotelSearch() {
                                 height: 25,
                                 margin: "5px",
                               }}
-                            /> 
-                              <RangePicker
-                                disabledDate={disabledDate}
-                                onChange={(date) => chnageDate(date)}
-                                minDate={new Date()}
-                                defaultValue={[
-                                  moment(startDate, dateFormat),
-                                  moment(endDate, dateFormat),
-                                ]}
-                                inputReadOnly
-                                type="button"
-                                style={{
-                                  backgroundColor: "transparent",
-                                  border: "0",
-                                  // width:"200px"
-                      padding: "5px",
-
-                                }}
-                              />
-                            </div>
-                      
+                            />
+                            <RangePicker
+                              disabledDate={disabledDate}
+                              onChange={(date) => chnageDate(date)}
+                              minDate={new Date()}
+                              defaultValue={[
+                                moment(startDate, dateFormat),
+                                moment(endDate, dateFormat),
+                              ]}
+                              inputReadOnly
+                              type="button"
+                              style={{
+                                backgroundColor: "transparent",
+                                border: "0",
+                                // width:"200px"
+                                padding: "5px",
+                              }}
+                            />
+                          </div>
                         </div>
                       </Col>
                     </Row>
@@ -711,7 +730,7 @@ function HotelSearch() {
                     Number Of Guests
                   </Form.Label>
 
-                  <ANTDropdown trigger={['click']} overlay={menu}>
+                  <ANTDropdown trigger={["click"]} overlay={menu}>
                     <input
                       id="inputState"
                       className="form-control pass_input"
@@ -730,15 +749,12 @@ function HotelSearch() {
                   </ANTDropdown>
                 </Form.Group>
               </Col>
-
             </Row>
-
           </Container>
-
         </div>
         <div
           className="dmticket-btn"
-        // style={{ textAlign: "center" }}
+          // style={{ textAlign: "center" }}
         >
           <Button
             type="submit"
