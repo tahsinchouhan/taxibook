@@ -4,7 +4,7 @@ import Logo from '.././assets/img/new_Logo.png'
 function MarqueeComponent() {
     const history = useHistory()
     const marqueeHandler = () => {
-        history.push("/busdetail")
+        history.push("/buspass")
     }
     return (
         <>
