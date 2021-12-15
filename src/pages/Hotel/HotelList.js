@@ -257,35 +257,6 @@ function HotelList() {
       });
   };
 
-  const getLocation = () => {
-    axios
-      .post(API_PATH + `/api/v2/hotelregistration`, geolocation)
-      .then((res) => {
-        setLocation(res.data.data);
-      })
-      .catch((e) => console.log(e));
-  };
-  const getCurrentLocation = async () => {
-    await window.navigator.geolocation.getCurrentPosition((pos) => {
-      console.log(pos);
-      setGeolocation(pos.coords);
-      const { latitude, longitude } = pos.coords;
-      axios
-        .post(API_PATH + `/api/v2/hotelregistration`, {
-          lat: latitude,
-          long: longitude,
-        })
-        .then((res) => {
-          for (var i = 0; i < res.data.data.length; i++) {
-            let str = `${res.data?.data[i]?.hotel_name},${res.data?.data[i]?.city}`;
-            myOptions.push(str);
-          }
-          setMyOptions(myOptions);
-          setLocation(res.data.data);
-        })
-        .catch((e) => console.log(e));
-    });
-  };
   const onDmTicketShow = () => {
     // console.log({ sendlocation });
     let city = sendlocation;
@@ -310,9 +281,7 @@ function HotelList() {
     // );
     history.push("/hotellist");
   };
-  useEffect(() => {
-    getLocation();
-  }, []);
+  
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
       style={{

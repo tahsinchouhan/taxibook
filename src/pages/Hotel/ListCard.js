@@ -21,8 +21,6 @@ import { FaTv } from "react-icons/fa";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 
 function ListCard(dates, props) {
-  // console.log({props})
-  // console.log("startDate",{dates})
 
   const history = useHistory();
   const {
@@ -30,8 +28,8 @@ function ListCard(dates, props) {
     getStartData,
     isLoading,
   } = useSelector((state) => state.hotelReducer);
+  
   const viewDetails = (item) => {
-    console.log("View Details", item);
     // history.push(`/hotelDetails/${item?.room_data?.hotel_id}`);
 
     history.push({
@@ -45,9 +43,7 @@ function ListCard(dates, props) {
   };
   const [view, setView] = useState(false);
   const animities = hotels?.map((item, index) => {
-    console.log("item", item);
   });
-  console.log("item is", animities.value);
 
   return (
     <>
@@ -147,15 +143,13 @@ function ListCard(dates, props) {
                         <Carousel
                           showThumbs={false}
                           autoPlay={true}
-                          infiniteLoop={true}
+                          infiniteLoop={true} 
+                          interval="4000" 
                         >
-                          <div>
+                        {
+                          item.image.length > 0 ? item.image.map((img,idx)=><div key={idx}>
                             <img
-                              src={
-                                item?.room_data?.image !== ""
-                                  ? item?.room_data?.image[0]
-                                  : item?.room_data?.image[0]
-                              }
+                              src={img}
                               alt="room img"
                               style={{
                                 width: "500px",
@@ -164,8 +158,7 @@ function ListCard(dates, props) {
                                 // marginRight: "25px",
                               }}
                             />
-                          </div>
-                          <div>
+                          </div>) : <div>
                             <img
                               src={
                                 item?.room_data?.image !== ""
@@ -181,18 +174,23 @@ function ListCard(dates, props) {
                               }}
                             />
                           </div>
-                        </Carousel>
+                        }                                                 
+                        </Carousel>                        
                       </div>
                       <div
                         className="col-sm-1 p-0"
-                        style={{ marginLeft: "2px", marginRight: "-20px" }}
+                        style={{ marginLeft: "2px", marginRight: "-20px", marginTop:'10px' }}
                       >
-                        <img
-                          src={
-                            item?.room_data?.image !== ""
-                              ? item?.room_data?.image[0]
-                              : item?.room_data?.image[0]
-                          }
+                      {
+                        item.image.length > 0 ? item.image.map((img,idx)=><img key={idx}
+                          src={img}
+                          alt="room img"
+                          style={{
+                            width: "70px",
+                            height: "50px",
+                          }}
+                        />) : <img 
+                          src={item?.room_data?.image !== "" ? item?.room_data?.image[0]: item?.room_data?.image[0]}
                           alt="room img"
                           style={{
                             width: "70px",
@@ -200,62 +198,7 @@ function ListCard(dates, props) {
                             marginTop: "10px",
                           }}
                         />
-                        <br />
-                        <img
-                          src={
-                            item?.room_data?.image !== ""
-                              ? item?.room_data?.image[0]
-                              : item?.room_data?.image[0]
-                          }
-                          alt="room img"
-                          style={{
-                            width: "70px",
-                            height: "50px",
-                            marginTop: "1px",
-                          }}
-                        />
-                        <br />
-                        <img
-                          src={
-                            item?.room_data?.image !== ""
-                              ? item?.room_data?.image[1]
-                              : item?.room_data?.image[1]
-                          }
-                          alt="room img"
-                          style={{
-                            width: "70px",
-                            height: "50px",
-                            marginTop: "1px",
-                          }}
-                        />
-                        <br />
-                        <img
-                          src={
-                            item?.room_data?.image !== ""
-                              ? item?.room_data?.image[2]
-                              : item?.room_data?.image[2]
-                          }
-                          alt="room img"
-                          style={{
-                            width: "70px",
-                            height: "50px",
-                            marginTop: "1px",
-                          }}
-                        />
-                        <br />
-                        <img
-                          src={
-                            item?.room_data?.image !== ""
-                              ? item?.room_data?.image[3]
-                              : item?.room_data?.image[3]
-                          }
-                          alt="room img"
-                          style={{
-                            width: "70px",
-                            height: "50px",
-                            marginTop: "1px",
-                          }}
-                        />
+                      }
                       </div>
                       <div md={5} className="col-sm-6 p-0 m-0">
                         <div className="rajratan-train" style={{}}>
@@ -281,7 +224,6 @@ function ListCard(dates, props) {
                           <span
                             style={{ fontFamily: "poppins", fontSize: "85" }}
                           >
-                            {console.log("object is", item)}
                             <span style={{ fontSize: "14px" }}>
                               &nbsp;{item.address}
                             </span>{" "}
@@ -452,7 +394,8 @@ function ListCard(dates, props) {
                                   fontSize: "24px",
                                 }}
                               >
-                                ₹{item?.room_data?.price?.final_price}
+                                ₹{item?.price?.final_price}
+                                {console.log('ajay price', item.price)}
                               </span>
                               <span
                                 style={{
@@ -562,7 +505,7 @@ function ListCard(dates, props) {
             {hotels.map((item, index) => {
               return (
                 <>
-                  <div>
+                  <div key={index}>
                     <Container>
                       <Row>
                         <Col>

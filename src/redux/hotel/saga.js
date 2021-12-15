@@ -20,15 +20,23 @@ import {
 } from "./actions";
 
 const getBookHotellistAsync = async (payload) => {
-  let check_in = moment(payload.startDate).format("YYYY-MM-DD");
-  let address = payload.sendlocation===undefined?'Jagdalpur':payload.sendlocation;
-  let check_out = moment(payload.endDate).format("YYYY-MM-DD");
+  // let check_in = moment(payload.startDate).format("YYYY-MM-DD");
+  // let address = payload.sendlocation===undefined?'Jagdalpur':payload.sendlocation;
+  // let check_out = moment(payload.endDate).format("YYYY-MM-DD");
 
-  return await fetch(
-    `${API_PATH}/api/v2/room/set?address=${address}&check_in=${check_in}&check_out=${check_out}`
-  )
-    .then((response) => response.json())
-    .then((json) => json);
+  // const fd = new FormData();
+  // fd.append('address', address)
+  // fd.append('check_in', check_in)
+  // fd.append('check_out', check_out)
+  // const params = {
+  //   method:'GET',
+  //   body:fd
+  // }
+  return await fetch(`${API_PATH}/api/v2/hotelregistration/list`).then((response) => response.json()).then((json) => json);
+  // return await fetch(`${API_PATH}/api/v2/room/set`, params).then((response) => response.json()).then((json) => json);
+  // return await fetch(
+  //   `${API_PATH}/api/v2/room/set?address=${address}&check_in=${check_in}&check_out=${check_out}`
+  // ).then((response) => response.json()).then((json) => json);
 };
 
 function* getBookHotelSaga({ payload }) {

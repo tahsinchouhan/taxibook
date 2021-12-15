@@ -165,6 +165,7 @@ function HotelSearch() {
   };
 
   useEffect(() => {
+    history.push("/hotellist");
     getLocation();
   }, []);
   const chnageDate = (datee) => {
