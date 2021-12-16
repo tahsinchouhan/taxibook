@@ -211,13 +211,7 @@ function ListCard(dates, props) {
                                 marginTop: "3px",
                               }}
                             >
-                              {/* <img
-                                src={hotel}
-                                alt="hotel"
-                                style={{ height: "20px", paddingRight: "10px" }}
-                              /> */}
                               {item?.hotel_name}
-                              {/* {""} 00601 */}
                             </h3>
                           </div>
 
@@ -236,13 +230,10 @@ function ListCard(dates, props) {
                             </span>
                           </span>
                           <div style={{ display: "flex" }}>
-                            {item?.room_data?.amenities?.find(
-                              (ame) => ame.name === "FreeWifi"
-                            ) ? (
+                            {item?.amenities_id?.find((ame) => ame.name === "FreeWifi") ? (
                               <span
                                 style={{
                                   display: "flex",
-                                  // alignItems: "center",
                                   color: "grey",
                                   paddingTop: "10px",
                                   fontSize: "12px",
@@ -256,13 +247,10 @@ function ListCard(dates, props) {
                             ) : (
                               ""
                             )}
-                            {item?.room_data?.amenities?.find(
-                              (ame) => ame.name === "Window"
-                            ) ? (
+                            {item?.amenities_id?.find((ame) => ame.name === "Window") ? (
                               <span
                                 style={{
                                   display: "flex",
-                                  // alignItems: "center",
                                   color: "grey",
                                   paddingTop: "10px",
                                   fontSize: "12px",
@@ -276,13 +264,10 @@ function ListCard(dates, props) {
                             ) : (
                               ""
                             )}
-                            {item?.room_data?.amenities?.find(
-                              (ame) => ame.name === "Cooler"
-                            ) ? (
+                            {item?.amenities_id?.find((ame) => ame.name === "Cooler") ? (
                               <span
                                 style={{
                                   display: "flex",
-                                  // alignItems: "center",
                                   color: "grey",
                                   paddingTop: "10px",
                                   fontSize: "12px",
@@ -297,13 +282,10 @@ function ListCard(dates, props) {
                               ""
                             )}
 
-                            {item?.room_data?.amenities?.find(
-                              (ame) => ame.name === "AC"
-                            ) ? (
+                            {item?.amenities_id?.find((ame) => ame.name === "AC") ? (
                               <span
                                 style={{
                                   display: "flex",
-                                  // alignItems: "center",
                                   color: "grey",
                                   paddingTop: "10px",
                                   fontSize: "12px",
@@ -317,13 +299,10 @@ function ListCard(dates, props) {
                             ) : (
                               ""
                             )}
-                            {item?.room_data?.amenities?.find(
-                              (ame) => ame.name === "Kitchen"
-                            ) ? (
+                            {item?.amenities_id?.find((ame) => ame.name === "Kitchen") ? (
                               <span
                                 style={{
                                   display: "flex",
-                                  // alignItems: "center",
                                   color: "grey",
                                   paddingTop: "10px",
                                   fontSize: "12px",
@@ -337,10 +316,7 @@ function ListCard(dates, props) {
                             ) : (
                               ""
                             )}
-                            {/* {console.log("item?.room_data?.amenities",item?.room_data?.amenities)} */}
-                            {item?.room_data?.amenities?.find(
-                              (ame) => ame.name === "TV"
-                            ) ? (
+                            {item?.amenities_id?.find((ame) => ame.name === "TV") ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -383,8 +359,6 @@ function ListCard(dates, props) {
                                 display: "flex",
                                 flexDirection: "row",
                                 lineHeight: "10px",
-                                // justifyContent: "end",
-                                // paddingRight: "30px",
                               }}
                             >
                               <span
@@ -395,7 +369,6 @@ function ListCard(dates, props) {
                                 }}
                               >
                                 ₹{item?.price?.final_price}
-                                {console.log('ajay price', item.price)}
                               </span>
                               <span
                                 style={{
@@ -408,8 +381,7 @@ function ListCard(dates, props) {
                               >
                                 <strike>
                                   {" "}
-                                  {/* {console.log("object",item.room_data.price.base_price)} */}
-                                  ₹{item?.room_data?.price?.base_price}
+                                  ₹{item?.price?.offer_price}
                                 </strike>{" "}
                               </span>
                               <span
@@ -418,13 +390,12 @@ function ListCard(dates, props) {
                                   fontSize: "14px",
                                   color: "#F5A623",
                                   marginLeft: "10px",
-                                  // lineHeight:"25px"
                                 }}
                               >
                                 {parseInt(
-                                  ((item?.room_data?.price?.base_price -
-                                    item?.room_data?.price?.final_price) /
-                                    item?.room_data?.price?.base_price) *
+                                  ((item?.price?.base_price -
+                                    item?.price?.final_price) /
+                                    item?.price?.base_price) *
                                     100
                                 )}
                                 %off
@@ -446,11 +417,7 @@ function ListCard(dates, props) {
                           </div>
                           <div
                             className="col-sm-6 d-flex justify-content-center flex-row"
-                            style={{
-                              // lineHeight: "12px",
-                              float: "right",
-                              // marginTop: "36px",
-                            }}
+                            style={{ float: "right"}}
                           >
                             <div
                               onClick={() => viewDetails(item)}
@@ -462,7 +429,6 @@ function ListCard(dates, props) {
                                 height: "40px",
                                 alignItems: "center",
                                 border: "1px solid #0FA453",
-                                // borderRadius: "4px",
                                 color: "#0FA453",
                                 marginRight: "20px",
                               }}
@@ -510,8 +476,8 @@ function ListCard(dates, props) {
                       <Row>
                         <Col>
                           <img
-                            // src={item.room_data?.image[0]}
-                            src={Room}
+                            src={item.image[0]}
+                            // src={Room}
                             alt="room img"
                             style={{
                               width: "330px",
@@ -594,32 +560,25 @@ function ListCard(dates, props) {
                             </div>
 
                             <div style={{ display: "flex" }}>
-                              {item?.room_data?.amenities?.includes(
-                                "FreeWifi"
-                              ) ? (
+                              {item?.amenities_id?.includes("FreeWifi") ? (
                                 <span
                                   style={{
                                     display: "flex",
                                     alignItems: "center",
-                                    color: "grey",
-                                    // padding: "20px",
-                                    fontSize: "10px",
-                                    // fontFamily: "sans-serif",
+                                    color: "grey",                                    
+                                    fontSize: "10px",                                    
                                   }}
                                 >
                                   <FiWifi /> &nbsp;Free Wifi
                                 </span>
-                              ) : (
-                                ""
-                              )}
+                              ) : ("")}
 
-                              {item?.room_data?.amenities?.includes("AC") ? (
+                              {item?.amenities_id?.includes("AC") ? (
                                 <span
                                   style={{
                                     display: "flex",
                                     alignItems: "center",
                                     color: "grey",
-                                    // padding: "20px",
                                     fontSize: "12px",
                                     fontFamily: "sans-serif",
                                   }}
@@ -627,10 +586,8 @@ function ListCard(dates, props) {
                                   <BiCheckCircle style={{ fontSize: "15px" }} />
                                   &nbsp;AC
                                 </span>
-                              ) : (
-                                ""
-                              )}
-                              {item?.room_data?.amenities?.includes("TV") ? (
+                              ) : ( "" )}
+                              {item?.amenities_id?.includes("TV") ? (
                                 <span
                                   style={{
                                     display: "flex",
@@ -644,9 +601,22 @@ function ListCard(dates, props) {
                                   <FaTv style={{ fontSize: "20px" }} />
                                   &nbsp;TV
                                 </span>
-                              ) : (
-                                ""
-                              )}
+                              ) : ( "" )}
+                              {item?.amenities_id?.includes("Cooler") ? (
+                                <span
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    color: "grey",
+                                    fontSize: "16px",
+                                    fontFamily: "sans-serif",
+                                  }}
+                                >
+                                  &nbsp; &nbsp;{" "}
+                                  <BsShopWindow style={{ fontSize: "20px" }} />
+                                  &nbsp; Cooler
+                                </span>
+                              ) : ( "" )}
                               {/* <small
                                 style={{
                                   display: "flex",
@@ -673,7 +643,6 @@ function ListCard(dates, props) {
                                 <div
                                   style={{
                                     display: "flex",
-                                    // alignItems: "flex-end",
                                     flexDirection: "column",
                                     float: "right",
                                   }}
@@ -687,9 +656,9 @@ function ListCard(dates, props) {
                                     }}
                                   >
                                     {parseInt(
-                                      ((item?.room_data?.price?.base_price -
-                                        item?.room_data?.price?.final_price) /
-                                        item?.room_data?.price?.base_price) *
+                                      ((item?.price?.base_price -
+                                        item?.price?.final_price) /
+                                        item?.price?.base_price) *
                                         100
                                     )}
                                     %off
@@ -703,7 +672,7 @@ function ListCard(dates, props) {
                                         fontSize: "14px",
                                       }}
                                     >
-                                      ₹{item?.room_data?.price?.base_price}
+                                      ₹{item?.price?.base_price}
                                     </strike>{" "}
                                   </span>
                                   <span
@@ -711,14 +680,11 @@ function ListCard(dates, props) {
                                       fontWeight: "700",
                                       color: "red",
                                       fontSize: "16px",
-                                      // fontSize: "18px",
-                                      // fontWeight: "bolder",
-                                      // fontFamily: "sans-serif",
                                       float: "right",
                                       marginLeft: "auto",
                                     }}
                                   >
-                                    ₹ {item?.room_data?.price?.final_price}
+                                    ₹ {item?.price?.final_price}
                                   </span>
                                   <span
                                     style={{
