@@ -362,8 +362,7 @@ const Interest = () => {
                 <div className="bookings-div">
                   <h3>Bookings</h3>
                   <p>
-                    Book tickets for Bus,Location wise Tickets and Traveller
-                    Passes
+                    Book bus tickets for your favorite destination  
                   </p>
                 </div>
 
@@ -384,7 +383,8 @@ const Interest = () => {
                   className="makebooking-btn mx-3 btn-primary-tb"
                   // onClick={onButtonclick}
                 >
-                  Step 1 - Book Travel Pass
+                  {/* Step 1 - Book Travel Pass */}
+                  Book Bus Ticket 
                 </Button>
               </div>
             </Col>
@@ -552,8 +552,7 @@ const Interest = () => {
                 </svg>
                 <h3 className="pt-3">Bookings</h3>
                 <p>
-                  Book tickets for Bus,Location wise Tickets and Traveller
-                  Passes
+                  Book bus tickets for your favorite destination  
                 </p>
               </div>
               <Button
@@ -561,7 +560,7 @@ const Interest = () => {
                 // style={{ backgroundColor: "#0FA453", color: "white" }}
                 // onClick={onButtonclick}
               >
-                Step 1 - Book Travel Pass
+              Book Bus Ticket 
               </Button>
               {/* <div style={{ width: "266px", height: "487px", marginLeft: "42px", marginBlockStart: "8px" }}>
                     <Image className="img-fluid" src={manWithMobileMob} />
@@ -576,14 +575,14 @@ const Interest = () => {
       <Container>
         <div className="ticket-div py-5">
           <Row>
-            <Col sm={12} md={12}>
+            {/* <Col sm={12} md={12}>
               <div>
                 <h3 className="ml-5">
                   <b>Book Tickets</b>
                 </h3>
                 <p>Click on the ticket type you wish to book</p>
               </div>
-            </Col>
+            </Col> */}
 
             {/* <Col sm={6} md={6}>
                   <div className="viewbtn">
@@ -608,7 +607,7 @@ const Interest = () => {
           <div className="pt-4">
             <Container>
               <h4>{/* <b>Recent Tickets</b> */}</h4>
-              <TravellerTicketMobile />
+              {/* <TravellerTicketMobile /> */}
             </Container>
           </div>
           {/* <div className="viewbtn">

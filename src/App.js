@@ -56,6 +56,7 @@ import TravellerTicket from "./pages/travesaly/TravellerTicket";
 // import DmTicket from './pages/dm pass/dmtickets/DmTicket';
 
 import BusTicketDetail from "./pages/selectbooking/BusTicketDetail";
+import PackageTicketDetail from "./pages/selectbooking/PackageTicketDetail";
 import AddTaxi from "./pages/VenderOrgAdd/AddTaxi";
 import AddTravelAgent from "./pages/VenderOrgAdd/AddTravelAgent";
 import AddInfluencer from "./pages/VenderOrgAdd/AddInfluencer";
@@ -103,7 +104,7 @@ function App() {
             />
             <Route path="/checkoutbooking" component={CheckOutBook} />
             <Route path="/bookpayement" component={BookingPayment} />
-            <Route path="/packages_details/:name" component={PackagesDetails} />
+            <Route path="/packages_details/:name" component={PackagesDetails} />            
             <Route path="/covidresponse" component={CovidResponse} />
             <Route path="/registrationguide" component={RegistrationGuide} />
             <Route path="/registration" component={Registration} />
@@ -148,6 +149,7 @@ function App() {
             <Route exact path="/travelticket" component={TravelTicket} />
             <Route exact path="/dm-detail/:id" component={DmDetail} />
             <Route exact path="/bus-detail/:id" component={BusTicketDetail} />
+            <Route exact path="/packages-detail/:id" component={PackageTicketDetail} />
             <Route exact path="/dm_congratulate" component={DmCongratulate} />
             <Route exact path="/tickets_sraech" component={TicketsSraech} />
             <Route exact path="/tickets" component={Tickets1} />

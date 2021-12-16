@@ -3,51 +3,51 @@ import Header from "../../components/Header";
 import { Button, Row, Col, Form, Container } from "react-bootstrap";
 import calendar from "../../assets/img/calendar.png";
 import "react-datepicker/dist/react-datepicker.css";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { API_PATH } from "../../Path/Path";
 import axios from "axios";
 import Footer from "../travesaly/Footer";
 import moment from "moment";
-import { DatePicker } from "antd";
+import { useSelector } from "react-redux";
+// import { DatePicker } from "antd";
 import Details from "./Details";
-import { Carousel } from "react-bootstrap";
+// import { Carousel } from "react-bootstrap";
 
 const HotelDetails = (props) => {
-  const history = useHistory();
+  // const history = useHistory();
 
   const hotelUniqid = props.match.params.name;
   const startDate = props.match.params.startDate;
   const endDate = props.match.params.endDate;
 
   const [detailsP, setDetailsP] = useState([]);
-  const [hotelDetail, setHotelDetail] = useState([]);
+  // const [hotelDetail, setHotelDetail] = useState([]);
+
+  const { getStartData } = useSelector((state) => state.hotelReducer);
 
   useEffect(() => {
-    setHotelDetail(props.location.state.detail);
+    // setHotelDetail(props.location.state.detail);
     initLoad(props.location.state.detail);
   }, [props.location.state.detail]);
 
   const initLoad = (value) => {
-    console.log("value", value);
     axios
-      .get(
-        API_PATH +
-          `/api/v2/room/set?address=${value.city}&check_in=2021-12-28&check_out=2021-12-29&hotel_id=${value.room_data.hotel_id}`
-      )
-      .then((response) => {
-        console.log("response", response.data.data);
-        console.log(response.data.data);
-        setDetailsP(response.data.data);
-      });
+      .post(API_PATH + `/api/v2/room/set`, {
+        address: value.city,
+        check_in: moment(getStartData.startDate).format("YYYY-MM-DD"),
+        check_out: moment(getStartData.endDate).format("YYYY-MM-DD"),
+        hotel_id: value._id,
+      })
+      .then((response) => setDetailsP(response.data.data));
   };
 
-  const { RangePicker } = DatePicker;
-  console.log(detailsP);
-  const [index, setIndex] = useState(0);
+  // const { RangePicker } = DatePicker;
+  // const [index, setIndex] = useState(0);
 
-  const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
-  };
+  // const handleSelect = (selectedIndex, e) => {
+  //   setIndex(selectedIndex);
+  // };
+
   return (
     <div>
       <Header />
@@ -57,9 +57,7 @@ const HotelDetails = (props) => {
           className="d-none d-md-block "
           style={{ marginTop: "0", backgroundColor: "white" }}
         ></Container>
-        <div>
-          <Details detailsP={detailsP} hotelUniqid={hotelUniqid} />
-        </div>
+        <Details detailsP={detailsP} hotelUniqid={hotelUniqid} />
         <Footer />
       </div>
 

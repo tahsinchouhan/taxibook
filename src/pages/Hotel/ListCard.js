@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import loadingGif from "../../assets/img/balls_loading.gif";
 import { BsShopWindow } from "react-icons/bs";
-import bus1 from "../../assets/img/bus.png";
-import hotel from "../../assets/img/hotel.png";
-import city1 from "../../assets/img/city.png";
+// import bus1 from "../../assets/img/bus.png";
+// import hotel from "../../assets/img/hotel.png";
+// import city1 from "../../assets/img/city.png";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 import Room from "../../assets/img/hotelRoom.jpeg";
 // import { Carousel } from "antd";
-import { useDispatch } from "react-redux";
-
 import axios from "axios";
 import { API_PATH } from "../../Path/Path";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -30,12 +29,20 @@ function ListCard(dates, props) {
   } = useSelector((state) => state.hotelReducer);
   
   const viewDetails = (item) => {
-    // history.push(`/hotelDetails/${item?.room_data?.hotel_id}`);
-
-    history.push({
-      pathname: `/hotelDetails/${item?.room_data?.hotel_id}/${dates.startDate}/${dates.endDate}`,
-      state: { detail: item },
-    });
+    axios.post(API_PATH + `/api/v2/room/hotel`, {
+      hotel_id:item._id,
+      check_in:moment(getStartData.startDate).format("YYYY-MM-DD"),
+      check_out:moment(getStartData.endDate).format("YYYY-MM-DD"),
+      guests:getStartData.noOfGuest,
+      no_of_room:getStartData.noOfRoom
+    })
+    .then((response) => {
+      history.push({
+        pathname: `/hotelDetails/${item.hotel_name}/${dates.startDate}/${dates.endDate}`,
+        state: { detail: item },
+      });
+    })
+    .catch(err => alert('Room Not Available') );
   };
 
   const bookNow = (HotelId) => {
@@ -344,7 +351,7 @@ function ListCard(dates, props) {
                                 fontSize: "10px",
                                 fontFamily: "sans-serif",
                               }}
-                              onClick={() => viewDetails(item.room_data._id)}
+                              onClick={() => viewDetails(item)}
                             >
                               View More
                             </span>
@@ -730,7 +737,7 @@ function ListCard(dates, props) {
                           </span>
                           <span
                             className="train-seats  d-flex justify-content-center "
-                            onClick={() => bookNow(item.room_data._id)}
+                            onClick={() => bookNow(item._id)}
                             style={{
                               fontSize: "15px",
                               fontWeight: 700,
