@@ -169,10 +169,23 @@ function HotelConfirmation(props) {
     }
   }, [hotelpayData])
 
-  const onHotelPay = () =>{
+  const onHotelPay = () => {
+    console.log(hotelPayDetails)
+    if(!user_data) { toast.error('Please Log in first', {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
+      return;
+    }
     dispatch(hotelpay({hotelPayDetails,getStartData}))
   }
-  console.log("hotelDetails",hotelDetails)
+
+  console.log("hotelDetails", hotelDetails)
   return (
     <>
       <ToastContainer />
@@ -359,7 +372,7 @@ function HotelConfirmation(props) {
                           ""
                         )}
                       </div>
-                      <div className="form-div d-flex">
+                      {/* <div className="form-div d-flex">
                         <button
                           className="locationpass-btn"
                           type="button"
@@ -367,7 +380,7 @@ function HotelConfirmation(props) {
                         >
                           Pay Now
                         </button>
-                      </div>
+                      </div> */}
                     </form>
                   </div>
                 </div>
