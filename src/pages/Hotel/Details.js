@@ -21,10 +21,10 @@ const Details = ({ hotelUniqid, detailsP }) => {
   const address1 = getStartData.sendlocation;
   const check_out = moment(getStartData.endDate).format("DD-MMM");
   // console.log(detailsP, typeof detailsP);
-  const firstData = detailsP[0].room_list[0];
+  // const firstData = detailsP[0].room_list[0];
   
   const [index, setIndex] = useState(0);
-  const [detail, setDetail] = useState([firstData]);
+  const [detail, setDetail] = useState([]);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);

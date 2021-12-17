@@ -29,20 +29,25 @@ function ListCard(dates, props) {
   } = useSelector((state) => state.hotelReducer);
   
   const viewDetails = (item) => {
-    axios.post(API_PATH + `/api/v2/room/hotel`, {
-      hotel_id:item._id,
-      check_in:moment(getStartData.startDate).format("YYYY-MM-DD"),
-      check_out:moment(getStartData.endDate).format("YYYY-MM-DD"),
-      guests:getStartData.noOfGuest,
-      no_of_room:getStartData.noOfRoom
-    })
-    .then((response) => {
-      history.push({
+    // axios.post(API_PATH + `/api/v2/room/hotel`, {
+    //   hotel_id:item._id,
+    //   check_in:moment(getStartData.startDate).format("YYYY-MM-DD"),
+    //   check_out:moment(getStartData.endDate).format("YYYY-MM-DD"),
+    //   guests:getStartData.noOfGuest,
+    //   no_of_room:getStartData.noOfRoom
+    // })
+    // .then((response) => {
+    //   console.log('Room Available', response)
+    //   history.push({
+    //     pathname: `/hotelDetails/${item.hotel_name}/${dates.startDate}/${dates.endDate}`,
+    //     state: { detail: item },
+    //   });
+    // })
+    // .catch(err => alert('Room Not Available') );
+    history.push({
         pathname: `/hotelDetails/${item.hotel_name}/${dates.startDate}/${dates.endDate}`,
         state: { detail: item },
       });
-    })
-    .catch(err => alert('Room Not Available') );
   };
 
   const bookNow = (HotelId) => {
@@ -151,7 +156,25 @@ function ListCard(dates, props) {
                           showThumbs={false}
                           autoPlay={true}
                           infiniteLoop={true} 
-                          interval="4000" 
+                          interval="4000"
+                          // renderIndicator={(onClickHandler, isSelected, index, label)=>{
+                          //   const defStyle = { marginLeft: 20, color: "white", cursor: "pointer" };
+                          //   const style = isSelected ? { ...defStyle, color: "red" } : { ...defStyle };
+                          //   return (
+                          //     <span
+                          //       style={style}
+                          //       onClick={onClickHandler}
+                          //       onKeyDown={onClickHandler}
+                          //       value={index}
+                          //       key={index}
+                          //       role="button"
+                          //       tabIndex={0}
+                          //       aria-label={`${label} ${index + 1}`}
+                          //     >
+                          //       {"cust " + index}
+                          //     </span>
+                          //   );
+                          // }}
                         >
                         {
                           item.image.length > 0 ? item.image.map((img,idx)=><div key={idx}>
