@@ -42,10 +42,10 @@ const Interest = () => {
   // const bookTickets = () => {
   //   history.push("/select-booking");
   // };
-  // const onButtonclick = () => {
-  //   console.log("object");
-  //   history.push("/select-booking");
-  // };
+  const onButtonclick = () => {
+    // history.push("/select-booking");
+    history.push("/buspass");
+  };
   useEffect(() => {
     getCurrentLocation();
   }, []);
@@ -360,7 +360,7 @@ const Interest = () => {
             >
               <div style={{ textAlign: "left", paddingLeft: "11%" }}>
                 <div className="bookings-div">
-                  <h3>Bookings</h3>
+                  <h3 style={{color:'#fff'}}>Bookings</h3>
                   <p>
                     Book bus tickets for your favorite destination  
                   </p>
@@ -381,7 +381,7 @@ const Interest = () => {
 
                 <Button
                   className="makebooking-btn mx-3 btn-primary-tb"
-                  // onClick={onButtonclick}
+                  onClick={onButtonclick}
                 >
                   {/* Step 1 - Book Travel Pass */}
                   Book Bus Ticket 
@@ -422,7 +422,7 @@ const Interest = () => {
         <Container>
           <div className="ticket-div py-5">
             <Container style={{ paddingLeft: "10%" }}>
-              <Row className="align-items-center">
+              {/* <Row className="align-items-center">
                 <Col sm={6} md={6}>
                   <div>
                     <h3 className="ml-5">Book Tickets</h3>
@@ -449,7 +449,7 @@ const Interest = () => {
                     </Button>
                   </div>
                 </Col>
-              </Row>
+              </Row> */}
 
               {/* Search Field */}
               <Row style={{ marginTop: "20px" }}>
@@ -480,12 +480,11 @@ const Interest = () => {
                 </Col>
               </Row>
             </Container>
-            <div className="pt-4">
+            {/* <div className="pt-4">
               <Container>
-                <h4>{/* <b>Recent Tickets</b> */}</h4>
                 <TravellerTicket />
               </Container>
-            </div>
+            </div> */}
           </div>
         </Container>
       </Container>
@@ -550,7 +549,7 @@ const Interest = () => {
                     fill="#0FA453"
                   />
                 </svg>
-                <h3 className="pt-3">Bookings</h3>
+                <h3 className="pt-3 text-white">Bookings</h3>
                 <p>
                   Book bus tickets for your favorite destination  
                 </p>
@@ -558,7 +557,7 @@ const Interest = () => {
               <Button
                 className="makebooking-btn btn-primary-tb"
                 // style={{ backgroundColor: "#0FA453", color: "white" }}
-                // onClick={onButtonclick}
+                onClick={onButtonclick}
               >
               Book Bus Ticket 
               </Button>
