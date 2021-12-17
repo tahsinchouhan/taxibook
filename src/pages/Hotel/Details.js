@@ -1,38 +1,40 @@
 import React, { useState, useEffect } from "react";
-import Room from "../../assets/img/hotelRoom.jpeg";
-import calendar from "../../assets/img/calendar.png";
+// import Room from "../../assets/img/hotelRoom.jpeg";
+// import calendar from "../../assets/img/calendar.png";
 import { useHistory } from "react-router-dom";
-import { API_PATH } from "../../Path/Path";
+// import { API_PATH } from "../../Path/Path";
 // import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import moment from "moment";
 import { FaCheckCircle } from "react-icons/fa";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import hotelotherimage from "../../assets/img/hotelotherimage.jpg";
+// import hotelotherimage from "../../assets/img/hotelotherimage.jpg";
 import { BiCheckCircle } from "react-icons/bi";
 // import { AiOutlineCamera } from "react-icons/Ai";
+import { AiOutlineWifi, AiOutlineVideoCamera } from "react-icons/ai"; //WiFi
 
-const Details = ({ hotelUniqid, detailsP }) => {
+
+
+const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
   const history = useHistory();
-
   const { getStartData } = useSelector((state) => state.hotelReducer);
   const check_in = moment(getStartData.startDate).format("DD-MMM");
   const address1 = getStartData.sendlocation;
   const check_out = moment(getStartData.endDate).format("DD-MMM");
-  // console.log(detailsP, typeof detailsP);
-  // const firstData = detailsP[0].room_list[0];
-  
+  const firstData = detailsP[0]?.room_list[0];
+    
   const [index, setIndex] = useState(0);
-  const [detail, setDetail] = useState([]);
+  const [detail, setDetail] = useState('');
+  const [selectedRoom, setSelectedRoom] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
   useEffect(() => {
-    
-  }, []);
+    setDetail(firstData)
+  }, [firstData]);
 
   const responsive = {
     desktop: {
@@ -52,14 +54,10 @@ const Details = ({ hotelUniqid, detailsP }) => {
     },
   };
 
-  const updatePrice =(item)=>{
-    setDetail(prev => [
-      ...prev, 
-      item
-    ]);
-    console.log(detail)
+  const updatePrice = (item, index) => {
+    setDetail(item);
+    setSelectedRoom(index)
   }
-
 
   const bookingPage = (_id) => {
     history.push(`/hotelconfirmation/${_id}`);
@@ -74,34 +72,18 @@ const Details = ({ hotelUniqid, detailsP }) => {
           activeIndex={index}
           onSelect={handleSelect}
           partialVisible
-          // itemClass="image-item"
           responsive={responsive}
         >
-          <div className="Carousel-a">
-            <img className="caraselImage" src={Room} alt="First slide" />{" "}
-          </div>
-          <div className="Carousel-a">
-            <img
-              className="caraselImage"
-              src={hotelotherimage}
-              alt="Second slide"
-            />
-          </div>
-          <div className="Carousel-a">
-            <img className="caraselImage" src={Room} alt="Second slide" />
-          </div>
-          <div className="Carousel-a">
-            <img
-              className="caraselImage"
-              src={hotelotherimage}
-              alt="Second slide"
-            />
-          </div>
+        {hotelDetail?.image ? (hotelDetail?.image).map((img, idx) => {
+          return <div key={idx} className="Carousel-a" >
+              <img className="caraselImage" src={img} alt="slide" style={{minWidth:'100%',maxWidth:'100%'}} />
+            </div>
+        }) : ''}
         </Carousel>
       </div>
 
       {/* =============== */}
-      {detailsP ? (
+      {detailsP ? (        
         <div
           className="hotel-confirm-div"
           style={{ width: "90%", margin: "0 auto" }}
@@ -119,17 +101,11 @@ const Details = ({ hotelUniqid, detailsP }) => {
                 {detailsP[0]?.room_list?.map((item, index) => {
                   return (
                     <div key={index} className="choose-room-div" style={{ marginBottom:"32px"}}>
-                      <div
-                        style={{
-                          backgroundColor: "#F5F5F5",
-                          height: "30px",
-                          display: "flex",
-                          alignItems: "center",
-                          padding: "0 15px",
-                        }}
-                      >
-                        ⭐️ Selected Category
+                     {selectedRoom === index && <div className={`${selectedRoom === index ? 'selected' : '' }`}>
+                        <span style={{color:'gold', paddingRight:'0.3rem'}}>⭐️</span> Selected Category
                       </div>
+                    }
+                      
                       <div
                         style={{
                           padding: "15px",
@@ -139,132 +115,27 @@ const Details = ({ hotelUniqid, detailsP }) => {
                         }}
                       >
                         <div>
-                          <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>
-                            Classic ({item?.room_category_id.name})
+                          <h1 style={{ fontSize: "28px", fontWeight: "bold" }}>
+                            Classic ({item?.room_category_id.name}){' '}
+                            {
+                              selectedRoom === index && <FaCheckCircle style={{ fontSize: "28px", color:'#28b628', }} />
+                            }                            
                           </h1>
 
                         <div className="row">
                           <div className="col-sm-12"><h5><b>Amenities</b></h5></div>
                           {item?.amenities.map((value,index)=>(
-                            <div className="col-sm-3" key={index}>
-                              <strong>{value.name}</strong>
+                            <div className="col-sm-4 mt-4" style={{fontSize:'18px'}} key={index}>
+                              {value?.name?.includes('FreeWifi') ? <AiOutlineWifi style={{marginRight:'0.5rem'}} /> : ''}
+                              {value?.name?.includes('CCTVCameras') ? <AiOutlineVideoCamera style={{marginRight:'0.5rem'}} /> : ''}
+                              {value?.name?.includes('AC') ? <AiOutlineVideoCamera style={{marginRight:'0.5rem'}} /> : ''}
+                              {value?.name?.includes('Kitchen') ? <AiOutlineVideoCamera style={{marginRight:'0.5rem'}} /> : ''}
+                              {value?.name?.includes('Cooler') ? <AiOutlineVideoCamera style={{marginRight:'0.5rem'}} /> : ''}
+                              {value.name}
                             </div>
                           ))}
                         </div>
-
-                          {/* <div style={{ display: "flex" }}>
-                            {item?.amenities?.some(word => word.name === 'Geezer') ? (
-                              <div
-                                style={{
-                                  display: "flex",
-                                  width: 100,
-                                  height: 50,
-                                }}
-                              >
-                                <img
-                                  src={calendar}
-                                  alt=""
-                                  style={{
-                                    margin: "0 10px",
-                                    width: "20px",
-                                    height: "20px",
-                                  }}
-                                />
-                                <h1
-                                  style={{
-                                    fontSize: "16px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    marginBottom: 0,
-                                  }}
-                                >
-                                  Geezer
-                                </h1>
-                              </div>
-                            ) : ( "" )}
-                            {item?.amenities?.some(word => word.name === 'AC') ? (
-                              <div
-                                style={{
-                                  display: "flex",
-                                  width: 100,
-                                  height: 50,
-                                }}
-                              > 
-                              { console.log('ac There is Available') }
-                                <BiCheckCircle style={{ fontSize: "20px" }} />
-                                <h1
-                                  style={{
-                                    fontSize: "16px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    marginBottom: 0,
-                                  }}
-                                >
-                                  AC
-                                </h1>
-                              </div>
-                            ) : ("")}
-
-                            {item?.amenities?.some(word => word.name === 'CCTVCameras') ? (
-                              <div
-                                style={{
-                                  display: "flex",
-                                  width: 100,
-                                  height: 50,
-                                }}
-                              >
-                                <img
-                                  src={calendar}
-                                  alt=""
-                                  style={{
-                                    margin: "0 10px",
-                                    width: "20px",
-                                    height: "20px",
-                                  }}
-                                />
-                                <h1
-                                  style={{
-                                    fontSize: "16px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    marginBottom: 0,
-                                  }}
-                                >
-                                  CCTV
-                                </h1>
-                              </div>
-                            ) : ("")}
-
-                            {item?.amenities?.some(word => word.name === 'FreeWifi') ? (
-                              <div
-                                style={{
-                                  display: "flex",
-                                  width: 100,
-                                  height: 50,
-                                }}
-                              >
-                                <img
-                                  src={calendar}
-                                  alt=""
-                                  style={{
-                                    margin: "0 10px",
-                                    width: "20px",
-                                    height: "20px",
-                                  }}
-                                />
-                                <h1
-                                  style={{
-                                    fontSize: "16px",
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    marginBottom: 0,
-                                  }}
-                                >
-                                  Free Wifi
-                                </h1>
-                              </div>
-                            ) : ("")}
-                          </div> */}
+                         
                         </div>
                         {item?.image.map((value, index)=>(
                         <div key={index}>
@@ -304,9 +175,12 @@ const Details = ({ hotelUniqid, detailsP }) => {
                             borderRadius: "5px",
                             cursor:'pointer'
                           }}
-                          onClick={()=>updatePrice(item)}>
-                          <FaCheckCircle />
-                          &nbsp; Selected
+                          onClick={()=>updatePrice(item, index)}>
+                          {
+                            selectedRoom === index ? 
+                              <span><FaCheckCircle style={{ fontSize: "24px", color:'#28b628', }} /> &nbsp; SELECTED</span> :
+                              <span> &nbsp; SELECT</span>
+                          } 
                         </div>
                       </div>
                     </div>
@@ -362,10 +236,9 @@ const Details = ({ hotelUniqid, detailsP }) => {
                     fontSize: "25px",
                     fontWeight: "bold",
                     paddingRight: "10px",
-                  }}>
-                 {/* ₹ {detailsP[0]?.room_list[0]?.price?.base_price ? detail?.price?.base_price : ""  } */}
-                  ₹ {detailsP[0]?.room_list[0]?.price?.offer_price} 
-                  {/* ₹ {detail?.price?.base_price} */}
+                  }}>                   
+                    ₹ {detail?.price?.offer_price}
+                    {console.log('Check data', detail)}
                 </h1>
                 <h2
                   style={{
@@ -376,8 +249,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                     paddingRight: "10px",
                     textDecoration: "line-through",
                   }}>
-                  ₹ {detailsP[0]?.room_list[0]?.price?.base_price} 
-                  {/* ₹ {detail?.price?.base_price} */}
+                  ₹ {detail?.price?.base_price}
                 </h2>
                 <h3
                   style={{
@@ -388,11 +260,10 @@ const Details = ({ hotelUniqid, detailsP }) => {
                   }}>
                   {" "}
                   {Math.round(
-                      ((detailsP[0]?.room_list[0]?.price?.base_price -
-                        detailsP[0]?.room_list[0]?.price?.final_price) /
-                        detailsP[0]?.room_list[0]?.price?.base_price) *
-                        100
-                    )}
+                      ((detail?.price?.base_price -
+                        detail?.price?.final_price) /
+                        detail?.price?.base_price) * 100)
+                  }
                   % 0ff
                 </h3>
               </div>
@@ -438,7 +309,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                     fontSize: "12px",
                   }}
                 >
-                  Classic ({detailsP[0]?.room_list[0]?.room_category_id?.name})
+                  Classic ({detail?.room_category_id?.name})
                 </div>
               </div>
 
@@ -448,7 +319,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
               >
                 <span style={{}}>Your Saving</span>
                 <span style={{ fontWeight: "bold" }}>
-                  ₹ {detailsP[0]?.room_list[0]?.price?.base_price - detailsP[0]?.room_list[0]?.price?.offer_price}
+                  ₹ {detail?.price?.base_price - detail?.price?.offer_price}
                 </span>
               </div>
               <div
@@ -463,7 +334,7 @@ const Details = ({ hotelUniqid, detailsP }) => {
                   </span>
                 </span>
                 <span style={{ fontWeight: "bold" }}>
-                  ₹ {detailsP[0]?.room_list[0]?.price?.final_price}
+                  ₹ {detail?.price?.final_price}
                 </span>
               </div>
 

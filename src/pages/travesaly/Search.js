@@ -11,7 +11,9 @@ import ticketImg from "../../assets/img/ticket@3x.png";
 import axios from 'axios'
 function Search() {
   const [destinations, setDestinations] = useState([]);
+  const [storeDestinations, setStoreDestinations] = useState([]);
   const [packages, setPackages] = useState([]);
+  const [storePackages, setStorePackages] = useState([]);
   const [search, setSearch] = useState();
   const [dmPass, setDmPass] = useState([]);
   const [flag, setFlag] = useState(false);
@@ -31,7 +33,7 @@ function Search() {
     fetch(API_PATH + "/api/v1/destinations/list")
       .then((response) => response.json())
       .then((json) => {
-        if (json.data !== undefined) setDestinations(json.data);
+        if (json.data !== undefined) { setDestinations(json.data); setStoreDestinations(json.data); }
         console.log(json.data);
       })
       .catch((e) => console.log(e));
@@ -40,11 +42,11 @@ function Search() {
     fetch(API_PATH + "/api/v1/packages/list")
       .then((response) => response.json())
       .then((json) => {
-        if (json.data !== undefined) setPackages(json.data);
-        console.log(json.data);
+        if (json.data !== undefined) { setPackages(json.data); setStorePackages(json.data); }
       })
       .catch((e) => console.log(e));
   };
+
   const getDmPass = async (mobile) => {
     // fetch(API_PATH + "/api/v1/dmpass/search")
     await axios.post(`${API_PATH}/api/v1/dmpass/search`, {
@@ -62,19 +64,26 @@ function Search() {
   };
 
   const searchingData = (value) => {
-    setSearch(value);
-    if (value) {
-      setFlag(true);
-    } else {
-      setFlag(false);
-    }
-    fetch(API_PATH + `/api/v1/search?searchvalue=${value}`)
-      .then((response) => response.json())
-      .then((json) => {
-        if (json.data !== undefined) setSearch(json.data);
-        console.log(json.data);
-      })
-      .catch((e) => console.log(e));
+    const res = value ? 
+                destinations.filter((dest) => dest.location.name.includes(value) || dest.address.includes(value) || dest.title.includes(value)) : 
+                storeDestinations;
+    const res1 = value ? 
+                packages.filter((pack) => pack.category.category_name.includes(value) || pack.title.includes(value) || pack.sub_title.includes(value)) : 
+                storePackages ;
+    setDestinations(res)
+    setPackages(res1)
+    // setSearch(value);
+    // if (value) {
+    //   setFlag(true);
+    // } else {
+    //   setFlag(false);
+    // }    
+    // fetch(API_PATH + `/api/v1/search?searchvalue=${value}`)
+    //   .then((response) => response.json())
+    //   .then((json) => {
+    //     if (json.data !== undefined) setSearch(json.data);
+    //   })
+    //   .catch((e) => console.log(e));
   };
 
   return (
@@ -273,11 +282,10 @@ function Search() {
                     marginTop: -100,
                   }}
                 >
-                  {console.log(search)}
-                  {!search.destinations == []
-                    ? search.destinations.map((item) => {
+                  {!search.destinations == [] ? search.destinations.map((item,index) => {
                       return (
                         <div
+                          key={index}
                           onClick={() =>
                             history.push({
                               pathname: `/destination_details/${item.title}`,
@@ -313,11 +321,9 @@ function Search() {
                           </div>
                         </div>
                       );
-                    })
-                    : null}
+                    }) : null}
 
-                  {!search.packages == []
-                    ? search.packages.map((item) => {
+                  {!search.packages == [] ? search.packages.map((item) => {
                       return (
                         <div
                           onClick={() =>
@@ -355,8 +361,7 @@ function Search() {
                           </div>
                         </div>
                       );
-                    })
-                    : null}
+                    }) : null}
                 </div>
               </div>
             ) : null) : null}

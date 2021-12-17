@@ -659,7 +659,6 @@ function HotelList() {
             startDate={startDate}
             endDate={endDate}
           />
-          {/* <ListCard /> */}
         </div>
       </div>
     </>

@@ -21,12 +21,12 @@ const HotelDetails = (props) => {
   const endDate = props.match.params.endDate;
 
   const [detailsP, setDetailsP] = useState([]);
-  // const [hotelDetail, setHotelDetail] = useState([]);
+  const [hotelDetail, setHotelDetail] = useState([]);
 
   const { getStartData } = useSelector((state) => state.hotelReducer);
 
   useEffect(() => {
-    // setHotelDetail(props.location.state.detail);
+    setHotelDetail(props.location.state.detail);
     initLoad(props.location.state.detail);
   }, [props.location.state.detail]);
 
@@ -57,7 +57,7 @@ const HotelDetails = (props) => {
           className="d-none d-md-block "
           style={{ marginTop: "0", backgroundColor: "white" }}
         ></Container>
-        <Details detailsP={detailsP} hotelUniqid={hotelUniqid} />
+        <Details hotelDetail={hotelDetail} detailsP={detailsP} hotelUniqid={hotelUniqid} />
         <Footer />
       </div>
 
@@ -208,7 +208,7 @@ const HotelDetails = (props) => {
           </Container> */}
         </div>
         <div>
-          <Details hotelUniqid={hotelUniqid} detailsP={detailsP} />
+          <Details hotelDetail={hotelDetail} hotelUniqid={hotelUniqid} detailsP={detailsP} />
         </div>
         <div>
           <Footer />

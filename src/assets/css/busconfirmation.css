@@ -112,6 +112,18 @@
   border: 1px solid lightgray;
   overflow: hidden;
 }
+.choose-room-div .selected{
+  display: flex;
+  align-items: center;
+  padding-left: 0.51rem;
+  background: linear-gradient(to right,#797f9d,#d4d1da) !important;
+  height: 30px !important;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 4px 4px 0px 0px !important;
+} 
+
 @media (max-width: 500px) {
   .hotel-confirm-div {
     flex-direction: column;

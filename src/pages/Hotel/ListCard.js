@@ -44,7 +44,7 @@ function ListCard(dates, props) {
     //   });
     // })
     // .catch(err => alert('Room Not Available') );
-    history.push({
+      history.push({
         pathname: `/hotelDetails/${item.hotel_name}/${dates.startDate}/${dates.endDate}`,
         state: { detail: item },
       });
