@@ -12,8 +12,10 @@ import { Link, useHistory } from "react-router-dom";
 import checkimage from "../assets/TravelBastar-desktop/checkimage.png";
 import { useDispatch } from "react-redux";
 import {setinterestprehome} from '../redux/actions'
+import SeoData from '../SeoData.json'
 
 const PreHome = () => {
+  console.log('Seo Data', SeoData)
   const history = useHistory();
   const dispatch = useDispatch()
   const [adventure11, setAdventure] = useState(0);
@@ -84,6 +86,12 @@ const PreHome = () => {
       }
     }
   };
+
+  useEffect(() => {
+    document.title = SeoData.home.page_title || 'Travel Bastar';
+    document.querySelector("meta[name='description']").setAttribute('content', (SeoData.home.meta_description || ''));
+    document.querySelector("meta[name='keywords']").setAttribute('content', (SeoData.home.meta_keywords || ''));
+  }, [])
   
   const getmaxCategory = async() => {
       dispatch(setinterestprehome({

@@ -24,6 +24,7 @@ import {
   setQuizStarted,
 } from "../../redux/actions";
 import HeritageWalkModal from "../../components/modal/HeritageWalkModal";
+import SeoData from '../../SeoData.json'
 
 
 function Saly() {
@@ -45,8 +46,14 @@ function Saly() {
     });
   };
 
+  
+
   useEffect(() => {
     getCurrentLocation();
+
+    document.title = SeoData.home.page_title || 'Travel Bastar';
+    document.querySelector("meta[name='description']").setAttribute('content', (SeoData.home.meta_description || ''));
+    document.querySelector("meta[name='keywords']").setAttribute('content', (SeoData.home.meta_keywords || ''));
   }, []);
   const onButtonclick = () => {
     console.log("object");

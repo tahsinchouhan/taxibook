@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import "../../assets/css/buspass.css";
@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import Message from "../../components/Message";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import LoginModal from "../../components/modal/LoginModal";
+import SeoData from '../../SeoData.json'
 
 function BusDetail({loading}) {
   const history = useHistory();
@@ -30,6 +31,11 @@ function BusDetail({loading}) {
   const [number, setNumber] = useState("")
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    document.title = SeoData.bus_ticket_booking_system.page_title || 'Travel Bastar';
+    document.querySelector("meta[name='description']").setAttribute('content', (SeoData.bus_ticket_booking_system.meta_description || ''));
+    document.querySelector("meta[name='keywords']").setAttribute('content', (SeoData.bus_ticket_booking_system.meta_keywords || ''));
+  }, [])
   // const handleMobile = (e) => {
   //   console.log("object", e.target.value);
   //   let mob = e.target.value;

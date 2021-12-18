@@ -13,6 +13,7 @@ import "react-multi-carousel/lib/styles.css";
 import Geocode from "react-geocode";
 import { useDispatch } from "react-redux";
 import {exportid} from '../../redux/actions'
+import SeoData from '../../SeoData.json'
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -37,6 +38,10 @@ const Explores = () => {
 
   useEffect(() => {
     getCurrentLocation();
+
+    document.title = SeoData.explore.page_title || 'Travel Bastar';
+    document.querySelector("meta[name='description']").setAttribute('content', (SeoData.explore.meta_description || ''));
+    document.querySelector("meta[name='keywords']").setAttribute('content', (SeoData.explore.meta_keywords || ''));
   }, []);
 
   const tripPackage = [

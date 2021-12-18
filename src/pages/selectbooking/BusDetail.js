@@ -20,6 +20,7 @@ import {
   setRouteId,
 } from "../../redux/actions";
 import Footer from "../travesaly/Footer";
+import SeoData from '../../SeoData.json'
 
 function BusPass() {
   const history = useHistory();
@@ -27,8 +28,13 @@ function BusPass() {
   const [startDate, setStartDate] = useState(new Date());
   const [selected, setSelected] = useState("");
   const dispatch = useDispatch();
+
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    document.title = SeoData.bus_ticket_booking_system.page_title || 'Travel Bastar';
+    document.querySelector("meta[name='description']").setAttribute('content', (SeoData.bus_ticket_booking_system.meta_description || ''));
+    document.querySelector("meta[name='keywords']").setAttribute('content', (SeoData.bus_ticket_booking_system.meta_keywords || ''));
   }, []);
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
