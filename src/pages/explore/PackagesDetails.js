@@ -23,7 +23,8 @@ const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
 };
 const PackagesDetails = (props) => {
-  console.log({props})
+  // console.log({props})
+
   const [enquireModal, setEnquireModal] = useState();
   const [modalReviewShow, setModalReviewShow] = useState(false);
   const [packages, setPackages] = useState("");
@@ -35,6 +36,16 @@ const PackagesDetails = (props) => {
   const history = useHistory();
 
   const [modalShow, setModalShow] = useState(false);
+
+
+  const getSeoDetails = async (id) => {
+    console.log('Package Id ', props?.location?.item)
+    const res = await fetch(API_PATH + `/api/v1/packages/${id}`)
+    const data = await res.json()
+    document.title = data.data.seo_title || 'Travel Bastar';
+    document.querySelector("meta[name='description']").setAttribute('content', (data.data.seo_description || ''));
+    document.querySelector("meta[name='keywords']").setAttribute('content', (data.data.seo_description || ''));
+  }
 
   const modalReviewHadler = () => {
     setModalReviewShow(true);
@@ -59,6 +70,7 @@ const PackagesDetails = (props) => {
     } else {
       id = localStorage.getItem("id");
     }
+    getSeoDetails(id);
     getPackages();
     getReview();
     getEnquiry();
@@ -603,60 +615,60 @@ const PackagesDetails = (props) => {
         </p> */}
 
 
-<div class="row">
-  <div class="side">
+<div className="row">
+  <div className="side">
     <div>5 star</div>
   </div>
-  <div class="middle">
-    <div class="bar-container">
-      <div class="bar-5"></div>
+  <div className="middle">
+    <div className="bar-container">
+      <div className="bar-5"></div>
     </div>
   </div>
-  <div class="side right">
+  <div className="side right">
     <div>150</div>
   </div>
-  <div class="side">
+  <div className="side">
     <div>4 star</div>
   </div>
-  <div class="middle">
-    <div class="bar-container">
-      <div class="bar-4"></div>
+  <div className="middle">
+    <div className="bar-container">
+      <div className="bar-4"></div>
     </div>
   </div>
-  <div class="side right">
+  <div className="side right">
     <div>63</div>
   </div>
-  <div class="side">
+  <div className="side">
     <div>3 star</div>
   </div>
-  <div class="middle">
-    <div class="bar-container">
-      <div class="bar-3"></div>
+  <div className="middle">
+    <div className="bar-container">
+      <div className="bar-3"></div>
     </div>
   </div>
-  <div class="side right">
+  <div className="side right">
     <div>15</div>
   </div>
-  <div class="side">
+  <div className="side">
     <div>2 star</div>
   </div>
-  <div class="middle">
-    <div class="bar-container">
-      <div class="bar-2"></div>
+  <div className="middle">
+    <div className="bar-container">
+      <div className="bar-2"></div>
     </div>
   </div>
-  <div class="side right">
+  <div className="side right">
     <div>6</div>
   </div>
-  <div class="side">
+  <div className="side">
     <div>1 star</div>
   </div>
-  <div class="middle">
-    <div class="bar-container">
-      <div class="bar-1"></div>
+  <div className="middle">
+    <div className="bar-container">
+      <div className="bar-1"></div>
     </div>
   </div>
-  <div class="side right">
+  <div className="side right">
     <div>20</div>
   </div>
 </div>

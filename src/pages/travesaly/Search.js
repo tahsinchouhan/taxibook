@@ -497,7 +497,6 @@ function Search() {
                           history.push({
                             pathname: `/packages_details/${item.title}`,
                             item: item._id,
-
                           })
                         }
                         className="search_div"

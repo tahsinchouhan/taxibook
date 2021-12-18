@@ -21,6 +21,20 @@ const DestinationDetails = (props) => {
   const [packagesdata, getPackagesdata] = useState([]);
   const [zoom, setZoom] = useState(11);
 
+  const getSeoDetails = async (id) => {
+    // console.log('Destination Id ', props?.location?.id)
+    console.log('Check id', id)
+    try {
+      const res = await fetch(API_PATH + `/api/v1/destinations/${id}`)
+      const data = await res.json()
+      document.title = data.data.seo_title || 'Travel Bastar';
+      document.querySelector("meta[name='description']").setAttribute('content', (data.data.seo_description || 'Ajay'));
+      document.querySelector("meta[name='keywords']").setAttribute('content', (data.data.seo_description || ''));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   var id;
 
   useEffect(() => {
@@ -28,18 +42,16 @@ const DestinationDetails = (props) => {
       localStorage.setItem("id", props.location.id);
       id = localStorage.getItem("id");
       console.log('1')
-
     } else {
       id = localStorage.getItem("id");
       console.log('2')
-
     }
     console.log('abcd')
   }, []);
 
   useEffect(() => {
     if (props.location.id) {
-      console.log("props.location.id",props.location.id)
+      // console.log("props.location.id",props.location.id)
       localStorage.setItem("id", props.location.id);
       id = localStorage.getItem("id");
       console.log('1')
@@ -47,8 +59,8 @@ const DestinationDetails = (props) => {
     } else {
       id = localStorage.getItem("id");
       console.log('2')
-
     }
+    getSeoDetails(id)
     getPackages();
     getPackagesid();
     window.scrollTo(0, 0);

@@ -16,6 +16,8 @@ import Details from "./Details";
 const HotelDetails = (props) => {
   // const history = useHistory();
 
+  console.log('All Details', props)
+
   const hotelUniqid = props.match.params.name;
   const startDate = props.match.params.startDate;
   const endDate = props.match.params.endDate;

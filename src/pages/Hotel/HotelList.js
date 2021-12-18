@@ -62,17 +62,6 @@ function HotelList() {
   const [rangeValue, setRangeValue] = useState([1500, 2500]);
 
   useEffect(() => {
-    // dispatch(
-    //   getBookHotel({
-    //     sendlocation: city,
-    //     startDate,
-    //     endDate,
-    //     noOfRoom,
-    //     noOfGuest,
-    //     roomStateData: roomState,
-    //   })
-    // );
-    // console.log(`getStartData`, getStartData);
     if (
       getStartData.length > 0 &&
       getStartData?.noOfRoom > 0 &&
@@ -82,6 +71,7 @@ function HotelList() {
       setNoOfGuest(getStartData.noOfGuest);
     }
   }, [getStartData]);
+
   const [roomState, setRoomState] = useState(
     getStartData?.roomStateData?.length > 0
       ? getStartData?.roomStateData
@@ -135,10 +125,12 @@ function HotelList() {
     addMenu();
     setRoomState(guestRoomObj);
   };
+
   useEffect(() => {
     setRoomState(roomState);
     addMenu();
   }, [roomState]);
+
   const menu = (
     <Menu className="menuSearch">
       <Menu.Item>
@@ -269,17 +261,18 @@ function HotelList() {
     }
     setSendlocation(city);
 
-    // dispatch(
-    //   getBookHotel({
-    //     sendlocation: city,
-    //     startDate,
-    //     endDate,
-    //     noOfRoom,
-    //     noOfGuest,
-    //     roomStateData: roomState,
-    //   })
-    // );
-    history.push("/hotellist");
+    dispatch(
+      getBookHotel({
+        sendlocation: city,
+        startDate,
+        endDate,
+        noOfRoom,
+        noOfGuest,
+        roomStateData: roomState,
+        filter:true
+      })
+    );
+    // history.push("/hotellist");
   };
   
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
@@ -297,14 +290,15 @@ function HotelList() {
       {value}
     </button>
   ));
+
   function disabledDate(current) {
     return current && current < moment().endOf("day");
   }
   const chnageDate = (datee) => {
-    console.log({ datee });
     setStartDate(datee[0]._d);
     setEndDate(datee[1]._d);
   };
+
   useEffect(() => {
     dispatch(
       getBookHotel({
@@ -313,7 +307,7 @@ function HotelList() {
         endDate,
         noOfRoom,
         noOfGuest,
-        roomStateData: roomState,
+        roomStateData: roomState
       })
     );
   }, []);
