@@ -4,6 +4,13 @@ import Home from "./pages/Home";
 import PreHome from "./pages/PreHome";
 import Packages from "./pages/Packages";
 import Destination from "./pages/Destination";
+
+import HomestaysInBastar from "./pages/HomestaysInBastar";
+import TourPackagesinBastar from "./pages/TourPackagesInBastar";
+import TaxiInBastar from "./pages/TaxiInBastar";
+import TourGuidesInBastar from "./pages/TourGuidesInBastar";
+import TourOperatorsInBastar from "./pages/TourOperatorsInBastar";
+
 import SelectBooking from "./pages/selectbooking/SelectBooking";
 import Pass from "./pages/selectbooking/Pass";
 import BusPass from "./pages/selectbooking/BusPass";
@@ -111,6 +118,13 @@ function App() {
             <Route exact path="/booking" component={BusPass} />
             <Route exact path="/populardestinations" component={Destination} />
             <Route exact path="/curatedexperiences" component={Packages} />
+
+            <Route exact path="/homestaysinbastar" component={HomestaysInBastar} />
+            <Route exact path="/tourpackagesinbastar" component={TourPackagesinBastar}/>
+            <Route exact path="/taxiinbastar" component={TaxiInBastar} />
+            <Route exact path="/tourguidesinbastar" component={TourGuidesInBastar} />
+            <Route exact path="/touroperatorsinbastar" component={TourOperatorsInBastar} />
+
             <Route exact path="/select-booking" component={SelectBooking} />
             <Route exact path="/traveller_card" component={TravellerCard} />
             <Route exact path="/traveller_ticket" component={TravellerTicket} />

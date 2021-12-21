@@ -15,39 +15,98 @@ import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 
 function SelectBooking() {
-  const [passTab, setPassTab] = useState(false);
+  // const [passTab, setPassTab] = useState(false);
   // const [Journey, setJourney] = useState(true);
-  const [startDate, setStartDate] = useState(new Date());
+  // const [startDate, setStartDate] = useState(new Date());
+  // const [busjourney, setBusJourney] = useState(false);
+  // const [cabjourney, setCabJourney] = useState(false);
 
-  const [busjourney, setBusJourney] = useState(false);
-
-  const [cabjourney, setCabJourney] = useState(false);
   const history = useHistory();
 
-  const onPassClick = () => {
-    setPassTab(true);
-    // setJourney(true);
-    // setBusJourney(false);
-    // setCabJourney(false);
-    console.log("object");
-    history.push("/dmpass");
-  };
-  const onBusClick = () => {
-    // setPassTab(false);
-    // setJourney(false);
-    setBusJourney(true);
-    console.log("hiii");
-    history.push("/buspass");
-  };
+  // const onPassClick = () => {
+  //   setPassTab(true);
+  //   // setJourney(true);
+  //   // setBusJourney(false);
+  //   // setCabJourney(false);
+  //   console.log("object");
+  //   history.push("/dmpass");
+  // };
+  // const onBusClick = () => {
+  //   // setPassTab(false);
+  //   // setJourney(false);
+  //   setBusJourney(true);
+  //   console.log("hiii");
+  //   history.push("/buspass");
+  // };
+  // const onClickTicket = () => {
+  //   // setBusJourney(false);
+  //   // setPassTab(false);
+  //   // setJourney(false);
+  //   setCabJourney(true);
+  //   console.log("hiii");
+  //   history.push("/tickets");
+  // };
 
-  const onClickTicket = () => {
-    // setBusJourney(false);
-    // setPassTab(false);
-    // setJourney(false);
-    setCabJourney(true);
-    console.log("hiii");
-    history.push("/tickets");
-  };
+  const clickEventHandler = href => {
+    history.push(href);
+  }
+
+  const list = [
+    {
+      img:bus,
+      title: 'Bus',
+      desc: 'Book bus ticket for your favourite spots',
+      link: '/buspass'
+    },
+    {
+      img:doodle,
+      title: 'Ticket',
+      desc: 'Registered ticket services for a personal travel experience',
+      link: '/tickets'
+    },
+    {
+      img:ticket,
+      title: 'Travel Pass',
+      desc: 'Registered ticket services for a personal travel experience',
+      link: '/dmpass'
+    },
+    {
+      img:ticket,
+      title: 'Home Stay',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      link: '/homestaysinbastar'
+    },
+    {
+      img:ticket,
+      title: 'Tour Package',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      link: '/tourpackagesinbastar'
+    },
+    {
+      img:ticket,
+      title: 'Taxi',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      link: '/taxiinbastar'
+    },
+    {
+      img:ticket,
+      title: 'Tour Guid',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      link: '/tourguidesinbastar'
+    },
+    {
+      img:ticket,
+      title: 'Tour Operators',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      link: '/touroperatorsinbastar'
+    },
+    {
+      img:ticket,
+      title: 'Event & Activity',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      link: '/bastareventsandactivities'
+    }
+  ]
 
   return (
     <>
@@ -66,82 +125,30 @@ function SelectBooking() {
           </div>
         </div>
         <Container style={{width:"971px"}}>
-          <div>
             <Row>
-              <Col xs={12} md={4}>
-                <div className="userdatas" onClick={onBusClick}>
-                  <div>
-                    <img
-                      src={bus}
-                      style={{ width: 39, height: 38.37, marginTop: "10px" }}
-                    />
-                  </div>
-                  <div className="bus_secation">
-                    <span className="booking_icon" style={{ color: "#FF4A68" }}>
-                      Bus
-                    </span>
-                    <br />
-                    <span>
-                    Book bus ticket for your 
-           <br />
-           favourite spots
-                    </span>
-                  </div>
-                </div>
-              </Col>
-              <Col xs={12} md={4}>
-                <div className="userdatas" onClick={onClickTicket}>
-                  <div>
-                    <img
-                      src={doodle}
-                      style={{ width: 39, height: 33.37, marginTop: "10px" }}
-                    />
-                  </div>
-                  <div className="bus_secation">
-                    <span className="booking_icon" style={{ color: "#864BD8" }}>
-                      Ticket
-                    </span>
-                    <br />
-                    <span>
-                      Registered ticket services for a<br />
-                      personal travel experience
-                    </span>
-                  </div>
-                </div>
-              </Col>
-              <Col xs={12} md={4}>
-                <div className="userdatas" onClick={onPassClick}>
-                  <div>
-                    <img
-                      src={ticket}
-                      style={{ width: 39, height: 25.58, marginTop: "10px" }}
-                    />
-                  </div>
-                  <div className="bus_secation">
-                    <span className="booking_icon" style={{ color: "#0FA453" }}>
-                      Travel Pass
-                    </span>
-                    <br />
-                    <span>
-                      Get a pass for travellers, vehicles
-                      <br /> and duration of your travel
-                    </span>
-                  </div>
-                </div>
-              </Col>
+              {
+                list.map((data,idx) => {
+                  const { img, title, desc, link } = data
+                  return (
+                    <Col key={idx} xs={12} md={4}>
+                      <div className="userdatas" onClick={()=>clickEventHandler(link)}>
+                        <div><img src={img} style={{ width: 39, height: 25.58, marginTop: "10px" }} /></div>
+                          <div className="ps-3">
+                            <p className="booking_icon my-0 text-secondary">{title}</p>
+                            <p>{desc}</p>
+                          </div>
+                      </div>
+                    </Col>
+                  )
+                })
+              }
             </Row>
-          </div>
         </Container>
-        {passTab ? <Pass /> : null}
-        {busjourney ? <BusPass /> : null}
-        {cabjourney ? <doodle /> : null}
-        {/* <Button className="locationpass-btn  mt-5" onClick={onBusClick}>
-          Continue
-        </Button> */}
         <div className="pt-5 mt-5">
           <Footer />
         </div>
       </div>
+
       {/*mobile*/}
       <div className="d-block d-md-none">
         <div className="select_div">
@@ -156,91 +163,26 @@ function SelectBooking() {
           </div>
 
           <Container>
-            <div>
               <Row>
-                <Col xs={12} md={4}>
-                  <div className="userdatas" onClick={onBusClick}>
-                    <div>
-                      <img
-                        src={bus}
-                        style={{ width: 30, height: 30, marginTop: "10px" }}
-                      />
-                    </div>
-                    <div className="bus_secation">
-                      <span
-                        className="booking_icon"
-                        style={{ color: "#FF4A68" }}
-                      >
-                        Bus
-                      </span>
-                      <br />
-                      <span>
-                      Book bus ticket for your 
-           <br />
-           favourite spots
-                      </span>
-                    </div>
-                  </div>
-                </Col>
-                <Col xs={12} md={4}>
-                  <div className="userdatas" onClick={onClickTicket}>
-                    <div>
-                      <img
-                        src={doodle}
-                        style={{ width: 40, height: 40, marginTop: "10px" }}
-                      />
-                    </div>
-                    <div className="bus_secation">
-                      <span
-                        className="booking_icon"
-                        style={{ color: "#864BD8" }}
-                      >
-                        Ticket
-                      </span>
-                      <br />
-                      <span>
-                        Registered ticket services for a<br />
-                        personal travel experience
-                      </span>
-                    </div>
-                  </div>
-                </Col>
-                <Col xs={12} md={4}>
-                  <div className="userdatas" onClick={onPassClick}>
-                    <div>
-                      <img
-                        src={ticket}
-                        style={{ width: 30, height: 30, marginTop: "10px" }}
-                      />
-                    </div>
-                    <div className="bus_secation">
-                      <span
-                        className="booking_icon"
-                        style={{ color: "#0FA453" }}
-                      >
-                        Travel Pass
-                      </span>
-                      <br />
-                      <span>
-                        Get a pass for travellers, vehicles
-                        <br /> and duration of your travel
-                      </span>
-                    </div>
-                  </div>
-                </Col>
+              {
+                list.map((data,idx) => {
+                  const { img, title, desc, link } = data
+                  return (
+                    <Col key={idx} xs={12} md={4}>
+                      <div className="userdatas" onClick={()=>clickEventHandler(link)}>
+                        <div><img src={img} style={{ width: 39, height: 25.58, marginTop: "10px" }} /></div>
+                          <div className="ps-3">
+                            <p className="booking_icon my-0 text-secondary">{title}</p>
+                            <p>{desc}</p>
+                          </div>
+                      </div>
+                    </Col>
+                  )
+                })
+              }
               </Row>
-            </div>
           </Container>
-          {/* {Journey ? ( */}
-          <></>
-          {/* ) : null} */}
-          {passTab ? <Pass /> : null}
-          {busjourney ? <BusPass /> : null}
-          {cabjourney ? <doodle /> : null}
         </div>
-        {/* <Button className="locationpass-btn" onClick={onBusClick}>
-          Continue
-        </Button> */}
       </div>
     </>
   );

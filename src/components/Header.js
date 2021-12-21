@@ -207,6 +207,9 @@ function Header() {
               <NavLink className="sidebar__navlink" to="/buspass">
                BUS BOOKING
               </NavLink>
+              <NavLink className="sidebar__navlink" to="https://blog.travelbastar.com">
+               BLOG
+              </NavLink>
               {/* <NavLink className="sidebar__navlink" to="/hotelsearch">
                 HOTEL BOOKING
               </NavLink>
@@ -276,6 +279,9 @@ function Header() {
                 {/* <NavLink className="sidebar_item" to="/select-booking"> */}
                   <NavLink className="sidebar_item" to="/buspass">
                     BUS BOOKING 
+                  </NavLink>
+                  <NavLink className="sidebar_item" to={{ pathname: "https://blog.travelbastar.com" }} target="_blank" >
+                    BLOG
                   </NavLink>
                 
                 {/* <NavLink className="sidebar_item" to="/tickets_sraech"> */}
