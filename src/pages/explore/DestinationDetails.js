@@ -10,6 +10,10 @@ import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
 import { NavLink, useHistory } from "react-router-dom";
 import TravellerTicket from "../travesaly/TravellerTicket";
+import {Howl, Howler} from 'howler';
+import Audio from '../..//assets/audio/Audio.mp3'
+
+// const audioClip = ["https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"]
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
@@ -21,19 +25,23 @@ const DestinationDetails = (props) => {
   const [packagesdata, getPackagesdata] = useState([]);
   const [zoom, setZoom] = useState(11);
 
-  const getSeoDetails = async (id) => {
-    // console.log('Destination Id ', props?.location?.id)
-    console.log('Check id', id)
-    try {
-      const res = await fetch(API_PATH + `/api/v1/destinations/${id}`)
-      const data = await res.json()
-      document.title = data.data.seo_title || 'Travel Bastar';
-      document.querySelector("meta[name='description']").setAttribute('content', (data.data.seo_description || 'Ajay'));
-      document.querySelector("meta[name='keywords']").setAttribute('content', (data.data.seo_description || ''));
-    } catch (error) {
-      console.log(error)
+    const sound = new Howl({
+      src:Audio
+    });
+
+    const getSeoDetails = async (id) => {
+      // console.log('Destination Id ', props?.location?.id)
+      console.log('Check id', id)
+      try {
+        const res = await fetch(API_PATH + `/api/v1/destinations/${id}`)
+        const data = await res.json()
+        document.title = data.data.seo_title || 'Travel Bastar';
+        document.querySelector("meta[name='description']").setAttribute('content', (data.data.seo_description || 'Ajay'));
+        document.querySelector("meta[name='keywords']").setAttribute('content', (data.data.seo_description || ''));
+      } catch (error) {
+        console.log(error)
+      }
     }
-  }
 
   var id;
 
@@ -46,7 +54,9 @@ const DestinationDetails = (props) => {
       id = localStorage.getItem("id");
       console.log('2')
     }
-    console.log('abcd')
+    // console.log('abcd')
+    sound.play();
+    Howler.volume(0.5);
   }, []);
 
   useEffect(() => {

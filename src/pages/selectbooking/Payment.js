@@ -49,9 +49,10 @@ function Payment() {
       // .then((res) => res.json())
       .then((result) => {
         setData(result.data);
+        console.log("Ajay data", data);
       })
       .catch((e) => {
-        console.log(e);
+        console.log('Ajay Error', e);
       });
       let userData = JSON.parse(localStorage.getItem('user_data'));
       if(userData){
@@ -68,10 +69,7 @@ function Payment() {
   }, [routeData]);
 
   const displayRazorpaysss = async (values) => {
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
-    );
-
+    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
@@ -81,7 +79,7 @@ function Payment() {
       // key: "rzp_live_CpkoLmfTklzLb0",
       key: 'rzp_test_DuapYrmQwcWLGy',
       currency: "INR",
-      amount: data.amount.toString(),
+      amount: data?.amount.toString(),
       order_id: data.id,
       name: "Aamcho Bastar",
       description: "Thank You For Booking.",

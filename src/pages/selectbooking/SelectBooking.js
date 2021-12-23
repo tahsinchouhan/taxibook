@@ -10,6 +10,8 @@ import BusPass from "./BusPass";
 import { useHistory } from "react-router-dom";
 import doodle from "../../assets/img/doodle.png";
 import bus from "../../assets/img/bus.png";
+import cab from "../../assets/img/cab.png";
+import hotel from "../../assets/img/hotel.png";
 import ticket from "../../assets/img/ticket.png";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
@@ -59,10 +61,22 @@ function SelectBooking() {
       link: '/buspass'
     },
     {
+      img:hotel,
+      title: 'Hotel',
+      desc: 'Hotels for your favourite spots',
+      link: '/hotellist'
+    },
+    {
       img:doodle,
       title: 'Ticket',
       desc: 'Registered ticket services for a personal travel experience',
       link: '/tickets'
+    },
+    {
+      img:cab,
+      title: 'Taxi',
+      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+      link: '/taxiinbastar'
     },
     {
       img:ticket,
@@ -82,15 +96,10 @@ function SelectBooking() {
       desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       link: '/tourpackagesinbastar'
     },
+    
     {
       img:ticket,
-      title: 'Taxi',
-      desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-      link: '/taxiinbastar'
-    },
-    {
-      img:ticket,
-      title: 'Tour Guid',
+      title: 'Tour Guide',
       desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
       link: '/tourguidesinbastar'
     },
