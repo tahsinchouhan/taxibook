@@ -8,6 +8,7 @@ import {
     LOGIN_EMAIL,
     LOGIN_EMAIL_SUCCESS,
     LOGIN_EMAIL_ERROR,
+    GET_VERIFY_OTP_ERROR
 } from "../actions";
 
 export const getOtp = (value) => {
@@ -29,6 +30,11 @@ export const getOtpSuccess = (value) => ({
 
 export const getOtpError = (value) => ({
     type: GET_OTP_ERROR,
+    payload: value,
+});
+
+export const getVerifyOtpError = (value) => ({
+    type: GET_VERIFY_OTP_ERROR,
     payload: value,
 });
 

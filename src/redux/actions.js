@@ -40,6 +40,7 @@ export const LOGOUT = "LOGOUT";
 export const LOGIN_EMAIL = "LOGIN_EMAIL"
 export const LOGIN_EMAIL_SUCCESS = "LOGIN_EMAIL_SUCCESS"
 export const LOGIN_EMAIL_ERROR = "LOGIN_EMAIL_ERROR"
+export const GET_VERIFY_OTP_ERROR = "GET_VERIFY_OTP_ERROR"
 
 
 //dmpass

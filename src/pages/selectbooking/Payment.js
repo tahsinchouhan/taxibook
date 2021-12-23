@@ -6,11 +6,9 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { API_PATH } from "../../Path/Path";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createBusBooking, setApiData } from "../../redux/actions";
-import { Formik, Field } from "formik";
-import * as yup from "yup";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 
 async function loadScript(src) {
@@ -35,35 +33,37 @@ function Payment() {
   const {
     data: apiData,
     tripData,
-    mobile,
     routeData,
   } = useSelector((state) => state.busReducer);
-  const { age, gender, adhaar, basic_details, price, surcharge } = apiData;
-  console.log("apiDataapiData",apiData)
+  const { price, surcharge } = apiData;
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
 
   useEffect(() => {
-    console.log("wrds", price, surcharge);
     axios
       .post(`${API_PATH}/api/v1/busticket/pay`, {
         amount: price + surcharge,
       })
       // .then((res) => res.json())
       .then((result) => {
-        console.log(result);
         setData(result.data);
       })
       .catch((e) => {
         console.log(e);
       });
+      let userData = JSON.parse(localStorage.getItem('user_data'));
+      if(userData){
+        setName(userData.user.name);
+        setEmail(userData.user.email);
+        setNumber(userData.user.mobile);
+      }
   }, []);
 
   useEffect(() => {
-    if(routeData.startDate === undefined){
-      history.push('/busdetail')
+    if (routeData.startDate === undefined) {
+      history.push("/busdetail");
     }
   }, [routeData]);
 
@@ -76,11 +76,10 @@ function Payment() {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
-    console.log("data", data);
     // key: "rzp_test_DuapYrmQwcWLGy",
     var options = {
-      key: "rzp_live_CpkoLmfTklzLb0",
-      // key: 'rzp_test_DuapYrmQwcWLGy',
+      // key: "rzp_live_CpkoLmfTklzLb0",
+      key: 'rzp_test_DuapYrmQwcWLGy',
       currency: "INR",
       amount: data.amount.toString(),
       order_id: data.id,
@@ -89,7 +88,6 @@ function Payment() {
       image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
 
       handler: function (response) {
-        console.log({response})
         if (response.razorpay_payment_id) {
           dispatch(
             createBusBooking({
@@ -121,7 +119,6 @@ function Payment() {
       },
     };
     const paymentOpject = new window.Razorpay(options);
-    console.log("paymentOpject",paymentOpject)
     paymentOpject.open();
   };
   return (
@@ -131,8 +128,8 @@ function Payment() {
         <Header />
         <Container style={{ width: "75%", marginTop: "50px" }}>
           <div>
-            <AvForm>
-              <Row style={{justifyContent: 'center',}}>
+            <AvForm onValidSubmit={displayRazorpaysss}>
+              <Row style={{ justifyContent: "center" }}>
                 <Col xs={12} md={6} className="mt-2">
                   <Form.Label className="dm-ticket">Enter Your Name</Form.Label>
                   <AvField
@@ -178,7 +175,9 @@ function Payment() {
                     }}
                   />
 
-                  <Form.Label className="dm-ticket">Enter Email Address</Form.Label>
+                  <Form.Label className="dm-ticket">
+                    Enter Email Address
+                  </Form.Label>
 
                   <AvField
                     onChange={(e) => setEmail(e.target.value)}
@@ -195,7 +194,7 @@ function Payment() {
                       pattern: {
                         value:
                           "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/",
-                          errorMessage:"Please Enter Your Vailid Email",
+                        errorMessage: "Please Enter Your Vailid Email",
                       },
                     }}
                   />
@@ -217,13 +216,12 @@ function Payment() {
                     border: "none",
                     marginBottom: 100,
                   }}
-                  onClick={displayRazorpaysss}
                 >
                   Continue
                 </Button>
               </div>
             </AvForm>
-            </div>
+          </div>
         </Container>
         <Footer />
       </div>
@@ -234,8 +232,8 @@ function Payment() {
         <Header />
         <Container style={{ width: "80%", marginTop: "50px" }}>
           <div>
-          <AvForm>
-              <Row style={{justifyContent: 'center',}}>
+            <AvForm onValidSubmit={displayRazorpaysss}>
+              <Row style={{ justifyContent: "center" }}>
                 <Col xs={12} md={6} className="mt-2">
                   <Form.Label className="dm-ticket">Enter Your Name</Form.Label>
                   <AvField
@@ -281,7 +279,9 @@ function Payment() {
                     }}
                   />
 
-                  <Form.Label className="dm-ticket">Enter Email Address</Form.Label>
+                  <Form.Label className="dm-ticket">
+                    Enter Email Address
+                  </Form.Label>
 
                   <AvField
                     onChange={(e) => setEmail(e.target.value)}
@@ -298,7 +298,7 @@ function Payment() {
                       pattern: {
                         value:
                           "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/",
-                          errorMessage:"Please Enter Your Vailid Email",
+                        errorMessage: "Please Enter Your Vailid Email",
                       },
                     }}
                   />
@@ -320,7 +320,6 @@ function Payment() {
                     border: "none",
                     marginBottom: 100,
                   }}
-                  onClick={displayRazorpaysss}
                 >
                   Continue
                 </Button>

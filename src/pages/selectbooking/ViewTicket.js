@@ -107,7 +107,7 @@ function ViewTicket() {
       <td className="text-center">{item?.trips_id.trip_name}</td>
       <td className="text-center">{item?.amount}</td>
       <td className="text-center">
-        <a href={`http://15.206.92.158/bus-detail/${item.booking_Id}`}>View Ticket</a>
+        <a href={`/bus-detail/${item.booking_Id}`}>View Ticket</a>
       </td>
 
     </tr>)
@@ -139,7 +139,7 @@ function ViewTicket() {
       <td className="text-center">{item?.hotel_id.hotel_name}</td>
       <td className="text-center">{item?.amount}</td>
       <td className="text-center">
-        {/* <a href={`http://15.206.92.158/bus-detail/${item.booking_Id}`}>View Ticket</a> */}
+        {/* <a href={`/bus-detail/${item.booking_Id}`}>View Ticket</a> */}
       </td>
 
     </tr>)

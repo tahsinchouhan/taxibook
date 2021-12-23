@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Offcanvas,
@@ -9,26 +9,22 @@ import {
   FormControl,
   Image,
   Dropdown,
-  Button
+  Button,
 } from "react-bootstrap";
-import axios from "axios"
+import axios from "axios";
 import { API_PATH } from "../Path/Path";
 
 import { HiMenu } from "react-icons/hi";
-import {FiSettings} from "react-icons/fi";
-// import logo from "../assets/img/logo1.png";
 import logo from "../assets/img/logo.png";
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginModal from "../components/modal/LoginModal";
 import SignupModal from "../components/modal/SignupModal";
 import { logout } from "../redux/actions";
-import { Menu, Dropdown as ANTDropdown } from "antd";
-import { DownOutlined } from "@ant-design/icons";
-function Header() {
+function Header({showSignUpModal}) {
   const [modalShow, setModalShow] = useState(false);
   const [signup, setSignup] = useState(false);
-  const [profile,setProfile] = useState([])
+  const [profile, setProfile] = useState([]);
 
   const modalHadler = () => {
     setModalShow(true);
@@ -43,25 +39,34 @@ function Header() {
 
   const [show, setShow] = useState(false);
   const [search, setSearch] = useState(false);
-  // const [explore, setExpolre] = useState(false);
-  // const [booking, setBooking] = useState(false);
-
-  // const [searching, setSearching] = useState();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    const customerID = JSON.parse(localStorage.getItem("customer_id"))
-    console.log("customerID",customerID)
-    axios.get(API_PATH + `/api/v1/customer/${customerID}`)
-    .then(response => {
-      setProfile(response.data)
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  }, [])
+    if(showSignUpModal){
+      setSignup(true);
+    }
+  }, [showSignUpModal]);
+
+  useEffect(() => {
+    const customerID = JSON.parse(localStorage.getItem("customer_id"));
+    console.log("customerID", customerID);
+    if(customerID){
+      let userData = JSON.parse(localStorage.getItem('user_data'));
+      if(userData){
+        setProfile({data:userData.user});
+      }
+    }
+    // axios
+    //   .get(API_PATH + `/api/v1/customer/${customerID}`)
+    //   .then((response) => {
+    //     setProfile(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  }, []);
   const history = useHistory();
 
   const onSearchClick = () => {
@@ -85,32 +90,17 @@ function Header() {
     history.push("/bookingprofile");
   };
 
-  const handleSignupClose = ()=>{
-    setSignup(false)
+  const handleSignupClose = () => {
+    setSignup(false);
+  };
 
-  }
-  const vendorHandler = () =>{
+  const handleSignupOpen = () => {
+    setSignup(true);
+  };
+  const vendorHandler = () => {
     history.push("/profile");
-  }
-  // const menu = (
-  //   <Menu>
-  //     <Menu.Item>
-  //       <NavLink className="sidebar_item" to="/buspass">
-  //         BUS BOOKING
-  //       </NavLink>
-  //     </Menu.Item>
-  //     <Menu.Item>
-  //       <NavLink className="sidebar_item" to="/hotelsearch">
-  //         HOTEL BOOKING
-  //       </NavLink>
-  //     </Menu.Item>
-  //     <Menu.Item>
-  //       <NavLink className="sidebar_item" to="/cab">
-  //         CAB BOOKING
-  //       </NavLink>
-  //     </Menu.Item>
-  //   </Menu>
-  // );
+  };
+ 
   return (
     <>
       <Container className="d-md-none header_div">
@@ -167,29 +157,33 @@ function Header() {
                   }}
                 >
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
-                  <Button className="btn btn-success" style={{padding:'2px 10px'}}>
+                    <Button
+                      className="btn btn-success"
+                      style={{ padding: "2px 10px" }}
+                    >
                       Hi,<span>{profile?.data?.name}</span>
-                      </Button>
+                    </Button>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
-                  <Dropdown.Item onClick={vendorHandler}>Profile</Dropdown.Item>
-                  <Dropdown.Item onClick={ViewTicketHandler}>
+                    <Dropdown.Item onClick={vendorHandler}>
+                      Profile
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={ViewTicketHandler}>
                       Bookings
                     </Dropdown.Item>
                     <Dropdown.Item>{mobile}</Dropdown.Item>
                     <Dropdown.Item onClick={() => mainLogout()}>
                       Logout
                     </Dropdown.Item>
-                    
                   </Dropdown.Menu>
                 </Dropdown>
               </Offcanvas.Title>
             ) : (
               <>
-              <Offcanvas.Title onClick={() => modalHadler()}>
-                LOGIN
-              </Offcanvas.Title>
-              </>             
+                <Offcanvas.Title onClick={() => modalHadler()}>
+                  LOGIN
+                </Offcanvas.Title>
+              </>
             )}
           </Offcanvas.Header>
           <Offcanvas.Body>
@@ -200,43 +194,17 @@ function Header() {
               <NavLink className="sidebar__navlink" to="/explore">
                 EXPLORE
               </NavLink>
-              {/* <NavLink className="sidebar__navlink" to="/select-booking"> */}
-              {/* <NavLink className="sidebar__navlink" to="/dmpass">
-                TRAVEL PASS
-              </NavLink> */}
+              
               <NavLink className="sidebar__navlink" to="/buspass">
-               BUS BOOKING
+                BUS BOOKING
               </NavLink>
-              <NavLink className="sidebar__navlink" to="https://blog.travelbastar.com">
-               BLOG
+              <NavLink
+                className="sidebar__navlink"
+                to="https://blog.travelbastar.com"
+              >
+                BLOG
               </NavLink>
-              {/* <NavLink className="sidebar__navlink" to="/hotelsearch">
-                HOTEL BOOKING
-              </NavLink>
-              <NavLink className="sidebar__navlink" to="/cab">
-                CAB BOOKING
-              </NavLink> */}
-              {/* <NavLink className="sidebar__navlink" to="/tickets_sraech"> */}
-              {/* <NavLink className="sidebar__navlink" to="/tickets">
-                TICKETS
-              </NavLink> */}
-              {/* <NavLink className="sidebar__navlink" to="/buspass">
-                BUS TICKETS
-              </NavLink> */}
-              <>
-                {/* <a
-                  className="sidebar_item"
-                  style={{ color: "white" }}
-                  href="http://booking.travelbastar.com/signin"
-                >
-                  VENDOR LOGIN
-                </a> */}
-              </>
-              {/* {user_data !== null ? (
-                <NavLink className="sidebar__navlink" to="/search#Tickets">
-                  VIEW TICKETS
-                </NavLink>
-              ) : null} */}
+              
             </Nav>
           </Offcanvas.Body>
         </Offcanvas>
@@ -277,102 +245,25 @@ function Header() {
                   TRAVEL PASS
                 </NavLink> */}
                 {/* <NavLink className="sidebar_item" to="/select-booking"> */}
-                  <NavLink className="sidebar_item" to="/buspass">
-                    BUS BOOKING 
-                  </NavLink>
-                  <NavLink className="sidebar_item" to={{ pathname: "https://blog.travelbastar.com" }} target="_blank" >
-                    BLOG
-                  </NavLink>
-                
-                {/* <NavLink className="sidebar_item" to="/tickets_sraech"> */}
-                {/* <NavLink className="sidebar_item" to="/tickets">
-                  TICKETS
-                </NavLink> */}
-                {/* <NavLink className="sidebar_item" to="/buspass">
-                  BUS TICKETS
-                </NavLink> */}
-
-                {/* {user_data !== null ? (
-                  <NavLink className="sidebar_item" to="/search#Tickets">
-                    VIEW TICKETS
-                  </NavLink>
-                ) : null} */}
-                {/* <NavLink className="sidebar_item" to="#">
-                CONTACT
-              </NavLink>
-              <NavLink className="sidebar_item" to="#">
-                ABOUT
-              </NavLink> */}
+                <NavLink className="sidebar_item" to="/buspass">
+                  BUS BOOKING
+                </NavLink>
+                <NavLink
+                  className="sidebar_item"
+                  to={{ pathname: "https://blog.travelbastar.com" }}
+                  target="_blank"
+                >
+                  BLOG
+                </NavLink>
               </div>
             </Nav>
             <Form className="" style={{ marginRight: "70px" }}>
               <div className="header_right d-flex">
                 <div className="header_info d-flex align-items-center">
-                  {/* <FaUser
-                    style={{
-                      fontSize: "21px",
-                      color: "#864BD8",
-                      marginRight: "10px",
-                    }}
-                  /> */}
-                  {/* <a
-                    href="http://booking.travelbastar.com/signin"
-                    title="Vendor Login "
-                  >
-                    <svg
-                      style={{
-                        marginRight: "10px",
-                      }}
-                      width="21"
-                      height="21"
-                      title="Vendor Login"
-                      viewBox="0 0 21 21"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M10.5 11.8125C13.7607 11.8125 16.4062 9.16699 16.4062 5.90625C16.4062 2.64551 13.7607 0 10.5 0C7.23926 0 4.59375 2.64551 4.59375 5.90625C4.59375 9.16699 7.23926 11.8125 10.5 11.8125ZM15.75 13.125H13.49C12.5795 13.5434 11.5664 13.7812 10.5 13.7812C9.43359 13.7812 8.42461 13.5434 7.50996 13.125H5.25C2.3502 13.125 0 15.4752 0 18.375V19.0312C0 20.1182 0.881836 21 1.96875 21H19.0312C20.1182 21 21 20.1182 21 19.0312V18.375C21 15.4752 18.6498 13.125 15.75 13.125Z"
-                        fill="#864BD8"
-                      />
-                    </svg>
-                    <h4
-                      style={{
-                        fontSize: "16px",
-                        fontWeight: "700",
-                        color: "#864BD8",
-                        margin: "0",
-                        marginRight: "40px",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {" "}
-                    </h4>
-                  </a> */}
+                
                 </div>
                 <div className="header_info d-flex align-items-center">
-                  {/* <FaUser
-                    style={{
-                      fontSize: "21px",
-                      color: "#864BD8",
-                      marginRight: "10px",
-                    }}
-                  /> */}
-                  {/* <svg
-                    style={{
-                      marginRight: "10px",
-                    }}
-                    width="21"
-                    height="21"
-                    viewBox="0 0 21 21"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M10.5 11.8125C13.7607 11.8125 16.4062 9.16699 16.4062 5.90625C16.4062 2.64551 13.7607 0 10.5 0C7.23926 0 4.59375 2.64551 4.59375 5.90625C4.59375 9.16699 7.23926 11.8125 10.5 11.8125ZM15.75 13.125H13.49C12.5795 13.5434 11.5664 13.7812 10.5 13.7812C9.43359 13.7812 8.42461 13.5434 7.50996 13.125H5.25C2.3502 13.125 0 15.4752 0 18.375V19.0312C0 20.1182 0.881836 21 1.96875 21H19.0312C20.1182 21 21 20.1182 21 19.0312V18.375C21 15.4752 18.6498 13.125 15.75 13.125Z"
-                      fill="#864BD8"
-                    />
-                  </svg> */}
-
+                
                   {user_data !== null ? (
                     <Dropdown
                       style={{
@@ -384,14 +275,23 @@ function Header() {
                         cursor: "pointer",
                       }}
                     >
-                      <Dropdown.Toggle variant="" style={{}} id="dropdown-basic">
-                      <Button className="btn btn-success" style={{padding:'2px 10px'}}>
-                      Hi,<span>{profile?.data?.name}</span>
-                      </Button>
-                       </Dropdown.Toggle>
+                      <Dropdown.Toggle
+                        variant=""
+                        style={{}}
+                        id="dropdown-basic"
+                      >
+                        <Button
+                          className="btn btn-success"
+                          style={{ padding: "2px 10px" }}
+                        >
+                          Hi,<span>{profile?.data?.name}</span>
+                        </Button>
+                      </Dropdown.Toggle>
                       <Dropdown.Menu>
-                      <Dropdown.Item onClick={vendorHandler}>Profile</Dropdown.Item>
-                      <Dropdown.Item onClick={ViewTicketHandler}>
+                        <Dropdown.Item onClick={vendorHandler}>
+                          Profile
+                        </Dropdown.Item>
+                        <Dropdown.Item onClick={ViewTicketHandler}>
                           Bookings
                         </Dropdown.Item>
                         <Dropdown.Item>{mobile}</Dropdown.Item>
@@ -402,20 +302,20 @@ function Header() {
                     </Dropdown>
                   ) : (
                     <>
-                    <h4
-                      style={{
-                        fontSize: "16px",
-                        fontWeight: "700",
-                        color: "#864BD8",
-                        margin: "0",
-                        marginRight: "40px",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => modalHadler()}
-                    >
-                      LOGIN
-                    </h4>
-                                      </>
+                      <h4
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: "700",
+                          color: "#864BD8",
+                          margin: "0",
+                          marginRight: "40px",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => modalHadler()}
+                      >
+                        LOGIN
+                      </h4>
+                    </>
                   )}
                 </div>
 
@@ -435,25 +335,17 @@ function Header() {
                     />
                   </svg>
 
-                  {/* <FaSistrix
-                    style={{
-                      fontSize: "21px",
-                      color: "#C4C4C4",
-                      fontWeight: "700",
-                      fontStyle: "bold",
-                      marginRight: "10px",
-                    }}
-                    onClick={onSearchClick}
-                  /> */}
                 </div>
               </div>
             </Form>
           </Navbar.Collapse>
         </Navbar>
       </Container>
-      <LoginModal show={modalShow} handleClose={handleLoginClose} />
+      <LoginModal
+        show={modalShow}
+        handleClose={handleLoginClose}
+      />
       <SignupModal show={signup} handleClose={handleSignupClose} />
-
     </>
   );
 }

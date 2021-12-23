@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
-// import { Link } from "react-router-dom";
 import "../../assets/css/buspass.css";
-// import { FaBus, FaCarAlt, FaTicketAlt } from "react-icons/fa";
 import bus from "../../assets/img/bus.png";
 import calendar from "../../assets/img/calendar.png";
 import { useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import Header from "../../components/Header";
-// import Footer from "../travesaly/Footer";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { API_PATH } from "../../Path/Path";
 import { useDispatch } from "react-redux";
 import {
-  getTripByRouteId,
-  setBookinStartDate,
   setRouteData,
   setRouteId,
-} from "../../redux/actions";
+} from "../../redux/actions"; 
 import Footer from "../travesaly/Footer";
-import SeoData from '../../SeoData.json'
+import SeoData from "../../SeoData.json";
 
 function BusPass() {
   const history = useHistory();
@@ -32,9 +27,20 @@ function BusPass() {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    document.title = SeoData.bus_ticket_booking_system.page_title || 'Travel Bastar';
-    document.querySelector("meta[name='description']").setAttribute('content', (SeoData.bus_ticket_booking_system.meta_description || ''));
-    document.querySelector("meta[name='keywords']").setAttribute('content', (SeoData.bus_ticket_booking_system.meta_keywords || ''));
+    document.title =
+      SeoData.bus_ticket_booking_system.page_title || "Travel Bastar";
+    document
+      .querySelector("meta[name='description']")
+      .setAttribute(
+        "content",
+        SeoData.bus_ticket_booking_system.meta_description || ""
+      );
+    document
+      .querySelector("meta[name='keywords']")
+      .setAttribute(
+        "content",
+        SeoData.bus_ticket_booking_system.meta_keywords || ""
+      );
   }, []);
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
@@ -78,18 +84,11 @@ function BusPass() {
     }
   };
 
-  const ViewTicketHandler = ()=>{
-    history.push('/viewticket')
-  }
-
   return (
     <div>
       <ToastContainer />
       <Header />
-      
-      {/* <div className=" col-md-11 d-flex justify-content-end">
-                        <button style={{background:'#0fa453',borderColor:'#0fa453',color:'white',borderRadius:'11px'}} onClick={ViewTicketHandler}>View tickets</button>
-                      </div> */}
+
       <div className="d-none d-md-block">
         <Container className="d-none d-md-block">
           <div style={{ textAlign: "center", margin: "50px" }}>
@@ -98,11 +97,11 @@ function BusPass() {
               <h5 style={{ margin: "10px", color: "#FF4A68" }}>Bus</h5>
             </div>
             <span>
-            Book bus ticket for route 
-           <br />
-           Tamda Ghumar- Mendri 
-           <br /> 
-           Ghumar- Chitrakoot etc 
+              Book bus ticket for route
+              <br />
+              Tamda Ghumar- Mendri
+              <br />
+              Ghumar- Chitrakoot etc
             </span>
           </div>
           <Container style={{ width: "70%" }}>
@@ -142,7 +141,6 @@ function BusPass() {
               </Col>
               <Col xs={12} md={4} className="">
                 <Form.Group
-                  // className="location-userdatas"
                   controlId="exampleForm.ControlInput1"
                 >
                   <Form.Label
@@ -162,7 +160,7 @@ function BusPass() {
                       display: "flex",
                       flexDirection: "row",
                       overflow: "hidden",
-                      }}
+                    }}
                   >
                     <img
                       className="location-userdatas-calendar"
@@ -201,11 +199,11 @@ function BusPass() {
             <h5 style={{ margin: "10px", color: "#FF4A68" }}>Bus</h5>
           </div>
           <span style={{ fontSize: "12px", fontWeight: "bold" }}>
-          Book bus ticket for route 
-           <br />
-           Tamda Ghumar- Mendri 
-           <br /> 
-           Ghumar- Chitrakoot etc 
+            Book bus ticket for route
+            <br />
+            Tamda Ghumar- Mendri
+            <br />
+            Ghumar- Chitrakoot etc
           </span>
         </div>
         <Container style={{ width: "100%" }}>
@@ -274,14 +272,17 @@ function BusPass() {
                     customInput={<ExampleCustomInput />}
                     dateFormat="dd MMM"
                     minDate={new Date()}
-
                   />
                 </div>
               </Form.Group>
             </Col>
           </Row>
         </Container>
-        <Button className="locationpass-btn" onClick={onSubmit} style={{position:'fixed',bottom:'0px'}}>
+        <Button
+          className="locationpass-btn"
+          onClick={onSubmit}
+          style={{ position: "fixed", bottom: "0px" }}
+        >
           Continue
         </Button>
         <div className="" style={{ paddingBottom: "85px" }}>
