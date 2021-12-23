@@ -167,7 +167,7 @@ function TaxiInBastar() {
               marginBottom: 100,
             }}
           >
-            <div className="d-flex flex-wrap align-items-center justify-content-around">
+            <div className="w-100 d-flex flex-wrap align-items-center justify-content-around">
               {packages.length > 0 ? (
                 packages.map((item) => {
                   return <HomestayCard key={item._id} item={item} />;

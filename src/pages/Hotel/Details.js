@@ -238,7 +238,6 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
                     paddingRight: "10px",
                   }}>                   
                     ₹ {detail?.price?.offer_price}
-                    {console.log('Check data', detail)}
                 </h1>
                 <h2
                   style={{
