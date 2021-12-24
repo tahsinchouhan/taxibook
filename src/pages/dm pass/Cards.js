@@ -37,6 +37,7 @@ export default function Cards(props) {
             class="input-group-field"
             type="number"
             name="quantity"
+            style={{color:'#000000', textAlign:'right'}}
             // value="0"
             value={props?.value}
           />

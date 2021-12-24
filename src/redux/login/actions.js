@@ -8,10 +8,10 @@ import {
     LOGIN_EMAIL,
     LOGIN_EMAIL_SUCCESS,
     LOGIN_EMAIL_ERROR,
+    GET_VERIFY_OTP_ERROR
 } from "../actions";
 
 export const getOtp = (value) => {
-    console.log("error",value)
     return {
     type: GET_OTP,
     payload: value,
@@ -32,6 +32,11 @@ export const getOtpError = (value) => ({
     payload: value,
 });
 
+export const getVerifyOtpError = (value) => ({
+    type: GET_VERIFY_OTP_ERROR,
+    payload: value,
+});
+
 export const setUser = (value) => ({
     type: SET_USER,
     payload: value,
@@ -43,14 +48,12 @@ export const logout = (value) => ({
 });
 
 export const loginEmail = (value) => {
-    console.log("valueEmail1",value)
     return {
     type: LOGIN_EMAIL,
     payload: value,
 }};
 
 export const loginEmailSuccess = (value) =>{
-    console.log("valueEmail2",value)
 
     return {
     type: LOGIN_EMAIL_SUCCESS,

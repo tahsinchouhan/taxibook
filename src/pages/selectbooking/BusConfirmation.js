@@ -10,9 +10,9 @@ import Paper from "@material-ui/core/Paper";
 import ButtonComponent from "../../containers/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setApiData } from "../../redux/actions";
-import '../../assets/css/busconfirmation.css'
+import "../../assets/css/busconfirmation.css";
 import { AvField, AvForm } from "availity-reactstrap-validation";
-import {AiOutlinePlus} from "react-icons/ai"
+import { AiOutlinePlus } from "react-icons/ai";
 
 const button_Data = [
   {
@@ -34,22 +34,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function BusConfirmation() {
-
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
   const [data, setData] = useState();
   const history = useHistory();
 
-  const dispatch = useDispatch()
-  const { tripData, data: apiData,  routeData } = useSelector(state => state.busReducer)
-console.log( tripData, apiData,  routeData )
+  const dispatch = useDispatch();
+  const {
+    tripData,
+    data: apiData,
+    routeData,
+  } = useSelector((state) => state.busReducer);
   const onSideBtnClick = (e) => {
     const name = e.target.name;
     setActiveButton(name);
   };
 
   useEffect(() => {
-    if(routeData.startDate === undefined){
-      history.push('/busdetail')
+    if (routeData.startDate === undefined) {
+      history.push("/busdetail");
     }
     // setTravellers([])
   }, [routeData]);
@@ -65,110 +67,131 @@ console.log( tripData, apiData,  routeData )
   const handleShow = () => setShow(true);
 
   const handleClick = (newPlacement) => (event) => {
-    console.log("object");
     setAnchorEl(event.currentTarget);
     setOpen((prev) => placement !== newPlacement || !prev);
     setPlacement(newPlacement);
   };
 
   const onCheckout = () => {
-    console.log("object");
-    let basic_details = []
+    let basic_details = [];
     travellers.forEach((tv, ind) => {
-      basic_details.push({name:tv['name'+ind], adhaar:tv['adhaar'+ind], gender:tv['gender'], age: tv['age'+ind]});
+      basic_details.push({
+        name: tv["name" + ind],
+        adhaar: tv["adhaar" + ind],
+        gender: tv["gender"],
+        age: tv["age" + ind],
+      });
     });
-    dispatch(setApiData({ ...values, basic_details: basic_details }))
-    console.log("travellers",travellers)
-    console.log("basic_details",basic_details)
+    dispatch(setApiData({ ...values, basic_details: basic_details }));
     // history.push("/checkoutpage");
     history.push({
       pathname: "/checkoutpage",
-      state: { 
-        update: basic_details, 
+      state: {
+        update: basic_details,
       },
-    }); 
+    });
   };
 
-
-
   const [values, setValues] = useState({
-    mobile: '',
-    nameoftrip: '',
-    trips_id: '',
-    date: '',
-    time: '',
-    route: '',
-    bus: '',
-    from: '',
-    to: '',
-    name: '',
-    adhaar: '',
-    age: '',
-    price: '',
+    mobile: "",
+    nameoftrip: "",
+    trips_id: "",
+    date: "",
+    time: "",
+    route: "",
+    bus: "",
+    from: "",
+    to: "",
+    name: "",
+    adhaar: "",
+    age: "",
+    price: "",
     surcharge: tripData?.surcharge,
-    gender: '',
+    gender: "",
     basic_details: apiData?.basic_details || [],
-  })
-  const [basePrice, setBasePrice] = useState(tripData?.ticket_price || 0)
+  });
+  const [basePrice, setBasePrice] = useState(tripData?.ticket_price || 0);
 
-  const [travellers, setTravellers] = useState(apiData?.basic_details || [{
-    name: '',
-    gender: '',
-    age: '',
-    adhaar: '',
-  }])
+  const [travellers, setTravellers] = useState(
+    (apiData?.basic_details &&
+      apiData?.basic_details.map((data, key) => {
+        let newData = {
+          name: data.name,
+          gender: data.gender,
+          age: data.age,
+          adhaar: data.adhaar,
+        };
+        newData['name'+key] = data.name;
+        newData['gender'+key] = data.gender;
+        newData['age'+key] = data.age;
+        newData['adhaar'+key] = data.adhaar;
+        return newData;
+      })) || [
+      {
+        name: "",
+        gender: "",
+        age: "",
+        adhaar: "",
+      },
+    ]
+  );
 
   const onClickBack = () => {
     history.push("/busmonsoon");
-    setTravellers([])
-  }
+    setTravellers([]);
+  };
 
   const { name, age, gender, adhaar, basic_details, price, surcharge } = values;
 
   const handleChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value, gender: activeButton })
-    console.log(e.target, 'val', values);
-  }
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+      gender: activeButton,
+    });
+  };
   const handleTraveller = (val, lbl, i) => {
-    setTravellers([...travellers].map((obj, key) => {
-      if (key === i) {
-        return {
-          ...obj,
-          [lbl]: val
+    setTravellers(
+      [...travellers].map((obj, key) => {
+        if (key === i) {
+          return {
+            ...obj,
+            [lbl]: val,
+          };
+        } else {
+          return obj;
         }
-      } else {
-        return obj
-      }
-
-    }))
-  }
+      })
+    );
+  };
   const deleteHandler = (key) => {
-    // console.log("object123456",key)
     // let deleteTravellers
-    setTravellers([...travellers].filter((obj, i) => i != key))
-  }
+    setTravellers([...travellers].filter((obj, i) => i != key));
+  };
 
   const handleOk = () => {
-    // console.log('ok');
-    setValues({ ...values, basic_details: [...basic_details, { name, age, gender, adhaar }], name: "", age: '', gender: '', adhaar: '' })
+    setValues({
+      ...values,
+      basic_details: [...basic_details, { name, age, gender, adhaar }],
+      name: "",
+      age: "",
+      gender: "",
+      adhaar: "",
+    });
     setShow(false);
   };
 
   useEffect(() => {
-    setValues({ ...values, price: (basePrice * travellers.length) })
-    // console.log(tripData,price,"enosdkl",travellers);
-    console.log('travellers',travellers)
-    console.log('values',values)
-  }, [travellers])
+    setValues({ ...values, price: basePrice * travellers.length });
+  }, [travellers]);
 
   useEffect(() => {
     // setValues({ ...values, price: (BASE_PRICE * basic_details.length)  })
-    setValues({ ...values, price: (basePrice * basic_details.length) })
-  }, [basic_details])
+    setValues({ ...values, price: basePrice * basic_details.length });
+  }, [basic_details]);
   // useEffect(()=>{
   // setTravellers([])
   // },[travellers])
-  // console.log("travellerstravellerstravellers",travellers)
 
   return (
     <>
@@ -183,7 +206,7 @@ console.log( tripData, apiData,  routeData )
                 fontSize: "19px",
                 color: "#0FA453",
                 fontWeight: "bolder",
-                marginLeft:'88px'
+                marginLeft: "88px",
               }}
             >
               Confirmation
@@ -196,8 +219,7 @@ console.log( tripData, apiData,  routeData )
                     style={{
                       color: "black",
                       fontFamily: "sans-serif",
-                      marginLeft:'80px'
-
+                      marginLeft: "80px",
                     }}
                   >
                     Boarding from
@@ -206,7 +228,7 @@ console.log( tripData, apiData,  routeData )
 
                 <div
                   className=" select-train mt-2 d-flex align-items-center"
-                  style={{ width: "100%" ,marginLeft:'77px'}}
+                  style={{ width: "100%", marginLeft: "77px" }}
                 >
                   <Form className="d-flex">
                     {["radio"].map((type) => (
@@ -214,8 +236,7 @@ console.log( tripData, apiData,  routeData )
                         key={`inline-${type}`}
                         className="mb-3"
                         style={{ margin: "10px", marginLeft: "10px" }}
-                      >
-                      </div>
+                      ></div>
                     ))}
 
                     <span
@@ -252,7 +273,7 @@ console.log( tripData, apiData,  routeData )
                     style={{
                       color: "black",
                       fontFamily: "sans-serif",
-                      marginLeft:'77px'
+                      marginLeft: "77px",
                     }}
                   >
                     Dropoff At
@@ -261,7 +282,7 @@ console.log( tripData, apiData,  routeData )
 
                 <div
                   className=" select-train mt-2 d-flex align-items-center"
-                  style={{ width: "100%" ,marginLeft:'77px'}}
+                  style={{ width: "100%", marginLeft: "77px" }}
                 >
                   <Form className="d-flex">
                     {["radio"].map((type) => (
@@ -269,8 +290,7 @@ console.log( tripData, apiData,  routeData )
                         key={`inline-${type}`}
                         className="mb-3"
                         style={{ margin: "10px", marginLeft: "10px" }}
-                      >
-                      </div>
+                      ></div>
                     ))}
 
                     <span
@@ -306,117 +326,139 @@ console.log( tripData, apiData,  routeData )
               </Col>
             </Row>
 
-
             <div className="">
-              <div className="traveller_div" >
-                {
-                  travellers?.map((item, i) => (
-                    <Paper key={i} className="traveller__card" >
-                      <div className="traveller__card_body" className="py-0">
-                        <div>
-                          <h5 className="traveller__card_title" style={{ fontSize: "20px", marginBottom: "15px", float: "left", fontWeight: "bold" }}>Enter Travellers {i + 1}</h5>
-                          {i !== 0 ? 
-                            <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
-                      :null}
+              <div className="traveller_div">
+                {travellers?.map((item, i) => (
+                  <Paper key={i} className="traveller__card">
+                    <div className="traveller__card_body" className="py-0">
+                      <div>
+                        <h5
+                          className="traveller__card_title"
+                          style={{
+                            fontSize: "20px",
+                            marginBottom: "15px",
+                            float: "left",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Enter Travellers {i + 1}
+                        </h5>
+                        {i !== 0 ? (
+                          <button
+                            type="button"
+                            className="btn"
+                            style={{
+                              float: "right",
+                              position: "relative",
+                              top: "-10px",
+                            }}
+                            onClick={(key) => deleteHandler(i)}
+                          >
+                            X
+                          </button>
+                        ) : null}
+                      </div>
+
+                      <p
+                        className="traveller__card_text"
+                        style={{ clear: "both" }}
+                      >
+                        <div className="form-group mt-0">
+                          <label className="mb-1" for={`name${i}`}>
+                            <h3
+                              style={{
+                                fontSize: "15px",
+                                marginLeft: "-5px",
+                                fontWeight: "bold",
+                              }}
+                            >
+                              Name
+                            </h3>
+                          </label>
+                          <AvField
+                            type="text"
+                            className="form-control pass_input"
+                            id={`name${i}`}
+                            placeholder="Enter Traveller Name"
+                            style={{
+                              fontSize: "11px",
+                              marginLeft: "-5px",
+                              fontWeight: "bold",
+                            }}
+                            name={`name${i}`}
+                            onChange={(e) =>
+                              handleTraveller(e.target.value, e.target.name, i)
+                            }
+                            value={travellers[i].name}
+                            // value={travellers[i].name[i]}
+                            // value={`${travellers[i]}.name${i}`}
+                            validate={{
+                              required: {
+                                value: true,
+                                errorMessage: "Enter Traveller Name",
+                              },
+                            }}
+                          />
                         </div>
 
-                        <p className="traveller__card_text" style={{ clear: "both" }}>
-                          <div className="form-group mt-0">
-                            <label className="mb-1" for={`name${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Name</h3></label>
-                            <AvField
-                              type="text"
-                              className="form-control pass_input"
-                              id={`name${i}`}
-                              placeholder="Enter Traveller Name"
-                              style={{ fontSize: "11px", marginLeft: "-5px", fontWeight: "bold" }}
-                              name={`name${i}`}
-                              onChange={(e) =>
-                                handleTraveller(
-                                  e.target.value,
-                                  e.target.name,
-                                  i
-                                )
-                              }
-                              value={travellers[i].name}
-                              // value={travellers[i].name[i]}
-                              // value={`${travellers[i]}.name${i}`}
-                              validate={{
-                                required: {
-                                  value: true,
-                                  errorMessage: "Enter Traveller Name",
-                                },
-
-                              }}
-                            />
-                          </div>
-
-                          <div className="form-row genderform pt-3 d-flex ">
-                            <div className="col m-2 w-50">
-                              <label className="mb-1" for={`gender${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Gender</h3></label>
-                              <div className="d-flex pt-2">
-                                <ButtonComponent
-                                  style={{
-                                    width: "50%",
-                                    fontSize: "11px",
-                                    whiteSpace: "nowrap"
-                                    , fontWeight: "bold"
-                                  }}
-                                  data={button_Data}
-                                  // activeButton={activeButton}
-                                  // trigerOnClickEmpSideBtn={onSideBtnClick}
-                                  trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender}
-                                  />
-                              </div>
-                            </div>
-                            <div className="form-group col m-2 w-50">
-                              <label className="mb-1" for={`age${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Age</h3></label>
-
-                              <AvField
-                                type="text"
-                                className="form-control pass_input w-70 pt-2"
-                                placeholder="Enter Age"
-                                id={`age${i}`}
+                        <div className="form-row genderform pt-3 d-flex ">
+                          <div className="col m-2 w-50">
+                            <label className="mb-1" for={`gender${i}`}>
+                              <h3
                                 style={{
-                                  width: "110px",
+                                  fontSize: "15px",
                                   marginLeft: "-5px",
-                                  fontSize: "12px",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                Gender
+                              </h3>
+                            </label>
+                            <div className="d-flex pt-2">
+                              <ButtonComponent
+                                style={{
+                                  width: "50%",
+                                  fontSize: "11px",
                                   whiteSpace: "nowrap",
-                                  height: "33px",
-                                  fontWeight: "bold" ,
-
+                                  fontWeight: "bold",
                                 }}
-                                name={`age${i}`}
-                                onChange={(e) =>
-                                  handleTraveller(
-                                    e.target.value,
-                                    e.target.name,
-                                    i
-                                  )
+                                data={button_Data}
+                                // activeButton={activeButton}
+                                // trigerOnClickEmpSideBtn={onSideBtnClick}
+                                trigerOnClickEmpSideBtn={(e) =>
+                                  handleTraveller(e.target.name, "gender", i)
                                 }
-                                value={travellers[i].age}
-                                validate={{
-                                  pattern: {value: '[0-9]'},
-                                  required: {
-                                    value: true,
-                                    errorMessage: "Enter Age",
-                                  }
-                                }}
+                                activeButton={travellers[i].gender}
                               />
-
                             </div>
                           </div>
-
-                          <div className="form-group mt-1 pt-2">
-                            <label className="mb-1" for={`aadhaar${i}`}>
-                            <h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}> Aadhar /Any Govt ID Number{" "}</h3>
+                          <div className="form-group col m-2 w-50">
+                            <label className="mb-1" for={`age${i}`}>
+                              <h3
+                                style={{
+                                  fontSize: "15px",
+                                  marginLeft: "-5px",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                Age
+                              </h3>
                             </label>
+
                             <AvField
                               type="text"
-                              className="form-control pass_input"
-                              id={`adhaar${i}`}
-                              placeholder="Enter Aadhar /Any Govt ID Number"
-                              style={{ fontSize: "11px", marginLeft: "-5px", fontWeight: "bold" }}
-                              name={`adhaar${i}`}
+                              className="form-control pass_input w-70 pt-2"
+                              placeholder="Enter Age"
+                              id={`age${i}`}
+                              style={{
+                                width: "110px",
+                                marginLeft: "-5px",
+                                fontSize: "12px",
+                                whiteSpace: "nowrap",
+                                height: "33px",
+                                fontWeight: "bold",
+                              }}
+                              name={`age${i}`}
                               onChange={(e) =>
                                 handleTraveller(
                                   e.target.value,
@@ -424,31 +466,68 @@ console.log( tripData, apiData,  routeData )
                                   i
                                 )
                               }
-                              maxlength="12"
-                              value={travellers[i].adhaar}
+                              value={travellers[i].age}
                               validate={{
+                                pattern: { value: "[0-9]" },
                                 required: {
                                   value: true,
-                                  errorMessage: "Your Aadhar /Any Govt ID Number Required",
+                                  errorMessage: "Enter Age",
                                 },
-                                // pattern: {
-                                //   value: "(?=.{12})",
-                                //   errorMessage: "Enter Aadhar /Any Govt ID Number"
-                                // },
-                                
                               }}
                             />
-
                           </div>
-                        </p>
-                      </div>
-                    </Paper>
-                  ))
-                }
+                        </div>
+
+                        <div className="form-group mt-1 pt-2">
+                          <label className="mb-1" for={`aadhaar${i}`}>
+                            <h3
+                              style={{
+                                fontSize: "15px",
+                                marginLeft: "-5px",
+                                fontWeight: "bold",
+                              }}
+                            >
+                              {" "}
+                              Aadhar /Any Govt ID Number{" "}
+                            </h3>
+                          </label>
+                          <AvField
+                            type="text"
+                            className="form-control pass_input"
+                            id={`adhaar${i}`}
+                            placeholder="Enter Aadhar /Any Govt ID Number"
+                            style={{
+                              fontSize: "11px",
+                              marginLeft: "-5px",
+                              fontWeight: "bold",
+                            }}
+                            name={`adhaar${i}`}
+                            onChange={(e) =>
+                              handleTraveller(e.target.value, e.target.name, i)
+                            }
+                            maxlength="12"
+                            value={travellers[i].adhaar}
+                            validate={{
+                              required: {
+                                value: true,
+                                errorMessage:
+                                  "Your Aadhar /Any Govt ID Number Required",
+                              },
+                              // pattern: {
+                              //   value: "(?=.{12})",
+                              //   errorMessage: "Enter Aadhar /Any Govt ID Number"
+                              // },
+                            }}
+                          />
+                        </div>
+                      </p>
+                    </div>
+                  </Paper>
+                ))}
               </div>
 
               <div style={{ textAlign: "center", paddingBottom: "200px" }}>
-            {/* <Button
+                {/* <Button
               type="button"
               style={{
                 backgroundColor: "#0FA453",
@@ -464,13 +543,26 @@ console.log( tripData, apiData,  routeData )
             >
               <AiOutlinePlus size={35}/>
             </Button> */}
-            <div style={{fontWeight:'9000',cursor:'pointer'}} onClick={() => setTravellers([...travellers, {
-                // name: "",
-                // gender: "",
-                // age:"",
-                // adhaar: "",
-              }])} style={{fontSize:'17px'}}> <AiOutlinePlus />Add Traveller</div>
-          </div>
+                <div
+                  style={{ fontWeight: "9000", cursor: "pointer" }}
+                  onClick={() =>
+                    setTravellers([
+                      ...travellers,
+                      {
+                        // name: "",
+                        // gender: "",
+                        // age:"",
+                        // adhaar: "",
+                      },
+                    ])
+                  }
+                  style={{ fontSize: "17px" }}
+                >
+                  {" "}
+                  <AiOutlinePlus />
+                  Add Traveller
+                </div>
+              </div>
 
               {/* <Popper
                     open={open}
@@ -478,18 +570,33 @@ console.log( tripData, apiData,  routeData )
                     placement={placement}
                     transition
                   > */}
-
-
             </div>
           </Container>
 
           <div>
-            <div style={{ display: 'flex', flexDirection: 'row' }} >
-              <Col style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px", }}>
-                <div style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px" }}>
-
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <Col
+                style={{
+                  backgroundColor: "#E5E5E5",
+                  textAlign: "center",
+                  height: "86px",
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: "#E5E5E5",
+                    textAlign: "center",
+                    height: "86px",
+                  }}
+                >
                   <div style={{ padding: "" }}>
-                    <span style={{ fontSize: "15px", lineHeight: "21px", color: "grey" }}>
+                    <span
+                      style={{
+                        fontSize: "15px",
+                        lineHeight: "21px",
+                        color: "grey",
+                      }}
+                    >
                       Total Amount (*Exclusive of Taxes)
                     </span>
                     <br />
@@ -501,8 +608,7 @@ console.log( tripData, apiData,  routeData )
                         fontSize: " 24px",
                       }}
                     >
-
-                      ₹  {price + surcharge}
+                      ₹ {price + surcharge}
                     </span>
                   </div>
                 </div>
@@ -518,7 +624,7 @@ console.log( tripData, apiData,  routeData )
                     textAlign: "center",
                     height: "86px",
                   }}
-                // onClick={onCheckout}
+                  // onClick={onCheckout}
                 >
                   <div>
                     <span
@@ -527,7 +633,7 @@ console.log( tripData, apiData,  routeData )
                         fontWeight: "bolder",
                         lineHeight: "25px",
                       }}
-                    // onClick={onCheckout}
+                      // onClick={onCheckout}
                     >
                       CONTINUE
                     </span>
@@ -578,9 +684,7 @@ console.log( tripData, apiData,  routeData )
             </div>
           </div>
 
-          <Container
-            style={{ width: "90%", paddingTop: "25px" }}
-          >
+          <Container style={{ width: "90%", paddingTop: "25px" }}>
             <h3
               style={{
                 fontSize: "19px",
@@ -598,52 +702,42 @@ console.log( tripData, apiData,  routeData )
                     style={{
                       color: "black",
                       fontFamily: "sans-serif",
+                      marginLeft: "5px"
                     }}
                   >
                     Boarding from
                   </span>
-
                 </div>
-                <div className=" select-train mt-2 d-flex">
-                  <Form className="d-flex">
+                <div className=" select-train mt-2 text-center">
+                <Form style={{width:'100%'}}>
                     {["radio"].map((type) => (
                       <div
                         key={`inline-${type}`}
                         className="mb-3"
                         style={{ margin: "10px", marginLeft: "10px" }}
-                      >
-                        {/* <Form.Check
-                        inline
-                        label=""
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-1`}
-                      /> */}
-                      </div>
+                      ></div>
                     ))}
 
-                    {/* <span
+                    <span
                       style={{
-                        marginTop: "10px",
-                        marginRight: "10px",
+                        // marginTop: "10px",
                         color: "black",
                         fontWeight: "bolder",
                         fontFamily: "sans-serif",
                       }}
                     >
+                      {/* 19:45 */}
                       {tripData?.departure_time}
-                    </span> */}
+                    </span>
                   </Form>
-                  <div className="d-flex">
+                  <div style={{width:'100%'}}>
                     <span
                       style={{
-                        margin: "10px",
                         whiteSpace: "nowrap",
                         fontSize: "12px",
                         fontWeight: "bolder",
                         fontFamily: "sans-serif",
-                        textAlign:"justify",
-                        marginLeft:'-19px'
+                        textAlign: "justify",
                       }}
                     >
                       {tripData?.route?.start?.name}
@@ -657,54 +751,43 @@ console.log( tripData, apiData,  routeData )
                     style={{
                       color: "black",
                       fontFamily: "sans-serif",
+                      marginLeft: "5px"
                     }}
                   >
                     Dropoff At
                   </span>
-
                 </div>
-                <div className=" select-train mt-2 d-flex">
-                  <Form className="d-flex">
+                <div className=" select-train mt-2 text-center">
+                <Form style={{width:'100%'}}>
                     {["radio"].map((type) => (
                       <div
                         key={`inline-${type}`}
                         className="mb-3"
                         style={{ margin: "10px", marginLeft: "10px" }}
-                      >
-                        {/* <Form.Check
-                        inline
-                        label=""
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-1`}
-                      /> */}
-                      </div>
+                      ></div>
                     ))}
 
-                    {/* <span
-                      style={{
-                        // marginTop: "10px",
-                        // marginRight: "0px",
-                        // color: "black",
-                        // fontWeight: "bolder",
-                        // fontFamily: "sans-serif",
-                      }}
-                    >
-                      {tripData?.estimated_time_of_arrival}
-                    </span> */}
-                  </Form>
-                  <div className="d-flex">
                     <span
                       style={{
-                        margin: "10px",
+                        // marginTop: "10px",
+                        color: "black",
+                        fontWeight: "bolder",
+                        fontFamily: "sans-serif",
+                      }}
+                    >
+                      {/* 19:45 */}
+                      {tripData?.estimated_time_of_arrival}
+                    </span>
+                  </Form>
+                  <div style={{width:'100%'}}>
+                    <span
+                      style={{
                         whiteSpace: "nowrap",
                         fontSize: "12px",
                         fontWeight: "bolder",
-                        fontFamily: "sans-serif",
-                        marginLeft:'-19px'
+                        fontFamily: "sans-serif"
                       }}
                     >
-
                       {tripData?.route?.end?.name}
                     </span>
                   </div>
@@ -713,139 +796,199 @@ console.log( tripData, apiData,  routeData )
             </Row>
           </Container>
 
-          <div className="traveller_div" >
-            {
-              travellers?.map((item, i) => (
-                <Paper key={i} className="traveller__card" style={{ marginBottom: "15px" }}>
-                  <div className="traveller__card_body" className="py-0">
-                    <div>
-                      <h5 className="traveller__card_title" style={{ fontSize: "20px", marginBottom: "15px", float: "left", fontWeight: "bold" }}>Enter Travellers {i + 1}</h5>
-                      {i !== 0 ? 
-                        <button className="btn" style={{ float: "right", position: "relative", top: "-10px" }} onClick={(key) => deleteHandler(i)}>X</button>
-                      :null}
-                    </div>
-                    <p className="traveller__card_text" style={{ clear: "both" }}>
-                      <div className="form-group mt-0">
-                        <label className="mb-1" for={`name${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Name</h3>  </label>
-                        <AvField
-                          type="text"
-                          className="form-control pass_input"
-                          id={`name${i}`}
-                          placeholder="Enter Traveller Name"
-                          style={{ fontSize: "11px", marginLeft: "-5px", fontWeight: "bold" }}
-                          name={`name${i}`}
-                          onChange={(e) =>
-                            handleTraveller(
-                              e.target.value,
-                              e.target.name,
-                              i
-                            )
-                          }
-                          value={travellers[i].name}
-                          validate={{
-                            required: {
-                              value: true,
-                              errorMessage: "Enter Traveller Name",
-                            },
-
+          <div className="traveller_div">
+            {travellers?.map((item, i) => (
+              <Paper
+                key={i}
+                className="traveller__card"
+                style={{ marginBottom: "15px" }}
+              >
+                <div className="traveller__card_body" className="py-0">
+                  <div>
+                    <h5
+                      className="traveller__card_title"
+                      style={{
+                        fontSize: "20px",
+                        marginBottom: "15px",
+                        float: "left",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      Enter Travellers {i + 1}
+                    </h5>
+                    {i !== 0 ? (
+                      <button
+                        type="button"
+                        className="btn"
+                        style={{
+                          float: "right",
+                          position: "relative",
+                          top: "-10px",
+                        }}
+                        onClick={(key) => deleteHandler(i)}
+                      >
+                        X
+                      </button>
+                    ) : null}
+                  </div>
+                  <p className="traveller__card_text" style={{ clear: "both" }}>
+                    <div className="form-group mt-0">
+                      <label className="mb-1" for={`name${i}`}>
+                        <h3
+                          style={{
+                            fontSize: "15px",
+                            marginLeft: "-5px",
+                            fontWeight: "bold",
                           }}
-                        />
+                        >
+                          Name
+                        </h3>{" "}
+                      </label>
+                      <AvField
+                        type="text"
+                        className="form-control pass_input"
+                        id={`name${i}`}
+                        placeholder="Enter Traveller Name"
+                        style={{
+                          fontSize: "11px",
+                          marginLeft: "-5px",
+                          fontWeight: "bold",
+                        }}
+                        name={`name${i}`}
+                        onChange={(e) =>
+                          handleTraveller(e.target.value, e.target.name, i)
+                        }
+                        value={travellers[i].name}
+                        validate={{
+                          required: {
+                            value: true,
+                            errorMessage: "Enter Traveller Name",
+                          },
+                        }}
+                      />
+                    </div>
 
-                      </div>
-
-                      <div className="form-row genderform pt-3 d-flex ">
-                        <div className="col m-2 w-50">
-                          <label className="mb-1" for={`gender${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Gender</h3></label>
-                          <div className="d-flex pt-2">
-                            <ButtonComponent
-                              style={{
-                                width: "50%",
-                                fontSize: "11px",
-                                whiteSpace: "nowrap", fontWeight: "bold" 
-                              }}
-                              data={button_Data}
-                              // activeButton={activeButton}
-                              // trigerOnClickEmpSideBtn={onSideBtnClick}
-                              trigerOnClickEmpSideBtn={(e) => handleTraveller(e.target.name, "gender", i)} activeButton={travellers[i].gender} />
-                          </div>
-                        </div>
-                        <div className="form-group col m-2 w-50">
-                          <label className="mb-1" for={`age${i}`}><h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}>Age</h3></label>
-                          <AvField
-                            type="number"
-                            className="form-control pass_input w-70 pt-2"
-                            placeholder="Enter Age"
-                            id={`age${i}`}
+                    <div className="form-row genderform pt-3 d-flex ">
+                      <div className="col m-2 w-50">
+                        <label className="mb-1" for={`gender${i}`}>
+                          <h3
                             style={{
-                              width: "110px",
+                              fontSize: "15px",
                               marginLeft: "-5px",
-                              fontSize: "12px",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            Gender
+                          </h3>
+                        </label>
+                        <div className="d-flex pt-2">
+                          <ButtonComponent
+                            style={{
+                              width: "50%",
+                              fontSize: "11px",
                               whiteSpace: "nowrap",
-                              height: "33px",
-                              fontWeight: "bold" ,
+                              fontWeight: "bold",
                             }}
-                            name={`age${i}`}
-                            onChange={(e) =>
-                              handleTraveller(
-                                e.target.value,
-                                e.target.name,
-                                i
-                              )
+                            data={button_Data}
+                            // activeButton={activeButton}
+                            // trigerOnClickEmpSideBtn={onSideBtnClick}
+                            trigerOnClickEmpSideBtn={(e) =>
+                              handleTraveller(e.target.name, "gender", i)
                             }
-                            value={travellers[i].age}
-                            validate={{
-                              pattern: {value: '[0-9]'},
-                              required: {
-                                value: true,
-                                errorMessage: "Enter Age",
-                              }
-                            }}
+                            activeButton={travellers[i].gender}
                           />
-
                         </div>
                       </div>
-
-                      <div className="form-group mt-1 pt-2">
-                        <label className="mb-1" for={`aadhaar${i}`}>
-                        <h3 style={{ fontSize: "15px", marginLeft: "-5px", fontWeight: "bold" }}> Aadhar /Any Govt ID Number{" "}</h3>
+                      <div className="form-group col m-2 w-50">
+                        <label className="mb-1" for={`age${i}`}>
+                          <h3
+                            style={{
+                              fontSize: "15px",
+                              marginLeft: "-5px",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            Age
+                          </h3>
                         </label>
                         <AvField
-                          type="text"
-                          className="form-control pass_input"
-                          id={`adhaar${i}`}
-                          placeholder="Enter 12 digit Aadhar /Any Govt ID Number"
-                          style={{ fontSize: "11px", marginLeft: "-5px", marginTop: "7px" , fontWeight: "bold"}}
-                          name={`adhaar${i}`}
+                          type="number"
+                          className="form-control pass_input w-70 pt-2"
+                          placeholder="Enter Age"
+                          id={`age${i}`}
+                          style={{
+                            width: "110px",
+                            marginLeft: "-5px",
+                            fontSize: "12px",
+                            whiteSpace: "nowrap",
+                            height: "33px",
+                            fontWeight: "bold",
+                          }}
+                          name={`age${i}`}
                           onChange={(e) =>
-                            handleTraveller(
-                              e.target.value,
-                              e.target.name,
-                              i
-                            )
+                            handleTraveller(e.target.value, e.target.name, i)
                           }
-                          maxlength="12"
-                          value={travellers[i].adhaar}
+                          value={travellers[i].age}
                           validate={{
+                            pattern: { value: "[0-9]" },
                             required: {
                               value: true,
-                              errorMessage: "Your Aadhar /Any Govt ID Number Required",
+                              errorMessage: "Enter Age",
                             },
-                            // pattern: {
-                            //   value: "(?=.{12})",
-                            //   errorMessage: "Enter 12 digit Adhaar Card Number"
-                            // },
-                            
                           }}
                         />
-
                       </div>
-                    </p>
-                  </div>
-                </Paper>
-              ))
-            }
+                    </div>
+
+                    <div className="form-group mt-1 pt-2">
+                      <label className="mb-1" for={`aadhaar${i}`}>
+                        <h3
+                          style={{
+                            fontSize: "15px",
+                            marginLeft: "-5px",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {" "}
+                          Aadhar /Any Govt ID Number{" "}
+                        </h3>
+                      </label>
+                      <AvField
+                        type="text"
+                        className="form-control pass_input"
+                        id={`adhaar${i}`}
+                        placeholder="Enter 12 digit Aadhar /Any Govt ID Number"
+                        style={{
+                          fontSize: "11px",
+                          marginLeft: "-5px",
+                          marginTop: "7px",
+                          fontWeight: "bold",
+                        }}
+                        name={`adhaar${i}`}
+                        onChange={(e) =>
+                          handleTraveller(e.target.value, e.target.name, i)
+                        }
+                        maxlength="12"
+                        value={travellers[i].adhaar}
+                        validate={{
+                          required: {
+                            value: true,
+                            errorMessage:
+                              "Your Aadhar /Any Govt ID Number Required",
+                          },
+                          // pattern: {
+                          //   value: "(?=.{12})",
+                          //   errorMessage: "Enter 12 digit Adhaar Card Number"
+                          // },
+                        }}
+                      />
+                    </div>
+                  </p>
+                </div>
+              </Paper>
+            ))}
           </div>
-          
+
           <div style={{ textAlign: "center", paddingBottom: "200px" }}>
             {/* <Button
               type="button"
@@ -863,21 +1006,62 @@ console.log( tripData, apiData,  routeData )
             >
               <AiOutlinePlus size={35}/>
             </Button> */}
-            <div style={{fontWeight:'9000',cursor:'pointer'}} onClick={() => setTravellers([...travellers, {
-                // name: "",
-                // gender: "",
-                // age: "",
-                // adhaar: ,
-              }])} style={{fontSize:'17px'}}> <AiOutlinePlus />Add Traveller</div>
+            <div
+              style={{ fontWeight: "9000", cursor: "pointer" }}
+              onClick={() =>
+                setTravellers([
+                  ...travellers,
+                  {
+                    // name: "",
+                    // gender: "",
+                    // age: "",
+                    // adhaar: ,
+                  },
+                ])
+              }
+              style={{ fontSize: "17px" }}
+            >
+              {" "}
+              <AiOutlinePlus />
+              Add Traveller
+            </div>
           </div>
 
           <div>
-            <div style={{ display: "flex", marginTop: "50px", flexDirection: 'row', width: "50%", position: 'fixed', bottom: "0px" }} >
-              <Col xs={12} md={6} style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px", }}>
-                <div style={{ backgroundColor: "#E5E5E5", textAlign: "center", height: "86px" }}>
-
+            <div
+              style={{
+                display: "flex",
+                marginTop: "50px",
+                flexDirection: "row",
+                width: "50%",
+                position: "fixed",
+                bottom: "0px",
+              }}
+            >
+              <Col
+                xs={12}
+                md={6}
+                style={{
+                  backgroundColor: "#E5E5E5",
+                  textAlign: "center",
+                  height: "86px",
+                }}
+              >
+                <div
+                  style={{
+                    backgroundColor: "#E5E5E5",
+                    textAlign: "center",
+                    height: "86px",
+                  }}
+                >
                   <div style={{ padding: "" }}>
-                    <span style={{ fontSize: "13px", lineHeight: "21px", color: "grey" }}>
+                    <span
+                      style={{
+                        fontSize: "13px",
+                        lineHeight: "21px",
+                        color: "grey",
+                      }}
+                    >
                       Total Amount (*Exclusive of Taxes)
                     </span>
                     <br />
@@ -889,7 +1073,7 @@ console.log( tripData, apiData,  routeData )
                         fontSize: " 24px",
                       }}
                     >
-                      ₹  {price + surcharge}
+                      ₹ {price + surcharge}
                     </span>
                   </div>
                 </div>

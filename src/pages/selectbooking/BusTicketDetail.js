@@ -20,18 +20,16 @@ function BusBookingDetail() {
   const [qrImage, setQRImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(true);
+  const [basicDetails, setBasicDetails] = useState(true);
   const { tripList: trips, route_id } = useSelector(
     (state) => state.busReducer
   );
   const {
     data: detailsData,
     createbusData,
-    booking_id
+    booking_id,
   } = useSelector((state) => state.busReducer);
-  const { basic_details } = detailsData;
-  console.log("detailsData",detailsData)
-  console.log("basic_detailsbasic_details",basic_details)
-  console.log("booking_idbooking_id",booking_id)
+  // const { basic_details } = detailsData;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -46,10 +44,10 @@ function BusBookingDetail() {
     fetch(`${API_PATH}/api/v1/busticket/list?booking_Id=${id}`)
       .then((response) => response.json())
       .then((res) => {
-        console.log(res.data);
         if (res.data !== undefined) {
           setApiData(res.data);
-          localStorage.setItem("data", res.data[0]._id)
+          localStorage.setItem("data", res.data[0]._id);
+          setBasicDetails(res.data[0].basic_details);
           setNotFound(false);
           setLoading(false);
         } else {
@@ -64,38 +62,54 @@ function BusBookingDetail() {
   };
 
   // let apiId = localStorage.getItem("data");
-  const BookingId = localStorage.getItem("busticketData")
+  const BookingId = localStorage.getItem("busticketData");
 
   if (BookingId == []) {
-    // console.log("sadh", apiId)
-    console.log("BookingId",BookingId)
-
-  }
-  else {
-    console.log("BookingIdBookingId",BookingId)
+    
+  } else {
     fetch(`${API_PATH}/api/v1/busticket/qrcode/${BookingId}`)
       .then((response) => response.json())
       .then((res) => {
-        console.log(res.data);
         setQRImage(res.data);
       })
       .catch((e) => {
         setLoading(false);
         setNotFound(true);
       });
-
   }
 
   const printPdf = () => {
-    window.print();
-  }
+    // window.print();
+    var content = document.getElementById("divcontents");
+    var pri = document.getElementById("ifmcontentstoprint").contentWindow;
+    pri.document.open();
+    pri.document.write(content.innerHTML);
+    pri.document.close();
+    pri.focus();
+    pri.print();
+  };
+
+  const printMobilePdf = () => {
+    // window.print();
+    var content = document.getElementById("divmobilecontents");
+    var pri = document.getElementById("ifmcontentstoprint").contentWindow;
+    pri.document.open();
+    pri.document.write(content.innerHTML);
+    pri.document.close();
+    pri.focus();
+    pri.print();
+  };
 
   return (
     <>
+      <iframe
+        id="ifmcontentstoprint"
+        style={{ height: "0px", width: "0px", position: "absolute" }}
+      ></iframe>
       <div className="d-none d-md-block">
         <Header />
         {loading == false && notFound == false ? (
-          <div style={{ backgroundColor: "white" }}>
+          <div style={{ backgroundColor: "white" }} id="divcontents">
             <Row className="p-3">
               <Col xs={5} sm={5} className="p-0 dm__barcode">
                 <div className="booking-div">
@@ -130,7 +144,7 @@ function BusBookingDetail() {
                           padding: "10px",
                         }}
                       >
-                         that will take you to <br />
+                        that will take you to <br />
                         your favourite destinations
                       </span>
                     </div>
@@ -139,29 +153,55 @@ function BusBookingDetail() {
               </Col>
             </Row>
             <Col className="dm__entry_div" xs={12}>
-             
-             <div className="dm__entry_card">
-                 <div className="row mb-1"> <div className="col-md-6" style={{color:"red",fontWeight:'bolder'}}>Pass Detail</div> <div className="col-md-6" style={{paddingLeft:'10px',color:"red",fontWeight:'bolder'}}>Pass ID</div></div>
-                 <div className="row mb-1"> <div className="col-md-6" style={{fontWeight:'bolder'}}>BUS BOOKING ID</div> <div className="col-md-6" style={{paddingLeft:'10px'}}>{apiData.length > 0 ? apiData[0]?.booking_Id : null}</div></div>
-                   </div>
-     </Col>
+              <div className="dm__entry_card">
+                <div className="row mb-1">
+                  {" "}
+                  <div
+                    className="col-md-6"
+                    style={{ color: "red", fontWeight: "bolder" }}
+                  >
+                    Pass Detail
+                  </div>{" "}
+                  <div
+                    className="col-md-6"
+                    style={{
+                      paddingLeft: "10px",
+                      color: "red",
+                      fontWeight: "bolder",
+                    }}
+                  >
+                    Pass ID
+                  </div>
+                </div>
+                <div className="row mb-1">
+                  {" "}
+                  <div className="col-md-6" style={{ fontWeight: "bolder" }}>
+                    BUS BOOKING ID
+                  </div>{" "}
+                  <div className="col-md-6" style={{ paddingLeft: "10px" }}>
+                    {apiData.length > 0 ? apiData[0]?.booking_Id : null}
+                  </div>
+                </div>
+              </div>
+            </Col>
             <Row>
               <Col className="dm__title" xs={12}>
                 TRAVELLER DETAILS
               </Col>
               <Col className="dm__traveller_div" xs={12}>
-                {basic_details?.length > 0
-                  ? basic_details?.map((item, i) => (
-                    <div key={i} className="dm__trav_card">
-                      <div className="dm__trav_card_title">{item.name}</div>
-                      <div className="dm__trav_card_body">
-                        <div className="top">
-                          {item.gender}, {item.age}
+                {basicDetails?.length > 0
+                  ? basicDetails?.map((item, i) => (
+                      <div key={i} className="dm__trav_card">
+                        <div className="dm__trav_card_title">
+                          Name: {item.name}
                         </div>
-                        <div className="bottom">Adhaar: {item.adhaar}</div>
+                        <div className="dm__trav_card_body">
+                          <div className="top">Gender: {item.gender}</div>
+                          <div className="top">Age: {item.age}</div>
+                          <div className="bottom">Adhaar: {item.adhaar}</div>
+                        </div>
                       </div>
-                    </div>
-                  ))
+                    ))
                   : null}
               </Col>
             </Row>
@@ -279,16 +319,22 @@ function BusBookingDetail() {
                       {/* {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { day: 'numeric' })} `}
                       {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { month: 'short' })} `}
                       {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { year: 'numeric' })} `} */}
-                      {
-                        (apiData[0]?.date !== null)
-                          ?
-                          <>
-                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { day: 'numeric' })} `}
-                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { month: 'short' })} `}
-                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { year: 'numeric' })}`}
-                          </>
-                          : null
-                      }
+                      {apiData[0]?.date !== null ? (
+                        <>
+                          {`${new Date(apiData[0]?.date)?.toLocaleDateString(
+                            "en-US",
+                            { day: "numeric" }
+                          )} `}
+                          {`${new Date(apiData[0]?.date)?.toLocaleDateString(
+                            "en-US",
+                            { month: "short" }
+                          )} `}
+                          {`${new Date(apiData[0]?.date)?.toLocaleDateString(
+                            "en-US",
+                            { year: "numeric" }
+                          )}`}
+                        </>
+                      ) : null}
                     </span>
                   </div>
                   <div className="p-2">
@@ -309,7 +355,9 @@ function BusBookingDetail() {
                         color: "#FF4A68",
                       }}
                     >
-                      ₹ {Number(apiData[0].ticketprice) + Number(apiData[0].surcharge)}
+                      ₹{" "}
+                      {Number(apiData[0].ticketprice) +
+                        Number(apiData[0].surcharge)}
                     </span>
                     <br />
                     <span
@@ -357,7 +405,8 @@ function BusBookingDetail() {
                             fontFamily: "sans-serif",
                           }}
                         >
-                          {" "} {apiData[0]?.trips_id?.trip_name}
+                          {" "}
+                          {apiData[0]?.trips_id?.trip_name}
                         </span>
                         <br />
                         <span
@@ -398,7 +447,10 @@ function BusBookingDetail() {
                             fontFamily: "sans-serif",
                           }}
                         >
-                          {apiData[0]?.trips_id?.route?.vehical?.registration_number}
+                          {
+                            apiData[0]?.trips_id?.route?.vehical
+                              ?.registration_number
+                          }
                         </span>
                       </div>
                       <span
@@ -414,25 +466,27 @@ function BusBookingDetail() {
                     </div>
                   </div>
                 </div>
-
               </Col>
 
               <Col className="dm__entry_div" xs={12}>
-                <Button onClick={() => printPdf()} style={{
-                  width: "186px",
-                  textAlign: "center",
-                  height: "52px",
-                  borderRadius: "9px",
-                  border: "none",
-                  backgroundColor: "#0FA453",
-                  fontWeight: "bold",
-                  marginTop: "20px",
-                  marginBottom: "20px"
-                }}>Print Ticket</Button>
+                <Button
+                  onClick={() => printPdf()}
+                  style={{
+                    width: "186px",
+                    textAlign: "center",
+                    height: "52px",
+                    borderRadius: "9px",
+                    border: "none",
+                    backgroundColor: "#0FA453",
+                    fontWeight: "bold",
+                    marginTop: "20px",
+                    marginBottom: "20px",
+                  }}
+                >
+                  Print Ticket
+                </Button>
               </Col>
-
             </Row>
-
           </div>
         ) : loading == false ? (
           <h1>No data found</h1>
@@ -449,11 +503,11 @@ function BusBookingDetail() {
               style={{ width: "30px", height: "30px" }}
               onClick={goHome}
             />
-            <div className="dmpass__mob_header_title">Your Details</div>
+            <div className="dmpass__mob_header_title">Ticket Details</div>
           </Col>
         </Row>
         {loading == false && notFound == false ? (
-          <Row className="mt-5 pt-5">
+          <Row className="mt-5 pt-5" id="divmobilecontents">
             <Col xs={12}>
               <div className="text-center mt-2">
                 <img src={qrImage} alt="" width={130} />
@@ -465,35 +519,61 @@ function BusBookingDetail() {
               sm={12}
             >
               <div className="dm__card mobile">
-              <div className="dm__entry_card">
-                 <div className="row mb-1"> <div className="col-md-6" style={{color:"red",fontWeight:'bolder'}}>Pass Detail</div> <div className="col-md-6" style={{paddingLeft:'10px',color:"red",fontWeight:'bolder'}}>Pass ID</div></div>
-                 <div className="row mb-1"> <div className="col-md-6" style={{fontWeight:'bolder'}}>BUS BOOKING ID</div> <div className="col-md-6" style={{paddingLeft:'10px'}}>{apiData.length > 0 ? apiData[0]?.booking_Id : null}</div></div>
-                   </div>
+                <div className="dm__entry_card">
+                  <div className="row mb-1">
+                    {" "}
+                    <div
+                      className="col-md-6"
+                      style={{ color: "red", fontWeight: "bolder" }}
+                    >
+                      Pass Detail
+                    </div>{" "}
+                    <div className="col-md-6" style={{ fontWeight: "bolder" }}>
+                      BUS BOOKING ID
+                    </div>
+                  </div>
+                  <div className="row mb-1">
+                    {" "}
+                    <div
+                      className="col-md-6"
+                      style={{
+                        paddingLeft: "10px",
+                        color: "red",
+                        fontWeight: "bolder",
+                      }}
+                    >
+                      Pass ID
+                    </div>{" "}
+                    <div className="col-md-6" style={{ paddingLeft: "10px" }}>
+                      {apiData.length > 0 ? apiData[0]?.booking_Id : null}
+                    </div>
+                  </div>
+                </div>
               </div>
             </Col>
             <Col className="dm__title mobile" xs={12}>
               TRAVELLER DETAILS
             </Col>
             <Col className="dm__traveller_div mobile" xs={12}>
-
               <Col className="dm__traveller_div" xs={12}>
-                {basic_details?.length > 0
-                  ? basic_details?.map((item, i) => (
-                    <div key={i} className="dm__trav_card">
-                      <div className="dm__trav_card_title">{item.name}</div>
-                      <div className="dm__trav_card_body">
-                        <div className="top">
-                          {item.gender}, {item.age}
+                {basicDetails?.length > 0
+                  ? basicDetails?.map((item, i) => (
+                      <div key={i} className="dm__trav_card">
+                        <div className="dm__trav_card_title">
+                          Name: {item.name}
                         </div>
-                        <div className="bottom">Adhaar: {item.adhaar}</div>
+                        <div className="dm__trav_card_body">
+                          <div className="top">Gender: {item.gender}</div>
+                          <div className="top">Age: {item.age}</div>
+                          <div className="bottom">Adhaar: {item.adhaar}</div>
+                        </div>
                       </div>
-                    </div>
-                  ))
+                    ))
                   : null}
               </Col>
             </Col>
             <Col className="dm__title mobile" xs={12}>
-              TRIP packages_details
+              TRIP DETAILS
             </Col>
 
             <Col className="dm__entry_div mobile" xs={12}>
@@ -551,16 +631,22 @@ function BusBookingDetail() {
                     {/* {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { day: 'numeric' })} `}
                     {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { month: 'short' })} `}
                     {`${new Date(apiData[0]?.trips_id?.select_date)?.toLocaleDateString("en-US", { year: 'numeric' })} `} */}
-                    {
-                        (apiData[0]?.date !== null)
-                          ?
-                          <>
-                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { day: 'numeric' })} `}
-                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { month: 'short' })} `}
-                            {`${new Date(apiData[0]?.date)?.toLocaleDateString("en-US", { year: 'numeric' })}`}
-                          </>
-                          : null
-                      }
+                    {apiData[0]?.date !== null ? (
+                      <>
+                        {`${new Date(apiData[0]?.date)?.toLocaleDateString(
+                          "en-US",
+                          { day: "numeric" }
+                        )} `}
+                        {`${new Date(apiData[0]?.date)?.toLocaleDateString(
+                          "en-US",
+                          { month: "short" }
+                        )} `}
+                        {`${new Date(apiData[0]?.date)?.toLocaleDateString(
+                          "en-US",
+                          { year: "numeric" }
+                        )}`}
+                      </>
+                    ) : null}
                   </span>
                 </div>
                 <div className="p-2">
@@ -580,8 +666,10 @@ function BusBookingDetail() {
                       fontWeight: "bolder",
                       color: "#FF4A68",
                     }}
-                  >  
-                  ₹ {Number(apiData[0].ticketprice) + Number(apiData[0].surcharge)}
+                  >
+                    ₹{" "}
+                    {Number(apiData[0].ticketprice) +
+                      Number(apiData[0].surcharge)}
                   </span>
                   <br />
                   <span
@@ -611,6 +699,7 @@ function BusBookingDetail() {
                     style={{ float: "", backgroundColor: "#F8F8F8" }}
                   >
                     <div style={{}}>
+                      <img src={city1} />
                       <span
                         style={{
                           whiteSpace: "nowrap",
@@ -619,7 +708,8 @@ function BusBookingDetail() {
                           fontFamily: "sans-serif",
                         }}
                       >
-                        {" "} {apiData[0]?.trips_id?.trip_name}
+                        {" "}
+                        {apiData[0]?.trips_id?.trip_name}
                       </span>
                       <br />
                       <span
@@ -647,6 +737,11 @@ function BusBookingDetail() {
                       </div>
                     </div>
                     <div className="d-flex p-1">
+                      <img
+                        src={bus1}
+                        alt="bus"
+                        style={{ height: "20px", paddingRight: "10px" }}
+                      />
                       <span
                         style={{
                           whiteSpace: "nowrap",
@@ -655,7 +750,10 @@ function BusBookingDetail() {
                           fontFamily: "sans-serif",
                         }}
                       >
-                        {apiData[0]?.trips_id?.route?.vehical?.registration_number}
+                        {
+                          apiData[0]?.trips_id?.route?.vehical
+                            ?.registration_number
+                        }
                       </span>
                     </div>
                     <span
@@ -683,17 +781,22 @@ function BusBookingDetail() {
               </div>
             </Col> */}
             <Col className="dm__entry_div" xs={12}>
-              <Button onClick={() => printPdf()} style={{
-                width: "186px",
-                textAlign: "center",
-                height: "52px",
-                borderRadius: "9px",
-                border: "none",
-                backgroundColor: "#0FA453",
-                fontWeight: "bold",
-                marginTop: "20px",
-                marginBottom: "20px"
-              }}>Print Ticket</Button>
+              <Button
+                onClick={() => printMobilePdf()}
+                style={{
+                  width: "186px",
+                  textAlign: "center",
+                  height: "52px",
+                  borderRadius: "9px",
+                  border: "none",
+                  backgroundColor: "#0FA453",
+                  fontWeight: "bold",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              >
+                Print Ticket
+              </Button>
             </Col>
           </Row>
         ) : loading == false ? (

@@ -47,25 +47,21 @@ const createBusBookingRequest = async (payload) =>{
 
     )
     .then((busticket) => {
-      console.log("busticketDatabusticketData",busticket.data._id)
       return busticket.data})
     .catch((error) => error);
 }
   
 
 function* TripByRouteId({ payload }) {
-  console.log("DATADTADT:::::", payload);
   try {
     const apiTripByRouteId = yield call(TripByRouteIdAsync, payload);
     yield put(getTripByRouteIdSuccess(apiTripByRouteId.data))
-    console.log("");
   } catch (error) {
-    console.log(error);
+    
   }
 }
 
 function* createBusBooking({ payload }) {
-  console.log("pay", payload);
   const phone = localStorage.getItem("mobile");
   try {
     const busticket = yield call(createBusBookingRequest, {
@@ -73,7 +69,6 @@ function* createBusBooking({ payload }) {
       mobile: phone,
     });
     yield put(setBookingId(busticket.data.booking_Id));
-    console.log("busbus", busticket);
     localStorage.setItem("busticketData",busticket.data._id)
 
   } catch (error) {
