@@ -63,11 +63,21 @@ function* Email({ payload }) {
 function* Otp({ payload }) {
   try {
     const apiOtp = yield call(OtpAsync, payload);
-    if(apiOtp.response.status == 200){
-      yield put(getOtpSuccess(apiOtp.data));
-    }else{
-      yield put(getOtpError(apiOtp.response.data));
+    console.log(apiOtp);
+    if(apiOtp.response){
+      if(apiOtp.response.status == 200){
+        yield put(getOtpSuccess(apiOtp.response.data));
+      }else{
+        yield put(getOtpError(apiOtp.response.data));
+      }
+    }else if(apiOtp.data){
+      if(apiOtp.data.code == 200){
+        yield put(getOtpSuccess(apiOtp.data));
+      }else{
+        yield put(getOtpError(apiOtp.data));
+      }
     }
+    
    
   } catch (error) {
     yield put(getOtpError(error));

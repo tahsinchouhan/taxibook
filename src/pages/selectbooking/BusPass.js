@@ -45,7 +45,7 @@ function BusDetail({ loading }) {
   }, []);
 
   const fetchOtp = (mobile) => {
-    setShowSignUpModal(false);
+    setModalShow(true);
     dispatch(getOtp(number));
 
   };
@@ -53,7 +53,7 @@ function BusDetail({ loading }) {
   useEffect(() => {
     if(send_otp_error.code == 401){
       toast.error("USER not registered? Signup First");
-      setShowSignUpModal(true);
+      setModalShow(true);
     }
   }, [send_otp_error]);
 

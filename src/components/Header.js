@@ -19,7 +19,7 @@ import logo from "../assets/img/logo.png";
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginModal from "../components/modal/LoginModal";
-import SignupModal from "../components/modal/SignupModal";
+// import SignupModal from "../components/modal/SignupModal";
 import { logout } from "../redux/actions";
 function Header({showSignUpModal}) {
   const [modalShow, setModalShow] = useState(false);
@@ -45,7 +45,7 @@ function Header({showSignUpModal}) {
 
   useEffect(() => {
     if(showSignUpModal){
-      setSignup(true);
+      setModalShow(true);
     }
   }, [showSignUpModal]);
 
@@ -344,7 +344,7 @@ function Header({showSignUpModal}) {
         show={modalShow}
         handleClose={handleLoginClose}
       />
-      <SignupModal show={signup} handleClose={handleSignupClose} />
+      {/* <SignupModal show={signup} handleClose={handleSignupClose} /> */}
     </>
   );
 }

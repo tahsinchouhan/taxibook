@@ -45,7 +45,12 @@ function* SignUp( {payload}) {
   console.log("payload",payload)
   try {
     const SignupData = yield call(Signup, payload);
-    yield put(signupSuccess(SignupData.data));
+    console.log(SignupData);
+    if(SignupData.data.code != 403){
+      yield put(signupSuccess(SignupData.data));
+    }else{
+      yield put(signupError(SignupData.data));
+    }
   } catch (error) {
     console.log("error",error)
     return signupError(error)

@@ -23,14 +23,14 @@ import {
 } from "../../redux/actions";
 import Loader from "../Loader";
 import Message from "../Message";
-import "../../assets/css/loginModal.css";
+import "../../assets/css/verifyModal.css";
 import { FiLogIn } from "react-icons/fi";
 import { ToastContainer, toast } from "react-toastify";
 import { FaMobileAlt, FaSignInAlt, FaUserCircle } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
 
-function LoginModal({ show, handleClose }) {
+function VerifyModal({ show, handleClose, showTab }) {
   const [flag, setFlag] = useState(2);
 
   const dispatch = useDispatch();
@@ -74,6 +74,14 @@ function LoginModal({ show, handleClose }) {
      setFlag(2);
     }
   }, [show]);
+
+  useEffect(() => {
+      console.log(showTab);
+    if (showTab > 0) {
+        show = true;
+        setFlag(2);
+    }
+  }, [showTab]);
 
   useEffect(() => {
     if(signup_success_data.code){
@@ -663,4 +671,4 @@ function LoginModal({ show, handleClose }) {
     </>
   );
 }
-export default LoginModal;
+export default VerifyModal;
