@@ -56,14 +56,13 @@ function* Email({ payload }) {
     const apiEmail = yield call(loginEmailAsync, payload);
     yield put(loginEmailSuccess(apiEmail.data));
   } catch (error) {
-    console.log(error);
+    
   }
 }
 
 function* Otp({ payload }) {
   try {
     const apiOtp = yield call(OtpAsync, payload);
-    console.log("error123", apiOtp.response);
     if(apiOtp.response.status == 200){
       yield put(getOtpSuccess(apiOtp.data));
     }else{

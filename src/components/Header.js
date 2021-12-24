@@ -51,7 +51,6 @@ function Header({showSignUpModal}) {
 
   useEffect(() => {
     const customerID = JSON.parse(localStorage.getItem("customer_id"));
-    console.log("customerID", customerID);
     if(customerID){
       let userData = JSON.parse(localStorage.getItem('user_data'));
       if(userData){
@@ -74,7 +73,7 @@ function Header({showSignUpModal}) {
   };
 
   const onSearchingHolder = () => {
-    console.log("hellllooo");
+    
   };
 
   const goHome = () => {

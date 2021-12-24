@@ -30,9 +30,6 @@ function BusBookingDetail() {
     booking_id,
   } = useSelector((state) => state.busReducer);
   // const { basic_details } = detailsData;
-  // console.log("detailsData", detailsData);
-  // console.log("basic_detailsbasic_details", basic_details);
-  console.log("booking_idbooking_id", booking_id);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,7 +44,6 @@ function BusBookingDetail() {
     fetch(`${API_PATH}/api/v1/busticket/list?booking_Id=${id}`)
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
         if (res.data !== undefined) {
           setApiData(res.data);
           localStorage.setItem("data", res.data[0]._id);
@@ -69,14 +65,11 @@ function BusBookingDetail() {
   const BookingId = localStorage.getItem("busticketData");
 
   if (BookingId == []) {
-    // console.log("sadh", apiId)
-    console.log("BookingId", BookingId);
+    
   } else {
-    console.log("BookingIdBookingId", BookingId);
     fetch(`${API_PATH}/api/v1/busticket/qrcode/${BookingId}`)
       .then((response) => response.json())
       .then((res) => {
-        console.log(res.data);
         setQRImage(res.data);
       })
       .catch((e) => {

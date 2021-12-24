@@ -19,7 +19,7 @@ function CongratulationPage() {
   };
 
   const dwnlPDF = () => {
-    console.log("object");
+    // console.log("object");
   };
 
   return (

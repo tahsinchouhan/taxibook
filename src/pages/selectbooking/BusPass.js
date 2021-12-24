@@ -64,7 +64,6 @@ function BusDetail({ loading }) {
   }, [verify_otp_error]);
 
   const onClickMonsoon = () => {
-    console.log("object", `91${mobile}`, otp);
     if (otp.length === 6) {
       dispatch(fetchStart());
       dispatch(verifyOtp(number, otp));
@@ -77,7 +76,7 @@ function BusDetail({ loading }) {
     setModalShow(false);
   };
   const handleSignupOpen = () => {
-    console.log("here");
+    // console.log("here");
   };
   return (
     <>

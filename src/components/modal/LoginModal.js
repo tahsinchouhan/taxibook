@@ -72,7 +72,6 @@ function LoginModal({ show, handleClose }) {
  
 
   useEffect(() => {
-    console.log("apiDataapiData", apiData);
     if (apiData !== undefined && apiData.length !== 0) {
       // toast.success("OTP Sent Successfully")
       setFlag(5);
@@ -122,17 +121,15 @@ function LoginModal({ show, handleClose }) {
 
   useEffect(() => {
     if (email_data && email_data?.status === "ERROR") {
-      console.log("error");
       toast.error(email_data?.message);
       setFlag(0);
     } else if (email_data && email_data?.status === "OK") {
-      console.log("success");
+      
     }
   }, [email_data]);
 
   const loginEmailHandler = () => {
     dispatch(loginEmail({ email, password }));
-    console.log("email_dataemail_data", email_data);
   };
 
   // for signupmobileNo
@@ -148,12 +145,8 @@ function LoginModal({ show, handleClose }) {
       toast.success("OTP SENT SUCCESSFULLY");
       setFlag(5);
     }
-    console.log("email", email);
-    console.log("password", password);
-    console.log("fullName", fullName);
     localStorage.setItem("mobileNo", mobile);
     dispatch(signup({ mobile, email, fullName, password }));
-    console.log("signup_success_data", { signup_success_data });
     localStorage.setItem("email", email);
     setEmail("");
     setPassword("");
