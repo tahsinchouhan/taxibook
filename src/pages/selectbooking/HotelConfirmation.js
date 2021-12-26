@@ -10,7 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { API_PATH } from "../../Path/Path";
 import moment from "moment";
-import { fetchStart, getOtp, setMobile, verifyOtp,hotelpay } from "../../redux/actions";
+import {
+  fetchStart,
+  getOtp,
+  setMobile,
+  verifyOtp,
+  hotelpay,
+} from "../../redux/actions";
 import { setBookHotel } from "../../redux/actions";
 import { toast, ToastContainer } from "react-toastify";
 import ButtonComponent from "../../containers/Button";
@@ -26,7 +32,7 @@ function HotelConfirmation(props) {
   const [total_amount1, settotal_amount1] = useState(0);
   const dispatch = useDispatch();
   const { getStartData } = useSelector((state) => state.hotelReducer);
-  const {hotelpayData} = useSelector((state) => state.hotelReducer)
+  const { hotelpayData } = useSelector((state) => state.hotelReducer);
   // console.log("hotelpayData",hotelpayData)
   const { user_data } = useSelector((state) => state.loginReducer);
   const check_in = moment(getStartData.startDate).format("DD-MMM");
@@ -44,7 +50,7 @@ function HotelConfirmation(props) {
   //calculate days difference by dividing total milliseconds in a day
   const days_difference = time_difference / (1000 * 60 * 60 * 24);
   const [dayDifference, setdayDifference] = useState(days_difference);
-  const [hotelPayDetails, setHotelPayDetails] = useState({})
+  const [hotelPayDetails, setHotelPayDetails] = useState({});
   const getHotelSingleData = async () => {
     await axios
       .get(`${API_PATH}/api/v2/room/${hotelUniqid}`)
@@ -53,9 +59,13 @@ function HotelConfirmation(props) {
         await setSingleData(response.data.data);
         // console.log(response.data.data.hotel_id.hotel_name)
         setHotelDetails(response.data.data.hotel_id);
-        setHotelPayDetails(response.data.data)
+        setHotelPayDetails(response.data.data);
         setTotalValue();
       });
+  };
+
+  const { amount, endDate, guests, rooms, startDate } = {
+    ...props?.location?.state,
   };
 
   const onCheckout = () => {
@@ -118,7 +128,7 @@ function HotelConfirmation(props) {
     // setValues({ ...values, ['total_amount']: total_amount1 });
   };
   const [checkLogin, setCheckLogin] = useState(false);
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
 
   const onClickMonsoon = () => {
     // console.log("object", `91${number}`, otp);
@@ -140,7 +150,7 @@ function HotelConfirmation(props) {
 
     return false;
   };
-  
+
   const [payableAmt, setPayableAmt] = useState(0);
   const calculatePrice = () => {
     console.log({ no_of_room });
@@ -148,50 +158,64 @@ function HotelConfirmation(props) {
       getStartData.noOfRoom * dayDifference * singleData?.price?.base_price;
     setPayableAmt(payAmt);
   };
-  useEffect((email) => {
-    console.log(singleData);
-    calculatePrice();
-  }, [singleData, dayDifference, getStartData]);
+  useEffect(
+    (email) => {
+      console.log(singleData);
+      calculatePrice();
+    },
+    [singleData, dayDifference, getStartData]
+  );
   // const className = props.activeButton === item.name ? "btn-success" : "btn-light";
 
   useEffect(() => {
-    if(hotelpayData?.data?.booking_id === undefined){
-
-    }else{
+    if (hotelpayData?.data?.booking_id === undefined) {
+    } else {
       history.push({
         pathname: `/hotel-details-pay/${hotelpayData?.data?.booking_id}`,
-        state: { fullname: values.name,
-                  gender: gender,
-                  age: number,
-                  adhar : adhar
-        } 
-      })
+        state: {
+          fullname: values.name,
+          gender: gender,
+          age: number,
+          adhar: adhar,
+        },
+      });
     }
-  }, [hotelpayData])
+  }, [hotelpayData]);
 
   const onHotelPay = () => {
-    console.log(hotelPayDetails)
-    if(!user_data) { toast.error('Please Log in first', {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
+    if (!user_data) {
+      toast.error("Please Log in first", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
       return;
     }
-    dispatch(hotelpay({hotelPayDetails,getStartData}))
-  }
+    dispatch(
+      hotelpay({
+        hotelPayDetails: {
+          ...hotelPayDetails,
+          amount,
+          endDate,
+          startDate,
+          guests,
+          rooms,
+        },
+        getStartData,
+      })
+    );
+  };
 
-  console.log("hotelDetails", hotelDetails)
   return (
     <>
       <ToastContainer />
       {singleData.price ? (
         <div className="">
-          <Header />
+          <Header showSignUpModal={!user_data} />
           {/* {user_data === null ? <Redirect to="/hotelsearch" /> : null} */}
 
           <div className="container-div">
@@ -260,13 +284,15 @@ function HotelConfirmation(props) {
                               handleChange(e);
                             }}
                             required
+                            value={user_data?.user?.name}
+                            disabled
                           />
                         </div>
                         <div className="form-input-div">
                           <h3 style={{ fontSize: "16px", fontWeight: "bold" }}>
-                            Gender
+                            Email
                           </h3>
-                        
+
                           <input
                             type="text"
                             name="gender"
@@ -277,6 +303,8 @@ function HotelConfirmation(props) {
                               setGender(e.target.value);
                               handleChange(e);
                             }}
+                            value={user_data?.user?.email}
+                            disabled
                           />
                         </div>
                       </div>
@@ -286,7 +314,7 @@ function HotelConfirmation(props) {
                           style={{ marginRight: "20px" }}
                         >
                           <h3 style={{ fontSize: "16px", fontWeight: "bold" }}>
-                           Age
+                            Mobile
                           </h3>
                           <input
                             type="number"
@@ -299,14 +327,16 @@ function HotelConfirmation(props) {
                               handleChange(e);
                               settotal_amount1(payableAmt);
                             }}
+                            value={user_data?.user?.mobile}
+                            disabled
                           />
                         </div>
-                        <div
+                        {/* <div
                           className=" form-input-div"
                           style={{ marginRight: "20px" }}
                         >
                           <h3 style={{ fontSize: "16px", fontWeight: "bold" }}>
-                           Adhar Number
+                            Adhar Number
                           </h3>
                           <input
                             type="number"
@@ -317,10 +347,10 @@ function HotelConfirmation(props) {
                             onChange={(e) => {
                               setAdhar(e.target.value);
                               handleChange(e);
-                            //   settotal_amount1(payableAmt);
+                              //   settotal_amount1(payableAmt);
                             }}
                           />
-                        </div>
+                        </div> */}
                         {/* {user_data === null ? (
                           <div
                             className="mt-3 "
@@ -353,7 +383,10 @@ function HotelConfirmation(props) {
                         {showOTP ? (
                           <div
                             className=" form-input-div"
-                            style={{ marginRight: "20px", marginBottom: "20px", }}
+                            style={{
+                              marginRight: "20px",
+                              marginBottom: "20px",
+                            }}
                           >
                             <h3
                               style={{ fontSize: "16px", fontWeight: "bold" }}
@@ -423,10 +456,10 @@ function HotelConfirmation(props) {
                       marginRight: "10px",
                     }}
                   />
-                  <p>{`${check_in}-${check_out}`}</p> &nbsp; | &nbsp;
+                  <p>{`${moment(startDate).format("DD-MMM")}-${moment(endDate).format("DD-MMM")}`}</p> &nbsp; | &nbsp;
                   <p>
                     {" "}
-                    {getStartData.noOfRoom} Room, {getStartData.noOfGuest}{" "}
+                    {rooms} Room, {guests}{" "}
                     Guests
                   </p>
                 </div>
@@ -442,9 +475,9 @@ function HotelConfirmation(props) {
                   >
                     <span style={{ color: "darkgrey" }}>
                       Room price for {dayDifference} Night X{" "}
-                      {getStartData.noOfGuest} guest
+                      {guests} guest
                     </span>
-                    <span style={{ fontWeight: "bold" }}>₹ {payableAmt}</span>
+                    <span style={{ fontWeight: "bold" }}>₹ {amount}</span>
                   </div>
                   {/* <div
                   className="mt-1"
@@ -477,15 +510,15 @@ function HotelConfirmation(props) {
                       </span>
                     </div>
 
-                    <span style={{ fontWeight: "bold" }}>₹ {payableAmt}</span>
+                    <span style={{ fontWeight: "bold" }}>₹ {amount}</span>
                   </div>
                   <button
-                          className="locationpass-btn mb-2 offset-md-5"
-                          type="button"
-                          onClick={onHotelPay}
-                        >
-                          Pay at Hotel
-                        </button>
+                    className="locationpass-btn mb-2 offset-md-5"
+                    type="button"
+                    onClick={onHotelPay}
+                  >
+                    Pay at Hotel
+                  </button>
                   <div
                     style={{
                       fontWeight: "bold",

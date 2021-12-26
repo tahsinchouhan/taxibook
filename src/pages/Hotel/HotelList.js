@@ -241,11 +241,12 @@ function HotelList() {
         return response.json();
       })
       .then((res) => {
+        const data = []
         for (var i = 0; i < res.data.length; i++) {
           let str = `${res.data[i]?.hotel_name},${res.data[i]?.city}`;
-          myOptions.push(str);
+          data.push(str);
         }
-        setMyOptions(myOptions);
+        setMyOptions([...data]);
       });
   };
 
