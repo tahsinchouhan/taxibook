@@ -39,13 +39,16 @@ const DestinationDetails = (props) => {
         document.querySelector("meta[name='description']").setAttribute('content', (data.data.seo_description || ''));
         document.querySelector("meta[name='keywords']").setAttribute('content', (data.data.seo_keywords || ''));
         
-        const script = document.createElement("script");
+        // const script = document.createElement("script");
         // script.src = "/path/to/resource.js";
         // script.async = true;
-        var text = document.createTextNode(data.data.seo[0].replace('<script>', '').replace('</script>', ''));
-        script.appendChild(text);
-        document.body.appendChild(script);
+        // var text = document.createTextNode(data.data.seo[0].replace('<script>', '').replace('</script>', ''));
+        // script.appendChild(text);
+        // document.body.appendChild(script);
         // document.body.prepend(data.data.seo[0]);
+
+        let text = data?.data?.seo[0].replace('<script type="application/ld+json">', '').replace('</script>', '');
+        document.querySelector("script[id='seoSchema']").innerHTML = text || '';
       } catch (error) {
         console.log(error)
       }
@@ -95,8 +98,9 @@ const DestinationDetails = (props) => {
       })
       .catch((e) => console.log(e));
   };
+
   const getPackagesid = () => {
-    fetch(API_PATH + "/api/v1/destinations/location", {
+    fetch(API_PATH + "/api/v1/packages/location", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -128,12 +132,12 @@ const DestinationDetails = (props) => {
     },
   };
 
-  const onDestinations = (value) => {
-    history.push({
-      pathname: `/destination_details/${value.title}`,
-      id: value._id,
-    });
-  };
+  // const onPackages = (value) => {
+  //   history.push({
+  //     pathname: `/packages_details/${value.title}`,
+  //     id: value._id,
+  //   });
+  // };
 
   return (
     <>
@@ -254,16 +258,14 @@ const DestinationDetails = (props) => {
             >
               <div>
                 <h2 className="package__title" style={{color:'white'}}>
-                  <span>Related</span> Destination
+                  <span>Related</span> Packages
                 </h2>
                 <h6 style={{color:'white'}}>
-                  Choose Your Best Destination
+                  Choose Your Best Package
                 </h6>
               </div>
             </div>
           </div>
-
-
 
           <Carousel
             partialVisible
@@ -274,7 +276,13 @@ const DestinationDetails = (props) => {
               packagesdata.map((item,key) => {
                 return (
                   <div
-                    key={key} onClick={() => onDestinations(item)}
+                    key={key} 
+                    onClick={() =>
+                      history.push({
+                        pathname: `/packages_details/${item.title}`,
+                        item: item._id,
+                      })
+                    }                    
                   >
                     <Image
                       draggable={false}

@@ -47,13 +47,15 @@ const PackagesDetails = (props) => {
     document.querySelector("meta[name='description']").setAttribute('content', (data.data.seo_description || ''));
     document.querySelector("meta[name='keywords']").setAttribute('content', (data.data.seo_keywords || ''));
 
-    const script = document.createElement("script");
+    // const script = document.createElement("script");
+    // script.type = "application/ld+json";
     // script.src = "/path/to/resource.js";
     // script.async = true;
-    var text = document.createTextNode(data.data.seo[0].replace('<script>', '').replace('</script>', ''));
-    script.appendChild(text);
-    document.body.appendChild(script);
-    // document.body.prepend(data.data.seo[0]);
+    // let text = document.createTextNode(data?.data?.seo[0].replace('<script type="application/ld+json">', '').replace('</script>', ''));
+    // script.appendChild(text);
+    // document.body.appendChild(script || '');
+    let text = data?.data?.seo[0].replace('<script type="application/ld+json">', '').replace('</script>', '');
+    document.querySelector("script[id='seoSchema']").innerHTML = text || '';
   }
 
   const modalReviewHadler = () => {
