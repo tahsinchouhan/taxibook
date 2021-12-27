@@ -76,7 +76,7 @@ function VerifyModal({ show, handleClose, showTab }) {
   }, [show]);
 
   useEffect(() => {
-      console.log(showTab);
+      // console.log(showTab);
     if (showTab > 0) {
         show = true;
         setFlag(2);
@@ -107,7 +107,7 @@ function VerifyModal({ show, handleClose, showTab }) {
  
 
   useEffect(() => {
-    console.log(apiData);
+    // console.log(apiData);
     if (apiData !== undefined && apiData.length !== 0) {
       // toast.success("OTP Sent Successfully")
       setFlag(5);

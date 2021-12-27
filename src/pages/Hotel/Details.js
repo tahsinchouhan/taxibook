@@ -1,40 +1,110 @@
 import React, { useState, useEffect } from "react";
-// import Room from "../../assets/img/hotelRoom.jpeg";
-// import calendar from "../../assets/img/calendar.png";
+import Room from "../../assets/img/hotelRoom.jpeg";
 import { useHistory } from "react-router-dom";
-// import { API_PATH } from "../../Path/Path";
-// import axios from "axios";
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { FaCheckCircle } from "react-icons/fa";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-// import hotelotherimage from "../../assets/img/hotelotherimage.jpg";
-import { BiCheckCircle } from "react-icons/bi";
-// import { AiOutlineCamera } from "react-icons/Ai";
-import { AiOutlineWifi, AiOutlineVideoCamera } from "react-icons/ai"; //WiFi
+import hotelotherimage from "../../assets/img/hotelotherimage.jpg";
+import { BsPlusSquare, BsDashSquare } from "react-icons/bs";
+import { DatePicker, Dropdown as ANTDropdown, Menu } from "antd";
+import { FaTrash, FaPlusCircle } from "react-icons/fa";
 
-
-
-const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
+const Details = ({
+  hotelUniqid,
+  detailsP,
+  address,
+  startDate,
+  endDate,
+  roomStateData,
+}) => {
   const history = useHistory();
-  const { getStartData } = useSelector((state) => state.hotelReducer);
-  const check_in = moment(getStartData.startDate).format("DD-MMM");
-  const address1 = getStartData.sendlocation;
-  const check_out = moment(getStartData.endDate).format("DD-MMM");
-  const firstData = detailsP[0]?.room_list[0];
-    
+
+  const { RangePicker } = DatePicker;
+  const dateFormat = "DD-MMM";
+  function disabledDate(current) {
+    return current && current < moment().endOf("day");
+  }
+
   const [index, setIndex] = useState(0);
-  const [detail, setDetail] = useState('');
-  const [selectedRoom, setSelectedRoom] = useState(0);
+  const [detail, setDetail] = useState(null);
+  const [dates, setDates] = useState([moment(startDate), moment(endDate)]);
+  const [prices, setPrices] = useState({
+    base: 0,
+    offer: 0,
+    final: 0,
+    perDayBase: 0,
+    perDayOffer: 0,
+    perDayFinal: 0,
+  });
+  const [noOfGuest, setNoOfGuest] = useState(2);
+  const [noOfRoom, setNoOfRoom] = useState(1);
+  const [roomState, setRoomState] = useState(
+    roomStateData?.length > 0
+      ? roomStateData
+      : [
+          {
+            room: 1,
+            guest: 2,
+          },
+        ]
+  );
+
+  const totalDays = moment(endDate).diff(moment(startDate), "days");
+
+  useEffect(() => {
+    if (detailsP?.length) {
+      setDetail(detailsP[0]);
+    }
+  }, [detailsP]);
+
+  const { price, max_guest, number_of_rooms, price_per_person } = { ...detail };
+
+  useEffect(() => {
+    if (price) {
+      setPrices({
+        base: price?.base_price,
+        offer: price?.offer_price,
+        final: price?.final_price,
+        perDayBase: price?.base_price / totalDays,
+        perDayOffer: price?.offer_price / totalDays,
+        perDayFinal: price?.final_price / totalDays,
+      });
+    }
+  }, [price, totalDays]);
+
+  useEffect(() => {
+    const currentSelectedDays = dates[1].diff(dates[0], "days");
+    const { base, perDayBase, perDayOffer, perDayFinal } = prices;
+    let extraGuestsAmount = 0;
+    if (noOfGuest - noOfRoom * 2 > 0)
+      extraGuestsAmount = (noOfGuest - noOfRoom * 2) * price_per_person;
+
+    const newBasePrice =
+      prices.perDayBase * currentSelectedDays + extraGuestsAmount;
+    if (newBasePrice !== base)
+      setPrices({
+        ...prices,
+        base: perDayBase * currentSelectedDays + extraGuestsAmount,
+        offer: perDayOffer * currentSelectedDays + extraGuestsAmount,
+        final: perDayFinal * currentSelectedDays + extraGuestsAmount,
+      });
+  }, [dates, totalDays, prices, noOfRoom, noOfGuest, price_per_person]);
+
+  useEffect(() => {
+    setNoOfRoom(roomState.length);
+    setNoOfGuest(roomState.reduce((total, { guest }) => total + guest, 0));
+  }, [roomState]);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
 
-  useEffect(() => {
-    setDetail(firstData)
-  }, [firstData]);
+  const handleDateChange = (dateArr) => {
+    console.log(dateArr);
+    setDates([...dateArr]);
+  };
 
   const responsive = {
     desktop: {
@@ -54,14 +124,101 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
     },
   };
 
-  const updatePrice = (item, index) => {
+  const updatePrice = (item) => {
     setDetail(item);
-    setSelectedRoom(index)
-  }
+  };
 
   const bookingPage = (_id) => {
-    history.push(`/hotelconfirmation/${_id}`);
+    history.push({
+      pathname: `/hotelconfirmation/${_id}`,
+      state: {
+        amount: prices.final,
+        guests: noOfGuest,
+        rooms: noOfRoom,
+        startDate: dates[0].toISOString(),
+        endDate: dates[1].toISOString(),
+      },
+    });
   };
+
+  const guestRoom = (act, room_id) => {
+    let guestRoomObj = roomState;
+    if (
+      act === "mainAdd" &&
+      noOfGuest > 0 &&
+      noOfRoom > 0 &&
+      noOfRoom < number_of_rooms
+    ) {
+      guestRoomObj.push({ room: room_id, guest: 2 });
+    } else if (act === "delete" && noOfGuest > 0 && noOfRoom > 0) {
+      let guestRoomObj1 = guestRoomObj.filter((elem, ind) => ind !== room_id);
+      guestRoomObj = guestRoomObj1;
+    } else if (act === "+" && guestRoomObj[room_id].guest < max_guest) {
+      guestRoomObj[room_id].guest = guestRoomObj[room_id].guest + 1;
+    } else if (act === "-" && guestRoomObj[room_id].guest > 1) {
+      guestRoomObj[room_id].guest = guestRoomObj[room_id].guest - 1;
+    }
+    setRoomState([...guestRoomObj]);
+  };
+
+  const menu = (
+    <Menu className="menuSearch">
+      <Menu.Item>
+        <b>Room</b> <b style={{ float: "right" }}>Guest</b>
+        <hr />
+      </Menu.Item>
+      <div className="addMenu">
+        {roomState?.map((curElem, index) => (
+          <Menu.Item key={index}>
+            Room {curElem.room}{" "}
+            <span style={{ float: "right" }}>
+              <span style={{ padding: "5px" }}>
+                {" "}
+                <BsDashSquare size={20} onClick={() => guestRoom("-", index)} />
+              </span>{" "}
+              <span style={{ fontWeight: "700" }}>{curElem.guest}</span>{" "}
+              {curElem.guest === max_guest ? (
+                <span style={{ padding: "5px" }}>
+                  <BsPlusSquare size={20} color={"#737272"} />
+                </span>
+              ) : (
+                <span style={{ padding: "5px" }}>
+                  <BsPlusSquare
+                    size={20}
+                    onClick={() => guestRoom("+", index)}
+                    style={{ height: "20px" }}
+                  />
+                </span>
+              )}
+            </span>
+            <hr />
+          </Menu.Item>
+        ))}
+      </div>
+      <Menu.Item>
+        {roomState.length > 1 ? (
+          <FaTrash
+            size={15}
+            title="Delete Room "
+            style={{ float: "left", marginLeft: "20px" }}
+            onClick={() => guestRoom("delete", roomState.length - 1)}
+          />
+        ) : (
+          ""
+        )}
+        {noOfRoom < number_of_rooms ? (
+          <span
+            title="Add Room "
+            style={{ float: "right" }}
+            onClick={() => guestRoom("mainAdd", roomState.length + 1)}
+          >
+            <FaPlusCircle size={15} />
+            &nbsp; Add Room
+          </span>
+        ) : null}
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <>
@@ -74,16 +231,30 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
           partialVisible
           responsive={responsive}
         >
-        {hotelDetail?.image ? (hotelDetail?.image).map((img, idx) => {
-          return <div key={idx} className="Carousel-a" >
-              <img className="caraselImage" src={img} alt="slide" style={{minWidth:'100%',maxWidth:'100%'}} />
-            </div>
-        }) : ''}
+          <div className="Carousel-a">
+            <img className="caraselImage" src={Room} alt="First slide" />{" "}
+          </div>
+          <div className="Carousel-a">
+            <img
+              className="caraselImage"
+              src={hotelotherimage}
+              alt="Second slide"
+            />
+          </div>
+          <div className="Carousel-a">
+            <img className="caraselImage" src={Room} alt="Second slide" />
+          </div>
+          <div className="Carousel-a">
+            <img
+              className="caraselImage"
+              src={hotelotherimage}
+              alt="Second slide"
+            />
+          </div>
         </Carousel>
       </div>
 
-      {/* =============== */}
-      {detailsP ? (        
+      {detailsP ? (
         <div
           className="hotel-confirm-div"
           style={{ width: "90%", margin: "0 auto" }}
@@ -91,21 +262,41 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
           <div className="hotel-details-1">
             <div
               className=""
-              style={{padding: "10px 10px 10px 0",margin: "15px 15px 15px 0"}}>
-              <h4 style={{ fontWeight: "bold", marginBottom: 0 }}>{detailsP[0]?.hotel_name}</h4>
-              <p style={{fontSize: "14px", margin: 0, padding: 0}}>{`${detailsP[0]?.street}, ${detailsP[0]?.city}`}</p>
+              style={{
+                padding: "10px 10px 10px 0",
+                margin: "15px 15px 15px 0",
+              }}
+            >
+              <h4 style={{ fontWeight: "bold", marginBottom: 0 }}>
+                {hotelUniqid}
+              </h4>
+              <p style={{ fontSize: "14px", margin: 0, padding: 0 }}>
+                {address}
+              </p>
             </div>
             <div>
               <div>
-                <h2 style={{ fontWeight: "bold", fontSize: "20px" }}>Choose Your Room</h2>
-                {detailsP[0]?.room_list?.map((item, index) => {
+                <h2 style={{ fontWeight: "bold", fontSize: "20px" }}>
+                  Choose Your Room
+                </h2>
+                {detailsP?.map((item, index) => {
                   return (
-                    <div key={index} className="choose-room-div" style={{ marginBottom:"32px"}}>
-                     {selectedRoom === index && <div className={`${selectedRoom === index ? 'selected' : '' }`}>
-                        <span style={{color:'gold', paddingRight:'0.3rem'}}>⭐️</span> Selected Category
+                    <div
+                      key={index}
+                      className="choose-room-div"
+                      style={{ marginBottom: "32px" }}
+                    >
+                      <div
+                        style={{
+                          backgroundColor: "#F5F5F5",
+                          height: "30px",
+                          display: "flex",
+                          alignItems: "center",
+                          padding: "0 15px",
+                        }}
+                      >
+                        ⭐️ Selected Category
                       </div>
-                    }
-                      
                       <div
                         style={{
                           padding: "15px",
@@ -115,32 +306,31 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
                         }}
                       >
                         <div>
-                          <h1 style={{ fontSize: "28px", fontWeight: "bold" }}>
-                            Classic ({item?.room_category_id.name}){' '}
-                            {
-                              selectedRoom === index && <FaCheckCircle style={{ fontSize: "28px", color:'#28b628', }} />
-                            }                            
+                          <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>
+                            Classic ({item?.room_category_id?.name})
                           </h1>
 
-                        <div className="row">
-                          <div className="col-sm-12"><h5><b>Amenities</b></h5></div>
-                          {item?.amenities.map((value,index)=>(
-                            <div className="col-sm-4 mt-4" style={{fontSize:'18px'}} key={index}>
-                              {value?.name?.includes('FreeWifi') ? <AiOutlineWifi style={{marginRight:'0.5rem'}} /> : ''}
-                              {value?.name?.includes('CCTVCameras') ? <AiOutlineVideoCamera style={{marginRight:'0.5rem'}} /> : ''}
-                              {value?.name?.includes('AC') ? <AiOutlineVideoCamera style={{marginRight:'0.5rem'}} /> : ''}
-                              {value?.name?.includes('Kitchen') ? <AiOutlineVideoCamera style={{marginRight:'0.5rem'}} /> : ''}
-                              {value?.name?.includes('Cooler') ? <AiOutlineVideoCamera style={{marginRight:'0.5rem'}} /> : ''}
-                              {value.name}
+                          <div className="row">
+                            <div className="col-sm-12">
+                              <h5>
+                                <b>Amenities</b>
+                              </h5>
                             </div>
-                          ))}
+                            {item?.amenities?.map((value, index) => (
+                              <div className="col-sm-3" key={index}>
+                                <strong>{value.name}</strong>
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                         
-                        </div>
-                        {item?.image.map((value, index)=>(
-                        <div key={index}>
-                          <img src={value} alt="Room" className="room-mobile" />
-                        </div>
+                        {item?.image.map((value, index) => (
+                          <div key={index}>
+                            <img
+                              src={value}
+                              alt="Room"
+                              className="room-mobile"
+                            />
+                          </div>
                         ))}
                       </div>
                       <div
@@ -158,7 +348,8 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
                             style={{
                               fontSize: "16px",
                               textDecoration: "line-through",
-                            }}>
+                            }}
+                          >
                             ₹ {item?.price.base_price}
                           </span>
                         </div>
@@ -173,20 +364,23 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
                             fontWeight: "bold",
                             fontSize: "18px",
                             borderRadius: "5px",
-                            cursor:'pointer'
+                            cursor: "pointer",
                           }}
-                          onClick={()=>updatePrice(item, index)}>
-                          {
-                            selectedRoom === index ? 
-                              <span><FaCheckCircle style={{ fontSize: "24px", color:'#28b628', }} /> &nbsp; SELECTED</span> :
-                              <span> &nbsp; SELECT</span>
-                          } 
+                          onClick={() => updatePrice(item)}
+                        >
+                          {detail?._id === item._id ? (
+                            <>
+                              <FaCheckCircle />
+                              &nbsp; Selected
+                            </>
+                          ) : (
+                            "Select"
+                          )}
                         </div>
                       </div>
                     </div>
                   );
                 })}
-
               </div>
             </div>
             <div style={{ padding: "15px 0 " }}>
@@ -236,8 +430,9 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
                     fontSize: "25px",
                     fontWeight: "bold",
                     paddingRight: "10px",
-                  }}>                   
-                    ₹ {detail?.price?.offer_price}
+                  }}
+                >
+                  {prices?.offer}
                 </h1>
                 <h2
                   style={{
@@ -247,8 +442,9 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
                     color: "gray",
                     paddingRight: "10px",
                     textDecoration: "line-through",
-                  }}>
-                  ₹ {detail?.price?.base_price}
+                  }}
+                >
+                  {prices?.base}
                 </h2>
                 <h3
                   style={{
@@ -256,13 +452,12 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
                     padding: "0",
                     fontSize: "16px",
                     color: "orange",
-                  }}>
+                  }}
+                >
                   {" "}
                   {Math.round(
-                      ((detail?.price?.base_price -
-                        detail?.price?.final_price) /
-                        detail?.price?.base_price) * 100)
-                  }
+                    ((prices?.base - prices?.final) / prices?.base) * 100
+                  )}
                   % 0ff
                 </h3>
               </div>
@@ -271,7 +466,8 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
                   fontSize: "13px",
                   fontWeight: "lighter",
                   color: "gray",
-                }}>
+                }}
+              >
                 inclusive of all taxes
               </span>
               <div
@@ -283,12 +479,39 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
                   margin: "20px 0",
                   boxShadow: "1px 1px 6px gray",
                   fontWeight: "bold",
-                }}>
-                <p style={{ margin: "0", padding: "0 4px" }}>
-                  {`${check_in}-${check_out}`}{" "}
-                </p>{" "}
-                &nbsp; | &nbsp;
-                <p style={{ margin: "0", padding: "0" }}> 1 Room, 2 Guests</p>
+                  alignItems: "center",
+                }}
+              >
+                <RangePicker
+                  disabledDate={disabledDate}
+                  onChange={handleDateChange}
+                  minDate={new Date()}
+                  defaultValue={dates}
+                  style={{
+                    backgroundColor: "transparent",
+                    border: "0",
+                    maxWidth: "50%",
+                    boxShadow: "none",
+                  }}
+                  format={dateFormat}
+                />{" "}
+                |
+                <ANTDropdown overlay={menu} trigger={["click"]}>
+                  <p
+                    style={{
+                      backgroundColor: "transparent",
+                      borderRadius: 0,
+                      margin: 0,
+                      border: 0,
+                      outline: "none",
+                      boxShadow: "none",
+                      fontSize: 14,
+                      fontWeight: "bold",
+                      flexGrow: "1",
+                      paddingLeft: 20,
+                    }}
+                  >{`${noOfRoom} Room, ${noOfGuest} Guest`}</p>
+                </ANTDropdown>
               </div>
 
               <div
@@ -318,7 +541,7 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
               >
                 <span style={{}}>Your Saving</span>
                 <span style={{ fontWeight: "bold" }}>
-                  ₹ {detail?.price?.base_price - detail?.price?.offer_price}
+                  ₹ {prices?.base - prices?.offer}
                 </span>
               </div>
               <div
@@ -332,14 +555,12 @@ const Details = ({ hotelDetail, hotelUniqid, detailsP }) => {
                     (inclusive of all taxes)
                   </span>
                 </span>
-                <span style={{ fontWeight: "bold" }}>
-                  ₹ {detail?.price?.final_price}
-                </span>
+                <span style={{ fontWeight: "bold" }}>₹ {prices?.final}</span>
               </div>
 
               <div>
                 <div
-                  onClick={()=>bookingPage(detail?._id)}
+                  onClick={() => bookingPage(detail?._id)}
                   style={{
                     fontWeight: "bold",
                     color: "#fff",

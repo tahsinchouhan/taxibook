@@ -99,7 +99,7 @@ function LoginModal({ show, handleClose }) {
  
 
   useEffect(() => {
-    console.log(apiData);
+    // console.log(apiData);
     if (apiData !== undefined && apiData.length !== 0) {
       // toast.success("OTP Sent Successfully")
       setFlag(5);

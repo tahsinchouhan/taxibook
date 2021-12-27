@@ -26,7 +26,6 @@ const INIT_STATE = {
 };
 
 const hotelReducer = (state = INIT_STATE, action) => {
-  console.log("data action",action)
   switch (action.type) {
     case GET_BOOK_HOTEL: {
       const actionData = action.payload;
