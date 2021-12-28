@@ -67,7 +67,7 @@ const DestinationDetails = (props) => {
     }
     // console.log('abcd')
     sound.play();
-    Howler.volume(0.5);
+    Howler.volume(0);
   }, []);
 
   useEffect(() => {
