@@ -25,7 +25,8 @@ function EnquireModal({ show, handleClose, packages }) {
       destination_id: packages.destinations,
       type: "",
     };
-    if (!name === "" && !email === "" && !number === "" && !comment === "") {
+  
+    if (name && email && number && comment) {
       dispatch(getEnquire(data))
     }
   };

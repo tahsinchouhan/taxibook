@@ -199,7 +199,8 @@ function Header({showSignUpModal}) {
               </NavLink>
               <NavLink
                 className="sidebar__navlink"
-                to="https://blog.travelbastar.com"
+                to={{ pathname: "https://blog.travelbastar.com" }}
+                target="_blank"
               >
                 BLOG
               </NavLink>

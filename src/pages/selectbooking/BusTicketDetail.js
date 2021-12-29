@@ -61,22 +61,34 @@ function BusBookingDetail() {
       });
   };
 
-  // let apiId = localStorage.getItem("data");
-  const BookingId = localStorage.getItem("busticketData");
+  let apiId = localStorage.getItem("data");
+  // const BookingId = localStorage.getItem("busticketData");
 
-  if (BookingId == []) {
+  fetch(`${API_PATH}/api/v1/busticket/qrcode/${apiId}`)
+    .then((response) => response.json())
+    .then((res) => {
+      console.log('QR CODE', res.data)
+      setQRImage(res.data);
+    })
+    .catch((e) => {
+      setLoading(false);
+      setNotFound(true);
+    });
+
+  // if (BookingId == []) {
     
-  } else {
-    fetch(`${API_PATH}/api/v1/busticket/qrcode/${BookingId}`)
-      .then((response) => response.json())
-      .then((res) => {
-        setQRImage(res.data);
-      })
-      .catch((e) => {
-        setLoading(false);
-        setNotFound(true);
-      });
-  }
+  // } else {
+  //   fetch(`${API_PATH}/api/v1/busticket/qrcode/${id}`)
+  //     .then((response) => response.json())
+  //     .then((res) => {
+  //       // console.log('QR CODE', res.data)
+  //       setQRImage(res.data);
+  //     })
+  //     .catch((e) => {
+  //       setLoading(false);
+  //       setNotFound(true);
+  //     });
+  // }
 
   const printPdf = () => {
     // window.print();
@@ -144,7 +156,7 @@ function BusBookingDetail() {
                           padding: "10px",
                         }}
                       >
-                        that will take you to <br />
+                        that will take you to 
                         your favourite destinations
                       </span>
                     </div>
