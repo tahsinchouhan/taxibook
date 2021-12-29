@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import Header from "../../components/Header";
 import bus1 from "../../assets/img/bus.png";
 import city1 from "../../assets/img/city.png";
-import ticket from "../../assets/img/ticket.png";
+// import ticket from "../../assets/img/ticket.png";
 import Footer from "../travesaly/Footer";
 import { useHistory, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";

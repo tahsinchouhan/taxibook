@@ -1,14 +1,14 @@
 import React from "react";
-import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
-import bus1 from "../../assets/img/bus.png";
-import city1 from "../../assets/img/city.png";
+import { Container, Row, Col, Button } from "react-bootstrap";
+// import bus1 from "../../assets/img/bus.png";
+// import city1 from "../../assets/img/city.png";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { useHistory } from "react-router-dom";
-import { FaWhatsapp } from "react-icons/fa";
+// import { FaWhatsapp } from "react-icons/fa";
 import runmen from "../../assets/img/runmen.png";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 function CongratulationPage() {
   const history = useHistory();
@@ -64,6 +64,7 @@ function CongratulationPage() {
                       <a href={`https://wa.me?text=http://15.206.92.158/hotel-details-book/${checkoutdata?.booking_id}`}
                         style={{ textDecoration: "none", color: "#fff" }}
                         target="_blank"
+                        rel="noreferrer"
                       >
                         Share in Whatsapp
                       </a>
@@ -179,6 +180,7 @@ function CongratulationPage() {
               <a href={`https://wa.me?text=http://15.206.92.158/hotel-details-book/${checkoutdata?.booking_id}`}
                 style={{ textDecoration: "none", color: "#fff" }}
                 target="_blank"
+                rel="noreferrer"
               >
                 Share in Whatsapp
               </a>

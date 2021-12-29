@@ -5,21 +5,21 @@ import {
   Row,
   Col,
   Form,
-  Dropdown,
+  // Dropdown,
   Button,
   InputGroup,
 } from "react-bootstrap";
 import logo from "../../assets/img/logo.png";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import OtpInput from "react-otp-input";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getOtp,
   verifyOtp,
-  signupOtp,
+  // signupOtp,
   signup,
   loginEmail,
-  verifysignupSuccess,
+  // verifysignupSuccess,
 } from "../../redux/actions";
 import Loader from "../Loader";
 import Message from "../Message";
@@ -70,7 +70,7 @@ function VerifyModal({ show, handleClose, showTab }) {
   }, [user_data]);
   
   useEffect(() => {
-    if (show == true) {
+    if (show === true) {
      setFlag(2);
     }
   }, [show]);

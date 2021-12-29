@@ -4,14 +4,14 @@ import axios from "axios";
 import * as moment from "moment";
 import {
   GET_BOOK_HOTEL,
-  GET_BOOK_HOTEL_SUCCESS,
-  SET_BOOK_HOTEL,
+  // GET_BOOK_HOTEL_SUCCESS,
+  // SET_BOOK_HOTEL,
   SET_BOOK_HOTEL_SUCCESS,
   SET_INTEREST_PREHOME,
   HOTEL_PAY,
 } from "../actions";
 import {
-  getBookHotel,
+  // getBookHotel,
   getBookHotelSuccess,
   setBookHotelSuccess,
   setinterestprehomeSuccess,

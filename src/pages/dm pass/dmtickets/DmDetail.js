@@ -1,21 +1,21 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
+import {  Row, Col, Button } from "react-bootstrap";
 import Header from "../../../components/Header";
-import bus1 from "../../../assets/img/bus.png";
+// import bus1 from "../../../assets/img/bus.png";
+// import city1 from "../../../assets/img/city.png";
+// import barcode from "../../../assets/img/barcode.png";
 import ticket from "../../../assets/img/ticket.png";
-import city1 from "../../../assets/img/city.png";
-import barcode from "../../../assets/img/barcode.png";
 import Footer from "../../travesaly/Footer";
 import { useHistory, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import ReactToPrint from "react-to-print";
-import { useReactToPrint } from 'react-to-print';
-import {
-  getTripByRouteId,
-  setRouteId,
-  setTripData,
-} from "../../../redux/actions";
+// import { useReactToPrint } from 'react-to-print';
+// import {
+//   getTripByRouteId,
+//   setRouteId,
+//   setTripData,
+// } from "../../../redux/actions";
 import "../../../assets/css/dmdetail.css";
 import { API_PATH } from "../../../Path/Path";
 
@@ -34,7 +34,7 @@ function DmDetail() {
     (state) => state.busReducer
   );
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     getTrips();

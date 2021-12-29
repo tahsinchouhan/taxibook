@@ -1,23 +1,23 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 import "../../assets/css/buspass.css";
-import { FaBus, FaCarAlt, FaSpinner, FaTicketAlt } from "react-icons/fa";
+import { FaSpinner } from "react-icons/fa";
 import ticket from "../../assets/ticketpage.svg";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import Footer from "../travesaly/Footer";
 import Header from "../../components/Header";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { fetchStart, getOtp, setMobile, verifyOtp } from "../../redux/actions";
-import { API_PATH } from "../../Path/Path";
-import axios from "axios";
-import Loader from "../../components/Loader";
-import { toast } from "react-toastify";
+import { fetchStart, getOtp, verifyOtp } from "../../redux/actions";
+// import { API_PATH } from "../../Path/Path";
+// import axios from "axios";
+// import Loader from "../../components/Loader";
+// import { toast } from "react-toastify";
 import Message from "../../components/Message";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 
 function BusDetail({ loading }) {
-  const history = useHistory();
+  // const history = useHistory();
   const [otp, setOtp] = useState("");
   const { error, message } = useSelector((state) => state.commonReducer);
   const { user_data } = useSelector((state) => state.loginReducer);

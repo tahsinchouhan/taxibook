@@ -513,7 +513,7 @@ function Registration() {
                         )}
                     </Formik>
                     : show === 1 ?
-                        Type == "Hotel" ?
+                        Type === "Hotel" ?
                             <Formik
                                 validationSchema={hotelSchema}
                                 onSubmit={(values) => onSubmitHotel(values)}
@@ -664,7 +664,7 @@ function Registration() {
                                 )}
                             </Formik>
                             :
-                            Type == "Taxi" ?
+                            Type === "Taxi" ?
                                 <Formik
                                     validationSchema={taxiSchema}
                                     onSubmit={(values) => onSubmitTaxi(values)}
@@ -887,7 +887,7 @@ function Registration() {
                                     )}
                                 </Formik>
                                 :
-                                Type == "Travel" ?
+                                Type === "Travel" ?
                                     <Formik
                                         validationSchema={travelSchema}
                                         onSubmit={(values) => onSubmitTravel(values)}

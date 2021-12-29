@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
-import logo from "../../assets/img/logo.png";
-import OtpInput from 'react-otp-input';
+import { Container, Row, Col, Button } from "react-bootstrap";
+// import logo from "../../assets/img/logo.png";
+// import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from "react-redux";
 import { getOtp, verifyOtp } from "../../redux/actions";
 import Loader from "../Loader";

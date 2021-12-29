@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Row, Col, Form, Container } from "react-bootstrap";
+import { Button, Row, Col, Container } from "react-bootstrap";
 import ticket from "../../../assets/img/ticket.png";
 import Header from "../../../components/Header";
 import { useHistory } from "react-router-dom";
@@ -9,10 +9,10 @@ import Footer from "../../travesaly/Footer";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { Paper } from "@material-ui/core";
 import { createDmPassTwo } from "../../../redux/actions";
-import DmPass from "../DmPass";
+// import DmPass from "../DmPass";
 import AvField from "availity-reactstrap-validation/lib/AvField";
 import AvForm from "availity-reactstrap-validation/lib/AvForm";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 
 const button_Data = [
   {
@@ -25,14 +25,14 @@ const button_Data = [
   },
 ];
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: 500,
-  },
-  typography: {
-    padding: theme.spacing(2),
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     width: 500,
+//   },
+//   typography: {
+//     padding: theme.spacing(2),
+//   },
+// }));
 
 function TravelTicket({ Seleted_Values }) {
   const [activeButton, setActiveButton] = useState(button_Data[0].name);

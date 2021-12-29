@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Row, Col, Form, Container, Card } from "react-bootstrap";
+import { Row, Col, Container} from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import covid from "../../assets/img/covid-19.png";
-import map from "../../assets/img/Map.svg";
+// import covid from "../../assets/img/covid-19.png";
+// import map from "../../assets/img/Map.svg";
 import images from "../../assets/img/image 1.svg";
 import logo from "../../assets/img/logo.png";
 
@@ -68,13 +68,13 @@ function Footer() {
             <Col sm={4} md={4}>
               <div className="footer__logo">
                 <div className={`header__logo`}>
-                  <img src={logo} id="logo" style={{ height: 200, width: 200 }} />
+                  <img src={logo} id="logo" alt="logo" style={{ height: 200, width: 200 }} />
                 </div>
               </div>
             </Col>
           </Row>
           <center className="mt-3">
-            <img src={images} width="50" />
+            <img src={images} width="50" alt="image" />
             <h6 className="mt-1">
               An initiative by District Bastar Administration
             </h6>

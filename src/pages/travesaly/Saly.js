@@ -417,11 +417,11 @@ function Saly() {
                   {item.percentages}%
                 </div>
                 <div className="type_type">
-                  {`${item.type == "religious" ? "heritage" : item.type}`}
+                  {`${item.type === "religious" ? "heritage" : item.type}`}
                 </div>
                 <Link
                   to={`/explore/${
-                    item.type == "religious" ? "heritage" : item.type
+                    item.type === "religious" ? "heritage" : item.type
                   }`}
                   className="type_link"
                 >
@@ -1119,11 +1119,11 @@ function Saly() {
                     {item.percentages}%
                   </div>
                   <div className="type_type">
-                    {`${item.type == "religious" ? "heritage" : item.type}`}
+                    {`${item.type === "religious" ? "heritage" : item.type}`}
                   </div>
                   <Link
                     to={`/explore/${
-                      item.type == "religious" ? "heritage" : item.type
+                      item.type === "religious" ? "heritage" : item.type
                     }`}
                     className="type_link"
                   >

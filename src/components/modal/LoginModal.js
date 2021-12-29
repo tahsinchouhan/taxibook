@@ -5,21 +5,21 @@ import {
   Row,
   Col,
   Form,
-  Dropdown,
+  // Dropdown,
   Button,
   InputGroup,
 } from "react-bootstrap";
 import logo from "../../assets/img/logo.png";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import OtpInput from "react-otp-input";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getOtp,
   verifyOtp,
-  signupOtp,
+  // signupOtp,
   signup,
   loginEmail,
-  verifysignupSuccess,
+  // verifysignupSuccess,
 } from "../../redux/actions";
 import Loader from "../Loader";
 import Message from "../Message";
@@ -70,18 +70,18 @@ function LoginModal({ show, handleClose }) {
   }, [user_data]);
   
   useEffect(() => {
-    if (show == true) {
+    if (show === true) {
      setFlag(2);
     }
   }, [show]);
 
   useEffect(() => {
     if(signup_success_data.code){
-      if (signup_success_data?.code == 403) {
-        if(signup_success_data?.message == 'Mobile Already Existed'){
+      if (signup_success_data?.code === 403) {
+        if(signup_success_data?.message === 'Mobile Already Existed'){
           toast.error(signup_success_data?.message);
           setFlag(0);
-        }else if(signup_success_data?.message == 'Email Already Existed'){
+        }else if(signup_success_data?.message === 'Email Already Existed'){
           toast.error(signup_success_data?.message);
           setFlag(1);
         }else{
@@ -208,7 +208,7 @@ function LoginModal({ show, handleClose }) {
                 </Col>
                 <Col>
                   <div className="vl"></div>
-                  {flag == 0 ? (
+                  {flag === 0 ? (
                     <div>
                       <Form>
                         <div className="d-flex justify-content-center ">
@@ -274,7 +274,7 @@ function LoginModal({ show, handleClose }) {
                         </p>
                       </Form>
                     </div>
-                  ) : flag == 1 ? (
+                  ) : flag === 1 ? (
                     <div>
                       <Form>
                         <div className="d-flex justify-content-center mb-4">
@@ -355,7 +355,7 @@ function LoginModal({ show, handleClose }) {
                         </p>
                       </Form>
                     </div>
-                  ) : flag == 2 ? (
+                  ) : flag === 2 ? (
                     <div>
                       <Form>
                         <div className=" vl"></div>
@@ -494,7 +494,7 @@ function LoginModal({ show, handleClose }) {
                         </div>
                       </Form>
                     </div>
-                  ) : flag == 3 ? (
+                  ) : flag === 3 ? (
                     <div>
                       <Form onSubmit={resetHandler}>
                         <div className="d-flex justify-content-center mb-4">
@@ -547,7 +547,7 @@ function LoginModal({ show, handleClose }) {
                         </p>
                       </Form>
                     </div>
-                  ) : flag == 4 ? (
+                  ) : flag === 4 ? (
                     <div>
                       <Form onSubmit={emailHandler}>
                         <div className="d-flex justify-content-center mb-4">
@@ -601,7 +601,7 @@ function LoginModal({ show, handleClose }) {
                         </p>
                       </Form>
                     </div>
-                  ) : flag == 5 ? (
+                  ) : flag === 5 ? (
                     <div className="modal__block">
                       <div className=" d-flex justify-content-center ">
                         <div style={{ fontSize: "24px", color: "green" }}>

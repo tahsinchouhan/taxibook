@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import loadingGif from "../../assets/img/balls_loading.gif";
 import { BsShopWindow } from "react-icons/bs";
 // import bus1 from "../../assets/img/bus.png";
 // import hotel from "../../assets/img/hotel.png";
 // import city1 from "../../assets/img/city.png";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import moment from "moment";
-import Room from "../../assets/img/hotelRoom.jpeg";
+// import Room from "../../assets/img/hotelRoom.jpeg";
 // import { Carousel } from "antd";
 import axios from "axios";
 import { API_PATH } from "../../Path/Path";
@@ -55,7 +55,7 @@ function ListCard(dates, props) {
     history.push(`/hotelconfirmation/${HotelId}`);
   };
   const [view, setView] = useState(false);
-  const animities = hotels?.map((item, index) => {});
+  // const animities = hotels?.map((item, index) => {});
 
   return (
     <>

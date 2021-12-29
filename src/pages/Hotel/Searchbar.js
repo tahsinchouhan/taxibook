@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { Button, Row, Col, Form, Container, Modal } from "react-bootstrap";
-import calendar from "../../assets/img/calendar.png";
+import React from "react";
+import { Row, Col, Form, Container } from "react-bootstrap";
+// import calendar from "../../assets/img/calendar.png";
 // import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useHistory } from "react-router-dom";
-import ticket from "../../assets/ticketpage.svg";
-import Header from "../../components/Header";
-import Footer from "../travesaly/Footer";
-import { useDispatch, useSelector } from "react-redux";
-import { getBookHotel } from "../../redux/actions";
-import { API_PATH } from "../../Path/Path";
-import hotel from "../../assets/img/hotel.png";
-import { FaSearchLocation, FaTrash, FaPlusCircle } from "react-icons/fa";
+// import ticket from "../../assets/ticketpage.svg";
+// import Header from "../../components/Header";
+// import Footer from "../travesaly/Footer";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getBookHotel } from "../../redux/actions";
+// import { API_PATH } from "../../Path/Path";
+// import hotel from "../../assets/img/hotel.png";
+// import { FaSearchLocation, FaTrash, FaPlusCircle } from "react-icons/fa";
 import { BiLeftArrowAlt } from "react-icons/bi";
 
-import axios from "axios";
-import TextField from "@material-ui/core/TextField";
-import { Autocomplete } from "@material-ui/lab";
-import { ToastContainer, toast } from "react-toastify";
-import AvField from "availity-reactstrap-validation/lib/AvField";
+// import axios from "axios";
+// import TextField from "@material-ui/core/TextField";
+// import { Autocomplete } from "@material-ui/lab";
+// import { ToastContainer, toast } from "react-toastify";
+// import AvField from "availity-reactstrap-validation/lib/AvField";
 import moment from "moment";
-import { DatePicker, Menu, Dropdown as ANTDropdown } from "antd";
+// import { DatePicker, Menu, Dropdown as ANTDropdown } from "antd";
 import { FiEdit2 } from "react-icons/fi";
 
 const Searchbar = ({ getStartData }) => {

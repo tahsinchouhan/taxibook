@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import Header from "../../components/Header";
-import bus1 from "../../assets/img/bus.png";
-import city1 from "../../assets/img/city.png";
+// import bus1 from "../../assets/img/bus.png";
+// import city1 from "../../assets/img/city.png";
 import hotel from "../../assets/img/hotel.png";
-import Footer from "../travesaly/Footer";
+// import Footer from "../travesaly/Footer";
 import { useHistory, useParams } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+// import { FaArrowLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { setBookHotel } from "../../redux/actions";
+// import { setBookHotel } from "../../redux/actions";
 import "../../assets/css/dmdetail.css";
 
 
