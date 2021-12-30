@@ -20,12 +20,12 @@ const HotelDetails = (props) => {
   const startDate = props.match.params.startDate;
   const endDate = props.match.params.endDate;
 
-  const { detail, address, roomState } = props?.location?.state;
+  const { detail, address, roomState, hotelDetail } = props?.location?.state;
 
   const [detailsP, setDetailsP] = useState([]);
   // const [hotelDetail, setHotelDetail] = useState([]);
 
-  console.log(address);
+  // console.log('Hotel Details', hotelDetail);
 
   const { getStartData } = useSelector((state) => state.hotelReducer);
 
@@ -62,6 +62,7 @@ const HotelDetails = (props) => {
         ></Container>
         <Details
           detailsP={detailsP}
+          hotelDetail={hotelDetail}
           hotelUniqid={hotelUniqid}
           address={address}
           startDate={startDate}
@@ -220,6 +221,7 @@ const HotelDetails = (props) => {
         <div>
           <Details
             hotelUniqid={hotelUniqid}
+            hotelDetail={hotelDetail}
             detailsP={detailsP}
             address={address}
             startDate={startDate}

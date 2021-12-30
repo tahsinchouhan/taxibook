@@ -44,11 +44,12 @@ function ListCard(dates, props) {
               detail: data?.data,
               address: item?.address,
               roomState: getStartData?.roomStateData,
+              hotelDetail:item
             },
           });
-        else throw new Error();
+        // else throw new Error();
       })
-      .catch(() => alert("Room Not Available"));
+      // .catch(() => alert("Room Not Available"));
   };
 
   const bookNow = (HotelId) => {

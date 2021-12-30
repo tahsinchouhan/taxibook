@@ -13,6 +13,7 @@ import { FaTrash, FaPlusCircle } from "react-icons/fa";
 
 const Details = ({
   hotelUniqid,
+  hotelDetail,
   detailsP,
   address,
   startDate,
@@ -225,7 +226,21 @@ const Details = ({
       {/* ===================== */}
       <div>
         <br />
-        <Carousel
+        {
+          hotelDetail?.image?.length > 0 && <Carousel
+            activeIndex={index}
+            onSelect={handleSelect}
+            responsive={responsive}
+          >
+            {hotelDetail?.image?.map((img,index)=> {
+              return (<div className="Carousel-a" key={index}>
+                <img className="caraselImage" src={img} alt="First slide" />
+              </div>)
+            })}
+          </Carousel>
+        } 
+        
+        {/* <Carousel
           activeIndex={index}
           onSelect={handleSelect}
           partialVisible
@@ -251,7 +266,7 @@ const Details = ({
               alt="Second slide"
             />
           </div>
-        </Carousel>
+        </Carousel> */}
       </div>
 
       {detailsP ? (

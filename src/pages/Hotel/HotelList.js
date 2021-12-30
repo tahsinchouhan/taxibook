@@ -87,7 +87,7 @@ function HotelList() {
     let noofg = 0;
     setNoOfRoom(roomState?.length);
 
-    roomState?.map((curElem, index) => (noofg += curElem.guest));
+    roomState?.map((curElem) => (noofg += curElem.guest));
     // setNoOfRoom(roomState?.length);
     setNoOfGuest(noofg);
   };
@@ -588,7 +588,7 @@ function HotelList() {
               <hr />
             </div>
             <div className="col-sm-10">
-              <ListCard startDate={startDate} endDate={endDate} />
+              <ListCard sendlocation={sendlocation} startDate={startDate} endDate={endDate} />
             </div>
           </div>
           <Footer />
