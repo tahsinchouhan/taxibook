@@ -80,7 +80,8 @@ const Details = ({
     const { base, perDayBase, perDayOffer, perDayFinal } = prices;
     let extraGuestsAmount = 0;
     if (noOfGuest - noOfRoom * 2 > 0)
-      extraGuestsAmount = (noOfGuest - noOfRoom * 2) * price_per_person;
+      extraGuestsAmount =
+        (noOfGuest - noOfRoom * 2) * price_per_person * currentSelectedDays;
 
     const newBasePrice =
       prices.perDayBase * currentSelectedDays + extraGuestsAmount;
@@ -226,20 +227,22 @@ const Details = ({
       {/* ===================== */}
       <div>
         <br />
-        {
-          hotelDetail?.image?.length > 0 && <Carousel
+        {hotelDetail?.image?.length > 0 && (
+          <Carousel
             activeIndex={index}
             onSelect={handleSelect}
             responsive={responsive}
           >
-            {hotelDetail?.image?.map((img,index)=> {
-              return (<div className="Carousel-a" key={index}>
-                <img className="caraselImage" src={img} alt="First slide" />
-              </div>)
+            {hotelDetail?.image?.map((img, index) => {
+              return (
+                <div className="Carousel-a" key={index}>
+                  <img className="caraselImage" src={img} alt="First slide" />
+                </div>
+              );
             })}
           </Carousel>
-        } 
-        
+        )}
+
         {/* <Carousel
           activeIndex={index}
           onSelect={handleSelect}
