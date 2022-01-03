@@ -60,6 +60,38 @@ function HotelList() {
   const [noOfRoom, setNoOfRoom] = useState(1);
   const [enterlocation, setEnterlocation] = useState("");
   const [rangeValue, setRangeValue] = useState([1500, 2500]);
+  const [amentiesData, setAmentiesData] = useState([]);
+  const [selectedAmeneties, setSelectedAmeneties] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(`${API_PATH}/api/v2/room/amenitie/list`)
+      .then(({ data }) => setAmentiesData(data?.data || []));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${API_PATH}/api/v2/hotelregistration/category/list`)
+      .then(({ data }) => setCategoryData(data?.data || []));
+  }, []);
+
+  const handleAmenetiesClick = (e) => {
+    let ameneties = selectedAmeneties;
+    if (selectedAmeneties.includes(e.target.id))
+      ameneties = ameneties.filter((a) => a !== e.target.id);
+    else ameneties.push(e.target.id);
+    setSelectedAmeneties([...ameneties]);
+  };
+
+  const handleCategoriesClick = (e) => {
+    // let categories = selectedCategories;
+    // if (selectedCategories?.includes(e.target.id))
+    //   categories = categories.filter((a) => a !== e.target.id);
+    // else categories.push(e.target.id);
+    setSelectedCategories(e.target.id);
+  };
 
   useEffect(() => {
     if (
@@ -215,18 +247,38 @@ function HotelList() {
   const Aminities = (
     <Menu className="aminitiesMenu">
       <div style={{ marginLeft: "20px" }}>
-        <Checkbox style={{ marginTop: "10px" }}>
-          <span className="p-2">AC</span>
-        </Checkbox>
-        <br />
-        <Checkbox style={{ marginTop: "10px" }}>
-          <span className="p-2">Free Wifi</span>
-        </Checkbox>
-        <br />
-        <Checkbox style={{ marginTop: "10px" }}>
-          <span className="p-2">TV</span>
-        </Checkbox>
-        <br />
+        {amentiesData?.map((amenity) => (
+          <>
+            <Checkbox
+              style={{ marginTop: "10px" }}
+              onClick={handleAmenetiesClick}
+              id={amenity?._id}
+              checked={selectedAmeneties?.includes(amenity?._id)}
+            >
+              <span className="p-2">{amenity?.name}</span>
+            </Checkbox>
+            <br />
+          </>
+        ))}
+      </div>
+    </Menu>
+  );
+  const Categories = (
+    <Menu className="aminitiesMenu">
+      <div style={{ marginLeft: "20px" }}>
+        {categoryData?.map((category) => (
+          <>
+            <Checkbox
+              style={{ marginTop: "10px" }}
+              onClick={handleCategoriesClick}
+              id={category?._id}
+              checked={selectedCategories === category?._id}
+            >
+              <span className="p-2">{category?.name}</span>
+            </Checkbox>
+            <br />
+          </>
+        ))}
       </div>
     </Menu>
   );
@@ -241,7 +293,7 @@ function HotelList() {
         return response.json();
       })
       .then((res) => {
-        const data = []
+        const data = [];
         for (var i = 0; i < res.data.length; i++) {
           let str = `${res.data[i]?.hotel_name},${res.data[i]?.city}`;
           data.push(str);
@@ -270,12 +322,20 @@ function HotelList() {
         noOfRoom,
         noOfGuest,
         roomStateData: roomState,
-        filter:true
+        filter: true,
+        ameneties: selectedAmeneties,
+        category: selectedCategories,
+        minPrice: rangeValue[0],
+        maxPrice: rangeValue[1],
       })
     );
     // history.push("/hotellist");
   };
-  
+
+  useEffect(() => {
+    onDmTicketShow();
+  }, [selectedCategories, selectedAmeneties, rangeValue]);
+
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
       style={{
@@ -308,7 +368,7 @@ function HotelList() {
         endDate,
         noOfRoom,
         noOfGuest,
-        roomStateData: roomState
+        roomStateData: roomState,
       })
     );
   }, []);
@@ -569,26 +629,53 @@ function HotelList() {
                   <b>Aminities</b>
                 </h6>
                 <div style={{ marginLeft: "20px" }}>
-                  <Checkbox style={{ marginTop: "10px" }}>
-                    <span className="p-2">AC</span>
-                  </Checkbox>
-                  <br />
-                  <Checkbox style={{ marginTop: "10px" }}>
-                    <span className="p-2">Free Wifi</span>
-                  </Checkbox>
-                  <br />
-                  <Checkbox style={{ marginTop: "10px" }}>
-                    <span className="p-2">TV</span>
-                  </Checkbox>
-                  <br />
+                  {amentiesData?.map((amenity) => (
+                    <>
+                      <Checkbox
+                        style={{ marginTop: "10px" }}
+                        onClick={handleAmenetiesClick}
+                        id={amenity?._id}
+                        checked={selectedAmeneties?.includes(amenity?._id)}
+                      >
+                        <span className="p-2">{amenity?.name}</span>
+                      </Checkbox>
+                      <br />
+                    </>
+                  ))}
                 </div>
                 {/* <span style={{clear:"both"}}></span> */}
               </div>
 
               <hr />
+
+              <div style={{ marginLeft: "20px" }}>
+                <h6>
+                  <b>Categories</b>
+                </h6>
+                <div style={{ marginLeft: "20px" }}>
+                  {categoryData?.map((category) => (
+                    <>
+                      <Checkbox
+                        style={{ marginTop: "10px" }}
+                        onClick={handleCategoriesClick}
+                        id={category?._id}
+                        checked={selectedCategories === category?._id}
+                      >
+                        <span className="p-2">{category?.name}</span>
+                      </Checkbox>
+                      <br />
+                    </>
+                  ))}
+                </div>
+                {/* <span style={{clear:"both"}}></span> */}
+              </div>
             </div>
             <div className="col-sm-10">
-              <ListCard sendlocation={sendlocation} startDate={startDate} endDate={endDate} />
+              <ListCard
+                sendlocation={sendlocation}
+                startDate={startDate}
+                endDate={endDate}
+              />
             </div>
           </div>
           <Footer />
@@ -644,6 +731,21 @@ function HotelList() {
                   }}
                 >
                   Aminities <DownOutlined style={{ color: "#0FA453" }} />
+                </p>
+              </ANTDropdown>
+            </p>
+            <p style={{ marginLeft: "10px" }}>
+              <ANTDropdown overlay={Categories}>
+                <p
+                  style={{
+                    boxShadow: "0px 0px 5px -2px",
+                    padding: "3px 0px 3px 10px",
+                    borderRadius: "4px",
+                    height: "30px",
+                    width: "90px",
+                  }}
+                >
+                  Categories <DownOutlined style={{ color: "#0FA453" }} />
                 </p>
               </ANTDropdown>
             </p>

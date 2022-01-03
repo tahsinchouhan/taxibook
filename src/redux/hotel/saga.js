@@ -32,6 +32,11 @@ const getBookHotellistAsync = async (payload) => {
     fd.append("check_out", check_out);
     fd.append("guests", payload.noOfGuest);
     fd.append("rooms", payload.noOfRoom);
+    if (payload.ameneties.length)
+      fd.append("amenities", JSON.stringify(payload.ameneties));
+    if (payload.category) fd.append("hotel_category", payload.category);
+    if (payload?.minPrice) fd.append("min_price", payload?.minPrice);
+    if (payload?.maxPrice) fd.append("max_price", payload?.maxPrice);
     const params = {
       method: "POST",
       body: fd,
