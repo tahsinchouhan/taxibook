@@ -1,0 +1,21 @@
+.reg_container{
+    width: 70%;
+}
+.reg_submit_btn{
+    text-align: center;
+}
+
+@media screen and (max-width:768px) {
+    .reg_container{
+        width: 100%;
+        padding: 15px;
+    }
+    .reg_submit_btn{
+        text-align: left;
+        margin-left: -15px;
+        z-index: 6;
+    }
+    .reg_submit_btn button{
+        z-index: 6;
+    }
+}

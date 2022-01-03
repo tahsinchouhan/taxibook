@@ -1,0 +1,407 @@
+.saly_div {
+  padding-inline: 7.5vw;
+  padding-block-start: 80px;
+}
+
+.video_div,
+.start_quiz,
+.on_quiz {
+  /* width: 650px; */
+  height: 390px;
+  border-radius: 10px;
+}
+
+.start_quiz,
+.quiz_div {
+  position: relative;
+  height: 390px;
+}
+
+.start_quiz {
+  background-color: #69BEED;
+  color: #fff;
+  padding: 48px 58px;
+}
+
+.on_quiz {
+  /* background-color: #F8F8F8; */
+  padding: 35px 29px 23px 53px;
+  text-align: center;
+}
+
+.quiz_title {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 49px;
+}
+
+.quiz_title span {
+  display: block;
+}
+
+.start_quiz p {
+  font-size: 16px;
+  line-height: 18.75px;
+  padding-inline-end: 5vw;
+}
+
+.quiz_content_header {
+  margin-block-start: 22px;
+}
+
+.quiz_start_btn {
+  position: absolute;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+  float: right;
+  right: 32px;
+  bottom: 30px;
+  cursor: pointer;
+}
+
+.quiz_div img {
+  width: 444px;
+  height: 233px;
+  border-radius: 10px;
+}
+
+.quiz_question {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  text-align: center;
+  padding-block-start: 15px;
+}
+
+.quiz_answer {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  position: relative;
+}
+
+.quiz_yes_btn {
+  background: #1CBD40;
+  border-color: #1CBD40;
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  padding: 0.7em 0.45em;
+  width: 100px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.quiz_no_btn {
+  background: #FF814A;
+  border-color: #FF814A;
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  padding: 0.7em 0.45em;
+  width: 100px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.quiz_no_btn:hover,
+.quiz_yes_btn:hover,
+.quiz_no_btn:focus,
+.quiz_yes_btn:focus {
+  filter: brightness(0.9);
+  color: #fff;
+
+}
+
+.quiz_skip_btn {
+  position: absolute;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 500;
+  float: right;
+  right: 29px;
+  bottom: 0px;
+  cursor: pointer;
+}
+
+.personality_div {
+  /* display: none; */
+  clip-path: polygon(0 0, 100% 0%, 100% 0, 0 0);
+  transition: all 0.75s ease-in-out;
+  height: 0;
+}
+
+.personality_div.show {
+  display: block;
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+  height: initial;
+
+}
+
+.personality_div,
+.destination_div,
+.explore_div {
+  padding-inline: 10%;
+  padding-block-start: 4%;
+}
+
+.type_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+@media screen and (max-width: 767px) {
+  .start_quiz{
+    padding: 35px;
+  }
+  .quiz_title{
+    font-size: 36px;
+    line-height: 42px;
+  }
+  .quiz_start_btn{
+    font-size: 19px;
+    line-height: 22px;
+  }
+  .quiz_div img {
+    width: 85vw;
+  }
+  .quiz_question{
+    font-size: 14px;
+    line-height: 16.41px;
+  }
+  .explore_div-heading h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #000000;
+  }
+  .explore_div-heading p {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    /* font-weight: 400; */
+    color: #000000;
+    padding-inline: 10vw;
+  }
+  
+}
+.btn-primary-tb{
+  color: #fff;
+  background-color: hsl(147deg 83% 35%);
+  border-color: hsl(147deg 83% 35%);
+}
+.btn-primary-tb:hover,
+.btn-primary-tb:focus{
+  color: #fff;
+  background-color: hsl(147deg 83% 30%);
+  border-color: hsl(147deg 83% 30%);
+}
+.btn-primary-tb:disabled{
+  color: #fff;
+  background-color: hsl(147deg 83% 30%);
+  border-color: hsl(147deg 83% 30%);
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 560px) and (min-width: 500px) {
+  .type_container {
+    padding-inline: 20vw;
+  }
+}
+
+@media screen and (max-width: 500px) and (min-width: 415px) {
+  .type_container {
+    padding-inline: 10vw;
+  }
+}
+
+.type_card {}
+
+.type_percent {
+  /* background-color: #FB7373; */
+  width: 81.6px;
+  height: 80.4px;
+  border-radius: 10px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 21px;
+}
+
+.type_type {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  padding-block: 10px;
+  text-transform: capitalize;
+}
+
+.type_link {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+  color: #A5A5A5;
+  text-transform: capitalize;
+  text-decoration: none;
+  display: block;
+
+}
+
+.type_link:hover,
+.type_link:focus {
+  color: #0FA453 !important;
+  outline: none;
+}
+
+.rocket-image {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.explore_div {
+  /* text-align: center; */
+  font-weight: bold;
+  /* font-size: 10px; */
+}
+
+@media screen and (max-width: 767px) {
+  .rocket-image {
+    width: 100% !important;
+    /* margin-top: 40px; */
+    /* height: 40px; */
+  }
+
+  .explore_div {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .ticket-div {
+    text-align: center;
+  }
+}
+
+.saly_card {
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.travel_card {
+  margin: 0 5px;
+}
+
+.saly-para {
+  padding-top: 10px;
+  font-size: 12px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.viewbtn {
+  /* margin-left: 10px; */
+  text-align: center;
+}
+
+.men-image {
+  position: absolute;
+  left: -20.69%;
+  top: -83.83%;
+  bottom: -65.48%;
+
+}
+
+.makebooking-btn {
+  /* font-size: 16px; */
+  background-color: #0FA453;
+  color: white;
+  width: 250px;
+  height: 52px;
+  border: 2px solid #0FA453 !important;
+  border-radius: 10px;
+}
+
+.ticket-div h3 h4 {
+  position: absolute;
+  font-style: normal;
+  font-weight: bold;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 700px) {
+  .explore_div {
+    text-align: center;
+  }
+
+  .explore {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+.homepage-heading h1 {
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
+  font-size: 39px;
+  line-height: 47px;
+  text-align: center;
+  color: #000000;
+}
+
+.homepage-heading p {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #000000;
+}
+
+.top_title {
+  font-weight: bold;
+  font-size: 23px;
+  line-height: 28px;
+  text-align: center;
+}
+.top_title123 {
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 38px;
+  text-align: center;
+}
+.heritage_walk_div {
+  padding-inline: 4%;
+}
+
+.heritage_walk {
+  position: relative;
+}
+
+.heritage_walk img {
+  width: 100%;
+}
+
+.heritage_walk_text {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  transform: translate(-50%, -50%);
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 50px;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+}
