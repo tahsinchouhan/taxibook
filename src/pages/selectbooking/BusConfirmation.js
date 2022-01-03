@@ -44,7 +44,6 @@ function BusConfirmation() {
     data: apiData,
     routeData,
   } = useSelector((state) => state.busReducer);
-  console.log(tripData, apiData, routeData);
   const onSideBtnClick = (e) => {
     const name = e.target.name;
     setActiveButton(name);
@@ -68,14 +67,12 @@ function BusConfirmation() {
   const handleShow = () => setShow(true);
 
   const handleClick = (newPlacement) => (event) => {
-    console.log("object");
     setAnchorEl(event.currentTarget);
     setOpen((prev) => placement !== newPlacement || !prev);
     setPlacement(newPlacement);
   };
 
   const onCheckout = () => {
-    console.log("object");
     let basic_details = [];
     travellers.forEach((tv, ind) => {
       basic_details.push({
@@ -86,8 +83,6 @@ function BusConfirmation() {
       });
     });
     dispatch(setApiData({ ...values, basic_details: basic_details }));
-    console.log("travellers", travellers);
-    console.log("basic_details", basic_details);
     // history.push("/checkoutpage");
     history.push({
       pathname: "/checkoutpage",
@@ -154,7 +149,6 @@ function BusConfirmation() {
       [e.target.name]: e.target.value,
       gender: activeButton,
     });
-    console.log(e.target, "val", values);
   };
   const handleTraveller = (val, lbl, i) => {
     setTravellers(
@@ -171,13 +165,11 @@ function BusConfirmation() {
     );
   };
   const deleteHandler = (key) => {
-    // console.log("object123456",key)
     // let deleteTravellers
     setTravellers([...travellers].filter((obj, i) => i != key));
   };
 
   const handleOk = () => {
-    // console.log('ok');
     setValues({
       ...values,
       basic_details: [...basic_details, { name, age, gender, adhaar }],
@@ -191,9 +183,6 @@ function BusConfirmation() {
 
   useEffect(() => {
     setValues({ ...values, price: basePrice * travellers.length });
-    // console.log(tripData,price,"enosdkl",travellers);
-    console.log("travellers", travellers);
-    console.log("values", values);
   }, [travellers]);
 
   useEffect(() => {
@@ -203,7 +192,6 @@ function BusConfirmation() {
   // useEffect(()=>{
   // setTravellers([])
   // },[travellers])
-  // console.log("travellerstravellerstravellers",travellers)
 
   return (
     <>
@@ -357,6 +345,7 @@ function BusConfirmation() {
                         </h5>
                         {i !== 0 ? (
                           <button
+                            type="button"
                             className="btn"
                             style={{
                               float: "right",
@@ -829,6 +818,7 @@ function BusConfirmation() {
                     </h5>
                     {i !== 0 ? (
                       <button
+                        type="button"
                         className="btn"
                         style={{
                           float: "right",

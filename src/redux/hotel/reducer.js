@@ -10,7 +10,7 @@ import {
   SET_DESTINATION_PREHOME_SUCCESS,
   HOTEL_PAY,
   HOTEL_PAY_SUCCESS,
-  HOTEL_PAY_ERROR
+  // HOTEL_PAY_ERROR
 } from "../actions";
 
 const INIT_STATE = {
@@ -26,10 +26,9 @@ const INIT_STATE = {
 };
 
 const hotelReducer = (state = INIT_STATE, action) => {
-  console.log("data action",action)
   switch (action.type) {
     case GET_BOOK_HOTEL: {
-      const actionData = action.payload;
+      // const actionData = action.payload;
       return {
         ...state,
         HotelBookingStartdate: action.payload,
@@ -45,8 +44,8 @@ const hotelReducer = (state = INIT_STATE, action) => {
       return { ...state, error: action.payload };
 
     case SET_BOOK_HOTEL: {
-      const actionData = action.payload;
-      console.log(actionData);
+      // const actionData = action.payload;
+      // console.log(actionData);
       return { ...state, Setdata: action.payload };
     }
     case SET_BOOK_HOTEL_SUCCESS:

@@ -19,7 +19,7 @@ import logo from "../assets/img/logo.png";
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginModal from "../components/modal/LoginModal";
-import SignupModal from "../components/modal/SignupModal";
+// import SignupModal from "../components/modal/SignupModal";
 import { logout } from "../redux/actions";
 function Header({showSignUpModal}) {
   const [modalShow, setModalShow] = useState(false);
@@ -45,13 +45,12 @@ function Header({showSignUpModal}) {
 
   useEffect(() => {
     if(showSignUpModal){
-      setSignup(true);
+      setModalShow(true);
     }
   }, [showSignUpModal]);
 
   useEffect(() => {
     const customerID = JSON.parse(localStorage.getItem("customer_id"));
-    console.log("customerID", customerID);
     if(customerID){
       let userData = JSON.parse(localStorage.getItem('user_data'));
       if(userData){
@@ -74,7 +73,7 @@ function Header({showSignUpModal}) {
   };
 
   const onSearchingHolder = () => {
-    console.log("hellllooo");
+    
   };
 
   const goHome = () => {
@@ -200,7 +199,8 @@ function Header({showSignUpModal}) {
               </NavLink>
               <NavLink
                 className="sidebar__navlink"
-                to="https://blog.travelbastar.com"
+                to={{ pathname: "https://blog.travelbastar.com" }}
+                target="_blank"
               >
                 BLOG
               </NavLink>
@@ -345,7 +345,7 @@ function Header({showSignUpModal}) {
         show={modalShow}
         handleClose={handleLoginClose}
       />
-      <SignupModal show={signup} handleClose={handleSignupClose} />
+      {/* <SignupModal show={signup} handleClose={handleSignupClose} /> */}
     </>
   );
 }

@@ -56,19 +56,28 @@ function* Email({ payload }) {
     const apiEmail = yield call(loginEmailAsync, payload);
     yield put(loginEmailSuccess(apiEmail.data));
   } catch (error) {
-    console.log(error);
+    
   }
 }
 
 function* Otp({ payload }) {
   try {
     const apiOtp = yield call(OtpAsync, payload);
-    console.log("error123", apiOtp.response);
-    if(apiOtp.response.status == 200){
-      yield put(getOtpSuccess(apiOtp.data));
-    }else{
-      yield put(getOtpError(apiOtp.response.data));
+    console.log(apiOtp);
+    if(apiOtp.response){
+      if(apiOtp.response.status === 200){
+        yield put(getOtpSuccess(apiOtp.response.data));
+      }else{
+        yield put(getOtpError(apiOtp.response.data));
+      }
+    }else if(apiOtp.data){
+      if(apiOtp.data.code === 200){
+        yield put(getOtpSuccess(apiOtp.data));
+      }else{
+        yield put(getOtpError(apiOtp.data));
+      }
     }
+    
    
   } catch (error) {
     yield put(getOtpError(error));
@@ -77,7 +86,7 @@ function* Otp({ payload }) {
 function* fetchVerifyOtp({ payload }) {
   try {
     const user_data = yield call(fetchVerifyOtpAsync, payload);
-    if (user_data?.status == 200) {
+    if (user_data?.status === 200) {
       localStorage.setItem(
         "customer_id",
         JSON.stringify(user_data.data.data.user._id)

@@ -1,7 +1,7 @@
 import {
   SIGNUP_OTP,
   SIGNUP_OTP_SUCCESS,
-  SIGNUP_OTP_ERROR,
+  // SIGNUP_OTP_ERROR,
   SIGN_UP,
   SIGN_UP_SUCCESS,
   SIGN_UP_ERROR,
@@ -21,8 +21,10 @@ const INIT_STATE = {
 const signupReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case SIGN_UP:
-      return { ...state, signup_data: action.payload, loading: false };
+      return { ...state, signup_data: action.payload, loading: false, signup_success_data: {} };
     case SIGN_UP_SUCCESS:
+      return { ...state, signup_success_data: action.payload, loading: false };
+    case SIGN_UP_ERROR:
       return { ...state, signup_success_data: action.payload, loading: false };
     case SIGNUP_OTP:
       return { ...state, SignOtp: action.payload, loading: true };

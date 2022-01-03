@@ -1,11 +1,14 @@
 import React from "react";
-import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import Header from "../../../components/Header";
 import Footer from "../../travesaly/Footer";
 import { useHistory } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import mobile from "../../../assets/img/mobile.png";
-import { useDispatch, useSelector } from "react-redux";
+import { 
+  // useDispatch, 
+  useSelector 
+} from "react-redux";
 
 function TicketCheckOut() {
   const history = useHistory();
@@ -13,7 +16,7 @@ function TicketCheckOut() {
   // const goHome = () => {
   //   history.push("/");
   // };
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { dmData } = useSelector((state) => state.dmpassReducer);
   const { dmpass_id } = dmData;
   return (

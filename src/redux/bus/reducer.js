@@ -4,7 +4,7 @@ import {
     SET_TRIP,
     GET_ROUTE,
     GET_ROUTE_SUCCESS,
-    GET_TRIP_BY_ROUTE_ID,
+    // GET_TRIP_BY_ROUTE_ID,
     GET_TRIP_BY_ROUTE_ID_SUCCESS,
     SET_BOOKING_ID,
     SET_MOBILE,
@@ -52,7 +52,6 @@ const busReducer = (state = INIT_STATE, action) => {
             return { ...state, route_id: action.payload, }
 
         case GET_TRIP_BY_ROUTE_ID_SUCCESS:
-            console.log("suc", action.payload);
             return { ...state, tripList: action.payload, }
         default:
             return {

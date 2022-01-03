@@ -1,6 +1,6 @@
 import {
     SET_DM_DATA,
-    CREATE_DM_PASS,
+    // CREATE_DM_PASS,
     SET_DM_PASS_ID,
     DM_PASS_DETAILS
 } from "../actions";

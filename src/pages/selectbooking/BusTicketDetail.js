@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import Header from "../../components/Header";
 import bus1 from "../../assets/img/bus.png";
 import city1 from "../../assets/img/city.png";
-import ticket from "../../assets/img/ticket.png";
+// import ticket from "../../assets/img/ticket.png";
 import Footer from "../travesaly/Footer";
 import { useHistory, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
@@ -30,9 +30,6 @@ function BusBookingDetail() {
     booking_id,
   } = useSelector((state) => state.busReducer);
   // const { basic_details } = detailsData;
-  // console.log("detailsData", detailsData);
-  // console.log("basic_detailsbasic_details", basic_details);
-  console.log("booking_idbooking_id", booking_id);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,7 +44,6 @@ function BusBookingDetail() {
     fetch(`${API_PATH}/api/v1/busticket/list?booking_Id=${id}`)
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
         if (res.data !== undefined) {
           setApiData(res.data);
           localStorage.setItem("data", res.data[0]._id);
@@ -65,25 +61,34 @@ function BusBookingDetail() {
       });
   };
 
-  // let apiId = localStorage.getItem("data");
-  const BookingId = localStorage.getItem("busticketData");
+  let apiId = localStorage.getItem("data");
+  // const BookingId = localStorage.getItem("busticketData");
 
-  if (BookingId == []) {
-    // console.log("sadh", apiId)
-    console.log("BookingId", BookingId);
-  } else {
-    console.log("BookingIdBookingId", BookingId);
-    fetch(`${API_PATH}/api/v1/busticket/qrcode/${BookingId}`)
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res.data);
-        setQRImage(res.data);
-      })
-      .catch((e) => {
-        setLoading(false);
-        setNotFound(true);
-      });
-  }
+  fetch(`${API_PATH}/api/v1/busticket/qrcode/${apiId}`)
+    .then((response) => response.json())
+    .then((res) => {
+      console.log('QR CODE', res.data)
+      setQRImage(res.data);
+    })
+    .catch((e) => {
+      setLoading(false);
+      setNotFound(true);
+    });
+
+  // if (BookingId == []) {
+    
+  // } else {
+  //   fetch(`${API_PATH}/api/v1/busticket/qrcode/${id}`)
+  //     .then((response) => response.json())
+  //     .then((res) => {
+  //       // console.log('QR CODE', res.data)
+  //       setQRImage(res.data);
+  //     })
+  //     .catch((e) => {
+  //       setLoading(false);
+  //       setNotFound(true);
+  //     });
+  // }
 
   const printPdf = () => {
     // window.print();
@@ -151,7 +156,7 @@ function BusBookingDetail() {
                           padding: "10px",
                         }}
                       >
-                        that will take you to <br />
+                        that will take you to 
                         your favourite destinations
                       </span>
                     </div>

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import loadingGif from "../../assets/img/balls_loading.gif";
 import { BsShopWindow } from "react-icons/bs";
 // import bus1 from "../../assets/img/bus.png";
 // import hotel from "../../assets/img/hotel.png";
 // import city1 from "../../assets/img/city.png";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import moment from "moment";
-import Room from "../../assets/img/hotelRoom.jpeg";
+// import Room from "../../assets/img/hotelRoom.jpeg";
 // import { Carousel } from "antd";
 import axios from "axios";
 import { API_PATH } from "../../Path/Path";
@@ -20,42 +20,43 @@ import { FaTv } from "react-icons/fa";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 
 function ListCard(dates, props) {
-
   const history = useHistory();
   const {
     getHotelList: hotels,
     getStartData,
     isLoading,
   } = useSelector((state) => state.hotelReducer);
-  
+
   const viewDetails = (item) => {
-    // axios.post(API_PATH + `/api/v2/room/hotel`, {
-    //   hotel_id:item._id,
-    //   check_in:moment(getStartData.startDate).format("YYYY-MM-DD"),
-    //   check_out:moment(getStartData.endDate).format("YYYY-MM-DD"),
-    //   guests:getStartData.noOfGuest,
-    //   no_of_room:getStartData.noOfRoom
-    // })
-    // .then((response) => {
-    //   console.log('Room Available', response)
-    //   history.push({
-    //     pathname: `/hotelDetails/${item.hotel_name}/${dates.startDate}/${dates.endDate}`,
-    //     state: { detail: item },
-    //   });
-    // })
-    // .catch(err => alert('Room Not Available') );
-      history.push({
-        pathname: `/hotelDetails/${item.hotel_name}/${dates.startDate}/${dates.endDate}`,
-        state: { detail: item },
-      });
+    axios
+      .post(API_PATH + `/api/v2/room/hotel`, {
+        hotel_id: item._id,
+        check_in: moment(getStartData.startDate).format("YYYY-MM-DD"),
+        check_out: moment(getStartData.endDate).format("YYYY-MM-DD"),
+        guests: getStartData.noOfGuest,
+        no_of_room: getStartData.noOfRoom,
+      })
+      .then(({ data }) => {
+        if (data?.data)
+          history.push({
+            pathname: `/hotelDetails/${item.hotel_name}/${dates.startDate}/${dates.endDate}`,
+            state: {
+              detail: data?.data,
+              address: item?.address,
+              roomState: getStartData?.roomStateData,
+              hotelDetail:item
+            },
+          });
+        // else throw new Error();
+      })
+      // .catch(() => alert("Room Not Available"));
   };
 
   const bookNow = (HotelId) => {
     history.push(`/hotelconfirmation/${HotelId}`);
   };
   const [view, setView] = useState(false);
-  const animities = hotels?.map((item, index) => {
-  });
+  // const animities = hotels?.map((item, index) => {});
 
   return (
     <>
@@ -155,80 +156,79 @@ function ListCard(dates, props) {
                         <Carousel
                           showThumbs={false}
                           autoPlay={true}
-                          infiniteLoop={true} 
+                          infiniteLoop={true}
                           interval="4000"
-                          // renderIndicator={(onClickHandler, isSelected, index, label)=>{
-                          //   const defStyle = { marginLeft: 20, color: "white", cursor: "pointer" };
-                          //   const style = isSelected ? { ...defStyle, color: "red" } : { ...defStyle };
-                          //   return (
-                          //     <span
-                          //       style={style}
-                          //       onClick={onClickHandler}
-                          //       onKeyDown={onClickHandler}
-                          //       value={index}
-                          //       key={index}
-                          //       role="button"
-                          //       tabIndex={0}
-                          //       aria-label={`${label} ${index + 1}`}
-                          //     >
-                          //       {"cust " + index}
-                          //     </span>
-                          //   );
-                          // }}
                         >
-                        {
-                          item.image.length > 0 ? item.image.map((img,idx)=><div key={idx}>
-                            <img
-                              src={img}
-                              alt="room img"
-                              style={{
-                                width: "500px",
-                                height: "253px",
-                                marginTop: "10px",
-                                // marginRight: "25px",
-                              }}
-                            />
-                          </div>) : <div>
-                            <img
-                              src={
-                                item?.room_data?.image !== ""
-                                  ? item?.room_data?.image[0]
-                                  : item?.room_data?.image[0]
-                              }
-                              alt="room img"
-                              style={{
-                                width: "500px",
-                                height: "250px",
-                                marginTop: "10px",
-                                // marginRight: "25px",
-                              }}
-                            />
-                          </div>
-                        }                                                 
-                        </Carousel>                        
+                          {item.image.length > 0 ? (
+                            item.image.map((img, idx) => (
+                              <div key={idx}>
+                                <img
+                                  src={img}
+                                  alt="room img"
+                                  style={{
+                                    width: "500px",
+                                    height: "253px",
+                                    marginTop: "10px",
+                                    // marginRight: "25px",
+                                  }}
+                                />
+                              </div>
+                            ))
+                          ) : (
+                            <div>
+                              <img
+                                src={
+                                  item?.room_data?.image !== ""
+                                    ? item?.room_data?.image[0]
+                                    : item?.room_data?.image[0]
+                                }
+                                alt="room img"
+                                style={{
+                                  width: "500px",
+                                  height: "250px",
+                                  marginTop: "10px",
+                                  // marginRight: "25px",
+                                }}
+                              />
+                            </div>
+                          )}
+                        </Carousel>
                       </div>
                       <div
                         className="col-sm-1 p-0"
-                        style={{ marginLeft: "2px", marginRight: "-20px", marginTop:'10px' }}
+                        style={{
+                          marginLeft: "2px",
+                          marginRight: "-20px",
+                          marginTop: "10px",
+                        }}
                       >
-                      {
-                        item.image.length > 0 ? item.image.map((img,idx)=><img key={idx}
-                          src={img}
-                          alt="room img"
-                          style={{
-                            width: "70px",
-                            height: "50px",
-                          }}
-                        />) : <img 
-                          src={item?.room_data?.image !== "" ? item?.room_data?.image[0]: item?.room_data?.image[0]}
-                          alt="room img"
-                          style={{
-                            width: "70px",
-                            height: "50px",
-                            marginTop: "10px",
-                          }}
-                        />
-                      }
+                        {item.image.length > 0 ? (
+                          item.image.map((img, idx) => (
+                            <img
+                              key={idx}
+                              src={img}
+                              alt="room img"
+                              style={{
+                                width: "70px",
+                                height: "50px",
+                              }}
+                            />
+                          ))
+                        ) : (
+                          <img
+                            src={
+                              item?.room_data?.image !== ""
+                                ? item?.room_data?.image[0]
+                                : item?.room_data?.image[0]
+                            }
+                            alt="room img"
+                            style={{
+                              width: "70px",
+                              height: "50px",
+                              marginTop: "10px",
+                            }}
+                          />
+                        )}
                       </div>
                       <div md={5} className="col-sm-6 p-0 m-0">
                         <div className="rajratan-train" style={{}}>
@@ -260,7 +260,9 @@ function ListCard(dates, props) {
                             </span>
                           </span>
                           <div style={{ display: "flex" }}>
-                            {item?.amenities_id?.find((ame) => ame.name === "FreeWifi") ? (
+                            {item?.amenities_id?.find(
+                              (ame) => ame.name === "FreeWifi"
+                            ) ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -277,7 +279,9 @@ function ListCard(dates, props) {
                             ) : (
                               ""
                             )}
-                            {item?.amenities_id?.find((ame) => ame.name === "Window") ? (
+                            {item?.amenities_id?.find(
+                              (ame) => ame.name === "Window"
+                            ) ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -294,7 +298,9 @@ function ListCard(dates, props) {
                             ) : (
                               ""
                             )}
-                            {item?.amenities_id?.find((ame) => ame.name === "Cooler") ? (
+                            {item?.amenities_id?.find(
+                              (ame) => ame.name === "Cooler"
+                            ) ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -312,7 +318,9 @@ function ListCard(dates, props) {
                               ""
                             )}
 
-                            {item?.amenities_id?.find((ame) => ame.name === "AC") ? (
+                            {item?.amenities_id?.find(
+                              (ame) => ame.name === "AC"
+                            ) ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -329,7 +337,9 @@ function ListCard(dates, props) {
                             ) : (
                               ""
                             )}
-                            {item?.amenities_id?.find((ame) => ame.name === "Kitchen") ? (
+                            {item?.amenities_id?.find(
+                              (ame) => ame.name === "Kitchen"
+                            ) ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -346,7 +356,9 @@ function ListCard(dates, props) {
                             ) : (
                               ""
                             )}
-                            {item?.amenities_id?.find((ame) => ame.name === "TV") ? (
+                            {item?.amenities_id?.find(
+                              (ame) => ame.name === "TV"
+                            ) ? (
                               <span
                                 style={{
                                   display: "flex",
@@ -409,10 +421,7 @@ function ListCard(dates, props) {
                                   color: "#6d787d",
                                 }}
                               >
-                                <strike>
-                                  {" "}
-                                  ₹{item?.price?.offer_price}
-                                </strike>{" "}
+                                <strike> ₹{item?.price?.base_price}</strike>{" "}
                               </span>
                               <span
                                 style={{
@@ -447,7 +456,7 @@ function ListCard(dates, props) {
                           </div>
                           <div
                             className="col-sm-6 d-flex justify-content-center flex-row"
-                            style={{ float: "right"}}
+                            style={{ float: "right" }}
                           >
                             <div
                               onClick={() => viewDetails(item)}
@@ -595,13 +604,15 @@ function ListCard(dates, props) {
                                   style={{
                                     display: "flex",
                                     alignItems: "center",
-                                    color: "grey",                                    
-                                    fontSize: "10px",                                    
+                                    color: "grey",
+                                    fontSize: "10px",
                                   }}
                                 >
                                   <FiWifi /> &nbsp;Free Wifi
                                 </span>
-                              ) : ("")}
+                              ) : (
+                                ""
+                              )}
 
                               {item?.amenities_id?.includes("AC") ? (
                                 <span
@@ -616,7 +627,9 @@ function ListCard(dates, props) {
                                   <BiCheckCircle style={{ fontSize: "15px" }} />
                                   &nbsp;AC
                                 </span>
-                              ) : ( "" )}
+                              ) : (
+                                ""
+                              )}
                               {item?.amenities_id?.includes("TV") ? (
                                 <span
                                   style={{
@@ -631,7 +644,9 @@ function ListCard(dates, props) {
                                   <FaTv style={{ fontSize: "20px" }} />
                                   &nbsp;TV
                                 </span>
-                              ) : ( "" )}
+                              ) : (
+                                ""
+                              )}
                               {item?.amenities_id?.includes("Cooler") ? (
                                 <span
                                   style={{
@@ -646,7 +661,9 @@ function ListCard(dates, props) {
                                   <BsShopWindow style={{ fontSize: "20px" }} />
                                   &nbsp; Cooler
                                 </span>
-                              ) : ( "" )}
+                              ) : (
+                                ""
+                              )}
                               {/* <small
                                 style={{
                                   display: "flex",

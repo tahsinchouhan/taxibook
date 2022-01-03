@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Row, Col, Container, Image } from "react-bootstrap";
+import { Button, Row, Container, Image } from "react-bootstrap";
 import ImageDesk from "./Desktopimage";
 // import Salyimg from "../../assets/img/Saly-1.png";
 // import Layer11 from "../../assets/img/hil.svg";
@@ -8,14 +8,13 @@ import ImageDesk from "./Desktopimage";
 import "./../assets/css/saly.css";
 import Header from "../components/Header";
 import MarqueeComponent from './marquee'
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import checkimage from "../assets/TravelBastar-desktop/checkimage.png";
 import { useDispatch } from "react-redux";
 import {setinterestprehome} from '../redux/actions'
 import SeoData from '../SeoData.json'
 
 const PreHome = () => {
-  console.log('Seo Data', SeoData)
   const history = useHistory();
   const dispatch = useDispatch()
   const [adventure11, setAdventure] = useState(0);
@@ -23,7 +22,7 @@ const PreHome = () => {
   const [heritage11, setHeritage] = useState(0);
   const [leisure11, setLeisure] = useState(0);
   const [imageCounter, setImageCounter] = useState([]);
-  const [getMAxValue, setGetMAxValue] = useState([]);
+  // const [getMAxValue, setGetMAxValue] = useState([]);
   // const [status, setStatus] = useState(false);
   const selectImageCategory = async (category, key, classN, e) => {
     console.log({category})
@@ -227,6 +226,7 @@ const PreHome = () => {
               {ImageDesk?.slice(0, 16).map((item, key) => {
                 return (
                   <div
+                    key={key}
                     className="container123"
                     style={{ width: "50%", height: "50%" }}
                   >

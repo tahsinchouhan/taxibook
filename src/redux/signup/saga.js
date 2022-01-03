@@ -1,11 +1,11 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { VERIFY_OTP, GET_OTP,SIGN_UP ,SIGN_UP_VERIFY_SUCCESS} from "../actions";
+import { SIGN_UP ,SIGN_UP_VERIFY_SUCCESS} from "../actions";
 import { API_PATH } from "../../Path/Path";
-import { signup } from "./actions";
-import {getOtpSuccess} from "../login/actions";
+// import { signup } from "./actions";
+// import {getOtpSuccess} from "../login/actions";
 import {signupSuccess,signupError,verifysignupSuccess} from "./actions";
 import axios from "axios";
-import { fetchError } from "../common/actions";
+// import { fetchError } from "../common/actions";
 
 
 const phone  = localStorage.getItem("mobileNo")
@@ -45,7 +45,12 @@ function* SignUp( {payload}) {
   console.log("payload",payload)
   try {
     const SignupData = yield call(Signup, payload);
-    yield put(signupSuccess(SignupData.data));
+    console.log(SignupData);
+    if(SignupData.data.code !== 403){
+      yield put(signupSuccess(SignupData.data));
+    }else{
+      yield put(signupError(SignupData.data));
+    }
   } catch (error) {
     console.log("error",error)
     return signupError(error)
@@ -58,7 +63,7 @@ function* fetchVerifySignupOtp({ payload }) {
 try {
   const signup_data_data = yield call(fetchVerifySignupOtpAsync, payload);
   console.log("payloadpayload",signup_data_data)
-  if (signup_data_data?.status == 200) {
+  if (signup_data_data?.status === 200) {
     yield put(verifysignupSuccess(signup_data_data.data.data));
   }
 } catch (error) {

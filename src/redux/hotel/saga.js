@@ -4,41 +4,53 @@ import axios from "axios";
 import * as moment from "moment";
 import {
   GET_BOOK_HOTEL,
-  GET_BOOK_HOTEL_SUCCESS,
-  SET_BOOK_HOTEL,
+  // GET_BOOK_HOTEL_SUCCESS,
+  // SET_BOOK_HOTEL,
   SET_BOOK_HOTEL_SUCCESS,
   SET_INTEREST_PREHOME,
-  HOTEL_PAY
+  HOTEL_PAY,
 } from "../actions";
 import {
-  getBookHotel,
+  // getBookHotel,
   getBookHotelSuccess,
   setBookHotelSuccess,
   setinterestprehomeSuccess,
   setDestinationprehomeSuccess,
-  hotelpaySuccess
+  hotelpaySuccess,
 } from "./actions";
 
 const getBookHotellistAsync = async (payload) => {
-
-  if(payload?.filter) {
+  if (payload?.filter) {
     let check_in = moment(payload.startDate).format("YYYY-MM-DD");
-    let address = payload.sendlocation===undefined?'Jagdalpur':payload.sendlocation;
+    let address =
+      payload.sendlocation === undefined ? "Jagdalpur" : payload.sendlocation;
     let check_out = moment(payload.endDate).format("YYYY-MM-DD");
 
-    const fd = new FormData();
-    fd.append('address', address)
-    fd.append('check_in', check_in)
-    fd.append('check_out', check_out)
-    fd.append('guests', payload.noOfGuest)
-    fd.append('rooms', payload.noOfRoom)
+    const fd = {};
+    fd.address = address;
+    fd.check_in = check_in;
+    fd.check_out = check_out;
+    fd.guests = payload.noOfGuest;
+    fd.rooms = payload.noOfRoom;
+    if (payload.ameneties.length) fd.amenities = payload.ameneties;
+    if (payload.category) fd.hotel_category = payload.category;
+    if (payload?.minPrice) fd.min_price = payload?.minPrice;
+    if (payload?.maxPrice) fd.max_price = payload?.maxPrice;
+
     const params = {
-      method:'POST',
-      body:fd
-    }
-    return await fetch(`${API_PATH}/api/v2/room/set`, params).then((response) => response.json()).then((json) => json);
+      method: "POST",
+      body: JSON.stringify(fd),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    return await fetch(`${API_PATH}/api/v2/room/set`, params)
+      .then((response) => response.json())
+      .then((json) => json);
   } else {
-    return await fetch(`${API_PATH}/api/v2/hotelregistration/list`).then((response) => response.json()).then((json) => json);
+    return await fetch(`${API_PATH}/api/v2/hotelregistration/list`)
+      .then((response) => response.json())
+      .then((json) => json);
   }
 };
 
@@ -56,105 +68,112 @@ function* getListofHotel() {
 }
 
 const sethotelbookingAsync = async (payload) => {
-  const user = JSON.parse(localStorage.getItem('user_data'));
-  const customerId = JSON.parse(localStorage.getItem("customer_id"))
+  const user = JSON.parse(localStorage.getItem("user_data"));
+  const customerId = JSON.parse(localStorage.getItem("customer_id"));
 
-  const token = user.token
-   return axios.post(`${API_PATH}/api/v2/booking/create`,  {
-    customer_id:customerId,
-    hotel_id:payload?.basic_details?.hotel_id?._id,
-    room_id:payload?.basic_details?._id,
-    check_in:payload?.startDate,
-    check_out:payload?.endDate,
-    amount:payload?.basic_details?.price?.base_price,
-    number_of_guests:payload?.no_of_guest,
-    number_of_rooms:payload?.no_of_room,
-    amount:(payload?.total_amount*100),
-    mobile: payload?.mobile,
-    email: payload?.email,
-    full_name: payload?.name,
-  },
-  {headers: { Authorization: `Bearer ${token}` }}
-
-  ).then((res) => {
-    console.log("resres",res)
-    return res.data.data;
-  }
-  ).catch((err) => 
-  {
-    console.log(err)
-  return err})
+  const token = user.token;
+  return axios
+    .post(
+      `${API_PATH}/api/v2/booking/create`,
+      {
+        customer_id: customerId,
+        hotel_id: payload?.basic_details?.hotel_id?._id,
+        room_id: payload?.basic_details?._id,
+        check_in: payload?.startDate,
+        check_out: payload?.endDate,
+        amount: payload?.basic_details?.price?.base_price,
+        number_of_guests: payload?.no_of_guest,
+        number_of_rooms: payload?.no_of_room,
+        amount: payload?.total_amount * 100,
+        mobile: payload?.mobile,
+        email: payload?.email,
+        full_name: payload?.name,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    .then((res) => {
+      console.log("resres", res);
+      return res.data.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
 };
 
 const atHotelPayAsync = async (payload) => {
-  const user = JSON.parse(localStorage.getItem('user_data'));
-  const customerId = JSON.parse(localStorage.getItem("customer_id"))
-  const mobileNo = JSON.parse(localStorage.getItem("mobile"))
+  const user = JSON.parse(localStorage.getItem("user_data"));
+  const customerId = JSON.parse(localStorage.getItem("customer_id"));
+  const mobileNo = JSON.parse(localStorage.getItem("mobile"));
 
-  const token = user.token
-  return axios.post(`${API_PATH}/api/v2/booking/create`,{
-    customer_id: customerId,
-    hotel_id: payload.hotelPayDetails.hotel_id._id,
-    user_id: payload.hotelPayDetails.user_id._id,
-    room_id: payload.hotelPayDetails._id,
-    check_in: "2021-12-10",
-    check_out: "2021-12-15",
-    amount: payload.hotelPayDetails.price.final_price,
-    payment_mode: "payathotel",
-    number_of_guests: payload.getStartData.noOfGuest,
-    number_of_rooms: payload.getStartData.noOfRoom,
-    mobile : mobileNo
-  },
-  {headers: { Authorization: `Bearer ${token}` }}
-  ).then((res) => {
-    console.log(res)
-    return res.data
-  }
-  ).catch((err) => {
-    {
-      console.log(err)
-    return err}
-  })
-}
+  const token = user.token;
+  return axios
+    .post(
+      `${API_PATH}/api/v2/booking/create`,
+      {
+        customer_id: customerId,
+        hotel_id: payload.hotelPayDetails.hotel_id._id,
+        user_id: payload.hotelPayDetails.user_id._id,
+        room_id: payload.hotelPayDetails._id,
+        check_in: moment(payload.hotelPayDetails.startDate).format(
+          "YYYY-MM-DD"
+        ),
+        check_out: moment(payload.hotelPayDetails.endDate).format("YYYY-MM-DD"),
+        amount: payload.hotelPayDetails.amount,
+        payment_mode: "payathotel",
+        number_of_guests: payload.hotelPayDetails.guests,
+        number_of_rooms: payload.hotelPayDetails.rooms,
+        mobile: mobileNo,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    .then((res) => {
+      console.log(res);
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+};
 
-function* hotelPaySaga({payload}) {
-  try{
-    const sagaHotelPay = yield call(atHotelPayAsync, payload)
-    console.log("sagaHotelPay",sagaHotelPay)
-    yield put(hotelpaySuccess(sagaHotelPay))
+function* hotelPaySaga({ payload }) {
+  try {
+    const sagaHotelPay = yield call(atHotelPayAsync, payload);
+    console.log("sagaHotelPay", sagaHotelPay);
+    yield put(hotelpaySuccess(sagaHotelPay));
   } catch (err) {
-    console.log("errr",err)
+    console.log("errr", err);
   }
 }
 
 function* sethotelBookingSaga({ payload }) {
   try {
     const apiSetHotel = yield call(sethotelbookingAsync, payload);
-    console.log("apiSetHotel",apiSetHotel)
+    console.log("apiSetHotel", apiSetHotel);
     yield put(setBookHotelSuccess(apiSetHotel));
   } catch (err) {
     console.log(err.message);
   }
 }
 
+const setPrehomeInterestSagaAsync = async (payload) =>
+  axios
+    .post(`${API_PATH}/api/v1/packages/sort`, payload)
+    .then((res) => res.data.data)
+    .catch((err) => err);
 
-const setPrehomeInterestSagaAsync = async (payload) => 
-    axios.post(`${API_PATH}/api/v1/packages/sort`, 
-   payload
-  ).then((res) =>res.data.data)
-  .catch(err=>err)
-
-  const setPrehomeDestinationSagaAsync = async (payload) => 
-  axios.post(`${API_PATH}/api/v1/destinations/sort`, 
- payload
-).then((res) =>res.data.data)
-.catch(err=>err)
+const setPrehomeDestinationSagaAsync = async (payload) =>
+  axios
+    .post(`${API_PATH}/api/v1/destinations/sort`, payload)
+    .then((res) => res.data.data)
+    .catch((err) => err);
 
 function* setPrehomeInterestSaga({ payload }) {
   try {
     const apiSetHotel = yield call(setPrehomeInterestSagaAsync, payload);
     const apiSetDest = yield call(setPrehomeDestinationSagaAsync, payload);
-    console.log({apiSetHotel})
+    console.log({ apiSetHotel });
     yield put(setinterestprehomeSuccess(apiSetHotel));
     yield put(setDestinationprehomeSuccess(apiSetDest));
   } catch (err) {
@@ -177,5 +196,5 @@ export default function* rootSaga() {
   yield all([fork(getListofHotel)]);
   yield all([fork(setHotel)]);
   yield all([fork(setPrehome)]);
-  yield all([fork(hotelPay)])
+  yield all([fork(hotelPay)]);
 }

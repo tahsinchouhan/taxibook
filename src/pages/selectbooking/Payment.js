@@ -49,10 +49,9 @@ function Payment() {
       // .then((res) => res.json())
       .then((result) => {
         setData(result.data);
-        console.log("Ajay data", data);
       })
       .catch((e) => {
-        console.log('Ajay Error', e);
+        
       });
       let userData = JSON.parse(localStorage.getItem('user_data'));
       if(userData){
@@ -80,7 +79,7 @@ function Payment() {
       //key: 'rzp_test_DuapYrmQwcWLGy',
       currency: "INR",
       amount: data?.amount.toString(),
-      order_id: data.id,
+      // order_id: data.id,
       name: "Aamcho Bastar",
       description: "Thank You For Booking.",
       image: "https://travelbastar.com/static/media/logo.0a3bc983.png",

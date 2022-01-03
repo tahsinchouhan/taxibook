@@ -1,5 +1,5 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
-import { CREATE_DM_PASS, CREATE_DM_PASS_TWO, GET_TRIP_BY_ROUTE_ID } from "../actions";
+import { CREATE_DM_PASS, CREATE_DM_PASS_TWO } from "../actions";
 import { API_PATH } from "../../Path/Path";
 import axios from 'axios'
 import { setDmPassId, setentyPassId } from "./actions";

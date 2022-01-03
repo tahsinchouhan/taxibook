@@ -6,7 +6,7 @@ import Footer from "./travesaly/Footer";
 import Header from "../components/Header";
 import HomestayCard from "./HomestayCard";
 
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import { API_PATH } from "../Path/Path";
 import Geocode from "react-geocode";
 import { TourPackages } from "../Path/PackageCategories";
@@ -18,7 +18,7 @@ Geocode.setLocationType("ROOFTOP");
 Geocode.enableDebug();
 
 function TourPackagesinBastar() {
-  const history = useHistory();
+  // const history = useHistory();
 
   const [packages, setPackages] = useState([]);
   const [location, setLoation] = useState([]);

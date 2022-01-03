@@ -37,7 +37,6 @@ function CheckoutPage() {
   };
   const value = location.state.update;
   useEffect(() => {
-    // console.log("basic_detailsbasic_detailsbasic_detailsbasic_details",basic_details)
     
   }, []);
   return (

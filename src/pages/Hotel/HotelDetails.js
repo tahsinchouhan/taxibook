@@ -16,21 +16,22 @@ import Details from "./Details";
 const HotelDetails = (props) => {
   // const history = useHistory();
 
-  console.log('All Details', props)
-
   const hotelUniqid = props.match.params.name;
   const startDate = props.match.params.startDate;
   const endDate = props.match.params.endDate;
 
+  const { detail, address, roomState, hotelDetail } = props?.location?.state;
+
   const [detailsP, setDetailsP] = useState([]);
-  const [hotelDetail, setHotelDetail] = useState([]);
+  // const [hotelDetail, setHotelDetail] = useState([]);
+
+  // console.log('Hotel Details', hotelDetail);
 
   const { getStartData } = useSelector((state) => state.hotelReducer);
 
   useEffect(() => {
-    setHotelDetail(props.location.state.detail);
-    initLoad(props.location.state.detail);
-  }, [props.location.state.detail]);
+    setDetailsP(detail);
+  }, [detail]);
 
   const initLoad = (value) => {
     axios
@@ -59,7 +60,15 @@ const HotelDetails = (props) => {
           className="d-none d-md-block "
           style={{ marginTop: "0", backgroundColor: "white" }}
         ></Container>
-        <Details hotelDetail={hotelDetail} detailsP={detailsP} hotelUniqid={hotelUniqid} />
+        <Details
+          detailsP={detailsP}
+          hotelDetail={hotelDetail}
+          hotelUniqid={hotelUniqid}
+          address={address}
+          startDate={startDate}
+          endDate={endDate}
+          roomStateData={roomState}
+        />
         <Footer />
       </div>
 
@@ -210,7 +219,15 @@ const HotelDetails = (props) => {
           </Container> */}
         </div>
         <div>
-          <Details hotelDetail={hotelDetail} hotelUniqid={hotelUniqid} detailsP={detailsP} />
+          <Details
+            hotelUniqid={hotelUniqid}
+            hotelDetail={hotelDetail}
+            detailsP={detailsP}
+            address={address}
+            startDate={startDate}
+            endDate={endDate}
+            roomStateData={roomState}
+          />
         </div>
         <div>
           <Footer />

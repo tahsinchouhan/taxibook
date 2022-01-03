@@ -51,7 +51,7 @@ function RettingModal({ show, handleClose }) {
     if (!data.mobile === "" && !data.email === "") {
       handleClose();
       dispatch(getReview(data));
-      console.log("object", data);
+      // console.log("object", data);
     }
   };
 

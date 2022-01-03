@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Container, Row, Button, Form, Col } from "react-bootstrap";
-import TicketsConfirm from "../booking/tickets/TicketsConfirm";
+import { Container, Row, Form } from "react-bootstrap";
+// import TicketsConfirm from "../booking/tickets/TicketsConfirm";
 import Cards from './Cards'
 
 const button_Data = [
@@ -17,7 +17,7 @@ const button_Data = [
 function Locations(props) {
   const [shows, setShows] = useState(1);
   const [activeButton, setActiveButton] = useState(button_Data[0].name);
-  const [data, setData] = useState();
+  // const [data, setData] = useState();
 
   const onSideBtnClick = (e) => {
     const name = e.target.name;

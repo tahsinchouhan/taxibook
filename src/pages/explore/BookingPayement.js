@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { API_PATH } from "../../Path/Path";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
-  createBusBooking,
+  // createBusBooking,
   setApiData
 } from "../../redux/actions";
 import {packagesbookingAction} from '../../redux/packages/actions'
-import { Formik, Field } from "formik";
-import * as yup from "yup";
+// import { Formik, Field } from "formik";
+// import * as yup from "yup";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 
 async function loadScript(src) {

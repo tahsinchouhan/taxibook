@@ -39,12 +39,23 @@ const PackagesDetails = (props) => {
 
 
   const getSeoDetails = async (id) => {
-    console.log('Package Id ', props?.location?.item)
+    // console.log('Package Id ', props?.location?.item)
     const res = await fetch(API_PATH + `/api/v1/packages/${id}`)
     const data = await res.json()
+    console.log('Seo Data', data.data)
     document.title = data.data.seo_title || 'Travel Bastar';
     document.querySelector("meta[name='description']").setAttribute('content', (data.data.seo_description || ''));
-    document.querySelector("meta[name='keywords']").setAttribute('content', (data.data.seo_description || ''));
+    document.querySelector("meta[name='keywords']").setAttribute('content', (data.data.seo_keywords || ''));
+
+    // const script = document.createElement("script");
+    // script.type = "application/ld+json";
+    // script.src = "/path/to/resource.js";
+    // script.async = true;
+    // let text = document.createTextNode(data?.data?.seo[0].replace('<script type="application/ld+json">', '').replace('</script>', ''));
+    // script.appendChild(text);
+    // document.body.appendChild(script || '');
+    let text = data?.data?.seo[0].replace('<script type="application/ld+json">', '').replace('</script>', '');
+    document.querySelector("script[id='seoSchema']").innerHTML = text || '';
   }
 
   const modalReviewHadler = () => {

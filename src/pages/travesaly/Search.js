@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
-import { Container, Col, Form, Row, Image, Button } from "react-bootstrap";
+import { Container, Col, Form, Row, Image } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 import { API_PATH } from "../../Path/Path";
-import SearchFelid from "./SearchFelid";
+// import SearchFelid from "./SearchFelid";
 // import { Button } from "bootstrap";
 import ticketImg from "../../assets/img/ticket@3x.png";
 import axios from 'axios'
@@ -34,7 +34,7 @@ function Search() {
       .then((response) => response.json())
       .then((json) => {
         if (json.data !== undefined) { setDestinations(json.data); setStoreDestinations(json.data); }
-        console.log(json.data);
+        // console.log(json.data);
       })
       .catch((e) => console.log(e));
   };
@@ -58,7 +58,7 @@ function Search() {
       .then(res => res.data)
       .then((json) => {
         if (json !== undefined) setDmPass(json.data);
-        console.log(json.data);
+        // console.log(json.data);
       })
       .catch((e) => console.log(e));
   };
@@ -282,7 +282,7 @@ function Search() {
                     marginTop: -100,
                   }}
                 >
-                  {!search.destinations == [] ? search.destinations.map((item,index) => {
+                  {!search.destinations === [] ? search.destinations.map((item,index) => {
                       return (
                         <div
                           key={index}
@@ -323,9 +323,10 @@ function Search() {
                       );
                     }) : null}
 
-                  {!search.packages == [] ? search.packages.map((item) => {
+                  {!search.packages === [] ? search.packages.map((item, index) => {
                       return (
                         <div
+                          key={index}
                           onClick={() =>
                             history.push({
                               pathname: `/destination_details/${item.title}`,
@@ -442,9 +443,9 @@ function Search() {
                 <span id="DestinationsScroll" style={{}}>Destinations</span>
               </h2>
               <Row>
-                {destinations.map((item) => {
+                {destinations.map((item, index) => {
                   return (
-                    <Col xs={12} md={6}>
+                    <Col xs={12} md={6} key={index}>
                       <div
                         onClick={() =>
                           history.push({
@@ -489,9 +490,9 @@ function Search() {
                 <span id="PackagesScroll">Packages</span>
               </h2>
               <Row>
-                {packages.map((item) => {
+                {packages.map((item, index) => {
                   return (
-                    <Col xs={12} md={4}>
+                    <Col xs={12} md={4} key={index}>
                       <div
                         onClick={() =>
                           history.push({
@@ -678,9 +679,9 @@ function Search() {
                 {
                   (dmPass.length > 0)
                     ?
-                    dmPass.map((item) => {
+                    dmPass.map((item, index) => {
                       return (
-                        <Col xs={12} md={4}>
+                        <Col xs={12} md={4} key={index}>
                           <div
                             onClick={() =>
                               history.push({

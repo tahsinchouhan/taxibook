@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Button, Row, Col, Form, Container } from "react-bootstrap";
-import logo from "../../assets/img/logo.png";
-import city from "../../assets/img/city.png";
-import calendar from "../../assets/img/calendar.png";
-import DatePicker from "react-datepicker";
+import React from "react";
+import { Row, Col, Container } from "react-bootstrap";
+// import logo from "../../assets/img/logo.png";
+// import city from "../../assets/img/city.png";
+// import calendar from "../../assets/img/calendar.png";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Pass from "./Pass";
-import BusPass from "./BusPass";
+// import Pass from "./Pass";
+// import BusPass from "./BusPass";
 import { useHistory } from "react-router-dom";
 import doodle from "../../assets/img/doodle.png";
 import bus from "../../assets/img/bus.png";
@@ -141,7 +141,7 @@ function SelectBooking() {
                   return (
                     <Col key={idx} xs={12} md={4}>
                       <div className="userdatas" onClick={()=>clickEventHandler(link)}>
-                        <div><img src={img} style={{ width: 39, height: 25.58, marginTop: "10px" }} /></div>
+                        <div><img src={img} alt={img} style={{ width: 39, height: 25.58, marginTop: "10px" }} /></div>
                           <div className="ps-3">
                             <p className="booking_icon my-0 text-secondary">{title}</p>
                             <p>{desc}</p>
@@ -179,7 +179,7 @@ function SelectBooking() {
                   return (
                     <Col key={idx} xs={12} md={4}>
                       <div className="userdatas" onClick={()=>clickEventHandler(link)}>
-                        <div><img src={img} style={{ width: 39, height: 25.58, marginTop: "10px" }} /></div>
+                        <div><img src={img} alt ={img} style={{ width: 39, height: 25.58, marginTop: "10px" }} /></div>
                           <div className="ps-3">
                             <p className="booking_icon my-0 text-secondary">{title}</p>
                             <p>{desc}</p>

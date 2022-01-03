@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { API_PATH } from "../Path/Path";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { IoCloseOutline } from "react-icons/io5";
-import axios from "axios";
+// import axios from "axios";
 
 import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";

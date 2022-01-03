@@ -5,6 +5,7 @@ import axios from 'axios'
 import moment from 'moment'
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
+import { Link } from "react-router-dom";
 import '../.././assets/css/viewTicket.css'
 import { array } from 'yup';
 
@@ -107,7 +108,7 @@ function ViewTicket() {
       <td className="text-center">{item?.trips_id.trip_name}</td>
       <td className="text-center">{item?.amount}</td>
       <td className="text-center">
-        <a href={`/bus-detail/${item.booking_Id}`}>View Ticket</a>
+      <Link to={`/bus-detail/${item?.booking_id}`}>View Ticket</Link>
       </td>
 
     </tr>)

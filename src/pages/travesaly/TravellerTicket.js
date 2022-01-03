@@ -1,14 +1,14 @@
 import React from "react";
 import {
-  Button,
-  Row,
+  // Button,
+  // Row,
   Col,
-  Form,
-  Container,
-  Card,
+  // Form,
+  // Container,
+  // Card,
   Image,
 } from "react-bootstrap";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Carousel from "react-multi-carousel";
 
 function TravellerTicket() {

@@ -5,21 +5,21 @@ import {
   Row,
   Col,
   Form,
-  Dropdown,
+  // Dropdown,
   Button,
   InputGroup,
 } from "react-bootstrap";
 import logo from "../../assets/img/logo.png";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import OtpInput from "react-otp-input";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getOtp,
   verifyOtp,
-  signupOtp,
+  // signupOtp,
   signup,
   loginEmail,
-  verifysignupSuccess,
+  // verifysignupSuccess,
 } from "../../redux/actions";
 import Loader from "../Loader";
 import Message from "../Message";
@@ -68,11 +68,38 @@ function LoginModal({ show, handleClose }) {
       handleClose();
     }
   }, [user_data]);
+  
+  useEffect(() => {
+    if (show === true) {
+     setFlag(2);
+    }
+  }, [show]);
+
+  useEffect(() => {
+    if(signup_success_data.code){
+      if (signup_success_data?.code === 403) {
+        if(signup_success_data?.message === 'Mobile Already Existed'){
+          toast.error(signup_success_data?.message);
+          setFlag(0);
+        }else if(signup_success_data?.message === 'Email Already Existed'){
+          toast.error(signup_success_data?.message);
+          setFlag(1);
+        }else{
+          toast.error(signup_success_data?.message);
+        }
+       
+      } else {
+        toast.success("OTP SENT SUCCESSFULLY");
+        setFlag(5);
+      }
+    }
+    
+  }, [signup_success_data]);
 
  
 
   useEffect(() => {
-    console.log("apiDataapiData", apiData);
+    // console.log(apiData);
     if (apiData !== undefined && apiData.length !== 0) {
       // toast.success("OTP Sent Successfully")
       setFlag(5);
@@ -96,7 +123,7 @@ function LoginModal({ show, handleClose }) {
   const handleSubmit = () => {
     if (OTP.length === 6) {
       dispatch(verifyOtp(mobile, OTP));
-      dispatch(verifysignupSuccess(mobile, OTP));
+      // dispatch(verifysignupSuccess(mobile, OTP));
     }
     setOTP("");
     setMobile("");
@@ -122,17 +149,15 @@ function LoginModal({ show, handleClose }) {
 
   useEffect(() => {
     if (email_data && email_data?.status === "ERROR") {
-      console.log("error");
       toast.error(email_data?.message);
       setFlag(0);
     } else if (email_data && email_data?.status === "OK") {
-      console.log("success");
+      
     }
   }, [email_data]);
 
   const loginEmailHandler = () => {
     dispatch(loginEmail({ email, password }));
-    console.log("email_dataemail_data", email_data);
   };
 
   // for signupmobileNo
@@ -141,19 +166,8 @@ function LoginModal({ show, handleClose }) {
   };
 
   const registerHandler = () => {
-    if (signup_success_data?.code == 403) {
-      toast.error(signup_success_data?.message);
-      setFlag(0);
-    } else {
-      toast.success("OTP SENT SUCCESSFULLY");
-      setFlag(5);
-    }
-    console.log("email", email);
-    console.log("password", password);
-    console.log("fullName", fullName);
     localStorage.setItem("mobileNo", mobile);
     dispatch(signup({ mobile, email, fullName, password }));
-    console.log("signup_success_data", { signup_success_data });
     localStorage.setItem("email", email);
     setEmail("");
     setPassword("");
@@ -194,7 +208,7 @@ function LoginModal({ show, handleClose }) {
                 </Col>
                 <Col>
                   <div className="vl"></div>
-                  {flag == 0 ? (
+                  {flag === 0 ? (
                     <div>
                       <Form>
                         <div className="d-flex justify-content-center ">
@@ -260,7 +274,7 @@ function LoginModal({ show, handleClose }) {
                         </p>
                       </Form>
                     </div>
-                  ) : flag == 1 ? (
+                  ) : flag === 1 ? (
                     <div>
                       <Form>
                         <div className="d-flex justify-content-center mb-4">
@@ -341,7 +355,7 @@ function LoginModal({ show, handleClose }) {
                         </p>
                       </Form>
                     </div>
-                  ) : flag == 2 ? (
+                  ) : flag === 2 ? (
                     <div>
                       <Form>
                         <div className=" vl"></div>
@@ -480,7 +494,7 @@ function LoginModal({ show, handleClose }) {
                         </div>
                       </Form>
                     </div>
-                  ) : flag == 3 ? (
+                  ) : flag === 3 ? (
                     <div>
                       <Form onSubmit={resetHandler}>
                         <div className="d-flex justify-content-center mb-4">
@@ -533,7 +547,7 @@ function LoginModal({ show, handleClose }) {
                         </p>
                       </Form>
                     </div>
-                  ) : flag == 4 ? (
+                  ) : flag === 4 ? (
                     <div>
                       <Form onSubmit={emailHandler}>
                         <div className="d-flex justify-content-center mb-4">
@@ -587,7 +601,7 @@ function LoginModal({ show, handleClose }) {
                         </p>
                       </Form>
                     </div>
-                  ) : flag == 5 ? (
+                  ) : flag === 5 ? (
                     <div className="modal__block">
                       <div className=" d-flex justify-content-center ">
                         <div style={{ fontSize: "24px", color: "green" }}>

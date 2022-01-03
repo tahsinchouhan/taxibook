@@ -4,6 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 // import Message from "../Message";
 import { AvForm, AvField } from "availity-reactstrap-validation";
+// import { AvForm, AvField } from "availity-reactstrap-validation";
 import {getEnquire} from "../../redux/actions";
 
 function EnquireModal({ show, handleClose, packages }) {
@@ -24,7 +25,8 @@ function EnquireModal({ show, handleClose, packages }) {
       destination_id: packages.destinations,
       type: "",
     };
-    if (!name === "" && !email === "" && !number === "" && !comment === "") {
+  
+    if (name && email && number && comment) {
       dispatch(getEnquire(data))
     }
   };

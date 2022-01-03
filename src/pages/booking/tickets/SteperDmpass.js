@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Button, Form, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import {  FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 import ButtonComponent from "../../../containers/Button";
 import { Stepper } from "react-form-stepper";
 import DatePicker from "react-datepicker";
@@ -23,10 +23,7 @@ import {
   AccordionSummary,
   Paper,
 } from "@material-ui/core";
-import {
-  createDmPass,
-  setDmData,
-} from "../../../redux/actions";
+import { createDmPass, setDmData } from "../../../redux/actions";
 import { API_PATH } from "../../../Path/Path";
 import axios from "axios";
 import { AvForm, AvField } from "availity-reactstrap-validation";
@@ -57,7 +54,6 @@ function SteperDmpass(shows, ...props) {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
 
-
   // const [activeButton, setActiveButton] = useState(button_Data[0].name);
   // const [data, setData] = useState();
   const history = useHistory();
@@ -66,6 +62,11 @@ function SteperDmpass(shows, ...props) {
   const { dmData } = useSelector((state) => state.dmpassReducer);
   const { user_data } = useSelector((state) => state.loginReducer);
   const { dmpass_id, start_date } = dmData;
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
@@ -86,7 +87,8 @@ function SteperDmpass(shows, ...props) {
   useEffect(() => {
     let mob;
     if (user_data !== null) {
-      mob = user_data?.user?.mobile?.slice(2, user_data?.user?.mobile?.length);
+      // mob = user_data?.user?.mobile?.slice(2, user_data?.user?.mobile?.length);
+      mob = user_data?.user?.mobile;
       dispatch(setDmData("mobile", mob));
       getDmPassData(mob);
       console.log();
@@ -1042,7 +1044,7 @@ function SteperDmpass(shows, ...props) {
               </h3>
               {locServ.length > 0
                 ? locServ?.map((item, key) => (
-                    <Accordion className="p-0" style={{ boxShadow: "none" }}>
+                    <Accordion className="p-0" style={{ boxShadow: "none" }} expanded={expanded === 'panel'+key} onChange={handleChange('panel'+key)}>
                       <AccordionSummary
                         className="p-0"
                         aria-controls="panel1a-content"
@@ -1058,15 +1060,25 @@ function SteperDmpass(shows, ...props) {
                         >
                           <Form.Check
                             type="radio"
-                            label={item?.location_name}
+                            // label={item?.location_name}
                             name="formHorizontalRadios"
-                            id="formHorizontalRadios2"
+                            id={"formHorizontalRadios"+key}
+                            checked={expanded === 'panel'+key?1:0}
                             style={{
                               margin: "8px",
                               color: "black",
                               fontWeight: "600",
                             }}
                           />
+                          <span 
+                          style={
+                            {
+                              display:'flex',
+                              alignItems: 'center',
+                              fontWeight: 'bold'
+                            }
+                          }
+                          >{item?.location_name}</span>
                         </div>
                       </AccordionSummary>
                       <AccordionDetails className="py-0">
@@ -1409,8 +1421,8 @@ function SteperDmpass(shows, ...props) {
                   </div>
                 </Container>
                 <div className="d-none d-md-block">
-                <Footer />
-              </div>
+                  <Footer />
+                </div>
               </div>
             </>
           )}

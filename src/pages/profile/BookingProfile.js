@@ -21,6 +21,7 @@ import Header from "../../components/Header";
 import "../../assets/css/profile.css";
 import axios from "axios";
 import men from "../../assets/img/men.jpg";
+import { Link } from "react-router-dom";
 
 function BookingProfile() {
   const [busTickets, setBusTickets] = useState();
@@ -34,26 +35,23 @@ function BookingProfile() {
   // customer details api
   useEffect(() => {
     const customerID = JSON.parse(localStorage.getItem("customer_id"));
-    console.log("customerID", customerID);
     axios
       .get(API_PATH + `/api/v1/customer/${customerID}`)
       .then((response) => {
         setProfile(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   }, []);
 
   // bus tickets api
   useEffect(() => {
-    // console.log('mobile',mobile)
     axios
       .post(API_PATH + `/api/v1/busticket/search`, {
         mobile,
       })
       .then((res) => {
-        // console.log('data this',res.data)
         res.data.data.forEach((element, index) => {
           res.data.data[index].booking_type = "Bus Ticket";
         });
@@ -70,7 +68,6 @@ function BookingProfile() {
     axios
       .get(API_PATH + `/api/v2/booking/search?mobile=${mobile}`)
       .then((res) => {
-        console.log("data hotel", res.data.data.hotel_id);
         res.data.data.forEach((element, index) => {
           res.data.data[index].date = element.check_in;
           res.data.data[index].booking_Id = element.booking_id;
@@ -81,7 +78,6 @@ function BookingProfile() {
             delete res.data.data[index];
           }
         });
-        // console.log("res.data.data",res.data.data)
         setHotelTickets(res.data.data);
         setCommonTickets((prev) => [...prev, res.data.data]);
         common();
@@ -89,11 +85,9 @@ function BookingProfile() {
       .catch((e) => console.log(e));
   }, []);
 
-  // console.log("commonTickets",commonTickets)
   bothTickets = commonTickets.flat();
 
   const common = (bothTickets) => {
-    console.log("string", bothTickets);
     if (bothTickets && bothTickets.length) {
       bothTickets = bothTickets.sort(function (a, b) {
         return (
@@ -102,7 +96,6 @@ function BookingProfile() {
         );
       });
     }
-    console.log("bothTicketsbothTickets", bothTickets);
   };
 
   return (
@@ -249,17 +242,13 @@ function BookingProfile() {
                         <td className="text-center">{item?.amount}</td>
                         <td className="text-center">
                           {item.check_in ? (
-                            <a
-                              href={`/bus-detail/${item.booking_Id}`}
-                            >
+                             <Link to={`/bus-detail/${item?.booking_Id}`}>
                               View Ticket
-                            </a>
+                            </Link>
                           ) : (
-                            <a
-                              href={`/bus-detail/${item.booking_Id}`}
-                            >
+                            <Link to={`/bus-detail/${item?.booking_Id}`}>
                               View Ticket
-                            </a>
+                            </Link>
                           )}
                         </td>
                         <td className="text-center">Reserved</td>

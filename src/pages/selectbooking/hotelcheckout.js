@@ -1,22 +1,26 @@
 import React, { useEffect } from "react";
-import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
-import bus1 from "../../assets/img/bus.png";
+import { Container, Row, Col, Button } from "react-bootstrap";
+// import bus1 from "../../assets/img/bus.png";
 import city1 from "../../assets/img/city.png";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { createBusBooking } from "../../redux/actions";
+import { 
+  // useDispatch, 
+  useSelector 
+} from "react-redux";
+// import { createBusBooking } from "../../redux/actions";
 import { FaArrowLeft } from "react-icons/fa";
-import Typography from "@material-ui/core/Typography";
+// import Typography from "@material-ui/core/Typography";
 import hotel from "../../assets/img/hotel.png";
 import Room from "../../assets/img/hotelRoom.jpeg";
 
 function CheckoutPage() {
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { getStartData, Setdata, checkoutData } = useSelector((state) => state.hotelReducer);
-  console.log("Setdata",Setdata)
+  console.log("Setdata",getStartData)
+  console.log("Setdata",checkoutData)
   
   const onCongratsClick = () => {
     history.push("/hpayment");
