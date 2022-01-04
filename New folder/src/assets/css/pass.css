@@ -1,0 +1,129 @@
+* .dmpassData {
+  margin: 10px;
+}
+.passform {
+  margin: 40px;
+}
+.passengerbtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 41px;
+  width: 100%;
+}
+.genderbtn {
+  width: 50%;
+  height: 30px;
+  font-size: 12px;
+}
+.pass_input input {
+  /* border: none; */
+  /* background-color: #9b98981c; */
+  height: 50px;
+  border: none;
+  background-color: transparent;
+  outline-width:0;
+}
+.pass_input{
+  display: flex;
+  align-items: center;
+  /* padding: 10px; */
+  /* margin-left: 10px; */
+  background-color:  #9b98981c;
+  /* border-radius: 0px; */
+} 
+.pass-color {
+  color: #0fa453;
+}
+.bus-color {
+  color: red;
+}
+.cab-color {
+  color: purple;
+}
+.default-color {
+  color: grey;
+}
+.dmpass-form {
+  width: 60%;
+}
+.passengerbtn{
+  width: 375px;
+height: 86px;
+left: 0px;
+top: 645px;
+
+background: #0FA453;
+}
+
+@media screen and (max-width: 700px) {
+  .dmpass-form {
+    width: 100%;
+    padding: 0;
+  }
+  .dmpass-div{
+    background-color:#FF814A;
+    width: 100%;
+}
+
+}
+
+.dmPass-rangebar{
+  position: absolute;
+width: 24px;
+height: 24px;
+left: 55px;
+top: 94px;
+
+background: #FF814A;
+border-radius: 50px;
+
+
+
+}
+.locations-rangebar{
+  width: 24px;
+  height: 24px;
+  left: 133px;
+  top: 94px;
+  
+  border: 1px solid #FF814A;
+  box-sizing: border-box;
+
+
+  margin-left: 110px;
+    margin-top: 14px;
+  border-radius: 50px;
+}
+.confirm-rangebar{
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 212px;
+  top: 94px;
+  
+  border: 1px solid #FF814A;
+  box-sizing: border-box;
+  border-radius: 50px;
+  
+}
+.checkout-rangebar{
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 292px;
+  top: 94px;
+  
+  border: 1px solid #FF814A;
+  box-sizing: border-box;
+  border-radius: 50px;
+}
+/* .{
+  position: absolute;
+width: 43px;
+height: 0px;
+left: 84px;
+top: 106px;
+
+border: 1px solid #FF814A;
+} */

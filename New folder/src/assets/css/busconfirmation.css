@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+
+.traveller_div {
+  /* margin-top: 2rem; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.traveller__card {
+  width: 450px;
+  padding: 1.5rem;
+  font-size: 12px;
+  flex-basis: calc(40% - 0.5rem);
+  border: 2px solid;
+}
+
+.traveller__card_title {
+  font-weight: 700;
+}
+
+.pass_input {
+  background-color: #f8f8f8;
+  border-color: #f8f8f8;
+}
+.hotel-confirm-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.hotel-confirm-1 {
+  width: "60%";
+}
+.hotel-confirm-2 {
+  width: 40%;
+  border: 1px solid gray;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 8px;
+}
+.form-div {
+  display: flex;
+  flex-direction: row;
+}
+.form-input {
+  border: 1px solid gray;
+  padding: 5px 20px;
+  border-radius: 3px;
+  width: 180px;
+}
+.details-div {
+  border: 1px solid gray;
+  margin: 15px;
+  border-radius: 5px;
+  overflow: hidden;
+  padding-bottom: 25px;
+}
+.form-input-div {
+  margin-top: 10px;
+}
+.container-div {
+  width: 85%;
+  margin: auto;
+  padding: 20px;
+}
+.saving-div {
+  color: #e6b560;
+  font-weight: 500;
+  font-size: 18px;
+}
+.saving-div-container {
+  background-color: #fff6e7;
+  border: 2px solid #f9e2bb;
+  border-radius: 5px;
+  margin: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.amenities-div {
+  display: flex;
+  width: 150px;
+  height: 60px;
+  align-items: center;
+}
+.amenities-logo {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+}
+.hotel-details-1 {
+  width: 65%;
+}
+.amenities-name {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.hotel-details-2 {
+  width: 35%;
+}
+.room-mobile {
+  width: 180px;
+  height: 130px;
+}
+.choose-room-div {
+  width: 95%;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  overflow: hidden;
+}
+.choose-room-div .selected{
+  display: flex;
+  align-items: center;
+  padding-left: 0.51rem;
+  background: linear-gradient(to right,#797f9d,#d4d1da) !important;
+  height: 30px !important;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 4px 4px 0px 0px !important;
+} 
+
+@media (max-width: 500px) {
+  .hotel-confirm-div {
+    flex-direction: column;
+  }
+  .hotel-confirm-1 {
+    width: 100%;
+  }
+  .hotel-confirm-2 {
+    width: 100%;
+    border-radius: 8px;
+  }
+  .form-div {
+    flex-direction: column;
+  }
+  .form-input {
+    width: 250px;
+  }
+  .form-input-div {
+    margin-top: 10px;
+  }
+  .details-div {
+    width: 100%;
+    margin: 0;
+  }
+  .container-div {
+    width: 90%;
+    padding: 0;
+  }
+  .saving-div {
+    width: 100%;
+    font-size: 17px;
+    text-align: center;
+  }
+  .saving-div-container {
+    margin: 0;
+    margin-bottom: 15px;
+  }
+  .hotel-details-1 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .amenities-div {
+    width: 100px;
+    height: 50px;
+  }
+  .amenities-name {
+    font-size: 15px;
+  }
+  .amenities-logo {
+    width: 22px;
+    height: 22px;
+  }
+  .hotel-details-2 {
+    width: 100%;
+  }
+  .room-mobile {
+    width: 90px;
+    height: 70px;
+    border-radius: 5px;
+  }
+  .choose-room-div {
+    width: 100%;
+  }
+}

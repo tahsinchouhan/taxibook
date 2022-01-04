@@ -1,0 +1,91 @@
+.card-Caintainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* padding-bottom: 100px; */
+}
+
+.MuiAccordion-root:before {
+  background-color: transparent !important;
+}
+
+.MuiAccordionSummary-content {
+  margin-block: 8px !important;
+}
+
+.location-card {
+
+  width: 100px;
+  height: 128px;
+  background-color: #864BD8;
+  color: white;
+}
+
+.location-card-title {
+  font-size: 12px;
+  /* margin-bottom: 7px; */
+  margin-bottom: 0;
+  line-height: 15px;
+  /* white-space: nowrap; */
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.location-card-rate {
+  /* margin-top: -10px; */
+  text-align: center;
+  color: #FFE603;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 32px;
+  margin-bottom: 0;
+}
+
+.location-card-name {
+  text-align: center;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 400;
+  margin-bottom: 0;
+  /* margin-top: -15px; */
+}
+
+.plus-minus-input {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  justify-content: center;
+}
+
+.button {
+  margin-top: -0.5px;
+}
+
+.input-group-field {
+  width: 45%;
+  text-align: center;
+}
+
+.locatione-title {
+  display: flex;
+  /* position: fixed; */
+  width: 100%;
+  /* bottom: 0; */
+  padding-top: 50px;
+}
+
+.location-amount {
+  padding: 18px;
+  background-color: #F8F8F8;
+  ;
+}
+
+.location-total {}
+
+.location-rs {
+  font-size: 20px;
+  font-weight: 600;
+  float: right;
+  /* padding: 10px; */
+}

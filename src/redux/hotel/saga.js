@@ -26,15 +26,23 @@ const getBookHotellistAsync = async (payload) => {
       payload.sendlocation === undefined ? "Jagdalpur" : payload.sendlocation;
     let check_out = moment(payload.endDate).format("YYYY-MM-DD");
 
-    const fd = new FormData();
-    fd.append("address", address);
-    fd.append("check_in", check_in);
-    fd.append("check_out", check_out);
-    fd.append("guests", payload.noOfGuest);
-    fd.append("rooms", payload.noOfRoom);
+    const fd = {};
+    fd.address = address;
+    fd.check_in = check_in;
+    fd.check_out = check_out;
+    fd.guests = payload.noOfGuest;
+    fd.rooms = payload.noOfRoom;
+    if (payload.ameneties.length) fd.amenities = payload.ameneties;
+    if (payload.category) fd.hotel_category = payload.category;
+    if (payload?.minPrice) fd.min_price = payload?.minPrice;
+    if (payload?.maxPrice) fd.max_price = payload?.maxPrice;
+
     const params = {
       method: "POST",
-      body: fd,
+      body: JSON.stringify(fd),
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
     return await fetch(`${API_PATH}/api/v2/room/set`, params)
       .then((response) => response.json())

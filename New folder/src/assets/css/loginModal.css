@@ -1,0 +1,20 @@
+.vl {
+  border-left: 1px solid grey;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  margin-left: -8px;
+  top: -14px;
+}
+@media only screen and (max-width: 600px) {
+  .vl {
+    display:none;
+  }
+}
+
+.otp-btn {
+  background-color: #07bf07;
+  border: none;
+  width: 40%;
+  border-radius: 5px;
+}

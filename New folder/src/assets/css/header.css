@@ -1,0 +1,174 @@
+.sidebar {
+  background-color: var(--primary-color);
+  width: 300px;
+  color: #fff;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-top: 1rem;
+}
+.sidebar__toggler {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  height: 40px;
+  width: 40px;
+}
+.header .logo {
+  width: 110px;
+}
+.btn-close {
+  color: #fff;
+}
+.sidebar__navlink {
+  width: 100%;
+  color: #fff;
+  padding: 1rem;
+  text-decoration: none;
+  font-size: large;
+}
+.sidebar__navlink:hover {
+  color: #fff;
+  font-weight: bold;
+}
+/* {header_div mon} */
+
+.header_div {
+  padding: 0px;
+  margin: 0px;
+  background-color: white !important;
+}
+.header_image {
+  width: 100%;
+}
+.toggle-icon {
+  margin-right: 20px;
+}
+.sidebar_item {
+  /* padding: 10px; */
+  text-decoration: none !important;
+  margin: 21px;
+  font-weight: 600; 
+  color: black;
+  text-decoration: none;
+ 
+  font-family: 'Inter', sans-serif;
+
+}
+.sidebar_item:hover {
+  color: #0FA453 !important;
+  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+}
+
+.explore-search{
+  width: 50%;
+  margin: auto;
+}
+.header_item {
+  padding: 10px;
+}
+.header_item:hover {
+  background-color: blue;
+  color: white;
+}
+
+@media screen and (max-width: 700px) {
+  .header_image {
+    width: 40% !important;
+  }
+
+  .searchIcon {
+    position: absolute;
+    right: 1rem;
+    top: 1.5rem;
+    height: 30px;
+    width: 30px;
+  }
+
+  .explore-search{
+    width: 100%;
+    margin: auto;
+  }
+  /* .locationpass-btn{
+    color: white;
+    background-color: #0fa453;
+    border-color: #0fa453;
+    font-weight: bold;
+    width: 100%;
+    height: 80px;
+    border-radius: 11px;
+  } */
+
+  .locationpass-btn{
+    color: white;
+    background-color: #0FA453;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 0px;
+    margin: 0px;
+    height: 80px;
+    border: 1px solid #0FA453;
+    /* position:fixed;  */
+    bottom:0;
+}
+.vendor-btn {
+  color: white;
+    background-color: #0FA453;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 5px;
+    margin: 0px;
+    height: 80px;
+    border: 1px solid #0FA453;
+  /* position:absolute;  */
+     bottom:0;
+}
+.location-pass{
+ display: block;
+}
+
+.locationpass-btn-two {
+  position: relative !important;
+  color: white;
+    background-color: #0FA453;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 5px;
+    margin: 0px;
+    height: 80px;
+    border: 1px solid #0FA453;
+}
+
+.train-seats{
+  /* border: 1px solid red; */
+  background-color: #0FA453;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 1px 0px 1px 1px grey;
+  height: 80px;
+  width: 74px;
+}
+  .dm-inputticket{
+    height: 39px;
+    width: 100%;
+    font-size: 11px;
+    border: none;
+    background-color: transparent;
+    outline-width: 0;
+    background-color: #F8F8F8;;
+  }
+  .travel_home_btn{
+    text-align: center;
+  }
+}
+
+.travel_home_btn{
+  text-align: center;
+}

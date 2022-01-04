@@ -1,0 +1,27 @@
+.table>:not(:last-child)>:last-child>*{
+    border-bottom-color: white;
+    border: none !important;
+}
+
+.profile{
+    font-weight: 600;
+    font-size: 21px;
+}
+
+.email{
+    color: #10c910;
+    font-weight: 600;
+}
+.password{
+    color: #10c910;
+    font-weight: 600;
+}
+.icons-1{
+    color: #10c910;  
+}
+.edit{
+    background: #10c910;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}
