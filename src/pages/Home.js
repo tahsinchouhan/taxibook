@@ -9,7 +9,9 @@ function Home() {
         <div>
             <Header />
             <Saly />
-            <FooterIcons />
+            <div fluid="true" className="d-sm-none">
+              <FooterIcons />
+            </div>
             <Footer />
         </div>
     )

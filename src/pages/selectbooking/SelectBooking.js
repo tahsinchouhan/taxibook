@@ -193,7 +193,9 @@ function SelectBooking() {
               </Row>
           </Container>
         </div>
-        <FooterIcons />
+        <div fluid="true" className="d-sm-none">
+          <FooterIcons />
+        </div>
       </div>
     </>
   );

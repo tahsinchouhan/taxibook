@@ -222,7 +222,9 @@ function Packages() {
           </div>
         </>
       </Container>
-      <FooterIcons />
+      <div fluid="true" className="d-sm-none">
+        <FooterIcons />
+      </div>
       <Footer />
     </React.Fragment>
   );
