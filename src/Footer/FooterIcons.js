@@ -1,15 +1,22 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Container, Image } from "react-bootstrap";
 import Header from "../components/Header";
 import Footer from "../pages/travesaly/Footer";
-import exploreIcon from "../assets/icons/explore.png";
-import experienceIcon from "../assets/icons/experience.png";
-import planIcon from "../assets/icons/plan.png";
-import supportIcon from "../assets/icons/support.png";
+import exploreIcon from "../assets/icons/ExploreActive.png";
+import exploreInactiveIcon from "../assets/icons/ExploreNotActive.png";
+import experienceIcon from "../assets/icons/ExperienceActive.png";
+import experienceInactiveIcon from "../assets/icons/ExperienceNotActive.png";
+import planIcon from "../assets/icons/PlanActive.png";
+import planInactiveIcon from "../assets/icons/PlanNotActive.png";
+import supportIcon from "../assets/icons/SupportActive.png";
+import supportInactiveIcon from "../assets/icons/SupportNotActive.png";
 import "../assets/css/footerIcons.css";
 
 const FooterIcons = () => {
+  const location = useLocation()
+  console.log(location.pathname)
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -20,26 +27,46 @@ const FooterIcons = () => {
         <div className="footerIcons_container">
             <span className="footerIcons_items">
             <NavLink className="" to="/explore">
-              <Image src={exploreIcon} alt="explore" />
-                EXPLORE
+              {
+                location.pathname == '/explore' ? (
+                  <Image src={exploreIcon} alt="explore" />
+                ) : (
+                  <Image src={exploreInactiveIcon} alt="explore" />
+                )
+              }
             </NavLink>
             </span>
             <span className="footerIcons_items">
             <NavLink className="" to="/curatedexperiences">
-              <Image src={experienceIcon} alt="experience" />
-                EXPERIENCE
+            {
+                location.pathname == '/curatedexperiences' ? (
+                  <Image src={experienceIcon} alt="experience" />
+                ) : (
+                  <Image src={experienceInactiveIcon} alt="experience" />
+                )
+            }
             </NavLink>
             </span>
             <span className="footerIcons_items">
             <NavLink className="" to="/select-booking">
-              <Image src={planIcon} alt="plan" />
-                PLAN
+            {
+                location.pathname == '/select-booking' ? (
+                  <Image src={planIcon} alt="plan" />
+                ) : (
+                  <Image src={planInactiveIcon} alt="plan" />
+                )
+            }
             </NavLink>
             </span>
             <span className="footerIcons_items">
             <NavLink className="" to="/support">
-              <Image src={supportIcon} alt="support" />
-                SUPPORT
+            {
+                location.pathname == '/support' ? (
+                  <Image src={supportIcon} alt="support" />
+                ) : (
+                  <Image src={supportInactiveIcon} alt="support" />
+                )
+            }
             </NavLink>
             </span>
         </div>

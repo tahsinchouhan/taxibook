@@ -9,7 +9,7 @@
     height: 66.77px;
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .footerIcons_items{

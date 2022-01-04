@@ -105,6 +105,10 @@ export const SIGN_UP_VERIFY = "SIGN_UP_VERIFY";
 export const SIGN_UP_VERIFY_SUCCESS = "SIGN_UP_VERIFY_SUCCESS";
 export const SIGN_UP_VERIFY_ERROR = "SIGN_UP_VERIFY_ERROR";
 
+// Audio Journeys
+export const SET_AUDIO_JOURNEY_FILES = "SET_AUDIO_JOURNEY_FILES";
+export const GET_AUDIO_JOURNEY_FILES = "GET_AUDIO_JOURNEY_FILES";
+
 
 export * from "./common/actions";
 export * from "./auth/actions";

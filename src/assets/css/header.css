@@ -12,6 +12,34 @@
   position: relative;
   padding-top: 1rem;
 }
+.header_title_red{
+  width: 134px;
+  height: 30px;
+  left: 128px;
+  top: 22px;
+  
+  font-family: Red Hat Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 23px;
+  line-height: 70px;
+  
+  color: #FF4A68;
+}
+.header_title_yellow{
+  width: 134px;
+  height: 30px;
+  left: 128px;
+  top: 22px;
+  
+  font-family: Red Hat Display;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 23px;
+  line-height: 70px;
+  
+  color: #FF9E01;
+}
 .sidebar__toggler {
   position: absolute;
   left: 1rem;

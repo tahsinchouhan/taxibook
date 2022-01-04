@@ -1,0 +1,15 @@
+.audioJourney_banner {
+    background-image: url(../img/AudioJourney.png) !important;
+    /* background-image: url(../img/AudioJourneyBanner.png) !important; */
+    height: 311px;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.audioJourney_banner_center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

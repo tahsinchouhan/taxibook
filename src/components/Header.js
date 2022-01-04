@@ -113,14 +113,16 @@ function Header({showSignUpModal}) {
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
           <div style={{ textAlign: "center" }}>
-            <Image
+            {/* <Image
               onClick={goHome}
               className="image-fluid"
               src={logo}
               style={{ height: "100px", width: "88px" }}
               alt="Travel Bastar"
-            />
+            /> */}
             {/* <FaSistrix onClick={onSearchClick} className="searchIcon" /> */}
+            <span className="header_title_red">travel</span>
+            <span className="header_title_yellow">Baster</span>
             <svg
               className="searchIcon"
               onClick={onSearchClick}
