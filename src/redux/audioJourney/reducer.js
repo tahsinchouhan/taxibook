@@ -1,5 +1,6 @@
 import {
     SET_AUDIO_JOURNEY_FILES,
+    SET_AUDIO_JOURNEY_FILE
   } from "../actions";
   
   const INIT_STATE = {
