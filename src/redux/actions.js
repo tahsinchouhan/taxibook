@@ -108,6 +108,8 @@ export const SIGN_UP_VERIFY_ERROR = "SIGN_UP_VERIFY_ERROR";
 // Audio Journeys
 export const SET_AUDIO_JOURNEY_FILES = "SET_AUDIO_JOURNEY_FILES";
 export const GET_AUDIO_JOURNEY_FILES = "GET_AUDIO_JOURNEY_FILES";
+export const SET_AUDIO_JOURNEY_FILE = "SET_AUDIO_JOURNEY_FILE";
+export const GET_AUDIO_JOURNEY_FILE = "GET_AUDIO_JOURNEY_FILE";
 
 
 export * from "./common/actions";
