@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Image } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import Header from "../../components/Header";
+import FooterIcons from '../../Footer/FooterIcons'
 import Footer from "../travesaly/Footer";
 import bg from "../../assets/img/bg_12.jpg";
 import { useHistory, useParams } from "react-router-dom";
@@ -362,6 +363,7 @@ const Explores = () => {
           ) : null}
         </Container>
       </div>
+      <FooterIcons />
       <Footer />
     </>
   );

@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { useHistory } from "react-router-dom";
 import { API_PATH } from "../Path/Path";
 import Geocode from "react-geocode";
+import FooterIcons from '../Footer/FooterIcons'
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -221,6 +222,7 @@ function Packages() {
           </div>
         </>
       </Container>
+      <FooterIcons />
       <Footer />
     </React.Fragment>
   );

@@ -15,6 +15,7 @@ import hotel from "../../assets/img/hotel.png";
 import ticket from "../../assets/img/ticket.png";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
+import FooterIcons from '../../Footer/FooterIcons'
 
 function SelectBooking() {
   // const [passTab, setPassTab] = useState(false);
@@ -192,6 +193,7 @@ function SelectBooking() {
               </Row>
           </Container>
         </div>
+        <FooterIcons />
       </div>
     </>
   );

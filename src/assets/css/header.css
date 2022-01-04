@@ -1,7 +1,8 @@
 .sidebar {
-  background-color: var(--primary-color);
+  /* background-color: var(--primary-color); */
+  background-color: #F8F8F8;
   width: 300px;
-  color: #fff;
+  color: black;
 }
 
 .header {
@@ -18,6 +19,11 @@
   height: 40px;
   width: 40px;
 }
+.sidebar_links{
+  width: 100%;
+  color: #FF4A68;
+  margin: 0.75em 1em;
+}
 .header .logo {
   width: 110px;
 }
@@ -26,7 +32,8 @@
 }
 .sidebar__navlink {
   width: 100%;
-  color: #fff;
+  color: black;
+  border-bottom: 1px solid #E5E5E5;
   padding: 1rem;
   text-decoration: none;
   font-size: large;
