@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import {exportid} from '../../redux/actions'
 import SeoData from '../../SeoData.json'
 import AudioJourneyBanner from '../../components/AudioJourneyBanner'
+import QuickLinks from '../../components/QuickLinks'
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -193,6 +194,7 @@ const Explores = () => {
           </div> 
         </Container>*/}
         <AudioJourneyBanner />
+        <QuickLinks />
       </div>
       <Container>
         <div className="mb-5 mt-5">

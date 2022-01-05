@@ -1,0 +1,19 @@
+.flex_container {
+  left: 0;
+  bottom: 0;
+  width: 90%;
+  background-color: #FFFFFF;
+  color: white;
+  text-align: center;
+  height: 8em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 5%);
+}
+
+.flex_item {
+  padding-right: 0.5em;
+  padding-left: 0.5em;
+  border-right: 1px solid black;
+}
