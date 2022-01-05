@@ -25,9 +25,9 @@ function* setAudioJourneys({ payload }) {
   }
 }
 
-function* setAudioJourney({ id }) {
+function* setAudioJourney( {payload} ) {
   try {
-    const audioJourneyFile = yield call(AudioJourneyAsync, id);
+    const audioJourneyFile = yield call(AudioJourneyAsync, payload);
       yield put(setAudioJourneyFile(audioJourneyFile.data));
   } catch (error) {
     console.log(error);

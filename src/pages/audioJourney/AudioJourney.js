@@ -3,39 +3,23 @@ import "../../assets/css/audioJourney.css"
 import Header from "../../components/Header"
 // import { API_PATH } from "../../Path/Path"
 import { useDispatch, useSelector } from "react-redux";
-import { getAudioJourneyFiles } from "../../redux/audioJourney/actions"
+import { getAudioJourneyFiles, getAudioJourneyFile } from "../../redux/audioJourney/actions"
 import { Card, Container, Row, Col } from "react-bootstrap"
 import ReactAudioPlayer from 'react-audio-player';
 import img from "../../assets/img/AudioJourney.png"
 import playImg from "../../assets/icons/Play.png"
 
 const AudioJourney = () => {
-    // const [audioJourneyFilesData, setAudioJourneyFilesData] = useState([])
     const [selectedAudio, setSelectedAudio] = useState('')
     const dispatch = useDispatch();
     const { audioJourneyFiles } = useSelector((state) => state.audioJourneyReducer);
+    const { audioJourneyFile } = useSelector((state) => state.audioJourneyReducer);
     useEffect(()=>{
-        // getDestinations()
         dispatch(getAudioJourneyFiles())
+        dispatch(getAudioJourneyFile("61d2ef6437b54d212c80e4cb"))
     },[])
-    // console.log('audioJourneyFiles',audioJourneyFiles)
-
-    // const getDestinations = () => {
-    //     fetch(API_PATH + "/api/v1/files/list", {
-    //       method: "GET",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     })
-    //       .then((response) => response.json())
-    //       .then((json) => {
-    //         if (json.data !== undefined) {
-    //           console.log(json.data)
-    //           setAudioJourneyFilesData(json.data)
-    //         }
-    //       })
-    //       .catch((e) => console.log(e));
-    //   };
+    console.log('audioJourneyFiles',audioJourneyFiles)
+    console.log('audioJourneyFile',audioJourneyFile)
 
     const handlePlayClicked = (audioJourney) => {
       console.log('selected audioJourney', audioJourney)
