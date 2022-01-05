@@ -193,8 +193,10 @@ const Explores = () => {
             </div>
           </div> 
         </Container>*/}
-        <AudioJourneyBanner />
-        <QuickLinks />
+        <div fluid="true" className="d-sm-none">
+          <AudioJourneyBanner />
+          <QuickLinks />
+        </div>
       </div>
       <Container>
         <div className="mb-5 mt-5">
