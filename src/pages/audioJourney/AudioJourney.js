@@ -8,8 +8,10 @@ import { Card, Container, Row, Col } from "react-bootstrap"
 import ReactAudioPlayer from 'react-audio-player';
 import img from "../../assets/img/AudioJourney.png"
 import playImg from "../../assets/icons/Play.png"
+import { useHistory } from "react-router-dom";
 
 const AudioJourney = () => {
+    const history = useHistory()
     const [selectedAudio, setSelectedAudio] = useState('')
     const dispatch = useDispatch();
     const { audioJourneyFiles } = useSelector((state) => state.audioJourneyReducer);
@@ -24,6 +26,10 @@ const AudioJourney = () => {
     const handlePlayClicked = (audioJourney) => {
       console.log('selected audioJourney', audioJourney)
       setSelectedAudio(audioJourney.file)
+    }
+
+    const goToAudioJourneyDetail = (item) => {
+      history.push("audioJourney/" + item._id)
     }
 
     return (
@@ -49,7 +55,7 @@ const AudioJourney = () => {
                     <Card.Body>
                         <Row>
                           <Col xs={4}>
-                            <Card.Img variant="top" src={img} />
+                            <Card.Img variant="top" src={img} onClick={() => goToAudioJourneyDetail(item)}/>
                           </Col>
                           <Col xs={6}>
                             <Card.Title>{item.destination.title}</Card.Title>
