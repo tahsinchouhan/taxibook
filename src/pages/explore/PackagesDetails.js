@@ -7,7 +7,7 @@ import bg from "../../assets/img/bg_12.jpg";
 import GoogleMapReact from "google-map-react";
 import { API_PATH } from "../../Path/Path";
 import { Button } from "bootstrap";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 import Modal from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
@@ -23,7 +23,8 @@ const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
 };
 const PackagesDetails = (props) => {
-  // console.log({props})
+
+  const { name } = useParams();
 
   const [enquireModal, setEnquireModal] = useState();
   const [modalReviewShow, setModalReviewShow] = useState(false);
@@ -38,14 +39,13 @@ const PackagesDetails = (props) => {
   const [modalShow, setModalShow] = useState(false);
 
 
-  const getSeoDetails = async (id) => {
-    // console.log('Package Id ', props?.location?.item)
-    const res = await fetch(API_PATH + `/api/v1/packages/${id}`)
-    const data = await res.json()
-    console.log('Seo Data', data.data)
-    document.title = data.data.seo_title || 'Travel Bastar';
-    document.querySelector("meta[name='description']").setAttribute('content', (data.data.seo_description || ''));
-    document.querySelector("meta[name='keywords']").setAttribute('content', (data.data.seo_keywords || ''));
+  const getSeoDetails = async (data) => {
+    // const res = await fetch(API_PATH + `/api/v1/packages/${name}`)
+    // const data = await res.json()
+
+    document.title = data?.data?.seo_title || 'Travel Bastar';
+    document.querySelector("meta[name='description']").setAttribute('content', (data?.data?.seo_description || ''));
+    document.querySelector("meta[name='keywords']").setAttribute('content', (data?.data?.seo_keywords || ''));
 
     // const script = document.createElement("script");
     // script.type = "application/ld+json";
@@ -74,25 +74,26 @@ const PackagesDetails = (props) => {
   };
   var id;
   useEffect(() => {
-    if (props.location.item) {
-      console.log("props.location.item",props.location.item)
-      localStorage.setItem("id", props.location.item);
-      id = localStorage.getItem("id");
-    } else {
-      id = localStorage.getItem("id");
-    }
-    getSeoDetails(id);
-    getPackages();
+    // if (props.location.item) {
+    //   console.log("props.location.item",props.location.item)
+    //   localStorage.setItem("id", props.location.item);
+    //   id = localStorage.getItem("id");
+    // } else {
+    //   id = localStorage.getItem("id");
+    // }
+    // getSeoDetails(name);
+    getPackages(name);
     getReview();
     getEnquiry();
     window.scrollTo(0, 0);
   }, [props]);
 
  
-  const getPackages = () => {
-    fetch(API_PATH + `/api/v1/packages/${id}`)
+  const getPackages = (name) => {
+    fetch(API_PATH + `/api/v1/packages/${name}`)
       .then((response) => response.json())
       .then((res) => {
+        getSeoDetails(res)
         setPackages(res.data);
         setInclusions(res.data.inclusions);
         setExclusions(res.data.exclusions);
