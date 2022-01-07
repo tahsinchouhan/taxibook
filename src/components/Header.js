@@ -19,7 +19,13 @@ import logo from "../assets/img/logo.png";
 import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginModal from "../components/modal/LoginModal";
-// import SignupModal from "../components/modal/SignupModal";
+import SignupModal from "../components/modal/SignupModal";
+import loginIcon from "../assets/icons/Loginicon.png";
+import homeIcon from "../assets/icons/Homestays.png";
+import experienceIcon from "../assets/icons/experience.png";
+import exploreIcon from "../assets/icons/explore.png";
+import planIcon from "../assets/icons/plan.png";
+import supportIcon from "../assets/icons/support.png";
 import { logout } from "../redux/actions";
 function Header({showSignUpModal}) {
   const [modalShow, setModalShow] = useState(false);
@@ -45,12 +51,13 @@ function Header({showSignUpModal}) {
 
   useEffect(() => {
     if(showSignUpModal){
-      setModalShow(true);
+      setSignup(true);
     }
   }, [showSignUpModal]);
 
   useEffect(() => {
     const customerID = JSON.parse(localStorage.getItem("customer_id"));
+    console.log("customerID", customerID);
     if(customerID){
       let userData = JSON.parse(localStorage.getItem('user_data'));
       if(userData){
@@ -73,7 +80,7 @@ function Header({showSignUpModal}) {
   };
 
   const onSearchingHolder = () => {
-    
+    console.log("hellllooo");
   };
 
   const goHome = () => {
@@ -106,14 +113,16 @@ function Header({showSignUpModal}) {
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
           <div style={{ textAlign: "center" }}>
-            <Image
+            {/* <Image
               onClick={goHome}
               className="image-fluid"
               src={logo}
               style={{ height: "100px", width: "88px" }}
               alt="Travel Bastar"
-            />
+            /> */}
             {/* <FaSistrix onClick={onSearchClick} className="searchIcon" /> */}
+            <span className="header_title_red">travel</span>
+            <span className="header_title_yellow">Baster</span>
             <svg
               className="searchIcon"
               onClick={onSearchClick}
@@ -188,22 +197,50 @@ function Header({showSignUpModal}) {
           <Offcanvas.Body>
             <Nav className="me-auto sidebar__nav">
               <NavLink to="/" className="sidebar__navlink">
-                HOME
+              <Image src={loginIcon} alt="login" />
+                <span style={{left: "76px", position: "absolute"}}>LOGIN</span>
+              </NavLink>
+              <NavLink to="/home" className="sidebar__navlink">
+              <Image src={homeIcon} alt="home" />
+                <span style={{left: "76px", position: "absolute"}}>HOME</span>
               </NavLink>
               <NavLink className="sidebar__navlink" to="/explore">
+              <Image src={exploreIcon} alt="explore" />
+                <span style={{left: "76px", position: "absolute"}}>EXPLORE</span>
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/curatedexperiences">
+              <Image src={experienceIcon} alt="experience" />
+              <span style={{left: "76px", position: "absolute"}}>EXPERIENCE</span>
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/select-booking">
+              <Image src={planIcon} alt="plan" />
+              <span style={{left: "76px", position: "absolute"}}>PLAN</span>
+              </NavLink>
+              <NavLink className="sidebar__navlink" to="/explore">
+              <Image src={supportIcon} alt="support" />
+                <span style={{left: "76px", position: "absolute"}}>SUPPORT</span>
+              </NavLink>
+
+
+              <NavLink className="sidebar_links" to="/explore">
+                About Us
+              </NavLink>
+              <NavLink className="sidebar_links" to="/explore">
+                Contact Us
+              </NavLink>
+
+              {/* <NavLink className="sidebar__navlink" to="/explore">
                 EXPLORE
               </NavLink>
-              
               <NavLink className="sidebar__navlink" to="/buspass">
                 BUS BOOKING
               </NavLink>
               <NavLink
                 className="sidebar__navlink"
-                to={{ pathname: "https://blog.travelbastar.com" }}
-                target="_blank"
+                to="https://blog.travelbastar.com"
               >
                 BLOG
-              </NavLink>
+              </NavLink> */}
               
             </Nav>
           </Offcanvas.Body>
@@ -345,7 +382,7 @@ function Header({showSignUpModal}) {
         show={modalShow}
         handleClose={handleLoginClose}
       />
-      {/* <SignupModal show={signup} handleClose={handleSignupClose} /> */}
+      <SignupModal show={signup} handleClose={handleSignupClose} />
     </>
   );
 }

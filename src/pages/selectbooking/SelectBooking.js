@@ -12,6 +12,7 @@ import doodle from "../../assets/img/doodle.png";
 import cab from "../../assets/img/cab.png";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
+import FooterIcons from '../../Footer/FooterIcons'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import CarouselReact from "react-multi-carousel";
@@ -300,6 +301,9 @@ function SelectBooking() {
               }
             </Row>
           </Container>
+        </div>
+        <div fluid="true" className="d-sm-none">
+          <FooterIcons />
         </div>
       </div>
     </>

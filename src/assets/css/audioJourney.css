@@ -1,0 +1,25 @@
+.audioJourney_heading{
+    font-size: 29px;
+}
+
+.audioJourney_description{
+    font-size: 12px;
+}
+
+.audio_journey_player{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #FFFFFF;
+  color: white;
+  text-align: center;
+  height: 66.77px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.play_btn_center {
+    align-self: center;
+}

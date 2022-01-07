@@ -86,6 +86,9 @@ import CabList from "./pages/Cab/CabList";
 import Profile from "./pages/profile/profile";
 import BookProfile from "./pages/profile/BookingProfile";
 
+import AudioJourney from "./pages/audioJourney/AudioJourney"
+import AudioJourneyDetail from "./pages/audioJourneyDeatil/AudioJourneyDetail";
+
 function App() {
   return (
     <>
@@ -212,6 +215,9 @@ function App() {
             <Route exact path="/checkoutpage" component={CheckoutPage} />
             <Route exact path="/cab" component={Cab} />
             <Route exact path="/cablist" component={CabList} />
+
+            <Route exact path="/audioJourney" component={AudioJourney} />
+            <Route exact path="/audioJourney/:id" component={AudioJourneyDetail} />
           </Switch>
         </div>
       </Router>

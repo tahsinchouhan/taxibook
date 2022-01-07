@@ -9,6 +9,7 @@ import quizReducer from "./quiz/reducer";
 import hotelReducer from "./hotel/reducer";
 import packageReducer from "./packages/reducer";
 import signupReducer from "./signup/reducer";
+import audioJourneyReducer from "./audioJourney/reducer"
 
 const reducers = combineReducers({
   commonReducer,
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   exploreReducer,
   quizReducer,
   packageReducer,
-  signupReducer
+  signupReducer,
+  audioJourneyReducer
 });
 export default reducers;

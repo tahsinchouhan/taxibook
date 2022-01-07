@@ -1,0 +1,37 @@
+.audio_journey_detail{
+    background-image: url(../img/AudioJourney.png);
+    height: 100vh;
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+.audio_journey_detail_center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 29px;
+}
+
+.audio_journey_detail_player{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #FFFFFF;
+    color: white;
+    text-align: center;
+    height: 66.77px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+  .top_right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 20px;
+    color: white;
+  }

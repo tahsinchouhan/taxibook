@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Image } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import Header from "../../components/Header";
+import FooterIcons from '../../Footer/FooterIcons'
 import Footer from "../travesaly/Footer";
 import bg from "../../assets/img/bg_12.jpg";
 import { useHistory, useParams } from "react-router-dom";
@@ -14,6 +15,8 @@ import Geocode from "react-geocode";
 import { useDispatch } from "react-redux";
 import {exportid} from '../../redux/actions'
 import SeoData from '../../SeoData.json'
+import AudioJourneyBanner from '../../components/AudioJourneyBanner'
+import QuickLinks from '../../components/QuickLinks'
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -170,11 +173,13 @@ const Explores = () => {
         }}
       >
         <Header />
-        <Container className="py-5">
+        {/* <Container className="py-5">
           <div className="search my-5 py-5">
-            <h1 className="search__title pt-5">Explore Bastar's <span style={{textTransform:"capitalize"}} >{id}</span></h1>
+            <h1 className="search__title pt-5">Explore Bastar's <span style={{textTransform:"capitalize"}} >{id}</span></h1> */}
+
             {/* <h1 className="search__title pt-5">Near You</h1> */}
-            <div className="search__inner">
+            
+            {/* <div className="search__inner">
               <div className="search__block">
                 <div className="block__location" onClick={goToSearch}>
                   <label className="block--text code" >
@@ -186,8 +191,12 @@ const Explores = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </Container>
+          </div> 
+        </Container>*/}
+        <div fluid="true" className="d-sm-none">
+          <AudioJourneyBanner />
+          <QuickLinks />
+        </div>
       </div>
       <Container>
         <div className="mb-5 mt-5">
@@ -361,6 +370,9 @@ const Explores = () => {
             </Carousel>
           ) : null}
         </Container>
+      </div>
+      <div fluid="true" className="d-sm-none">
+        <FooterIcons />
       </div>
       <Footer />
     </>

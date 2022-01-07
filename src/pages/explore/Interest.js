@@ -16,6 +16,7 @@ import TravellerTicket from "../travesaly/TravellerTicket";
 import TravellerTicketMobile from "../travesaly/TravellerTicketMobile";
 import { useSelector } from "react-redux";
 import hotelReducer from "../../redux/hotel/reducer";
+import AudioJourneyBanner from '../../components/AudioJourneyBanner'
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -176,6 +177,7 @@ const Interest = () => {
     <>
       <Container>
         <Header />
+        <AudioJourneyBanner />
         <div className="mb-5 mt-5">
           <div
             style={{
