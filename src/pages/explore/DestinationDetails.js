@@ -8,7 +8,7 @@ import GoogleMapReact from "google-map-react";
 import ReactPlayer from "react-player";
 import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import TravellerTicket from "../travesaly/TravellerTicket";
 import {Howl, Howler} from 'howler';
 import Audio from '../..//assets/audio/Audio.mp3'
@@ -20,7 +20,9 @@ const Marker = () => {
 };
 
 const DestinationDetails = (props) => {
+  const { name } = useParams();
   const history = useHistory();
+
   const [destinations, setDestinations] = useState("");
   const [packagesdata, getPackagesdata] = useState([]);
   const [zoom, setZoom] = useState(11);
@@ -29,15 +31,13 @@ const DestinationDetails = (props) => {
       src:Audio
     });
 
-    const getSeoDetails = async (id) => {
-      // console.log('Destination Id ', props?.location?.id)
-      console.log('Check id', id)
+    const getSeoDetails = async (data) => {
       try {
-        const res = await fetch(API_PATH + `/api/v1/destinations/${id}`)
-        const data = await res.json()
-        document.title = data.data.seo_title || 'Travel Bastar';
-        document.querySelector("meta[name='description']").setAttribute('content', (data.data.seo_description || ''));
-        document.querySelector("meta[name='keywords']").setAttribute('content', (data.data.seo_keywords || ''));
+        // const res = await fetch(API_PATH + `/api/v1/destinations/${id}`)
+        // const data = await res.json()
+        document.title = data?.data?.seo_title || 'Travel Bastar';
+        document.querySelector("meta[name='description']").setAttribute('content', (data?.data?.seo_description || ''));
+        document.querySelector("meta[name='keywords']").setAttribute('content', (data?.data?.seo_keywords || ''));
         
         // const script = document.createElement("script");
         // script.src = "/path/to/resource.js";
@@ -57,44 +57,39 @@ const DestinationDetails = (props) => {
   var id;
 
   useEffect(() => {
-    if (props.location.id) {
-      localStorage.setItem("id", props.location.id);
-      id = localStorage.getItem("id");
-      console.log('1')
-    } else {
-      id = localStorage.getItem("id");
-      console.log('2')
-    }
+    // if (props.location.id) {
+    //   localStorage.setItem("id", props.location.id);
+    //   id = localStorage.getItem("id");
+    //   console.log('1')
+    // } else {
+    //   id = localStorage.getItem("id");
+    //   console.log('2')
+    // }
     // console.log('abcd')
     sound.play();
-    Howler.volume(0);
+    Howler.volume(0.1);
   }, []);
 
   useEffect(() => {
-    if (props.location.id) {
-      // console.log("props.location.id",props.location.id)
-      localStorage.setItem("id", props.location.id);
-      id = localStorage.getItem("id");
-      console.log('1')
-
-    } else {
-      id = localStorage.getItem("id");
-      console.log('2')
-    }
-    getSeoDetails(id)
-    getPackages();
+    // if (props.location.id) {
+    //   // console.log("props.location.id",props.location.id)
+    //   localStorage.setItem("id", props.location.id);
+    //   id = localStorage.getItem("id");
+    // } else {
+    //   id = localStorage.getItem("id");
+    // }
+    // getSeoDetails(id)
+    getPackages(name);
     getPackagesid();
     window.scrollTo(0, 0);
-    console.log('avcs')
   }, [props]);
 
-  const getPackages = () => {
-    fetch(API_PATH + `/api/v1/destinations/${id}`)
+  const getPackages = (name) => {
+    fetch(API_PATH + `/api/v1/destinations/${name}`)
       .then((response) => response.json())
       .then((res) => {
+        getSeoDetails(res)
         setDestinations(res.data);
-        console.log('destinations',destinations)
-
       })
       .catch((e) => console.log(e));
   };
