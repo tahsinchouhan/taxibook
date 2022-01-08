@@ -154,7 +154,7 @@ function Destination() {
                 <div
                   onClick={() =>
                     history.push({
-                      pathname: `/destination_details/${item.title}`,
+                      pathname: `/destination_details/${item.title.split(" ").join("-")}`,
                       id: item._id,
                     })
                   }

@@ -64,26 +64,10 @@ function Search() {
   };
 
   const searchingData = (value) => {
-    const res = value ? 
-                destinations.filter((dest) => dest.location.name.includes(value) || dest.address.includes(value) || dest.title.includes(value)) : 
-                storeDestinations;
-    const res1 = value ? 
-                packages.filter((pack) => pack.category.category_name.includes(value) || pack.title.includes(value) || pack.sub_title.includes(value)) : 
-                storePackages ;
+    const res = value ? destinations.filter((dest) => dest.location.name.toLowerCase().indexOf(value.toLowerCase()) !== -1 || dest.address.toLowerCase().indexOf(value.toLowerCase()) !== -1 || dest.title.toLowerCase().indexOf(value.toLowerCase()) !== -1 ) : storeDestinations;
+    const res1 = value ? packages.filter((pack) => pack?.category?.category_name?.toLowerCase().indexOf(value.toLowerCase()) !== -1 || pack.title.toLowerCase().indexOf(value.toLowerCase()) !== -1 || pack.sub_title.toLowerCase().indexOf(value.toLowerCase()) !== -1 ) : storePackages;
     setDestinations(res)
     setPackages(res1)
-    // setSearch(value);
-    // if (value) {
-    //   setFlag(true);
-    // } else {
-    //   setFlag(false);
-    // }    
-    // fetch(API_PATH + `/api/v1/search?searchvalue=${value}`)
-    //   .then((response) => response.json())
-    //   .then((json) => {
-    //     if (json.data !== undefined) setSearch(json.data);
-    //   })
-    //   .catch((e) => console.log(e));
   };
 
   return (
@@ -288,7 +272,7 @@ function Search() {
                           key={index}
                           onClick={() =>
                             history.push({
-                              pathname: `/destination_details/${item.title}`,
+                              pathname: `/destination_details/${item.title.split(" ").join("-")}`,
                               id: item._id,
                             })
                           }
@@ -329,7 +313,7 @@ function Search() {
                           key={index}
                           onClick={() =>
                             history.push({
-                              pathname: `/destination_details/${item.title}`,
+                              pathname: `/destination_details/${item.title.split(" ").join("-")}`,                     
                               id: item._id,
                             })
                           }
@@ -449,7 +433,7 @@ function Search() {
                       <div
                         onClick={() =>
                           history.push({
-                            pathname: `/destination_details/${item.title}`,
+                            pathname: `/destination_details/${item.title.split(" ").join("-")}`,
                             id: item._id,
                           })
                         }
@@ -496,8 +480,8 @@ function Search() {
                       <div
                         onClick={() =>
                           history.push({
-                            pathname: `/packages_details/${item.title}`,
-                            item: item._id,
+                            pathname: `/packages_details/${item.title.split(" ").join("-")}`,
+                            id: item._id,
                           })
                         }
                         className="search_div"
@@ -533,7 +517,7 @@ function Search() {
 
                               }}
                             >
-                              {item.category.category_name}
+                              {item?.category?.category_name}
                             </h6>
                           </div>
                           <div>
