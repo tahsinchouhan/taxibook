@@ -154,7 +154,7 @@ const Explores = () => {
 
   const onDestinations = (value) => {
     history.push({
-      pathname: `/destination_details/${value.title}`,
+      pathname: `/destination_details/${value.title.split(" ").join("-")}`,
       id: value._id,
     });
   };
@@ -260,8 +260,8 @@ const Explores = () => {
                     key={key}
                     onClick={() =>
                       history.push({
-                        pathname: `/packages_details/${item.title}`,
-                        item: item._id,
+                        pathname: `/packages_details/${item.title.split(" ").join("-")}`,
+                        id: item._id,
                       })
                     }
                   >

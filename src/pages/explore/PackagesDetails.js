@@ -24,7 +24,8 @@ const Marker = () => {
 };
 const PackagesDetails = (props) => {
 
-  const { name } = useParams();
+  let { name } = useParams();
+  name = name.split("-").join(" ");
 
   const [enquireModal, setEnquireModal] = useState();
   const [modalReviewShow, setModalReviewShow] = useState(false);
@@ -40,21 +41,11 @@ const PackagesDetails = (props) => {
 
 
   const getSeoDetails = async (data) => {
-    // const res = await fetch(API_PATH + `/api/v1/packages/${name}`)
-    // const data = await res.json()
-
+   
     document.title = data?.data?.seo_title || 'Travel Bastar';
     document.querySelector("meta[name='description']").setAttribute('content', (data?.data?.seo_description || ''));
     document.querySelector("meta[name='keywords']").setAttribute('content', (data?.data?.seo_keywords || ''));
-
-    // const script = document.createElement("script");
-    // script.type = "application/ld+json";
-    // script.src = "/path/to/resource.js";
-    // script.async = true;
-    // let text = document.createTextNode(data?.data?.seo[0].replace('<script type="application/ld+json">', '').replace('</script>', ''));
-    // script.appendChild(text);
-    // document.body.appendChild(script || '');
-    let text = data?.data?.seo[0].replace('<script type="application/ld+json">', '').replace('</script>', '');
+    let text = data?.data?.seo[0]?.replace('<script type="application/ld+json">', '')?.replace('</script>', '');
     document.querySelector("script[id='seoSchema']").innerHTML = text || '';
   }
 
@@ -72,16 +63,8 @@ const PackagesDetails = (props) => {
   const handEnquireClose = () => {
     setEnquireModal(false);
   };
-  var id;
+ 
   useEffect(() => {
-    // if (props.location.item) {
-    //   console.log("props.location.item",props.location.item)
-    //   localStorage.setItem("id", props.location.item);
-    //   id = localStorage.getItem("id");
-    // } else {
-    //   id = localStorage.getItem("id");
-    // }
-    // getSeoDetails(name);
     getPackages(name);
     getReview();
     getEnquiry();
@@ -114,11 +97,11 @@ const PackagesDetails = (props) => {
     })
       .then((response) => response.json())
       .then((res) => {
-        console.log("imagd res",res)
+        // console.log("imagd res",res)
         setReview(res.data);
         console.log('res.data',res.data);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.log('Error', e));
   };
 
   const getEnquiry = () => {
@@ -126,24 +109,14 @@ const PackagesDetails = (props) => {
       .then((response) => response.json())
       .then((res) => {
         setEnquiry(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.log('Error', e));
   };
 
   var current = null;
   var cnt = 0;
-  // review.map((data) => {
-  //   if (data.star_rating != current) {
-  //     current = data.star_rating;
-  //     cnt = 1;
-  //     console.log(current + " comes --> " + cnt + " times");
-  //   } else {
-  //     cnt++;
-  //   }
-  // });
-  // console.log(current + " comes --> " + cnt + " times");
-
+  
   for (var i = 0; i < review.length; i++) {
     if (review[i].star_rating != current) {
       if (cnt > 0) {
@@ -154,13 +127,11 @@ const PackagesDetails = (props) => {
       // } else {
       //   cnt++;
       // }
-      console.log(cnt)
+      // console.log(cnt)
     }
     // console.log(i)
   }
-  // if (cnt > 0) {
-  //   console.log(current + " comes --> " + cnt + " times");
-  // }
+  
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -178,16 +149,6 @@ const PackagesDetails = (props) => {
       slidesToSlide: 1, // optional, default to 1.
     },
   };
-
-  const onPackages =(data)=>{
-    console.log("id in packages", data)
-    history.push({
-      pathname: `/packages_details/${data.title}`,
-      id: data._id,
-    })
-    localStorage.setItem("id", data._id);
-
-  }
 
   // const bookHandler = () =>{
   //   history.push({
@@ -255,11 +216,16 @@ const PackagesDetails = (props) => {
       ) : null}
 
       <Container className="mb-5 pb-5">
-        <h4 className="block__title mt-5">
-          <span>Price</span>
-        </h4>
-        <h5 className="price__title pt-3 mb-1">₹{packages.price}</h5>
+        {/* 0 package_type Booking , 1 package_type info */}
+        {
+          packages?.package_type === 0 && <div>
+              <h4 className="block__title mt-5"><span>Price</span></h4>
+              <h5 className="price__title pt-3 mb-1">₹{packages.price}</h5>
+            </div>
+        }
+
         <p>{packages.duration}</p>
+
         <div className="block pt-5">
           <h4 className="block__title">
             <span>Location</span>
@@ -339,10 +305,10 @@ const PackagesDetails = (props) => {
           <h4 className="block__title">
             <span>Contact Details</span>
           </h4>
-          {packages ? (
+          {packages && packages.package_type === 1 ? (
             <div>
               <h5 className="price__title pt-3 mb-1">
-                {packages.tour_operator_account.name}
+                {packages?.tour_operator_account?.name}
               </h5>
               <a
                 className="code"
@@ -696,9 +662,12 @@ const PackagesDetails = (props) => {
                   <>
                   <div
                   key={key}
-                    onClick={() =>
-                     onPackages(data)
-                    }
+                  onClick={() =>
+                    history.push({
+                      pathname: `/packages_details/${data.title.split(" ").join("-")}`,
+                      id: data._id,
+                    })
+                  }
                   >
                     <Image
                       draggable={false}

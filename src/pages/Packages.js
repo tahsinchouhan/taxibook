@@ -199,7 +199,7 @@ function Packages() {
                 <div
                   onClick={() =>
                     history.push({
-                      pathname: `/packages_details/${item.title}`,
+                      pathname: `/packages_details/${item.title.split(" ").join("-")}`,
                       item: item._id,
                     })
                   }
