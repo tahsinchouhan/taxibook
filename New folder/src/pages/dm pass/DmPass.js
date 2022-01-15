@@ -55,14 +55,14 @@ function DmPass({ DmPassDetails }) {
   const data = [
     {
       "Vehicle": vehicle,
-      "DaysTravel": moment(endDate).format("YYYYMMDD")-moment(startDate).format("YYYYMMDD") + 1,
+      "DaysTravel": moment(endDate).format("YYYYMMDD") - moment(startDate).format("YYYYMMDD") + 1,
       "Travellers": travellers,
     }
   ]
 
   const onDmTicketShow = () => {
-      DmPassDetails({ data })
-      history.push('/travelticket')
+    DmPassDetails({ data })
+    history.push('/travelticket')
   };
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
@@ -146,9 +146,9 @@ function DmPass({ DmPassDetails }) {
                       controlId="exampleForm.ControlInput1"
                     >
                       <div>
-                      <Form.Label className="dm-ticket">Start Date</Form.Label><br />
+                        <Form.Label className="dm-ticket">Start Date</Form.Label><br />
                         <Col xs={12} md={6}>
-                          <div style={{width: 200}}>
+                          <div style={{ width: 200 }}>
                             <img
                               className="location-userdatas-calendar"
                               src={calendar}
@@ -163,18 +163,18 @@ function DmPass({ DmPassDetails }) {
                             />
                           </div>
                         </Col>
-                        </div>
+                      </div>
                     </Form.Group>
                   </Col>
                   <Col xs={12} md={3} className="mt-2">
-                  <Form.Group
+                    <Form.Group
                       className=""
                       controlId="exampleForm.ControlInput1"
                     >
                       <div>
-                      <Form.Label className="dm-ticket">End Date</Form.Label><br />
+                        <Form.Label className="dm-ticket">End Date</Form.Label><br />
                         <Col xs={12} md={6}>
-                          <div style={{width: 200}}>
+                          <div style={{ width: 200 }}>
                             <img
                               className="location-userdatas-calendar"
                               src={calendar}
@@ -190,7 +190,7 @@ function DmPass({ DmPassDetails }) {
                             />
                           </div>
                         </Col>
-                        </div>
+                      </div>
                     </Form.Group>
                   </Col>
                 </Row>
@@ -275,15 +275,15 @@ function DmPass({ DmPassDetails }) {
                 </Form.Group>
               </Col>
               <Col xs={12} md={4} className="mt-2">
-                <Form.Group className=""  controlId="exampleForm.ControlInput1" >
+                <Form.Group className="" controlId="exampleForm.ControlInput1" >
                   <Row>
                     <Col xs={6} md={4}>
                       <div>
-                        <Form.Label className="dm-ticket">Start Date</Form.Label><br/>
+                        <Form.Label className="dm-ticket">Start Date</Form.Label><br />
                         <img
                           className="location-userdatas-calendar"
                           src={calendar}
-                          style={{ width: 25, height: 30,marginTop: -10 }}
+                          style={{ width: 25, height: 30, marginTop: -10 }}
                         />
                         <DatePicker
                           selected={startDate}
@@ -296,11 +296,11 @@ function DmPass({ DmPassDetails }) {
                     </Col>
                     <Col xs={6} md={4}>
                       <div >
-                        <Form.Label className="dm-ticket">End Date</Form.Label><br/>
+                        <Form.Label className="dm-ticket">End Date</Form.Label><br />
                         <img
                           className="location-userdatas-calendar"
                           src={calendar}
-                          style={{ width: 25, height: 30,marginTop: -10 }}
+                          style={{ width: 25, height: 30, marginTop: -10 }}
                         />
                         <DatePicker
                           selected={endDate}

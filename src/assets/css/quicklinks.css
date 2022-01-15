@@ -10,10 +10,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, 5%);
+  justify-content: center;
 }
 
 .flex_item {
   padding-right: 0.5em;
   padding-left: 0.5em;
-  border-right: 1px solid black;
+  border-right: 1px solid rgb(160, 156, 156);
 }

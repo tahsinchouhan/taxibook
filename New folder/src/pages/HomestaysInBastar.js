@@ -30,7 +30,7 @@ function HomestaysInBastar() {
       console.log(pos);
       setLoation(pos.coords);
     });
-  }; 
+  };
 
   const getPackages = async () => {
     try {

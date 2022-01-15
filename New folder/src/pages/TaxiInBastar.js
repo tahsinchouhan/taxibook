@@ -138,11 +138,11 @@ function TaxiInBastar() {
 
           <div>
             {/* <h6><span>Sort By Price :</span></h6> */}
-            <Form>
+            { /*<Form>
               <Form.Group
                 controlId="formGridState"
                 className="d-flex align-items-center"
-              >
+              > 
                 <Form.Label style={{ width: "100%" }}>
                   Sort By Price :
                 </Form.Label>
@@ -155,7 +155,8 @@ function TaxiInBastar() {
                   <option value="lowToHigh">Low to High</option>
                 </Form.Select>
               </Form.Group>
-            </Form>
+            </Form> */
+            }
           </div>
         </div>
         <>

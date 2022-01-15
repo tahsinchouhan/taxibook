@@ -6,7 +6,11 @@ import Header from "../components/Header";
 import { useHistory } from "react-router-dom";
 import { API_PATH } from "../Path/Path";
 import Geocode from "react-geocode";
-import FooterIcons from '../Footer/FooterIcons'
+import FooterIcons from '../Footer/FooterIcons';
+import Sandals from "../assets/img/sandals.png";
+import Map from "../assets/img/Map.png";
+import Camera from "../assets/img/Camera.png";
+import Backpack from "../assets/img/Backpack.png";
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -104,12 +108,26 @@ function Packages() {
     }
   }
 
+  const icons = {
+    border: " 1px solid rgba(0, 0, 0, 0.25)",
+    height: "90px",
+    boxSizing: "borderBox",
+    padding: "5px",
+    alignItems: "center",
+    borderRadius: "8px"
+  }
+  const img = {
+    width: "60%",
+    height: "40px",
+    marginLeft: "10px",
+    marginTop: "10px"
+  }
   return (
     <React.Fragment>
       <Header />
       <Container>
         <div className="mt-5 mb-5">
-          <div className="explore-search">
+          {/*  <div className="explore-search">
             <form className="d-flex" style={{ position: "relative" }}>
               <Form.Control
                 type="text"
@@ -132,19 +150,19 @@ function Packages() {
                 <BsSearch style={{ marginTop: -20 }} color="grey" size="25px" />
               </div>
             </form>
-          </div>
+              </div>  */}
         </div>
         <div className="d-flex justify-content-between">
           <div>
-            <h2 className="package__title mb-5">
-              <span>Packages</span>
+            <h2 className="package__title mb-5" style={{ marginTop: "-10px", fontWeight: "bold" }}>
+              <span>Travel Packages and itneraries </span>
             </h2>
 
           </div>
 
           <div>
             {/* <h6><span>Sort By Price :</span></h6> */}
-            <Form>
+            {/* <Form>
               <Form.Group controlId="formGridState" className="d-flex">
                 <Form.Label style={{width:"100%"}}>Sort By Price :</Form.Label>
                 <Form.Select value={selected}
@@ -155,8 +173,17 @@ function Packages() {
                 </Form.Select>
               </Form.Group>
             </Form>
+           */ }
           </div>
         </div>
+        <div className="d-flex justify-content-between">
+          <div style={icons} > <img src={Sandals} style={img} alt="image" /> <p style={{ marginLeft: "5px" }}> Leisure </p> </div>
+          <div style={icons}> <img src={Camera} style={img} alt="image" /> <p style={{ marginLeft: "5px" }}> Culture </p>  </div>
+          <div style={icons}>  <img src={Backpack} style={img} alt="image" /> <p style={{ marginLeft: "5px" }}> Adventure </p></div>
+          <div style={icons}> <img src={Map} style={img} alt="image" /> <p style={{ marginLeft: "5px" }}> Heritage </p></div>
+        </div>
+
+
         <>
           <div
             style={{
@@ -179,8 +206,8 @@ function Packages() {
                   style={{
                     width: 300,
                     height: 200,
-                    marginRight: 15,
-                    marginTop: 100,
+                    marginLeft: "15px",
+                    marginTop: "140px"
                   }}
                 >
                   <Image
@@ -193,27 +220,18 @@ function Packages() {
                     <h6 className="packages__block-title_ mt-3 mb-0">
                       {item.title}
                     </h6>
+                    <p style={{ fontSize: "15px", height: "50px", overflow: "hidden" }}> {item.description} </p>
                     <div
                       style={{
                         paddingTop: 2,
                       }}
                     >
-                      {/* <h6
-                        style={{
-                          background: "#BEBEBE",
-                          display: "inline",
-                          padding: "3px",
-                          borderRadius: "4px",
-                          fontSize: "14px",
-                        }}
-                      >
-                        {item.category.category_name}
-                      </h6> */}
                     </div>
-                    <div>
-                      <small className="packages__block-subtitle">
+                    <div style={{ backgroundColor: "#f0f0f0", marginTop: "-15px", borderRadius: "2px", display: "flex" }}>
+                      <div style={{ marginTop: "8px" }}>  <p> {item.duration}</p> </div>
+                      <div style={{ marginLeft: "100px" }}>  <p style={{ fontSize: "26px", color: "#0fa453", fontWeight: "bold" }}>
                         ₹ {item.price}
-                      </small>
+                      </p> </div>
                     </div>
                   </div>
                 </div>

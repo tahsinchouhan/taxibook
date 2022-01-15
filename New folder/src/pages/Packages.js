@@ -136,16 +136,16 @@ function Packages() {
         <div className="d-flex justify-content-between">
           <div>
             <h2 className="package__title mb-5">
-              <span>Packages</span>
+              <span>Packags</span>
             </h2>
 
           </div>
 
           <div>
             {/* <h6><span>Sort By Price :</span></h6> */}
-            <Form>
+            {/* <Form>
               <Form.Group controlId="formGridState" className="d-flex">
-                <Form.Label style={{width:"100%"}}>Sort By Price :</Form.Label>
+                <Form.Label style={{ width: "100%" }}>Sort By Price :</Form.Label>
                 <Form.Select value={selected}
                   onChange={(e) => renderPackages(e)}                >
                   <option value="">sort</option>
@@ -153,7 +153,7 @@ function Packages() {
                   <option value="lowToHigh">Low to High</option>
                 </Form.Select>
               </Form.Group>
-            </Form>
+           </Form> */}
           </div>
         </div>
         <>

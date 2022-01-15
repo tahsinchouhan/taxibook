@@ -1,6 +1,7 @@
 .audioJourney_banner {
     background-image: url(../img/AudioJourney.png) !important;
     /* background-image: url(../img/AudioJourneyBanner.png) !important; */
+    background-size: cover;
     height: 311px;
     position: relative;
     text-align: center;

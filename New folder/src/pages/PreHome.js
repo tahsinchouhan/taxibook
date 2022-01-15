@@ -11,7 +11,7 @@ import MarqueeComponent from './marquee'
 import { Link, useHistory } from "react-router-dom";
 import checkimage from "../assets/TravelBastar-desktop/checkimage.png";
 import { useDispatch } from "react-redux";
-import {setinterestprehome} from '../redux/actions'
+import { setinterestprehome } from '../redux/actions'
 import SeoData from '../SeoData.json'
 
 const PreHome = () => {
@@ -26,28 +26,28 @@ const PreHome = () => {
   const [getMAxValue, setGetMAxValue] = useState([]);
   // const [status, setStatus] = useState(false);
   const selectImageCategory = async (category, key, classN, e) => {
-    console.log({category})
+    console.log({ category })
     key = parseInt(key);
     let status = false
-    if(imageCounter.length>0){
+    if (imageCounter.length > 0) {
       if (imageCounter.includes(key)) {
         // setStatus(false)
         let aaa = imageCounter;
-        let newarry = aaa.filter(elem=>elem!==key)
-       await setImageCounter([...newarry]);
+        let newarry = aaa.filter(elem => elem !== key)
+        await setImageCounter([...newarry]);
       } else {
         // setStatus(true)
         status = true
         let arr = imageCounter;
         arr.push(key)
-       await setImageCounter(arr);
+        await setImageCounter(arr);
       }
-    }else{
+    } else {
       // setStatus(true)
       status = true
       let arr = imageCounter;
       arr.push(key)
-     await  setImageCounter(arr);
+      await setImageCounter(arr);
     }
     switch (category) {
       case "Adventure":
@@ -65,14 +65,14 @@ const PreHome = () => {
 
         break;
       case "Leisure":
-        if(status === true) setLeisure(leisure11 + 1);
+        if (status === true) setLeisure(leisure11 + 1);
         else setLeisure(leisure11 - 1);
 
         break;
       default:
         break;
     }
-    console.log(adventure11,culture11,heritage11,leisure11)
+    console.log(adventure11, culture11, heritage11, leisure11)
     let x, i, overlay3;
     x = document.querySelectorAll("." + classN);
     overlay3 = document.querySelectorAll(".overlay3" + key);
@@ -82,7 +82,7 @@ const PreHome = () => {
         overlay3[i].style.display = "block";
       } else {
         x[i].style.border = "none";
-        overlay3[i].style.display ="none";
+        overlay3[i].style.display = "none";
       }
     }
   };
@@ -92,13 +92,13 @@ const PreHome = () => {
     document.querySelector("meta[name='description']").setAttribute('content', (SeoData.home.meta_description || ''));
     document.querySelector("meta[name='keywords']").setAttribute('content', (SeoData.home.meta_keywords || ''));
   }, [])
-  
-  const getmaxCategory = async() => {
-      dispatch(setinterestprehome({
-      adventure:adventure11*25 ,
-      culture: culture11*25,
-      religious: heritage11*25,
-      leisure: leisure11*25,
+
+  const getmaxCategory = async () => {
+    dispatch(setinterestprehome({
+      adventure: adventure11 * 25,
+      culture: culture11 * 25,
+      religious: heritage11 * 25,
+      leisure: leisure11 * 25,
     }))
     history.push('/interest')
 
@@ -112,7 +112,7 @@ const PreHome = () => {
         style={{ padding: 0, margin: 0 }}
       >
         <Header />
-        <MarqueeComponent/>
+        <MarqueeComponent />
         <Row className="saly_div w-100  m-0 ">
           <div
             className="container"
@@ -135,50 +135,50 @@ const PreHome = () => {
                     style={{ marginTop: "10px" }}
                   >
                     <div className="mainImgContainer">
-                    <Image
-                      className={`homepage borderImage${key} container1234`}
-                      draggable={false}
-                      style={{ width: "100%", height: "100%" }}
-                      src={item.image}
-                      alt={item.title}
-                    />
+                      <Image
+                        className={`homepage borderImage${key} container1234`}
+                        draggable={false}
+                        style={{ width: "100%", height: "100%" }}
+                        src={item.image}
+                        alt={item.title}
+                      />
                       <div
-                      className="overlay"
-                      chek="DeskView"
-                      onClick={(e) =>
-                        selectImageCategory(
-                          item.category,
-                          key,
-                          `borderImage${key}`,
-                          e
-                        )
-                      }
-                    >
-                      <div className="textHover">
-                        <b>{item.title}</b>
+                        className="overlay"
+                        chek="DeskView"
+                        onClick={(e) =>
+                          selectImageCategory(
+                            item.category,
+                            key,
+                            `borderImage${key}`,
+                            e
+                          )
+                        }
+                      >
+                        <div className="textHover">
+                          <b>{item.title}</b>
+                        </div>
+                      </div>
+                      <div
+                        style={{ display: "none" }}
+                        className={`overlay3 overlay3${key}`}
+                        chek="DeskView"
+                        onClick={(e) =>
+                          selectImageCategory(
+                            item.category,
+                            key,
+                            `borderImage${key}`,
+                            e
+                          )
+                        }
+                      >
+                        <Image src={checkimage} className="checkimage" />
+                        <div className="textHover">
+                          <b>{item.title}</b>
+                        </div>
                       </div>
                     </div>
-                    <div
-                      style={{ display: "none" }}
-                      className={`overlay3 overlay3${key}`}
-                      chek="DeskView"
-                      onClick={(e) =>
-                        selectImageCategory(
-                          item.category,
-                          key,
-                          `borderImage${key}`,
-                          e
-                        )
-                      }
-                    >
-                      <Image src={checkimage} className="checkimage" />
-                      <div className="textHover">
-                        <b>{item.title}</b>
-                      </div>
-                    </div>
-                      </div>
-                   
-                  
+
+
                   </div>
                 );
               })}
@@ -196,16 +196,19 @@ const PreHome = () => {
                 >
                   CONTINUE
                 </Button>
+
+
               </center>
             </div>
           </div>
         </Row>
+
       </Container>
 
       {/* Mobile View */}
       <div fluid="true" className="d-md-none">
         <Header />
-        <MarqueeComponent/>
+        <MarqueeComponent />
 
         <div fluid="true" style={{ padding: 0, margin: 0 }}></div>
         <Row className="saly_div w-100  m-0 p-0 pt-5 ">
@@ -230,57 +233,57 @@ const PreHome = () => {
                     className="container123"
                     style={{ width: "50%", height: "50%" }}
                   >
-                     <div className="mainImgContainer">
-                    
-                    <Image
-                      className={`homepage1 borderImage${key} container1234 `}
-                      draggable={false}
-                      style={{
-                        width: "100%",
-                        height: "120%",
-                        marginTop: "10px",
-                      }}
-                      src={item.image}
-                      alt={item.title}
-                    />
-                    <div
-                      className="overlay2"
-                      style={{ width: "100%", height: "89%",marginTop:"10px" }}
-                      chek="mobileView"
-                      onClick={(e) =>
-                        selectImageCategory(
-                          item.category,
-                          key,
-                          `borderImage${key}`,
-                          e
-                        )
-                      }
-                    >
-                      <div className="textHover">
-                        <b>{item.title}</b>
+                    <div className="mainImgContainer">
+
+                      <Image
+                        className={`homepage1 borderImage${key} container1234 `}
+                        draggable={false}
+                        style={{
+                          width: "100%",
+                          height: "120%",
+                          marginTop: "10px",
+                        }}
+                        src={item.image}
+                        alt={item.title}
+                      />
+                      <div
+                        className="overlay2"
+                        style={{ width: "100%", height: "89%", marginTop: "10px" }}
+                        chek="mobileView"
+                        onClick={(e) =>
+                          selectImageCategory(
+                            item.category,
+                            key,
+                            `borderImage${key}`,
+                            e
+                          )
+                        }
+                      >
+                        <div className="textHover">
+                          <b>{item.title}</b>
+                        </div>
+                      </div>
+                      <div
+                        style={{ display: "none", width: "100%", height: "89%", marginTop: "10px", marginBottom: "10px" }}
+                        className={`overlay3 overlay3${key}`}
+                        chek="mobileView"
+                        onClick={(e) =>
+                          selectImageCategory(
+                            item.category,
+                            key,
+                            `borderImage${key}`,
+                            e
+                          )
+                        }
+                      >
+                        {" "}
+                        <Image src={checkimage} className="checkimage" />
+                        <div className="textHover">
+                          <b>{item.title}</b>
+                        </div>
                       </div>
                     </div>
-                    <div
-                      style={{ display: "none",width: "100%", height: "89%",marginTop:"10px",marginBottom:"10px" }}
-                      className={`overlay3 overlay3${key}`}
-                      chek="mobileView"
-                      onClick={(e) =>
-                        selectImageCategory(
-                          item.category,
-                          key,
-                          `borderImage${key}`,
-                          e
-                        )
-                      }
-                    >
-                      {" "}
-                      <Image src={checkimage} className="checkimage" />
-                      <div className="textHover">
-                        <b>{item.title}</b>
-                      </div>
-                    </div>
-                    </div>
-                    </div>
+                  </div>
                 );
               })}
             </div>
