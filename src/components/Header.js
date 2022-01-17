@@ -27,7 +27,7 @@ import exploreIcon from "../assets/icons/explore.png";
 import planIcon from "../assets/icons/plan.png";
 import supportIcon from "../assets/icons/support.png";
 import { logout } from "../redux/actions";
-function Header({showSignUpModal}) {
+function Header({ showSignUpModal }) {
   const [modalShow, setModalShow] = useState(false);
   const [signup, setSignup] = useState(false);
   const [profile, setProfile] = useState([]);
@@ -50,7 +50,7 @@ function Header({showSignUpModal}) {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    if(showSignUpModal){
+    if (showSignUpModal) {
       setSignup(true);
     }
   }, [showSignUpModal]);
@@ -58,10 +58,10 @@ function Header({showSignUpModal}) {
   useEffect(() => {
     const customerID = JSON.parse(localStorage.getItem("customer_id"));
     console.log("customerID", customerID);
-    if(customerID){
-      let userData = JSON.parse(localStorage.getItem('user_data'));
-      if(userData){
-        setProfile({data:userData.user});
+    if (customerID) {
+      let userData = JSON.parse(localStorage.getItem("user_data"));
+      if (userData) {
+        setProfile({ data: userData.user });
       }
     }
     // axios
@@ -106,7 +106,7 @@ function Header({showSignUpModal}) {
   const vendorHandler = () => {
     history.push("/profile");
   };
- 
+
   return (
     <>
       <Container className="d-md-none header_div">
@@ -121,8 +121,8 @@ function Header({showSignUpModal}) {
               alt="Travel Bastar"
             /> */}
             {/* <FaSistrix onClick={onSearchClick} className="searchIcon" /> */}
-            <span className="header_title_red">travel</span>
-            <span className="header_title_yellow">Baster</span>
+            <span className="header_title_red">Travel</span>
+            <span className="header_title_yellow">Bastar</span>
             <svg
               className="searchIcon"
               onClick={onSearchClick}
@@ -197,30 +197,37 @@ function Header({showSignUpModal}) {
           <Offcanvas.Body>
             <Nav className="me-auto sidebar__nav">
               <NavLink to="/" className="sidebar__navlink">
-              <Image src={loginIcon} alt="login" />
-                <span style={{left: "76px", position: "absolute"}}>LOGIN</span>
+                <Image src={loginIcon} alt="login" />
+                <span style={{ left: "76px", position: "absolute" }}>
+                  LOGIN
+                </span>
               </NavLink>
               <NavLink to="/home" className="sidebar__navlink">
-              <Image src={homeIcon} alt="home" />
-                <span style={{left: "76px", position: "absolute"}}>HOME</span>
+                <Image src={homeIcon} alt="home" />
+                <span style={{ left: "76px", position: "absolute" }}>HOME</span>
               </NavLink>
               <NavLink className="sidebar__navlink" to="/explore">
-              <Image src={exploreIcon} alt="explore" />
-                <span style={{left: "76px", position: "absolute"}}>EXPLORE</span>
+                <Image src={exploreIcon} alt="explore" />
+                <span style={{ left: "76px", position: "absolute" }}>
+                  EXPLORE
+                </span>
               </NavLink>
               <NavLink className="sidebar__navlink" to="/curatedexperiences">
-              <Image src={experienceIcon} alt="experience" />
-              <span style={{left: "76px", position: "absolute"}}>EXPERIENCE</span>
+                <Image src={experienceIcon} alt="experience" />
+                <span style={{ left: "76px", position: "absolute" }}>
+                  EXPERIENCE
+                </span>
               </NavLink>
-              <NavLink className="sidebar__navlink" to="/select-booking">
-              <Image src={planIcon} alt="plan" />
-              <span style={{left: "76px", position: "absolute"}}>PLAN</span>
+              <NavLink className="sidebar__navlink" to="/plan">
+                <Image src={planIcon} alt="plan" />
+                <span style={{ left: "76px", position: "absolute" }}>PLAN</span>
               </NavLink>
               <NavLink className="sidebar__navlink" to="/explore">
-              <Image src={supportIcon} alt="support" />
-                <span style={{left: "76px", position: "absolute"}}>SUPPORT</span>
+                <Image src={supportIcon} alt="support" />
+                <span style={{ left: "76px", position: "absolute" }}>
+                  SUPPORT
+                </span>
               </NavLink>
-
 
               <NavLink className="sidebar_links" to="/explore">
                 About Us
@@ -241,7 +248,6 @@ function Header({showSignUpModal}) {
               >
                 BLOG
               </NavLink> */}
-              
             </Nav>
           </Offcanvas.Body>
         </Offcanvas>
@@ -277,7 +283,9 @@ function Header({showSignUpModal}) {
                 <NavLink className="sidebar_item" to="/explore">
                   EXPLORE
                 </NavLink>
-
+                <NavLink className="sidebar_item" to="/plan">
+                  PLAN
+                </NavLink>
                 {/* <NavLink className="sidebar_item" to="/dmpass">
                   TRAVEL PASS
                 </NavLink> */}
@@ -296,11 +304,8 @@ function Header({showSignUpModal}) {
             </Nav>
             <Form className="" style={{ marginRight: "70px" }}>
               <div className="header_right d-flex">
+                <div className="header_info d-flex align-items-center"></div>
                 <div className="header_info d-flex align-items-center">
-                
-                </div>
-                <div className="header_info d-flex align-items-center">
-                
                   {user_data !== null ? (
                     <Dropdown
                       style={{
@@ -371,17 +376,13 @@ function Header({showSignUpModal}) {
                       fill="#C4C4C4"
                     />
                   </svg>
-
                 </div>
               </div>
             </Form>
           </Navbar.Collapse>
         </Navbar>
       </Container>
-      <LoginModal
-        show={modalShow}
-        handleClose={handleLoginClose}
-      />
+      <LoginModal show={modalShow} handleClose={handleLoginClose} />
       <SignupModal show={signup} handleClose={handleSignupClose} />
     </>
   );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Image } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import Header from "../../components/Header";
-import FooterIcons from '../../Footer/FooterIcons'
+import FooterIcons from "../../Footer/FooterIcons";
 import Footer from "../travesaly/Footer";
 import bg from "../../assets/img/bg_12.jpg";
 import { useHistory, useParams } from "react-router-dom";
@@ -13,10 +13,13 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Geocode from "react-geocode";
 import { useDispatch } from "react-redux";
-import {exportid} from '../../redux/actions'
-import SeoData from '../../SeoData.json'
-import AudioJourneyBanner from '../../components/AudioJourneyBanner'
-import QuickLinks from '../../components/QuickLinks'
+import { exportid } from "../../redux/actions";
+import SeoData from "../../SeoData.json";
+import ReactAudioPlayer from "react-audio-player";
+
+import "../../assets/css/audioJourneyBanner.css";
+import AudioJourneyBanner from "../../components/AudioJourneyBanner";
+import QuickLinks from "../../components/QuickLinks";
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -29,22 +32,26 @@ const Explores = () => {
   const history = useHistory();
   const [destinations, setDestinations] = useState([]);
   const [packages, setPackages] = useState([]);
-  const [location, setLoation] = useState([]);
-  const dispatch = useDispatch()
+  const [location, setLocation] = useState([]);
+  const dispatch = useDispatch();
 
   const getCurrentLocation = async () => {
     await window.navigator.geolocation.getCurrentPosition((pos) => {
       console.log(pos);
-      setLoation(pos.coords);
+      setLocation(pos.coords);
     });
   };
 
   useEffect(() => {
     getCurrentLocation();
 
-    document.title = SeoData.explore.page_title || 'Travel Bastar';
-    document.querySelector("meta[name='description']").setAttribute('content', (SeoData.explore.meta_description || ''));
-    document.querySelector("meta[name='keywords']").setAttribute('content', (SeoData.explore.meta_keywords || ''));
+    document.title = SeoData.explore.page_title || "Travel Bastar";
+    document
+      .querySelector("meta[name='description']")
+      .setAttribute("content", SeoData.explore.meta_description || "");
+    document
+      .querySelector("meta[name='keywords']")
+      .setAttribute("content", SeoData.explore.meta_keywords || "");
   }, []);
 
   const tripPackage = [
@@ -87,9 +94,9 @@ const Explores = () => {
   }, [location]);
 
   const getDestinations = () => {
-    dispatch(exportid(id))
+    dispatch(exportid(id));
     if (id !== undefined) {
-      if(id == 'heritage') id = 'religious'
+      if (id == "heritage") id = "religious";
       fetch(`${API_PATH}/api/v1/destinations/list?${id}=true`)
         .then((response) => response.json())
         .then((json) => {
@@ -111,18 +118,16 @@ const Explores = () => {
       })
         .then((response) => response.json())
         .then((json) => {
-          if (json.data !== undefined)
-            setDestinations(json.data);
+          if (json.data !== undefined) setDestinations(json.data);
         })
         .catch((e) => console.log(e));
     }
   };
 
-
   const getPackages = () => {
-    console.log("objectabc", id)
+    console.log("objectabc", id);
     if (id !== undefined) {
-      if(id == 'heritage') id = 'religious'
+      if (id == "heritage") id = "religious";
       fetch(`${API_PATH}/api/v1/packages/list?${id}=true`)
         .then((response) => response.json())
         .then((json) => {
@@ -149,37 +154,40 @@ const Explores = () => {
           }
         })
         .catch((e) => console.log(e));
-    };
-  }
+    }
+  };
 
   const onDestinations = (value) => {
     history.push({
-      pathname: `/destination_details/${value.title.split(" ").join("-")}`,
+      pathname: `/destination_details/${value.title}`,
       id: value._id,
     });
   };
 
   const goToSearch = () => {
-    history.push("/search")
-  }
+    history.push("/search");
+  };
 
   return (
     <>
+      <Header />
+
       <div
         style={{
           backgroundImage: `url(${bg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
+          height: "28rem",
         }}
+        className="background-overlay"
       >
-        <Header />
         {/* <Container className="py-5">
           <div className="search my-5 py-5">
             <h1 className="search__title pt-5">Explore Bastar's <span style={{textTransform:"capitalize"}} >{id}</span></h1> */}
 
-            {/* <h1 className="search__title pt-5">Near You</h1> */}
-            
-            {/* <div className="search__inner">
+        {/* <h1 className="search__title pt-5">Near You</h1> */}
+
+        {/* <div className="search__inner">
               <div className="search__block">
                 <div className="block__location" onClick={goToSearch}>
                   <label className="block--text code" >
@@ -193,38 +201,54 @@ const Explores = () => {
             </div>
           </div> 
         </Container>*/}
-        <div fluid="true" className="d-sm-none">
+        <div
+          fluid="true"
+          style={{ marginBottom: "2rem" }}
+          className="d-sm-none"
+        >
           <AudioJourneyBanner />
-          <QuickLinks />
         </div>
+        <QuickLinks Position={"relative"} Top={"65%"} />
       </div>
       <Container>
-        <div className="mb-5 mt-5">
+        <div style={{ margin: "7rem 0 1rem" }}>
           <h2 className="package__title pt-1">
             <span>Tour</span> Maps
           </h2>
         </div>
         {tripPackage.length > 0
           ? tripPackage.map((_item, index) => {
-            return (
-              <div key={index} style={{ display: "inline-block", width: "min(90vw,348px)", height: 170, marginRight: "20px" }} className="mt-4">
-                <Image
-                  draggable={false}
-                  className="img-fluid"
-                  style={{ borderRadius: 15 }}
-                  src={_item.url}
-                />
-                <a href={_item.pdf} target="_blank" className="package__trip">
-                  <h6 className="packages__block-title mt-3 mb-0">
-                    {_item.title}
-                  </h6>
-                  <small className="packages__block-subtitle mt-3 mb-0" style={{ color: "#757575", fontSize: "-0.125em" }}>
-                    {_item.subtTitle}
-                  </small>
-                </a>
-              </div>
-            );
-          })
+              return (
+                <div
+                  key={index}
+                  style={{
+                    display: "inline-block",
+                    width: "min(90vw,348px)",
+                    height: 170,
+                    marginRight: "20px",
+                  }}
+                  className="mt-4"
+                >
+                  <Image
+                    draggable={false}
+                    className="img-fluid"
+                    style={{ borderRadius: 15 }}
+                    src={_item.url}
+                  />
+                  <a href={_item.pdf} target="_blank" className="package__trip">
+                    <h6 className="packages__block-title mt-3 mb-0">
+                      {_item.title}
+                    </h6>
+                    <small
+                      className="packages__block-subtitle mt-3 mb-0"
+                      style={{ color: "#757575", fontSize: "-0.125em" }}
+                    >
+                      {_item.subtTitle}
+                    </small>
+                  </a>
+                </div>
+              );
+            })
           : null}
         <div className="mb-5 mt-5">
           <div
@@ -255,31 +279,31 @@ const Explores = () => {
           >
             {packages.length > 0
               ? packages.map((item, key) => {
-                return (
-                  <div
-                    key={key}
-                    onClick={() =>
-                      history.push({
-                        pathname: `/packages_details/${item.title.split(" ").join("-")}`,
-                        id: item._id,
-                      })
-                    }
-                  >
-                    <Image
-                      draggable={false}
-                      style={{ width: "100%", height: "100%" }}
-                      src={item.upload_images}
-                    />
-                    <div>
-                      <h6 className="packages__block-title_ mt-3 mb-0">
-                        {item.title}
-                      </h6>
-                      <div
-                        style={{
-                          paddingTop: 2,
-                        }}
-                      >
-                        {/* <h6
+                  return (
+                    <div
+                      key={key}
+                      onClick={() =>
+                        history.push({
+                          pathname: `/packages_details/${item.title}`,
+                          item: item._id,
+                        })
+                      }
+                    >
+                      <Image
+                        draggable={false}
+                        style={{ width: "100%", height: "100%" }}
+                        src={item.upload_images}
+                      />
+                      <div>
+                        <h6 className="packages__block-title_ mt-3 mb-0">
+                          {item.title}
+                        </h6>
+                        <div
+                          style={{
+                            paddingTop: 2,
+                          }}
+                        >
+                          {/* <h6
                             style={{
                               background: "#BEBEBE",
                               display: "inline",
@@ -290,24 +314,20 @@ const Explores = () => {
                           >
                             {item.category.category_name}
                           </h6> */}
-                      </div>
-                      <div>
-                        <small className="packages__block-subtitle">
-                          ₹ {item.price}
-                        </small>
+                        </div>
+                        <div>
+                          <small className="packages__block-subtitle">
+                            ₹ {item.price}
+                          </small>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })
+                  );
+                })
               : null}
           </Carousel>
         ) : null}
       </Container>
-
-
-
-
 
       <div
         className="py-5 mt-5"
@@ -323,16 +343,17 @@ const Explores = () => {
               }}
             >
               <div>
-                <h2 className="package__title" style={{color:"white"}}>
+                <h2 className="package__title" style={{ color: "white" }}>
                   <span>Popular</span> Destinations
                 </h2>
                 <h6 style={{ color: "white" }}>
-                  The best tourist locations across Bastar, rated and curated by travellers.
+                  The best tourist locations across Bastar, rated and curated by
+                  travellers.
                 </h6>
               </div>
 
               <h6
-                style={{ cursor: "pointer",color:"white" }}
+                style={{ cursor: "pointer", color: "white" }}
                 onClick={() => history.push("/populardestinations")}
                 className="package__title pt-5"
               >
@@ -357,10 +378,16 @@ const Explores = () => {
                     />
 
                     <div style={{ color: "white" }} className="package__trip">
-                      <h6 className="packages__block-title mt-3 mb-0" style={{ color: "white" }}>
+                      <h6
+                        className="packages__block-title mt-3 mb-0"
+                        style={{ color: "white" }}
+                      >
                         {item.title}
                       </h6>
-                      <small className="packages__block-subtitle" style={{ color: "white" }}>
+                      <small
+                        className="packages__block-subtitle"
+                        style={{ color: "white" }}
+                      >
                         {item.sub_title}
                       </small>
                     </div>

@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
-import { Container, Row, Col,Image } from "react-bootstrap";
+import { Container, Row, Col, Image } from "react-bootstrap";
 import loc from "../../assets/img/location.svg";
 import bg from "../../assets/img/bg_12.jpg";
 import GoogleMapReact from "google-map-react";
 import { API_PATH } from "../../Path/Path";
 import { Button } from "bootstrap";
 import { useHistory, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { FaWhatsapp } from "react-icons/fa";
 import Modal from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
@@ -16,16 +18,22 @@ import ReactPlayer from "react-player";
 import RettingModal from "../../components/modal/RettingModal";
 import EnquireModal from "../../components/modal/EnquireModal";
 import { FaStar } from "react-icons/fa";
-import '../../assets/css/ratings.css'
+import "../../assets/css/ratings.css";
 import { teal } from "@material-ui/core/colors";
+import { getAudioJourneyFile } from "../../redux/audioJourney/actions";
+
+import { AiOutlinePlayCircle } from "react-icons/ai";
+import { AiOutlinePauseCircle } from "react-icons/ai";
+
+import ReactAudioPlayer from "react-audio-player";
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
 };
 const PackagesDetails = (props) => {
-
   let { name } = useParams();
   name = name.split("-").join(" ");
+  const dispatch = useDispatch();
 
   const [enquireModal, setEnquireModal] = useState();
   const [modalReviewShow, setModalReviewShow] = useState(false);
@@ -35,19 +43,29 @@ const PackagesDetails = (props) => {
   const [inclusions, setInclusions] = useState([]);
   const [exclusions, setExclusions] = useState([]);
   const [zoom, setZoom] = useState(11);
+  const [selectedAudio, setSelectedAudio] = useState("");
+  const [playAudio, setPlayAudio] = useState(false);
   const history = useHistory();
 
   const [modalShow, setModalShow] = useState(false);
 
+  const { audioJourneyFile } = useSelector(
+    (state) => state.audioJourneyReducer
+  );
 
   const getSeoDetails = async (data) => {
-   
-    document.title = data?.data?.seo_title || 'Travel Bastar';
-    document.querySelector("meta[name='description']").setAttribute('content', (data?.data?.seo_description || ''));
-    document.querySelector("meta[name='keywords']").setAttribute('content', (data?.data?.seo_keywords || ''));
-    let text = data?.data?.seo[0]?.replace('<script type="application/ld+json">', '')?.replace('</script>', '');
-    document.querySelector("script[id='seoSchema']").innerHTML = text || '';
-  }
+    document.title = data?.data?.seo_title || "Travel Bastar";
+    document
+      .querySelector("meta[name='description']")
+      .setAttribute("content", data?.data?.seo_description || "");
+    document
+      .querySelector("meta[name='keywords']")
+      .setAttribute("content", data?.data?.seo_keywords || "");
+    let text = data?.data?.seo[0]
+      ?.replace('<script type="application/ld+json">', "")
+      ?.replace("</script>", "");
+    document.querySelector("script[id='seoSchema']").innerHTML = text || "";
+  };
 
   const modalReviewHadler = () => {
     setModalReviewShow(true);
@@ -63,20 +81,20 @@ const PackagesDetails = (props) => {
   const handEnquireClose = () => {
     setEnquireModal(false);
   };
- 
+
   useEffect(() => {
     getPackages(name);
     getReview();
     getEnquiry();
+    dispatch(getAudioJourneyFile("61dec48bbae9f1794d2e55ff"));
     window.scrollTo(0, 0);
   }, [props]);
 
- 
   const getPackages = (name) => {
     fetch(API_PATH + `/api/v1/packages/${name}`)
       .then((response) => response.json())
       .then((res) => {
-        getSeoDetails(res)
+        getSeoDetails(res);
         setPackages(res.data);
         setInclusions(res.data.inclusions);
         setExclusions(res.data.exclusions);
@@ -99,9 +117,9 @@ const PackagesDetails = (props) => {
       .then((res) => {
         // console.log("imagd res",res)
         setReview(res.data);
-        console.log('res.data',res.data);
+        console.log("res.data", res.data);
       })
-      .catch((e) => console.log('Error', e));
+      .catch((e) => console.log("Error", e));
   };
 
   const getEnquiry = () => {
@@ -111,12 +129,23 @@ const PackagesDetails = (props) => {
         setEnquiry(res.data);
         // console.log(res.data);
       })
-      .catch((e) => console.log('Error', e));
+      .catch((e) => console.log("Error", e));
+  };
+
+  const audio = document.getElementById("audio");
+  const handleAudio = () => {
+    if (audio.paused) {
+      setPlayAudio(true);
+      audio.play();
+    } else {
+      setPlayAudio(false);
+      audio.pause();
+    }
   };
 
   var current = null;
   var cnt = 0;
-  
+
   for (var i = 0; i < review.length; i++) {
     if (review[i].star_rating != current) {
       if (cnt > 0) {
@@ -131,7 +160,9 @@ const PackagesDetails = (props) => {
     }
     // console.log(i)
   }
-  
+
+  console.log(packages);
+
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -162,12 +193,14 @@ const PackagesDetails = (props) => {
   return (
     <>
       <div
-        style={{
-          // backgroundImage: `url("${packages.upload_images}")`,
-          // backgroundSize: "cover",
-          // backgroundPosition: "center top",
-          // height: 650,
-        }}
+        style={
+          {
+            // backgroundImage: `url("${packages.upload_images}")`,
+            // backgroundSize: "cover",
+            // backgroundPosition: "center top",
+            // height: 650,
+          }
+        }
       >
         <Header />
         <div className="destination_bg_img">
@@ -181,6 +214,26 @@ const PackagesDetails = (props) => {
             <h1 className="header__title">
               <span>{packages?.title}</span>
             </h1>
+            <div
+              style={{
+                backgroundColor: "#ffe",
+                marginTop: "-1rem",
+                display: "inline-block",
+                borderRadius: "50%",
+              }}
+              onClick={() => handleAudio()}
+            >
+              {playAudio ? (
+                <AiOutlinePlayCircle style={{ fontSize: "3rem" }} />
+              ) : (
+                <AiOutlinePauseCircle style={{ fontSize: "3rem" }} />
+              )}
+            </div>
+            <div className="">
+              <audio id="audio">
+                <source src={audioJourneyFile.file} />
+              </audio>
+            </div>
           </Container>
         </div>
         {/* <h1 className="header__title pb-3">
@@ -217,12 +270,14 @@ const PackagesDetails = (props) => {
 
       <Container className="mb-5 pb-5">
         {/* 0 package_type Booking , 1 package_type info */}
-        {
-          packages?.package_type === 0 && <div>
-              <h4 className="block__title mt-5"><span>Price</span></h4>
-              <h5 className="price__title pt-3 mb-1">₹{packages.price}</h5>
-            </div>
-        }
+        {packages?.package_type === 0 && (
+          <div>
+            <h4 className="block__title mt-5">
+              <span>Price</span>
+            </h4>
+            <h5 className="price__title pt-3 mb-1">₹{packages.price}</h5>
+          </div>
+        )}
 
         <p>{packages.duration}</p>
 
@@ -334,12 +389,13 @@ const PackagesDetails = (props) => {
             <span
               className="packages_enquired"
               style={{ width: "200px", display: "inline-block" }}
-            // onClick={() => modalReviewHadler()}
+              // onClick={() => modalReviewHadler()}
             >
               <a
                 className="code"
                 style={{ color: "#7868E6" }}
-                href={`tel:${packages.tour_operator_account.mobile}`}              >
+                href={`tel:${packages.tour_operator_account.mobile}`}
+              >
                 Call Now
               </a>
             </span>
@@ -433,9 +489,7 @@ const PackagesDetails = (props) => {
                 className="packages_enquired"
                 style={{ width: "200px", display: "inline-block" }}
               >
-                <a
-                  href={`tel:${packages.tour_operator_account.mobile}`}              
-                >
+                <a href={`tel:${packages.tour_operator_account.mobile}`}>
                   Call Now
                 </a>
               </span>
@@ -473,7 +527,6 @@ const PackagesDetails = (props) => {
           </div>
         </div>
       </div>
-
 
       <Container className="mb-5 pb-5">
         <h4 className="block__title mt-5">
@@ -592,82 +645,83 @@ const PackagesDetails = (props) => {
           </span>
         </p> */}
 
-
-<div className="row">
-  <div className="side">
-    <div>5 star</div>
-  </div>
-  <div className="middle">
-    <div className="bar-container">
-      <div className="bar-5"></div>
-    </div>
-  </div>
-  <div className="side right">
-    <div>150</div>
-  </div>
-  <div className="side">
-    <div>4 star</div>
-  </div>
-  <div className="middle">
-    <div className="bar-container">
-      <div className="bar-4"></div>
-    </div>
-  </div>
-  <div className="side right">
-    <div>63</div>
-  </div>
-  <div className="side">
-    <div>3 star</div>
-  </div>
-  <div className="middle">
-    <div className="bar-container">
-      <div className="bar-3"></div>
-    </div>
-  </div>
-  <div className="side right">
-    <div>15</div>
-  </div>
-  <div className="side">
-    <div>2 star</div>
-  </div>
-  <div className="middle">
-    <div className="bar-container">
-      <div className="bar-2"></div>
-    </div>
-  </div>
-  <div className="side right">
-    <div>6</div>
-  </div>
-  <div className="side">
-    <div>1 star</div>
-  </div>
-  <div className="middle">
-    <div className="bar-container">
-      <div className="bar-1"></div>
-    </div>
-  </div>
-  <div className="side right">
-    <div>20</div>
-  </div>
-</div>
+        <div className="row">
+          <div className="side">
+            <div>5 star</div>
+          </div>
+          <div className="middle">
+            <div className="bar-container">
+              <div className="bar-5"></div>
+            </div>
+          </div>
+          <div className="side right">
+            <div>150</div>
+          </div>
+          <div className="side">
+            <div>4 star</div>
+          </div>
+          <div className="middle">
+            <div className="bar-container">
+              <div className="bar-4"></div>
+            </div>
+          </div>
+          <div className="side right">
+            <div>63</div>
+          </div>
+          <div className="side">
+            <div>3 star</div>
+          </div>
+          <div className="middle">
+            <div className="bar-container">
+              <div className="bar-3"></div>
+            </div>
+          </div>
+          <div className="side right">
+            <div>15</div>
+          </div>
+          <div className="side">
+            <div>2 star</div>
+          </div>
+          <div className="middle">
+            <div className="bar-container">
+              <div className="bar-2"></div>
+            </div>
+          </div>
+          <div className="side right">
+            <div>6</div>
+          </div>
+          <div className="side">
+            <div>1 star</div>
+          </div>
+          <div className="middle">
+            <div className="bar-container">
+              <div className="bar-1"></div>
+            </div>
+          </div>
+          <div className="side right">
+            <div>20</div>
+          </div>
+        </div>
         <div className="mt-5">
-        <Carousel
+          <Carousel
             ssr
             partialVisible
             itemClass="image-item"
             responsive={responsive}
           >
-              {review.map((data, key) => {
-                return (
-                  <>
+            {review.map((data, key) => {
+              return (
+                <>
                   <div
-                  key={key}
-                  onClick={() =>
-                    history.push({
-                      pathname: `/packages_details/${data.title.split(" ").join("-")}`,
-                      id: data._id,
-                    })
-                  }
+                    key={key}
+                    onClick={() =>
+                      history.push({
+                        pathname: `/packages_details/${data.title
+                          .split(" ")
+                          .join("-")}`,
+                        id: data._id,
+                      })
+                    }
                   >
                     <Image
                       draggable={false}
@@ -676,24 +730,23 @@ const PackagesDetails = (props) => {
                     />
                   </div>
                   <div>
-                      <h6 className="packages__block-title_ mt-3 mb-0">
-                        {data.title}
-                      </h6>
-                      <div
-                        style={{
-                          paddingTop: 2,
-                        }}
-                      >
-                      </div>
-                      <div>
-                        <small className="packages__block-subtitle">
-                          ₹ {data.price}
-                        </small>
-                      </div>
+                    <h6 className="packages__block-title_ mt-3 mb-0">
+                      {data.title}
+                    </h6>
+                    <div
+                      style={{
+                        paddingTop: 2,
+                      }}
+                    ></div>
+                    <div>
+                      <small className="packages__block-subtitle">
+                        ₹ {data.price}
+                      </small>
                     </div>
-                    </>
-                );
-              })}
+                  </div>
+                </>
+              );
+            })}
           </Carousel>
           {/* {review
             .filter((data) => data.star_rating >= "0")

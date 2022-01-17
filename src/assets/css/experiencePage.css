@@ -1,0 +1,32 @@
+.experiencePage-card {
+  width: 100% !important;
+}
+
+@media (min-width: 712px) {
+  .experiencePage-card {
+    margin: 1rem;
+    width: 45% !important;
+  }
+}
+
+@media (min-width: 900px) {
+  .experiencePage-card {
+    margin: 1rem 0.5rem;
+    width: 45% !important;
+  }
+}
+
+@media (min-width: 1000px) {
+  .experiencePage-card {
+    width: 30% !important;
+  }
+}
+
+/* @media (min-width: 1200px) {} */
+
+@media (min-width: 1420px) {
+  .experiencePage-card {
+    margin: 1rem 0.4rem;
+    width: 24% !important;
+  }
+}

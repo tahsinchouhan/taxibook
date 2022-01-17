@@ -11,6 +11,12 @@ import TaxiInBastar from "./pages/TaxiInBastar";
 import TourGuidesInBastar from "./pages/TourGuidesInBastar";
 import TourOperatorsInBastar from "./pages/TourOperatorsInBastar";
 
+import PlanHomeStays from "./pages/plan/Plan";
+import PlanTaxis from "./pages/plan/PlanTaxis";
+import PlanTourGuides from "./pages/plan/PlanTourGuides";
+import PlanTourPackages from "./pages/plan/PlanTourPackages";
+import EventsAndActivities from "./pages/plan/EventsAndActivities";
+
 import SelectBooking from "./pages/selectbooking/SelectBooking";
 import Pass from "./pages/selectbooking/Pass";
 import BusPass from "./pages/selectbooking/BusPass";
@@ -86,7 +92,7 @@ import CabList from "./pages/Cab/CabList";
 import Profile from "./pages/profile/profile";
 import BookProfile from "./pages/profile/BookingProfile";
 
-import AudioJourney from "./pages/audioJourney/AudioJourney"
+import AudioJourney from "./pages/audioJourney/AudioJourney";
 import AudioJourneyDetail from "./pages/audioJourneyDeatil/AudioJourneyDetail";
 
 function App() {
@@ -114,7 +120,7 @@ function App() {
             />
             <Route path="/checkoutbooking" component={CheckOutBook} />
             <Route path="/bookpayement" component={BookingPayment} />
-            <Route path="/packages_details/:name" component={PackagesDetails} />            
+            <Route path="/packages_details/:name" component={PackagesDetails} />
             <Route path="/covidresponse" component={CovidResponse} />
             <Route path="/registrationguide" component={RegistrationGuide} />
             <Route path="/registration" component={Registration} />
@@ -122,13 +128,43 @@ function App() {
             <Route exact path="/populardestinations" component={Destination} />
             <Route exact path="/curatedexperiences" component={Packages} />
 
-            <Route exact path="/homestaysinbastar" component={HomestaysInBastar} />
-            <Route exact path="/tourpackagesinbastar" component={TourPackagesinBastar}/>
+            <Route
+              exact
+              path="/homestaysinbastar"
+              component={HomestaysInBastar}
+            />
+            <Route
+              exact
+              path="/tourpackagesinbastar"
+              component={TourPackagesinBastar}
+            />
             <Route exact path="/taxiinbastar" component={TaxiInBastar} />
-            <Route exact path="/tourguidesinbastar" component={TourGuidesInBastar} />
-            <Route exact path="/touroperatorsinbastar" component={TourOperatorsInBastar} />
+            <Route
+              exact
+              path="/tourguidesinbastar"
+              component={TourGuidesInBastar}
+            />
+            <Route
+              exact
+              path="/touroperatorsinbastar"
+              component={TourOperatorsInBastar}
+            />
 
             <Route exact path="/select-booking" component={SelectBooking} />
+            <Route exact path="/plan" component={PlanHomeStays} />
+            <Route exact path="/planTourGuides" component={PlanTourGuides} />
+            <Route
+              exact
+              path="/planTourPackages"
+              component={PlanTourPackages}
+            />
+            <Route exact path="/planTaxis" component={PlanTaxis} />
+            <Route
+              exact
+              path="/bastarEventsAndActivities"
+              component={EventsAndActivities}
+            />
+
             <Route exact path="/traveller_card" component={TravellerCard} />
             <Route exact path="/traveller_ticket" component={TravellerTicket} />
             <Route exact path="/dmpass" component={DmTicket2} />
@@ -166,7 +202,11 @@ function App() {
             <Route exact path="/travelticket" component={TravelTicket} />
             <Route exact path="/dm-detail/:id" component={DmDetail} />
             <Route exact path="/bus-detail/:id" component={BusTicketDetail} />
-            <Route exact path="/packages-detail/:id" component={PackageTicketDetail} />
+            <Route
+              exact
+              path="/packages-detail/:id"
+              component={PackageTicketDetail}
+            />
             <Route exact path="/dm_congratulate" component={DmCongratulate} />
             <Route exact path="/tickets_sraech" component={TicketsSraech} />
             <Route exact path="/tickets" component={Tickets1} />
@@ -217,7 +257,11 @@ function App() {
             <Route exact path="/cablist" component={CabList} />
 
             <Route exact path="/audioJourney" component={AudioJourney} />
-            <Route exact path="/audioJourney/:id" component={AudioJourneyDetail} />
+            <Route
+              exact
+              path="/audioJourney/:id"
+              component={AudioJourneyDetail}
+            />
           </Switch>
         </div>
       </Router>

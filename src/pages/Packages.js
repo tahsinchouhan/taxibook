@@ -3,14 +3,17 @@ import { Container, Form, Image } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
 import Footer from "../pages/travesaly/Footer";
 import Header from "../components/Header";
+import Loader from "../components/Loader";
 import { useHistory } from "react-router-dom";
 import { API_PATH } from "../Path/Path";
 import Geocode from "react-geocode";
-import FooterIcons from '../Footer/FooterIcons';
+import FooterIcons from "../Footer/FooterIcons";
 import Sandals from "../assets/img/sandals.png";
 import Map from "../assets/img/Map.png";
 import Camera from "../assets/img/Camera.png";
 import Backpack from "../assets/img/Backpack.png";
+
+import  "../assets/css/experiencePage.css"
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -36,92 +39,103 @@ function Packages() {
     });
   };
 
+  const experienceJSON = [
+    {
+      icon: Sandals,
+      type: "leisure",
+      title: "Leisure",
+    },
+    {
+      icon: Camera,
+      type: "culture",
+      title: "Culture",
+    },
+    {
+      icon: Backpack,
+      type: "adventure",
+      title: "Adventure",
+    },
+    {
+      icon: Map,
+      type: "religious",
+      title: "Heritage",
+    },
+  ];
+
   useEffect(() => {
-    getPackages();
+    getPackages("adventure");
     // hightToLowPrice();
     window.scrollTo(0, 0);
   }, [location]);
 
-  const getPackages = () => {
-    fetch(API_PATH + "/api/v1/packages/location", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        latitude: location.latitude,
-        longitude: location.longitude,
-      }),
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        if (json.data !== undefined) {
-          console.log(json.data)
-          setPackages(json.data);
-        }
-      })
-      .catch((e) => console.log(e));
-  };
-
-
-  const searchingData = (value) => {
-    fetch(API_PATH + `/api/v1/search/package?searchvalue=${value}`)
-      .then((response) => response.json())
-      .then((json) => {
-        if (json.data !== undefined) {
-          console.log(json.data.packages);
-          setPackages(json.data.packages)
-        };
-      })
-      .catch((e) => console.log(e));
-  };
-
-  const renderPackages = (e) => {
-    setSelected(e.target.value)
-    console.log("object", e.target.value)
-    if (e.target.value === "highToLow") {
-      fetch(API_PATH + "/api/v1/packages/srt?sort=-price", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          setPackages(res.data);
-          console.log("hightToLowPrice Genre Data", res.data);
-        })
-        .catch((error) => console.log("Genre Lookup Err::", error));
-    } else {
-      fetch(API_PATH + "/api/v1/packages/srt?sort=price", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          setPackages(res.data);
-          console.log("lowToHighPrice  Data", res.data);
-        })
-        .catch((error) => console.log("Genre Lookup Err::", error));
+  const getPackages = async (type) => {
+    try {
+      const res = await fetch(`${API_PATH}/api/v1/packages/list?${type}=true`);
+      const json = await res.json();
+      // console.log(json);
+      setPackages(json.data);
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
+
+  // const searchingData = (value) => {
+  //   fetch(API_PATH + `/api/v1/search/package?searchvalue=${value}`)
+  //     .then((response) => response.json())
+  //     .then((json) => {
+  //       if (json.data !== undefined) {
+  //         console.log(json.data.packages);
+  //         setPackages(json.data.packages);
+  //       }
+  //     })
+  //     .catch((e) => console.log(e));
+  // };
+
+  // const renderPackages = (e) => {
+  //   setSelected(e.target.value);
+  //   console.log("object", e.target.value);
+  //   if (e.target.value === "highToLow") {
+  //     fetch(API_PATH + "/api/v1/packages/srt?sort=-price", {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //       .then((res) => res.json())
+  //       .then((res) => {
+  //         setPackages(res.data);
+  //         console.log("hightToLowPrice Genre Data", res.data);
+  //       })
+  //       .catch((error) => console.log("Genre Lookup Err::", error));
+  //   } else {
+  //     fetch(API_PATH + "/api/v1/packages/srt?sort=price", {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     })
+  //       .then((res) => res.json())
+  //       .then((res) => {
+  //         setPackages(res.data);
+  //         console.log("lowToHighPrice  Data", res.data);
+  //       })
+  //       .catch((error) => console.log("Genre Lookup Err::", error));
+  //   }
+  // };
 
   const icons = {
     border: " 1px solid rgba(0, 0, 0, 0.25)",
-    height: "90px",
-    boxSizing: "borderBox",
+    display: "flex",
+    flexDirection: "column",
     padding: "5px",
+    justifyContent: "center",
     alignItems: "center",
-    borderRadius: "8px"
-  }
+    borderRadius: "8px",
+    cursor: "pointer",
+  };
   const img = {
-    width: "60%",
-    height: "40px",
-    marginLeft: "10px",
-    marginTop: "10px"
-  }
+    margin: "0",
+  };
   return (
     <React.Fragment>
       <Header />
@@ -154,10 +168,12 @@ function Packages() {
         </div>
         <div className="d-flex justify-content-between">
           <div>
-            <h2 className="package__title mb-5" style={{ marginTop: "-10px", fontWeight: "bold" }}>
+            <h2
+              className="package__title mb-5"
+              style={{ marginTop: "-10px", fontWeight: "bold" }}
+            >
               <span>Travel Packages and itneraries </span>
             </h2>
-
           </div>
 
           <div>
@@ -173,65 +189,108 @@ function Packages() {
                 </Form.Select>
               </Form.Group>
             </Form>
-           */ }
+           */}
           </div>
         </div>
-        <div className="d-flex justify-content-between">
-          <div style={icons} > <img src={Sandals} style={img} alt="image" /> <p style={{ marginLeft: "5px" }}> Leisure </p> </div>
-          <div style={icons}> <img src={Camera} style={img} alt="image" /> <p style={{ marginLeft: "5px" }}> Culture </p>  </div>
-          <div style={icons}>  <img src={Backpack} style={img} alt="image" /> <p style={{ marginLeft: "5px" }}> Adventure </p></div>
-          <div style={icons}> <img src={Map} style={img} alt="image" /> <p style={{ marginLeft: "5px" }}> Heritage </p></div>
+        <div className="d-flex justify-content-around">
+          {[...experienceJSON].map((item, i) => (
+            <div style={icons} onClick={() => getPackages(item.type)}>
+              <img src={item.icon} style={img} alt="image" />
+              <p style={{ margin: "0.4rem 0.4rem 0" }}>{item.title}</p>
+            </div>
+          ))}
         </div>
-
 
         <>
           <div
             style={{
+              width: "90%",
               display: "flex",
               flexDirection: "row",
+              justifyContent: "space-evenly",
+              margin: "2rem auto",
               flexWrap: "wrap",
-              marginBottom: 100,
-              marginTop: -100,
             }}
           >
             {packages.map((item) => {
               return (
                 <div
+                className="experiencePage-card"
                   onClick={() =>
                     history.push({
-                      pathname: `/packages_details/${item.title.split(" ").join("-")}`,
+                      pathname: `/packages_details/${item.title
+                        .split(" ")
+                        .join("-")}`,
                       item: item._id,
                     })
                   }
                   style={{
-                    width: 300,
-                    height: 200,
-                    marginLeft: "15px",
-                    marginTop: "140px"
+                    width: "50%",
+                    height: "fit-content",
+                    margin: "1rem 0",
+                    border: "1px solid #d4d4d4",
+                    borderRadius: "7px",
                   }}
                 >
                   <Image
                     draggable={false}
                     // className="img-fluid"
-                    style={{ width: "100%", height: "100%", borderRadius: 10 }}
+                    style={{
+                      width: "100%",
+                      height: "170px",
+                      borderTopLeftRadius: "7px",
+                      borderTopRightRadius: "7px",
+                    }}
                     src={item.upload_images}
                   />
-                  <div>
-                    <h6 className="packages__block-title_ mt-3 mb-0">
+                  <div
+                    style={{
+                      border: "1px solid #d4d4d4",
+                      borderBottomLeftRadius: "7px",
+                      borderBottomRightRadius: "7px",
+                    }}
+                  >
+                    <h6
+                      className="packages__block-title_"
+                      style={{ margin: "0.5rem 0.5rem 0" }}
+                    >
                       {item.title}
                     </h6>
-                    <p style={{ fontSize: "15px", height: "50px", overflow: "hidden" }}> {item.description} </p>
-                    <div
+                    <p
                       style={{
-                        paddingTop: 2,
+                        fontSize: "0.8rem",
+                        margin: "0.2rem 0.5rem",
                       }}
                     >
-                    </div>
-                    <div style={{ backgroundColor: "#f0f0f0", marginTop: "-15px", borderRadius: "2px", display: "flex" }}>
-                      <div style={{ marginTop: "8px" }}>  <p> {item.duration}</p> </div>
-                      <div style={{ marginLeft: "100px" }}>  <p style={{ fontSize: "26px", color: "#0fa453", fontWeight: "bold" }}>
-                        ₹ {item.price}
-                      </p> </div>
+                      {item.seo_description.slice(0, 25) + "..."}
+                    </p>
+                    <div
+                      style={{
+                        backgroundColor: "rgba(0,0,0,0.04)",
+                        borderRadius: "2px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        padding: "0 0.5rem",
+                      }}
+                    >
+                      <div>
+                        {" "}
+                        <p style={{ margin: 0 }}> {item.duration}</p>
+                      </div>
+                      <div>
+                        {" "}
+                        <p
+                          style={{
+                            fontSize: "1.5rem",
+                            color: "#0fa453",
+                            fontWeight: "bold",
+                            margin: 0,
+                          }}
+                        >
+                          ₹ {item.price}
+                        </p>{" "}
+                      </div>
                     </div>
                   </div>
                 </div>
