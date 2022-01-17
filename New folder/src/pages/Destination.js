@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import { useHistory } from "react-router-dom";
 import { API_PATH } from "../Path/Path";
 import Geocode from "react-geocode";
-import '../assets/css/destinationList.css'
+import "../assets/css/destinationList.css";
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
 Geocode.setRegion("in");
@@ -16,7 +16,7 @@ Geocode.enableDebug();
 function Destination() {
   const [destinations, setDestinations] = useState([]);
   const history = useHistory();
-  const [location, setLoation] = useState([]);
+  const [currLocation, setCurrLocation] = useState([]);
 
   useEffect(() => {
     getCurrentLocation();
@@ -25,14 +25,14 @@ function Destination() {
   const getCurrentLocation = async () => {
     await window.navigator.geolocation.getCurrentPosition((pos) => {
       console.log(pos);
-      setLoation(pos.coords);
+      setCurrLocation(pos.coords);
     });
   };
 
   useEffect(() => {
     getDestinations();
     window.scrollTo(0, 0);
-  }, [location]);
+  }, [currLocation]);
 
   const getDestinations = () => {
     fetch(API_PATH + "/api/v1/destinations/location", {
@@ -41,14 +41,14 @@ function Destination() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        latitude: location.latitude,
-        longitude: location.longitude,
+        latitude: currLocation.latitude,
+        longitude: currLocation.longitude,
       }),
     })
       .then((response) => response.json())
       .then((json) => {
         if (json.data !== undefined) {
-          console.log(json.data)
+          console.log(json.data);
           setDestinations(json.data);
         }
       })
@@ -61,8 +61,8 @@ function Destination() {
       .then((json) => {
         if (json.data !== undefined) {
           console.log(json.data.destinations);
-          setDestinations(json.data.destinations)
-        };
+          setDestinations(json.data.destinations);
+        }
       })
       .catch((e) => console.log(e));
   };
@@ -159,25 +159,35 @@ function Destination() {
                     })
                   }
                   className="destinationListContainer"
-                  style={{
-                    // width: 300,
-                    // width: "100%",
-                    // height: 200,
-                    // marginRight: 15,
-                    // marginTop: 71,
-                  }}
+                  style={
+                    {
+                      // width: 300,
+                      // width: "100%",
+                      // height: 200,
+                      // marginRight: 15,
+                      // marginTop: 71,
+                    }
+                  }
                 >
                   <Image
                     draggable={false}
                     // className="img-fluid"
-                    style={{ width: "100%", height: "100%", borderRadius: 10,objectFit:"cover" }}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: 10,
+                      objectFit: "cover",
+                    }}
                     src={item.upload_images}
                   />
                   <div style={{ color: "black" }} className="package__trip ">
                     <h6 className="packages__block-title mt-3 mb-0">
                       {item.title}
                     </h6>
-                    <small className="packages__block-subtitle mt-3 mb-2" style={{color:"#757575"}} >
+                    <small
+                      className="packages__block-subtitle mt-3 mb-2"
+                      style={{ color: "#757575" }}
+                    >
                       {item.sub_title}
                     </small>
                   </div>

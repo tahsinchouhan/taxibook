@@ -37,7 +37,7 @@ const PlanTourGuides = () => {
   useEffect(() => {
     getPackages();
     window.scrollTo(0, 0);
-  }, [location]);
+  }, []);
 
   return (
     <>

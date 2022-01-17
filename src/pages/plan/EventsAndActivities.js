@@ -11,6 +11,7 @@ import Loader from "../../components/Loader";
 import QuickLinks from "../../components/QuickLinks";
 import FooterIcons from "../../Footer/FooterIcons";
 import Footer from "../travesaly/Footer";
+import PackageCard from "./PackageCard";
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -34,7 +35,7 @@ const EventsAndActivites = () => {
   useEffect(() => {
     // getPackages();
     window.scrollTo(0, 0);
-  }, [location]);
+  }, []);
 
   return (
     <>

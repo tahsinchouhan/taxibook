@@ -96,7 +96,7 @@ const Explores = () => {
   const getDestinations = () => {
     dispatch(exportid(id));
     if (id !== undefined) {
-      if (id == "heritage") id = "religious";
+      if (id === "heritage") id = "religious";
       fetch(`${API_PATH}/api/v1/destinations/list?${id}=true`)
         .then((response) => response.json())
         .then((json) => {
@@ -127,7 +127,7 @@ const Explores = () => {
   const getPackages = () => {
     console.log("objectabc", id);
     if (id !== undefined) {
-      if (id == "heritage") id = "religious";
+      if (id === "heritage") id = "religious";
       fetch(`${API_PATH}/api/v1/packages/list?${id}=true`)
         .then((response) => response.json())
         .then((json) => {
@@ -235,7 +235,12 @@ const Explores = () => {
                     style={{ borderRadius: 15 }}
                     src={_item.url}
                   />
-                  <a href={_item.pdf} target="_blank" className="package__trip">
+                  <a
+                    href={_item.pdf}
+                    rel="noreferrer"
+                    target="_blank"
+                    className="package__trip"
+                  >
                     <h6 className="packages__block-title mt-3 mb-0">
                       {_item.title}
                     </h6>

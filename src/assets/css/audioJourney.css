@@ -1,17 +1,22 @@
-.audioJourney_heading{
-    font-size: 29px;
+.audioJourney_heading {
+  font-size: 29px;
 }
 
-.audioJourney_description{
-    font-size: 12px;
+.audiocard-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.audio_journey_player{
+.audioJourney_description {
+  font-size: 0.8rem;
+}
+
+.audio_journey_player {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: white;
   text-align: center;
   height: 66.77px;
@@ -21,5 +26,57 @@
 }
 
 .play_btn_center {
-    align-self: center;
+  align-self: center;
+}
+
+@media only screen and (min-width: 600px) {
+  .audiocard-container {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .audio-card {
+    width: 50%;
+    margin: 1rem 0;
+  }
+}
+
+@media (min-width: 712px) {
+  .audiocard-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .audio-card {
+    width: 45%;
+  }
+}
+
+@media (min-width: 900px) {
+  .audio-card {
+    margin: 1rem 0.5rem;
+    width: 45%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .audio-card {
+    width: 30%;
+  }
+
+.audioJourney_description {
+  font-size: 0.9rem;
+}
+
+}
+
+@media (min-width: 1420px) {
+  .audiocard-container {
+    justify-content: flex-start;
+  }
+  .audio-card {
+    margin: 1rem 0.4rem;
+    width: 24%;
+  }
 }
