@@ -197,7 +197,7 @@ const DestinationDetails = (props) => {
           <h4 className="block__title">
             <span>About</span> the Destination
           </h4>
-          <p className="pt-2">{destinations?.description}</p>
+          <p className="pt-2" style={{whiteSpace:'pre-line'}}>{destinations?.description}</p>
         </div>
       </Container>
 
