@@ -8,8 +8,8 @@ import GoogleMapReact from "google-map-react";
 import { API_PATH } from "../../Path/Path";
 import { Button } from "bootstrap";
 import { useHistory, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-
+import BookNowForm from "../BookNowForm";
+import { useSelector } from "react-redux";
 import { FaWhatsapp } from "react-icons/fa";
 import Modal from "react-bootstrap";
 import ReactStars from "react-rating-stars-component";
@@ -20,12 +20,6 @@ import EnquireModal from "../../components/modal/EnquireModal";
 import { FaStar } from "react-icons/fa";
 import "../../assets/css/ratings.css";
 import { teal } from "@material-ui/core/colors";
-import { getAudioJourneyFile } from "../../redux/audioJourney/actions";
-
-import { AiOutlinePlayCircle } from "react-icons/ai";
-import { AiOutlinePauseCircle } from "react-icons/ai";
-
-import ReactAudioPlayer from "react-audio-player";
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
@@ -33,7 +27,6 @@ const Marker = () => {
 const PackagesDetails = (props) => {
   let { name } = useParams();
   name = name.split("-").join(" ");
-  const dispatch = useDispatch();
 
   const [enquireModal, setEnquireModal] = useState();
   const [modalReviewShow, setModalReviewShow] = useState(false);
@@ -43,15 +36,11 @@ const PackagesDetails = (props) => {
   const [inclusions, setInclusions] = useState([]);
   const [exclusions, setExclusions] = useState([]);
   const [zoom, setZoom] = useState(11);
-  const [selectedAudio, setSelectedAudio] = useState("");
-  const [playAudio, setPlayAudio] = useState(false);
   const history = useHistory();
 
   const [modalShow, setModalShow] = useState(false);
 
-  const { audioJourneyFile } = useSelector(
-    (state) => state.audioJourneyReducer
-  );
+
 
   const getSeoDetails = async (data) => {
     document.title = data?.data?.seo_title || "Travel Bastar";
@@ -86,7 +75,7 @@ const PackagesDetails = (props) => {
     getPackages(name);
     getReview();
     getEnquiry();
-    dispatch(getAudioJourneyFile("61dec48bbae9f1794d2e55ff"));
+
     window.scrollTo(0, 0);
   }, [props]);
 
@@ -132,19 +121,13 @@ const PackagesDetails = (props) => {
       .catch((e) => console.log("Error", e));
   };
 
-  const audio = document.getElementById("audio");
-  const handleAudio = () => {
-    if (audio.paused) {
-      setPlayAudio(true);
-      audio.play();
-    } else {
-      setPlayAudio(false);
-      audio.pause();
-    }
-  };
+
 
   var current = null;
   var cnt = 0;
+
+  const { user_data } = useSelector((state) => state.loginReducer);
+  const [showFormModal, setShowFormModal] = useState(false);
 
   for (var i = 0; i < review.length; i++) {
     if (review[i].star_rating != current) {
@@ -214,26 +197,7 @@ const PackagesDetails = (props) => {
             <h1 className="header__title">
               <span>{packages?.title}</span>
             </h1>
-            <div
-              style={{
-                backgroundColor: "#ffe",
-                marginTop: "-1rem",
-                display: "inline-block",
-                borderRadius: "50%",
-              }}
-              onClick={() => handleAudio()}
-            >
-              {playAudio ? (
-                <AiOutlinePlayCircle style={{ fontSize: "3rem" }} />
-              ) : (
-                <AiOutlinePauseCircle style={{ fontSize: "3rem" }} />
-              )}
-            </div>
-            <div className="">
-              <audio id="audio">
-                <source src={audioJourneyFile.file} />
-              </audio>
-            </div>
+
           </Container>
         </div>
         {/* <h1 className="header__title pb-3">
@@ -389,7 +353,7 @@ const PackagesDetails = (props) => {
             <span
               className="packages_enquired"
               style={{ width: "200px", display: "inline-block" }}
-              // onClick={() => modalReviewHadler()}
+            // onClick={() => modalReviewHadler()}
             >
               <a
                 className="code"
@@ -742,6 +706,15 @@ const PackagesDetails = (props) => {
                       <small className="packages__block-subtitle">
                         ₹ {data.price}
                       </small>
+                      <button className="book-now" onClick={() => setShowFormModal(true)}>
+                        Book Now
+                      </button>
+                      <BookNowForm
+                        item={packages}
+                        show={showFormModal}
+                        handleModal={setShowFormModal}
+                        user_data={user_data}
+                      />
                     </div>
                   </div>
                 </>

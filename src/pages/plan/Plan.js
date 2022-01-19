@@ -50,7 +50,7 @@ const PlanHomeStays = () => {
         />
       </div>
       <div
-        className="plan-page-width plan-header"
+        className="page-width plan-header"
         style={{ margin: "2rem auto 0 " }}
       >
         <div className="searchBox-container">
@@ -76,7 +76,7 @@ const PlanHomeStays = () => {
         <h1 className="package__title">Book Homestays In Bastar</h1>
       </div>
 
-      <div className="package-card-container plan-page-width">
+      <div className="package-card-container page-width">
         {packages.length ? (
           packages.map((item, idx) => <PackageCard key={idx} item={item} />)
         ) : (

@@ -25,7 +25,7 @@ const FooterIcons = () => {
       <Header />
       <Container>
         <div className="footerIcons_container">
-            <span className="footerIcons_items">
+          <span className="footerIcons_items">
             <NavLink className="" to="/explore">
               {
                 location.pathname == '/explore' ? (
@@ -35,43 +35,43 @@ const FooterIcons = () => {
                 )
               }
             </NavLink>
-            </span>
-            <span className="footerIcons_items">
+          </span>
+          <span className="footerIcons_items">
             <NavLink className="" to="/curatedexperiences">
-            {
+              {
                 location.pathname == '/curatedexperiences' ? (
                   <Image src={experienceIcon} alt="experience" />
                 ) : (
                   <Image src={experienceInactiveIcon} alt="experience" />
                 )
-            }
+              }
             </NavLink>
-            </span>
-            <span className="footerIcons_items">
-            <NavLink className="" to="/select-booking">
-            {
-                location.pathname == '/select-booking' ? (
+          </span>
+          <span className="footerIcons_items">
+            <NavLink className="" to="/plan">
+              {
+                location.pathname == '/plam' ? (
                   <Image src={planIcon} alt="plan" />
                 ) : (
                   <Image src={planInactiveIcon} alt="plan" />
                 )
-            }
+              }
             </NavLink>
-            </span>
-            <span className="footerIcons_items">
+          </span>
+          <span className="footerIcons_items">
             <NavLink className="" to="/support">
-            {
+              {
                 location.pathname == '/support' ? (
                   <Image src={supportIcon} alt="support" />
                 ) : (
                   <Image src={supportInactiveIcon} alt="support" />
                 )
-            }
+              }
             </NavLink>
-            </span>
+          </span>
         </div>
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

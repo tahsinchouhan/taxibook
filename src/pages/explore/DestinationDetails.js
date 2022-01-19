@@ -10,8 +10,15 @@ import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import TravellerTicket from "../travesaly/TravellerTicket";
-import {Howl, Howler} from 'howler';
+import { Howl, Howler } from 'howler';
 import Audio from '../..//assets/audio/Audio.mp3'
+import { getAudioJourneyFile } from "../../redux/audioJourney/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { AiOutlinePlayCircle } from "react-icons/ai";
+import { AiOutlinePauseCircle } from "react-icons/ai";
+
+import ReactAudioPlayer from "react-audio-player";
+
 
 // const audioClip = ["https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"]
 
@@ -27,24 +34,44 @@ const DestinationDetails = (props) => {
 
   const [destinations, setDestinations] = useState("");
   const [packagesdata, getPackagesdata] = useState([]);
+  const [playAudio, setPlayAudio] = useState(false);
+
+  const [selectedAudio, setSelectedAudio] = useState("");
   const [zoom, setZoom] = useState(11);
 
-    const sound = new Howl({
-      src:Audio
-    });
+  const dispatch = useDispatch();
 
-    const getSeoDetails = async (data) => {
-      try {
-        document.title = data?.data?.seo_title || 'Travel Bastar';
-        document.querySelector("meta[name='description']").setAttribute('content', (data?.data?.seo_description || ''));
-        document.querySelector("meta[name='keywords']").setAttribute('content', (data?.data?.seo_keywords || ''));
+  const sound = new Howl({
+    src: Audio
+  });
 
-        let text = data?.data?.seo[0].replace('<script type="application/ld+json">', '').replace('</script>', '');
-        document.querySelector("script[id='seoSchema']").innerHTML = text || '';
-      } catch (error) {
-        console.log(error)
-      }
+  const getSeoDetails = async (data) => {
+    try {
+      document.title = data?.data?.seo_title || 'Travel Bastar';
+      document.querySelector("meta[name='description']").setAttribute('content', (data?.data?.seo_description || ''));
+      document.querySelector("meta[name='keywords']").setAttribute('content', (data?.data?.seo_keywords || ''));
+
+      let text = data?.data?.seo[0].replace('<script type="application/ld+json">', '').replace('</script>', '');
+      document.querySelector("script[id='seoSchema']").innerHTML = text || '';
+    } catch (error) {
+      console.log(error)
     }
+  }
+
+  const { audioJourneyFile } = useSelector(
+    (state) => state.audioJourneyReducer
+  );
+
+  const audio = document.getElementById("audio");
+  const handleAudio = () => {
+    if (audio.paused) {
+      setPlayAudio(true);
+      audio.play();
+    } else {
+      setPlayAudio(false);
+      audio.pause();
+    }
+  };
 
   var id;
 
@@ -59,6 +86,7 @@ const DestinationDetails = (props) => {
     // }
     // console.log('abcd')
     sound.play();
+    dispatch(getAudioJourneyFile("61dec48bbae9f1794d2e55ff"));
     Howler.volume(0.1);
   }, []);
 
@@ -96,7 +124,7 @@ const DestinationDetails = (props) => {
       .then((response) => response.json())
       .then((res) => {
         getPackagesdata(res.data);
-        console.log('getPackagesdata',getPackagesdata)
+        console.log('getPackagesdata', getPackagesdata)
       })
       .catch((e) => console.log(e));
   };
@@ -141,6 +169,26 @@ const DestinationDetails = (props) => {
             <h1 className="header__title">
               <span>{destinations?.title}</span>
             </h1>
+            <div
+              style={{
+                backgroundColor: "#ffe",
+                marginTop: "-1rem",
+                display: "inline-block",
+                borderRadius: "50%",
+              }}
+            // onClick={() => handleAudio()}
+            >
+              {playAudio ? (
+                <AiOutlinePlayCircle style={{ fontSize: "3rem" }} />
+              ) : (
+                <AiOutlinePauseCircle style={{ fontSize: "3rem" }} />
+              )}
+            </div>
+            <div className="">
+              <audio id="audio">
+                <source src={audioJourneyFile.file} />
+              </audio>
+            </div>
           </Container>
         </div>
       </div>
@@ -237,10 +285,10 @@ const DestinationDetails = (props) => {
               }}
             >
               <div>
-                <h2 className="package__title" style={{color:'white'}}>
+                <h2 className="package__title" style={{ color: 'white' }}>
                   <span>Related</span> Packages
                 </h2>
-                <h6 style={{color:'white'}}>
+                <h6 style={{ color: 'white' }}>
                   Choose Your Best Package
                 </h6>
               </div>
@@ -253,16 +301,16 @@ const DestinationDetails = (props) => {
             responsive={responsive}
           >
             {packagesdata.length ? (
-              packagesdata.map((item,key) => {
+              packagesdata.map((item, key) => {
                 return (
                   <div
-                    key={key} 
+                    key={key}
                     onClick={() =>
                       history.push({
                         pathname: `/packages_details/${item.title.split(" ").join("-")}`,
                         id: item._id,
                       })
-                    }                    
+                    }
                   >
                     <Image
                       draggable={false}

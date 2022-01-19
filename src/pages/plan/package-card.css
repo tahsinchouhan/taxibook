@@ -1,4 +1,4 @@
-.plan-page-width  {
+.page-width  {
   width: 90%;
 }
 
@@ -107,7 +107,7 @@
 }
 
 @media only screen and (max-width: 712px) {
-  .plan-page-width  {
+  .page-width  {
     width: 65%;
   }
   .package-card-container {
@@ -116,7 +116,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .plan-page-width  {
+  .page-width  {
     width: 75%;
   }
   .package-card-container {
@@ -125,7 +125,7 @@
 }
 
 @media only screen and (max-width: 400px) {
-  .plan-page-width  {
+  .page-width  {
     width: 90%;
   }
 }

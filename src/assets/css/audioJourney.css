@@ -11,6 +11,10 @@
   font-size: 0.8rem;
 }
 
+.audio-card {
+  margin: 0.6rem 0;
+}
+
 .audio_journey_player {
   position: fixed;
   left: 0;

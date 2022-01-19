@@ -11,8 +11,9 @@
 
 .audioJourney_banner_center {
   position: absolute;
-  top: 45%;
+  top: 37%;
   left: 50%;
+  width: 100%;
   z-index: 10;
   transform: translate(-50%, -50%);
 }
@@ -20,6 +21,15 @@
 .background-overlay {
   position: relative;
 }
+
+.play-now-btn {
+  background: green;
+  border: 0;
+  width: 35%;
+  border-radius: 0;
+}
+
+
 
 .background-overlay::after {
   content: "";
@@ -30,8 +40,25 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
 }
+
+
+@media screen and (max-width: 400px) {
+  .audioJourney_banner_center .heading {
+    font-size: 2rem !important;
+  }
+
+  .audioJourney_banner .text {
+    font-size: 0.7rem !important;
+    width: 60% !important;
+  }
+
+  .play-now-btn {
+    width: 45% !important;
+  }
+}
+
 
 @media (min-width: 700px) {
   .background-overlay {

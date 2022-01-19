@@ -13,7 +13,7 @@ import Map from "../assets/img/Map.png";
 import Camera from "../assets/img/Camera.png";
 import Backpack from "../assets/img/Backpack.png";
 
-import  "../assets/css/experiencePage.css"
+import "../assets/css/experiencePage.css"
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -128,13 +128,14 @@ function Packages() {
     display: "flex",
     flexDirection: "column",
     padding: "5px",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     borderRadius: "8px",
     cursor: "pointer",
   };
   const img = {
     margin: "0",
+    height: "35px",
   };
   return (
     <React.Fragment>
@@ -167,10 +168,10 @@ function Packages() {
               </div>  */}
         </div>
         <div className="d-flex justify-content-between">
-          <div>
+          <div className="page-width" style={{ margin: "0 auto" }}>
             <h2
               className="package__title mb-5"
-              style={{ marginTop: "-10px", fontWeight: "bold" }}
+              style={{ fontWeight: "bold" }}
             >
               <span>Travel Packages and itneraries </span>
             </h2>
@@ -192,9 +193,9 @@ function Packages() {
            */}
           </div>
         </div>
-        <div className="d-flex justify-content-around">
+        <div className="d-flex justify-content-around page-width" style={{ margin: "0 auto" }}>
           {[...experienceJSON].map((item, i) => (
-            <div style={icons} onClick={() => getPackages(item.type)}>
+            <div className="experiencepage-icon-container" style={icons} onClick={() => getPackages(item.type)}>
               <img src={item.icon} style={img} alt="image" />
               <p style={{ margin: "0.4rem 0.4rem 0" }}>{item.title}</p>
             </div>
@@ -203,11 +204,11 @@ function Packages() {
 
         <>
           <div
+            className="page-width"
             style={{
-              width: "90%",
               display: "flex",
               flexDirection: "row",
-              justifyContent: "space-evenly",
+              justifyContent: "space-between",
               margin: "2rem auto",
               flexWrap: "wrap",
             }}
@@ -215,7 +216,7 @@ function Packages() {
             {packages.map((item) => {
               return (
                 <div
-                className="experiencePage-card"
+                  className="experiencePage-card"
                   onClick={() =>
                     history.push({
                       pathname: `/packages_details/${item.title
@@ -245,7 +246,7 @@ function Packages() {
                   />
                   <div
                     style={{
-                      border: "1px solid #d4d4d4",
+                      borderTop: "1px solid #d4d4d4",
                       borderBottomLeftRadius: "7px",
                       borderBottomRightRadius: "7px",
                     }}

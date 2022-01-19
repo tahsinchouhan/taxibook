@@ -113,16 +113,9 @@ function Header({ showSignUpModal }) {
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
           <div style={{ textAlign: "center" }}>
-            {/* <Image
-              onClick={goHome}
-              className="image-fluid"
-              src={logo}
-              style={{ height: "100px", width: "88px" }}
-              alt="Travel Bastar"
-            /> */}
-            {/* <FaSistrix onClick={onSearchClick} className="searchIcon" /> */}
-            <span className="header_title_red">Travel</span>
-            <span className="header_title_yellow">Bastar</span>
+
+            <span className="header_title_red">travel</span>
+            <span className="header_title_yellow">bastar</span>
             <svg
               className="searchIcon"
               onClick={onSearchClick}
@@ -186,22 +179,16 @@ function Header({ showSignUpModal }) {
                   </Dropdown.Menu>
                 </Dropdown>
               </Offcanvas.Title>
-            ) : (
-              <>
-                <Offcanvas.Title onClick={() => modalHadler()}>
-                  LOGIN
-                </Offcanvas.Title>
-              </>
-            )}
+            ) : ("")}
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="me-auto sidebar__nav">
-              <NavLink to="/" className="sidebar__navlink">
+              <a onClick={() => modalHadler()} className="sidebar__navlink">
                 <Image src={loginIcon} alt="login" />
                 <span style={{ left: "76px", position: "absolute" }}>
                   LOGIN
                 </span>
-              </NavLink>
+              </a>
               <NavLink to="/home" className="sidebar__navlink">
                 <Image src={homeIcon} alt="home" />
                 <span style={{ left: "76px", position: "absolute" }}>HOME</span>
@@ -222,32 +209,19 @@ function Header({ showSignUpModal }) {
                 <Image src={planIcon} alt="plan" />
                 <span style={{ left: "76px", position: "absolute" }}>PLAN</span>
               </NavLink>
-              <NavLink className="sidebar__navlink" to="/explore">
+              <a className="sidebar__navlink" href="https://api.whatsapp.com/send/?phone=6267020580&text&app_absent=0">
                 <Image src={supportIcon} alt="support" />
                 <span style={{ left: "76px", position: "absolute" }}>
                   SUPPORT
                 </span>
-              </NavLink>
+              </a>
 
-              <NavLink className="sidebar_links" to="/explore">
+              <NavLink className="sidebar_links" to="/covidresponse">
                 About Us
               </NavLink>
-              <NavLink className="sidebar_links" to="/explore">
+              <a className="sidebar_links" href="tel:+916267020580">
                 Contact Us
-              </NavLink>
-
-              {/* <NavLink className="sidebar__navlink" to="/explore">
-                EXPLORE
-              </NavLink>
-              <NavLink className="sidebar__navlink" to="/buspass">
-                BUS BOOKING
-              </NavLink>
-              <NavLink
-                className="sidebar__navlink"
-                to="https://blog.travelbastar.com"
-              >
-                BLOG
-              </NavLink> */}
+              </a>
             </Nav>
           </Offcanvas.Body>
         </Offcanvas>
