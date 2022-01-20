@@ -21,7 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginModal from "../components/modal/LoginModal";
 import SignupModal from "../components/modal/SignupModal";
 import { logout } from "../redux/actions";
-function Header({showSignUpModal}) {
+function Header({ showSignUpModal }) {
   const [modalShow, setModalShow] = useState(false);
   const [signup, setSignup] = useState(false);
   const [profile, setProfile] = useState([]);
@@ -44,7 +44,7 @@ function Header({showSignUpModal}) {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    if(showSignUpModal){
+    if (showSignUpModal) {
       setSignup(true);
     }
   }, [showSignUpModal]);
@@ -52,10 +52,10 @@ function Header({showSignUpModal}) {
   useEffect(() => {
     const customerID = JSON.parse(localStorage.getItem("customer_id"));
     console.log("customerID", customerID);
-    if(customerID){
+    if (customerID) {
       let userData = JSON.parse(localStorage.getItem('user_data'));
-      if(userData){
-        setProfile({data:userData.user});
+      if (userData) {
+        setProfile({ data: userData.user });
       }
     }
     // axios
@@ -100,7 +100,7 @@ function Header({showSignUpModal}) {
   const vendorHandler = () => {
     history.push("/profile");
   };
- 
+
   return (
     <>
       <Container className="d-md-none header_div">
@@ -194,7 +194,7 @@ function Header({showSignUpModal}) {
               <NavLink className="sidebar__navlink" to="/explore">
                 EXPLORE
               </NavLink>
-              
+
               <NavLink className="sidebar__navlink" to="/buspass">
                 BUS BOOKING
               </NavLink>
@@ -204,7 +204,7 @@ function Header({showSignUpModal}) {
               >
                 BLOG
               </NavLink>
-              
+
             </Nav>
           </Offcanvas.Body>
         </Offcanvas>
@@ -244,7 +244,7 @@ function Header({showSignUpModal}) {
                 {/* <NavLink className="sidebar_item" to="/dmpass">
                   TRAVEL PASS
                 </NavLink> */}
-                {/* <NavLink className="sidebar_item" to="/select-booking"> */}
+                {/* <NavLink className="sidebar_item" to="plan"> */}
                 <NavLink className="sidebar_item" to="/buspass">
                   BUS BOOKING
                 </NavLink>
@@ -260,10 +260,10 @@ function Header({showSignUpModal}) {
             <Form className="" style={{ marginRight: "70px" }}>
               <div className="header_right d-flex">
                 <div className="header_info d-flex align-items-center">
-                
+
                 </div>
                 <div className="header_info d-flex align-items-center">
-                
+
                   {user_data !== null ? (
                     <Dropdown
                       style={{

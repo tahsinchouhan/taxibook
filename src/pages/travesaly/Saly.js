@@ -57,7 +57,7 @@ function Saly() {
   }, []);
   const onButtonclick = () => {
     console.log("object");
-    history.push("/select-booking");
+    history.push("plan");
   };
   const dmPassId = localStorage.getItem("dm_pass_id");
 
@@ -262,7 +262,7 @@ function Saly() {
   };
 
   const bookTickets = () => {
-    history.push("/select-booking");
+    history.push("/plan");
   };
 
   // for quiz
@@ -512,7 +512,7 @@ function Saly() {
                               alt={item.title}
                             />
                             <div>
-                              <h6 className="packages__block-title_ mt-3 mb-0">
+                              <h6 style={{ color: "#fff" }} className="packages__block-title_ mt-3 mb-0">
                                 {item.title}
                               </h6>
                               <div
@@ -769,7 +769,7 @@ function Saly() {
                   >
                     <h2
                       className="package__title"
-                      style={{ fontSize: "28px", fontFamily: "Inter" }}
+                      style={{ fontSize: "28px", fontFamily: "Inter", color: "#fff" }}
                     >
                       <span>Curated</span> Experiences
                     </h2>
@@ -779,6 +779,7 @@ function Saly() {
                         fontWeight: "normal",
                         marginRight: "3em",
                         paddingBlockEnd: "1em",
+                        color: "#fff",
                       }}
                       onClick={() => history.push("/curatedexperiences")}
                       className="package__title pt-5"
@@ -814,7 +815,7 @@ function Saly() {
                               alt={item.title}
                             />
                             <div>
-                              <h6 className="packages__block-title_ mt-3 mb-0">
+                              <h6 style={{ color: "#fff" }} className="packages__block-title_ mt-3 mb-0">
                                 {item.title}
                               </h6>
                               <div
@@ -1295,7 +1296,7 @@ function Saly() {
                                 alt={item.title}
                               />
                               <div>
-                                <h6 className="packages__block-title_ mt-3 mb-0">
+                                <h6 style={{ color: "#fff" }} className="packages__block-title_ mt-3 mb-0">
                                   {item.title}
                                 </h6>
                                 <div
@@ -1598,7 +1599,7 @@ function Saly() {
                               alt={item.title}
                             />
                             <div>
-                              <h6 className="packages__block-title_ mt-3 mb-0">
+                              <h6 style={{ color: "#fff" }} className="packages__block-title_ mt-3 mb-0">
                                 {item.title}
                               </h6>
                               <div

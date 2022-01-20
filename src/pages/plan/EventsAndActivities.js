@@ -37,6 +37,11 @@ const EventsAndActivites = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const [searchField, setSearchField] = useState("");
+  const filteredPackages = packages.filter((item) =>
+    item.title.toLowerCase().includes(searchField.toLowerCase())
+  );
+
   return (
     <>
       <Header />
@@ -59,7 +64,9 @@ const EventsAndActivites = () => {
           />
           <svg
             className="searchIcon"
-            // onClick={onSearchClick}
+            onChange={(e) => {
+              setSearchField(e.target.value)
+            }}
             style={{ cursor: "pointer" }}
             viewBox="0 0 25 26"
             fill="none"
@@ -75,8 +82,8 @@ const EventsAndActivites = () => {
       </div>
 
       <div className="package-card-container page-width">
-        {packages.length ? (
-          packages.map((item, idx) => <PackageCard key={idx} item={item} />)
+        {filteredPackages.length ? (
+          filteredPackages.map((item, idx) => <PackageCard key={idx} item={item} />)
         ) : (
           <Loader />
         )}

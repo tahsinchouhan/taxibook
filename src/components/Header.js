@@ -209,7 +209,7 @@ function Header({ showSignUpModal }) {
                 <Image src={planIcon} alt="plan" />
                 <span style={{ left: "76px", position: "absolute" }}>PLAN</span>
               </NavLink>
-              <a className="sidebar__navlink" href="https://api.whatsapp.com/send/?phone=6267020580&text&app_absent=0">
+              <a className="sidebar__navlink" href="https://api.whatsapp.com/send/?phone=+916267020580&text&app_absent=0">
                 <Image src={supportIcon} alt="support" />
                 <span style={{ left: "76px", position: "absolute" }}>
                   SUPPORT
@@ -263,7 +263,7 @@ function Header({ showSignUpModal }) {
                 {/* <NavLink className="sidebar_item" to="/dmpass">
                   TRAVEL PASS
                 </NavLink> */}
-                {/* <NavLink className="sidebar_item" to="/select-booking"> */}
+                {/* <NavLink className="sidebar_item" to="plan"> */}
                 <NavLink className="sidebar_item" to="/buspass">
                   BUS BOOKING
                 </NavLink>

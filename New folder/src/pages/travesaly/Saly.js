@@ -46,7 +46,7 @@ function Saly() {
     });
   };
 
-  
+
 
   useEffect(() => {
     getCurrentLocation();
@@ -57,7 +57,7 @@ function Saly() {
   }, []);
   const onButtonclick = () => {
     console.log("object");
-    history.push("/select-booking");
+    history.push("plan");
   };
   const dmPassId = localStorage.getItem("dm_pass_id");
 
@@ -262,7 +262,7 @@ function Saly() {
   };
 
   const bookTickets = () => {
-    history.push("/select-booking");
+    history.push("plan");
   };
 
   // for quiz
@@ -403,15 +403,14 @@ function Saly() {
                 <div
                   className="type_percent"
                   style={{
-                    backgroundColor: `${
-                      item.percentages >= 30 && item.percentages < 50
-                        ? "#12CBF3"
-                        : item.percentages >= 50 && item.percentages < 67
+                    backgroundColor: `${item.percentages >= 30 && item.percentages < 50
+                      ? "#12CBF3"
+                      : item.percentages >= 50 && item.percentages < 67
                         ? "#F3D224"
                         : item.percentages >= 67 && item.percentages <= 100
-                        ? "#1CBD40"
-                        : "#FB7373"
-                    }`,
+                          ? "#1CBD40"
+                          : "#FB7373"
+                      }`,
                   }}
                 >
                   {item.percentages}%
@@ -420,9 +419,8 @@ function Saly() {
                   {`${item.type == "religious" ? "heritage" : item.type}`}
                 </div>
                 <Link
-                  to={`/explore/${
-                    item.type == "religious" ? "heritage" : item.type
-                  }`}
+                  to={`/explore/${item.type == "religious" ? "heritage" : item.type
+                    }`}
                   className="type_link"
                 >
                   Explore &gt;
@@ -495,53 +493,53 @@ function Saly() {
                   >
                     {packagesByPersonality.length > 0
                       ? packagesByPersonality.map((item, key) => {
-                          return (
-                            <div
-                              // style={{width:"376px", height:"237px"}}
-                              key={key}
-                              onClick={() =>
-                                history.push({
-                                  pathname: `/packages_details/${item.title}`,
-                                  item: item._id,
-                                })
-                              }
-                            >
-                              <Image
-                                className="homepage"
-                                draggable={false}
-                                src={item.upload_images}
-                                alt={item.title}
-                              />
-                              <div>
-                                <h6 className="packages__block-title_ mt-3 mb-0">
-                                  {item.title}
-                                </h6>
-                                <div
+                        return (
+                          <div
+                            // style={{width:"376px", height:"237px"}}
+                            key={key}
+                            onClick={() =>
+                              history.push({
+                                pathname: `/packages_details/${item.title}`,
+                                item: item._id,
+                              })
+                            }
+                          >
+                            <Image
+                              className="homepage"
+                              draggable={false}
+                              src={item.upload_images}
+                              alt={item.title}
+                            />
+                            <div>
+                              <h6 className="packages__block-title_ mt-3 mb-0">
+                                {item.title}
+                              </h6>
+                              <div
+                                style={{
+                                  paddingTop: 2,
+                                }}
+                              >
+                                <h6
                                   style={{
-                                    paddingTop: 2,
+                                    // background: "#BEBEBE",
+                                    display: "inline",
+                                    padding: "3px",
+                                    borderRadius: "4px",
+                                    fontSize: "14px",
                                   }}
                                 >
-                                  <h6
-                                    style={{
-                                      // background: "#BEBEBE",
-                                      display: "inline",
-                                      padding: "3px",
-                                      borderRadius: "4px",
-                                      fontSize: "14px",
-                                    }}
-                                  >
-                                    {item.category.category_name}
-                                  </h6>
-                                </div>
-                                <div>
-                                  <small className="packages__block-subtitle">
-                                    ₹ {item.price}
-                                  </small>
-                                </div>
+                                  {item.category.category_name}
+                                </h6>
+                              </div>
+                              <div>
+                                <small className="packages__block-subtitle">
+                                  ₹ {item.price}
+                                </small>
                               </div>
                             </div>
-                          );
-                        })
+                          </div>
+                        );
+                      })
                       : null}
                   </Carousel>
                 </Container>
@@ -749,7 +747,7 @@ function Saly() {
           </>
         )}
 
-       
+
         {!quizStarted ? (
           <>
             <div
@@ -797,53 +795,53 @@ function Saly() {
                   >
                     {packages.length > 0
                       ? packages.map((item, key) => {
-                          return (
-                            <div
-                              // style={{width:"376px", height:"237px"}}
-                              key={key}
-                              onClick={() =>
-                                history.push({
-                                  pathname: `/packages_details/${item.title}`,
-                                  item: item._id,
-                                })
-                              }
-                            >
-                              <Image
-                                className="homepage"
-                                draggable={false}
-                                src={item.upload_images}
-                                alt={item.title}
-                              />
-                              <div>
-                                <h6 className="packages__block-title_ mt-3 mb-0">
-                                  {item.title}
-                                </h6>
-                                <div
+                        return (
+                          <div
+                            // style={{width:"376px", height:"237px"}}
+                            key={key}
+                            onClick={() =>
+                              history.push({
+                                pathname: `/packages_details/${item.title}`,
+                                item: item._id,
+                              })
+                            }
+                          >
+                            <Image
+                              className="homepage"
+                              draggable={false}
+                              src={item.upload_images}
+                              alt={item.title}
+                            />
+                            <div>
+                              <h6 className="packages__block-title_ mt-3 mb-0">
+                                {item.title}
+                              </h6>
+                              <div
+                                style={{
+                                  paddingTop: 2,
+                                }}
+                              >
+                                <h6
                                   style={{
-                                    paddingTop: 2,
+                                    // background: "#BEBEBE",
+                                    display: "inline",
+                                    padding: "3px",
+                                    borderRadius: "4px",
+                                    fontSize: "14px",
                                   }}
                                 >
-                                  <h6
-                                    style={{
-                                      // background: "#BEBEBE",
-                                      display: "inline",
-                                      padding: "3px",
-                                      borderRadius: "4px",
-                                      fontSize: "14px",
-                                    }}
-                                  >
-                                    {item.category.category_name}
-                                  </h6>
-                                </div>
-                                <div>
-                                  <small className="packages__block-subtitle">
-                                    ₹ {item.price}
-                                  </small>
-                                </div>
+                                  {item.category.category_name}
+                                </h6>
+                              </div>
+                              <div>
+                                <small className="packages__block-subtitle">
+                                  ₹ {item.price}
+                                </small>
                               </div>
                             </div>
-                          );
-                        })
+                          </div>
+                        );
+                      })
                       : null}
                   </Carousel>
                 ) : null}
@@ -912,7 +910,7 @@ function Saly() {
           draggable
           pauseOnHover
         />
-         <Container className="heritage_walk_div">
+        <Container className="heritage_walk_div">
           <Row
             style={{
               flexDirection: "row",
@@ -1077,7 +1075,7 @@ function Saly() {
           </div>
         </Container>
       </Container>
-     
+
 
       {/*mobile-view*/}
       <div fluid="true" className="d-md-none">
@@ -1105,15 +1103,14 @@ function Saly() {
                   <div
                     className="type_percent"
                     style={{
-                      backgroundColor: `${
-                        item.percentages >= 30 && item.percentages < 50
-                          ? "#12CBF3"
-                          : item.percentages >= 50 && item.percentages < 67
+                      backgroundColor: `${item.percentages >= 30 && item.percentages < 50
+                        ? "#12CBF3"
+                        : item.percentages >= 50 && item.percentages < 67
                           ? "#F3D224"
                           : item.percentages >= 67 && item.percentages <= 100
-                          ? "#1CBD40"
-                          : "#FB7373"
-                      }`,
+                            ? "#1CBD40"
+                            : "#FB7373"
+                        }`,
                     }}
                   >
                     {item.percentages}%
@@ -1122,9 +1119,8 @@ function Saly() {
                     {`${item.type == "religious" ? "heritage" : item.type}`}
                   </div>
                   <Link
-                    to={`/explore/${
-                      item.type == "religious" ? "heritage" : item.type
-                    }`}
+                    to={`/explore/${item.type == "religious" ? "heritage" : item.type
+                      }`}
                     className="type_link"
                   >
                     Explore &gt;
@@ -1280,53 +1276,53 @@ function Saly() {
                     >
                       {packagesByPersonality.length > 0
                         ? packagesByPersonality.map((item, key) => {
-                            return (
-                              <div
-                                // style={{width:"376px", height:"237px"}}
-                                key={key}
-                                onClick={() =>
-                                  history.push({
-                                    pathname: `/packages_details/${item.title}`,
-                                    item: item._id,
-                                  })
-                                }
-                              >
-                                <Image
-                                  className="homepage"
-                                  draggable={false}
-                                  src={item.upload_images}
-                                  alt={item.title}
-                                />
-                                <div>
-                                  <h6 className="packages__block-title_ mt-3 mb-0">
-                                    {item.title}
-                                  </h6>
-                                  <div
+                          return (
+                            <div
+                              // style={{width:"376px", height:"237px"}}
+                              key={key}
+                              onClick={() =>
+                                history.push({
+                                  pathname: `/packages_details/${item.title}`,
+                                  item: item._id,
+                                })
+                              }
+                            >
+                              <Image
+                                className="homepage"
+                                draggable={false}
+                                src={item.upload_images}
+                                alt={item.title}
+                              />
+                              <div>
+                                <h6 className="packages__block-title_ mt-3 mb-0">
+                                  {item.title}
+                                </h6>
+                                <div
+                                  style={{
+                                    paddingTop: 2,
+                                  }}
+                                >
+                                  <h6
                                     style={{
-                                      paddingTop: 2,
+                                      // background: "#BEBEBE",
+                                      display: "inline",
+                                      padding: "3px",
+                                      borderRadius: "4px",
+                                      fontSize: "14px",
                                     }}
                                   >
-                                    <h6
-                                      style={{
-                                        // background: "#BEBEBE",
-                                        display: "inline",
-                                        padding: "3px",
-                                        borderRadius: "4px",
-                                        fontSize: "14px",
-                                      }}
-                                    >
-                                      {item.category.category_name}
-                                    </h6>
-                                  </div>
-                                  <div>
-                                    <small className="packages__block-subtitle">
-                                      ₹ {item.price}
-                                    </small>
-                                  </div>
+                                    {item.category.category_name}
+                                  </h6>
+                                </div>
+                                <div>
+                                  <small className="packages__block-subtitle">
+                                    ₹ {item.price}
+                                  </small>
                                 </div>
                               </div>
-                            );
-                          })
+                            </div>
+                          );
+                        })
                         : null}
                     </Carousel>
                   </Container>
@@ -1548,7 +1544,7 @@ function Saly() {
             </>
           )}
 
-         
+
 
           {/* Popular PAckages */}
 
@@ -1584,52 +1580,52 @@ function Saly() {
                   >
                     {packages.length > 0
                       ? packages.map((item, key) => {
-                          return (
-                            <div
-                              key={key}
-                              onClick={() =>
-                                history.push({
-                                  pathname: `/packages_details/${item.title}`,
-                                  item: item._id,
-                                })
-                              }
-                            >
-                              <Image
-                                draggable={false}
-                                style={{ width: "100%", height: "100%" }}
-                                src={item.upload_images}
-                                alt={item.title}
-                              />
-                              <div>
-                                <h6 className="packages__block-title_ mt-3 mb-0">
-                                  {item.title}
-                                </h6>
-                                <div
+                        return (
+                          <div
+                            key={key}
+                            onClick={() =>
+                              history.push({
+                                pathname: `/packages_details/${item.title}`,
+                                item: item._id,
+                              })
+                            }
+                          >
+                            <Image
+                              draggable={false}
+                              style={{ width: "100%", height: "100%" }}
+                              src={item.upload_images}
+                              alt={item.title}
+                            />
+                            <div>
+                              <h6 className="packages__block-title_ mt-3 mb-0">
+                                {item.title}
+                              </h6>
+                              <div
+                                style={{
+                                  paddingTop: 2,
+                                }}
+                              >
+                                <h6
                                   style={{
-                                    paddingTop: 2,
+                                    //  background: "#BEBEBE",
+                                    display: "inline",
+                                    padding: "3px",
+                                    borderRadius: "4px",
+                                    fontSize: "14px",
                                   }}
                                 >
-                                  <h6
-                                    style={{
-                                      //  background: "#BEBEBE",
-                                      display: "inline",
-                                      padding: "3px",
-                                      borderRadius: "4px",
-                                      fontSize: "14px",
-                                    }}
-                                  >
-                                    {item.category.category_name}
-                                  </h6>
-                                </div>
-                                <div>
-                                  <small className="packages__block-subtitle">
-                                    ₹ {item.price}
-                                  </small>
-                                </div>
+                                  {item.category.category_name}
+                                </h6>
+                              </div>
+                              <div>
+                                <small className="packages__block-subtitle">
+                                  ₹ {item.price}
+                                </small>
                               </div>
                             </div>
-                          );
-                        })
+                          </div>
+                        );
+                      })
                       : null}
                   </Carousel>
                 ) : null}
@@ -1684,94 +1680,94 @@ function Saly() {
               </Container>
 
               <div
-            style={{
-              // backgroundColor: "black",
-              color: "white",
-              // height: "500px",
-            }}
-          >
-            <div style={{ flexDirection: "row" }}>
-              <Col md={6} style={{ position: "relative" }}>
-                <div>
-                  <div className="heritage_walk">
-                    <Image
-                      src={heritage_walk}
-                      alt="Heritage Walk"
-                      style={{ borderRadius: "0" }}
-                    />
-                    <span
-                      className="heritage_walk_text"
-                      style={{ fontSize: "34px", lineHeight: "40px" }}
+                style={{
+                  // backgroundColor: "black",
+                  color: "white",
+                  // height: "500px",
+                }}
+              >
+                <div style={{ flexDirection: "row" }}>
+                  <Col md={6} style={{ position: "relative" }}>
+                    <div>
+                      <div className="heritage_walk">
+                        <Image
+                          src={heritage_walk}
+                          alt="Heritage Walk"
+                          style={{ borderRadius: "0" }}
+                        />
+                        <span
+                          className="heritage_walk_text"
+                          style={{ fontSize: "34px", lineHeight: "40px" }}
+                        >
+                          Heritage Walk{" "}
+                          <Button
+                            onClick={() => setModalShow(true)}
+                            className="makebooking-btn "
+                          >
+                            Know More
+                          </Button>
+                        </span>
+                      </div>
+                    </div>
+                  </Col>
+                  <Col className="p-3">
+                    <div
+                      style={{
+                        paddingBlock: "34px",
+                        backgroundColor: "#2c2c2c",
+                        borderRadius: "10px",
+                        textAlign: "center",
+                      }}
                     >
-                      Heritage Walk{" "}
+                      <div className="bookings-div px-3">
+                        <svg
+                          width="75"
+                          height="50"
+                          viewBox="0 0 75 50"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M16.6667 22.5C16.6667 16.9772 21.1438 12.5 26.6667 12.5H48.3333C53.8562 12.5 58.3333 16.9772 58.3333 22.5V27.5C58.3333 33.0228 53.8562 37.5 48.3333 37.5H26.6667C21.1438 37.5 16.6667 33.0228 16.6667 27.5V22.5ZM68.75 25C68.75 30.4223 75 35.6456 75 41.0679V43.75C75 47.2018 72.2018 50 68.75 50H6.25C2.79818 50 0 47.2018 0 43.75V41.0679C0 35.6456 6.25 30.4223 6.25 25C6.25 19.5777 0 14.3544 0 8.93212V6.25C0 2.79818 2.79818 0 6.25 0H68.75C72.2018 0 75 2.79818 75 6.25V8.93212C75 14.3544 68.75 19.5777 68.75 25ZM62.5 11.4583C62.5 9.73242 61.1009 8.33333 59.375 8.33333H15.625C13.8991 8.33333 12.5 9.73242 12.5 11.4583V38.5417C12.5 40.2676 13.8991 41.6667 15.625 41.6667H59.375C61.1009 41.6667 62.5 40.2676 62.5 38.5417V11.4583Z"
+                            fill="#0FA453"
+                          />
+                        </svg>
+                        <h3 className="pt-3">Bookings</h3>
+                        <p>
+                          Book tickets for Bus,Location wise Tickets and Traveller
+                          Passes
+                        </p>
+                      </div>
                       <Button
-                        onClick={() => setModalShow(true)}
-                        className="makebooking-btn "
+                        className="makebooking-btn btn-primary-tb"
+                        // style={{ backgroundColor: "#0FA453", color: "white" }}
+                        onClick={onButtonclick}
                       >
-                        Know More
+                        Step 1 - Book Travel Pass
                       </Button>
-                    </span>
-                  </div>
-                </div>
-              </Col>
-              <Col className="p-3">
-                <div
-                  style={{
-                    paddingBlock: "34px",
-                    backgroundColor: "#2c2c2c",
-                    borderRadius: "10px",
-                    textAlign: "center",
-                  }}
-                >
-                  <div className="bookings-div px-3">
-                    <svg
-                      width="75"
-                      height="50"
-                      viewBox="0 0 75 50"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M16.6667 22.5C16.6667 16.9772 21.1438 12.5 26.6667 12.5H48.3333C53.8562 12.5 58.3333 16.9772 58.3333 22.5V27.5C58.3333 33.0228 53.8562 37.5 48.3333 37.5H26.6667C21.1438 37.5 16.6667 33.0228 16.6667 27.5V22.5ZM68.75 25C68.75 30.4223 75 35.6456 75 41.0679V43.75C75 47.2018 72.2018 50 68.75 50H6.25C2.79818 50 0 47.2018 0 43.75V41.0679C0 35.6456 6.25 30.4223 6.25 25C6.25 19.5777 0 14.3544 0 8.93212V6.25C0 2.79818 2.79818 0 6.25 0H68.75C72.2018 0 75 2.79818 75 6.25V8.93212C75 14.3544 68.75 19.5777 68.75 25ZM62.5 11.4583C62.5 9.73242 61.1009 8.33333 59.375 8.33333H15.625C13.8991 8.33333 12.5 9.73242 12.5 11.4583V38.5417C12.5 40.2676 13.8991 41.6667 15.625 41.6667H59.375C61.1009 41.6667 62.5 40.2676 62.5 38.5417V11.4583Z"
-                        fill="#0FA453"
-                      />
-                    </svg>
-                    <h3 className="pt-3">Bookings</h3>
-                    <p>
-                      Book tickets for Bus,Location wise Tickets and Traveller
-                      Passes
-                    </p>
-                  </div>
-                  <Button
-                    className="makebooking-btn btn-primary-tb"
-                    // style={{ backgroundColor: "#0FA453", color: "white" }}
-                    onClick={onButtonclick}
-                  >
-                    Step 1 - Book Travel Pass
-                  </Button>
-                  {/* <div style={{ width: "266px", height: "487px", marginLeft: "42px", marginBlockStart: "8px" }}>
+                      {/* <div style={{ width: "266px", height: "487px", marginLeft: "42px", marginBlockStart: "8px" }}>
                     <Image className="img-fluid" src={manWithMobileMob} />
                   </div> */}
+                    </div>
+                  </Col>
+                  <Col></Col>
                 </div>
-              </Col>
-              <Col></Col>
-            </div>
-          </div>
+              </div>
 
-          {/*Tictets*/}
-          <Container>
-            <div className="ticket-div py-5">
-              <Row>
-                <Col sm={12} md={12}>
-                  <div>
-                    <h3 className="ml-5">
-                      <b>Book Tickets</b>
-                    </h3>
-                    <p>Click on the ticket type you wish to book</p>
-                  </div>
-                </Col>
+              {/*Tictets*/}
+              <Container>
+                <div className="ticket-div py-5">
+                  <Row>
+                    <Col sm={12} md={12}>
+                      <div>
+                        <h3 className="ml-5">
+                          <b>Book Tickets</b>
+                        </h3>
+                        <p>Click on the ticket type you wish to book</p>
+                      </div>
+                    </Col>
 
-                {/* <Col sm={6} md={6}>
+                    {/* <Col sm={6} md={6}>
                   <div className="viewbtn">
                     <Button
                       // variant="danger"                      
@@ -1790,14 +1786,14 @@ function Saly() {
                     </Button>
                   </div>
                 </Col> */}
-              </Row>
-              <div className="pt-4">
-                <Container>
-                  <h4>{/* <b>Recent Tickets</b> */}</h4>
-                  <TravellerTicketMobile />
-                </Container>
-              </div>
-              {/* <div className="viewbtn">
+                  </Row>
+                  <div className="pt-4">
+                    <Container>
+                      <h4>{/* <b>Recent Tickets</b> */}</h4>
+                      <TravellerTicketMobile />
+                    </Container>
+                  </div>
+                  {/* <div className="viewbtn">
                 <Button
                   // variant="danger"                      
                   style={{
@@ -1814,8 +1810,8 @@ function Saly() {
                   Book Now
                 </Button>
               </div> */}
-            </div>
-          </Container>
+                </div>
+              </Container>
             </>
           ) : null}
         </div>

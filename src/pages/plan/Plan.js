@@ -34,10 +34,16 @@ const PlanHomeStays = () => {
     }
   };
 
+
   useEffect(() => {
     getPackages();
     window.scrollTo(0, 0);
   }, []);
+
+  const [searchField, setSearchField] = useState("");
+  const filteredPackages = packages.filter((item) =>
+    item.title.toLowerCase().includes(searchField.toLowerCase())
+  );
 
   return (
     <>
@@ -56,12 +62,14 @@ const PlanHomeStays = () => {
         <div className="searchBox-container">
           <input
             type="search"
+            onChange={(e) => {
+              setSearchField(e.target.value)
+            }}
             className="searchBox"
             placeholder="Search for Homestays"
           />
           <svg
             className="searchIcon"
-            // onClick={onSearchClick}
             style={{ cursor: "pointer" }}
             viewBox="0 0 25 26"
             fill="none"
@@ -77,10 +85,12 @@ const PlanHomeStays = () => {
       </div>
 
       <div className="package-card-container page-width">
-        {packages.length ? (
-          packages.map((item, idx) => <PackageCard key={idx} item={item} />)
+        {filteredPackages.length ? (
+          filteredPackages.map((item, idx) => <PackageCard key={idx} item={item} />)
         ) : (
-          <Loader />
+          <div>
+            <Loader />
+          </div>
         )}
       </div>
       <div fluid="true" className="d-sm-none">

@@ -211,7 +211,7 @@ const PreHome = () => {
         <Row className="saly_div w-100  m-0 p-0 pt-5 ">
           <div
             className="container"
-            style={{ paddingLeft: "10%", paddingRight: "10%" }}
+            style={{ paddingLeft: "10%", paddingRight: "10%", margin: "0 0 3rem" }}
           >
             <div className="homepage-top_title">
               <h1 className="top_title">Travel Bastar</h1>
@@ -223,7 +223,7 @@ const PreHome = () => {
                 You can select as few or as many options as you like.
               </center>
             </div>
-            <div className="row ">
+            <div style={{ margin: "0 0 2rem" }} className="row ">
               {ImageDesk?.slice(0, 16).map((item, key) => {
                 return (
                   <div
@@ -285,10 +285,10 @@ const PreHome = () => {
                 );
               })}
             </div>
-            <div style={{ margin: "30px 0 0", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", position: "fixed", left: "0", bottom: "66.77px", width: "100%", boxShadow: "0 0 10px rgba(0,0,0,0.5" }}>
               <Button
                 style={{
-                  padding: "10px 60px", width: "65%", borderRadius: "0", border: "none"
+                  padding: "14px 60px", width: "70%", borderRadius: "0", border: "none"
                 }}
                 className="btn btn-block btn-success"
                 onClick={() => getmaxCategory()}
@@ -297,7 +297,7 @@ const PreHome = () => {
               </Button>
               <button
                 onClick={() => history.push("/curatedexperiences")}
-                style={{ width: "30%", borderRadius: "0", border: "none" }} className="btn btn-light" >Skip</button>
+                style={{ width: "30%", borderRadius: "0", border: "0", padding: "13px 0 14px", textTransform: "uppercase", fontSize: "1rem" }}>Skip</button>
             </div>
             <FooterIcons />
           </div>

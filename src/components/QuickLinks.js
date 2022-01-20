@@ -38,8 +38,8 @@ const QuickLinksArr = [{
 },
 {
   "icon": guidesIcon,
-  "title": "Destinations",
-  "route": "/populardestinations",
+  "title": "Tour Guides",
+  "route": "/planTourGuides",
 },
 {
   "icon": ticketsIcon,
@@ -53,7 +53,7 @@ const QuickLinksArr = [{
 },
 {
   "icon": packagesIcon,
-  "title": "Packages",
+  "title": "Tour Packages",
   "route": "/curatedexperiences",
 },
 {

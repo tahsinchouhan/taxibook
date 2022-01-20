@@ -9,6 +9,13 @@
   color: white;
 }
 
+.react-multi-carousel-item > div > .destinationExploreImg {
+    max-width: 376px !important;
+  height: 500px !important;
+  border-radius: 10px;
+  cursor: pointer !important;
+}
+
 .audioJourney_banner_center {
   position: absolute;
   top: 37%;

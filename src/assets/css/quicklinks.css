@@ -30,6 +30,11 @@
   border-right: 1px solid #d0d0d0;
 }
 
+.flex_item img {
+  height: 1.2rem;
+  width: 1.4rem;
+}
+
 .flex_item p {
   margin: 0.2rem 0 !important;
   font-size: 0.6rem;
@@ -62,8 +67,8 @@
   }
 
   .flex_item img {
-    width: 40px !important;
-    height: 50px !important;
+    width: 1.8rem !important;
+    height: 1.4rem !important;
   }
 }
 
@@ -75,8 +80,8 @@
   }
 
   .flex_item img {
-    width: 45px !important;
-    height: 60px !important;
+    width: 2rem !important;
+    height: 1.6rem !important;
   }
 }
 
@@ -89,5 +94,8 @@
 @media (min-width: 1250px) {
   .flex_container {
     width: 80%;
+  }
+  .flex_item {
+    width: auto;
   }
 }
