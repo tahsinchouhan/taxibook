@@ -28,6 +28,8 @@ const PackagesDetails = (props) => {
   let { name } = useParams();
   name = name.split("-").join(" ");
 
+  const { user_data } = useSelector((state) => state.loginReducer);
+  const [showFormModal, setShowFormModal] = useState(false);
   const [enquireModal, setEnquireModal] = useState();
   const [modalReviewShow, setModalReviewShow] = useState(false);
   const [packages, setPackages] = useState("");
@@ -126,8 +128,6 @@ const PackagesDetails = (props) => {
   var current = null;
   var cnt = 0;
 
-  const { user_data } = useSelector((state) => state.loginReducer);
-  const [showFormModal, setShowFormModal] = useState(false);
 
   for (var i = 0; i < review.length; i++) {
     if (review[i].star_rating != current) {
@@ -242,8 +242,16 @@ const PackagesDetails = (props) => {
             <h5 className="price__title pt-3 mb-1">₹{packages.price}</h5>
           </div>
         )}
-
         <p>{packages.duration}</p>
+
+        <button style={{ background: "green" }} className="btn btn-success" onClick={() => setShowFormModal(true)} >Book Now</button>
+
+        <BookNowForm
+          item={packages}
+          show={showFormModal}
+          handleModal={setShowFormModal}
+          user_data={user_data}
+        />
 
         <div className="block pt-5">
           <h4 className="block__title">
@@ -706,15 +714,6 @@ const PackagesDetails = (props) => {
                       <small className="packages__block-subtitle">
                         ₹ {data.price}
                       </small>
-                      <button className="book-now" onClick={() => setShowFormModal(true)}>
-                        Book Now
-                      </button>
-                      <BookNowForm
-                        item={packages}
-                        show={showFormModal}
-                        handleModal={setShowFormModal}
-                        user_data={user_data}
-                      />
                     </div>
                   </div>
                 </>

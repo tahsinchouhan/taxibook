@@ -213,9 +213,10 @@ function Packages() {
               flexWrap: "wrap",
             }}
           >
-            {packages.map((item) => {
+            {packages.map((item, i) => {
               return (
                 <div
+                  key={i}
                   className="experiencePage-card"
                   onClick={() =>
                     history.push({
@@ -263,11 +264,11 @@ function Packages() {
                         margin: "0.2rem 0.5rem",
                       }}
                     >
-                      {item.seo_description.slice(0, 25) + "..."}
+                      {item.seo_description ? item.seo_description.slice(0, 25) + "..." : ""}
                     </p>
                     <div
                       style={{
-                        backgroundColor: "rgba(0,0,0,0.04)",
+                        backgroundColor: "#F8F8F8",
                         borderRadius: "2px",
                         display: "flex",
                         alignItems: "center",

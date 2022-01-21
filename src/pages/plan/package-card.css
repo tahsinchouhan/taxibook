@@ -76,7 +76,7 @@
   font-size: 1.3rem;
   font-weight: 600;
   margin: 0;
-  color: green;
+  color: #0FA453;
 }
 
 .package__card-btn {
@@ -102,7 +102,7 @@
 }
 
 .package__card-btn .book-now {
-  background-color: green;
+  background-color: #0FA453;
   color: white;
 }
 

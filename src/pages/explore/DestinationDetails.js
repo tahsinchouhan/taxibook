@@ -16,6 +16,8 @@ import { getAudioJourneyFile } from "../../redux/audioJourney/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { AiOutlinePauseCircle } from "react-icons/ai";
+import BookNowForm from "../BookNowForm";
+
 
 import ReactAudioPlayer from "react-audio-player";
 
@@ -32,6 +34,10 @@ const DestinationDetails = (props) => {
 
   name = name.split("-").join(" ");
 
+
+  const { user_data } = useSelector((state) => state.loginReducer);
+  const [showFormModal, setShowFormModal] = useState(false);
+
   const [destinations, setDestinations] = useState("");
   const [packagesdata, getPackagesdata] = useState([]);
   const [playAudio, setPlayAudio] = useState(false);
@@ -40,10 +46,6 @@ const DestinationDetails = (props) => {
   const [zoom, setZoom] = useState(11);
 
   const dispatch = useDispatch();
-
-  const sound = new Howl({
-    src: Audio
-  });
 
   const getSeoDetails = async (data) => {
     try {
@@ -73,7 +75,6 @@ const DestinationDetails = (props) => {
     }
   };
 
-  var id;
 
   useEffect(() => {
     // if (props.location.id) {
@@ -85,9 +86,7 @@ const DestinationDetails = (props) => {
     //   console.log('2')
     // }
     // console.log('abcd')
-    sound.play();
     dispatch(getAudioJourneyFile("61dec48bbae9f1794d2e55ff"));
-    Howler.volume(0.1);
   }, []);
 
   useEffect(() => {
@@ -179,14 +178,14 @@ const DestinationDetails = (props) => {
             // onClick={() => handleAudio()}
             >
               {playAudio ? (
-                <AiOutlinePlayCircle style={{ fontSize: "3rem" }} />
-              ) : (
                 <AiOutlinePauseCircle style={{ fontSize: "3rem" }} />
+              ) : (
+                <AiOutlinePlayCircle style={{ fontSize: "3rem" }} />
               )}
             </div>
             <div className="">
               <audio id="audio">
-                <source src={audioJourneyFile.file} />
+                <source />
               </audio>
             </div>
           </Container>
@@ -197,7 +196,7 @@ const DestinationDetails = (props) => {
           <h4 className="block__title">
             <span>About</span> the Destination
           </h4>
-          <p className="pt-2" style={{whiteSpace:'pre-line'}}>{destinations?.description}</p>
+          <p className="pt-2" style={{ whiteSpace: 'pre-line' }}>{destinations?.description}</p>
         </div>
       </Container>
 
@@ -247,7 +246,16 @@ const DestinationDetails = (props) => {
                   </b>
                 </span>
               </div>
+              <button className="btn btn-success" style={{ background: "green" }}
+                onClick={() => setShowFormModal(true)}
+              >Book Now</button>
             </Col>
+            <BookNowForm
+              item={destinations}
+              show={showFormModal}
+              handleModal={setShowFormModal}
+              user_data={user_data}
+            />
             <Col sm={6} className="google__map">
               {destinations ? (
                 <GoogleMapReact

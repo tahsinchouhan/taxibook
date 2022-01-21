@@ -209,7 +209,7 @@ const Explores = () => {
         <QuickLinks Position={"relative"} Top={"65%"} />
       </div>
       <Container>
-        <div style={{ margin: "7rem 0 1rem" }}>
+        <div style={{ margin: "2.5rem 0 1rem" }}>
           <h2 className="package__title pt-1">
             <span>Tour</span> Maps
           </h2>
@@ -253,7 +253,7 @@ const Explores = () => {
             );
           })
           : null}
-        <div className="mb-5 mt-5">
+        <div className="mb-5 mt-3">
           <div
             style={{
               display: "flex",
@@ -333,35 +333,35 @@ const Explores = () => {
       </Container>
 
       <div
-        className="py-5 mt-5"
+        className="py-5 mt-3"
         style={{ backgroundColor: "black", color: "white" }}
       >
         <Container>
           <div className="mb-5">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <div>
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
                 <h2 className="package__title" style={{ color: "white" }}>
                   <span>Popular</span> Destinations
                 </h2>
-                <h6 style={{ color: "white" }}>
-                  The best tourist locations across Bastar, rated and curated by
-                  travellers.
+                <h6
+                  style={{ cursor: "pointer", color: "white" }}
+                  onClick={() => history.push("/populardestinations")}
+                  className="package__title"
+                >
+                  View All
                 </h6>
               </div>
-
-              <h6
-                style={{ cursor: "pointer", color: "white" }}
-                onClick={() => history.push("/populardestinations")}
-                className="package__title pt-5"
-              >
-                View All
+              <h6 style={{ color: "white" }}>
+                The best tourist locations across Bastar, rated and curated by
+                travellers.
               </h6>
+
             </div>
           </div>
           {destinations.length > 0 ? (

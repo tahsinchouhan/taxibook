@@ -192,7 +192,8 @@ const PreHome = () => {
                     paddingRight: "60px",
                   }}
                   className="btn btn-block btn-success"
-                  onClick={() => getmaxCategory()}
+                  // onClick={() => getmaxCategory()}
+                  onClick={() => history.push("/explore")}
                 >
                   CONTINUE
                 </Button>
@@ -291,13 +292,14 @@ const PreHome = () => {
                   padding: "14px 60px", width: "70%", borderRadius: "0", border: "none"
                 }}
                 className="btn btn-block btn-success"
-                onClick={() => getmaxCategory()}
+                // onClick={() => getmaxCategory()}
+                onClick={() => history.push("/explore")}
               >
                 CONTINUE
               </Button>
               <button
                 onClick={() => history.push("/curatedexperiences")}
-                style={{ width: "30%", borderRadius: "0", border: "0", padding: "13px 0 14px", textTransform: "uppercase", fontSize: "1rem" }}>Skip</button>
+                style={{ width: "30%", color: "purple", borderRadius: "0", border: "0", padding: "13px 0 14px", textTransform: "uppercase", fontSize: "1rem" }}>Skip</button>
             </div>
             <FooterIcons />
           </div>

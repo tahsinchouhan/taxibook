@@ -2,15 +2,18 @@ import React, { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Container, Image } from "react-bootstrap";
 import Header from "../components/Header";
-import Footer from "../pages/travesaly/Footer";
-import exploreIcon from "../assets/icons/ExploreActive.png";
-import exploreInactiveIcon from "../assets/icons/ExploreNotActive.png";
-import experienceIcon from "../assets/icons/ExperienceActive.png";
-import experienceInactiveIcon from "../assets/icons/ExperienceNotActive.png";
-import planIcon from "../assets/icons/PlanActive.png";
-import planInactiveIcon from "../assets/icons/PlanNotActive.png";
-import supportIcon from "../assets/icons/SupportActive.png";
-import supportInactiveIcon from "../assets/icons/SupportNotActive.png";
+// import Footer from "../pages/travesaly/Footer";
+
+import exploreIcon from "../assets/icons/explore.svg";
+import experienceIcon from "../assets/icons/experience.svg";
+import planIcon from "../assets/icons/plan.svg";
+import supportIcon from "../assets/icons/support.svg";
+
+import exploreActiveIcon from "../assets/icons/exploreActive.svg";
+import experienceActiveIcon from "../assets/icons/experienceActive.svg";
+import planActiveIcon from "../assets/icons/planActive.svg";
+// import supportActiveIcon from "../assets/icons/supportActive.svg";
+
 import "../assets/css/footerIcons.css";
 
 const FooterIcons = () => {
@@ -20,54 +23,62 @@ const FooterIcons = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const iconsArr = [
+    {
+      icon: exploreIcon,
+      route: "/explore",
+      activeIcon: exploreActiveIcon,
+      title: "Explore",
+    },
+    {
+      icon: experienceIcon,
+      activeIcon: experienceActiveIcon,
+      route: "/curatedexperiences",
+      title: "Experience",
+    },
+    {
+      icon: planIcon,
+      activeIcon: planActiveIcon,
+      route: "/plan",
+      title: "Plan",
+    },
+  ];
+
+
   return (
     <>
       <Header />
       <Container>
         <div className="footerIcons_container">
+          {
+            [...iconsArr].map((item, i) => (
+              <span key={i} className="footerIcons_items">
+                <NavLink to={item.route}>
+                  {
+                    location.pathname === item.route ? (
+                      <>
+                        <Image src={item.activeIcon} alt={item.title} />
+                        <p style={{ color: "#000" }}>{item.title}</p>
+                      </>
+                    ) : (
+                      <>
+                        <Image src={item.icon} alt={item.title} />
+                        <p style={{ color: "#999" }}>{item.title}</p>
+                      </>
+                    )
+                  }
+                </NavLink>
+              </span>
+            ))
+          }
           <span className="footerIcons_items">
-            <NavLink className="" to="/explore">
-              {
-                location.pathname == '/explore' ? (
-                  <Image src={exploreIcon} alt="explore" />
-                ) : (
-                  <Image src={exploreInactiveIcon} alt="explore" />
-                )
-              }
-            </NavLink>
-          </span>
-          <span className="footerIcons_items">
-            <NavLink className="" to="/curatedexperiences">
-              {
-                location.pathname == '/curatedexperiences' ? (
-                  <Image src={experienceIcon} alt="experience" />
-                ) : (
-                  <Image src={experienceInactiveIcon} alt="experience" />
-                )
-              }
-            </NavLink>
-          </span>
-          <span className="footerIcons_items">
-            <NavLink className="" to="/plan">
-              {
-                location.pathname == '/plam' ? (
-                  <Image src={planIcon} alt="plan" />
-                ) : (
-                  <Image src={planInactiveIcon} alt="plan" />
-                )
-              }
-            </NavLink>
-          </span>
-          <span className="footerIcons_items">
-            <NavLink className="" to="/support">
-              {
-                location.pathname == '/support' ? (
-                  <Image src={supportIcon} alt="support" />
-                ) : (
-                  <Image src={supportInactiveIcon} alt="support" />
-                )
-              }
-            </NavLink>
+            <a href="https://api.whatsapp.com/send/?phone=+916267020580&text&app_absent=0">
+              <>
+                <Image src={supportIcon} alt="Support" />
+                <p style={{ color: "#999" }}>Support</p>
+              </>
+            </a>
           </span>
         </div>
       </Container>

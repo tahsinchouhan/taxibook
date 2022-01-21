@@ -22,10 +22,12 @@ import LoginModal from "../components/modal/LoginModal";
 import SignupModal from "../components/modal/SignupModal";
 import loginIcon from "../assets/icons/Loginicon.png";
 import homeIcon from "../assets/icons/Homestays.png";
-import experienceIcon from "../assets/icons/experience.png";
-import exploreIcon from "../assets/icons/explore.png";
-import planIcon from "../assets/icons/plan.png";
-import supportIcon from "../assets/icons/support.png";
+
+import experienceIcon from "../assets/icons/experienceActive.svg";
+import exploreIcon from "../assets/icons/exploreActive.svg";
+import planIcon from "../assets/icons/planActive.svg";
+import supportIcon from "../assets/icons/supportActive.svg";
+
 import { logout } from "../redux/actions";
 function Header({ showSignUpModal }) {
   const [modalShow, setModalShow] = useState(false);
@@ -113,9 +115,10 @@ function Header({ showSignUpModal }) {
         <header style={{ flexDirection: "row" }}>
           <HiMenu onClick={handleShow} className="sidebar__toggler" />
           <div style={{ textAlign: "center" }}>
-
-            <span className="header_title_red">travel</span>
-            <span className="header_title_yellow">bastar</span>
+            <div onClick={() => history.push("/")}>
+              <span className="header_title_red">travel</span>
+              <span className="header_title_yellow">bastar</span>
+            </div>
             <svg
               className="searchIcon"
               onClick={onSearchClick}
@@ -189,7 +192,7 @@ function Header({ showSignUpModal }) {
                   LOGIN
                 </span>
               </a>
-              <NavLink to="/home" className="sidebar__navlink">
+              <NavLink to="/" className="sidebar__navlink">
                 <Image src={homeIcon} alt="home" />
                 <span style={{ left: "76px", position: "absolute" }}>HOME</span>
               </NavLink>
@@ -227,6 +230,8 @@ function Header({ showSignUpModal }) {
         </Offcanvas>
       </Container>
 
+
+
       <Container fluid className="header_div d-none d-md-block">
         <Navbar expand="lg">
           <NavLink to="/">
@@ -238,6 +243,8 @@ function Header({ showSignUpModal }) {
               />
             </div>
           </NavLink>
+
+
           <Navbar.Toggle aria-controls="navbarScroll" className="toggle-icon" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
