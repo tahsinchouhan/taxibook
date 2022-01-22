@@ -63,7 +63,7 @@ const AudioJourney = () => {
           {audioJourneyFiles.map((item) => (
             <Card className="audio-card" key={item._id}>
               <Card.Body>
-                <Row  style={{ alignItems: "center" }}>
+                <Row style={{ alignItems: "center" }}>
                   <Col xs={4}>
                     <Card.Img
                       variant="top"
@@ -72,7 +72,8 @@ const AudioJourney = () => {
                     />
                   </Col>
                   <Col xs={6}>
-                    <Card.Title>{item.destination.title}</Card.Title>
+                    <Card.Title>{item.title.slice(0, 30) + "..."}</Card.Title>
+                    <Card.Text>{item.destination.title}</Card.Text>
                   </Col>
                   <Col xs={2} className="play_btn_center">
                     <Card.Img

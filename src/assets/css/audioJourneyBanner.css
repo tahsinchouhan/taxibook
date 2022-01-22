@@ -11,9 +11,7 @@
 
 .react-multi-carousel-item > div > .destinationExploreImg {
     max-width: 376px !important;
-  height: 500px !important;
-  border-radius: 10px;
-  cursor: pointer !important;
+    height: 500px !important; 
 }
 
 .audioJourney_banner_center {
@@ -66,6 +64,13 @@
   }
 }
 
+
+@media (min-width: 600px) {
+  .react-multi-carousel-item > div > .destinationExploreImg {
+    height: 150px !important;
+    max-width: 250px !important;
+  }
+}
 
 @media (min-width: 700px) {
   .background-overlay {

@@ -7,7 +7,9 @@ import ImageDesk from "./Desktopimage";
 // import doodle1 from "../../assets/img/doodle.png";
 import "./../assets/css/saly.css";
 import Header from "../components/Header";
-import MarqueeComponent from './marquee'
+// import MarqueeComponent from './marquee'
+import Logo from '.././assets/img/new_Logo.png'
+import Marquee from "react-fast-marquee";
 import { useHistory } from "react-router-dom";
 import checkimage from "../assets/TravelBastar-desktop/checkimage.png";
 import { useDispatch } from "react-redux";
@@ -100,8 +102,7 @@ const PreHome = () => {
       religious: heritage11 * 25,
       leisure: leisure11 * 25,
     }))
-    history.push('/interest')
-
+    history.push('/explore')
   };
 
   return (
@@ -112,7 +113,18 @@ const PreHome = () => {
         style={{ padding: 0, margin: 0 }}
       >
         <Header />
-        <MarqueeComponent />
+        {/* <MarqueeComponent /> */}
+        <Marquee speed="30" direction="right">
+          <div style={{ cursor: "pointer" }} onClick={() => history.push("/audioJourney")} >
+            <span style={{ margin: "0 0.5rem 0 5rem" }} >Audio Journeys</span>
+            <img src={Logo} style={{ height: '35px' }} alt="new" />
+          </div>
+          <div style={{ cursor: "pointer" }} onClick={() => history.push("/buspass")} >
+            <span style={{ margin: "0 0.5rem 0 5rem" }}>Book Bus Tickets</span>
+            <img src={Logo} style={{ height: '35px' }} alt="new" />
+          </div>
+        </Marquee>
+
         <Row className="saly_div w-100  m-0 ">
           <div
             className="container"
@@ -192,8 +204,8 @@ const PreHome = () => {
                     paddingRight: "60px",
                   }}
                   className="btn btn-block btn-success"
-                  // onClick={() => getmaxCategory()}
-                  onClick={() => history.push("/explore")}
+                  onClick={() => getmaxCategory()}
+                // onClick={() => history.push("/explore")}
                 >
                   CONTINUE
                 </Button>
@@ -206,7 +218,16 @@ const PreHome = () => {
       {/* Mobile View */}
       <div fluid="true" className="d-md-none">
         <Header />
-        <MarqueeComponent />
+        <Marquee speed="30" direction="right">
+          <div style={{ cursor: "pointer" }} onClick={() => history.push("/audioJourney")} >
+            <span style={{ margin: "0 0.5rem 0 5rem" }} >Audio Journeys</span>
+            <img src={Logo} style={{ height: '35px' }} alt="new" />
+          </div>
+          <div style={{ cursor: "pointer" }} onClick={() => history.push("/buspass")} >
+            <span style={{ margin: "0 0.5rem 0 5rem" }}>Book Bus Tickets</span>
+            <img src={Logo} style={{ height: '35px' }} alt="new" />
+          </div>
+        </Marquee>
 
         <div fluid="true" style={{ padding: 0, margin: 0 }}></div>
         <Row className="saly_div w-100  m-0 p-0 pt-5 ">
@@ -292,8 +313,8 @@ const PreHome = () => {
                   padding: "14px 60px", width: "70%", borderRadius: "0", border: "none"
                 }}
                 className="btn btn-block btn-success"
-                // onClick={() => getmaxCategory()}
-                onClick={() => history.push("/explore")}
+                onClick={() => getmaxCategory()}
+              // onClick={() => history.push("/explore")}
               >
                 CONTINUE
               </Button>

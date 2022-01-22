@@ -59,7 +59,7 @@ function HotelList() {
   const [noOfGuest, setNoOfGuest] = useState(2);
   const [noOfRoom, setNoOfRoom] = useState(1);
   const [enterlocation, setEnterlocation] = useState("");
-  const [rangeValue, setRangeValue] = useState([1500, 2500]);
+  const [rangeValue, setRangeValue] = useState([500, 4500]);
   const [amentiesData, setAmentiesData] = useState([]);
   const [selectedAmeneties, setSelectedAmeneties] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
@@ -108,11 +108,11 @@ function HotelList() {
     getStartData?.roomStateData?.length > 0
       ? getStartData?.roomStateData
       : [
-          {
-            room: 1,
-            guest: 2,
-          },
-        ]
+        {
+          room: 1,
+          guest: 2,
+        },
+      ]
   );
 
   const addMenu = () => {
@@ -229,7 +229,7 @@ function HotelList() {
       <div>
         <Slider
           range={{ draggableTrack: false }}
-          defaultValue={[1500, 2500]}
+          defaultValue={[500, 4500]}
           tooltip={false}
           min={500}
           max={4500}
@@ -432,7 +432,7 @@ function HotelList() {
                       {...params}
                       onKeyPress={(e) => getDataFromAPI(e.target.value)}
                       placeholder="Search Area"
-                      // InputProps={{ disableUnderline: true }}
+                    // InputProps={{ disableUnderline: true }}
                     />
                   )}
                 />
@@ -514,7 +514,7 @@ function HotelList() {
                   <ANTDropdown
                     overlay={menu}
                     trigger={["click"]}
-                    // style={{ width: "100px" }}
+                  // style={{ width: "100px" }}
                   >
                     <input // onChange={(e) => setEmail(e.target.value)}
                       // value={email}
@@ -531,7 +531,7 @@ function HotelList() {
                         // padding: "10px",
                         // position:"absolute"
                       }}
-                      // readOnly
+                    // readOnly
                     />
                   </ANTDropdown>
                 </div>
@@ -549,7 +549,7 @@ function HotelList() {
             >
               <div
                 className="dmticket-btn"
-                //   style={{ textAlign: "center" }}
+              //   style={{ textAlign: "center" }}
               >
                 <Button
                   type="submit"
@@ -609,7 +609,7 @@ function HotelList() {
               <div style={{ textAlign: "center", marginLeft: "15px" }}>
                 <Slider
                   range={{ draggableTrack: false }}
-                  defaultValue={[1500, 2500]}
+                  defaultValue={[500, 4500]}
                   tooltip={false}
                   min={500}
                   max={4500}

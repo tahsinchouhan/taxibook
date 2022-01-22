@@ -23,6 +23,7 @@ import SignupModal from "../components/modal/SignupModal";
 import loginIcon from "../assets/icons/Loginicon.png";
 import homeIcon from "../assets/icons/Homestays.png";
 
+import audioIcon from "../assets/icons/event.svg";
 import experienceIcon from "../assets/icons/experienceActive.svg";
 import exploreIcon from "../assets/icons/exploreActive.svg";
 import planIcon from "../assets/icons/planActive.svg";
@@ -212,6 +213,12 @@ function Header({ showSignUpModal }) {
                 <Image src={planIcon} alt="plan" />
                 <span style={{ left: "76px", position: "absolute" }}>PLAN</span>
               </NavLink>
+              <NavLink className="sidebar__navlink" to="/audioJourney">
+                <Image src={audioIcon} alt="audio" />
+                <span style={{ left: "76px", position: "absolute" }}>
+                  AUDIO JOURNEYS
+                </span>
+              </NavLink>
               <a className="sidebar__navlink" href="https://api.whatsapp.com/send/?phone=+916267020580&text&app_absent=0">
                 <Image src={supportIcon} alt="support" />
                 <span style={{ left: "76px", position: "absolute" }}>
@@ -244,7 +251,6 @@ function Header({ showSignUpModal }) {
             </div>
           </NavLink>
 
-
           <Navbar.Toggle aria-controls="navbarScroll" className="toggle-icon" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -267,10 +273,9 @@ function Header({ showSignUpModal }) {
                 <NavLink className="sidebar_item" to="/plan">
                   PLAN
                 </NavLink>
-                {/* <NavLink className="sidebar_item" to="/dmpass">
-                  TRAVEL PASS
-                </NavLink> */}
-                {/* <NavLink className="sidebar_item" to="plan"> */}
+                <NavLink className="sidebar_item" to="/audioJourney">
+                  AUDIO JOURNEYS
+                </NavLink>
                 <NavLink className="sidebar_item" to="/buspass">
                   BUS BOOKING
                 </NavLink>

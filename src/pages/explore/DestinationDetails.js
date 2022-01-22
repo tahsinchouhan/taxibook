@@ -168,7 +168,7 @@ const DestinationDetails = (props) => {
             <h1 className="header__title">
               <span>{destinations?.title}</span>
             </h1>
-            <div
+            {/* <div
               style={{
                 backgroundColor: "#ffe",
                 marginTop: "-1rem",
@@ -182,7 +182,7 @@ const DestinationDetails = (props) => {
               ) : (
                 <AiOutlinePlayCircle style={{ fontSize: "3rem" }} />
               )}
-            </div>
+            </div> */}
             <div className="">
               <audio id="audio">
                 <source />
