@@ -12,13 +12,13 @@ import ReactAudioPlayer from "react-audio-player";
 import playImg from "../../assets/icons/Play.png";
 import { useHistory } from "react-router-dom";
 
-import img from "../../assets/img/AudioJourney.png";
+// import img from "../../assets/img/AudioJourney.png";
 import dalpatSagar from "../../assets/img/dalpat-sagar.jpg";
 import danteshwariTemple from "../../assets/img/Danteshwari-Temple.jpg";
 import golBazar from "../../assets/img/gol-bazar.jpg";
 import jagannathTemple from "../../assets/img/jagannath-temple.jpg";
 import jagadalpurHome from "../../assets/img/jagdalpur-home.jpg";
-import jagadalpur from "../../assets/img/jagdalpur.jpg";
+import jagdalpur from "../../assets/img/jagdalpur.jpg";
 import mauliTemple from "../../assets/img/mauli-temple.jpg";
 import puratatvaBhawan from "../../assets/img/puratatva-bhawan.jpg";
 import sirhasar from "../../assets/img/sirhasar.jpg";
@@ -30,10 +30,13 @@ const AudioJourney = () => {
 
   const staticImgArr = [
     {
-      img: danteshwariTemple,
+      img: jagdalpur,
     },
     {
       img: dalpatSagar,
+    },
+    {
+      img: danteshwariTemple,
     },
     {
       img: golBazar,
@@ -42,16 +45,13 @@ const AudioJourney = () => {
       img: jagannathTemple,
     },
     {
-      img: jagadalpurHome,
-    },
-    {
-      img: jagadalpur,
-    },
-    {
       img: mauliTemple,
     },
     {
       img: puratatvaBhawan,
+    },
+    {
+      img: jagadalpurHome,
     },
     {
       img: sirhasar,

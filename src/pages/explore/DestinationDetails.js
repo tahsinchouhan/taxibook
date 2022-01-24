@@ -148,8 +148,11 @@ const DestinationDetails = (props) => {
             src={destinations?.upload_images}
           />
           <Container
-            className="destination_header__title d-flex align-items-center"
-            style={{ justifyContent: "space-between", marginBottom: "0.8rem" }}
+            className="container d-flex align-items-center destination_header__title"
+            style={{
+              justifyContent: "space-between",
+              marginBottom: "0.8rem",
+            }}
           >
             <h1 className="header__title" style={{ margin: 0, padding: 0 }}>
               <span>{destinations?.title}</span>

@@ -90,16 +90,16 @@ const Explores = () => {
   const responsiveTwo = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 3,
+      items: 4.5,
       slidesToSlide: 4, // optional, default to 1.
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2.5,
+      items: 3.5,
       slidesToSlide: 2, // optional, default to 1.
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 600, min: 0 },
       items: 1,
       slidesToSlide: 1, // optional, default to 1.
     },
@@ -216,42 +216,42 @@ const Explores = () => {
         </div>
         {tripPackage.length > 0
           ? tripPackage.map((_item, index) => {
-            return (
-              <div
-                key={index}
-                style={{
-                  display: "inline-block",
-                  width: "min(90vw,348px)",
-                  height: 170,
-                  marginRight: "20px",
-                }}
-                className="mt-4"
-              >
-                <Image
-                  draggable={false}
-                  className="img-fluid"
-                  style={{ borderRadius: 15 }}
-                  src={_item.url}
-                />
-                <a
-                  href={_item.pdf}
-                  rel="noreferrer"
-                  target="_blank"
-                  className="package__trip"
+              return (
+                <div
+                  key={index}
+                  style={{
+                    display: "inline-block",
+                    width: "min(90vw,348px)",
+                    height: 170,
+                    marginRight: "20px",
+                  }}
+                  className="mt-4"
                 >
-                  <h6 className="packages__block-title mt-3 mb-0">
-                    {_item.title}
-                  </h6>
-                  <small
-                    className="packages__block-subtitle mt-3 mb-0"
-                    style={{ color: "#757575", fontSize: "-0.125em" }}
+                  <Image
+                    draggable={false}
+                    className="img-fluid"
+                    style={{ borderRadius: 15 }}
+                    src={_item.url}
+                  />
+                  <a
+                    href={_item.pdf}
+                    rel="noreferrer"
+                    target="_blank"
+                    className="package__trip"
                   >
-                    {_item.subtTitle}
-                  </small>
-                </a>
-              </div>
-            );
-          })
+                    <h6 className="packages__block-title mt-3 mb-0">
+                      {_item.title}
+                    </h6>
+                    <small
+                      className="packages__block-subtitle mt-3 mb-0"
+                      style={{ color: "#757575", fontSize: "-0.125em" }}
+                    >
+                      {_item.subtTitle}
+                    </small>
+                  </a>
+                </div>
+              );
+            })
           : null}
         <div className="mb-5 mt-3">
           <div
@@ -282,31 +282,31 @@ const Explores = () => {
           >
             {packages.length > 0
               ? packages.map((item, key) => {
-                return (
-                  <div
-                    key={key}
-                    onClick={() =>
-                      history.push({
-                        pathname: `/packages_details/${item.title}`,
-                        item: item._id,
-                      })
-                    }
-                  >
-                    <Image
-                      draggable={false}
-                      style={{ width: "100%", height: "100%" }}
-                      src={item.upload_images}
-                    />
-                    <div>
-                      <h6 className="packages__block-title_ mt-3 mb-0">
-                        {item.title}
-                      </h6>
-                      <div
-                        style={{
-                          paddingTop: 2,
-                        }}
-                      >
-                        {/* <h6
+                  return (
+                    <div
+                      key={key}
+                      onClick={() =>
+                        history.push({
+                          pathname: `/packages_details/${item.title}`,
+                          item: item._id,
+                        })
+                      }
+                    >
+                      <Image
+                        draggable={false}
+                        style={{ width: "100%", height: "100%" }}
+                        src={item.upload_images}
+                      />
+                      <div>
+                        <h6 className="packages__block-title_ mt-3 mb-0">
+                          {item.title}
+                        </h6>
+                        <div
+                          style={{
+                            paddingTop: 2,
+                          }}
+                        >
+                          {/* <h6
                             style={{
                               background: "#BEBEBE",
                               display: "inline",
@@ -317,16 +317,16 @@ const Explores = () => {
                           >
                             {item.category.category_name}
                           </h6> */}
-                      </div>
-                      <div>
-                        <small className="packages__block-subtitle">
-                          ₹ {item.price}
-                        </small>
+                        </div>
+                        <div>
+                          <small className="packages__block-subtitle">
+                            ₹ {item.price}
+                          </small>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })
+                  );
+                })
               : null}
           </Carousel>
         ) : null}
@@ -361,7 +361,6 @@ const Explores = () => {
                 The best tourist locations across Bastar, rated and curated by
                 travellers.
               </h6>
-
             </div>
           </div>
           {destinations.length > 0 ? (
