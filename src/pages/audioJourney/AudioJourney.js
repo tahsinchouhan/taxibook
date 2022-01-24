@@ -30,10 +30,10 @@ const AudioJourney = () => {
 
   const staticImgArr = [
     {
-      img: dalpatSagar,
+      img: danteshwariTemple,
     },
     {
-      img: danteshwariTemple,
+      img: dalpatSagar,
     },
     {
       img: golBazar,
