@@ -10,17 +10,15 @@ import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import TravellerTicket from "../travesaly/TravellerTicket";
-import { Howl, Howler } from 'howler';
-import Audio from '../..//assets/audio/Audio.mp3'
+import { Howl, Howler } from "howler";
+import Audio from "../..//assets/audio/Audio.mp3";
 import { getAudioJourneyFile } from "../../redux/audioJourney/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { AiOutlinePauseCircle } from "react-icons/ai";
 import BookNowForm from "../BookNowForm";
 
-
 import ReactAudioPlayer from "react-audio-player";
-
 
 // const audioClip = ["https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"]
 
@@ -34,7 +32,6 @@ const DestinationDetails = (props) => {
 
   name = name.split("-").join(" ");
 
-
   const { user_data } = useSelector((state) => state.loginReducer);
   const [showFormModal, setShowFormModal] = useState(false);
 
@@ -42,27 +39,28 @@ const DestinationDetails = (props) => {
   const [packagesdata, getPackagesdata] = useState([]);
   const [playAudio, setPlayAudio] = useState(false);
 
-  const [selectedAudio, setSelectedAudio] = useState("");
   const [zoom, setZoom] = useState(11);
 
   const dispatch = useDispatch();
 
   const getSeoDetails = async (data) => {
     try {
-      document.title = data?.data?.seo_title || 'Travel Bastar';
-      document.querySelector("meta[name='description']").setAttribute('content', (data?.data?.seo_description || ''));
-      document.querySelector("meta[name='keywords']").setAttribute('content', (data?.data?.seo_keywords || ''));
+      document.title = data?.data?.seo_title || "Travel Bastar";
+      document
+        .querySelector("meta[name='description']")
+        .setAttribute("content", data?.data?.seo_description || "");
+      document
+        .querySelector("meta[name='keywords']")
+        .setAttribute("content", data?.data?.seo_keywords || "");
 
-      let text = data?.data?.seo[0].replace('<script type="application/ld+json">', '').replace('</script>', '');
-      document.querySelector("script[id='seoSchema']").innerHTML = text || '';
+      let text = data?.data?.seo[0]
+        .replace('<script type="application/ld+json">', "")
+        .replace("</script>", "");
+      document.querySelector("script[id='seoSchema']").innerHTML = text || "";
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-
-  const { audioJourneyFile } = useSelector(
-    (state) => state.audioJourneyReducer
-  );
+  };
 
   const audio = document.getElementById("audio");
   const handleAudio = () => {
@@ -74,20 +72,6 @@ const DestinationDetails = (props) => {
       audio.pause();
     }
   };
-
-
-  useEffect(() => {
-    // if (props.location.id) {
-    //   localStorage.setItem("id", props.location.id);
-    //   id = localStorage.getItem("id");
-    //   console.log('1')
-    // } else {
-    //   id = localStorage.getItem("id");
-    //   console.log('2')
-    // }
-    // console.log('abcd')
-    dispatch(getAudioJourneyFile("61dec48bbae9f1794d2e55ff"));
-  }, []);
 
   useEffect(() => {
     // if (props.location.id) {
@@ -107,7 +91,7 @@ const DestinationDetails = (props) => {
     fetch(API_PATH + `/api/v1/destinations/${name}`)
       .then((response) => response.json())
       .then((res) => {
-        getSeoDetails(res)
+        getSeoDetails(res);
         setDestinations(res.data);
       })
       .catch((e) => console.log(e));
@@ -123,7 +107,7 @@ const DestinationDetails = (props) => {
       .then((response) => response.json())
       .then((res) => {
         getPackagesdata(res.data);
-        console.log('getPackagesdata', getPackagesdata)
+        // console.log("getPackagesdata", res.data);
       })
       .catch((e) => console.log(e));
   };
@@ -164,42 +148,54 @@ const DestinationDetails = (props) => {
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
             src={destinations?.upload_images}
           />
-          <Container className="destination_header__title">
-            <h1 className="header__title">
+          <Container
+            className="destination_header__title d-flex align-items-center"
+            style={{ justifyContent: "space-between", marginBottom: "0.8rem" }}
+          >
+            <h1 className="header__title" style={{ margin: 0, padding: 0 }}>
               <span>{destinations?.title}</span>
             </h1>
-            {/* <div
+            <div
               style={{
                 backgroundColor: "#ffe",
-                marginTop: "-1rem",
+
                 display: "inline-block",
                 borderRadius: "50%",
               }}
-            // onClick={() => handleAudio()}
+              onClick={() => handleAudio()}
             >
               {playAudio ? (
-                <AiOutlinePauseCircle style={{ fontSize: "3rem" }} />
+                <AiOutlinePauseCircle
+                  style={{ fontSize: "3rem", cursor: "pointer" }}
+                />
               ) : (
-                <AiOutlinePlayCircle style={{ fontSize: "3rem" }} />
+                <AiOutlinePlayCircle
+                  style={{ fontSize: "3rem", cursor: "pointer" }}
+                />
               )}
-            </div> */}
-            <div className="">
-              <audio id="audio">
-                <source />
-              </audio>
             </div>
           </Container>
         </div>
       </div>
+
+      <div className="">
+        {destinations && (
+          <audio id="audio">
+            <source src={destinations.audio[0]} />
+          </audio>
+        )}
+      </div>
+
       <Container>
         <div className="block pt-3">
           <h4 className="block__title">
             <span>About</span> the Destination
           </h4>
-          <p className="pt-2" style={{ whiteSpace: 'pre-line' }}>{destinations?.description}</p>
+          <p className="pt-2" style={{ whiteSpace: "pre-line" }}>
+            {destinations?.description}
+          </p>
         </div>
       </Container>
-
       {destinations?.youtube_url ? (
         <Container>
           <h4 className="block__title know__more mb-4 pt-4">
@@ -238,6 +234,7 @@ const DestinationDetails = (props) => {
                   <b>
                     <a
                       className="get__direction"
+                      rel="noreferrer"
                       href={`https://maps.google.com/?q=${destinations?.latitude},${destinations?.longitude}`}
                       target="_blank"
                     >
@@ -246,9 +243,13 @@ const DestinationDetails = (props) => {
                   </b>
                 </span>
               </div>
-              <button className="btn btn-success" style={{ background: "green" }}
+              <button
+                className="btn btn-success"
+                style={{ background: "green" }}
                 onClick={() => setShowFormModal(true)}
-              >Book Now</button>
+              >
+                Book Now
+              </button>
             </Col>
             <BookNowForm
               item={destinations}
@@ -293,12 +294,10 @@ const DestinationDetails = (props) => {
               }}
             >
               <div>
-                <h2 className="package__title" style={{ color: 'white' }}>
+                <h2 className="package__title" style={{ color: "white" }}>
                   <span>Related</span> Packages
                 </h2>
-                <h6 style={{ color: 'white' }}>
-                  Choose Your Best Package
-                </h6>
+                <h6 style={{ color: "white" }}>Choose Your Best Package</h6>
               </div>
             </div>
           </div>
@@ -315,7 +314,9 @@ const DestinationDetails = (props) => {
                     key={key}
                     onClick={() =>
                       history.push({
-                        pathname: `/packages_details/${item.title.split(" ").join("-")}`,
+                        pathname: `/packages_details/${item.title
+                          .split(" ")
+                          .join("-")}`,
                         id: item._id,
                       })
                     }
@@ -362,7 +363,6 @@ const DestinationDetails = (props) => {
       </div>
       <div className="pt-4">
         <Container>
-
           <h2 className="package__title">
             <span>Book</span> Tickets
           </h2>

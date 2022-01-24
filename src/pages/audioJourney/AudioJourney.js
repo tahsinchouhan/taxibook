@@ -9,31 +9,76 @@ import {
 } from "../../redux/audioJourney/actions";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import ReactAudioPlayer from "react-audio-player";
-import img from "../../assets/img/AudioJourney.png";
 import playImg from "../../assets/icons/Play.png";
 import { useHistory } from "react-router-dom";
+
+import img from "../../assets/img/AudioJourney.png";
+import dalpatSagar from "../../assets/img/dalpat-sagar.jpg";
+import danteshwariTemple from "../../assets/img/Danteshwari-Temple.jpg";
+import golBazar from "../../assets/img/gol-bazar.jpg";
+import jagannathTemple from "../../assets/img/jagannath-temple.jpg";
+import jagadalpurHome from "../../assets/img/jagdalpur-home.jpg";
+import jagadalpur from "../../assets/img/jagdalpur.jpg";
+import mauliTemple from "../../assets/img/mauli-temple.jpg";
+import puratatvaBhawan from "../../assets/img/puratatva-bhawan.jpg";
+import sirhasar from "../../assets/img/sirhasar.jpg";
 
 const AudioJourney = () => {
   const history = useHistory();
   const [selectedAudio, setSelectedAudio] = useState("");
   const dispatch = useDispatch();
+
+  const staticImgArr = [
+    {
+      img: dalpatSagar,
+    },
+    {
+      img: danteshwariTemple,
+    },
+    {
+      img: golBazar,
+    },
+    {
+      img: jagannathTemple,
+    },
+    {
+      img: jagadalpurHome,
+    },
+    {
+      img: jagadalpur,
+    },
+    {
+      img: mauliTemple,
+    },
+    {
+      img: puratatvaBhawan,
+    },
+    {
+      img: sirhasar,
+    },
+  ];
+
   const { audioJourneyFiles } = useSelector(
     (state) => state.audioJourneyReducer
   );
-  const { audioJourneyFile } = useSelector(
-    (state) => state.audioJourneyReducer
-  );
+
   useEffect(() => {
     dispatch(getAudioJourneyFiles());
     dispatch(getAudioJourneyFile("61d2ef6437b54d212c80e4cb"));
   }, []);
-  console.log("audioJourneyFiles", audioJourneyFiles);
-  console.log("audioJourneyFile", audioJourneyFile);
 
   const handlePlayClicked = (audioJourney) => {
-    console.log("selected audioJourney", audioJourney);
     setSelectedAudio(audioJourney.file);
   };
+
+  const imgAudioJourney = [];
+  if (audioJourneyFiles.length > 0) {
+    staticImgArr.forEach((img, i) => {
+      imgAudioJourney.push({ ...img, ...audioJourneyFiles[i] });
+    });
+  }
+
+  console.log(imgAudioJourney);
 
   const goToAudioJourneyDetail = (item) => {
     history.push("audioJourney/" + item._id);
@@ -60,20 +105,19 @@ const AudioJourney = () => {
         </Row>
 
         <div className="audiocard-container">
-          {audioJourneyFiles.map((item) => (
+          {[...imgAudioJourney].map((item) => (
             <Card className="audio-card" key={item._id}>
               <Card.Body>
-                <Row style={{ alignItems: "center" }}>
+                <Row style={{ alignItems: "center", height: "100%" }}>
                   <Col xs={4}>
                     <Card.Img
                       variant="top"
-                      src={img}
+                      src={item.img}
                       onClick={() => goToAudioJourneyDetail(item)}
                     />
                   </Col>
                   <Col xs={6}>
                     <Card.Title>{item.title.slice(0, 30) + "..."}</Card.Title>
-                    <Card.Text>{item.destination.title}</Card.Text>
                   </Col>
                   <Col xs={2} className="play_btn_center">
                     <Card.Img

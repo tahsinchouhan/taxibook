@@ -13,7 +13,7 @@
 
 .audio-card {
   margin: 0.6rem 0;
-  height: 155px;
+  height: 145px;
 }
 
 .audio_journey_player {
@@ -70,15 +70,14 @@
     width: 30%;
   }
 
-.audioJourney_description {
-  font-size: 0.9rem;
-}
-
+  .audioJourney_description {
+    font-size: 0.9rem;
+  }
 }
 
 @media (min-width: 1420px) {
   .audiocard-container {
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
   }
   .audio-card {
     margin: 1rem 0.4rem;
