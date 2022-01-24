@@ -16,9 +16,8 @@ import { getAudioJourneyFile } from "../../redux/audioJourney/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { AiOutlinePauseCircle } from "react-icons/ai";
-import BookNowForm from "../BookNowForm";
-
 import ReactAudioPlayer from "react-audio-player";
+import "../../assets/css/destination.css";
 
 // const audioClip = ["https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"]
 
@@ -178,11 +177,17 @@ const DestinationDetails = (props) => {
         </div>
       </div>
 
-      <div className="">
+      <div
+        style={{ display: playAudio ? "block" : "none" }}
+        className="destination-audio-player-container"
+      >
         {destinations && (
-          <audio id="audio">
-            <source src={destinations.audio[0]} />
-          </audio>
+          <ReactAudioPlayer
+            className="audio-player"
+            id="audio"
+            src={destinations.audio[0]}
+            controls
+          />
         )}
       </div>
 
@@ -243,20 +248,8 @@ const DestinationDetails = (props) => {
                   </b>
                 </span>
               </div>
-              <button
-                className="btn btn-success"
-                style={{ background: "green" }}
-                onClick={() => setShowFormModal(true)}
-              >
-                Book Now
-              </button>
             </Col>
-            <BookNowForm
-              item={destinations}
-              show={showFormModal}
-              handleModal={setShowFormModal}
-              user_data={user_data}
-            />
+
             <Col sm={6} className="google__map">
               {destinations ? (
                 <GoogleMapReact

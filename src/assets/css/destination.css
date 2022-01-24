@@ -1,0 +1,10 @@
+.destination-audio-player-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.audio-player {
+  width: 100%;
+}
