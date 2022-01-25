@@ -50,7 +50,6 @@ function Tickets1({ loading }) {
       setTimeout(() => {
         dispatch(hideMessage());
       }, 100);
-      // dispatch(hideMessage())
     }
   }, [error]);
 
@@ -78,8 +77,9 @@ function Tickets1({ loading }) {
     </button>
   ));
   const onStepreClick = () => {
-    if (user_data !== null) {
-      history.push("/steper_dmpass");
+    if (user_data === null) {
+      toast.error("USER not registered? Signup First");
+      setShowSignUpModal(true);
     } else {
       dispatch(fetchStart());
       dispatch(verifyOtp(number, otp));
@@ -113,14 +113,14 @@ function Tickets1({ loading }) {
   };
 
   useEffect(() => {
-    if (send_otp_error.code == 401) {
+    if (send_otp_error.code === 401) {
       toast.error("USER not registered? Signup First");
       setShowSignUpModal(true);
     }
   }, [send_otp_error]);
 
   useEffect(() => {
-    if (verify_otp_error == "OTP verification failed!!") {
+    if (verify_otp_error === "OTP verification failed!!") {
       toast.error("OTP verification failed!!");
     }
   }, [verify_otp_error]);
@@ -369,6 +369,7 @@ function Tickets1({ loading }) {
                           className="location-userdatas-calendar"
                           src={calendar}
                           style={{ width: 25, height: 30 }}
+                          alt="calendar"
                         />
                         <DatePicker
                           selected={startDate}

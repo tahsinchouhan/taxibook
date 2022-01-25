@@ -336,7 +336,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
                 fontWeight: "500",
               }}
             >
-              You need to signup first and login!
+              You need to signup first then login!
             </Modal.Body>
             <Modal.Footer>
               <Button

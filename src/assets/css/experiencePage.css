@@ -1,5 +1,6 @@
 .experiencePage-card {
   width: 100% !important;
+  height: 280px !important;
 }
 
 @media (min-width: 712px) {

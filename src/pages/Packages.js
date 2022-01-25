@@ -13,7 +13,7 @@ import Map from "../assets/img/Map.png";
 import Camera from "../assets/img/Camera.png";
 import Backpack from "../assets/img/Backpack.png";
 
-import "../assets/css/experiencePage.css"
+import "../assets/css/experiencePage.css";
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -169,10 +169,7 @@ function Packages() {
         </div>
         <div className="d-flex justify-content-between">
           <div className="page-width" style={{ margin: "0 auto" }}>
-            <h2
-              className="package__title mb-5"
-              style={{ fontWeight: "bold" }}
-            >
+            <h2 className="package__title mb-5" style={{ fontWeight: "bold" }}>
               <span>Travel Packages and itneraries </span>
             </h2>
           </div>
@@ -193,10 +190,17 @@ function Packages() {
            */}
           </div>
         </div>
-        <div className="d-flex justify-content-around page-width" style={{ margin: "0 auto" }}>
+        <div
+          className="d-flex justify-content-around page-width"
+          style={{ margin: "0 auto" }}
+        >
           {[...experienceJSON].map((item, i) => (
-            <div className="experiencepage-icon-container" style={icons} onClick={() => getPackages(item.type)}>
-              <img src={item.icon} style={img} alt="image" />
+            <div
+              className="experiencepage-icon-container"
+              style={icons}
+              onClick={() => getPackages(item.type)}
+            >
+              <img src={item.icon} style={img} alt={item.title} />
               <p style={{ margin: "0.4rem 0.4rem 0" }}>{item.title}</p>
             </div>
           ))}
@@ -256,7 +260,7 @@ function Packages() {
                       className="packages__block-title_"
                       style={{ margin: "0.5rem 0.5rem 0" }}
                     >
-                      {item.title}
+                      {item.title.slice(0, 25) + "..."}
                     </h6>
                     <p
                       style={{
@@ -264,7 +268,9 @@ function Packages() {
                         margin: "0.2rem 0.5rem",
                       }}
                     >
-                      {item.seo_description ? item.seo_description.slice(0, 25) + "..." : ""}
+                      {item.seo_description
+                        ? item.seo_description.slice(0, 25) + "..."
+                        : ""}
                     </p>
                     <div
                       style={{

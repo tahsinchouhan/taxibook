@@ -17,19 +17,19 @@ import * as moment from "moment";
 
 function DmPass({ DmPassDetails }) {
   const history = useHistory();
-  const [vehicle, setVehicle] = useState("0")
-  const [travellers, setTraveller] = useState("1")
+  const [vehicle, setVehicle] = useState("0");
+  const [travellers, setTraveller] = useState("1");
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  const [errors, setErrors] = useState('');
+  const [errors, setErrors] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const { dmData } = useSelector(state => state.dmpassReducer)
-  var { number_of_vehicals, number_of_travellers, duration_of_travel } = dmData
+  const { dmData } = useSelector((state) => state.dmpassReducer);
+  var { number_of_vehicals, number_of_travellers, duration_of_travel } = dmData;
   const { error, loading, message } = useSelector(
     (state) => state.commonReducer
   );
@@ -38,42 +38,50 @@ function DmPass({ DmPassDetails }) {
 
   useEffect(() => {
     let d = new Date();
-    let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
-    let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(d);
-    let da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
-    dispatch(setDmData('start_date', `${ye}-${mo}-${da}`))
-  }, [])
+    let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
+    let mo = new Intl.DateTimeFormat("en", { month: "2-digit" }).format(d);
+    let da = new Intl.DateTimeFormat("en", { day: "2-digit" }).format(d);
+    dispatch(setDmData("start_date", `${ye}-${mo}-${da}`));
+  }, []);
 
   useEffect(() => {
     console.log("dmData", dmData);
-  }, [dmData])
+  }, [dmData]);
 
   useEffect(() => {
     console.log("dmData", dmData);
-  }, [startDate, endDate])
+  }, [startDate, endDate]);
 
   const data = [
     {
-      "Vehicle": vehicle,
-      "DaysTravel": moment(endDate).format("YYYYMMDD")-moment(startDate).format("YYYYMMDD") + 1,
-      "Travellers": travellers,
-    }
-  ]
+      Vehicle: vehicle,
+      DaysTravel:
+        moment(endDate).format("YYYYMMDD") -
+        moment(startDate).format("YYYYMMDD") +
+        1,
+      Travellers: travellers,
+    },
+  ];
 
   const onDmTicketShow = () => {
-      DmPassDetails({ data })
-      history.push('/travelticket')
+    DmPassDetails({ data });
+    history.push("/travelticket");
   };
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
-      style={{ border: "none", background: "transparent", fontSize: "25px", color: "#a5a5a5" }}
+      style={{
+        border: "none",
+        background: "transparent",
+        fontSize: "25px",
+        color: "#a5a5a5",
+      }}
       onClick={onClick}
       ref={ref}
     >
       {value}
     </button>
-  ))
+  ));
 
   return (
     <>
@@ -84,7 +92,10 @@ function DmPass({ DmPassDetails }) {
         {error ? <Message msg={error} type="error" /> : null}
         {user_data !== null ? <Redirect to="/dmticket" /> : null}
         <div className="d-none d-md-block">
-          <Container className="d-none d-md-block my-5" style={{ width: "70%" }}>
+          <Container
+            className="d-none d-md-block my-5"
+            style={{ width: "70%" }}
+          >
             <div className="select_div">
               <div className="row p-3" style={{ textAlign: "center" }}>
                 <div className="col-xs-12  col-sm-12 col-md-12">
@@ -92,9 +103,19 @@ function DmPass({ DmPassDetails }) {
                     <div style={{ marginBottom: "15px" }}>
                       <img src={ticket} alt="logo" />
                     </div>
-                    <span style={{ fontWeight: "bolder", color: "#0fa453", paddingTop: "50px" }}>Travel Pass</span><br />
+                    <span
+                      style={{
+                        fontWeight: "bolder",
+                        color: "#0fa453",
+                        paddingTop: "50px",
+                      }}
+                    >
+                      Travel Pass
+                    </span>
+                    <br />
                     <span style={{ fontSize: "12px", padding: "10px" }}>
-                      Get a pass for travellers, vehicles<br /> and duration of your travel
+                      Get a pass for travellers, vehicles
+                      <br /> and duration of your travel
                     </span>
                   </div>
                 </div>
@@ -107,8 +128,14 @@ function DmPass({ DmPassDetails }) {
                       className=""
                       controlId="exampleForm.ControlInput1"
                     >
-                      <Form.Label className="dm-ticket" >Number of Vehicles</Form.Label>
-                      <select id="inputState" className="form-control pass_input" onChange={(e) => setVehicle(e.target.value)}>
+                      <Form.Label className="dm-ticket">
+                        Number of Vehicles
+                      </Form.Label>
+                      <select
+                        id="inputState"
+                        className="form-control pass_input"
+                        onChange={(e) => setVehicle(e.target.value)}
+                      >
                         <option selected>0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -124,14 +151,18 @@ function DmPass({ DmPassDetails }) {
                       className=""
                       controlId="exampleForm.ControlInput1"
                     >
-                      <Form.Label className="dm-ticket">Number of Travellers</Form.Label>
+                      <Form.Label className="dm-ticket">
+                        Number of Travellers
+                      </Form.Label>
                       <select
                         id="inputState"
                         className="form-control pass_input"
                         // onChange={handleTravellerCount}
                         onChange={(e) => setTraveller(e.target.value)}
                       >
-                        <option value="1" selected>1</option>
+                        <option value="1" selected>
+                          1
+                        </option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                         <option value="4">4</option>
@@ -146,13 +177,17 @@ function DmPass({ DmPassDetails }) {
                       controlId="exampleForm.ControlInput1"
                     >
                       <div>
-                      <Form.Label className="dm-ticket">Start Date</Form.Label><br />
+                        <Form.Label className="dm-ticket">
+                          Start Date
+                        </Form.Label>
+                        <br />
                         <Col xs={12} md={6}>
-                          <div style={{width: 200}}>
+                          <div style={{ width: 200 }}>
                             <img
                               className="location-userdatas-calendar"
                               src={calendar}
                               style={{ width: 25, height: 25, marginTop: -8 }}
+                              alt="location"
                             />
                             <DatePicker
                               selected={startDate}
@@ -163,22 +198,24 @@ function DmPass({ DmPassDetails }) {
                             />
                           </div>
                         </Col>
-                        </div>
+                      </div>
                     </Form.Group>
                   </Col>
                   <Col xs={12} md={3} className="mt-2">
-                  <Form.Group
+                    <Form.Group
                       className=""
                       controlId="exampleForm.ControlInput1"
                     >
                       <div>
-                      <Form.Label className="dm-ticket">End Date</Form.Label><br />
+                        <Form.Label className="dm-ticket">End Date</Form.Label>
+                        <br />
                         <Col xs={12} md={6}>
-                          <div style={{width: 200}}>
+                          <div style={{ width: 200 }}>
                             <img
                               className="location-userdatas-calendar"
                               src={calendar}
                               style={{ width: 25, height: 25, marginTop: -8 }}
+                              alt="calender"
                             />
 
                             <DatePicker
@@ -190,11 +227,14 @@ function DmPass({ DmPassDetails }) {
                             />
                           </div>
                         </Col>
-                        </div>
+                      </div>
                     </Form.Group>
                   </Col>
                 </Row>
-                <div className="dmticket-btn" style={{ textAlign: "center", marginTop: "70px" }}>
+                <div
+                  className="dmticket-btn"
+                  style={{ textAlign: "center", marginTop: "70px" }}
+                >
                   <Button
                     type="submit"
                     class="btn btn-success"
@@ -204,7 +244,7 @@ function DmPass({ DmPassDetails }) {
                       height: "52px",
                       borderRadius: "9px",
                       backgroundColor: "#0fa453",
-                      border: "none"
+                      border: "none",
                     }}
                     onClick={onDmTicketShow}
                   >
@@ -227,23 +267,38 @@ function DmPass({ DmPassDetails }) {
                 <div style={{ marginBottom: "15px" }}>
                   <img src={ticket} alt="" />
                 </div>
-                <span style={{ fontWeight: "bolder", color: "#0fa453", paddingTop: "50px" }}>Travel Pass</span><br />
+                <span
+                  style={{
+                    fontWeight: "bolder",
+                    color: "#0fa453",
+                    paddingTop: "50px",
+                  }}
+                >
+                  Travel Pass
+                </span>
+                <br />
                 <span style={{ fontSize: "12px", padding: "10px" }}>
-                  Get a pass for travellers, vehicles<br /> and duration of your travel
+                  Get a pass for travellers, vehicles
+                  <br /> and duration of your travel
                 </span>
               </div>
             </div>
           </div>
 
-          <Container style={{ width: "92%", paddingTop: "28px", paddingBottom: 100 }}>
+          <Container
+            style={{ width: "92%", paddingTop: "28px", paddingBottom: 100 }}
+          >
             <Row>
               <Col xs={12} md={4} className="mt-2">
-                <Form.Group
-                  className=""
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label className="dm-ticket" >Number of Vehicles</Form.Label>
-                  <select id="inputState" className="form-control pass_input" onChange={(e) => setVehicle(e.target.value)}>
+                <Form.Group className="" controlId="exampleForm.ControlInput1">
+                  <Form.Label className="dm-ticket">
+                    Number of Vehicles
+                  </Form.Label>
+                  <select
+                    id="inputState"
+                    className="form-control pass_input"
+                    onChange={(e) => setVehicle(e.target.value)}
+                  >
                     <option selected>0</option>
                     <option>1</option>
                     <option value="2">2</option>
@@ -255,11 +310,10 @@ function DmPass({ DmPassDetails }) {
                 </Form.Group>
               </Col>
               <Col xs={12} md={4} className="mt-2">
-                <Form.Group
-                  className=""
-                  controlId="exampleForm.ControlInput1"
-                >
-                  <Form.Label className="dm-ticket">Number of Travellers</Form.Label>
+                <Form.Group className="" controlId="exampleForm.ControlInput1">
+                  <Form.Label className="dm-ticket">
+                    Number of Travellers
+                  </Form.Label>
                   <select
                     id="inputState"
                     className="form-control pass_input"
@@ -275,15 +329,19 @@ function DmPass({ DmPassDetails }) {
                 </Form.Group>
               </Col>
               <Col xs={12} md={4} className="mt-2">
-                <Form.Group className=""  controlId="exampleForm.ControlInput1" >
+                <Form.Group className="" controlId="exampleForm.ControlInput1">
                   <Row>
                     <Col xs={6} md={4}>
                       <div>
-                        <Form.Label className="dm-ticket">Start Date</Form.Label><br/>
+                        <Form.Label className="dm-ticket">
+                          Start Date
+                        </Form.Label>
+                        <br />
                         <img
                           className="location-userdatas-calendar"
                           src={calendar}
-                          style={{ width: 25, height: 30,marginTop: -10 }}
+                          style={{ width: 25, height: 30, marginTop: -10 }}
+                          alt="location"
                         />
                         <DatePicker
                           selected={startDate}
@@ -295,12 +353,14 @@ function DmPass({ DmPassDetails }) {
                       </div>
                     </Col>
                     <Col xs={6} md={4}>
-                      <div >
-                        <Form.Label className="dm-ticket">End Date</Form.Label><br/>
+                      <div>
+                        <Form.Label className="dm-ticket">End Date</Form.Label>
+                        <br />
                         <img
                           className="location-userdatas-calendar"
                           src={calendar}
-                          style={{ width: 25, height: 30,marginTop: -10 }}
+                          style={{ width: 25, height: 30, marginTop: -10 }}
+                          alt="calendar"
                         />
                         <DatePicker
                           selected={endDate}
@@ -315,7 +375,10 @@ function DmPass({ DmPassDetails }) {
                 </Form.Group>
               </Col>
             </Row>
-            <div className="dmticket-btn" style={{ textAlign: "center", marginTop: "70px" }}>
+            <div
+              className="dmticket-btn"
+              style={{ textAlign: "center", marginTop: "70px" }}
+            >
               <Button
                 type="submit"
                 class="btn btn-success"
@@ -327,9 +390,8 @@ function DmPass({ DmPassDetails }) {
                   border: "none",
                   height: "86px",
                   position: "fixed",
-                  width: "100%",
                   bottom: "0",
-                  left: "0"
+                  left: "0",
                 }}
                 onClick={onDmTicketShow}
               >
@@ -342,16 +404,12 @@ function DmPass({ DmPassDetails }) {
           Continue
         </Button> */}
       </div>
-
     </>
   );
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  DmPassDetails: (data) => dispatch(DmPassDetails(data))
+  DmPassDetails: (data) => dispatch(DmPassDetails(data)),
 });
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(DmPass);
+export default connect(null, mapDispatchToProps)(DmPass);
