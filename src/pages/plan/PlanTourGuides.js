@@ -34,6 +34,8 @@ const PlanTourGuides = () => {
     }
   };
 
+  console.log(packages);
+
   useEffect(() => {
     getPackages();
     window.scrollTo(0, 0);
@@ -63,7 +65,7 @@ const PlanTourGuides = () => {
           <svg
             className="searchIcon"
             onChange={(e) => {
-              setSearchField(e.target.value)
+              setSearchField(e.target.value);
             }}
             style={{ cursor: "pointer" }}
             viewBox="0 0 25 26"
@@ -81,7 +83,9 @@ const PlanTourGuides = () => {
 
       <div className="package-card-container page-width">
         {filteredPackages.length ? (
-          filteredPackages.map((item, idx) => <PackageCard key={idx} item={item} />)
+          filteredPackages.map((item, idx) => (
+            <PackageCard key={idx} item={item} />
+          ))
         ) : (
           <Loader />
         )}

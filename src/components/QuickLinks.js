@@ -62,11 +62,11 @@ const QuickLinksArr = [
     title: "Tour Packages",
     route: "/curatedexperiences",
   },
-  {
-    icon: eventsIcon,
-    title: "Events & Activities",
-    route: "/bastareventsandactivities",
-  },
+  // {
+  //   icon: eventsIcon,
+  //   title: "Events & Activities",
+  //   route: "/bastareventsandactivities",
+  // },
 ];
 
 const QuickLinks = ({ Position, Top }) => {

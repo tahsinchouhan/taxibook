@@ -42,8 +42,6 @@ const PackagesDetails = (props) => {
 
   const [modalShow, setModalShow] = useState(false);
 
-
-
   const getSeoDetails = async (data) => {
     document.title = data?.data?.seo_title || "Travel Bastar";
     document
@@ -108,7 +106,6 @@ const PackagesDetails = (props) => {
       .then((res) => {
         // console.log("imagd res",res)
         setReview(res.data);
-        console.log("res.data", res.data);
       })
       .catch((e) => console.log("Error", e));
   };
@@ -123,11 +120,8 @@ const PackagesDetails = (props) => {
       .catch((e) => console.log("Error", e));
   };
 
-
-
   var current = null;
   var cnt = 0;
-
 
   for (var i = 0; i < review.length; i++) {
     if (review[i].star_rating != current) {
@@ -197,7 +191,6 @@ const PackagesDetails = (props) => {
             <h1 className="header__title">
               <span>{packages?.title}</span>
             </h1>
-
           </Container>
         </div>
         {/* <h1 className="header__title pb-3">
@@ -244,7 +237,13 @@ const PackagesDetails = (props) => {
         )}
         <p>{packages.duration}</p>
 
-        <button style={{ background: "green" }} className="btn btn-success" onClick={() => setShowFormModal(true)} >Book Now</button>
+        <button
+          style={{ background: "green" }}
+          className="btn btn-success"
+          onClick={() => setShowFormModal(true)}
+        >
+          Book Now
+        </button>
 
         <BookNowForm
           item={packages}
@@ -270,12 +269,13 @@ const PackagesDetails = (props) => {
               >
                 <p className="pt-3">{packages.address}</p>
                 <span className="text-info">
-                  <img src={loc} height="40" width="45" />
+                  <img src={loc} height="40" width="45" alt={packages.title} />
                   <b>
                     <a
                       className="get__direction"
                       href={`https://maps.google.com/?q=${packages.latitude},${packages.longitude}`}
                       target="_blank"
+                      rel="noreferrer"
                     >
                       Get Directions
                     </a>
@@ -284,18 +284,18 @@ const PackagesDetails = (props) => {
               </div>
             </Col>
             <Col sm={6} className="google__map">
-              {packages ? (
+              {!isNaN(packages.latitude) && !isNaN(packages.longitude) ? (
                 <GoogleMapReact
                   bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API }}
                   defaultCenter={{
-                    lat: parseFloat(packages.latitude),
-                    lng: parseFloat(packages.longitude),
+                    lat: parseFloat(packages?.latitude),
+                    lng: parseFloat(packages?.longitude),
                   }}
                   defaultZoom={zoom}
                 >
                   <Marker
-                    lat={parseFloat(packages.latitude)}
-                    lng={parseFloat(packages.longitude)}
+                    lat={parseFloat(packages?.latitude)}
+                    lng={parseFloat(packages?.longitude)}
                     name="My Marker"
                     color="blue"
                   />
@@ -361,7 +361,7 @@ const PackagesDetails = (props) => {
             <span
               className="packages_enquired"
               style={{ width: "200px", display: "inline-block" }}
-            // onClick={() => modalReviewHadler()}
+              // onClick={() => modalReviewHadler()}
             >
               <a
                 className="code"
