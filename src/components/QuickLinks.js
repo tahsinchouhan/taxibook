@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { Image } from "react-bootstrap";
+import exploreIcon from "../assets/icons/exploreActive.svg";
 import busIcon from "../assets/icons/bus.svg";
 import eventsIcon from "../assets/icons/event.svg";
 import guidesIcon from "../assets/icons/guide.svg";
@@ -15,68 +16,72 @@ import "../assets/css/quicklinks.css";
 
 import { NavLink } from "react-router-dom";
 
-
-const QuickLinksArr = [{
-  "icon": busIcon,
-  "title": "Buses",
-  "route": "/buspass"
-},
-{
-  "icon": homestaysIcon,
-  "title": "Homestays",
-  "route": "/plan"
-},
-{
-  "icon": hotelsIcon,
-  "title": "Hotels",
-  "route": "/hotellist",
-},
-{
-  "icon": taxisIcon,
-  "title": "Taxis",
-  "route": "/planTaxis",
-},
-{
-  "icon": guidesIcon,
-  "title": "Tour Guides",
-  "route": "/planTourGuides",
-},
-{
-  "icon": ticketsIcon,
-  "title": "Tickets",
-  "route": "/tickets",
-},
-{
-  "icon": travelpassIcon,
-  "title": "Travel Pass",
-  "route": "/dmpass",
-},
-{
-  "icon": packagesIcon,
-  "title": "Tour Packages",
-  "route": "/curatedexperiences",
-},
-{
-  "icon": eventsIcon,
-  "title": "Events & Activities",
-  "route": "/bastareventsandactivities",
-},]
+const QuickLinksArr = [
+  {
+    icon: busIcon,
+    title: "Buses",
+    route: "/buspass",
+  },
+  {
+    icon: homestaysIcon,
+    title: "Homestays",
+    route: "/plan",
+  },
+  {
+    icon: hotelsIcon,
+    title: "Hotels",
+    route: "/hotellist",
+  },
+  {
+    icon: taxisIcon,
+    title: "Taxis",
+    route: "/planTaxis",
+  },
+  {
+    icon: exploreIcon,
+    title: "Destinations",
+    route: "/populardestinations",
+  },
+  {
+    icon: guidesIcon,
+    title: "Tour Guides",
+    route: "/planTourGuides",
+  },
+  {
+    icon: ticketsIcon,
+    title: "Tickets",
+    route: "/tickets",
+  },
+  {
+    icon: travelpassIcon,
+    title: "Travel Pass",
+    route: "/dmpass",
+  },
+  {
+    icon: packagesIcon,
+    title: "Tour Packages",
+    route: "/curatedexperiences",
+  },
+  {
+    icon: eventsIcon,
+    title: "Events & Activities",
+    route: "/bastareventsandactivities",
+  },
+];
 
 const QuickLinks = ({ Position, Top }) => {
   const history = useHistory();
 
   return (
     <div className="flex_container" style={{ position: Position, top: Top }}>
-      {
-        [...QuickLinksArr].map((item, i) => (
-          <NavLink key={i} to={item.route} className="flex_item">
-            <Image draggable={false} style={{ width: "30px%" }} src={item.icon} />
-            <p>{item.title}</p>
-          </NavLink>
-        ))
-      }
+      {[...QuickLinksArr].map((item, i) => (
+        <NavLink key={i} to={item.route} className="flex_item">
+          <Image draggable={false} style={{ width: "30px%" }} src={item.icon} />
+          <p>{item.title}</p>
+        </NavLink>
+      ))}
     </div>
-  )
+  );
 
   // // return (
   // //   <div className="flex_container" style={{ position: Position, top: Top }}>
