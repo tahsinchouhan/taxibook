@@ -42,7 +42,6 @@ function HotelList() {
     getStartData,
     isLoading,
   } = useSelector((state) => state.hotelReducer);
-  console.log({ getStartData });
   const [startDate, setStartDate] = useState(
     getStartData.startDate ? getStartData.startDate : new Date()
   );
@@ -108,11 +107,11 @@ function HotelList() {
     getStartData?.roomStateData?.length > 0
       ? getStartData?.roomStateData
       : [
-        {
-          room: 1,
-          guest: 2,
-        },
-      ]
+          {
+            room: 1,
+            guest: 2,
+          },
+        ]
   );
 
   const addMenu = () => {
@@ -303,8 +302,8 @@ function HotelList() {
   };
 
   const onDmTicketShow = () => {
-    // console.log({ sendlocation });
     let city = sendlocation;
+
     if (city === undefined) {
       if (enterlocation === "" || enterlocation === undefined) {
         city = "jagdalpur";
@@ -332,9 +331,9 @@ function HotelList() {
     // history.push("/hotellist");
   };
 
-  useEffect(() => {
-    onDmTicketShow();
-  }, [selectedCategories, selectedAmeneties, rangeValue]);
+  // useEffect(() => {
+  //   onDmTicketShow();
+  // }, [selectedCategories, selectedAmeneties, rangeValue]);
 
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
@@ -369,6 +368,7 @@ function HotelList() {
         noOfRoom,
         noOfGuest,
         roomStateData: roomState,
+        filter: false,
       })
     );
   }, []);
@@ -432,7 +432,7 @@ function HotelList() {
                       {...params}
                       onKeyPress={(e) => getDataFromAPI(e.target.value)}
                       placeholder="Search Area"
-                    // InputProps={{ disableUnderline: true }}
+                      // InputProps={{ disableUnderline: true }}
                     />
                   )}
                 />
@@ -514,7 +514,7 @@ function HotelList() {
                   <ANTDropdown
                     overlay={menu}
                     trigger={["click"]}
-                  // style={{ width: "100px" }}
+                    // style={{ width: "100px" }}
                   >
                     <input // onChange={(e) => setEmail(e.target.value)}
                       // value={email}
@@ -531,7 +531,7 @@ function HotelList() {
                         // padding: "10px",
                         // position:"absolute"
                       }}
-                    // readOnly
+                      // readOnly
                     />
                   </ANTDropdown>
                 </div>
@@ -549,7 +549,7 @@ function HotelList() {
             >
               <div
                 className="dmticket-btn"
-              //   style={{ textAlign: "center" }}
+                //   style={{ textAlign: "center" }}
               >
                 <Button
                   type="submit"

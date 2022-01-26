@@ -269,12 +269,12 @@ function HotelList() {
         noOfRoom,
         noOfGuest,
         roomStateData: roomState,
-        filter:true
+        filter: true,
       })
     );
     // history.push("/hotellist");
   };
-  
+
   const ExampleCustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <button
       style={{
@@ -307,7 +307,8 @@ function HotelList() {
         endDate,
         noOfRoom,
         noOfGuest,
-        roomStateData: roomState
+        roomStateData: roomState,
+        filter: false,
       })
     );
   }, []);

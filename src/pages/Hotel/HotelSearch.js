@@ -126,6 +126,7 @@ function HotelSearch() {
         noOfRoom,
         noOfGuest,
         roomStateData: roomState,
+        filter: false,
       })
     );
     history.push("/hotellist");
