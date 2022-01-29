@@ -41,10 +41,11 @@ function BusBookingDetail() {
   };
 
   const getTrips = () => {
-    fetch(`${API_PATH}/api/v1/busticket/list?booking_Id=${id}`)
+    fetch(`${API_PATH}/api/v1/packages/booking/list?booking_Id=${id}`)
       .then((response) => response.json())
       .then((res) => {
         if (res.data !== undefined) {
+          console.log(res.data);
           setApiData(res.data);
           localStorage.setItem("data", res.data[0]._id);
           setBasicDetails(res.data[0].basic_details);
@@ -56,6 +57,7 @@ function BusBookingDetail() {
         }
       })
       .catch((e) => {
+        console.log(e);
         setLoading(false);
         setNotFound(true);
       });
@@ -67,16 +69,17 @@ function BusBookingDetail() {
   fetch(`${API_PATH}/api/v1/busticket/qrcode/${apiId}`)
     .then((response) => response.json())
     .then((res) => {
-      console.log('QR CODE', res.data)
+      console.log("QR CODE", res.data);
       setQRImage(res.data);
     })
     .catch((e) => {
+      console.log(e);
       setLoading(false);
       setNotFound(true);
     });
 
   // if (BookingId == []) {
-    
+
   // } else {
   //   fetch(`${API_PATH}/api/v1/busticket/qrcode/${id}`)
   //     .then((response) => response.json())
@@ -116,11 +119,12 @@ function BusBookingDetail() {
     <>
       <iframe
         id="ifmcontentstoprint"
+        title="ifmcontentstoprint"
         style={{ height: "0px", width: "0px", position: "absolute" }}
       ></iframe>
       <div className="d-none d-md-block">
         <Header />
-        {loading == false && notFound == false ? (
+        {loading === false && notFound === false ? (
           <div style={{ backgroundColor: "white" }} id="divcontents">
             <Row className="p-3">
               <Col xs={5} sm={5} className="p-0 dm__barcode">
@@ -156,8 +160,7 @@ function BusBookingDetail() {
                           padding: "10px",
                         }}
                       >
-                        that will take you to 
-                        your favourite destinations
+                        that will take you to your favourite destinations
                       </span>
                     </div>
                   </Col>
@@ -369,7 +372,8 @@ function BusBookingDetail() {
                     >
                       ₹{" "}
                       {Number(apiData[0].ticketprice) +
-                        Number(apiData[0].surcharge)}
+                        Number(apiData[0].surcharge) ||
+                        Number(apiData[0].amount)}
                     </span>
                     <br />
                     <span

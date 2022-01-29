@@ -50,24 +50,20 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
   };
 
   const onSubmit = async (data) => {
+    // console.log(user_data.user._id);
+
     const body = JSON.stringify({
       packages_id: item._id,
-      customer_id: user_data.user.customer_id,
+      customer_id: user_data.user._id,
       // customer_id: "61a8b36ee5163d51d37bfc09",
       start_date: data.startDate,
       end_date: data.endDate,
       email: data.email,
       number_of_travellers: data.visitors,
       amount: item.price,
-      basic_details: [
-        {
-          name: data.name,
-          age: "",
-          adhhar: "",
-          gender: "",
-        },
-      ],
     });
+
+    console.log(body);
 
     try {
       const response = await fetch(`${API_PATH}/api/v1/packages/booking`, {
