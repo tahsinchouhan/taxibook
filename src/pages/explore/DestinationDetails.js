@@ -44,6 +44,8 @@ const DestinationDetails = (props) => {
 
   const getSeoDetails = async (data) => {
     try {
+      console.log("byme", data);
+
       document.title = data?.data?.seo_title || "Travel Bastar";
       document
         .querySelector("meta[name='description']")
@@ -55,7 +57,25 @@ const DestinationDetails = (props) => {
       let text = data?.data?.seo[0]
         .replace('<script type="application/ld+json">', "")
         .replace("</script>", "");
+
+      let text1 = data?.data?.seo_schema_1[0]
+        ?.replace('<script type="application/ld+json">', "")
+        ?.replace("</script>", "");
+      let text2 = data?.data?.seo_schema_2[0]
+        ?.replace('<script type="application/ld+json">', "")
+        ?.replace("</script>", "");
+      let text3 = data?.data?.seo_schema_3[0]
+        ?.replace('<script type="application/ld+json">', "")
+        ?.replace("</script>", "");
+      let text4 = data?.data?.seo_schema_4[0]
+        ?.replace('<script type="application/ld+json">', "")
+        ?.replace("</script>", "");
+
       document.querySelector("script[id='seoSchema']").innerHTML = text || "";
+      document.querySelector("script[id='seoSchema1']").innerHTML = text1 || "";
+      document.querySelector("script[id='seoSchema2']").innerHTML = text2 || "";
+      document.querySelector("script[id='seoSchema3']").innerHTML = text3 || "";
+      document.querySelector("script[id='seoSchema4']").innerHTML = text4 || "";
     } catch (error) {
       console.log(error);
     }

@@ -50,10 +50,28 @@ const PackagesDetails = (props) => {
     document
       .querySelector("meta[name='keywords']")
       .setAttribute("content", data?.data?.seo_keywords || "");
+
     let text = data?.data?.seo[0]
       ?.replace('<script type="application/ld+json">', "")
       ?.replace("</script>", "");
+    let text1 = data?.data?.seo_schema_1[0]
+      ?.replace('<script type="application/ld+json">', "")
+      ?.replace("</script>", "");
+    let text2 = data?.data?.seo_schema_2[0]
+      ?.replace('<script type="application/ld+json">', "")
+      ?.replace("</script>", "");
+    let text3 = data?.data?.seo_schema_3[0]
+      ?.replace('<script type="application/ld+json">', "")
+      ?.replace("</script>", "");
+    let text4 = data?.data?.seo_schema_4[0]
+      ?.replace('<script type="application/ld+json">', "")
+      ?.replace("</script>", "");
+
     document.querySelector("script[id='seoSchema']").innerHTML = text || "";
+    document.querySelector("script[id='seoSchema1']").innerHTML = text1 || "";
+    document.querySelector("script[id='seoSchema2']").innerHTML = text2 || "";
+    document.querySelector("script[id='seoSchema3']").innerHTML = text3 || "";
+    document.querySelector("script[id='seoSchema4']").innerHTML = text4 || "";
   };
 
   const modalReviewHadler = () => {
