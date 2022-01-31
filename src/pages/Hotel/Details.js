@@ -9,6 +9,7 @@ import "react-multi-carousel/lib/styles.css";
 import hotelotherimage from "../../assets/img/hotelotherimage.jpg";
 import { BsPlusSquare, BsDashSquare } from "react-icons/bs";
 import { DatePicker, Dropdown as ANTDropdown, Menu } from "antd";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { FaTrash, FaPlusCircle } from "react-icons/fa";
 
 const Details = ({
@@ -277,7 +278,22 @@ const Details = ({
           className="hotel-confirm-div"
           style={{ width: "90%", margin: "0 auto" }}
         >
-          <div className="hotel-details-1">
+          <div className="hotel-details-1" style={{ marginTop: "2rem" }}>
+            <Breadcrumb>
+              <Breadcrumb.Item
+                style={{ color: "#AF98F4" }}
+                onClick={() => history.push("/")}
+              >
+                Home
+              </Breadcrumb.Item>
+              <Breadcrumb.Item
+                style={{ color: "#AF98F4" }}
+                onClick={() => history.push("/hotellist")}
+              >
+                Hotels
+              </Breadcrumb.Item>
+              <Breadcrumb.Item active>{hotelUniqid}</Breadcrumb.Item>
+            </Breadcrumb>
             <div
               className=""
               style={{
@@ -430,7 +446,6 @@ const Details = ({
               </div>
             </div>
           </div>
-
           <div className="hotel-details-2">
             <div
               style={{

@@ -11,6 +11,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 // import { DatePicker } from "antd";
 import Details from "./Details";
+
 // import { Carousel } from "react-bootstrap";
 
 const HotelDetails = (props) => {
@@ -31,6 +32,7 @@ const HotelDetails = (props) => {
 
   useEffect(() => {
     setDetailsP(detail);
+    window.scrollTo(0, 0);
   }, [detail]);
 
   const initLoad = (value) => {

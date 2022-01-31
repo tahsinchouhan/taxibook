@@ -3,20 +3,22 @@ import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import loc from "../../assets/img/location.svg";
-import bg from "../../assets/img/bg_12.jpg";
+// import bg from "../../assets/img/bg_12.jpg";
 import GoogleMapReact from "google-map-react";
 import ReactPlayer from "react-player";
 import { API_PATH } from "../../Path/Path";
 import Carousel from "react-multi-carousel";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import TravellerTicket from "../travesaly/TravellerTicket";
-import { Howl, Howler } from "howler";
-import Audio from "../..//assets/audio/Audio.mp3";
-import { getAudioJourneyFile } from "../../redux/audioJourney/actions";
+// import { Howl, Howler } from "howler";
+// import Audio from "../..//assets/audio/Audio.mp3";
+// import { getAudioJourneyFile } from "../../redux/audioJourney/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { AiOutlinePauseCircle } from "react-icons/ai";
 import ReactAudioPlayer from "react-audio-player";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
+
 import "../../assets/css/destination.css";
 
 // const audioClip = ["https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"]
@@ -216,6 +218,27 @@ const DestinationDetails = (props) => {
 
       <Container>
         <div className="block pt-3">
+          <Breadcrumb>
+            <Breadcrumb.Item
+              style={{ color: "#AF98F4" }}
+              onClick={() => history.push("/")}
+            >
+              Home
+            </Breadcrumb.Item>
+            <Breadcrumb.Item
+              style={{ color: "#AF98F4" }}
+              onClick={() => history.push("/explore")}
+            >
+              Explore
+            </Breadcrumb.Item>
+            <Breadcrumb.Item
+              style={{ color: "#AF98F4" }}
+              onClick={() => history.push("/populardestinations")}
+            >
+              Destinations
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>{destinations.title}</Breadcrumb.Item>
+          </Breadcrumb>
           <h4 className="block__title">
             <span>About</span> the Destination
           </h4>

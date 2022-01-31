@@ -106,7 +106,7 @@ function HotelSearch() {
       sendlocation === "" ||
       sendlocation === " "
     ) {
-      if (enterlocation == "" || enterlocation === undefined) {
+      if (enterlocation === "" || enterlocation === undefined) {
         city = "Jagdalpur";
       } else {
         city = enterlocation;
@@ -126,7 +126,7 @@ function HotelSearch() {
         noOfRoom,
         noOfGuest,
         roomStateData: roomState,
-        filter: false,
+        // filter: false,
       })
     );
     history.push("/hotellist");

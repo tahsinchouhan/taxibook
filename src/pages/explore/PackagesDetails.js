@@ -20,6 +20,7 @@ import EnquireModal from "../../components/modal/EnquireModal";
 import { FaStar } from "react-icons/fa";
 import "../../assets/css/ratings.css";
 import { teal } from "@material-ui/core/colors";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 const Marker = () => {
   return <div className="SuperAwesomePin"></div>;
@@ -220,6 +221,21 @@ const PackagesDetails = (props) => {
 
       <Container>
         <div className="block pt-3">
+          <Breadcrumb>
+            <Breadcrumb.Item
+              style={{ color: "#AF98F4" }}
+              onClick={() => history.push("/")}
+            >
+              Home
+            </Breadcrumb.Item>
+            <Breadcrumb.Item
+              style={{ color: "#AF98F4" }}
+              onClick={() => history.push("/plan")}
+            >
+              Plan
+            </Breadcrumb.Item>
+            <Breadcrumb.Item active>{packages.title}</Breadcrumb.Item>
+          </Breadcrumb>
           <h4 className="block__title">
             <span>About</span> the Package
           </h4>

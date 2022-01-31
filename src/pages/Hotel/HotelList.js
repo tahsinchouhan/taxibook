@@ -82,6 +82,7 @@ function HotelList() {
       ameneties = ameneties.filter((a) => a !== e.target.id);
     else ameneties.push(e.target.id);
     setSelectedAmeneties([...ameneties]);
+    onDmTicketShow();
   };
 
   const handleCategoriesClick = (e) => {
@@ -90,6 +91,7 @@ function HotelList() {
     //   categories = categories.filter((a) => a !== e.target.id);
     // else categories.push(e.target.id);
     setSelectedCategories(e.target.id);
+    onDmTicketShow();
   };
 
   useEffect(() => {
@@ -234,6 +236,7 @@ function HotelList() {
           max={4500}
           onChange={(e) => {
             setRangeValue(e);
+            onDmTicketShow();
           }}
         />
         <span>
@@ -321,11 +324,11 @@ function HotelList() {
         noOfRoom,
         noOfGuest,
         roomStateData: roomState,
-        filter: true,
         ameneties: selectedAmeneties,
         category: selectedCategories,
         minPrice: rangeValue[0],
         maxPrice: rangeValue[1],
+        filter: true,
       })
     );
     // history.push("/hotellist");
@@ -371,7 +374,18 @@ function HotelList() {
         filter: false,
       })
     );
-  }, []);
+  }, [
+    dispatch,
+    endDate,
+    noOfGuest,
+    noOfRoom,
+    roomState,
+    sendlocation,
+    startDate,
+  ]);
+
+  console.log(hotels);
+
   // const Pricemenu = (
   //   <Menu>
   //     <Menu.Item>
@@ -615,7 +629,7 @@ function HotelList() {
                   max={4500}
                   onChange={(e) => {
                     setRangeValue(e);
-                    console.log(e);
+                    onDmTicketShow();
                   }}
                 />
                 <span>
