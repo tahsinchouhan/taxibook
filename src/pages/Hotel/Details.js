@@ -209,16 +209,18 @@ const Details = ({
         ) : (
           ""
         )}
-        {noOfRoom < number_of_rooms ? (
-          <span
+        {/*
+          {noOfRoom < number_of_rooms ? (
+            <span
             title="Add Room "
             style={{ float: "right" }}
             onClick={() => guestRoom("mainAdd", roomState.length + 1)}
-          >
+            >
             <FaPlusCircle size={15} />
             &nbsp; Add Room
-          </span>
-        ) : null}
+            </span>
+            ) : null}
+          */}
       </Menu.Item>
     </Menu>
   );
@@ -568,15 +570,17 @@ const Details = ({
                 </div>
               </div>
 
-              <div
+              {/*
+                <div
                 className="mt-1"
                 style={{ display: "flex", justifyContent: "space-between" }}
-              >
+                >
                 <span style={{}}>Your Saving</span>
                 <span style={{ fontWeight: "bold" }}>
-                  ₹ {prices?.base - prices?.offer}
+                ₹ {prices?.base - prices?.offer}
                 </span>
-              </div>
+                </div>
+              */}
               <div
                 className="mt-1"
                 style={{ display: "flex", justifyContent: "space-between" }}
@@ -588,7 +592,7 @@ const Details = ({
                     (inclusive of all taxes)
                   </span>
                 </span>
-                <span style={{ fontWeight: "bold" }}>₹ {prices?.final}</span>
+                <span style={{ fontWeight: "bold" }}>₹ {prices?.offer}</span>
               </div>
 
               <div>
