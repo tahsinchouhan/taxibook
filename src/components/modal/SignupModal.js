@@ -16,7 +16,7 @@ function SignupModal({ show, handleClose }) {
   const [modalShow, setModalShow] = useState(false);
   const [mobile, setMobile] = useState("");
   const [OTP, setOTP] = useState("");
-  const [password,setPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [showDiv, setShowDiv] = useState(false);
 
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ function SignupModal({ show, handleClose }) {
                         <Form.Label
                           style={{ fontWeight: "bolder" }}
                         ></Form.Label>
-                        <FaUserCircle  className='text-success'/>
+                        <FaUserCircle className="text-success" />
                         <Form.Control
                           type="number"
                           placeholder="Name"

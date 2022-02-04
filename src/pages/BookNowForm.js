@@ -43,9 +43,9 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
     setModalShow(false);
   };
 
-  const takeToBusPage = (id) => {
+  const takeToTicketPage = (id) => {
     history.push({
-      pathname: `/bus-detail/${id}`,
+      pathname: `/packages-detail/${id}`,
     });
   };
 
@@ -81,7 +81,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
       // console.log("book now from the form clicked");
       reset();
 
-      takeToBusPage(json.data.booking_Id);
+      takeToTicketPage(json.data._id);
     } catch (error) {
       console.log(error);
     }

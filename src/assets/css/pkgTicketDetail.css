@@ -1,0 +1,51 @@
+.package-ticket-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.package-ticket-page h2 {
+  font-size: 1rem;
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+}
+
+.package-ticket-page h3 {
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  font-weight: 700;
+}
+
+.package-ticket-page p {
+  font-size: 0.8rem;
+  color: gray;
+  margin: 0 !important;
+}
+
+.package-ticket-page .card {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 3rem;
+  background: rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 1000px) {
+  .package-ticket-page .ticket-width {
+    width: 82% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .package-ticket-page .ticket-width {
+    width: 80% !important;
+  }
+
+  .package-ticket-page .personal-details {
+    width: 90% !important;
+    padding: 1rem !important;
+  }
+}

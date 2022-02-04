@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Row, Col, Form, Container, Image } from "react-bootstrap";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import Header from "../../../components/Header";
+
 import doodle from "../../../assets/img/doodle.png";
 import DatePicker from "react-datepicker";
 import calendar from "../../../assets/img/calendar.png";
@@ -9,6 +10,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import Footer from "../../travesaly/Footer";
 import { API_PATH } from "../../../Path/Path";
 import { FaSpinner } from "react-icons/fa";
+import Loader from "../../../components/Loader";
 import { connect, useDispatch, useSelector } from "react-redux";
 import {
   fetchStart,
@@ -20,6 +22,7 @@ import {
 
 import Message from "../../../components/Message";
 import { ToastContainer, toast } from "react-toastify";
+import LoginModal from "../../../components/modal/LoginModal";
 
 function Tickets1({ loading }) {
   const history = useHistory();
@@ -77,14 +80,16 @@ function Tickets1({ loading }) {
     </button>
   ));
   const onStepreClick = () => {
-    if (user_data === null) {
+    if (user_data !== null) {
+      history.push("/steper_dmpass");
+    } else {
       toast.error("USER not registered? Signup First");
       setShowSignUpModal(true);
-    } else {
-      dispatch(fetchStart());
-      dispatch(verifyOtp(number, otp));
+      // dispatch(fetchStart());
+      // dispatch(verifyOtp(number, otp));
     }
   };
+
   const handleDate = (d) => {
     let ye = new Intl.DateTimeFormat("en", { year: "numeric" }).format(d);
     let mo = new Intl.DateTimeFormat("en", { month: "2-digit" }).format(d);
@@ -112,29 +117,36 @@ function Tickets1({ loading }) {
     dispatch(getOtp(number));
   };
 
+  const handleClose = () => {
+    setShowSignUpModal(false);
+  };
+
   useEffect(() => {
     if (send_otp_error.code === 401) {
       toast.error("USER not registered? Signup First");
       setShowSignUpModal(true);
     }
-  }, [send_otp_error]);
+  }, []);
 
   useEffect(() => {
     if (verify_otp_error === "OTP verification failed!!") {
       toast.error("OTP verification failed!!");
     }
-  }, [verify_otp_error]);
+  }, []);
 
   return (
     <>
       <div>
         <AvForm>
           <ToastContainer limit={1} />
-          <Header showSignUpModal={showSignUpModal} />
-          {/* {loading ? <Loader /> : null} */}
+          <Header />
+
+          {<LoginModal show={showSignUpModal} handleClose={handleClose} />}
+
+          {loading ? <Loader /> : null}
           {message ? <Message msg={message} type="success" /> : null}
           {error ? <Message msg={error} type="error" /> : null}
-          {/* {(user_data !== null) ? <Redirect to='/busdetail' /> : null} */}
+          {/*  {user_data !== null ? <Redirect to="/busdetail" /> : null} */}
           <Container className="">
             <div style={{ textAlign: "center", margin: "50px" }}>
               <div style={{ margin: "10px" }}>

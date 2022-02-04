@@ -183,7 +183,9 @@ function Header({ showSignUpModal }) {
                   </Dropdown.Menu>
                 </Dropdown>
               </Offcanvas.Title>
-            ) : ("")}
+            ) : (
+              ""
+            )}
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="me-auto sidebar__nav">
@@ -219,7 +221,10 @@ function Header({ showSignUpModal }) {
                   AUDIO JOURNEYS
                 </span>
               </NavLink>
-              <a className="sidebar__navlink" href="https://api.whatsapp.com/send/?phone=+916267020580&text&app_absent=0">
+              <a
+                className="sidebar__navlink"
+                href="https://api.whatsapp.com/send/?phone=+916267020580&text&app_absent=0"
+              >
                 <Image src={supportIcon} alt="support" />
                 <span style={{ left: "76px", position: "absolute" }}>
                   SUPPORT
@@ -236,8 +241,6 @@ function Header({ showSignUpModal }) {
           </Offcanvas.Body>
         </Offcanvas>
       </Container>
-
-
 
       <Container fluid className="header_div d-none d-md-block">
         <Navbar expand="lg">

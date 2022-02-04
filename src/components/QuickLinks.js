@@ -52,11 +52,11 @@ const QuickLinksArr = [
     title: "Tickets",
     route: "/tickets",
   },
-  {
-    icon: travelpassIcon,
-    title: "Travel Pass",
-    route: "/dmpass",
-  },
+  // {
+  //   icon: travelpassIcon,
+  //   title: "Travel Pass",
+  //   route: "/dmpass",
+  // },
   {
     icon: packagesIcon,
     title: "Tour Packages",

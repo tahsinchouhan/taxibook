@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Container, Row, Col, Form, Dropdown, Button } from "react-bootstrap";
 import Header from "../../components/Header";
 import bus1 from "../../assets/img/bus.png";
@@ -9,642 +9,219 @@ import { useHistory, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import "../../assets/css/dmdetail.css";
+import "../../assets/css/pkgTicketDetail.css";
+import { useReactToPrint } from "react-to-print";
 
 import { API_PATH } from "../../Path/Path";
 
 function BusBookingDetail() {
   const { id } = useParams();
+  const { user_data } = useSelector((state) => state.loginReducer);
 
   const history = useHistory();
   const [apiData, setApiData] = useState([]);
+  const [packages, setPackages] = useState([]);
   const [qrImage, setQRImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(true);
-  const { tripList: trips, route_id } = useSelector(
-    (state) => state.busReducer
-  );
-  const {
-    data: detailsData,
-    createbusData,
-    booking_id,
-  } = useSelector((state) => state.busReducer);
-  const { basic_details } = detailsData;
-  console.log("detailsData", detailsData);
-  console.log("basic_detailsbasic_details", basic_details);
-  console.log("booking_idbooking_id", booking_id);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    getTrips();
-  }, []);
+  // const dispatch = useDispatch();
 
   const goHome = () => {
     history.push("/");
   };
 
-  const getTrips = () => {
-    fetch(`${API_PATH}/api/v1/busticket/list?booking_Id=${id}`)
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res.data);
-        if (res.data !== undefined) {
-          setApiData(res.data);
-          localStorage.setItem("data", res.data[0]._id);
-          setNotFound(false);
-          setLoading(false);
-        } else {
-          setLoading(false);
-          setNotFound(true);
-        }
-      })
-      .catch((e) => {
-        setLoading(false);
-        setNotFound(true);
-      });
+  useEffect(() => {
+    getTrips();
+  }, []);
+
+  const getTrips = async () => {
+    try {
+      const endpoint = await fetch(`${API_PATH}/api/v1/packages/booking/${id}`);
+      const res = await endpoint.json();
+      console.log("data", res.data);
+      setApiData(res.data);
+      setLoading(false);
+      setNotFound(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(true);
+      setNotFound(true);
+    }
   };
 
   // let apiId = localStorage.getItem("data");
-  const BookingId = localStorage.getItem("busticketData");
+  // const BookingId = localStorage.getItem("busticketData");
 
-  if (BookingId == []) {
-    // console.log("sadh", apiId)
-    console.log("BookingId", BookingId);
-  } else {
-    console.log("BookingIdBookingId", BookingId);
-    fetch(`${API_PATH}/api/v1/busticket/qrcode/${BookingId}`)
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res.data);
-        setQRImage(res.data);
-      })
-      .catch((e) => {
-        setLoading(false);
-        setNotFound(true);
-      });
-  }
+  // if (BookingId === []) {
+  //   // console.log("sadh", apiId)
+  //   console.log("BookingId", BookingId);
+  // } else {
+  //   console.log("BookingIdBookingId", BookingId);
+  //   fetch(`${API_PATH}/api/v1/busticket/qrcode/${BookingId}`)
+  //     .then((response) => response.json())
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setQRImage(res.data);
+  //     })
+  //     .catch((e) => {
+  //       setLoading(false);
+  //       setNotFound(true);
+  //     });
+  // }
 
-  const printPdf = () => {
-    window.print();
-  };
+  // const printPdf = () => {
+  //   window.print();
+  // };
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+  // const printPdf = () => {
+  //   // var content = document.getElementById("divcontents");
+  //   // var pri = document.getElementById("ifmcontentstoprint").contentWindow;
+  //   // pri.document.open();
+  //   // pri.document.write(content.innerHTML);
+  //   // pri.document.close();
+  //   // pri.focus();
+  //   // pri.print();
+  //   const w = window.open();
+  //   if (printableAreaRef.current.innerHTML) {
+  //     w?.document.write(printableAreaRef.current.innerHTML);
+  //     w?.print();
+  //   }
+  //   w?.close();
+  // };
 
   return (
     <>
-      <div className="d-none d-md-block">
+      <iframe
+        id="ifmcontentstoprint"
+        title="ifmcontentstoprint"
+        style={{ height: "0px", width: "0px", position: "absolute" }}
+      ></iframe>
+      <div className="d-block package-ticket-page">
         <Header />
-        {loading == false && notFound == false ? (
-          <div style={{ backgroundColor: "white" }}>
-            <Row className="p-3">
-              <Col xs={5} sm={5} className="p-0 dm__barcode">
-                <div className="booking-div">
-                  <img src={qrImage} alt="" width={250} />
-                </div>
-              </Col>
-              <Col xs={5} sm={5}>
-                <Row className="p-0" style={{ textAlign: "center" }}>
-                  <Col xs={6} sm={6}>
-                    <div
-                      className="booking-div"
-                      style={{ marginBottom: "2rem" }}
-                    >
-                      <div style={{ marginBottom: "15px" }}>
-                        <img src={ticket} alt="" />
-                      </div>
-                      <span
-                        style={{
-                          fontWeight: "bolder",
-                          fontSize: "15px",
-                          color: "#FF4A68",
-                          paddingTop: "50px",
-                        }}
-                      >
-                        Package
-                      </span>
-                      <br />
-                      <span
-                        style={{
-                          fontWeight: "400",
-                          fontSize: "12px",
-                          padding: "10px",
-                        }}
-                      >
-                        that will take you to <br />
-                        your favourite destinations
-                      </span>
-                    </div>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-            <Col className="dm__entry_div" xs={12}>
-              <div className="dm__entry_card">
-                <div className="row mb-1">
-                  {" "}
-                  <div
-                    className="col-md-6"
-                    style={{ color: "red", fontWeight: "bolder" }}
-                  >
-                    Pass Detail
-                  </div>{" "}
-                  <div
-                    className="col-md-6"
-                    style={{
-                      paddingLeft: "10px",
-                      color: "red",
-                      fontWeight: "bolder",
-                    }}
-                  >
-                    Pass ID
-                  </div>
-                </div>
-                <div className="row mb-1">
-                  {" "}
-                  <div className="col-md-6" style={{ fontWeight: "bolder" }}>
-                    BUS BOOKING ID
-                  </div>{" "}
-                  <div className="col-md-6" style={{ paddingLeft: "10px" }}>
-                    {apiData.length > 0 ? apiData[0]?.booking_Id : null}
-                  </div>
-                </div>
-              </div>
-            </Col>
-            <Row>
-              <Col className="dm__title" xs={12}>
-                PACKAGE DETAILS
-              </Col>
-              <Col className="dm__traveller_div" xs={12}>
-                {basic_details?.length > 0
-                  ? basic_details?.map((item, i) => (
-                      <div key={i} className="dm__trav_card">
-                        <div className="dm__trav_card_title">{item.name}</div>
-                        <div className="dm__trav_card_body">
-                          <div className="top">
-                            {item.gender}, {item.age}
-                          </div>
-                          <div className="bottom">Adhaar: {item.adhaar}</div>
-                        </div>
-                      </div>
-                    ))
-                  : null}
-              </Col>
-            </Row>
-            <Row>
-              {/* <Col>
-              <Row>
-              <Col xs={12} md={6}>
-                <div style={{ width: "100%" }}>
-                  <span
-                    style={{
-                      color: "black",
-                      fontFamily: "sans-serif",
-                      marginLeft:'27px'
-
-                    }}
-                  >
-                    Boarding from
-                  </span>
-                </div>
-
-                <div
-                  className=" select-train mt-2 d-flex align-items-center"
-                  style={{ width: "100%" }}
-                >
-                  <div className="d-flex">
-                    <span
-                      style={{
-                        margin: "10px",
-                        whiteSpace: "nowrap",
-                        fontSize: "12px",
-                        fontWeight: "bolder",
-                        fontFamily: "sans-serif",
-                      }}
-                    >
-                      {apiData[0]?.trips_id?.route?.start?.name}
-                    </span>
-                  </div>
-                </div>
-              </Col>
-              <Col>
-                <div style={{ width: "100%" }}>
-                  <span
-                    style={{
-                      color: "black",
-                      fontFamily: "sans-serif",
-                      marginLeft:'27px'
-                    }}
-                  >
-                    Dropoff At
-                  </span>
-                </div>
-
-                <div
-                  className=" select-train mt-2 d-flex align-items-center"
-                  style={{ width: "100%" }}
-                >
-                  <div className="d-flex">
-                    <span
-                      style={{
-                        margin: "10px",
-                        whiteSpace: "nowrap",
-                        fontSize: "12px",
-                        fontWeight: "bolder",
-                        fontFamily: "sans-serif",
-                      }}
-                    >
-                      Raj Ratan Travels, Borivali East,
-                    <br />
-                    Devipada Subway
-
-                    {apiData[0]?.trips_id?.route?.end?.name}
-                    </span>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-
-              </Col> */}
-              <Col className="dm__entry_div" xs={12}>
-                <div className="dm__entry_card" style={{ marginLeft: "25px" }}>
-                  <div className="p-2">
-                    <span>Name</span>
-                    <br />
-                    <span
-                      style={{
-                        fontSize: "19px",
-                        fontWeight: "bolder",
-                        color: "black",
-                      }}
-                    >
-                      {/* Chitrakote, Bastar */}
-                      {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                      Ghumo Bastar Trip
-                    </span>
-                    <br />
-                    <span>Mobile</span>
-                    <br />
-                    <span
-                      style={{
-                        fontSize: "19px",
-                        fontWeight: "bolder",
-                        color: "black",
-                      }}
-                    >
-                      {/* Chitrakote, Bastar */}
-                      8120424325
-                    </span>
-                    <br />
-                    <span>E-mail</span>
-                    <br />
-                    <span
-                      style={{
-                        fontSize: "19px",
-                        fontWeight: "bolder",
-                        color: "black",
-                      }}
-                    >
-                      {/* Chitrakote, Bastar */}
-                      admin@gmail.com
-                      {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                    </span>
-                    <br />
-                  </div>
-                </div>
-                <div className="dm__entry_card">
-                  <div>
-                    <div
-                      className="rajratan-train p-2"
-                      style={{ float: "", backgroundColor: "#F8F8F8" }}
-                    >
-                      <span>Package Name</span>
-                      <br />
-                      <span
-                        style={{
-                          fontSize: "19px",
-                          fontWeight: "bolder",
-                          color: "black",
-                        }}
-                      >
-                        {/* Chitrakote, Bastar */}
-                        admin@gmail.com
-                        {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                      </span>
-                      <br />
-                      <span>From Date</span>
-                      <br />
-                      <span
-                        style={{
-                          fontSize: "19px",
-                          fontWeight: "bolder",
-                          color: "black",
-                        }}
-                      >
-                        {/* Chitrakote, Bastar */}
-                        13-12-2021
-                        {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                      </span>
-                      <br />
-                      <span>End Date</span>
-                      <br />
-                      <span
-                        style={{
-                          fontSize: "19px",
-                          fontWeight: "bolder",
-                          color: "black",
-                        }}
-                      >
-                        {/* Chitrakote, Bastar */}
-                        13-12-2021
-                        {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                      </span>
-                      <br />
-                      <span>No. Of Travellers</span>
-                      <br />
-                      <span
-                        style={{
-                          fontSize: "18px",
-                          fontWeight: "bolder",
-                          color: "black",
-                        }}
-                      >
-                        {/* Chitrakote, Bastar */}3
-                        {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                      </span>
-                      <br />
-                    </div>
-                  </div>
-                </div>
-              </Col>
-
-              <Col className="dm__entry_div" xs={12}>
-                <Button
-                  onClick={() => printPdf()}
-                  style={{
-                    width: "186px",
-                    textAlign: "center",
-                    height: "52px",
-                    borderRadius: "9px",
-                    border: "none",
-                    backgroundColor: "#0FA453",
-                    fontWeight: "bold",
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                  }}
-                >
-                  Print Ticket
-                </Button>
-              </Col>
-            </Row>
-          </div>
-        ) : loading == false ? (
-          <h1>No data found</h1>
-        ) : null}
-        <Footer />
-      </div>
-
-      {/*mobile View*/}
-
-      <div className="m-0 d-md-none" style={{ backgroundColor: "#E5E5E5" }}>
-        <Row className="m-0">
-          <Col className="m-0 dmpass__mob_header" xs={12}>
-            <FaArrowLeft
-              style={{ width: "30px", height: "30px" }}
-              onClick={goHome}
-            />
-            <div className="dmpass__mob_header_title">Your Details</div>
-          </Col>
-        </Row>
-        {loading == false && notFound == false ? (
-          <Row className="mt-5 pt-5">
-            <Col xs={12}>
-              <div className="text-center mt-2">
-                <img src={qrImage} alt="" width={130} />
-              </div>
-            </Col>
-            <Col
-              className="px-4 d-flex justify-content-center mt-3 "
-              xs={12}
-              sm={12}
-            >
-              <div className="dm__card mobile">
-                <div className="dm__entry_card">
-                  <div className="row mb-1">
-                    {" "}
-                    <div
-                      className="col-md-6"
-                      style={{ color: "red", fontWeight: "bolder" }}
-                    >
-                      Pass Detail
-                    </div>{" "}
-                    <div
-                      className="col-md-6"
-                      style={{
-                        paddingLeft: "10px",
-                        color: "red",
-                        fontWeight: "bolder",
-                      }}
-                    >
-                      Pass ID
-                    </div>
-                  </div>
-                  <div className="row mb-1">
-                    {" "}
-                    <div className="col-md-6" style={{ fontWeight: "bolder" }}>
-                      PACKAGE ID
-                    </div>{" "}
-                    <div className="col-md-6" style={{ paddingLeft: "10px" }}>
-                      {apiData.length > 0 ? apiData[0]?.booking_Id : null}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Col>
-            <Col className="dm__title mobile" xs={12}>
-              PACKAGE DETAILS
-            </Col>
-            <Col className="dm__traveller_div mobile" xs={12}>
-              <Col className="dm__traveller_div" xs={12}>
-                {basic_details?.length > 0
-                  ? basic_details?.map((item, i) => (
-                      <div key={i} className="dm__trav_card">
-                        <div className="dm__trav_card_title">{item.name}</div>
-                        <div className="dm__trav_card_body">
-                          <div className="top">
-                            {item.gender}, {item.age}
-                          </div>
-                          <div className="bottom">Adhaar: {item.adhaar}</div>
-                        </div>
-                      </div>
-                    ))
-                  : null}
-              </Col>
-            </Col>
-            <Col className="dm__title mobile" xs={12}>
-              TRIP packages_details
-            </Col>
-
-            <Col className="dm__entry_div mobile" xs={12}>
-              {/* {apiData?.length > 0
-                ? apiData[0]?.ep_id?.locations?.map((item, i) => (
-                  <div key={i} className="dm__entry_card">
-                    <div className="dm__entry_card_title">
-                      <div className="left">Tamdaghumar</div>
-                      <div className="right">Change</div>
-                    </div>
-                    {item?.services?.map((service, key) => (
-                      <div key={key} className="dm__entry_card_body">
-                        <div className="left">
-                          {service?.service_id?.service_name} x{" "}
-                          {service?.service_id?.unit}
-                        </div>
-                        <div className="right">
-                          {service?.service_id?.price}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  ))
-                : null} */}
-              <div className="dm__entry_card">
-                <div className="p-2">
-                  <span>Name</span>
-                  <br />
-                  <span
-                    style={{
-                      fontSize: "19px",
-                      fontWeight: "bolder",
-                      color: "black",
-                    }}
-                  >
-                    {/* Chitrakote, Bastar */}
-                    {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                    Ghumo Bastar Trip
-                  </span>
-                  <br />
-                  <span>Mobile</span>
-                  <br />
-                  <span
-                    style={{
-                      fontSize: "19px",
-                      fontWeight: "bolder",
-                      color: "black",
-                    }}
-                  >
-                    {/* Chitrakote, Bastar */}
-                    8120424325
-                  </span>
-                  <br />
-                  <span>E-mail</span>
-                  <br />
-                  <span
-                    style={{
-                      fontSize: "19px",
-                      fontWeight: "bolder",
-                      color: "black",
-                    }}
-                  >
-                    {/* Chitrakote, Bastar */}
-                    admin@gmail.com
-                    {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                  </span>
-                  <br />
-                </div>
-              </div>
-              <div className="dm__entry_card">
-                <div>
-                  <div
-                    className="rajratan-train p-2"
-                    style={{ float: "", backgroundColor: "#F8F8F8" }}
-                  >
-                    <span>Package Name</span>
-                    <br />
-                    <span
-                      style={{
-                        fontSize: "19px",
-                        fontWeight: "bolder",
-                        color: "black",
-                      }}
-                    >
-                      {/* Chitrakote, Bastar */}
-                      admin@gmail.com
-                      {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                    </span>
-                    <br />
-                    <span>From Date</span>
-                    <br />
-                    <span
-                      style={{
-                        fontSize: "19px",
-                        fontWeight: "bolder",
-                        color: "black",
-                      }}
-                    >
-                      {/* Chitrakote, Bastar */}
-                      13-12-2021
-                      {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                    </span>
-                    <br />
-                    <span>End Date</span>
-                    <br />
-                    <span
-                      style={{
-                        fontSize: "19px",
-                        fontWeight: "bolder",
-                        color: "black",
-                      }}
-                    >
-                      {/* Chitrakote, Bastar */}
-                      13-12-2021
-                      {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                    </span>
-                    <br />
-                    <span>No. Of Travellers</span>
-                    <br />
-                    <span
-                      style={{
-                        fontSize: "18px",
-                        fontWeight: "bolder",
-                        color: "black",
-                      }}
-                    >
-                      {/* Chitrakote, Bastar */}3
-                      {/* {apiData[0]?.trips_id?.route?.end?.name} */}
-                    </span>
-                    <br />
-                  </div>
-                </div>
-              </div>
-            </Col>
-            {/* <Col className="dm__footer_div mobile" xs={12}>
-              <div className="dm__footer_card">
-                <div className="dm__footer_card_title">BUS BOOKING</div>
-                <Button className="dm__footer_card_body">VIEW</Button>
-              </div>
-              <div className="dm__footer_card">
-                <div className="dm__footer_card_title">CAB BOOKING</div>
-                <Button className="dm__footer_card_body">VIEW</Button>
-              </div>
-            </Col> */}
-            <Col className="dm__entry_div" xs={12}>
-              <Button
-                onClick={() => printPdf()}
+        {loading === false && notFound === false ? (
+          <div
+            className="package-ticket-page"
+            id="divcontents"
+            ref={componentRef}
+          >
+            <div className="card mb-4 bg-white">
+              <div
                 style={{
-                  width: "186px",
-                  textAlign: "center",
-                  height: "52px",
-                  borderRadius: "9px",
-                  border: "none",
-                  backgroundColor: "#0FA453",
-                  fontWeight: "bold",
-                  marginTop: "20px",
-                  marginBottom: "20px",
+                  width: "40px",
+                  height: "30px",
                 }}
               >
-                Print Ticket
-              </Button>
-            </Col>
-          </Row>
-        ) : loading == false ? (
-          <h1 style={{ height: "96vh", textAlign: "center" }}>No data found</h1>
+                <img src={ticket} alt="ticketIcon" />
+              </div>
+              <h3 style={{ color: "#0fa453" }}>Package</h3>
+              <p style={{ margin: 0 }}>
+                That will take you to your favourite destinations
+              </p>
+            </div>
+
+            {/* Pass Detail + Pass ID */}
+            <div
+              className="card mb-5 ticket-width"
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-around",
+                width: "35%",
+              }}
+            >
+              <div>
+                <h3>Pass Detail</h3>
+                <div>Package Booking Id</div>
+              </div>
+              <div>
+                <h3 style={{ color: "#0fa453" }}>Pass ID</h3>
+                <div>{apiData.booking_Id}</div>
+              </div>
+            </div>
+
+            <h2>Package Details</h2>
+            <div className="card" style={{ textAlign: "center" }}>
+              <div>
+                <div className="d-flex">
+                  <div style={{ width: "50%" }}>
+                    <p>Name</p>
+                    <h2>{apiData.package_name}</h2>
+                  </div>
+
+                  <div style={{ width: "50%" }}>
+                    <p>Price</p>
+                    <h2 style={{ color: "#0fa453" }}>₹{apiData.price}</h2>
+                  </div>
+                </div>
+
+                <div className="d-flex">
+                  <div style={{ width: "50%" }}>
+                    <p>Start Date</p>
+                    <h2>{apiData.start_date.toString().slice(0, 10)}</h2>
+                  </div>
+
+                  <div style={{ width: "50%", marginLeft: "1rem" }}>
+                    <p>End Date</p>
+                    <h2>{apiData.end_date.toString().slice(0, 10)}</h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="card mt-5 mb-5 ticket-width personal-details"
+              style={{
+                flexDirection: "row",
+                width: "44%",
+                justifyContent: "space-around",
+                alignItems: "flex-start",
+              }}
+            >
+              <div>
+                <h2 style={{ fontSize: "1.1rem" }}>Traveller Details</h2>
+                {/* name, email, mobile, no. of travellers */}
+                <p>Name</p>
+                <h2>{user_data.user.name}</h2>
+
+                <p>E-mail</p>
+                <h2>{user_data.user.email}</h2>
+
+                <p>Mobile</p>
+                <h2>{user_data.user.mobile}</h2>
+
+                <p>No. of Travellers</p>
+                <h2>{apiData.number_of_travellers}</h2>
+              </div>
+
+              <div>
+                <h2 style={{ fontSize: "1.1rem" }}>Vendor Details</h2>
+                {/* email, mobile */}
+                <p>Email</p>
+                <h2>{apiData.vendor_email}</h2>
+
+                <p>Mobile</p>
+                <h2>{apiData.vendor_mobile}</h2>
+              </div>
+            </div>
+          </div>
+        ) : loading === false ? (
+          <h1>No data found</h1>
         ) : null}
+
+        <div className="d-flex justify-content-center align-items-center mb-3">
+          <button
+            className="btn btn-success"
+            style={{ width: "100px" }}
+            onClick={() => handlePrint()}
+          >
+            Print
+          </button>
+        </div>
+        <Footer />
       </div>
     </>
   );
