@@ -11,6 +11,7 @@ import { BsPlusSquare, BsDashSquare } from "react-icons/bs";
 import { DatePicker, Dropdown as ANTDropdown, Menu } from "antd";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { FaTrash, FaPlusCircle } from "react-icons/fa";
+import { API_PATH } from "../../Path/Path";
 
 const Details = ({
   hotelUniqid,
