@@ -25,6 +25,7 @@ const HotelDetails = (props) => {
 
   const [detailsP, setDetailsP] = useState([]);
   // const [hotelDetail, setHotelDetail] = useState([]);
+  // const [hotel, setHotel] = useState([]);
 
   // console.log('Hotel Details', hotelDetail);
 
@@ -32,8 +33,57 @@ const HotelDetails = (props) => {
 
   useEffect(() => {
     setDetailsP(detail);
+    getSelectedHotel(hotelDetail._id);
     window.scrollTo(0, 0);
   }, [detail]);
+
+  const getSelectedHotel = async (id) => {
+    try {
+      const res = await fetch(`${API_PATH}/api/v2/hotelregistration/${id}`);
+      const data = await res.json();
+      getSeoDetails(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getSeoDetails = async (data) => {
+    try {
+      // console.log(data.seo_schema_1);
+      document.title = data?.seo_title || "Travel Bastar";
+      document
+        .querySelector("meta[name='description']")
+        .setAttribute("content", data?.seo_description || "");
+      document
+        .querySelector("meta[name='keywords']")
+        .setAttribute("content", data?.seo_keywords || "");
+
+      let text = data?.seo[0]
+        .replace('<script type="application/ld+json">', "")
+        .replace("</script>", "");
+
+      let text1 = data?.seo_schema_1[0]
+        ?.replace('<script type="application/ld+json">', "")
+        ?.replace("</script>", "");
+      let text2 = data?.seo_schema_2[0]
+        ?.replace('<script type="application/ld+json">', "")
+        ?.replace("</script>", "");
+      let text3 = data?.seo_schema_3[0]
+        ?.replace('<script type="application/ld+json">', "")
+        ?.replace("</script>", "");
+      let text4 = data?.seo_schema_4[0]
+        ?.replace('<script type="application/ld+json">', "")
+        ?.replace("</script>", "");
+
+      document.querySelector("script[id='seoSchema']").innerHTML = text || "";
+      document.querySelector("script[id='seoSchema1']").innerHTML = text1 || "";
+      document.querySelector("script[id='seoSchema2']").innerHTML = text2 || "";
+      document.querySelector("script[id='seoSchema3']").innerHTML = text3 || "";
+      document.querySelector("script[id='seoSchema4']").innerHTML = text4 || "";
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const initLoad = (value) => {
     axios
