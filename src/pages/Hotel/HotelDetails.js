@@ -49,9 +49,12 @@ const HotelDetails = (props) => {
 
   const getSeoDetails = async (data) => {
     try {
+      console.log(data);
+
       if (data.seo_title) {
         document.title = data?.seo_title || "Travel Bastar";
       }
+
       if (data.seo_description) {
         document
           .querySelector("meta[name='description']")
@@ -63,8 +66,8 @@ const HotelDetails = (props) => {
           .setAttribute("content", data?.seo_keywords || "");
       }
 
-      if (data.seo) {
-        let text = data?.seo[0]
+      if (data.seo_schema) {
+        let text = data?.seo_schema[0]
           .replace('<script type="application/ld+json">', "")
           .replace("</script>", "");
         document.querySelector("script[id='seoSchema']").innerHTML = text || "";
