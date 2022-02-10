@@ -49,37 +49,60 @@ const HotelDetails = (props) => {
 
   const getSeoDetails = async (data) => {
     try {
-      // console.log(data.seo_schema_1);
-      document.title = data?.seo_title || "Travel Bastar";
-      document
-        .querySelector("meta[name='description']")
-        .setAttribute("content", data?.seo_description || "");
-      document
-        .querySelector("meta[name='keywords']")
-        .setAttribute("content", data?.seo_keywords || "");
+      if (data.seo_title) {
+        document.title = data?.seo_title || "Travel Bastar";
+      }
+      if (data.seo_description) {
+        document
+          .querySelector("meta[name='description']")
+          .setAttribute("content", data?.seo_description || "");
+      }
+      if (data.seo_keywords) {
+        document
+          .querySelector("meta[name='keywords']")
+          .setAttribute("content", data?.seo_keywords || "");
+      }
 
-      let text = data?.seo[0]
-        .replace('<script type="application/ld+json">', "")
-        .replace("</script>", "");
+      if (data.seo) {
+        let text = data?.seo[0]
+          .replace('<script type="application/ld+json">', "")
+          .replace("</script>", "");
+        document.querySelector("script[id='seoSchema']").innerHTML = text || "";
+      }
 
-      let text1 = data?.seo_schema_1[0]
-        ?.replace('<script type="application/ld+json">', "")
-        ?.replace("</script>", "");
-      let text2 = data?.seo_schema_2[0]
-        ?.replace('<script type="application/ld+json">', "")
-        ?.replace("</script>", "");
-      let text3 = data?.seo_schema_3[0]
-        ?.replace('<script type="application/ld+json">', "")
-        ?.replace("</script>", "");
-      let text4 = data?.seo_schema_4[0]
-        ?.replace('<script type="application/ld+json">', "")
-        ?.replace("</script>", "");
+      if (data.seo_schema_1) {
+        let text1 = data?.seo_schema_1[0]
+          ?.replace('<script type="application/ld+json">', "")
+          ?.replace("</script>", "");
+        document.querySelector("script[id='seoSchema1']").innerHTML =
+          text1 || "";
+      }
 
-      document.querySelector("script[id='seoSchema']").innerHTML = text || "";
-      document.querySelector("script[id='seoSchema1']").innerHTML = text1 || "";
-      document.querySelector("script[id='seoSchema2']").innerHTML = text2 || "";
-      document.querySelector("script[id='seoSchema3']").innerHTML = text3 || "";
-      document.querySelector("script[id='seoSchema4']").innerHTML = text4 || "";
+      if (data.seo_schema_2) {
+        let text2 = data?.seo_schema_2[0]
+          ?.replace('<script type="application/ld+json">', "")
+          ?.replace("</script>", "");
+        document.querySelector("script[id='seoSchema2']").innerHTML =
+          text2 || "";
+      }
+
+      if (data.seo_schema_3) {
+        let text3 = data?.seo_schema_3[0]
+          ?.replace('<script type="application/ld+json">', "")
+          ?.replace("</script>", "");
+
+        document.querySelector("script[id='seoSchema3']").innerHTML =
+          text3 || "";
+      }
+
+      if (data.seo_schema_4) {
+        let text4 = data?.seo_schema_4[0]
+          ?.replace('<script type="application/ld+json">', "")
+          ?.replace("</script>", "");
+
+        document.querySelector("script[id='seoSchema4']").innerHTML =
+          text4 || "";
+      }
     } catch (error) {
       console.log(error);
     }
