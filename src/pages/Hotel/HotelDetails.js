@@ -49,7 +49,7 @@ const HotelDetails = (props) => {
 
   const getSeoDetails = async (data) => {
     try {
-      console.log(data);
+      // console.log(data);
 
       if (data.seo_title) {
         document.title = data?.seo_title || "Travel Bastar";
