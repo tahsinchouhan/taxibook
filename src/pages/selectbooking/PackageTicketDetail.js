@@ -37,10 +37,11 @@ function BusBookingDetail() {
 
   const getTrips = async () => {
     try {
-      const endpoint = await fetch(`${API_PATH}/api/v1/packages/booking/${id}`);
+      // /api/v1/packages/booking/list?booking_Id=TBP2801202208
+      const endpoint = await fetch(`${API_PATH}/api/v1/packages/booking/list?booking_Id=${id}`);
       const res = await endpoint.json();
-      console.log("data", res.data);
-      setApiData(res.data);
+      console.log("data", res.data[0]);
+      setApiData(res.data[0]);
       setLoading(false);
       setNotFound(false);
     } catch (error) {
@@ -53,22 +54,20 @@ function BusBookingDetail() {
   // let apiId = localStorage.getItem("data");
   // const BookingId = localStorage.getItem("busticketData");
 
-  // if (BookingId === []) {
-  //   // console.log("sadh", apiId)
-  //   console.log("BookingId", BookingId);
-  // } else {
-  //   console.log("BookingIdBookingId", BookingId);
-  //   fetch(`${API_PATH}/api/v1/busticket/qrcode/${BookingId}`)
-  //     .then((response) => response.json())
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setQRImage(res.data);
-  //     })
-  //     .catch((e) => {
-  //       setLoading(false);
-  //       setNotFound(true);
-  //     });
-  // }
+
+    // console.log("BookingIdBookingId", BookingId);
+    if(apiData?.booking_Id && loading) {
+      fetch(`${API_PATH}/api/v1/packages/booking/qrcode/${apiData?._id}`)
+      .then((response) => response.json())
+      .then((res) => {
+        setQRImage(res.data);
+      })
+      .catch((e) => {
+        // setLoading(false);
+        // setNotFound(true);
+      });
+    }
+
 
   // const printPdf = () => {
   //   window.print();
@@ -78,6 +77,7 @@ function BusBookingDetail() {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
+
   // const printPdf = () => {
   //   // var content = document.getElementById("divcontents");
   //   // var pri = document.getElementById("ifmcontentstoprint").contentWindow;
@@ -122,6 +122,10 @@ function BusBookingDetail() {
               <p style={{ margin: 0 }}>
                 That will take you to your favourite destinations
               </p>
+            </div>
+
+            <div className="qr-code">
+              <img src={qrImage} alt="" width={250} />
             </div>
 
             {/* Pass Detail + Pass ID */}
@@ -185,26 +189,26 @@ function BusBookingDetail() {
                 <h2 style={{ fontSize: "1.1rem" }}>Traveller Details</h2>
                 {/* name, email, mobile, no. of travellers */}
                 <p>Name</p>
-                <h2>{user_data.user.name}</h2>
+                <h2>{apiData?.customer_id?.name || ''}</h2>
 
                 <p>E-mail</p>
-                <h2>{user_data.user.email}</h2>
+                <h2>{apiData?.email || ''}</h2>
 
                 <p>Mobile</p>
-                <h2>{user_data.user.mobile}</h2>
+                <h2>{apiData?.customer_mobile || ''}</h2>
 
                 <p>No. of Travellers</p>
-                <h2>{apiData.number_of_travellers}</h2>
+                <h2>{apiData?.number_of_travellers || ''}</h2>
               </div>
 
               <div>
                 <h2 style={{ fontSize: "1.1rem" }}>Vendor Details</h2>
                 {/* email, mobile */}
                 <p>Email</p>
-                <h2>{apiData.vendor_email}</h2>
+                <h2>{apiData?.vendor_email || ''}</h2>
 
                 <p>Mobile</p>
-                <h2>{apiData.vendor_mobile}</h2>
+                <h2>{apiData?.vendor_mobile || ''}</h2>
               </div>
             </div>
           </div>

@@ -41,11 +41,11 @@ function BusBookingDetail() {
   };
 
   const getTrips = () => {
-    fetch(`${API_PATH}/api/v1/packages/booking/list?booking_Id=${id}`)
+    fetch(`${API_PATH}/api/v1/busticket/list?booking_Id=${id}`)
       .then((response) => response.json())
       .then((res) => {
         if (res.data !== undefined) {
-          console.log(res.data);
+          console.log('Ajay', res.data);
           setApiData(res.data);
           localStorage.setItem("data", res.data[0]._id);
           setBasicDetails(res.data[0].basic_details);

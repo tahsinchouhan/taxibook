@@ -81,7 +81,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
       // console.log("book now from the form clicked");
       reset();
 
-      takeToTicketPage(json.data._id);
+      takeToTicketPage(json.data.booking_Id);
     } catch (error) {
       console.log(error);
     }
