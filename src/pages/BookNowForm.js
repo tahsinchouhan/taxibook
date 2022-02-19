@@ -21,7 +21,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
 
-  let today = `${day}/${month}/${year}`;
+  let today = `${year}-${month}-${day}`;
 
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState("");
@@ -140,6 +140,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
                                   setStartDate("");
                                 }
                                 setStartDate(e.target.value);
+                                console.log(startDate);
                               }}
                             />
                             {errors.startDate && (
@@ -147,7 +148,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
                                 {errors.startDate.message}
                               </p>
                             )}
-                            {!validator.isAfter(startDate) && (
+                            {!validator.isAfter(startDate, today) && (
                               <p className="text-danger">
                                 Start date should be valid
                               </p>
