@@ -16,7 +16,7 @@ import {
   Table,
   Dropdown,
 } from "react-bootstrap";
-import { NavLink, useHistory } from "react-router-dom";
+// import { NavLink, useHistory } from "react-router-dom";
 import Header from "../../components/Header";
 import "../../assets/css/profile.css";
 import axios from "axios";
@@ -24,8 +24,8 @@ import men from "../../assets/img/men.jpg";
 import { Link } from "react-router-dom";
 
 function BookingProfile() {
-  const [busTickets, setBusTickets] = useState();
-  const [hotelTickets, setHotelTickets] = useState();
+  // const [busTickets, setBusTickets] = useState();
+  // const [hotelTickets, setHotelTickets] = useState();
   const [commonTickets, setCommonTickets] = useState([]);
   const [profile, setProfile] = useState([]);
   let bothTickets = [];
@@ -46,57 +46,86 @@ function BookingProfile() {
   }, []);
 
   // bus tickets api
-  useEffect(() => {
-    axios
-      .post(API_PATH + `/api/v1/busticket/search`, {
-        mobile,
-      })
-      .then((res) => {
-        res.data.data.forEach((element, index) => {
-          res.data.data[index].booking_type = "Bus Ticket";
-        });
-        setBusTickets(res.data.data);
-        // setCommonTickets([...commonTickets, res.data.data])
-        setCommonTickets((prev) => [...prev, res.data.data]);
-        common();
-      })
-      .catch((e) => console.log(e));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .post(API_PATH + `/api/v1/busticket/search`, {
+  //       mobile,
+  //     })
+  //     .then((res) => {
+  //       res.data.data.forEach((element, index) => {
+  //         res.data.data[index].booking_type = "Bus Ticket";
+  //       });
+  //       setBusTickets(res.data.data);
+  //       // setCommonTickets([...commonTickets, res.data.data])
+  //       setCommonTickets((prev) => [...prev, res.data.data]);
+  //       common();
+  //     })
+  //     .catch((e) => console.log(e));
+  // }, []);
 
   // hotel ticket api
   useEffect(() => {
     axios
       .get(API_PATH + `/api/v2/booking/search?mobile=${mobile}`)
       .then((res) => {
-        res.data.data.forEach((element, index) => {
-          res.data.data[index].date = element.check_in;
-          res.data.data[index].booking_Id = element.booking_id;
-          res.data.data[index].booking_type = "Hotel Ticket";
-          if (element.hotel_id) {
-            res.data.data[index].name = element.hotel_id.hotel_name;
-          } else {
-            delete res.data.data[index];
-          }
-        });
-        setHotelTickets(res.data.data);
-        setCommonTickets((prev) => [...prev, res.data.data]);
-        common();
-      })
-      .catch((e) => console.log(e));
-  }, []);
+        // console.log('busticket', res.data.busticket)
+        // console.log('res.data', res.data.hotel_bookings)
+        console.log('res.data', res.data.package_bookings)
+        let ticketArray = [];
+        res.data.busticket.map(element => ticketArray.push({
+          date:element?.date || '',
+          booking_type: "Bus Ticket",
+          booking_Id: element?.booking_Id || '',
+          name: element?.name || '',
+          amount: element?.amount || '',
+          status: element?.status || ''
+        }))
 
-  bothTickets = commonTickets.flat();
+        res.data.hotel_bookings.map(element => ticketArray.push({
+          date:element?.check_in || '',
+          booking_type: "Hotel Ticket",
+          booking_Id: element?.booking_id || '',
+          name: element?.email || '',
+          amount: element?.amount || '',
+          status: element?.status || ''
+        }))
 
-  const common = (bothTickets) => {
-    if (bothTickets && bothTickets.length) {
-      bothTickets = bothTickets.sort(function (a, b) {
-        return (
-          Date.parse(new Date(b.date.split("/").reverse().join("-"))) -
-          Date.parse(new Date(a.date.split("/").reverse().join("-")))
-        );
-      });
-    }
-  };
+        res.data.package_bookings.map(element => ticketArray.push({
+          date:element?.start_date || '',
+          booking_type: "Package Ticket",
+          booking_Id: element?.booking_Id || '',
+          name: element?.email || '',
+          amount: element?.amount || '',
+          status: element?.status || ''
+        }))
+        
+        if(ticketArray.length){
+          bothTickets = ticketArray.sort(function (a, b) {
+            return (
+              Date.parse(new Date(b.date.split("/").reverse().join("-"))) -
+              Date.parse(new Date(a.date.split("/").reverse().join("-")))
+            );
+          });
+        }
+        setCommonTickets(bothTickets)
+        // common();
+      }).catch((e) => console.log(e));
+  }, [])
+
+  // bothTickets = commonTickets.flat();
+
+  // const common = (commonTickets) => {
+  //   if (commonTickets && commonTickets.length) {
+  //     bothTickets = commonTickets.sort(function (a, b) {
+  //       return (
+  //         Date.parse(new Date(b.date.split("/").reverse().join("-"))) -
+  //         Date.parse(new Date(a.date.split("/").reverse().join("-")))
+  //       );
+  //     });
+  //     console.log('object :>> ', bothTickets);
+  //   }
+  // };
+  
 
   return (
     <>
@@ -230,26 +259,18 @@ function BookingProfile() {
                   </tr>
                 </thead>
                 <tbody>
-                  {bothTickets?.map((item, index) => {
+                  {commonTickets?.map((item, index) => {
                     return (
                       <tr>
                         <td className="text-center">{item?.booking_Id}</td>
                         <td className="text-center">{item.booking_type}</td>
                         <td className="text-center">{item.name}</td>
-                        <td className="text-center">
-                          {moment(item?.date).format("DD-MM-YYYY")}
-                        </td>
+                        <td className="text-center">{moment(item?.date).format("DD-MM-YYYY")}</td>
                         <td className="text-center">{item?.amount}</td>
                         <td className="text-center">
-                          {item.check_in ? (
-                             <Link to={`/bus-detail/${item?.booking_Id}`}>
-                              View Ticket
-                            </Link>
-                          ) : (
-                            <Link to={`/bus-detail/${item?.booking_Id}`}>
-                              View Ticket
-                            </Link>
-                          )}
+                        {item.booking_type === 'Bus Ticket' ? <Link to={`/bus-detail/${item?.booking_Id}`}>View Ticket</Link> : ''}
+                        {item.booking_type === 'Hotel Ticket' ? <Link to={`/hotel-details-book/${item?.booking_Id}`}>View Ticket</Link> : ''}
+                        {item.booking_type === 'Package Ticket' ? <Link to={`/packages-detail/${item?.booking_Id}`}>View Ticket</Link> : ''}
                         </td>
                         <td className="text-center">Reserved</td>
                       </tr>
