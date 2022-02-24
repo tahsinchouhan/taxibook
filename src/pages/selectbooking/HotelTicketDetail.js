@@ -141,7 +141,7 @@ function HotelTicketDetail() {
                   Name :{" "}
                 </div>{" "}
                 <div className="col-md-8" style={{ paddingLeft: "10px" }}>
-                  {apiData?.customer_id?.name || ""}
+                  {apiData?.full_name || ""}
                 </div>
               </div>
               <div className="row mb-1">
@@ -191,7 +191,7 @@ function HotelTicketDetail() {
             <div className="dm__entry_card_two1 d-flex flex-column justify-content-center">
               <div className="row mb-1">
                 <div className="col-md-5" style={{ fontWeight: "bolder" }}>Hotel Name</div>
-                <div className="col-md-7" style={{ paddingLeft: "10px" }}>{apiData?.hotel_id}</div>
+                <div className="col-md-7" style={{ paddingLeft: "10px" }}>{apiData?.hotel_id?.hotel_name}</div>
               </div>
               <div className="row mb-1">
                 <div className="col-md-5" style={{ fontWeight: "bolder" }}>

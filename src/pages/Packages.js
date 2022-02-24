@@ -73,7 +73,8 @@ function Packages() {
       const res = await fetch(`${API_PATH}/api/v1/packages/list?${type}=true`);
       const json = await res.json();
       // console.log(json);
-      setPackages(json.data);
+      setPackages(json.data.filter(elem => elem.package_type === 0));
+      // setPackages(json.data);
     } catch (error) {
       console.log(error);
     }

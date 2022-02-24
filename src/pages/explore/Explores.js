@@ -150,7 +150,8 @@ const Explores = () => {
         .then((response) => response.json())
         .then((json) => {
           if (json.data !== undefined) {
-            setPackages(json.data);
+           const pkg = json.data.length && json.data.filter(elem => elem.package_type === 1);
+            setPackages(pkg);
           }
         })
         .catch((e) => console.log(e));
@@ -168,7 +169,8 @@ const Explores = () => {
         .then((response) => response.json())
         .then((json) => {
           if (json.data !== undefined) {
-            setPackages(json.data);
+            const pkg = json.data.length && json.data.filter(elem => elem.package_type === 1);
+            setPackages(pkg);
           }
         })
         .catch((e) => console.log(e));
@@ -319,9 +321,9 @@ const Explores = () => {
                           </h6> */}
                         </div>
                         <div>
-                          <small className="packages__block-subtitle">
+                          {/* <small className="packages__block-subtitle">
                             ₹ {item.price}
-                          </small>
+                          </small> */}
                         </div>
                       </div>
                     </div>

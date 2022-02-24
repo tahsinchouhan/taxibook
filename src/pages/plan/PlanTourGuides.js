@@ -28,7 +28,8 @@ const PlanTourGuides = () => {
         `${API_PATH}/api/v1/packages/list?category=${TourGuides}`
       );
       const json = await res.json();
-      setPackages(json.data);
+      // setPackages(json.data);
+      setPackages(json.data.filter(elem => elem.package_type === 0));
     } catch (error) {
       console.log(error);
     }

@@ -28,7 +28,7 @@ const PlanHomeStays = () => {
         `${API_PATH}/api/v1/packages/list?category=${Homestays}`
       );
       const json = await res.json();
-      setPackages(json.data);
+      setPackages(json.data.filter(elem => elem.package_type === 0));
     } catch (error) {
       console.log(error);
     }
