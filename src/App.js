@@ -35,6 +35,8 @@ import BookingConformation from "./pages/explore/BookingConfirmation";
 import CheckOutBook from "./pages/explore/checkoutBooking";
 import BookingPayment from "./pages/explore/BookingPayement";
 import CovidResponse from "./Footer/CovidResponse";
+import CabOperator from "./Footer/CabOperator";
+import TourOperator from "./Footer/TourOperator";
 import RegistrationGuide from "./Footer/RegistrationGuide";
 import DmPass from "./pages/dm pass/DmPass";
 import Locations from "./pages/dm pass/Locations";
@@ -122,6 +124,8 @@ function App() {
             <Route path="/bookpayement" component={BookingPayment} />
             <Route path="/packages_details/:name" component={PackagesDetails} />
             <Route path="/covidresponse" component={CovidResponse} />
+            <Route path="/tour-operator" component={TourOperator} />
+            <Route path="/cab-operator" component={CabOperator} />
             <Route path="/registrationguide" component={RegistrationGuide} />
             <Route path="/registration" component={Registration} />
             <Route exact path="/booking" component={BusPass} />

@@ -139,50 +139,36 @@ function BookingProfile() {
       >
         <div className="container">
           <div className="row mt-5">
-            <div className="col-md-4 ">
-              <Card className="w-50 ">
+            <div className="col-md-4">
+              <Card className="w-100">
                 <Card.Img
                   variant="top"
                   src={men}
                   alt="men"
-                  className="w-75 mt-3 mx-4 rounded"
+                  className="p-2 rounded"
                 />
-                <div
-                  className="d-flex justify-content-end "
-                  style={{
-                    position: "absolute",
-                    left: "85%",
-                    top: "31%",
-                    color: "#10c910",
-                  }}
-                >
-                  <FaPencilAlt />
-                </div>
-
                 <Card.Title
                   className="h6 text-center mt-3 "
                   style={{ fontWeight: "bolder", fontSize: "14px" }}
                 >
-                  {profile?.data?.name}
+                <FaPencilAlt style={{color: "#10c910"}} />  {profile?.data?.name}
                 </Card.Title>
                 <Card.Body>
                   <Card.Text>
                     <div className="border-bottom pb-2">
-                      <div className="d-flex">
-                        <FaIdCardAlt className="mx-3 icons-1" />
-
-                        <div style={{ fontSize: "12px", fontWeight: "600" }}>
-                          profile
+                      <div className="d-flex align-items-center">
+                        <FaIdCardAlt className="mx-3 icons-1" style={{ fontSize: "1rem" }} />
+                        <div style={{ fontSize: "1rem" }}>
+                          Profile
                         </div>
                       </div>
                     </div>
                   </Card.Text>
                   <Card.Text>
                     <div className="border-bottom pb-2">
-                      <div className="d-flex">
-                        <FaSuitcaseRolling className="mx-3 icons-1" />
-
-                        <div style={{ fontSize: "12px", fontWeight: "600" }}>
+                      <div className="d-flex align-items-center">
+                        <FaSuitcaseRolling className="mx-3 icons-1" style={{ fontSize: "1rem" }}/>
+                        <div style={{ fontSize: "1rem"}}>
                           Booking
                         </div>
                       </div>
@@ -191,10 +177,9 @@ function BookingProfile() {
 
                   <Card.Text>
                     <div className="border-bottom pb-2">
-                      <div className="d-flex">
-                        <FaSignInAlt className="mx-3 icons-1" />
-
-                        <div style={{ fontSize: "12px", fontWeight: "600" }}>
+                      <div className="d-flex align-items-center">
+                        <FaSignInAlt className="mx-3 icons-1" style={{ fontSize: "1rem" }} />
+                        <div style={{ fontSize: "1rem" }}>
                           Login Details
                         </div>
                       </div>
@@ -202,10 +187,9 @@ function BookingProfile() {
                   </Card.Text>
 
                   <Card.Text>
-                    <div className="d-flex">
-                      <FaSignOutAlt className="mx-3 icons-1" />
-
-                      <div style={{ fontSize: "12px", fontWeight: "600" }}>
+                    <div className="d-flex align-items-center">
+                      <FaSignOutAlt className="mx-3 icons-1" style={{ fontSize: "1rem" }}/>
+                      <div style={{ fontSize: "1rem" }}>
                         Logout
                       </div>
                     </div>
@@ -215,15 +199,8 @@ function BookingProfile() {
             </div>
             <div className="col-md-8 p-1">
               <div className="row">
-                <div className="col-md-6">
-                  <div className="row">
-                    <div className="col-md-2">
-                      <FaIdCardAlt style={{ color: "green" }} size="2x" />
-                    </div>
-                    <h2 className="col-md-10">Booking Details</h2>
-                  </div>
-                </div>
-                <div className=" col-md-6">
+                <h2 className="text-center text-md-start my-4 my-md-1"><FaIdCardAlt style={{ color: "green", fontSize:'40px' }} className="cart-alt-icon" /> Booking Details</h2>
+                {/* <div className=" col-md-6">
                   <div className="row">
                     <RangePicker className="col-md-9" />
                     <Dropdown className="col-md-3">
@@ -244,40 +221,42 @@ function BookingProfile() {
                       </Dropdown.Menu>
                     </Dropdown>
                   </div>
-                </div>
+                </div> */}
               </div>
-              <Table bordered hover className="card-table table" size="md">
-                <thead>
-                  <tr>
-                    <th className="text-center">Booking id</th>
-                    <th className="text-center">Booking type</th>
-                    <th className="text-center">Name</th>
-                    <th className="text-center">Date</th>
-                    <th className="text-center">Amount</th>
-                    <th className="text-center">View Ticket</th>
-                    <th className="text-center">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {commonTickets?.map((item, index) => {
-                    return (
-                      <tr>
-                        <td className="text-center">{item?.booking_Id}</td>
-                        <td className="text-center">{item.booking_type}</td>
-                        <td className="text-center">{item.name}</td>
-                        <td className="text-center">{moment(item?.date).format("DD-MM-YYYY")}</td>
-                        <td className="text-center">{item?.amount}</td>
-                        <td className="text-center">
-                        {item.booking_type === 'Bus Ticket' ? <Link to={`/bus-detail/${item?.booking_Id}`}>View Ticket</Link> : ''}
-                        {item.booking_type === 'Hotel Ticket' ? <Link to={`/hotel-details-book/${item?.booking_Id}`}>View Ticket</Link> : ''}
-                        {item.booking_type === 'Package Ticket' ? <Link to={`/packages-detail/${item?.booking_Id}`}>View Ticket</Link> : ''}
-                        </td>
-                        <td className="text-center">Reserved</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </Table>
+              <div className="table-responsive">
+                <Table bordered hover className="card-table table" size="md">
+                  <thead>
+                    <tr>
+                      <th className="text-center">Booking id</th>
+                      <th className="text-center">Booking type</th>
+                      <th className="text-center">Name</th>
+                      <th className="text-center">Date</th>
+                      <th className="text-center">Amount</th>
+                      <th className="text-center">View Ticket</th>
+                      <th className="text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {commonTickets?.map((item, index) => {
+                      return (
+                        <tr>
+                          <td className="text-center">{item?.booking_Id}</td>
+                          <td className="text-center">{item.booking_type}</td>
+                          <td className="text-center">{item.name}</td>
+                          <td className="text-center">{moment(item?.date).format("DD-MM-YYYY")}</td>
+                          <td className="text-center">{item?.amount}</td>
+                          <td className="text-center">
+                          {item.booking_type === 'Bus Ticket' ? <Link to={`/bus-detail/${item?.booking_Id}`}>View Ticket</Link> : ''}
+                          {item.booking_type === 'Hotel Ticket' ? <Link to={`/hotel-details-book/${item?.booking_Id}`}>View Ticket</Link> : ''}
+                          {item.booking_type === 'Package Ticket' ? <Link to={`/packages-detail/${item?.booking_Id}`}>View Ticket</Link> : ''}
+                          </td>
+                          <td className="text-center">Reserved</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </Table>
+              </div>
             </div>
           </div>
         </div>

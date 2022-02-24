@@ -26,11 +26,24 @@ function Footer() {
                   </Link>
                 </div>
                 <div className="footer__item">
+                  <Link to="/cab-operator" className="link">
+                    <h5 className="footer__item-title"> Cab Operator</h5>
+                    <small>View cab operator Details</small>
+                  </Link>
+                </div>
+                <div className="footer__item">
+                  <Link to="/tour-operator" className="link">
+                    <h5 className="footer__item-title"> Tour Operator</h5>
+                    <small>View tout operator Details</small>
+                  </Link>
+                </div>
+
+                {/* <div className="footer__item">
                   <Link to="/covidresponse" className="link">
                     <h5 className="footer__item-title"> Covid-19 Response</h5>
                   </Link>
                   <small>Health and Safety Update</small>
-                </div>
+                </div> */}
                 <div className="footer__item">
                   <Link to="/covidresponse" className="link">
                     <h5 className="footer__item-title">Booking Details</h5>

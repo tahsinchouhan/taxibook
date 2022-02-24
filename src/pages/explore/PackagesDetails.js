@@ -262,13 +262,14 @@ const PackagesDetails = (props) => {
       <Container className="mb-5 pb-5">
         {/* 0 package_type Booking , 1 package_type info */}
         {packages?.package_type === 0 && (
+          <>
           <div>
             <h4 className="block__title mt-5">
               <span>Price</span>
             </h4>
             <h5 className="price__title pt-3 mb-1">₹{packages.price}</h5>
           </div>
-        )}
+         
         <p>{packages.duration}</p>
 
         <button
@@ -285,7 +286,8 @@ const PackagesDetails = (props) => {
           handleModal={setShowFormModal}
           user_data={user_data}
         />
-
+       </>
+      )}
         <div className="block pt-5">
           <h4 className="block__title">
             <span>Location</span>

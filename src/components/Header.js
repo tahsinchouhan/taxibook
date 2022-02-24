@@ -27,6 +27,7 @@ import audioIcon from "../assets/icons/event.svg";
 import experienceIcon from "../assets/icons/experienceActive.svg";
 import exploreIcon from "../assets/icons/exploreActive.svg";
 import planIcon from "../assets/icons/planActive.svg";
+import blog from "../assets/icons/blog.svg";
 import supportIcon from "../assets/icons/supportActive.svg";
 
 import { logout } from "../redux/actions";
@@ -154,19 +155,19 @@ function Header({ showSignUpModal }) {
           <Offcanvas.Header style={{ flexDirection: "row-reverse" }}>
             <HiMenu onClick={handleClose} className="sidebar__toggler" />
             {user_data !== null ? (
-              <Offcanvas.Title>
+              <Offcanvas.Title  style={{maxWidth:'80%'}}>
                 <Dropdown
                   style={{
                     backgroundColor: "transparent",
                     borderColor: "transparent",
                   }}
                 >
-                  <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  <Dropdown.Toggle variant="success" id="dropdown-basic" style={{width:'100%', overflow:'hidden'}}>
                     <Button
                       className="btn btn-success"
                       style={{ padding: "2px 10px" }}
                     >
-                      Hi,<span>{profile?.data?.name}</span>
+                      Hi,<span>{user_data?.user?.name || profile?.data?.name}</span>
                     </Button>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
@@ -189,48 +190,56 @@ function Header({ showSignUpModal }) {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="me-auto sidebar__nav">
-              <a onClick={() => modalHadler()} className="sidebar__navlink">
+            {
+              !user_data && <a onClick={() => modalHadler()} className="sidebar__navlink">
                 <Image src={loginIcon} alt="login" />
-                <span style={{ left: "76px", position: "absolute" }}>
+                <span style={{ left: "60px", position: "absolute" }}>
                   LOGIN
                 </span>
               </a>
+            }
               <NavLink to="/" className="sidebar__navlink">
                 <Image src={homeIcon} alt="home" />
-                <span style={{ left: "76px", position: "absolute" }}>HOME</span>
+                <span style={{ left: "60px", position: "absolute" }}>HOME</span>
               </NavLink>
               <NavLink className="sidebar__navlink" to="/explore">
                 <Image src={exploreIcon} alt="explore" />
-                <span style={{ left: "76px", position: "absolute" }}>
+                <span style={{ left: "60px", position: "absolute" }}>
                   EXPLORE
                 </span>
               </NavLink>
               <NavLink className="sidebar__navlink" to="/curatedexperiences">
                 <Image src={experienceIcon} alt="experience" />
-                <span style={{ left: "76px", position: "absolute" }}>
+                <span style={{ left: "60px", position: "absolute" }}>
                   EXPERIENCE
                 </span>
               </NavLink>
               <NavLink className="sidebar__navlink" to="/plan">
                 <Image src={planIcon} alt="plan" />
-                <span style={{ left: "76px", position: "absolute" }}>PLAN</span>
+                <span style={{ left: "60px", position: "absolute" }}>PLAN</span>
               </NavLink>
               <NavLink className="sidebar__navlink" to="/audioJourney">
                 <Image src={audioIcon} alt="audio" />
-                <span style={{ left: "76px", position: "absolute" }}>
+                <span style={{ left: "60px", position: "absolute" }}>
                   AUDIO JOURNEYS
                 </span>
               </NavLink>
-              <a
-                className="sidebar__navlink"
-                href="https://api.whatsapp.com/send/?phone=+916267020580&text&app_absent=0"
-              >
+              <NavLink className="sidebar__navlink" to={{ pathname: "https://blog.travelbastar.com" }} target="_blank">
+                <Image src={blog} alt="plan" width={25} />
+                <span style={{ left: "60px", position: "absolute" }}>BLOG</span>
+              </NavLink>
+              <NavLink className="sidebar__navlink" to={{ pathname: "https://api.whatsapp.com/send/?phone=+916267020580&text&app_absent=0" }} target="_blank">
                 <Image src={supportIcon} alt="support" />
-                <span style={{ left: "76px", position: "absolute" }}>
-                  SUPPORT
-                </span>
-              </a>
+                <span style={{ left: "60px", position: "absolute" }}>SUPPORT</span>
+              </NavLink>
 
+
+              <NavLink className="sidebar_links" to="/cab-operator">
+                Cab Operator
+              </NavLink>
+              <NavLink className="sidebar_links" to="/tour-operator">
+                Tour Operator
+              </NavLink>
               <NavLink className="sidebar_links" to="/covidresponse">
                 About Us
               </NavLink>
@@ -315,7 +324,7 @@ function Header({ showSignUpModal }) {
                           className="btn btn-success"
                           style={{ padding: "2px 10px" }}
                         >
-                          Hi,<span>{profile?.data?.name}</span>
+                        <span>{user_data?.user?.name || profile?.data?.name}</span>
                         </Button>
                       </Dropdown.Toggle>
                       <Dropdown.Menu>

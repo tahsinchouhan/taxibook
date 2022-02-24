@@ -79,21 +79,19 @@ function LoginModal({ show, handleClose }) {
     if(signup_success_data.code){
       if (signup_success_data?.code === 403) {
         if(signup_success_data?.message === 'Mobile Already Existed'){
-          toast.error(signup_success_data?.message);
-          setFlag(0);
+            toast.error(signup_success_data?.message);
+            setFlag(0);
         }else if(signup_success_data?.message === 'Email Already Existed'){
-          toast.error(signup_success_data?.message);
-          setFlag(1);
+            toast.error(signup_success_data?.message);
+            setFlag(1);
         }else{
-          toast.error(signup_success_data?.message);
+            toast.error(signup_success_data?.message);
         }
-       
       } else {
-        toast.success("OTP SENT SUCCESSFULLY");
-        setFlag(5);
+          toast.success("OTP SENT SUCCESSFULLY");
+          setFlag(5);
       }
     }
-    
   }, [signup_success_data]);
 
  

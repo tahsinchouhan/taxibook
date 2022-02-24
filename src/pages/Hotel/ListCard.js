@@ -474,7 +474,7 @@ function ListCard(dates, props) {
                             >
                               View Details
                             </div>
-                            <div
+                            {/* <div
                               className="train-seats  d-flex justify-content-center "
                               onClick={() => bookNow(item.room_data._id)}
                               style={{
@@ -489,7 +489,7 @@ function ListCard(dates, props) {
                               }}
                             >
                               Book Now
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>
@@ -775,7 +775,7 @@ function ListCard(dates, props) {
                           >
                             View Details
                           </span>
-                          <span
+                          {/* <span
                             className="train-seats  d-flex justify-content-center "
                             onClick={() => bookNow(item._id)}
                             style={{
@@ -787,7 +787,7 @@ function ListCard(dates, props) {
                             }}
                           >
                             Book Now
-                          </span>
+                          </span> */}
                         </div>
                         {/* <br />
                         <hr /> */}

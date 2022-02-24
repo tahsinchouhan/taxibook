@@ -16,7 +16,7 @@ import { API_PATH } from "../../Path/Path";
 
 function BusBookingDetail() {
   const { id } = useParams();
-  const { user_data } = useSelector((state) => state.loginReducer);
+  // const { user_data } = useSelector((state) => state.loginReducer);
 
   const history = useHistory();
   const [apiData, setApiData] = useState([]);
@@ -96,79 +96,56 @@ function BusBookingDetail() {
 
   return (
     <>
-      <iframe
-        id="ifmcontentstoprint"
-        title="ifmcontentstoprint"
-        style={{ height: "0px", width: "0px", position: "absolute" }}
-      ></iframe>
+      {/* <iframe id="ifmcontentstoprint" title="ifmcontentstoprint" style={{ height: "0px", width: "0px", position: "absolute" }}></iframe> */}
       <div className="d-block package-ticket-page">
         <Header />
         {loading === false && notFound === false ? (
-          <div
-            className="package-ticket-page"
-            id="divcontents"
-            ref={componentRef}
-          >
-            <div className="card mb-4 bg-white">
-              <div
-                style={{
-                  width: "40px",
-                  height: "30px",
-                }}
-              >
-                <img src={ticket} alt="ticketIcon" />
+          <div className="package-ticket-page" id="divcontents" ref={componentRef}>
+
+            <div className="card mb-1 bg-white">
+              <div style={{width: "100px",height: "70px"}}>
+                <img src={ticket} alt="ticketIcon" style={{minWidth: "100%",maxHeight: "100%"}} />
               </div>
-              <h3 style={{ color: "#0fa453" }}>Package</h3>
-              <p style={{ margin: 0 }}>
-                That will take you to your favourite destinations
-              </p>
+              <h3>Package</h3>
+              <p style={{ margin: 0 }}>That will take you to your favourite destinations</p>
             </div>
 
-            <div className="qr-code">
-              <img src={qrImage} alt="" width={250} />
-            </div>
+            <div className="qr-code border mb-2"><img src={qrImage} alt="qr-code" width={200} /></div>
 
             {/* Pass Detail + Pass ID */}
-            <div
-              className="card mb-5 ticket-width"
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-around",
-                width: "35%",
-              }}
-            >
+            <div className="card mb-5 ticket-width d-flex flex-row gap-1 gap-md-5 text-center text-md-start">
               <div>
                 <h3>Pass Detail</h3>
                 <div>Package Booking Id</div>
               </div>
               <div>
-                <h3 style={{ color: "#0fa453" }}>Pass ID</h3>
+                <h3>Pass ID</h3>
                 <div>{apiData.booking_Id}</div>
               </div>
             </div>
 
             <h2>Package Details</h2>
-            <div className="card" style={{ textAlign: "center" }}>
+            <div className="card mb-5 ticket-width personal-details">
               <div>
                 <div className="d-flex">
-                  <div style={{ width: "50%" }}>
+                  <div className="w-50 float-start">
                     <p>Name</p>
                     <h2>{apiData.package_name}</h2>
                   </div>
 
-                  <div style={{ width: "50%" }}>
+                  <div className="w-50 text-end">
                     <p>Price</p>
-                    <h2 style={{ color: "#0fa453" }}>₹{apiData.price}</h2>
+                    <h2>₹ {apiData.price}</h2>
                   </div>
                 </div>
 
                 <div className="d-flex">
-                  <div style={{ width: "50%" }}>
+                  <div className="w-50 float-start">
                     <p>Start Date</p>
                     <h2>{apiData.start_date.toString().slice(0, 10)}</h2>
                   </div>
 
-                  <div style={{ width: "50%", marginLeft: "1rem" }}>
+                  <div className="w-50 text-end">
                     <p>End Date</p>
                     <h2>{apiData.end_date.toString().slice(0, 10)}</h2>
                   </div>
@@ -176,8 +153,9 @@ function BusBookingDetail() {
               </div>
             </div>
 
+            <h2 style={{ fontSize: "1.1rem" }}>Traveller Details</h2>
             <div
-              className="card mt-5 mb-5 ticket-width personal-details"
+              className="card mb-5 ticket-width personal-details gap-4 gap-md-1"
               style={{
                 flexDirection: "row",
                 width: "44%",
@@ -186,7 +164,7 @@ function BusBookingDetail() {
               }}
             >
               <div>
-                <h2 style={{ fontSize: "1.1rem" }}>Traveller Details</h2>
+              <h2 style={{ fontSize: "1.1rem" }}>Customer Details</h2>
                 {/* name, email, mobile, no. of travellers */}
                 <p>Name</p>
                 <h2>{apiData?.customer_id?.name || ''}</h2>

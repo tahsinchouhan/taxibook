@@ -21,6 +21,8 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
 
+  month = month > 9 ? month : '0' + month;
+
   let today = `${year}-${month}-${day}`;
 
   const [startDate, setStartDate] = useState(today);
@@ -129,6 +131,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
                             <Form.Label>Start Date</Form.Label>
                             <Form.Control
                               type="date"
+                              min={today} 
                               {...register("startDate", {
                                 required: "Please enter date in this field",
                               })}
@@ -162,6 +165,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
                             <Form.Label>End Date</Form.Label>
                             <Form.Control
                               type="date"
+                              min={today} 
                               {...register("endDate", {
                                 required: "Please enter date in this field",
                               })}
