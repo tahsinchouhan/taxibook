@@ -133,143 +133,129 @@ function HotelTicketDetail() {
             TRAVELLER DETAILS
           </div>
         
-            <div className="card">
-              
-              <div className="dm__traveller_div1 card px-4" style={{alignItems:'initial'}}>
-                <div className="dm__entry_card_two1">
-                  <div className="row mb-1">
-                    {" "}
-                    <div className="col-md-4" style={{ fontWeight: "bolder" }}>
-                      Name :{" "}
-                    </div>{" "}
-                    <div className="col-md-8" style={{ paddingLeft: "10px" }}>
-                      {apiData?.customer_id?.name || ""}
-                    </div>
-                  </div>
-                  <div className="row mb-1">
-                    {" "}
-                    <div
-                      className="col-md-4"
-                      style={{ fontWeight: "bolder" }}
-                    >
-                      Mobile :{" "}
-                    </div>{" "}
-                    <div className="col-md-8" style={{ paddingLeft: "10px" }}>
-                      {apiData?.mobile || ""}
-                    </div>
-                  </div>
-                  <div className="row mb-1">
-                    {" "}
-                    <div
-                      className="col-md-4"
-                      style={{ fontWeight: "bolder" }}
-                    >
-                      Email :{" "}
-                    </div>{" "}
-                    <div className="col-md-8" style={{ paddingLeft: "10px" }}>
-                      {apiData?.email || ""}
-                    </div>
-                  </div>
-                  <div className="row mb-1">
-                    {" "}
-                    <div
-                      className="col-md-4"
-                      style={{ fontWeight: "bolder" }}
-                    >
-                      Aadhar :{" "}
-                    </div>{" "}
-                    <div className="col-md-8" style={{ paddingLeft: "10px" }}>
-                      Aadhar will be here
-                    </div>
+          <div className="card ticket-width" style={{minWidth:'35%', alignItems:'initial'}}>
+            <div className="dm__entry_card_two1 d-flex flex-column justify-content-center">
+              <div className="row mb-1">
+                {" "}
+                <div className="col-md-4" style={{ fontWeight: "bolder" }}>
+                  Name :{" "}
+                </div>{" "}
+                <div className="col-md-8" style={{ paddingLeft: "10px" }}>
+                  {apiData?.customer_id?.name || ""}
+                </div>
+              </div>
+              <div className="row mb-1">
+                {" "}
+                <div
+                  className="col-md-4"
+                  style={{ fontWeight: "bolder" }}
+                >
+                  Mobile :{" "}
+                </div>{" "}
+                <div className="col-md-8" style={{ paddingLeft: "10px" }}>
+                  {apiData?.mobile || ""}
+                </div>
+              </div>
+              <div className="row mb-1">
+                {" "}
+                <div
+                  className="col-md-4"
+                  style={{ fontWeight: "bolder" }}
+                >
+                  Email :{" "}
+                </div>{" "}
+                <div className="col-md-8" style={{ paddingLeft: "10px" }}>
+                  {apiData?.email || ""}
+                </div>
+              </div>
+              <div className="row mb-1">
+                {" "}
+                <div
+                  className="col-md-4"
+                  style={{ fontWeight: "bolder" }}
+                >
+                  Aadhar :{" "}
+                </div>{" "}
+                <div className="col-md-8" style={{ paddingLeft: "10px" }}>
+                  Aadhar will be here
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="dm__title my-4">
+            ENTRY TICKET DETAILS
+          </div>
+          
+          <div className="card mb-4 py-0 ticket-width" style={{minWidth:'40%', alignItems:'initial'}}>
+            <div className="dm__entry_card_two1 d-flex flex-column justify-content-center">
+              <div className="row mb-1">
+                <div className="col-md-5" style={{ fontWeight: "bolder" }}>Hotel Name</div>
+                <div className="col-md-7" style={{ paddingLeft: "10px" }}>{apiData?.hotel_id}</div>
+              </div>
+              <div className="row mb-1">
+                <div className="col-md-5" style={{ fontWeight: "bolder" }}>
+                  Location :
+                </div>
+                <div className="col-md-7" style={{ paddingLeft: "10px" }}>
+                  {apiData?.hotel_id?.address}
+                </div>
+              </div>
+              <div className="row mb-1">
+                <div
+                  className="col-md-5"
+                  style={{ fontWeight: "bolder" }}
+                >
+                  Check-In-Date:
+                </div>
+                <div className="col-md-7" style={{ paddingLeft: "10px" }}>
+                {apiData?.check_in?.split('T')[0].split("-").reverse().join("-") || ''}
+                  {/* {`${apiData?.check_in?.toLocaleDateString("en-US", {
+                    day: "numeric",
+                  })} `} */}
+                  {/* {`${apiData?.check_in?.toLocaleDateString("en-US", {
+                    month: "short",
+                  })} `}
+                  {`${apiData?.check_in?.toLocaleDateString("en-US", {
+                    year: "numeric",
+                  })} `} */}
+                </div>
+              </div>
+              <div className="row mb-1">
+                <div className="col-md-5" style={{ fontWeight: "bolder" }}>Check-Out-Date:</div>
+                <div className="col-md-7" style={{ paddingLeft: "10px" }}>
+                {apiData?.check_out?.split('T')[0].split("-").reverse().join("-") || ''}
+                  {/* {`${apiData?.check_out?.toLocaleDateString("en-US", {
+                    day: "numeric",
+                  })} `}
+                  {`${apiData?.check_out?.toLocaleDateString("en-US", {
+                    month: "short",
+                  })} `}
+                  {`${apiData?.check_out?.toLocaleDateString("en-US", {
+                    year: "numeric",
+                  })} `} */}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="dm__title">
+            AMOUNT PAID
+          </div>
+          
+            <div className="card mt-4 py-0 ticket-width" style={{minWidth:'40%', alignItems:'initial'}}>
+              <div className="dm__entry_div1">
+                <div className="dm__entry_card row">
+                  <div className="col-md-6 dm__title1">Total Amount :</div>
+                  <div className="col-md-4">
+                    ₹ {apiData?.amount}
+                    {/* <hr style={{ color: "black" }} />
+                    ₹ {Setdata?.total_amount} */}
                   </div>
                 </div>
               </div>
             </div>
-            <Row>
-              <Col className="dm__title" xs={12}>
-                ENTRY TICKET DETAILS
-              </Col>
-              <Col className="dm__entry_div" xs={12}>
-                <div className="dm__entry_card_two">
-                  <div className="row mb-1">
-                    {" "}
-                    <div
-                      className="col-md-4"
-                      style={{ fontWeight: "bolder" }}
-                    >
-                      Hotel Name :{}
-                    </div>{" "}
-                    <div className="col-md-8" style={{ paddingLeft: "10px" }}>
-                      {Setdata?.basic_details?.hotel_id?.hotel_name}
-                    </div>
-                  </div>
-                  <div className="row mb-1">
-                    {" "}
-                    <div
-                      className="col-md-4"
-                      style={{ fontWeight: "bolder" }}
-                    >
-                      Location :{" "}
-                    </div>{" "}
-                    <div className="col-md-8" style={{ paddingLeft: "10px" }}>
-                      {Setdata?.basic_details?.hotel_id?.address}
-                    </div>
-                  </div>
-                  <div className="row mb-1">
-                    <div
-                      className="col-md-4"
-                      style={{ fontWeight: "bolder" }}
-                    >
-                      Check-In-Date:
-                    </div>
-                    <div className="col-md-8" style={{ paddingLeft: "10px" }}>
-                      {`${Setdata?.startDate?.toLocaleDateString("en-US", {
-                        day: "numeric",
-                      })} `}
-                      {`${Setdata?.startDate?.toLocaleDateString("en-US", {
-                        month: "short",
-                      })} `}
-                      {`${Setdata?.startDate?.toLocaleDateString("en-US", {
-                        year: "numeric",
-                      })} `}
-                    </div>
-                  </div>
-                  <div className="row mb-1">
-                    <div
-                      className="col-md-4"
-                      style={{ fontWeight: "bolder" }}
-                    >
-                      Check-Out-Date:
-                    </div>
-                    <div className="col-md-8" style={{ paddingLeft: "10px" }}>
-                      {`${Setdata?.endDate?.toLocaleDateString("en-US", {
-                        day: "numeric",
-                      })} `}
-                      {`${Setdata?.endDate?.toLocaleDateString("en-US", {
-                        month: "short",
-                      })} `}
-                      {`${Setdata?.endDate?.toLocaleDateString("en-US", {
-                        year: "numeric",
-                      })} `}
-                    </div>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col className="dm__title" xs={12}>
-                AMOUNT PAID
-              </Col>
-              <Col className="dm__entry_div" xs={12}>
-                <div className="dm__entry_card row">
-                  <div className="col-md-6 dm__title">Total Amount :</div>
-                  <div className="col-md-4 ">
-                    ₹ {Setdata?.total_amount}
-                    <hr style={{ color: "black" }} />₹ {Setdata?.total_amount}
-                  </div>
-                </div>
-              </Col>
-            </Row>
+
             <Row>
               <Col className="dm__footer_div" xs={12}>
                 <div className="d-flex justify-content-center align-items-center">
