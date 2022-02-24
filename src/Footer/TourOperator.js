@@ -13,7 +13,7 @@ const TourOperator = () => {
       <Container>
         <div className="visitors">
           <h1 className="header__title text__dark">
-            <span className="text__dark">For Tour Operator</span>
+            <span className="text__dark">Tour Operator's List</span>
           </h1>
           
           <div className="table-responsive">
@@ -167,7 +167,7 @@ const TourOperator = () => {
                   <td>22</td>
                   <td>Ravi Tour and Travels</td>
                   <td></td>
-                  <td>Aadawal, Jagdalpur, Chhattisgarh 494001</td>
+                  <td>Aahawal, Jagdalpur, Chhattisgarh 494001</td>
                 </tr>
                 <tr>
                   <td>23</td>
@@ -184,6 +184,7 @@ const TourOperator = () => {
                 </tr>
               </tbody>
             </table>
+            <p> Want to add your business contact <a href="tel:+917987300407"> <strong>7987300407</strong> </a></p>
           </div>
         </div>
       </Container>
