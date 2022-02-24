@@ -13,7 +13,7 @@ const CabOperator = () => {
       <Container>
         <div className="visitors">
           <h1 className="header__title text__dark">
-            <span className="text__dark">Cab Operator's List</span>
+            <span className="text__dark">Cab Operators List</span>
           </h1>
 
           <div className="table-responsive">

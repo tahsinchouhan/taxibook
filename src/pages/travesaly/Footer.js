@@ -27,13 +27,13 @@ function Footer() {
                 </div>
                 <div className="footer__item">
                   <Link to="/cab-operator" className="link">
-                    <h5 className="footer__item-title"> Cab Operator's List</h5>
+                    <h5 className="footer__item-title"> Cab Operators List</h5>
                     <small>View cab operators Details</small>
                   </Link>
                 </div>
                 <div className="footer__item">
                   <Link to="/tour-operator" className="link">
-                    <h5 className="footer__item-title"> Tour Operator's List</h5>
+                    <h5 className="footer__item-title"> Tour Operators List</h5>
                     <small>View tour operators Details</small>
                   </Link>
                 </div>

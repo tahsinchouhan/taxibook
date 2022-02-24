@@ -235,10 +235,10 @@ function Header({ showSignUpModal }) {
 
 
               <NavLink className="sidebar_links" to="/cab-operator">
-                Cab Operator's List
+                Cab Operator List
               </NavLink>
               <NavLink className="sidebar_links" to="/tour-operator">
-                Tour Operator's List
+                Tour Operator List
               </NavLink>
               <NavLink className="sidebar_links" to="/covidresponse">
                 About Us
