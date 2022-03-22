@@ -92,7 +92,7 @@ function* Otp({ payload }) {
           "customer_id",
           JSON.stringify(apiOtp.data.data.user._id)
         );
-        localStorage.setItem("apiOtp", JSON.stringify(apiOtp.data.data));
+        localStorage.setItem("user_data", JSON.stringify(apiOtp.data.data));
         yield put(setUser(apiOtp.data.data));
         localStorage.setItem("mobile", apiOtp.data.data.user.mobile);
         yield put(hideMessage());
