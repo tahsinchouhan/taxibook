@@ -48,7 +48,7 @@ const loginReducer = (state = INIT_STATE, action) => {
             }
         }
         case LOGIN_EMAIL: {
-            return { ...state,loading:true  }
+            return { ...state, loading:true  }
         }
         case LOGIN_EMAIL_SUCCESS: {
             return { ...state, email_data: action.payload,loading:false  }

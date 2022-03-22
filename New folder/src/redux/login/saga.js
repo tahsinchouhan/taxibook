@@ -54,6 +54,7 @@ const loginEmailAsync = async (payload) =>
 function* Email({ payload }) {
   try {
     const apiEmail = yield call(loginEmailAsync, payload);
+    console.log('apiEmail', apiEmail)
     yield put(loginEmailSuccess(apiEmail.data));
   } catch (error) {
     console.log(error);

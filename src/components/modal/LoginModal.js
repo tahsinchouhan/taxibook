@@ -156,6 +156,7 @@ function LoginModal({ show, handleClose }) {
 
   const loginEmailHandler = () => {
     dispatch(loginEmail({ email, password }));
+    
   };
 
   // for signupmobileNo
@@ -254,7 +255,8 @@ function LoginModal({ show, handleClose }) {
                             variant="dark"
                             onClick={fetchOtp}
                           >
-                            Send OTP
+                            {/* Send OTP */}
+                            Login
                           </Button>
                         </div>
                         <p

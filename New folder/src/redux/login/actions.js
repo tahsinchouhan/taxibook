@@ -49,7 +49,7 @@ export const logout = (value) => ({
 });
 
 export const loginEmail = (value) => {
-    console.log("valueEmail1",value)
+    console.log("valueEmail1", value)
     return {
     type: LOGIN_EMAIL,
     payload: value,
