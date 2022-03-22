@@ -76,6 +76,7 @@ function LoginModal({ show, handleClose }) {
   }, [show]);
 
   useEffect(() => {
+    console.log('signup_success_data', signup_success_data)
     if(signup_success_data.code){
       if (signup_success_data?.code === 403) {
         if(signup_success_data?.message === 'Mobile Already Existed'){
@@ -88,16 +89,18 @@ function LoginModal({ show, handleClose }) {
             toast.error(signup_success_data?.message);
         }
       } else {
-          toast.success("OTP SENT SUCCESSFULLY");
-          setFlag(5);
+          // toast.success("OTP SENT SUCCESSFULLY");
+          toast.success("REGISTRATION SUCCESSFULLY, PLEASE LOGIN NOW");
+          // setFlag(5);
+          setFlag(0);
       }
     }
-  }, [signup_success_data]);
+  }, [signup_success_data?.message]);
 
  
-
+console.log('apiData :>> ', apiData);
   useEffect(() => {
-    // console.log(apiData);
+    console.log('apiData', apiData);
     if (apiData !== undefined && apiData.length !== 0) {
       // toast.success("OTP Sent Successfully")
       setFlag(5);

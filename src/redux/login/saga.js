@@ -17,7 +17,7 @@ const OtpAsync = (mobile) =>
       mobile,
     })
     .then((response) => response)
-    .catch((error) => error);
+    .catch((error) => error.response);
 
 const fetchVerifyOtpAsync = async (payload) =>
   await axios
@@ -97,18 +97,17 @@ function* Otp({ payload }) {
         localStorage.setItem("mobile", apiOtp.data.data.user.mobile);
         yield put(hideMessage());
         // 
-
         yield put(getOtpSuccess(apiOtp.data));
       }else{
         yield put(getOtpError(apiOtp.data));
       }
     }
-    
    
   } catch (error) {
     yield put(getOtpError(error));
   }
 }
+
 function* fetchVerifyOtp({ payload }) {
   try {
     const user_data = yield call(fetchVerifyOtpAsync, payload);

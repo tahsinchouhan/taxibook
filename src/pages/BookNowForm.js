@@ -12,6 +12,20 @@ import { useForm } from "react-hook-form";
 import validator from "validator";
 import LoginModal from "../components/modal/LoginModal";
 
+async function loadScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+}
+
 const BookNowForm = ({ item, show, handleModal, user_data }) => {
   const history = useHistory();
 
@@ -51,9 +65,42 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
     });
   };
 
+  const displayRazorpaysss = async (values) => {
+    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+    // key: "rzp_test_DuapYrmQwcWLGy",
+    var options = {
+       key: "rzp_live_CpkoLmfTklzLb0",
+      //key: 'rzp_test_DuapYrmQwcWLGy',
+      currency: "INR",
+      amount: 100 * item?.price.toString() , //data?.amount.toString(),
+      // order_id: data.id,
+      name: "Aamcho Bastar",
+      description: "Thank You For Booking.",
+      image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
+
+      handler: function (response) {
+        if (response.razorpay_payment_id) {
+         
+        }
+      },
+      prefill: {
+        name: 'name',
+        email: item.email,
+        contact: 'number',
+      },
+    };
+    const paymentOpject = new window.Razorpay(options);
+    paymentOpject.open();
+  };
+
   const onSubmit = async (data) => {
     // console.log(user_data.user._id);
-
+    displayRazorpaysss(data)
+    return false;
     const body = JSON.stringify({
       packages_id: item._id,
       customer_id: user_data.user._id,
@@ -64,8 +111,6 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
       number_of_travellers: data.visitors,
       amount: item.price,
     });
-
-    console.log(body);
 
     try {
       const response = await fetch(`${API_PATH}/api/v1/packages/booking`, {
@@ -88,6 +133,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
       console.log(error);
     }
   };
+
 
   return (
     <>

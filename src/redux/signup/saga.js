@@ -18,7 +18,6 @@ const phone  = localStorage.getItem("mobileNo")
         password : payload.password,
       })
       .then((response) => {
-        console.log("response",response)
         return response})
       // .then((json) => json)
       .catch((error) => {
@@ -42,7 +41,6 @@ const phone  = localStorage.getItem("mobileNo")
       });
 
 function* SignUp( {payload}) {
-  console.log("payload",payload)
   try {
     const SignupData = yield call(Signup, payload);
     console.log(SignupData);
