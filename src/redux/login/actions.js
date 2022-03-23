@@ -14,7 +14,7 @@ import {
 export const getOtp = (value) => {
     return {
     type: GET_OTP,
-    payload: value,
+    payload: value, //string, array data , object data, boolean
 }};
 
 export const verifyOtp = (mobile,otp) => ({

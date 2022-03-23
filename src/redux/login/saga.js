@@ -54,20 +54,19 @@ const loginEmailAsync = async (payload) =>
 function* Email({ payload }) {
   try {
     const apiEmail = yield call(loginEmailAsync, payload);
-    console.log('apiEmail', apiEmail)
-
-    if (apiEmail.data) {
-      console.log('apiEmail :>> ', apiEmail.data.data);
-      localStorage.setItem(
-        "customer_id",
-        JSON.stringify(apiEmail.data.data.user._id)
-      );
-      localStorage.setItem("user_data", JSON.stringify(apiEmail.data.data));
-      yield put(setUser(apiEmail.data.data));
-      localStorage.setItem("mobile", apiEmail.data.data.user.mobile);
-      yield put(hideMessage());
-    } 
-
+    // "Ajay"
+    // if (apiEmail.data) {
+    //   console.log('apiEmail :>> ', apiEmail.data.data);
+    //   localStorage.setItem(
+    //     "customer_id",
+    //     JSON.stringify(apiEmail.data.data.user._id)
+    //   );
+    //   localStorage.setItem("user_data", JSON.stringify(apiEmail.data.data));
+    //   yield put(setUser(apiEmail.data.data));
+    //   localStorage.setItem("mobile", apiEmail.data.data.user.mobile);
+    //   yield put(hideMessage());
+    // } 
+    // 
     yield put(loginEmailSuccess(apiEmail.data));
   } catch (error) {
     
@@ -88,18 +87,18 @@ function* Otp({ payload }) {
     }else if(apiOtp.data){
       if(apiOtp.data.code === 200){
         // Ajay
-        localStorage.setItem(
-          "customer_id",
-          JSON.stringify(apiOtp.data.data.user._id)
-        );
-        localStorage.setItem("user_data", JSON.stringify(apiOtp.data.data));
-        yield put(setUser(apiOtp.data.data));
-        localStorage.setItem("mobile", apiOtp.data.data.user.mobile);
-        yield put(hideMessage());
+        // localStorage.setItem(
+        //   "customer_id",
+        //   JSON.stringify(apiOtp.data.data.user._id)
+        // );
+        // localStorage.setItem("user_data", JSON.stringify(apiOtp.data.data));
+        // yield put(setUser(apiOtp.data.data));
+        // localStorage.setItem("mobile", apiOtp.data.data.user.mobile);
+        // yield put(hideMessage());
         // 
         yield put(getOtpSuccess(apiOtp.data));
       }else{
-        yield put(getOtpError(apiOtp.data));
+        yield put(getOtpError(apiOtp.data.message));
       }
     }
    

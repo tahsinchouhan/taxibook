@@ -32,7 +32,6 @@ const loginReducer = (state = INIT_STATE, action) => {
             return { ...state, apiData: action.payload ,loading:false }
 
         case GET_OTP_ERROR:
-            console.log('error', action.payload)
             return { ...state, error: action.payload, loading:false, send_otp_error: action.payload }
 
         case GET_VERIFY_OTP_ERROR:

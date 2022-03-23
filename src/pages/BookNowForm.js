@@ -99,8 +99,8 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
 
   const onSubmit = async (data) => {
     // console.log(user_data.user._id);
-    displayRazorpaysss(data)
-    return false;
+    // displayRazorpaysss(data)
+    // return false;
     const body = JSON.stringify({
       packages_id: item._id,
       customer_id: user_data.user._id,

@@ -44,6 +44,7 @@ function LoginModal({ show, handleClose }) {
   const [mobile, setMobile] = useState("");
   const [OTP, setOTP] = useState("");
   const [showDiv, setShowDiv] = useState(false);
+  const [errorMesage, setErrorMesage] = useState('');
 
   const email_data = useSelector((state) => state.loginReducer.email_data);
   // email
@@ -61,7 +62,14 @@ function LoginModal({ show, handleClose }) {
   // reset
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { user_data} = useSelector((state) => state.loginReducer);
+  const { user_data, send_otp_error } = useSelector((state) => state.loginReducer);
+    
+  useEffect(() => {
+    if(typeof send_otp_error !== 'object' && send_otp_error !== null){
+      setErrorMesage('User not registered? Signup First')
+      // toast.error("User not registered? Signup First");  
+    }
+  }, [send_otp_error]);
 
   useEffect(() => {
     if (user_data !== null) {
@@ -76,7 +84,6 @@ function LoginModal({ show, handleClose }) {
   }, [show]);
 
   useEffect(() => {
-    console.log('signup_success_data', signup_success_data)
     if(signup_success_data.code){
       if (signup_success_data?.code === 403) {
         if(signup_success_data?.message === 'Mobile Already Existed'){
@@ -91,16 +98,13 @@ function LoginModal({ show, handleClose }) {
       } else {
           // toast.success("OTP SENT SUCCESSFULLY");
           toast.success("REGISTRATION SUCCESSFULLY, PLEASE LOGIN NOW");
-          // setFlag(5);
-          setFlag(0);
+          setFlag(5);
+          // setFlag(0);
       }
     }
   }, [signup_success_data?.message]);
 
- 
-console.log('apiData :>> ', apiData);
   useEffect(() => {
-    console.log('apiData', apiData);
     if (apiData !== undefined && apiData.length !== 0) {
       // toast.success("OTP Sent Successfully")
       setFlag(5);
@@ -110,7 +114,11 @@ console.log('apiData :>> ', apiData);
   }, [apiData]);
 
   const fetchOtp = (_) => {
-    dispatch(getOtp(mobile));
+    if(mobile.length !== 10) {
+      setErrorMesage('Mobile Number must be 10 digit')
+    } else {
+      dispatch(getOtp(mobile));
+    }
   };
 
   // login
@@ -220,6 +228,7 @@ console.log('apiData :>> ', apiData);
                           />
                           <h1 style={{ fontWeight: "bolder" }}>Login</h1>
                         </div>
+                        <div className="text-center text-danger fw-bold">{errorMesage}</div>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                           <Form.Label style={{ fontWeight: "bolder" }}>
                             Enter mobile number
@@ -258,8 +267,7 @@ console.log('apiData :>> ', apiData);
                             variant="dark"
                             onClick={fetchOtp}
                           >
-                            {/* Send OTP */}
-                            Login
+                            Send OTP
                           </Button>
                         </div>
                         <p
