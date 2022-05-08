@@ -263,31 +263,31 @@ const PackagesDetails = (props) => {
         {/* 0 package_type Booking , 1 package_type info */}
         {packages?.package_type === 0 && (
           <>
-          <div>
-            <h4 className="block__title mt-5">
-              <span>Price</span>
-            </h4>
-            <h5 className="price__title pt-3 mb-1">₹{packages.price}</h5>
-          </div>
-         
-        <p>{packages.duration}</p>
+            <div>
+              <h4 className="block__title mt-5">
+                <span>Price</span>
+              </h4>
+              <h5 className="price__title pt-3 mb-1">₹{packages.price}</h5>
+            </div>
 
-        <button
-          style={{ background: "green" }}
-          className="btn btn-success"
-          onClick={() => setShowFormModal(true)}
-        >
-          Book Now
-        </button>
+            <p>{packages.duration}</p>
 
-        <BookNowForm
-          item={packages}
-          show={showFormModal}
-          handleModal={setShowFormModal}
-          user_data={user_data}
-        />
-       </>
-      )}
+            <button
+              style={{ background: "green" }}
+              className="btn btn-success"
+              onClick={() => setShowFormModal(true)}
+            >
+              Book Now
+            </button>
+
+            <BookNowForm
+              item={packages}
+              show={showFormModal}
+              handleModal={setShowFormModal}
+              user_data={user_data}
+            />
+          </>
+        )}
         <div className="block pt-5">
           <h4 className="block__title">
             <span>Location</span>
@@ -402,7 +402,7 @@ const PackagesDetails = (props) => {
               <a
                 className="code"
                 style={{ color: "#7868E6" }}
-                href={`tel:${packages.tour_operator_account.mobile}`}
+                href={`tel:${packages.tour_operator_account?.mobile}`}
               >
                 Call Now
               </a>
@@ -497,7 +497,7 @@ const PackagesDetails = (props) => {
                 className="packages_enquired"
                 style={{ width: "200px", display: "inline-block" }}
               >
-                <a href={`tel:${packages.tour_operator_account.mobile}`}>
+                <a href={`tel:${packages.tour_operator_account?.mobile}`}>
                   Call Now
                 </a>
               </span>
