@@ -67,7 +67,8 @@ function Pass() {
     }
 
     var options = {
-      key: __DEV__ ? "rzp_test_ITrJmeIH74R5nA" : "PRODUCTION_KEY",
+      // key: __DEV__ ? "rzp_test_ITrJmeIH74R5nA" : "PRODUCTION_KEY",
+      key: "rzp_test_htjBwxfHqGABkj", //rzp_test_DuapYrmQwcWLGy
       currency: data.currency,
       amount: data.amount.toString(),
       order_id: data.id,

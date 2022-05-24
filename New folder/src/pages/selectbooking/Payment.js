@@ -76,8 +76,8 @@ function Payment() {
     }
     // key: "rzp_test_DuapYrmQwcWLGy",
     var options = {
-       key: "rzp_live_CpkoLmfTklzLb0",
-      //key: 'rzp_test_DuapYrmQwcWLGy',
+      //  key: "rzp_live_CpkoLmfTklzLb0",
+      key: "rzp_test_htjBwxfHqGABkj", //rzp_test_DuapYrmQwcWLGy
       currency: "INR",
       amount: data?.amount.toString(),
       order_id: data.id,

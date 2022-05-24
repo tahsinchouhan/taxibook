@@ -71,13 +71,13 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
-    // key: "rzp_test_DuapYrmQwcWLGy",
+    
     var options = {
-       key: "rzp_live_CpkoLmfTklzLb0",
-      //key: 'rzp_test_DuapYrmQwcWLGy',
+      //  key: "rzp_live_CpkoLmfTklzLb0",
+      key: 'rzp_test_htjBwxfHqGABkj', //rzp_test_DuapYrmQwcWLGy
       currency: "INR",
       amount: 100 * item?.price.toString() , //data?.amount.toString(),
-      // order_id: data.id,
+      // order_id: values.id,
       name: "Aamcho Bastar",
       description: "Thank You For Booking.",
       image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
@@ -88,9 +88,9 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
         }
       },
       prefill: {
-        name: 'name',
-        email: item.email,
-        contact: 'number',
+        name: values.name,
+        email: values.email,
+        contact: values.phone
       },
     };
     const paymentOpject = new window.Razorpay(options);
@@ -99,8 +99,8 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
 
   const onSubmit = async (data) => {
     // console.log(user_data.user._id);
-    // displayRazorpaysss(data)
-    // return false;
+    displayRazorpaysss(data)
+    return false;
     const body = JSON.stringify({
       packages_id: item._id,
       customer_id: user_data.user._id,
