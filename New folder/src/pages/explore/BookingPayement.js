@@ -49,7 +49,6 @@ function Payment() {
   const [number, setNumber] = useState("");
 
   useEffect(() => {
-    console.log("wrds", price);
     axios
       .post(`${API_PATH}/api/v1/busticket/pay`, {
         amount: price,

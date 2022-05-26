@@ -11,6 +11,7 @@ import { Container, Row, Col, Form, Button, Modal } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import validator from "validator";
 import LoginModal from "../components/modal/LoginModal";
+import axios from "axios";
 
 async function loadScript(src) {
   return new Promise((resolve) => {
@@ -71,20 +72,46 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
-    
+
+    const Paymentdata = await axios.post(`${API_PATH}/api/v1/packages/pay`, { amount: item?.price });
+    console.log('Paymentdata?.data.id :>> ', Paymentdata?.data.id);
+
     var options = {
       //  key: "rzp_live_CpkoLmfTklzLb0",
       key: 'rzp_test_htjBwxfHqGABkj', //rzp_test_DuapYrmQwcWLGy
       currency: "INR",
       amount: 100 * item?.price.toString() , //data?.amount.toString(),
-      // order_id: values.id,
+      order_id: Paymentdata?.data?.id,
       name: "Aamcho Bastar",
       description: "Thank You For Booking.",
       image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
 
-      handler: function (response) {
+      handler: async function (response) {
         if (response.razorpay_payment_id) {
-         
+          const body = JSON.stringify({
+            packages_id: item._id,
+            customer_id: user_data.user._id,
+            // customer_id: "61a8b36ee5163d51d37bfc09",
+            start_date: values.startDate,
+            end_date: values.endDate,
+            email: values.email,
+            number_of_travellers: values.visitors,
+            amount: item.price,
+          });
+
+          const response = await fetch(`${API_PATH}/api/v1/packages/booking`, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: body,
+          });
+          const json = await response.json();
+          console.log("RESPONSE: ", json.data);
+          reset();
+          takeToTicketPage(json.data.booking_Id);
         }
       },
       prefill: {

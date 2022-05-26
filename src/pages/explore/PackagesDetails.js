@@ -157,8 +157,6 @@ const PackagesDetails = (props) => {
     // console.log(i)
   }
 
-  console.log(packages);
-
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
