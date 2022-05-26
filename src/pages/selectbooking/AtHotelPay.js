@@ -37,7 +37,7 @@ function AtHotelPay(props) {
   useEffect(() => {
     console.log("locationlocation",location?.state?.detail);
 
-    axios.get(API_PATH + `/api/v2/booking/${hotelpayData.hotelpayData.data._id}`)
+    axios.get(API_PATH + `/api/v2/booking/${hotelpayData.hotelpayData.data?._id}`)
     .then((res) => {
         console.log("resresres",res)
         setApiData(res.data)
@@ -112,7 +112,7 @@ function AtHotelPay(props) {
              
              <div className="dm__entry_card_two">
                  <div className="row mb-1"> <div className="col-md-4" style={{color:"red",fontWeight:'bolder'}}>Pass Detail</div> <div className="col-md-8" style={{paddingLeft:'10px',color:"red",fontWeight:'bolder'}}>Pass ID</div></div>
-                 <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Booking Id </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{hotelpayData.hotelpayData.data.booking_id}</div></div>
+                 <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Booking Id </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{hotelpayData?.hotelpayData?.data?.booking_id}</div></div>
                    </div>
      </Col>
           <Row>
@@ -121,10 +121,10 @@ function AtHotelPay(props) {
             </Col>
             <Col className="dm__traveller_div" xs={12}>
                   <div className="dm__entry_card_two">
-                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Name : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{props.location.state.fullname}</div></div>
-                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Age : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{props.location.state.age}</div></div>
-                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Gender : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{props.location.state.gender}</div></div>
-                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Aadhar : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{props.location.state.adhar}</div></div> 
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Name : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{props.location.state?.fullname}</div></div>
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Age : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{props.location.state?.age}</div></div>
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Gender : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{props.location.state?.gender}</div></div>
+                          <div className="row mb-1"> <div className="col-md-4" style={{fontWeight:'bolder'}}>Aadhar : </div> <div className="col-md-8" style={{paddingLeft:'10px'}}>{props.location.state?.adhar}</div></div> 
  
                             </div>
             </Col>
@@ -144,7 +144,7 @@ function AtHotelPay(props) {
                                Check-In-Date:
                                </div>          
                                  <div className="col-md-8" style={{paddingLeft:'10px'}}>
-                                 {Moment(hotelpayData.hotelpayData.data.check_in).format('DD-MM-YYYY')}
+                                 {Moment(hotelpayData.hotelpayData.data?.check_in).format('DD-MM-YYYY')}
               
             </div>
                               </div>
@@ -153,7 +153,7 @@ function AtHotelPay(props) {
                                Check-Out-Date: 
                                </div>         
                                  <div className="col-md-8" style={{paddingLeft:'10px'}}>
-                                 {Moment(hotelpayData.hotelpayData.data.check_out).format('DD-MM-YYYY')}
+                                 {Moment(hotelpayData.hotelpayData.data?.check_out).format('DD-MM-YYYY')}
 
               
             </div>
@@ -171,9 +171,9 @@ function AtHotelPay(props) {
           Total Amount :
           </div>
           <div className="col-md-4 ">
-          ₹ {hotelpayData.hotelpayData.data.amount*100}
+          ₹ {hotelpayData.hotelpayData.data?.amount*100}
           <hr style={{color:'black'}}/>
-          ₹ {hotelpayData.hotelpayData.data.amount*100} 
+          ₹ {hotelpayData.hotelpayData.data?.amount*100} 
 
           </div>
           </div>

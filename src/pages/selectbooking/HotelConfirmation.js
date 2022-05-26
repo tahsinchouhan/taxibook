@@ -21,6 +21,21 @@ import { setBookHotel } from "../../redux/actions";
 import { toast, ToastContainer } from "react-toastify";
 import ButtonComponent from "../../containers/Button";
 
+async function loadScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = () => {
+      resolve(true);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+}
+
+
 function HotelConfirmation(props) {
   const history = useHistory();
   const [singleData, setSingleData] = useState([]);
@@ -182,6 +197,56 @@ function HotelConfirmation(props) {
     }
   }, [hotelpayData]);
 
+   const displayRazorpaysss = async () => {
+      const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+      if (!res) {
+        alert("Razorpay SDK failed to load. Are you online?");
+        return;
+      }
+
+      const user = JSON.parse(localStorage.getItem("user_data"));
+      const token = user.token;
+
+      const Paymentdata = await axios.post(`${API_PATH}/api/v2/booking/pay`, 
+      { amount },
+      { headers: { Authorization: `Bearer ${token}` } } );
+
+      var options = {
+        key: 'rzp_test_htjBwxfHqGABkj', //rzp_test_DuapYrmQwcWLGy
+        currency: "INR",
+        amount:  Paymentdata?.amount, //data?.amount.toString(),
+        order_id: Paymentdata?.data?.id,
+        name: "Aamcho Bastar",
+        description: "Thank You For Booking.",
+        image: "https://travelbastar.com/static/media/logo.0a3bc983.png",
+        handler: async function (response) {
+          if (response.razorpay_payment_id) {
+            dispatch(
+              hotelpay({
+                hotelPayDetails: {
+                  ...hotelPayDetails,
+                  amount,
+                  endDate,
+                  startDate,
+                  guests,
+                  rooms,
+                },
+                getStartData,
+              })
+            );
+          }
+        },
+        prefill: {
+          name: user.user.name,
+          email: user.user.email,
+          contact: user.user.mobile
+        },
+      };
+      const paymentOpject = new window.Razorpay(options);
+      paymentOpject.open();
+
+    }
+
   const onHotelPay = () => {
     if (!user_data) {
       toast.error("Please Log in first", {
@@ -195,19 +260,23 @@ function HotelConfirmation(props) {
       });
       return;
     }
-    dispatch(
-      hotelpay({
-        hotelPayDetails: {
-          ...hotelPayDetails,
-          amount,
-          endDate,
-          startDate,
-          guests,
-          rooms,
-        },
-        getStartData,
-      })
-    );
+   
+    displayRazorpaysss();
+    return
+
+    // dispatch(
+    //   hotelpay({
+    //     hotelPayDetails: {
+    //       ...hotelPayDetails,
+    //       amount,
+    //       endDate,
+    //       startDate,
+    //       guests,
+    //       rooms,
+    //     },
+    //     getStartData,
+    //   })
+    // );
   };
 
   return (
