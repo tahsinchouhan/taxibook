@@ -155,19 +155,26 @@ function Header({ showSignUpModal }) {
           <Offcanvas.Header style={{ flexDirection: "row-reverse" }}>
             <HiMenu onClick={handleClose} className="sidebar__toggler" />
             {user_data !== null ? (
-              <Offcanvas.Title  style={{maxWidth:'80%'}}>
+              <Offcanvas.Title style={{ maxWidth: "80%" }}>
                 <Dropdown
                   style={{
                     backgroundColor: "transparent",
                     borderColor: "transparent",
                   }}
                 >
-                  <Dropdown.Toggle variant="success" id="dropdown-basic" style={{width:'100%', overflow:'hidden'}}>
+                  <Dropdown.Toggle
+                    variant="success"
+                    id="dropdown-basic"
+                    style={{ width: "100%", overflow: "hidden" }}
+                  >
                     <Button
                       className="btn btn-success"
                       style={{ padding: "2px 10px" }}
                     >
-                      Hi,<span>{user_data?.user?.name || profile?.data?.name}</span>
+                      Hi,
+                      <span>
+                        {user_data?.user?.name || profile?.data?.name}
+                      </span>
                     </Button>
                   </Dropdown.Toggle>
                   <Dropdown.Menu>
@@ -190,14 +197,14 @@ function Header({ showSignUpModal }) {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="me-auto sidebar__nav">
-            {
-              !user_data && <a onClick={() => modalHadler()} className="sidebar__navlink">
-                <Image src={loginIcon} alt="login" />
-                <span style={{ left: "60px", position: "absolute" }}>
-                  LOGIN
-                </span>
-              </a>
-            }
+              {!user_data && (
+                <a onClick={() => modalHadler()} className="sidebar__navlink">
+                  <Image src={loginIcon} alt="login" />
+                  <span style={{ left: "60px", position: "absolute" }}>
+                    LOGIN
+                  </span>
+                </a>
+              )}
               <NavLink to="/" className="sidebar__navlink">
                 <Image src={homeIcon} alt="home" />
                 <span style={{ left: "60px", position: "absolute" }}>HOME</span>
@@ -224,16 +231,31 @@ function Header({ showSignUpModal }) {
                   AUDIO JOURNEYS
                 </span>
               </NavLink>
-              <NavLink className="sidebar__navlink" to={{ pathname: "https://blog.travelbastar.com" }} target="_blank">
+              <NavLink
+                className="sidebar__navlink"
+                to={{ pathname: "https://blog.travelbastar.com" }}
+                target="_blank"
+              >
                 <Image src={blog} alt="plan" width={25} />
                 <span style={{ left: "60px", position: "absolute" }}>BLOG</span>
               </NavLink>
-              <NavLink className="sidebar__navlink" to={{ pathname: "https://api.whatsapp.com/send/?phone=+916267020580&text&app_absent=0" }} target="_blank">
+              <NavLink
+                className="sidebar__navlink"
+                to={{
+                  pathname:
+                    "https://api.whatsapp.com/send/?phone=+916267020580&text&app_absent=0",
+                }}
+                target="_blank"
+              >
                 <Image src={supportIcon} alt="support" />
-                <span style={{ left: "60px", position: "absolute" }}>SUPPORT</span>
+                <span style={{ left: "60px", position: "absolute" }}>
+                  SUPPORT
+                </span>
               </NavLink>
 
-
+              <NavLink className="sidebar_links" to="/badal">
+                Badal
+              </NavLink>
               <NavLink className="sidebar_links" to="/cab-operator">
                 Cab Operator List
               </NavLink>
@@ -298,6 +320,9 @@ function Header({ showSignUpModal }) {
                 >
                   BLOG
                 </NavLink>
+                <NavLink className="sidebar_item" to="/badal">
+                  BADAL
+                </NavLink>
               </div>
             </Nav>
             <Form className="" style={{ marginRight: "70px" }}>
@@ -324,7 +349,9 @@ function Header({ showSignUpModal }) {
                           className="btn btn-success"
                           style={{ padding: "2px 10px" }}
                         >
-                        <span>{user_data?.user?.name || profile?.data?.name}</span>
+                          <span>
+                            {user_data?.user?.name || profile?.data?.name}
+                          </span>
                         </Button>
                       </Dropdown.Toggle>
                       <Dropdown.Menu>
