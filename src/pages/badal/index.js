@@ -9,9 +9,9 @@ import BadalLogo from "../../assets/img/BadalLogo.png";
 import BadalArrow from "../../assets/icons/BadalArrow.png";
 import BadalWelcome from "../../assets/img/BadalWelcome.png";
 import BadalFeatured1 from "../../assets/img/BadalFeatured1.png";
-import BadalFeatured2 from "../../assets/img/BadalFeatured2.png";
-import BadalFeatured3 from "../../assets/img/BadalFeatured3.png";
-import BadalFeatured4 from "../../assets/img/BadalFeatured4.png";
+import BadalFeatured2 from "../../assets/img/BadalFeatured2.jpg";
+import BadalFeatured3 from "../../assets/img/BadalFeatured3.jpg";
+import BadalFeatured4 from "../../assets/img/BadalFeatured4.jpg";
 import BadalTribalWoman from "../../assets/img/BadalTribalWoman.png";
 
 // components and pages
