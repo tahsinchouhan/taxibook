@@ -10,6 +10,7 @@ import TourPackagesinBastar from "./pages/TourPackagesInBastar";
 import TaxiInBastar from "./pages/TaxiInBastar";
 import TourGuidesInBastar from "./pages/TourGuidesInBastar";
 import TourOperatorsInBastar from "./pages/TourOperatorsInBastar";
+import Badal from "./pages/badal";
 
 import PlanHomeStays from "./pages/plan/Plan";
 import PlanTaxis from "./pages/plan/PlanTaxis";
@@ -266,6 +267,7 @@ function App() {
               path="/audioJourney/:id"
               component={AudioJourneyDetail}
             />
+            <Route exact path="/badal" component={Badal} />
           </Switch>
         </div>
       </Router>

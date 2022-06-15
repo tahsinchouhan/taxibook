@@ -1,0 +1,575 @@
+.badal-page {
+  /* background-color: hotpink; */
+  /* padding: 0 1rem; */
+}
+
+.badal-page .logo {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.badal-page .logo img {
+  width: 158px;
+  height: 58px;
+}
+
+.badal-page button {
+  font-size: 1rem;
+  color: #fff;
+  background-color: #eead81;
+  margin: 1rem 0 0;
+  border: none;
+  outline: none;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+}
+
+.badal-page button .icon {
+  display: inline-block;
+  padding-left: 10px;
+  width: 58px;
+  height: 4px;
+  -webkit-transition: transform 0.3s ease-out;
+  -moz-transition: transform 0.3s ease-out;
+  -ms-transition: transform 0.3s ease-out;
+  -o-transition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+.badal-page button:hover {
+  background-color: #ba5511;
+}
+
+.badal-page button:hover .icon {
+  -webkit-transform: translateX(10px);
+  -moz-transform: translateX(10px);
+  -ms-transform: translateX(10px);
+  -o-transform: translateX(10px);
+  transform: translateX(10px);
+}
+
+/************* WELCOME SECTION START *************/
+.badal-page .welcome-section {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.badal-page .welcome-section .image img {
+  width: 100%;
+}
+
+.badal-page .welcome-section .text {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.badal-page .welcome-section .text h2 {
+  font-size: 2.2rem;
+  line-height: 2.4rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.badal-page .welcome-section .text h2 span {
+  color: #ba5511;
+}
+
+.badal-page .welcome-section .text p {
+  font-size: 1rem;
+  line-height: 1.2rem;
+  margin: 10px 0;
+}
+
+/************* WELCOME SECTION END *************/
+
+/************* COVER BANNER SECTION START *************/
+
+.badal-page .cover-banner-section {
+  width: 100%;
+  height: 200px;
+  background: url("../img/BadalCoverImg.png") no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.badal-page .cover-banner-section h2 {
+  width: 80%;
+  margin: 0 auto;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.7rem;
+}
+
+/************* COVER BANNER SECTION END *************/
+
+/************* FEATURES SECTION START *************/
+.badal-page .features-section {
+  padding: 1rem;
+}
+
+.badal-page .features-section .text h3 {
+  margin: 0.5rem 0 1rem;
+}
+
+.badal-page .features-section .text h3 {
+  color: #ba5511;
+  font-weight: 800;
+  font-size: 1.7rem;
+  line-height: 1.9rem;
+}
+
+.badal-page .features-section .text p {
+  color: #000;
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+}
+
+.badal-page .features-section .text h4 {
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.4rem;
+}
+
+.badal-page .features-section .text .list {
+  margin: 1rem 0 2rem;
+}
+
+.badal-page .features-section .text .list-item {
+  display: flex;
+}
+
+.badal-page .features-section .text .icon {
+  color: #ba5511;
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.4rem;
+  margin-right: 5px;
+}
+
+.badal-page .features-section .carousel {
+  position: relative;
+}
+
+.badal-page .features-section .carousel .thumbs-wrapper {
+  margin: 20px 0;
+}
+
+.badal-page .features-section .carousel .thumbs-wrapper .thumbs {
+  padding: 0;
+}
+
+/************* FEATURES SECTION END *************/
+/************* PRESERVATION BANNER SECTION START *************/
+
+.preservation-banner-section {
+  background: url("../img/BadalCoverImg2.png") no-repeat center center/cover;
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+}
+
+.preservation-banner-section .image {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.preservation-banner-section .image img {
+  width: 50%;
+  height: auto;
+}
+
+.preservation-banner-section .text {
+  color: #fff;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.preservation-banner-section .text h3,
+.preservation-banner-section .text h4 {
+  color: #fff;
+}
+
+.preservation-banner-section .text h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 2.2rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.preservation-banner-section .text h4 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.55rem;
+  margin: 1rem 0 1.7rem;
+}
+
+.preservation-banner-section .text p {
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+  margin: 0 0 1rem;
+}
+
+.preservation-banner-section .text button {
+  margin: 0 0 2rem;
+  letter-spacing: 2px;
+}
+
+/************* PRESERVATION BANNER SECTION END *************/
+/************* STAY AT BADAL SECTION START *************/
+
+.stay-at-badal-section {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.stay-at-badal-section h2 {
+  font-size: 2.2rem;
+  line-height: 2.4rem;
+  font-weight: 800;
+  margin-bottom: 0.7rem;
+}
+
+.stay-at-badal-section h2 span {
+  color: #ba5511;
+}
+
+.stay-at-badal-section p {
+  font-size: 1rem;
+  line-height: 1.2rem;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.stay-at-badal-section p span {
+  color: green;
+  font-weight: 800;
+}
+
+.stay-at-badal-section button {
+  text-transform: uppercase;
+  margin: 1rem 0;
+}
+
+/************* STAY AT BADAL SECTION END *************/
+
+@media screen and (min-width: 720px) {
+  .badal-page .welcome-section {
+    flex-direction: row;
+  }
+
+  .badal-page button {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .badal-page .cover-banner-section {
+    height: 400px;
+    font-size: 5rem;
+  }
+
+  .badal-page .cover-banner-section h2 {
+    font-size: 3rem;
+    line-height: 3.2rem;
+  }
+
+  .badal-page .features-section .text h3 {
+    font-size: 2rem;
+    line-height: 2.2rem;
+  }
+
+  .badal-page .features-section .text p {
+    color: #000;
+    font-size: 1rem;
+    line-height: 1.2rem;
+  }
+
+  .badal-page .features-section .text h4 {
+    color: #000;
+    font-size: 1.4rem;
+    font-weight: 800;
+    line-height: 1.6rem;
+  }
+
+  .badal-page .carousel .thumb {
+    width: 124px !important;
+  }
+
+  .badal-page .preservation-banner-section {
+    padding: 2rem;
+  }
+
+  .badal-page .preservation-banner-section .image img {
+    height: 400px;
+  }
+
+  .badal-page .preservation-banner-section .text {
+    margin: 0;
+    align-self: flex-start;
+  }
+
+  .badal-page .preservation-banner-section .text h3 {
+    font-size: 2.4rem;
+    line-height: 2.6rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .badal-page .preservation-banner-section .text h4 {
+    font-size: 1.6rem;
+    line-height: 1.75rem;
+  }
+
+  .badal-page .preservation-banner-section .text p {
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+  }
+
+  .badal-page .stay-at-badal-section h2 {
+    font-size: 2.6rem;
+    line-height: 2.8rem;
+  }
+
+  .badal-page .stay-at-badal-section p {
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .badal-page .logo img {
+    width: 21rem;
+    height: 8.6rem;
+  }
+
+  .badal-page .welcome-section {
+    justify-content: space-around;
+  }
+
+  .badal-page .welcome-section .image {
+    width: 40%;
+  }
+  .badal-page .welcome-section .text {
+    width: 50%;
+  }
+
+  .badal-page .welcome-section .text h2 {
+    font-size: 2.6rem;
+    line-height: 2.8rem;
+  }
+
+  .badal-page .welcome-section .text p {
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    margin: 10px 0;
+  }
+
+  .badal-page .features-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    margin: 2rem 0;
+  }
+
+  .badal-page .features-section .text {
+    width: 50%;
+  }
+
+  .badal-page .features-section > .carousel {
+    width: 40%;
+  }
+
+  .badal-page .features-section .text p {
+    font-size: 1.1rem;
+    line-height: 1.4rem;
+  }
+
+  .badal-page .features-section .text .list-item {
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .badal-page .features-section .text .list-item p {
+    margin: 0;
+  }
+
+  .badal-page .preservation-banner-section {
+    display: flex;
+    flex-direction: row;
+    padding: 0 1rem;
+    padding-top: 2rem;
+  }
+
+  .badal-page .preservation-banner-section .image {
+    width: 80%;
+  }
+
+  .badal-page .preservation-banner-section .image img {
+    width: 80%;
+    height: auto;
+  }
+
+  .badal-page .preservation-banner-section .text h3 {
+    font-size: 2.2rem;
+    line-height: 2.4rem;
+  }
+
+  .badal-page .preservation-banner-section .text h4 {
+    font-size: 1.4rem;
+    line-height: 1.65rem;
+  }
+
+  .badal-page .preservation-banner-section .text p {
+    font-size: 1.1rem;
+    line-height: 1.4rem;
+  }
+
+  .badal-page .preservation-banner-section .text button {
+    padding: 0.7rem 2rem 0.7rem 1rem;
+    font-size: 1.2rem;
+  }
+
+  .badal-page .stay-at-badal-section {
+    padding: 4.5rem 0;
+  }
+
+  .badal-page .stay-at-badal-section p {
+    width: 50%;
+    margin: 0.5rem auto;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .badal-page button {
+    padding: 0.7rem 2rem 0.7rem 1rem;
+  }
+  .badal-page .welcome-section .image {
+    width: 50%;
+  }
+  .badal-page .welcome-section .text {
+    width: 40%;
+  }
+
+  .badal-page .welcome-section .text h2 {
+    font-size: 3.8rem;
+    line-height: 4rem;
+  }
+
+  .badal-page .welcome-section .text p {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    margin-left: 8px;
+  }
+
+  .badal-page .welcome-section .text button {
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    margin-left: 8px;
+  }
+
+  .badal-page .cover-banner-section h2 {
+    font-size: 3.2rem;
+    line-height: 3.4rem;
+  }
+
+  .badal-page .features-section .text p {
+    font-size: 1.2rem;
+    line-height: 1.48rem;
+  }
+
+  .badal-page .preservation-banner-section {
+    align-items: flex-end;
+  }
+
+  .badal-page .preservation-banner-section .image {
+    width: 45%;
+  }
+
+  .badal-page .preservation-banner-section .image img {
+    width: 60%;
+  }
+
+  .badal-page .preservation-banner-section .text {
+    width: 40%;
+  }
+
+  .badal-page .preservation-banner-section .text h3 {
+    font-size: 2.2rem;
+    line-height: 2.4rem;
+  }
+
+  .badal-page .preservation-banner-section .text h4 {
+    font-size: 1.4rem;
+    line-height: 1.65rem;
+  }
+
+  .badal-page .preservation-banner-section .text p {
+    font-size: 1.1rem;
+  }
+
+  .badal-page .preservation-banner-section .text button {
+    padding: 0.7rem 2rem 0.7rem 1rem;
+    font-size: 1.2rem;
+  }
+
+  .badal-page .stay-at-badal-section {
+    padding: 4.5rem 0;
+  }
+
+  .badal-page .stay-at-badal-section p {
+    width: 50%;
+    margin: 0.5rem auto;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  .badal-page .features-section .text h3 {
+    font-size: 2.2rem;
+    line-height: 2.4rem;
+  }
+
+  .badal-page .features-section .text h4 {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+  }
+  .badal-page .features-section .text p {
+    font-size: 1.4rem;
+    line-height: 1.7rem;
+  }
+
+  .badal-page .preservation-banner-section .text {
+    width: 45%;
+  }
+
+  .badal-page .preservation-banner-section .text h3 {
+    font-size: 2.6rem;
+    line-height: 2.8rem;
+  }
+
+  .badal-page .preservation-banner-section .text h4 {
+    font-size: 1.8rem;
+    line-height: 2.05rem;
+  }
+
+  .badal-page .preservation-banner-section .text p {
+    font-size: 1.5rem;
+    line-height: 1.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .badal-page .stay-at-badal-section h2 {
+    font-size: 2.8rem;
+    line-height: 3rem;
+  }
+}
