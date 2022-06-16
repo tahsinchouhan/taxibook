@@ -8,18 +8,18 @@ import ImageDesk from "./Desktopimage";
 import "./../assets/css/saly.css";
 import Header from "../components/Header";
 // import MarqueeComponent from './marquee'
-import Logo from '.././assets/img/new_Logo.png'
+import Logo from ".././assets/img/new_Logo.png";
 import Marquee from "react-fast-marquee";
 import { useHistory } from "react-router-dom";
 import checkimage from "../assets/TravelBastar-desktop/checkimage.png";
 import { useDispatch } from "react-redux";
-import { setinterestprehome } from '../redux/actions'
-import SeoData from '../SeoData.json'
-import FooterIcons from "../Footer/FooterIcons"
+import { setinterestprehome } from "../redux/actions";
+import SeoData from "../SeoData.json";
+import FooterIcons from "../Footer/FooterIcons";
 
 const PreHome = () => {
   const history = useHistory();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [adventure11, setAdventure] = useState(0);
   const [culture11, setCulture] = useState(0);
   const [heritage11, setHeritage] = useState(0);
@@ -28,27 +28,27 @@ const PreHome = () => {
   // const [getMAxValue, setGetMAxValue] = useState([]);
   // const [status, setStatus] = useState(false);
   const selectImageCategory = async (category, key, classN, e) => {
-    console.log({ category })
+    console.log({ category });
     key = parseInt(key);
-    let status = false
+    let status = false;
     if (imageCounter.length > 0) {
       if (imageCounter.includes(key)) {
         // setStatus(false)
         let aaa = imageCounter;
-        let newarry = aaa.filter(elem => elem !== key)
+        let newarry = aaa.filter((elem) => elem !== key);
         await setImageCounter([...newarry]);
       } else {
         // setStatus(true)
-        status = true
+        status = true;
         let arr = imageCounter;
-        arr.push(key)
+        arr.push(key);
         await setImageCounter(arr);
       }
     } else {
       // setStatus(true)
-      status = true
+      status = true;
       let arr = imageCounter;
-      arr.push(key)
+      arr.push(key);
       await setImageCounter(arr);
     }
     switch (category) {
@@ -74,7 +74,7 @@ const PreHome = () => {
       default:
         break;
     }
-    console.log(adventure11, culture11, heritage11, leisure11)
+    console.log(adventure11, culture11, heritage11, leisure11);
     let x, i, overlay3;
     x = document.querySelectorAll("." + classN);
     overlay3 = document.querySelectorAll(".overlay3" + key);
@@ -90,19 +90,25 @@ const PreHome = () => {
   };
 
   useEffect(() => {
-    document.title = SeoData.home.page_title || 'Travel Bastar';
-    document.querySelector("meta[name='description']").setAttribute('content', (SeoData.home.meta_description || ''));
-    document.querySelector("meta[name='keywords']").setAttribute('content', (SeoData.home.meta_keywords || ''));
-  }, [])
+    document.title = SeoData.home.page_title || "Travel Bastar";
+    document
+      .querySelector("meta[name='description']")
+      .setAttribute("content", SeoData.home.meta_description || "");
+    document
+      .querySelector("meta[name='keywords']")
+      .setAttribute("content", SeoData.home.meta_keywords || "");
+  }, []);
 
   const getmaxCategory = async () => {
-    dispatch(setinterestprehome({
-      adventure: adventure11 * 25,
-      culture: culture11 * 25,
-      religious: heritage11 * 25,
-      leisure: leisure11 * 25,
-    }))
-    history.push('/explore')
+    dispatch(
+      setinterestprehome({
+        adventure: adventure11 * 25,
+        culture: culture11 * 25,
+        religious: heritage11 * 25,
+        leisure: leisure11 * 25,
+      })
+    );
+    history.push("/explore");
   };
 
   return (
@@ -115,14 +121,19 @@ const PreHome = () => {
         <Header />
         {/* <MarqueeComponent /> */}
         <Marquee speed="30" direction="right">
-          <div style={{ cursor: "pointer" }} onClick={() => history.push("/audioJourney")} >
-            <span style={{ margin: "0 0.5rem 0 5rem" }} >Audio Journeys</span>
-            <img src={Logo} style={{ height: '35px' }} alt="new" />
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => history.push("/badal")}
+          >
+            <span style={{ margin: "0 0.5rem 0 5rem" }}>Stay at BADAL</span>
+            <img src={Logo} style={{ height: "35px" }} alt="new" />
           </div>
+          {/**
           <div style={{ cursor: "pointer" }} onClick={() => history.push("/buspass")} >
-            <span style={{ margin: "0 0.5rem 0 5rem" }}>Book Bus Tickets</span>
-            <img src={Logo} style={{ height: '35px' }} alt="new" />
+          <span style={{ margin: "0 0.5rem 0 5rem" }}>Book Bus Tickets</span>
+          <img src={Logo} style={{ height: '35px' }} alt="new" />
           </div>
+        */}
         </Marquee>
 
         <Row className="saly_div w-100  m-0 ">
@@ -189,8 +200,6 @@ const PreHome = () => {
                         </div>
                       </div>
                     </div>
-
-
                   </div>
                 );
               })}
@@ -205,7 +214,7 @@ const PreHome = () => {
                   }}
                   className="btn btn-block btn-success"
                   onClick={() => getmaxCategory()}
-                // onClick={() => history.push("/explore")}
+                  // onClick={() => history.push("/explore")}
                 >
                   CONTINUE
                 </Button>
@@ -219,13 +228,19 @@ const PreHome = () => {
       <div fluid="true" className="d-md-none">
         <Header />
         <Marquee speed="30" direction="right">
-          <div style={{ cursor: "pointer" }} onClick={() => history.push("/audioJourney")} >
-            <span style={{ margin: "0 0.5rem 0 5rem" }} >Audio Journeys</span>
-            <img src={Logo} style={{ height: '35px' }} alt="new" />
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => history.push("/audioJourney")}
+          >
+            <span style={{ margin: "0 0.5rem 0 5rem" }}>Audio Journeys</span>
+            <img src={Logo} style={{ height: "35px" }} alt="new" />
           </div>
-          <div style={{ cursor: "pointer" }} onClick={() => history.push("/buspass")} >
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => history.push("/buspass")}
+          >
             <span style={{ margin: "0 0.5rem 0 5rem" }}>Book Bus Tickets</span>
-            <img src={Logo} style={{ height: '35px' }} alt="new" />
+            <img src={Logo} style={{ height: "35px" }} alt="new" />
           </div>
         </Marquee>
 
@@ -233,7 +248,11 @@ const PreHome = () => {
         <Row className="saly_div w-100  m-0 p-0 pt-5 ">
           <div
             className="container"
-            style={{ paddingLeft: "10%", paddingRight: "10%", margin: "0 0 3rem" }}
+            style={{
+              paddingLeft: "10%",
+              paddingRight: "10%",
+              margin: "0 0 3rem",
+            }}
           >
             <div className="homepage-top_title">
               <h1 className="top_title">Travel Bastar</h1>
@@ -254,7 +273,6 @@ const PreHome = () => {
                     style={{ width: "50%", height: "50%" }}
                   >
                     <div className="mainImgContainer">
-
                       <Image
                         className={`homepage1 borderImage${key} container1234 `}
                         draggable={false}
@@ -268,7 +286,11 @@ const PreHome = () => {
                       />
                       <div
                         className="overlay2"
-                        style={{ width: "100%", height: "89%", marginTop: "10px" }}
+                        style={{
+                          width: "100%",
+                          height: "89%",
+                          marginTop: "10px",
+                        }}
                         chek="mobileView"
                         onClick={(e) =>
                           selectImageCategory(
@@ -284,7 +306,13 @@ const PreHome = () => {
                         </div>
                       </div>
                       <div
-                        style={{ display: "none", width: "100%", height: "89%", marginTop: "10px", marginBottom: "10px" }}
+                        style={{
+                          display: "none",
+                          width: "100%",
+                          height: "89%",
+                          marginTop: "10px",
+                          marginBottom: "10px",
+                        }}
                         className={`overlay3 overlay3${key}`}
                         chek="mobileView"
                         onClick={(e) =>
@@ -307,20 +335,45 @@ const PreHome = () => {
                 );
               })}
             </div>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", position: "fixed", left: "0", bottom: "66.77px", width: "100%", boxShadow: "0 0 10px rgba(0,0,0,0.5" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "fixed",
+                left: "0",
+                bottom: "66.77px",
+                width: "100%",
+                boxShadow: "0 0 10px rgba(0,0,0,0.5",
+              }}
+            >
               <Button
                 style={{
-                  padding: "14px 60px", width: "70%", borderRadius: "0", border: "none"
+                  padding: "14px 60px",
+                  width: "70%",
+                  borderRadius: "0",
+                  border: "none",
                 }}
                 className="btn btn-block btn-success"
                 onClick={() => getmaxCategory()}
-              // onClick={() => history.push("/explore")}
+                // onClick={() => history.push("/explore")}
               >
                 CONTINUE
               </Button>
               <button
                 onClick={() => history.push("/curatedexperiences")}
-                style={{ width: "30%", color: "purple", borderRadius: "0", border: "0", padding: "13px 0 14px", textTransform: "uppercase", fontSize: "1rem" }}>Skip</button>
+                style={{
+                  width: "30%",
+                  color: "purple",
+                  borderRadius: "0",
+                  border: "0",
+                  padding: "13px 0 14px",
+                  textTransform: "uppercase",
+                  fontSize: "1rem",
+                }}
+              >
+                Skip
+              </button>
             </div>
             <FooterIcons />
           </div>

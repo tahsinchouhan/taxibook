@@ -7,11 +7,17 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 
 import BadalLogo from "../../assets/img/BadalLogo.png";
 import BadalArrow from "../../assets/icons/BadalArrow.png";
-import BadalWelcome from "../../assets/img/BadalWelcome.png";
-import BadalFeatured1 from "../../assets/img/BadalFeatured1.png";
+import BadalTopImg1 from "../../assets/img/BadalTopImg1.jpeg";
+
+import BadalTopImg3 from "../../assets/img/BadalTopImg3.jpeg";
+import BadalTopImg4 from "../../assets/img/BadalTopImg4.jpeg";
+import BadalTopImg5 from "../../assets/img/BadalTopImg5.jpeg";
+import BadalTopImg6 from "../../assets/img/BadalTopImg6.jpeg";
+import BadalFeatured1 from "../../assets/img/BadalFeatured1.jpeg";
 import BadalFeatured2 from "../../assets/img/BadalFeatured2.jpg";
 import BadalFeatured3 from "../../assets/img/BadalFeatured3.jpg";
 import BadalFeatured4 from "../../assets/img/BadalFeatured4.jpg";
+import BadalFeatured5 from "../../assets/img/BadalFeatured5.jpeg";
 import BadalTribalWoman from "../../assets/img/BadalTribalWoman.png";
 
 // components and pages
@@ -37,6 +43,15 @@ const Badal = () => {
     BadalFeatured2,
     BadalFeatured3,
     BadalFeatured4,
+    BadalFeatured5,
+  ];
+
+  const TopImgList = [
+    BadalTopImg1,
+    BadalTopImg3,
+    BadalTopImg4,
+    BadalTopImg5,
+    BadalTopImg6,
   ];
 
   return (
@@ -53,7 +68,8 @@ const Badal = () => {
               Welcome to <span>BADAL</span>
             </h2>
             <p>
-              We enable sustainable livelihood through Cultural Presentation
+              Learn, explore and experience the tribal life with campus stay
+              options.
             </p>
             <button
               onClick={() => history.push("/packages_details/Stay-at-BADAL")}
@@ -64,7 +80,21 @@ const Badal = () => {
           </div>
 
           <div className="image">
-            <img src={BadalWelcome} alt="Badal" />
+            {/*<img src={BadalWelcome} alt="Badal" />*/}
+            <div className="carousel">
+              <Carousel
+                showIndicators={false}
+                showStatus={false}
+                swipeable={true}
+                infiniteLoop={true}
+              >
+                {[...TopImgList].map((image, idx) => (
+                  <div className="featured-img" key={idx}>
+                    <img src={image} alt="Badal" />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
           </div>
         </section>
         {/*** Welcome section ends ***/}
