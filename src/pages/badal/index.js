@@ -18,8 +18,11 @@ import BadalTribalWoman from "../../assets/img/BadalTribalWoman.png";
 import Header from "../../components/Header";
 import Footer from "../travesaly/Footer";
 import { Carousel } from "react-responsive-carousel";
+import { useHistory } from "react-router-dom";
 
 const Badal = () => {
+  const history = useHistory();
+
   const FeaturesList = [
     "6 Luxury Cottages",
     "2 Dormitories",
@@ -52,8 +55,10 @@ const Badal = () => {
             <p>
               We enable sustainable livelihood through Cultural Presentation
             </p>
-            <button>
-              HomeStays
+            <button
+              onClick={() => history.push("/packages_details/Stay-at-BADAL")}
+            >
+              Book stay at BADAL
               <img src={BadalArrow} alt="badal" className="icon" />
             </button>
           </div>
@@ -139,8 +144,10 @@ const Badal = () => {
               economy both in line with tribal welfare and development.
             </p>
 
-            <button>
-              Visit BADAL
+            <button
+              onClick={() => history.push("/packages_details/Stay-at-BADAL")}
+            >
+              Book stay at BADAL
               <img src={BadalArrow} alt="badal" className="icon" />
             </button>
           </div>
@@ -157,8 +164,10 @@ const Badal = () => {
             campus stay options.
           </p>
 
-          <button>
-            Book your stay
+          <button
+            onClick={() => history.push("/packages_details/Stay-at-BADAL")}
+          >
+            Book stay at BADAL
             <img src={BadalArrow} alt="badal" className="icon" />
           </button>
 
