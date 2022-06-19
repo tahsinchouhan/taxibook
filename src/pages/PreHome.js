@@ -230,6 +230,14 @@ const PreHome = () => {
         <Marquee speed="30" direction="right">
           <div
             style={{ cursor: "pointer" }}
+            onClick={() => history.push("/badal")}
+          >
+            <span style={{ margin: "0 0.5rem 0 5rem" }}>Stay at BADAL</span>
+            <img src={Logo} style={{ height: "35px" }} alt="new" />
+          </div>
+
+          {/*<div
+            style={{ cursor: "pointer" }}
             onClick={() => history.push("/audioJourney")}
           >
             <span style={{ margin: "0 0.5rem 0 5rem" }}>Audio Journeys</span>
@@ -241,7 +249,7 @@ const PreHome = () => {
           >
             <span style={{ margin: "0 0.5rem 0 5rem" }}>Book Bus Tickets</span>
             <img src={Logo} style={{ height: "35px" }} alt="new" />
-          </div>
+      </div>*/}
         </Marquee>
 
         <div fluid="true" style={{ padding: 0, margin: 0 }}></div>
