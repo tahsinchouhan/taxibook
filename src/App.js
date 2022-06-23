@@ -11,6 +11,7 @@ import TaxiInBastar from "./pages/TaxiInBastar";
 import TourGuidesInBastar from "./pages/TourGuidesInBastar";
 import TourOperatorsInBastar from "./pages/TourOperatorsInBastar";
 import Badal from "./pages/badal";
+import BastarArt from "./pages/bastarArt";
 
 import PlanHomeStays from "./pages/plan/Plan";
 import PlanTaxis from "./pages/plan/PlanTaxis";
@@ -97,6 +98,7 @@ import BookProfile from "./pages/profile/BookingProfile";
 
 import AudioJourney from "./pages/audioJourney/AudioJourney";
 import AudioJourneyDetail from "./pages/audioJourneyDeatil/AudioJourneyDetail";
+import PromotionalContent from "./pages/promotionalContent";
 
 function App() {
   return (
@@ -268,6 +270,12 @@ function App() {
               component={AudioJourneyDetail}
             />
             <Route exact path="/badal" component={Badal} />
+            <Route exact path="/bastarArt" component={BastarArt} />
+            <Route
+              exact
+              path="/promotionalContent"
+              component={PromotionalContent}
+            />
           </Switch>
         </div>
       </Router>

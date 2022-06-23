@@ -1,17 +1,16 @@
 import React from "react";
-import { Row, Col, Container} from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 // import covid from "../../assets/img/covid-19.png";
 // import map from "../../assets/img/Map.svg";
 import images from "../../assets/img/image 1.svg";
 import logo from "../../assets/img/logo.png";
 
-
 function Footer() {
   const history = useHistory();
   const goForRegistration = () => {
-    history.push("/registrationguide")
-  }
+    history.push("/registrationguide");
+  };
   return (
     <>
       <footer className="footer pb-3">
@@ -38,6 +37,13 @@ function Footer() {
                   </Link>
                 </div>
 
+                <div className="footer__item">
+                  <Link to="/promotionalContent" className="link">
+                    <h5 className="footer__item-title"> Promotional Content</h5>
+                    <small>Checkout awesome things that we offer </small>
+                  </Link>
+                </div>
+
                 {/* <div className="footer__item">
                   <Link to="/covidresponse" className="link">
                     <h5 className="footer__item-title"> Covid-19 Response</h5>
@@ -56,7 +62,9 @@ function Footer() {
               <div className="footer__block">
                 <div className="footer__item">
                   <Link to="/registrationguide" className="link">
-                    <h6 className="footer__item-subtitle">Vendor & Organization Registration</h6>
+                    <h6 className="footer__item-subtitle">
+                      Vendor & Organization Registration
+                    </h6>
                   </Link>
                 </div>
                 <div className="footer__item">
@@ -81,7 +89,12 @@ function Footer() {
             <Col sm={4} md={4}>
               <div className="footer__logo">
                 <div className={`header__logo`}>
-                  <img src={logo} id="logo" alt="logo" style={{ height: 200, width: 200 }} />
+                  <img
+                    src={logo}
+                    id="logo"
+                    alt="logo"
+                    style={{ height: 200, width: 200 }}
+                  />
                 </div>
               </div>
             </Col>
