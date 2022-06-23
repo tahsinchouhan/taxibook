@@ -11,7 +11,7 @@ import TaxiInBastar from "./pages/TaxiInBastar";
 import TourGuidesInBastar from "./pages/TourGuidesInBastar";
 import TourOperatorsInBastar from "./pages/TourOperatorsInBastar";
 import Badal from "./pages/badal";
-import BastarArt from "./pages/bastarArt";
+// import BastarArt from "./pages/bastarArt";
 
 import PlanHomeStays from "./pages/plan/Plan";
 import PlanTaxis from "./pages/plan/PlanTaxis";
@@ -110,7 +110,6 @@ function App() {
             <Route exact path="/home" component={Home} />
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/bookingprofile" component={BookProfile} />
-
             <Route exact path="/explore" component={Explores} />
             <Route exact path="/explore/:id" component={Explores} />
             <Route
@@ -134,7 +133,6 @@ function App() {
             <Route exact path="/booking" component={BusPass} />
             <Route exact path="/populardestinations" component={Destination} />
             <Route exact path="/curatedexperiences" component={Packages} />
-
             <Route
               exact
               path="/homestaysinbastar"
@@ -156,7 +154,6 @@ function App() {
               path="/touroperatorsinbastar"
               component={TourOperatorsInBastar}
             />
-
             <Route exact path="/select-booking" component={SelectBooking} />
             <Route exact path="/plan" component={PlanHomeStays} />
             <Route exact path="/planTourGuides" component={PlanTourGuides} />
@@ -171,7 +168,6 @@ function App() {
               path="/bastarEventsAndActivities"
               component={EventsAndActivities}
             />
-
             <Route exact path="/traveller_card" component={TravellerCard} />
             <Route exact path="/traveller_ticket" component={TravellerTicket} />
             <Route exact path="/dmpass" component={DmTicket2} />
@@ -222,7 +218,6 @@ function App() {
             <Route exact path="/payment" component={Payment} />
             <Route exact path="/hpayment" component={hPayment} />
             <Route exact path="/interest" component={Interest} />
-
             {/* For Hotel Details */}
             <Route exact path="/hotelsearch" component={HotelSearch} />
             <Route
@@ -251,18 +246,15 @@ function App() {
               path="/hotel-details-pay/:id"
               component={HotelTicketPay}
             />
-
             <Route
               exact
               path="/hotelconfirmation/:id"
               component={HotelConfirmation}
             />
-
             <Route exact path="/cabconfirmation" component={CabConfirmation} />
             <Route exact path="/checkoutpage" component={CheckoutPage} />
             <Route exact path="/cab" component={Cab} />
             <Route exact path="/cablist" component={CabList} />
-
             <Route exact path="/audioJourney" component={AudioJourney} />
             <Route
               exact
@@ -270,7 +262,7 @@ function App() {
               component={AudioJourneyDetail}
             />
             <Route exact path="/badal" component={Badal} />
-            <Route exact path="/bastarArt" component={BastarArt} />
+            {/*<Route exact path="/bastarArt" component={BastarArt} />*/}
             <Route
               exact
               path="/promotionalContent"
