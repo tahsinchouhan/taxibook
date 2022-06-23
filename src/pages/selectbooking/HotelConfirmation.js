@@ -212,7 +212,7 @@ function HotelConfirmation(props) {
       { headers: { Authorization: `Bearer ${token}` } } );
 
       var options = {
-        key: 'rzp_test_htjBwxfHqGABkj', //rzp_test_DuapYrmQwcWLGy
+        key: 'rzp_live_CpkoLmfTklzLb0', //rzp_test_DuapYrmQwcWLGy
         currency: "INR",
         amount:  Paymentdata?.amount, //data?.amount.toString(),
         order_id: Paymentdata?.data?.id,
