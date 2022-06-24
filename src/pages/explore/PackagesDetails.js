@@ -407,7 +407,7 @@ const PackagesDetails = (props) => {
             </span>
           ) : null}
 
-          <span
+          {/*<span
             className="packages_enquired"
             style={{
               color: "rgb(120, 104, 230)",
@@ -417,7 +417,7 @@ const PackagesDetails = (props) => {
             onClick={() => modalReviewHadler()}
           >
             Review
-          </span>
+          </span>*/}
           <span
             className="packages_enquired"
             style={{
@@ -464,7 +464,7 @@ const PackagesDetails = (props) => {
       <div fluid className="d-md-none">
         <div className="packeges_title">
           <div>
-            <span
+            {/*<span
               className="packages_enquired"
               style={{
                 color: "rgb(120, 104, 230)",
@@ -474,7 +474,7 @@ const PackagesDetails = (props) => {
               onClick={() => modalReviewHadler()}
             >
               Review
-            </span>
+            </span>*/}
           </div>
           <div>
             <span
@@ -535,7 +535,7 @@ const PackagesDetails = (props) => {
       </div>
 
       <Container className="mb-5 pb-5">
-        <h4 className="block__title mt-5">
+        {/*<h4 className="block__title mt-5">
           <span>Review</span>
         </h4>
         <h5
@@ -569,89 +569,91 @@ const PackagesDetails = (props) => {
           >
             {review.length} reviews
           </span>
-        </h5>
-        {/* <p>
-          <span
-            style={{
-              margin: 3,
-              fontSize: 15,
-              marginTop: 8,
-              fontWeight: "bold",
-            }}
-          >
-            Excellent{" "}
-            {
-              review.filter(
-                (data) => data.star_rating >= "4" && data.star_rating <= "5"
-              ).length
-            }
-          </span>
-        </p>
-        <p>
-          <span
-            style={{
-              margin: 3,
-              fontSize: 15,
-              marginTop: 8,
-              fontWeight: "bold",
-            }}
-          >
-            Very good{" "}
-            {
-              review.filter(
-                (data) => data.star_rating >= "3" && data.star_rating < "4"
-              ).length
-            }
-          </span>
-        </p>
-        <p>
-          <span
-            style={{
-              margin: 3,
-              fontSize: 15,
-              marginTop: 8,
-              fontWeight: "bold",
-            }}
-          >
-            Average{" "}
-            {
-              review.filter(
-                (data) => data.star_rating >= "2" && data.star_rating < "3"
-              ).length
-            }
-          </span>
-        </p>
-        <p>
-          <span
-            style={{
-              margin: 3,
-              fontSize: 15,
-              marginTop: 8,
-              fontWeight: "bold",
-            }}
-          >
-            Poor{" "}
-            {
-              review.filter(
-                (data) => data.star_rating >= "1" && data.star_rating < "2"
-              ).length
-            }
-          </span>
-        </p>
-        <p>
-          <span
-            style={{
-              margin: 3,
-              fontSize: 15,
-              marginTop: 8,
-              fontWeight: "bold",
-            }}
-          >
-            Terrible {review.filter((data) => data.star_rating === "").length}
-          </span>
-        </p> */}
+          </h5>*/}
+        {/*
+        //  <p>
+        //   <span
+        //     style={{
+        //       margin: 3,
+        //       fontSize: 15,
+        //       marginTop: 8,
+        //       fontWeight: "bold",
+        //     }}
+        //   >
+        //     Excellent{" "}
+        //     {
+        //       review.filter(
+        //         (data) => data.star_rating >= "4" && data.star_rating <= "5"
+        //       ).length
+        //     }
+        //   </span>
+        // </p>
+        // <p>
+        //   <span
+        //     style={{
+        //       margin: 3,
+        //       fontSize: 15,
+        //       marginTop: 8,
+        //       fontWeight: "bold",
+        //     }}
+        //   >
+        //     Very good{" "}
+        //     {
+        //       review.filter(
+        //         (data) => data.star_rating >= "3" && data.star_rating < "4"
+        //       ).length
+        //     }
+        //   </span>
+        // </p>
+        // <p>
+        //   <span
+        //     style={{
+        //       margin: 3,
+        //       fontSize: 15,
+        //       marginTop: 8,
+        //       fontWeight: "bold",
+        //     }}
+        //   >
+        //     Average{" "}
+        //     {
+        //       review.filter(
+        //         (data) => data.star_rating >= "2" && data.star_rating < "3"
+        //       ).length
+        //     }
+        //   </span>
+        // </p>
+        // <p>
+        //   <span
+        //     style={{
+        //       margin: 3,
+        //       fontSize: 15,
+        //       marginTop: 8,
+        //       fontWeight: "bold",
+        //     }}
+        //   >
+        //     Poor{" "}
+        //     {
+        //       review.filter(
+        //         (data) => data.star_rating >= "1" && data.star_rating < "2"
+        //       ).length
+        //     }
+        //   </span>
+        // </p>
+        // <p>
+        //   <span
+        //     style={{
+        //       margin: 3,
+        //       fontSize: 15,
+        //       marginTop: 8,
+        //       fontWeight: "bold",
+        //     }}
+        //   >
+        //     Terrible {review.filter((data) => data.star_rating === "").length}
+        //   </span>
+        // </p>
+       */}
 
-        <div className="row">
+        {/*<div className="row">
           <div className="side">
             <div>5 star</div>
           </div>
@@ -707,7 +709,7 @@ const PackagesDetails = (props) => {
           <div className="side right">
             <div>20</div>
           </div>
-        </div>
+      </div>*/}
         <div className="mt-5">
           <Carousel
             ssr
