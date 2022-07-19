@@ -128,6 +128,15 @@ const PreHome = () => {
             <span style={{ margin: "0 0.5rem 0 5rem" }}>Stay at BADAL</span>
             <img src={Logo} style={{ height: "35px" }} alt="new" />
           </div>
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => history.push("/kalagudi")}
+          >
+            <span style={{ margin: "0 0.5rem 0 5rem" }}>
+              Kalagudi: Art of Bastar
+            </span>
+            <img src={Logo} style={{ height: "35px" }} alt="new" />
+          </div>
           {/**
           <div style={{ cursor: "pointer" }} onClick={() => history.push("/buspass")} >
           <span style={{ margin: "0 0.5rem 0 5rem" }}>Book Bus Tickets</span>
@@ -233,6 +242,15 @@ const PreHome = () => {
             onClick={() => history.push("/badal")}
           >
             <span style={{ margin: "0 0.5rem 0 5rem" }}>Stay at BADAL</span>
+            <img src={Logo} style={{ height: "35px" }} alt="new" />
+          </div>
+          <div
+            style={{ cursor: "pointer" }}
+            onClick={() => history.push("/kalagudi")}
+          >
+            <span style={{ margin: "0 0.5rem 0 5rem" }}>
+              Kalagudi: Art of Bastar
+            </span>
             <img src={Logo} style={{ height: "35px" }} alt="new" />
           </div>
 
