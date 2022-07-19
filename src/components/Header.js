@@ -256,6 +256,10 @@ function Header({ showSignUpModal }) {
               <NavLink className="sidebar_links" to="/badal">
                 Badal
               </NavLink>
+
+              <NavLink className="sidebar_links" to="/kalagudi">
+                Kalagudi
+              </NavLink>
               <NavLink className="sidebar_links" to="/cab-operator">
                 Cab Operator List
               </NavLink>
@@ -322,6 +326,9 @@ function Header({ showSignUpModal }) {
                 </NavLink>
                 <NavLink className="sidebar_item" to="/badal">
                   BADAL
+                </NavLink>
+                <NavLink className="sidebar_item" to="/kalagudi">
+                  KALAGUDI
                 </NavLink>
               </div>
             </Nav>

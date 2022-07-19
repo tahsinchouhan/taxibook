@@ -36,7 +36,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
 
-  month = month > 9 ? month : '0' + month;
+  month = month > 9 ? month : "0" + month;
 
   let today = `${year}-${month}-${day}`;
 
@@ -67,20 +67,24 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
   };
 
   const displayRazorpaysss = async (values) => {
-    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
 
-    const Paymentdata = await axios.post(`${API_PATH}/api/v1/packages/pay`, { amount: item?.price });
-    console.log('Paymentdata?.data.id :>> ', Paymentdata?.data.id);
+    const Paymentdata = await axios.post(`${API_PATH}/api/v1/packages/pay`, {
+      amount: item?.price,
+    });
+    console.log("Paymentdata?.data.id :>> ", Paymentdata?.data.id);
 
     var options = {
       //  key: "rzp_live_CpkoLmfTklzLb0",
-      key: 'rzp_live_CpkoLmfTklzLb0', //rzp_test_DuapYrmQwcWLGy
+      key: "rzp_live_I8E16v75z35cbj", //rzp_test_DuapYrmQwcWLGy
       currency: "INR",
-      amount: 100 * item?.price.toString() , //data?.amount.toString(),
+      amount: 100 * item?.price.toString(), //data?.amount.toString(),
       order_id: Paymentdata?.data?.id,
       name: "Aamcho Bastar",
       description: "Thank You For Booking.",
@@ -117,7 +121,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
       prefill: {
         name: values.name,
         email: values.email,
-        contact: values.phone
+        contact: values.phone,
       },
     };
     const paymentOpject = new window.Razorpay(options);
@@ -126,7 +130,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
 
   const onSubmit = async (data) => {
     // console.log(user_data.user._id);
-    displayRazorpaysss(data)
+    displayRazorpaysss(data);
     return false;
     const body = JSON.stringify({
       packages_id: item._id,
@@ -160,7 +164,6 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
       console.log(error);
     }
   };
-
 
   return (
     <>
@@ -204,7 +207,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
                             <Form.Label>Start Date</Form.Label>
                             <Form.Control
                               type="date"
-                              min={today} 
+                              min={today}
                               {...register("startDate", {
                                 required: "Please enter date in this field",
                               })}
@@ -238,7 +241,7 @@ const BookNowForm = ({ item, show, handleModal, user_data }) => {
                             <Form.Label>End Date</Form.Label>
                             <Form.Control
                               type="date"
-                              min={today} 
+                              min={today}
                               {...register("endDate", {
                                 required: "Please enter date in this field",
                               })}

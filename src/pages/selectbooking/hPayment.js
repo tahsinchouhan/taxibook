@@ -32,9 +32,12 @@ function HPayment() {
   const [data, setData1] = useState();
 
   const dispatch = useDispatch();
-  const { data: apiData, tripData, mobile, routeData } = useSelector(
-    (state) => state.busReducer
-  );
+  const {
+    data: apiData,
+    tripData,
+    mobile,
+    routeData,
+  } = useSelector((state) => state.busReducer);
   const { age, gender, adhaar, basic_details, price, surcharge } = apiData;
   const { getStartData, Setdata, checkoutData } = useSelector(
     (state) => state.hotelReducer
@@ -42,7 +45,7 @@ function HPayment() {
   console.log("Setdata", Setdata);
   console.log("data", data);
 
-  console.log("apiData",apiData)
+  console.log("apiData", apiData);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -97,7 +100,7 @@ function HPayment() {
     // key: "rzp_test_DuapYrmQwcWLGy",
     var options = {
       // key: "rzp_live_CpkoLmfTklzLb0",
-      key: "rzp_live_CpkoLmfTklzLb0", //rzp_test_DuapYrmQwcWLGy
+      key: "rzp_live_I8E16v75z35cbj", //rzp_test_DuapYrmQwcWLGy
       currency: "INR",
       amount: data.amount.toFixed().toString(),
       order_id: data.id,

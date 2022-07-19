@@ -50,15 +50,13 @@ function Payment() {
       .then((result) => {
         setData(result.data);
       })
-      .catch((e) => {
-        
-      });
-      let userData = JSON.parse(localStorage.getItem('user_data'));
-      if(userData){
-        setName(userData.user.name);
-        setEmail(userData.user.email);
-        setNumber(userData.user.mobile);
-      }
+      .catch((e) => {});
+    let userData = JSON.parse(localStorage.getItem("user_data"));
+    if (userData) {
+      setName(userData.user.name);
+      setEmail(userData.user.email);
+      setNumber(userData.user.mobile);
+    }
   }, []);
 
   useEffect(() => {
@@ -68,7 +66,9 @@ function Payment() {
   }, [routeData]);
 
   const displayRazorpaysss = async (values) => {
-    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
@@ -76,7 +76,7 @@ function Payment() {
     // key: "rzp_test_DuapYrmQwcWLGy",
     var options = {
       //  key: "rzp_live_CpkoLmfTklzLb0",
-      key: "rzp_live_CpkoLmfTklzLb0", //rzp_test_DuapYrmQwcWLGy
+      key: "rzp_live_I8E16v75z35cbj", //rzp_test_DuapYrmQwcWLGy
       currency: "INR",
       amount: data?.amount.toString(),
       // order_id: data.id,

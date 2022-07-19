@@ -433,7 +433,7 @@ function SteperDmpass(shows, ...props) {
     }
     console.log("data", data.amount);
     var options = {
-      key: "rzp_live_CpkoLmfTklzLb0", //rzp_test_DuapYrmQwcWLGy
+      key: "rzp_live_I8E16v75z35cbj", //rzp_test_DuapYrmQwcWLGy
       currency: "INR",
       amount: data.amount.toString(),
       order_id: data.id,
@@ -1044,7 +1044,12 @@ function SteperDmpass(shows, ...props) {
               </h3>
               {locServ.length > 0
                 ? locServ?.map((item, key) => (
-                    <Accordion className="p-0" style={{ boxShadow: "none" }} expanded={expanded === 'panel'+key} onChange={handleChange('panel'+key)}>
+                    <Accordion
+                      className="p-0"
+                      style={{ boxShadow: "none" }}
+                      expanded={expanded === "panel" + key}
+                      onChange={handleChange("panel" + key)}
+                    >
                       <AccordionSummary
                         className="p-0"
                         aria-controls="panel1a-content"
@@ -1062,23 +1067,23 @@ function SteperDmpass(shows, ...props) {
                             type="radio"
                             // label={item?.location_name}
                             name="formHorizontalRadios"
-                            id={"formHorizontalRadios"+key}
-                            checked={expanded === 'panel'+key?1:0}
+                            id={"formHorizontalRadios" + key}
+                            checked={expanded === "panel" + key ? 1 : 0}
                             style={{
                               margin: "8px",
                               color: "black",
                               fontWeight: "600",
                             }}
                           />
-                          <span 
-                          style={
-                            {
-                              display:'flex',
-                              alignItems: 'center',
-                              fontWeight: 'bold'
-                            }
-                          }
-                          >{item?.location_name}</span>
+                          <span
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            {item?.location_name}
+                          </span>
                         </div>
                       </AccordionSummary>
                       <AccordionDetails className="py-0">

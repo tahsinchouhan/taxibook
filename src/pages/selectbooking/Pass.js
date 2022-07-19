@@ -68,7 +68,7 @@ function Pass() {
 
     var options = {
       // key: __DEV__ ? "rzp_test_ITrJmeIH74R5nA" : "PRODUCTION_KEY",
-      key: "rzp_live_CpkoLmfTklzLb0",
+      key: "rzp_live_I8E16v75z35cbj",
       currency: data.currency,
       amount: data.amount.toString(),
       order_id: data.id,
@@ -98,7 +98,7 @@ function Pass() {
           <form>
             <div className="form-row"></div>
             <div className="form-group">
-              <label htmlFor ="inputAddress">Mobile Number</label>
+              <label htmlFor="inputAddress">Mobile Number</label>
               <input
                 type="text"
                 className="form-control pass_input"
@@ -108,7 +108,7 @@ function Pass() {
             </div>
             <div className="form-row">
               <div className="form-group ">
-                <label htmlFor ="inputState">Number of Travellers</label>
+                <label htmlFor="inputState">Number of Travellers</label>
                 <select id="inputState" className="form-control pass_input">
                   <option selected>1</option>
                   <option value="2">2</option>
@@ -119,7 +119,7 @@ function Pass() {
                 </select>
               </div>
               <div className="form-group ">
-                <label htmlFor ="inputState">Days of Travel</label>
+                <label htmlFor="inputState">Days of Travel</label>
                 <select id="inputState" className="form-control pass_input">
                   <option selected>1</option>
                   <option value="2">2</option>
@@ -131,13 +131,13 @@ function Pass() {
               </div>
             </div>
             <div className="traveller-detail">
-              <label htmlFor ="inputAddress">Traveller Details</label>
+              <label htmlFor="inputAddress">Traveller Details</label>
               <div className="card w-100">
                 <div className="card-body">
                   <h5 className="card-title">Traveller 1</h5>
                   <p className="card-text">
                     <div className="form-group">
-                      <label htmlFor ="inputAddress">Name</label>
+                      <label htmlFor="inputAddress">Name</label>
                       <input
                         type="text"
                         className="form-control pass_input"
@@ -149,7 +149,7 @@ function Pass() {
 
                     <div className="form-row genderform pt-3 d-flex ">
                       <div className="col m-2 w-50">
-                        <label htmlFor ="inputAddress">Gender</label>
+                        <label htmlFor="inputAddress">Gender</label>
                         <div className="d-flex pt-2">
                           <ButtonComponent
                             style={{
@@ -164,7 +164,7 @@ function Pass() {
                         </div>
                       </div>
                       <div className="col m-2 w-50">
-                        <label htmlFor ="inputAddress">Age</label>
+                        <label htmlFor="inputAddress">Age</label>
                         <br />
                         <input
                           type="text"
@@ -180,7 +180,7 @@ function Pass() {
                     </div>
 
                     <div className="form-group pt-2">
-                      <label htmlFor ="inputAddress">Adhaar Card Number </label>
+                      <label htmlFor="inputAddress">Adhaar Card Number </label>
                       <input
                         type="text"
                         className="form-control pass_input"
@@ -190,7 +190,9 @@ function Pass() {
                       />
                     </div>
                   </p>
-                  <Link className="btn" style={{backgroundColor:"#0FA453"}}>Button</Link>
+                  <Link className="btn" style={{ backgroundColor: "#0FA453" }}>
+                    Button
+                  </Link>
                 </div>
               </div>
             </div>
