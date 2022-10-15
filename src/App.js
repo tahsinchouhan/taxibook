@@ -3,9 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Destination from "./pages/Destination";
 import Packages from "./pages/Packages";
 
-import Badal from "./pages/badal";
-import BastarArt from "./pages/bastarArt";
-
 import EventsAndActivities from "./pages/plan/EventsAndActivities";
 import PlanHomeStays from "./pages/plan/Plan";
 import PlanTaxis from "./pages/plan/PlanTaxis";
@@ -15,7 +12,6 @@ import PlanTourPackages from "./pages/plan/PlanTourPackages";
 import "antd/dist/antd.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./assets/css/app.css";
-import BusPass from "./pages/selectbooking/BusPass";
 import SelectBooking from "./pages/selectbooking/SelectBooking";
 
 import "./assets/css/mediaQuery.css";
@@ -29,11 +25,9 @@ import Tickets1 from "./pages/booking/tickets/Tickets1";
 import TicketsSraech from "./pages/booking/tickets/TicketsSreach";
 import DmCongratulate from "./pages/dm pass/dmtickets/DmCongratulate";
 import DmDetail from "./pages/dm pass/dmtickets/DmDetail";
-import TravelTicket from "./pages/dm pass/dmtickets/TravelTicket";
 import BookingConformation from "./pages/explore/BookingConfirmation";
 import BookingDetails from "./pages/explore/BookingDetails";
 import BookingPayment from "./pages/explore/BookingPayement";
-import BookPass from "./pages/explore/BookPass";
 import CheckOutBook from "./pages/explore/checkoutBooking";
 import Interest from "./pages/explore/Interest";
 import PackagesDetails from "./pages/explore/PackagesDetails";
@@ -62,17 +56,12 @@ import CabConfirmation from "./pages/Cab/CabConfirmation";
 import CabList from "./pages/Cab/CabList";
 import Cab from "./pages/Cab/CabSearch";
 
-import AudioJourney from "./pages/audioJourney/AudioJourney";
-import AudioJourneyDetail from "./pages/audioJourneyDeatil/AudioJourneyDetail";
-import PromotionalContent from "./pages/promotionalContent";
-
 function App() {
   return (
     <>
       <Router>
         <div>
           <Switch>
-            <Route path="/bookpass" component={BookPass} />
             <Route path="/bookingdetail" component={BookingDetails} />
             <Route
               path="/bookingconfirmation"
@@ -86,7 +75,6 @@ function App() {
             <Route path="/cab-operator" component={CabOperator} />
             <Route path="/registrationguide" component={RegistrationGuide} />
             <Route path="/registration" component={Registration} />
-            <Route exact path="/booking" component={BusPass} />
             <Route exact path="/populardestinations" component={Destination} />
             <Route exact path="/curatedexperiences" component={Packages} />
 
@@ -118,7 +106,6 @@ function App() {
               component={CongratulationPage}
             />
             <Route exact path="/ratancard" component={RatanCard} />
-            <Route exact path="/travelticket" component={TravelTicket} />
             <Route exact path="/dm-detail/:id" component={DmDetail} />
             <Route exact path="/bus-detail/:id" component={BusTicketDetail} />
             <Route
@@ -140,19 +127,6 @@ function App() {
             <Route exact path="/checkoutpage" component={CheckoutPage} />
             <Route exact path="/cab" component={Cab} />
             <Route exact path="/cablist" component={CabList} />
-            <Route exact path="/audioJourney" component={AudioJourney} />
-            <Route
-              exact
-              path="/audioJourney/:id"
-              component={AudioJourneyDetail}
-            />
-            <Route exact path="/badal" component={Badal} />
-            <Route exact path="/kalagudi" component={BastarArt} />
-            <Route
-              exact
-              path="/promotionalContent"
-              component={PromotionalContent}
-            />
           </Switch>
         </div>
       </Router>
