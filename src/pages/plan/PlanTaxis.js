@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { API_PATH } from "../../Path/Path";
-import { Cabs } from "../../Path/PackageCategories";
 import Geocode from "react-geocode";
+import { Cabs } from "../../Path/PackageCategories";
+import { API_PATH } from "../../Path/Path";
 
 import "./package-card.css";
 
 // components and pages
 import Header from "../../components/Header";
 import Loader from "../../components/Loader";
-import QuickLinks from "../../components/QuickLinks";
 import FooterIcons from "../../Footer/FooterIcons";
-import PackageCard from "./PackageCard";
 import Footer from "../travesaly/Footer";
+import PackageCard from "./PackageCard";
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
 Geocode.setLanguage("en");
@@ -47,9 +46,7 @@ const PlanTaxis = () => {
   return (
     <>
       <Header />
-      <div>
-        <QuickLinks Position={"relative"} Top={"10%"} />
-      </div>
+      <div></div>
       <div
         className="page-width plan-header"
         style={{ margin: "2rem auto 0 " }}
@@ -63,7 +60,7 @@ const PlanTaxis = () => {
           <svg
             className="searchIcon"
             onChange={(e) => {
-              setSearchField(e.target.value)
+              setSearchField(e.target.value);
             }}
             style={{ cursor: "pointer" }}
             viewBox="0 0 25 26"
@@ -81,7 +78,9 @@ const PlanTaxis = () => {
 
       <div className="package-card-container page-width">
         {filteredPackages.length ? (
-          filteredPackages.map((item, idx) => <PackageCard key={idx} item={item} />)
+          filteredPackages.map((item, idx) => (
+            <PackageCard key={idx} item={item} />
+          ))
         ) : (
           <Loader />
         )}
