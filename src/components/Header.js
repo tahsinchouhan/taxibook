@@ -253,10 +253,6 @@ function Header({ showSignUpModal }) {
                 <NavLink className="sidebar_item" to="/">
                   HOME
                 </NavLink>
-
-                <NavLink className="sidebar_item" to="/plan">
-                  PLAN
-                </NavLink>
               </div>
             </Nav>
             <Form className="" style={{ marginRight: "70px" }}>
